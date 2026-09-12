@@ -69,6 +69,7 @@ function seedData(){
   const hanoiId = uid('d'), manilaId = uid('d');
 
   return {
+    schema:2,
     tripName:"My Big Trip 🌏",
     startDate:"2026-11-22",
     endDate:null,
@@ -80,7 +81,8 @@ function seedData(){
       splitDate:"2026-12-08",
       together:{title:"תאילנד · מבנגקוק לאנדמן", subtitle:"22 בנובמבר – 8 בדצמבר 2026 · 15 לילות", nights:15},
       itai:{title:"השבועיים שלי", subtitle:"22/11 – 8/12 · ואז הביתה", homeFlight:"ארקיע IZ598 · פוקט → תל אביב · 8/12, 17:20"},
-      talia:{title:"הטיול הגדול", subtitle:"מ-22/11/2026 והלאה · תאילנד, סרי לנקה, וייטנאם, פיליפינים"}
+      talia:{title:"הטיול הגדול", subtitle:"מ-22/11/2026 והלאה · תאילנד, סרי לנקה, וייטנאם, פיליפינים",
+             onwardFlight:"פוקט → צ׳יאנג מאי · 8/12 — באותו יום שאיתי טס הביתה", onwardDate:"2026-12-08"}
     },
 
     /* חלוקת הוצאות בסגנון Splitwise */
@@ -125,11 +127,12 @@ function seedData(){
            notes:"פרק המנוחה — ספא, בריכת אינפיניטי, ויום אחד באגם צ׳או לאן בקאו סוק",
            budget:4400, status:"booked", companions:["ביחד"], order:4},
           {id:chiangmaiId, owner:"talia", name:"צ'יאנג מאי", wiki:"Chiang Mai", hue:"#8C6FA0",
-           lat:18.7883, lng:98.9853, arrival:"2026-12-02", departure:"2026-12-06", nights:4,
-           accommodation:"", transport:"טיסה פנימית", notes:"תחנת מעבר בדרך לפאי",
-           budget:1800, status:"planned", companions:["לבד"], order:5},
+           lat:18.7883, lng:98.9853, arrival:"2026-12-08", departure:"2026-12-09", nights:1,
+           accommodation:"", transport:"טיסה מפוקט — באותו יום שאיתי טס הביתה",
+           notes:"לילה אחד בדרך לפאי. הטיסה מפוקט לצ׳יאנג מאי היא עם עצירה — לבדוק שעות מול שעת הצ׳ק-אאוט בקאו לק.",
+           budget:600, status:"planned", companions:["לבד"], order:5},
           {id:paiId, owner:"talia", name:"פאי — קורס מורים ליוגה", wiki:"Pai, Thailand", hue:"#4E8B8B",
-           lat:19.3583, lng:98.4383, arrival:"2026-12-06", departure:"2027-01-05", nights:30,
+           lat:19.3583, lng:98.4383, arrival:"2026-12-09", departure:"2027-01-08", nights:30,
            accommodation:"", transport:"מיניבאן מצ'יאנג מאי",
            notes:"קבוע במסלול — לא לזוז. קורס טיטשריניג חודשי.",
            budget:3000, status:"booked", companions:["לבד"], order:6}
@@ -148,10 +151,10 @@ function seedData(){
       },
       {id:"srilanka", owner:"talia", name:"סרי לנקה", flag:"🇱🇰", color:"var(--srilanka)", order:2, currency:"LKR", notes:"",
         destinations:[
-          {id:colomboId, owner:"talia", name:"קולומבו", lat:6.9271, lng:79.8612, arrival:"2027-01-05", departure:"2027-01-06", nights:1, accommodation:"", transport:"טיסה מתאילנד", notes:"תחנת כניסה", budget:600, status:"planned", companions:["Solo"], order:1},
-          {id:mirissaId, owner:"talia", name:"מיריסה", lat:5.9483, lng:80.4589, arrival:"2027-01-06", departure:"2027-01-12", nights:6, accommodation:"", transport:"רכבת/אוטובוס", notes:"חופים, גלישה, יוגה", budget:2400, status:"planned", companions:["Solo"], order:2},
-          {id:ellaId, owner:"talia", name:"אלה", lat:6.8667, lng:81.0466, arrival:"2027-01-12", departure:"2027-01-16", nights:4, accommodation:"", transport:"רכבת ההרים המפורסמת", notes:"טבע, טיולים, נופים", budget:1400, status:"optional", companions:["Solo"], order:3},
-          {id:arugamId, owner:"talia", name:"ארוגם ביי", lat:6.8400, lng:81.8360, arrival:"2027-01-16", departure:"2027-01-22", nights:6, accommodation:"", transport:"אוטובוס", notes:"גלישה נוספת, חוף רגוע", budget:2000, status:"optional", companions:["Solo"], order:4}
+          {id:colomboId, owner:"talia", name:"קולומבו", lat:6.9271, lng:79.8612, arrival:"2027-01-08", departure:"2027-01-09", nights:1, accommodation:"", transport:"טיסה מתאילנד", notes:"תחנת כניסה", budget:600, status:"planned", companions:["Solo"], order:1},
+          {id:mirissaId, owner:"talia", name:"מיריסה", lat:5.9483, lng:80.4589, arrival:"2027-01-09", departure:"2027-01-15", nights:6, accommodation:"", transport:"רכבת/אוטובוס", notes:"חופים, גלישה, יוגה", budget:2400, status:"planned", companions:["Solo"], order:2},
+          {id:ellaId, owner:"talia", name:"אלה", lat:6.8667, lng:81.0466, arrival:"2027-01-15", departure:"2027-01-19", nights:4, accommodation:"", transport:"רכבת ההרים המפורסמת", notes:"טבע, טיולים, נופים", budget:1400, status:"optional", companions:["Solo"], order:3},
+          {id:arugamId, owner:"talia", name:"ארוגם ביי", lat:6.8400, lng:81.8360, arrival:"2027-01-19", departure:"2027-01-25", nights:6, accommodation:"", transport:"אוטובוס", notes:"גלישה נוספת, חוף רגוע", budget:2000, status:"optional", companions:["Solo"], order:4}
         ],
         prepChecklist:[
           {id:uid('t'), title:"ETA / ויזה אלקטרונית לסרי לנקה", status:"todo", deadline:"2026-12-20", notes:"", link:"", priority:"גבוהה", order:1},
@@ -377,6 +380,30 @@ function ensureDefaults(){
 
   /* מסמך שנשמר לפני שהאפליקציה התפצלה לשני משתמשים — משלימים את החסר */
   const fresh = seedData();
+
+  /*
+   * טליה טסה לקורס בפאי ב-8/12 ולא ב-6/12. מסמכים שנשמרו לפני ההחלטה הזאת
+   * מחזיקים את התאריכים הישנים, ולכן מתקנים אותם פעם אחת.
+   */
+  if(!STATE.schema || STATE.schema < 2){
+    const shift = {
+      "צ'יאנג מאי":       {arrival:"2026-12-08", departure:"2026-12-09", nights:1},
+      "פאי — קורס מורים ליוגה":{arrival:"2026-12-09", departure:"2027-01-08", nights:30},
+      "קולומבו":          {arrival:"2027-01-08", departure:"2027-01-09", nights:1},
+      "מיריסה":           {arrival:"2027-01-09", departure:"2027-01-15", nights:6},
+      "אלה":              {arrival:"2027-01-15", departure:"2027-01-19", nights:4},
+      "ארוגם ביי":        {arrival:"2027-01-19", departure:"2027-01-25", nights:6}
+    };
+    STATE.countries.forEach(c=>c.destinations.forEach(d=>{
+      const fix = shift[d.name];
+      if(fix) Object.assign(d, fix);
+    }));
+    if(STATE.trip && STATE.trip.talia && !STATE.trip.talia.onwardFlight){
+      STATE.trip.talia.onwardFlight = fresh.trip.talia.onwardFlight;
+      STATE.trip.talia.onwardDate = fresh.trip.talia.onwardDate;
+    }
+    STATE.schema = 2;
+  }
   if(!STATE.trip) STATE.trip = fresh.trip;
   if(!STATE.money) STATE.money = fresh.money;
   if(!STATE.money.settlements) STATE.money.settlements = [];
@@ -906,13 +933,29 @@ function sharedCategoryTotals(){
 /** היעדים שרלוונטיים למי שמחובר, לפי סדר התאריכים */
 function myDestinations(){
   return allDestinations()
-    .filter(d=>mine(d))
+    .filter(d=>mine(d) && !afterMyTrip(d.arrival))
     .sort((a,b)=>(a.arrival||'9999').localeCompare(b.arrival||'9999'));
 }
-/** הימים המפורטים מהגיליון ששייכים ליעד מסוים */
+
+/** איתי חוזר לארץ ב-8/12 — מה שמתחיל אחרי זה כבר לא הטיול שלו */
+function afterMyTrip(date){
+  if(meId()!=='itai' || !date) return false;
+  return date >= splitDate();
+}
+/**
+ * הימים המפורטים מהגיליון ששייכים ליעד מסוים.
+ * יום מעבר שייך לתחנה שמגיעים אליה — חוץ מ-8/12, יום הפרידה, ששייך
+ * לקאו לק: שם שניהם מתעוררים, ומשם כל אחד נוסע לשדה התעופה.
+ */
 function daysForDest(dest){
   if(!sh() || !dest.arrival) return [];
-  return sh().days.filter(d=> d.date >= dest.arrival && d.date < (dest.departure||dest.arrival));
+  const end = dest.departure || dest.arrival;
+  const split = splitDate();
+  return sh().days.filter(d=>{
+    if(d.date < dest.arrival) return false;
+    if(d.date === split) return end === split;   // התחנה שיוצאים ממנה, לא זו שמגיעים אליה
+    return d.date < end;
+  });
 }
 
 /* =========================================================
@@ -933,8 +976,12 @@ function renderRouteTab(){
       <div class="stat-cell"><b>${dests.length}</b><span>תחנות</span></div>
       <div class="stat-cell"><b>${totalNights}</b><span>לילות</span></div>
     </div>
-    ${isItai ? '' : renderConflictNotice()}
-    ${dests.map((d,i)=>renderDestCard(d, i, dests.length)).join('')}
+    ${isItai ? '' : ''}
+    ${dests.map((d,i)=>{
+      const marker = (!isItai && d.arrival >= splitDate() &&
+                      (i===0 || dests[i-1].arrival < splitDate())) ? renderSplitMarker() : '';
+      return marker + renderDestCard(d, i, dests.length);
+    }).join('')}
     ${isItai ? `<div class="card dashed" style="text-align:center">
         <div style="font-size:22px">✈️</div>
         <b>${STATE.trip.itai.homeFlight}</b>
@@ -943,18 +990,18 @@ function renderRouteTab(){
   </div>`;
 }
 
-/** התנגשות אמיתית בין שני המקורות — מוצגת ולא מוסתרת */
-function renderConflictNotice(){
-  const pai = allDestinations().find(d=>d.name.indexOf('פאי')===0);
-  const khaolak = allDestinations().find(d=>d.name.indexOf('קאו לק')===0);
-  if(!pai || !khaolak) return '';
-  if(pai.arrival >= khaolak.departure) return '';
+/** נקודת הפרידה — שני מטוסים באותו יום */
+function renderSplitMarker(){
+  const t = STATE.trip.talia || {};
   return `
-  <div class="card warn">
-    <b>⚠️ התנגשות בתאריכים</b>
-    <div class="small" style="margin-top:6px">
-      הקורס בפאי מתחיל ב-${fmtDateShort(pai.arrival)}, אבל המסלול המשותף בקאו לק נמשך עד ${fmtDateShort(khaolak.departure)}.
-      אחד מהשניים צריך לזוז — או שאת עוזבת את קאו לק מוקדם.
+  <div class="split-marker">
+    <div class="sm-line"></div>
+    <div class="sm-body">
+      <div class="sm-title">✈️ ${fmtDateShort(splitDate())} — נפרדים בפוקט</div>
+      <div class="sm-text">
+        ${PEOPLE.itai.name} טס הביתה · ${STATE.trip.itai.homeFlight}<br>
+        ${PEOPLE.talia.name} ממשיכה · ${t.onwardFlight || ''}
+      </div>
     </div>
   </div>`;
 }
@@ -970,6 +1017,17 @@ function renderBigHero(title, subtitle, dest){
   </div>`;
 }
 
+function nightsLabel(n){
+  const count = Number(n)||0;
+  if(!count) return '';
+  return count===1 ? 'לילה אחד' : count+' לילות';
+}
+function datesLabel(d){
+  if(!d.arrival) return 'תאריכים עוד לא נקבעו';
+  const range = `${fmtDateShort(d.arrival)} – ${fmtDateShort(d.departure)}`;
+  const nights = nightsLabel(d.nights);
+  return nights ? `${range} · ${nights}` : range;
+}
 function renderDestCard(d, index, total){
   const open = expandedDest[d.id] === true;
   const days = daysForDest(d);
@@ -983,7 +1041,7 @@ function renderDestCard(d, index, total){
       <div class="dest-overlay">
         <div class="dest-step">${index+1}/${total}</div>
         <div class="dest-name">${d.name}</div>
-        <div class="dest-dates">${fmtDateShort(d.arrival)} – ${fmtDateShort(d.departure)} · ${d.nights||0} לילות</div>
+        <div class="dest-dates">${datesLabel(d)}</div>
         <div class="dest-tags">
           ${ownerBadge(d.owner)}
           ${d.status==='booked'?'<span class="own-tag booked">מוזמן</span>':''}
@@ -1306,7 +1364,7 @@ function renderHome(){
       <div class="nu-text">
         <div class="nu-label">${current ? 'התחנה הבאה' : 'מתחילים כאן'}</div>
         <div class="nu-name">${next.name}</div>
-        <div class="nu-dates">${fmtDateShort(next.arrival)} · ${next.nights||0} לילות · ${ownerBadge(next.owner)}</div>
+        <div class="nu-dates">${fmtDateShort(next.arrival)}${nightsLabel(next.nights)?' · '+nightsLabel(next.nights):''} · ${ownerBadge(next.owner)}</div>
       </div>
     </div>` : ''}
 
