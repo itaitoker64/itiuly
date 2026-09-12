@@ -69,7 +69,7 @@ function seedData(){
   const hanoiId = uid('d'), manilaId = uid('d');
 
   return {
-    schema:2,
+    schema:3,
     tripName:"My Big Trip 🌏",
     startDate:"2026-11-22",
     endDate:null,
@@ -403,6 +403,50 @@ function ensureDefaults(){
       STATE.trip.talia.onwardDate = fresh.trip.talia.onwardDate;
     }
     STATE.schema = 2;
+  }
+
+  /*
+   * מסמכים שנשמרו לפני הפיצול לשני משתמשים מחזיקים עדיין את המסלול הראשון
+   * של טליה — בלי בעלות, בלי תמונות, ועם התחנות שהגיליון המשותף החליף.
+   * מיישרים אותם מול התוכנית הנוכחית בלי לאבד מה שהוסיפו בעצמם.
+   */
+  if(STATE.schema < 3){
+    fresh.countries.forEach(seedCountry=>{
+      let country = findCountry(seedCountry.id);
+      if(!country){ STATE.countries.push(JSON.parse(JSON.stringify(seedCountry))); return; }
+      if(!country.owner) country.owner = seedCountry.owner;
+
+      seedCountry.destinations.forEach(seedDest=>{
+        const existing = country.destinations.find(d=>d.name===seedDest.name);
+        if(!existing){
+          country.destinations.push(JSON.parse(JSON.stringify(seedDest)));
+          return;
+        }
+        // השדות שנוספו בעיצוב החדש, והתאריכים המתוקנים
+        ['owner','wiki','hue','arrival','departure','nights','status','order'].forEach(key=>{
+          if(seedDest[key]!==undefined) existing[key] = seedDest[key];
+        });
+        ['notes','accommodation','transport','budget'].forEach(key=>{
+          if(!existing[key] && seedDest[key]) existing[key] = seedDest[key];
+        });
+      });
+
+      // תחנה זמנית מהתוכנית הראשונה שהגיליון המשותף החליף — מוסרת רק אם לא נגעו בה
+      country.destinations = country.destinations.filter(d=>{
+        const replaced = d.name === 'האיים הדרומיים (קו סמוי/פיפי)';
+        const untouched = !d.accommodation && !d.owner;
+        return !(replaced && untouched);
+      });
+    });
+
+    // משימות שנוספו עם הפיצול — מתווספות למי שעוד אין לו אותן
+    fresh.masterChecklist.forEach(seedTask=>{
+      if(!STATE.masterChecklist.some(t=>t.title===seedTask.title)){
+        STATE.masterChecklist.push(JSON.parse(JSON.stringify(seedTask)));
+      }
+    });
+
+    STATE.schema = 3;
   }
   if(!STATE.trip) STATE.trip = fresh.trip;
   if(!STATE.money) STATE.money = fresh.money;
@@ -855,13 +899,32 @@ function renderNav(){
 /* =========================================================
    תמונות — נטענות מוויקיפדיה בזמן אמת, עם נפילה רכה לגרדיאנט
 ========================================================= */
-const imageCache = {};
+/*
+ * כתובות שנבדקו מראש מול Wikimedia — כך שהתמונות עולות מיד, בלי תלות
+ * בקריאת API בזמן טעינה. יעד שמישהו מוסיף בעצמו נפתר בזמן אמת.
+ */
+const DEST_IMAGES = {
+ "Bangkok": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7d/4Y1A1159_Bangkok_%2833536795515%29.jpg/1280px-4Y1A1159_Bangkok_%2833536795515%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+ "Ko Yao Noi": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3e/Dramatic_karst_landscape_of_Phang_Nga_Bay%2C_Thailand.jpg/1280px-Dramatic_karst_landscape_of_Phang_Nga_Bay%2C_Thailand.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+ "Ao Nang": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/ca/Ao_Nang_beach_panorama_1.jpg/1280px-Ao_Nang_beach_panorama_1.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+ "Khao Lak": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/13/Khao_Lak_Beach%2C_Thailand.jpg/1280px-Khao_Lak_Beach%2C_Thailand.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+ "Chiang Mai": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/85/0020-%E0%B8%A7%E0%B8%B1%E0%B8%94%E0%B8%9E%E0%B8%A3%E0%B8%B0%E0%B8%AA%E0%B8%B4%E0%B8%87%E0%B8%AB%E0%B9%8C%E0%B8%A7%E0%B8%A3%E0%B8%A1%E0%B8%AB%E0%B8%B2%E0%B8%A7%E0%B8%B4%E0%B8%AB%E0%B8%B2%E0%B8%A3.jpg/1280px-0020-%E0%B8%A7%E0%B8%B1%E0%B8%94%E0%B8%9E%E0%B8%A3%E0%B8%B0%E0%B8%AA%E0%B8%B4%E0%B8%87%E0%B8%AB%E0%B9%8C%E0%B8%A7%E0%B8%A3%E0%B8%A1%E0%B8%AB%E0%B8%B2%E0%B8%A7%E0%B8%B4%E0%B8%AB%E0%B8%B2%E0%B8%A3.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+ "Pai, Thailand": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4f/View_of_Pai_3.jpg/1280px-View_of_Pai_3.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+ "Colombo": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/62/Colombo_city_skyline_at_night.png/1280px-Colombo_city_skyline_at_night.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+ "Mirissa": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a5/Mirissa-Plage_%283%29.jpg/1280px-Mirissa-Plage_%283%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+ "Ella, Sri Lanka": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/47/Ella_railway_station.jpg/1280px-Ella_railway_station.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+ "Arugam Bay": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2c/Beach_of_Arugam_Bay.jpg/1280px-Beach_of_Arugam_Bay.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+ "Hanoi": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8e/Hanoi_skyline_with_Ba_Vi_Mountain.jpg/1280px-Hanoi_skyline_with_Ba_Vi_Mountain.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+ "Manila": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f7/Cityscape_of_Manila%2C_2025_%2801%29.jpg/1280px-Cityscape_of_Manila%2C_2025_%2801%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
+};
+
+const imageCache = Object.assign({}, DEST_IMAGES);
 function imageBox(wiki, hue, cls){
   const key = wiki || '';
   const cached = imageCache[key];
   const style = `--hue:${hue||'#C97B5A'}`;
   return `<div class="photo ${cls||''} ${cached?'loaded':''}" style="${style}" data-wiki="${escapeAttr(key)}">
-    ${cached?`<img src="${cached}" alt="" loading="lazy">`:''}
+    ${cached?`<img src="${cached}" alt="" loading="lazy" onerror="imageFailed(this)">`:''}
   </div>`;
 }
 async function loadVisibleImages(){
@@ -874,21 +937,33 @@ async function loadVisibleImages(){
     if(url){ imageCache[title] = url; paintImage(box, url); }
   }
 }
-/** תמונה מוויקיפדיה — קודם בעברית, ואם אין ערך כזה אז באנגלית */
+/** תמונה מוויקיפדיה ליעד שלא נמצא ברשימה המוכנה — קודם עברית, אחר כך אנגלית */
 async function wikiImage(title){
   for(const lang of ['he','en']){
     try{
-      const res = await fetch(
-        `https://${lang}.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(title)}?redirect=true`
-      );
+      const api = `https://${lang}.wikipedia.org/w/api.php?action=query&prop=pageimages` +
+                  `&piprop=thumbnail&pithumbsize=1024&format=json&redirects=1&origin=*` +
+                  `&titles=${encodeURIComponent(title)}`;
+      const res = await fetch(api);
       if(!res.ok) continue;
       const data = await res.json();
-      const url = (data.originalimage && data.originalimage.source) ||
-                  (data.thumbnail && data.thumbnail.source);
+      const pages = data && data.query && data.query.pages;
+      if(!pages) continue;
+      const page = Object.values(pages)[0];
+      const url = page && page.thumbnail && page.thumbnail.source;
       if(url) return url;
     }catch(e){ /* אין רשת — הגרדיאנט נשאר */ }
   }
   return null;
+}
+/** תמונה שלא נטענה — חוזרים לגרדיאנט במקום אייקון שבור */
+function imageFailed(img){
+  const box = img.closest('.photo');
+  if(box){
+    box.classList.remove('loaded');
+    delete imageCache[box.dataset.wiki];
+  }
+  img.remove();
 }
 function paintImage(box, url){
   box.classList.add('loaded');
