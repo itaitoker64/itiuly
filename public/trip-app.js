@@ -69,7 +69,7 @@ function seedData(){
   const hanoiId = uid('d'), manilaId = uid('d');
 
   return {
-    schema:4,
+    schema:5,
     tripName:"My Big Trip 🌏",
     startDate:"2026-11-22",
     endDate:null,
@@ -92,13 +92,16 @@ function seedData(){
       budgets:{itai:12000, talia:8000},
       expenses:[
         {id:uid('x'), date:"2026-09-10", title:"ארקיע IZ591 · תל אביב → בנגקוק", category:"flights",
-         amount:3777, currency:"ILS", paidBy:"itai", split:"ratio", note:"לשניים · שולם", settled:false},
+         amount:3777, currency:"ILS", paidBy:"itai", split:"ratio", status:"paid", note:"לשניים · אישור IL-603978"},
         {id:uid('x'), date:"2026-09-10", title:"ארקיע IZ598 · פוקט → תל אביב", category:"flights",
-         amount:1891, currency:"ILS", paidBy:"talia", split:"full-itai", note:"הטיסה הביתה של איתי · שולם", settled:false},
+         amount:1891, currency:"ILS", paidBy:"talia", split:"full-itai", status:"paid", note:"הטיסה הביתה של איתי · אישור IL-604062"},
         {id:uid('x'), date:"2026-09-10", title:"Chermantra Aonang · 3 לילות", category:"accommodation",
-         amount:1839, currency:"ILS", paidBy:"itai", split:"ratio", note:"ביטול חינם עד 14/11", settled:false},
+         amount:1839, currency:"ILS", paidBy:"itai", split:"ratio", status:"paid", note:"אישור 5553772333 · ביטול חינם עד 14/11"},
+        {id:uid('x'), date:"2026-11-23", title:"Montraj Coach Sukhumvit · 3 לילות בבנגקוק", category:"accommodation",
+         amount:1128, currency:"ILS", paidBy:"itai", split:"ratio", status:"due",
+         note:"אישור 5123136373 · משלמים במקום בצ׳ק-אין · פיקדון ฿1,000 מזומן, מוחזר בצ׳ק-אאוט"},
         {id:uid('x'), date:"2026-09-10", title:"Kalima Resort · 6 לילות בקאו לק", category:"accommodation",
-         amount:4029, currency:"ILS", paidBy:"itai", split:"ratio", note:"ביטול חינם", settled:false}
+         amount:4029, currency:"ILS", paidBy:"itai", split:"ratio", status:"paid", note:"6 לילות · ביטול חינם"}
       ],
       settlements:[]
     },
@@ -117,36 +120,36 @@ function seedData(){
            lat:8.1099, lng:98.5892, arrival:"2026-11-26", departure:"2026-11-29", nights:3,
            accommodation:"Panoramic Sunset View · KYN Phoenix", transport:"Vietjet לפוקט ואז ספידבוט",
            notes:"שני אימונים ביום, יוגה, ולונגטייל למפרץ פאנג נגה מהצד שאין בו סירות",
-           scooter:{ok:true, perDay:250, bikes:2, days:2, headline:"המקום הכי טוב באי לקטנוע",
+           scooter:{ok:true, perDay:250, bikes:1, days:2, rider:"itai", pillion:"talia", headline:"המקום הכי טוב באי לקטנוע",
              note:"כביש אחד לאורך החוף המזרחי, כמעט בלי תנועה. שדות אורז, המסגד, התצפית, והחופים שאין אליהם סונגתאו."},
            budget:2200, status:"planned", companions:["ביחד"], order:2},
           {id:aonangId, owner:"both", name:"אאו נאנג וריילאי", wiki:"Ao Nang", hue:"#6E88A0",
            lat:8.0320, lng:98.8210, arrival:"2026-11-29", departure:"2026-12-02", nights:3,
            accommodation:"Chermantra Aonang · Mountain Pool Villa", transport:"ספידבוט מקו יאו נוי",
            notes:"קורס טיפוס בריילאי, חוף פרה נאנג, קיאקים במנגרובים של אאו תלאנה",
-           scooter:{ok:true, perDay:250, bikes:2, days:2, headline:"כן — חוץ מיום ריילאי",
+           scooter:{ok:true, perDay:250, bikes:1, days:2, rider:"itai", pillion:"talia", headline:"כן — חוץ מיום ריילאי",
              note:"฿250–300 ליום, תלוי במשכיר. לריילאי אין כביש, רק סירה, אז ביום הטיפוס הקטנועים חונים. שווה לאאו תלאנה, לקראבי ולחופים שמצפון."},
            budget:2600, status:"booked", companions:["ביחד"], order:3},
           {id:khaolakId, owner:"both", name:"קאו לק", wiki:"Khao Lak", hue:"#C9A24C",
            lat:8.6392, lng:98.2450, arrival:"2026-12-02", departure:"2026-12-08", nights:6,
            accommodation:"Kalima Resort and Villas", transport:"רכב פרטי דרך פאנג נגה",
            notes:"פרק המנוחה — ספא, בריכת אינפיניטי, ויום אחד באגם צ׳או לאן בקאו סוק",
-           scooter:{ok:true, perDay:250, bikes:2, days:4, headline:"כן, אבל לא על כביש 4",
+           scooter:{ok:true, perDay:250, bikes:1, days:4, rider:"itai", pillion:"talia", headline:"כן, אבל לא על כביש 4",
              note:"כביש 4 מהיר ועמוס משאיות. בכביש החוף המקומי מגיעים לבד לבאנג סאק, לאאו תונג ולמסעדות שמחוץ לריזורט."},
            budget:4400, status:"booked", companions:["ביחד"], order:4},
           {id:chiangmaiId, owner:"talia", name:"צ'יאנג מאי", wiki:"Chiang Mai", hue:"#8C6FA0",
            lat:18.7883, lng:98.9853, arrival:"2026-12-08", departure:"2026-12-09", nights:1,
            accommodation:"", transport:"טיסה מפוקט — באותו יום שאיתי טס הביתה",
            notes:"לילה אחד בדרך לפאי. הטיסה מפוקט לצ׳יאנג מאי היא עם עצירה — לבדוק שעות מול שעת הצ׳ק-אאוט בקאו לק.",
-           scooter:{ok:true, perDay:250, bikes:1, days:1, headline:"אפשרי, ליום אחד",
-             note:"בעיר עצמה התנועה סבירה מחוץ לשעות העומס. לילה אחד — אולי פשוט לוותר."},
+           scooter:{ok:true, perDay:250, bikes:1, days:1, soloRider:"talia", headline:"רק אם את רוכבת בעצמך",
+             note:"כאן איתי כבר בארץ, אז אין מי שירכיב. לילה אחד בלבד — כנראה פשוט לוותר."},
            budget:600, status:"planned", companions:["לבד"], order:5},
           {id:paiId, owner:"talia", name:"פאי — קורס מורים ליוגה", wiki:"Pai, Thailand", hue:"#4E8B8B",
            lat:19.3583, lng:98.4383, arrival:"2026-12-09", departure:"2027-01-08", nights:30,
            accommodation:"", transport:"מיניבאן מצ'יאנג מאי",
            notes:"קבוע במסלול — לא לזוז. קורס טיטשריניג חודשי.",
-           scooter:{ok:true, perDay:180, bikes:1, days:30, headline:"בפאי זה כמעט חובה",
-             note:"฿150–200 ליום, וזול יותר בחודש. הקניון, המעיינות החמים והכפרים מסביב הם מרחק קטנוע. הכביש מצ׳יאנג מאי הוא 762 עיקולים — אם עושים אותו, לא בלילה ולא בגשם."},
+           scooter:{ok:true, perDay:180, bikes:1, days:30, soloRider:"talia", headline:"בפאי זה כמעט חובה",
+             note:"฿150–200 ליום, וזול יותר בחודש. הקניון, המעיינות החמים והכפרים מסביב הם מרחק קטנוע — אבל כאן את רוכבת לבד, וצריך רישיון A על השם שלך. הכביש מצ׳יאנג מאי הוא 762 עיקולים — לא בלילה ולא בגשם."},
            budget:3000, status:"booked", companions:["לבד"], order:6}
         ],
         prepChecklist:[
@@ -204,8 +207,8 @@ function seedData(){
 
       {id:uid('m'), owner:"itai", category:"מואיי תאי", title:"לקנות מגן שיניים בארץ", status:"todo", deadline:"2026-11-15", notes:"", priority:"בינונית", link:"", countryId:null, order:12},
       {id:uid('m'), owner:"itai", category:"מואיי תאי", title:"לוודא שהביטוח מכסה ספורט מגע", status:"todo", deadline:"2026-11-10", notes:"מואיי תאי לא תמיד כלול בפוליסה רגילה", priority:"גבוהה", link:"", countryId:null, order:13},
-      {id:uid('m'), owner:"both", category:"קטנוע", title:"רישיון בינלאומי 1949 עם קטגוריית אופנוע (A)", status:"todo", deadline:"2026-11-10", notes:"בלי קטגוריה A הביטוח לא משלם גם על שריטה. מוציאים בארץ לפני הטיסה — אי אפשר להסתדר עם זה בתאילנד.", priority:"גבוהה", link:"", countryId:null, order:14},
-      {id:uid('m'), owner:"both", category:"קטנוע", title:"לוודא שהביטוח מכסה רכיבה על קטנוע", status:"todo", deadline:"2026-11-10", notes:"לבדוק גם עד איזה נפח מנוע — הרבה פוליסות עוצרות ב-125cc", priority:"גבוהה", link:"", countryId:null, order:15},
+      {id:uid('m'), owner:"itai", category:"קטנוע", title:"רישיון בינלאומי 1949 עם קטגוריית אופנוע (A)", status:"todo", deadline:"2026-11-10", notes:"אתה הרוכב, אז זה עליך. בלי קטגוריה A הביטוח לא משלם גם על שריטה. מוציאים בארץ לפני הטיסה — אי אפשר להסתדר עם זה בתאילנד.", priority:"גבוהה", link:"", countryId:null, order:14},
+      {id:uid('m'), owner:"both", category:"קטנוע", title:"ביטוח: רכיבה לאיתי, נסיעה כנוסעת לטליה", status:"todo", deadline:"2026-11-10", notes:"לבדוק גם עד איזה נפח מנוע — הרבה פוליסות עוצרות ב-125cc", priority:"גבוהה", link:"", countryId:null, order:15},
       {id:uid('m'), owner:"itai", category:"ISB", title:"לתאם ביקור בוגרים ב-ISB", status:"todo", deadline:"2026-11-20", notes:"isbalum@isb.ac.th, לפחות יומיים מראש, תעודה מזהה בשער", priority:"בינונית", link:"", countryId:"thailand", order:15},
 
       {id:uid('m'), owner:"talia", category:"קורס יוגה", title:"לשלם את היתרה על הקורס בפאי", status:"todo", deadline:"2026-11-01", notes:"", priority:"גבוהה", link:"", countryId:"thailand", order:16},
@@ -341,6 +344,8 @@ let activeTab = "home";
 let activeCountry = "thailand";
 let moneySection = "balance";
 let expandedDest = {};
+let expandedRow = {};
+let todayIndex = null;
 let activeCountrySection = "prep";
 let saveTimer = null;
 let leafletMap = null;
@@ -393,6 +398,14 @@ function ensureDefaults(){
 
   /* מסמך שנשמר לפני שהאפליקציה התפצלה לשני משתמשים — משלימים את החסר */
   const fresh = seedData();
+
+  /* ברירות מחדל חייבות להיות במקום לפני שהמיגרציות נשענות עליהן */
+  if(!STATE.trip) STATE.trip = fresh.trip;
+  if(!STATE.money) STATE.money = fresh.money;
+  if(!STATE.money.settlements) STATE.money.settlements = [];
+  if(!STATE.money.budgets) STATE.money.budgets = fresh.money.budgets;
+  if(!STATE.money.defaultSplit) STATE.money.defaultSplit = fresh.money.defaultSplit;
+  if(!STATE.money.rate) STATE.money.rate = fresh.money.rate;
 
   /*
    * טליה טסה לקורס בפאי ב-8/12 ולא ב-6/12. מסמכים שנשמרו לפני ההחלטה הזאת
@@ -489,18 +502,71 @@ function ensureDefaults(){
     STATE.schema = 4;
   }
 
+  /*
+   * אופנוע אחד במקום שניים — איתי רוכב וטליה מאחור — והמלון בבנגקוק
+   * שנשמט מפנקס ההוצאות.
+   */
+  if(STATE.schema < 5){
+    const seedShared = window.SHARED_SEED;
+    if(seedShared && STATE.shared && STATE.shared.days){
+      seedShared.days.forEach(seedDay=>{
+        const day = STATE.shared.days.find(d=>d.id===seedDay.id);
+        if(!day) return;
+        if(seedDay.summary) day.summary = seedDay.summary;
+        seedDay.rows.forEach((seedRow, seedIndex)=>{
+          const row = day.rows.find(r=>r.id===seedRow.id);
+          if(!row){
+            // נכנסת במקום שלה ביום, לא בסוף
+            day.rows.splice(Math.min(seedIndex, day.rows.length), 0, JSON.parse(JSON.stringify(seedRow)));
+            return;
+          }
+          if(seedRow.wiki && !row.wiki) row.wiki = seedRow.wiki;
+          // שורות שהאפליקציה מנהלת — נשארות מסונכרנות עם התוכנית
+          if(seedRow.managed){
+            ['act','time','dur','baht','status','notes','link','wiki'].forEach(k=>{
+              if(seedRow[k]!==undefined) row[k] = seedRow[k];
+            });
+            row.managed = true;
+          }
+        });
+        // סדר השורות נקבע על ידי התוכנית; שורות שהוסיפו ידנית נשארות בסוף
+        const seedOrder = new Map(seedDay.rows.map((r,i)=>[r.id, i]));
+        day.rows.sort((a,b)=>{
+          const ai = seedOrder.has(a.id) ? seedOrder.get(a.id) : 1e6;
+          const bi = seedOrder.has(b.id) ? seedOrder.get(b.id) : 1e6;
+          return ai - bi;
+        });
+      });
+      if(seedShared.scooterInfo) STATE.shared.scooterInfo = seedShared.scooterInfo;
+    }
+    fresh.countries.forEach(seedCountry=>{
+      const country = findCountry(seedCountry.id);
+      if(!country) return;
+      seedCountry.destinations.forEach(seedDest=>{
+        const dest = country.destinations.find(d=>d.name===seedDest.name);
+        if(dest && seedDest.scooter) dest.scooter = JSON.parse(JSON.stringify(seedDest.scooter));
+      });
+    });
+    // הרישיון שייך לרוכב בלבד
+    STATE.masterChecklist.forEach(t=>{
+      if(t.category==='קטנוע' && /רישיון בינלאומי/.test(t.title)) t.owner = 'itai';
+    });
+    // כל הוצאה קיימת נחשבת כמשולמת, והמלון החסר נוסף
+    (STATE.money.expenses||[]).forEach(x=>{ if(!x.status) x.status = 'paid'; });
+    fresh.money.expenses.forEach(seedExpense=>{
+      if(!STATE.money.expenses.some(x=>x.title===seedExpense.title)){
+        STATE.money.expenses.push(JSON.parse(JSON.stringify(seedExpense)));
+      }
+    });
+    STATE.schema = 5;
+  }
+
   /* משימות חדשות מתווספות בכל גרסה, לפי כותרת */
   fresh.masterChecklist.forEach(seedTask=>{
     if(!STATE.masterChecklist.some(t=>t.title===seedTask.title)){
       STATE.masterChecklist.push(JSON.parse(JSON.stringify(seedTask)));
     }
   });
-  if(!STATE.trip) STATE.trip = fresh.trip;
-  if(!STATE.money) STATE.money = fresh.money;
-  if(!STATE.money.settlements) STATE.money.settlements = [];
-  if(!STATE.money.budgets) STATE.money.budgets = fresh.money.budgets;
-  if(!STATE.money.defaultSplit) STATE.money.defaultSplit = fresh.money.defaultSplit;
-  if(!STATE.money.rate) STATE.money.rate = fresh.money.rate;
   // רשימת ציוד ישנה הייתה כולה של טליה
   if(!STATE.packingList.some(p=>p.owner==='itai')){
     STATE.packingList.forEach(p=>{ if(!p.owner) p.owner = 'talia'; });
@@ -909,6 +975,7 @@ function render(){
   renderNav();
   const c = document.getElementById('content');
   if(activeTab==='home') c.innerHTML = renderHome();
+  else if(activeTab==='today'){ c.innerHTML = renderToday(); initSwipe(); }
   else if(activeTab==='route') c.innerHTML = renderRouteTab();
   else if(activeTab==='money') c.innerHTML = renderMoney();
   else if(activeTab==='map') { c.innerHTML = renderMapShell(); initMapIfNeeded(); }
@@ -925,6 +992,7 @@ function render(){
 function navItems(){
   const common = [
     {tab:'home',  icon:'🏠', label:'בית'},
+    {tab:'today', icon:'📆', label:'היום'},
     {tab:'route', icon:'🧭', label:'המסלול'},
     {tab:'money', icon:'💸', label:'כסף'}
   ];
@@ -965,7 +1033,26 @@ const DEST_IMAGES = {
  "Manila": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f7/Cityscape_of_Manila%2C_2025_%2801%29.jpg/1280px-Cityscape_of_Manila%2C_2025_%2801%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
 };
 
-const imageCache = Object.assign({}, DEST_IMAGES);
+const ROW_IMAGES = {
+ "Grand Palace": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c7/0005574_-_Wat_Phra_Kaew_006.jpg/960px-0005574_-_Wat_Phra_Kaew_006.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+ "Khao Lak": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/13/Khao_Lak_Beach%2C_Thailand.jpg/960px-Khao_Lak_Beach%2C_Thailand.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+ "Khao Sok National Park": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d2/1022_KhaoSokNationalPark_2.jpg/960px-1022_KhaoSokNationalPark_2.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+ "Loy Krathong": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/bd/Thai_people_setting_their_candle-lit_krathongs_in_the_Ping_river_at_night_during_Loy_Krathong_2015-10_%2822715933524%29.jpg/960px-Thai_people_setting_their_candle-lit_krathongs_in_the_Ping_river_at_night_during_Loy_Krathong_2015-10_%2822715933524%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+ "Lumphini Park": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3e/Aerial_view_of_Lumphini_Park.jpg/960px-Aerial_view_of_Lumphini_Park.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+ "MBK Center": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/70/MBK_CENTER_%288%29.jpg/960px-MBK_CENTER_%288%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+ "Muay Thai": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9a/Muay_Thai_Fight_Us_Vs_Burma_%2880668065%29.jpeg/960px-Muay_Thai_Fight_Us_Vs_Burma_%2880668065%29.jpeg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+ "Phang Nga Bay": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3e/Dramatic_karst_landscape_of_Phang_Nga_Bay%2C_Thailand.jpg/960px-Dramatic_karst_landscape_of_Phang_Nga_Bay%2C_Thailand.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+ "Railay Beach": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/40/Railay_Beach_5.jpg/960px-Railay_Beach_5.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+ "Rajadamnern Stadium": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6c/RajInfront.jpg/960px-RajInfront.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+ "Wat Arun": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2a/%E0%B9%80%E0%B8%88%E0%B8%94%E0%B8%B5%E0%B8%A2%E0%B9%8C%E0%B8%9B%E0%B8%A3%E0%B8%B0%E0%B8%98%E0%B8%B2%E0%B8%99%E0%B8%97%E0%B8%A3%E0%B8%87%E0%B8%9B%E0%B8%A3%E0%B8%B2%E0%B8%87%E0%B8%84%E0%B9%8C%E0%B8%A7%E0%B8%B1%E0%B8%94%E0%B8%AD%E0%B8%A3%E0%B8%B8%E0%B8%932.jpg/960px-%E0%B9%80%E0%B8%88%E0%B8%94%E0%B8%B5%E0%B8%A2%E0%B9%8C%E0%B8%9B%E0%B8%A3%E0%B8%B0%E0%B8%98%E0%B8%B2%E0%B8%99%E0%B8%97%E0%B8%A3%E0%B8%87%E0%B8%9B%E0%B8%A3%E0%B8%B2%E0%B8%87%E0%B8%84%E0%B9%8C%E0%B8%A7%E0%B8%B1%E0%B8%94%E0%B8%AD%E0%B8%A3%E0%B8%B8%E0%B8%932.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+ "Wat Pho": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/53/%E0%B8%9E%E0%B8%A3%E0%B8%B0%E0%B8%9E%E0%B8%B8%E0%B8%97%E0%B8%98%E0%B9%84%E0%B8%AA%E0%B8%A2%E0%B8%B2%E0%B8%AA%E0%B8%A7%E0%B8%B1%E0%B8%94%E0%B8%9E%E0%B8%A3%E0%B8%B0%E0%B9%80%E0%B8%8A%E0%B8%95%E0%B8%B8%E0%B8%9E%E0%B8%99.jpg/960px-%E0%B8%9E%E0%B8%A3%E0%B8%B0%E0%B8%9E%E0%B8%B8%E0%B8%97%E0%B8%98%E0%B9%84%E0%B8%AA%E0%B8%A2%E0%B8%B2%E0%B8%AA%E0%B8%A7%E0%B8%B1%E0%B8%94%E0%B8%9E%E0%B8%A3%E0%B8%B0%E0%B9%80%E0%B8%8A%E0%B8%95%E0%B8%B8%E0%B8%9E%E0%B8%99.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+ "Yaowarat Road": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9e/%282022%29_%E0%B8%95%E0%B8%B6%E0%B8%81%E0%B9%81%E0%B8%96%E0%B8%A7%E0%B8%A3%E0%B8%B4%E0%B8%A1%E0%B8%96%E0%B8%99%E0%B8%99%E0%B9%80%E0%B8%A2%E0%B8%B2%E0%B8%A7%E0%B8%A3%E0%B8%B2%E0%B8%8A_%E0%B9%80%E0%B8%82%E0%B8%95%E0%B8%AA%E0%B8%B1%E0%B8%A1%E0%B8%9E%E0%B8%B1%E0%B8%99%E0%B8%98%E0%B8%A7%E0%B8%87%E0%B8%A8%E0%B9%8C_%E0%B8%81%E0%B8%A3%E0%B8%B8%E0%B8%87%E0%B9%80%E0%B8%97%E0%B8%9E%E0%B8%A1%E0%B8%AB%E0%B8%B2%E0%B8%99%E0%B8%84%E0%B8%A3_%284%29.jpg/960px-%282022%29_%E0%B8%95%E0%B8%B6%E0%B8%81%E0%B9%81%E0%B8%96%E0%B8%A7%E0%B8%A3%E0%B8%B4%E0%B8%A1%E0%B8%96%E0%B8%99%E0%B8%99%E0%B9%80%E0%B8%A2%E0%B8%B2%E0%B8%A7%E0%B8%A3%E0%B8%B2%E0%B8%8A_%E0%B9%80%E0%B8%82%E0%B8%95%E0%B8%AA%E0%B8%B1%E0%B8%A1%E0%B8%9E%E0%B8%B1%E0%B8%99%E0%B8%98%E0%B8%A7%E0%B8%87%E0%B8%A8%E0%B9%8C_%E0%B8%81%E0%B8%A3%E0%B8%B8%E0%B8%87%E0%B9%80%E0%B8%97%E0%B8%9E%E0%B8%A1%E0%B8%AB%E0%B8%B2%E0%B8%99%E0%B8%84%E0%B8%A3_%284%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+ "Phra Nang Cave Beach": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/40/Railay_Beach_5.jpg/960px-Railay_Beach_5.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+ "Similan Islands": "https://upload.wikimedia.org/wikipedia/commons/b/b0/Similan_islands.png",
+ "Zip line": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/15/Texas_Zip_liner_5430.JPG/960px-Texas_Zip_liner_5430.JPG?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
+};
+
+const imageCache = Object.assign({}, DEST_IMAGES, ROW_IMAGES);
 function imageBox(wiki, hue, cls){
   const key = wiki || '';
   const cached = imageCache[key];
@@ -1199,14 +1286,25 @@ function renderScooter(d){
   const total = (Number(sc.perDay)||0) * (Number(sc.bikes)||1) * (Number(sc.days)||1);
   const bikes = sc.bikes===1 ? 'קטנוע אחד' : sc.bikes+' קטנועים';
   const days  = sc.days===1 ? 'ליום' : `ל-${sc.days} ימים`;
+  const who = sc.rider
+    ? `<div class="moto-who">${PEOPLE[sc.rider].name} רוכב · ${PEOPLE[sc.pillion].name} מאחור · שתי קסדות</div>`
+    : (sc.soloRider ? `<div class="moto-who">רכיבה עצמאית — רישיון A על השם של ${PEOPLE[sc.soloRider].name}</div>` : '');
   return `<div class="moto">
     <span class="moto-icon">🛵</span>
     <div>
       <b>${sc.headline}</b>
-      <div class="moto-line">${bikes} ${days} · ฿${sc.perDay} לקטנוע ליום · ${baht(total)} · ${ils(toIls(total))}</div>
+      <div class="moto-line">${bikes} ${days} · ฿${sc.perDay} ליום · ${baht(total)} · ${ils(toIls(total))}</div>
+      ${who}
       <div class="moto-note">${sc.note}</div>
     </div>
   </div>`;
+}
+
+const ROW_ICONS = {'אוכל':'🍜','תחבורה':'🛵','אטרקציות':'📍','לינה':'🏨','אחר':'•'};
+
+function rowThumb(r){
+  if(r.wiki) return imageBox(r.wiki, '#8C8272', 'row-photo');
+  return `<div class="row-icon">${ROW_ICONS[r.cat] || '•'}</div>`;
 }
 
 function renderDayCard(day){
@@ -1228,27 +1326,208 @@ function renderDayCard(day){
 
 function renderSharedRow(day, r){
   const statusCls = SHARED_STATUS_CLASS[r.status] || 'onsite';
-  const meta = [r.loc, r.dur && (r.dur+' שעות'), r.cat].filter(Boolean).join(' · ');
+  const open = expandedRow[r.id] === true;
+  const meta = [r.loc, r.dur && (r.dur+' שעות')].filter(Boolean).join(' · ');
+  const hasMore = !!(r.notes || r.link || r.baht);
   return `
-  <div class="irow ${r.done?'done':''}">
+  <div class="irow ${r.done?'done':''} ${open?'open':''}">
     <input class="icheck" type="checkbox" ${r.done?'checked':''} data-action="toggleSharedRow" data-day="${day.id}" data-id="${r.id}">
-    <div class="itime">${r.time||''}</div>
-    <div class="ibody">
-      <div class="iact">${r.act}</div>
-      ${meta?`<div class="imeta">${meta}</div>`:''}
-      ${r.notes?`<div class="inotes">${r.notes}</div>`:''}
-      <div class="chip-row tight">
-        ${r.link?`<a class="chip mini" href="${r.link}" target="_blank" rel="noopener">↗ פתיחה</a>`:''}
-        ${r.baht?`<button class="chip mini" data-action="expenseFromRow" data-day="${day.id}" data-id="${r.id}">💸 לרשום כהוצאה</button>`:''}
-        <button class="chip mini" data-action="editSharedRow" data-day="${day.id}" data-id="${r.id}">✏️ עריכה</button>
+    ${rowThumb(r)}
+    <div class="ibody" ${hasMore?`data-action="toggleRow" data-id="${r.id}"`:''}>
+      <div class="irow-top">
+        <div class="iact">${r.act}</div>
+        ${r.time?`<div class="itime">${r.time}</div>`:''}
       </div>
-    </div>
-    <div class="iside">
-      ${r.baht?`<span class="ibaht">${baht(r.baht)}</span>`:''}
-      <span class="tag-s ${statusCls}">${r.status||''}</span>
+      <div class="imeta">
+        ${meta}
+        ${r.baht?`<span class="ibaht">${baht(r.baht)}</span>`:''}
+        <span class="tag-s ${statusCls}">${r.status||''}</span>
+      </div>
+      ${open ? `
+        ${r.notes?`<div class="inotes">${r.notes}</div>`:''}
+        <div class="chip-row tight">
+          ${r.link?`<a class="chip mini" href="${r.link}" target="_blank" rel="noopener">↗ פתיחה</a>`:''}
+          ${r.baht?`<button class="chip mini" data-action="expenseFromRow" data-day="${day.id}" data-id="${r.id}">💸 לרשום כהוצאה</button>`:''}
+          <button class="chip mini" data-action="editSharedRow" data-day="${day.id}" data-id="${r.id}">✏️ עריכה</button>
+        </div>` : (hasMore?`<div class="imore">${r.notes? r.notes.slice(0,52)+(r.notes.length>52?'…':'') : 'פרטים'}</div>`:'')}
     </div>
   </div>`;
 }
+
+/* =========================================================
+   היום — חפיסת ימים שמחליקים בין הכרטיסים שלה
+========================================================= */
+
+/** הימים שרלוונטיים למי שמחובר, לפי הסדר */
+function myDays(){
+  if(!sh() || !sh().days) return [];
+  return sh().days.filter(d=> !afterMyTrip(d.date) || d.date === splitDate());
+}
+
+/** היום של היום — ואם הטיול עוד לא התחיל, היום הראשון */
+function defaultDayIndex(){
+  const days = myDays();
+  if(!days.length) return 0;
+  const today = new Date().toISOString().slice(0,10);
+  const exact = days.findIndex(d=>d.date === today);
+  if(exact >= 0) return exact;
+  const next = days.findIndex(d=>d.date > today);
+  return next >= 0 ? next : days.length-1;
+}
+
+function currentDayIndex(){
+  const days = myDays();
+  if(todayIndex === null) todayIndex = defaultDayIndex();
+  return Math.max(0, Math.min(days.length-1, todayIndex));
+}
+
+function renderToday(){
+  const days = myDays();
+  if(!days.length) return `<div class="section"><div class="empty">אין ימים מפורטים להצגה</div></div>`;
+  const i = currentDayIndex();
+  const day = days[i];
+  const isToday = day.date === new Date().toISOString().slice(0,10);
+  const until = daysUntil(day.date);
+  const done = day.rows.filter(r=>r.done).length;
+  const pct = day.rows.length ? Math.round(done/day.rows.length*100) : 0;
+  const dest = myDestinations().find(d=>d.arrival <= day.date && day.date <= (d.departure||d.arrival));
+
+  const when = isToday ? 'היום'
+    : until === 1 ? 'מחר'
+    : until > 1 ? `בעוד ${until} ימים`
+    : until === -1 ? 'אתמול'
+    : `לפני ${Math.abs(until)} ימים`;
+
+  return `
+  <div class="today-wrap">
+    <div class="today-rail">
+      <button class="rail-btn ${i>=days.length-1?'off':''}" data-action="dayStep" data-id="1">‹</button>
+      <div class="rail-dots">
+        ${days.map((d,idx)=>`<span class="dot ${idx===i?'on':''} ${d.rows.every(r=>r.done)?'full':''}"
+            data-action="dayJump" data-id="${idx}"></span>`).join('')}
+      </div>
+      <button class="rail-btn ${i<=0?'off':''}" data-action="dayStep" data-id="-1">›</button>
+    </div>
+
+    <div class="day-deck" id="day-deck">
+      <div class="deck-card" id="deck-card">
+        <div class="deck-hero">
+          ${imageBox(dest && dest.wiki, dest && dest.hue, 'deck-photo')}
+          <div class="deck-hero-text">
+            <div class="deck-when">${when} · יום ${day.day} מתוך ${days.length}</div>
+            <div class="deck-place">${day.dest}</div>
+            <div class="deck-date">${day.dow} ${fmtDate(day.date)}</div>
+          </div>
+          <div class="deck-ring">
+            <svg viewBox="0 0 36 36" class="ring">
+              <path class="ring-bg" d="M18 2.5a15.5 15.5 0 1 1 0 31 15.5 15.5 0 0 1 0-31"/>
+              <path class="ring-fill" stroke-dasharray="${pct}, 100"
+                    d="M18 2.5a15.5 15.5 0 1 1 0 31 15.5 15.5 0 0 1 0-31"/>
+            </svg>
+            <span>${done}/${day.rows.length}</span>
+          </div>
+        </div>
+
+        <div class="deck-body">
+          ${day.summary?`<div class="deck-summary">${day.summary}</div>`:''}
+          ${day.rows.map(r=>renderTodayRow(day, r)).join('')}
+          <div class="deck-total">
+            סה״כ היום · ${baht(dayTotalBaht(day))} · ${ils(toIls(dayTotalBaht(day)))}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="deck-hint">החליקו ימינה ושמאלה כדי לעבור בין הימים</div>
+  </div>`;
+}
+
+function renderTodayRow(day, r){
+  const statusCls = SHARED_STATUS_CLASS[r.status] || 'onsite';
+  const meta = [r.time, r.loc].filter(Boolean).join(' · ');
+  return `
+  <div class="tcard ${r.done?'done':''}">
+    ${rowThumb(r)}
+    <div class="tbody">
+      <div class="tact">${r.act}</div>
+      <div class="tmeta">${meta}</div>
+      <div class="chip-row tight">
+        ${r.baht?`<span class="chip mini">${baht(r.baht)}</span>`:''}
+        <span class="tag-s ${statusCls}">${r.status||''}</span>
+        ${r.link?`<a class="chip mini" href="${r.link}" target="_blank" rel="noopener">↗</a>`:''}
+      </div>
+      ${r.notes?`<div class="tnotes">${r.notes}</div>`:''}
+    </div>
+    <input class="icheck" type="checkbox" ${r.done?'checked':''}
+           data-action="toggleSharedRow" data-day="${day.id}" data-id="${r.id}">
+  </div>`;
+}
+
+/** מעבר יום: 1 = קדימה בזמן. ב-RTL החלקה שמאלה מקדמת. */
+function stepDay(delta){
+  const days = myDays();
+  const next = currentDayIndex() + delta;
+  if(next < 0 || next >= days.length) return false;
+  todayIndex = next;
+  render();
+  return true;
+}
+
+/** גרירה בעכבר ובאצבע — הכרטיס עוקב אחרי היד, ומשלים את התנועה בשחרור */
+function initSwipe(){
+  const deck = document.getElementById('day-deck');
+  const card = document.getElementById('deck-card');
+  if(!deck || !card) return;
+
+  let startX = 0, startY = 0, dx = 0, dragging = false, locked = null;
+
+  const onStart = (x,y)=>{ startX=x; startY=y; dx=0; dragging=true; locked=null; card.style.transition='none'; };
+  const onMove = (x,y,e)=>{
+    if(!dragging) return;
+    const moveX = x-startX, moveY = y-startY;
+    if(locked === null && (Math.abs(moveX) > 8 || Math.abs(moveY) > 8)){
+      locked = Math.abs(moveX) > Math.abs(moveY) ? 'x' : 'y';
+    }
+    if(locked !== 'x') return;
+    if(e && e.cancelable) e.preventDefault();
+    dx = moveX;
+    card.style.transform = `translateX(${dx}px) rotate(${dx/40}deg)`;
+    card.style.opacity = String(Math.max(0.45, 1 - Math.abs(dx)/420));
+  };
+  const onEnd = ()=>{
+    if(!dragging) return;
+    dragging = false;
+    card.style.transition = 'transform .28s ease, opacity .28s ease';
+    const threshold = 70;
+    if(locked === 'x' && Math.abs(dx) > threshold){
+      // RTL: גרירה שמאלה מביאה את היום הבא
+      const moved = stepDay(dx < 0 ? 1 : -1);
+      if(moved) return;             // render() בונה כרטיס חדש
+    }
+    card.style.transform = '';
+    card.style.opacity = '';
+  };
+
+  deck.addEventListener('touchstart', e=>onStart(e.touches[0].clientX, e.touches[0].clientY), {passive:true});
+  deck.addEventListener('touchmove',  e=>onMove(e.touches[0].clientX, e.touches[0].clientY, e), {passive:false});
+  deck.addEventListener('touchend', onEnd);
+  deck.addEventListener('touchcancel', onEnd);
+
+  deck.addEventListener('mousedown', e=>{ if(e.target.closest('input,button,a')) return; onStart(e.clientX, e.clientY); });
+  window.addEventListener('mousemove', e=>onMove(e.clientX, e.clientY, null));
+  window.addEventListener('mouseup', onEnd);
+
+  if(!window.__dayKeys){
+    window.__dayKeys = true;
+    document.addEventListener('keydown', e=>{
+      if(activeTab !== 'today' || modalOpen()) return;
+      if(e.key === 'ArrowLeft') stepDay(1);
+      if(e.key === 'ArrowRight') stepDay(-1);
+    });
+  }
+}
+
+
 
 /* =========================================================
    כסף — חלוקת הוצאות בסגנון Splitwise
@@ -1273,12 +1552,24 @@ function splitLabel(expense){
   return Math.round(d.itai*100)+'/'+Math.round(d.talia*100);
 }
 
-/** מי חייב למי, אחרי כל ההוצאות וההחזרים */
+function isDue(x){ return x.status === 'due'; }
+
+/**
+ * מי חייב למי. היתרה נספרת רק ממה שכבר שולם — מה שמשלמים במקום עוד לא
+ * חוב של אף אחד — ובמקביל מחושבת גם התמונה הצפויה, כולל מה שטרם שולם.
+ */
 function balance(){
   let itaiPaid=0, taliaPaid=0, itaiOwes=0, taliaOwes=0;
+  let duePaid=0, dueOwesItai=0, dueTotal=0;
   wallet().expenses.forEach(x=>{
     const amount = expenseIls(x);
     const shares = splitShares(x);
+    if(isDue(x)){
+      dueTotal += amount;
+      duePaid += (x.paidBy==='itai' ? amount : -amount);
+      dueOwesItai += shares.itai;
+      return;
+    }
     if(x.paidBy==='itai') itaiPaid += amount; else taliaPaid += amount;
     itaiOwes += shares.itai; taliaOwes += shares.talia;
   });
@@ -1288,7 +1579,9 @@ function balance(){
   });
   // נטו חיובי = טליה חייבת לאיתי
   const net = (itaiPaid - itaiOwes) + transfers;
-  return {itaiPaid, taliaPaid, itaiOwes, taliaOwes, net, total:itaiPaid+taliaPaid};
+  const projected = net + (duePaid - dueOwesItai);
+  return {itaiPaid, taliaPaid, itaiOwes, taliaOwes, net, projected,
+          dueTotal, total:itaiPaid+taliaPaid};
 }
 
 function renderMoney(){
@@ -1314,10 +1607,18 @@ function renderBalance(){
   const amount = Math.abs(net);
   const settled = amount < 1;
 
+  const proj = b.projected;
+  const projMine = (meId()==='itai' && proj>0) || (meId()==='talia' && proj<0);
+  const projLine = b.dueTotal > 0
+    ? `<div class="bal-proj">כולל ${ils(b.dueTotal)} שעוד לא שולמו:
+         ${Math.abs(proj)<1 ? 'מסודרים' : (projMine ? `לזכותך ${ils(Math.abs(proj))}` : `לחובתך ${ils(Math.abs(proj))}`)}</div>`
+    : '';
+
   return `
   <div class="balance-card ${settled?'even':(iAmOwed?'plus':'minus')}">
     <div class="bal-label">${settled ? 'אתם מסודרים' : (iAmOwed ? `${other().name} חייב/ת לך` : `את/ה חייב/ת ל${other().name}`)}</div>
     <div class="bal-amount">${settled ? '✓' : ils(amount)}</div>
+    ${projLine}
     ${settled?'':`<button class="btn full" data-action="settleUp" style="margin-top:14px">לסגור חשבון</button>`}
   </div>
 
@@ -1363,9 +1664,9 @@ function renderExpenseList(){
     const myShare = shares[meId()];
     const iPaid = x.paidBy===meId();
     return `
-    <div class="exp-card" data-action="editExpense" data-id="${x.id}">
-      <div class="exp-main">
-        <div class="exp-title">${x.title}</div>
+    <div class="exp-card ${isDue(x)?'due':''}">
+      <div class="exp-main" data-action="editExpense" data-id="${x.id}">
+        <div class="exp-title">${x.title}${isDue(x)?' <span class="due-tag">טרם שולם</span>':''}</div>
         <div class="exp-meta">
           ${fmtDateShort(x.date)} · ${expCatLabel(x.category)} ·
           שילם/ה ${personName(x.paidBy)} · ${splitLabel(x)}
@@ -1375,8 +1676,10 @@ function renderExpenseList(){
       <div class="exp-side">
         <div class="exp-amount">${x.currency==='THB'?baht(x.amount):ils(x.amount)}</div>
         <div class="exp-share ${iPaid?'plus':'minus'}">
-          ${iPaid ? 'שילמת · חלקך '+ils(myShare) : 'חלקך '+ils(myShare)}
+          ${isDue(x) ? 'חלקך יהיה '+ils(myShare)
+                     : (iPaid ? 'שילמת · חלקך '+ils(myShare) : 'חלקך '+ils(myShare))}
         </div>
+        ${isDue(x)?`<button class="chip mini" data-action="markPaid" data-id="${x.id}">✓ שולם</button>`:''}
       </div>
     </div>`;
   }).join('')}
@@ -2274,6 +2577,10 @@ function openExpenseModal(editId, preset){
       <button type="button" class="choice ${splitValue==='full-itai'?'active':''}" data-value="full-itai">הכל על איתי</button>
       <button type="button" class="choice ${splitValue==='full-talia'?'active':''}" data-value="full-talia">הכל על טליה</button>
     </div></div>
+    <div class="field"><label>מצב תשלום</label><div class="choice-row" id="ex-status">
+      <button type="button" class="choice ${val('status','paid')!=='due'?'active':''}" data-value="paid">כבר שולם</button>
+      <button type="button" class="choice ${val('status')==='due'?'active':''}" data-value="due">משלמים במקום</button>
+    </div></div>
     <div class="field"><label>הערה</label><input id="ex-note" value="${escapeAttr(val('note'))}"></div>
     <div id="ex-preview" class="split-preview"></div>
     <div class="modal-actions">
@@ -2284,6 +2591,7 @@ function openExpenseModal(editId, preset){
   `, ()=>{
     let paidBy = val('paidBy', meId());
     let split = splitValue;
+    let status = val('status','paid') === 'due' ? 'due' : 'paid';
 
     function chooser(containerId, onPick){
       const box = document.getElementById(containerId);
@@ -2307,6 +2615,7 @@ function openExpenseModal(editId, preset){
     }
     chooser('ex-paid', v=>paidBy=v);
     chooser('ex-split', v=>split=v);
+    chooser('ex-status', v=>status=v);
     document.getElementById('ex-amount').oninput = preview;
     document.getElementById('ex-currency').onchange = preview;
     preview();
@@ -2323,10 +2632,10 @@ function openExpenseModal(editId, preset){
         date: document.getElementById('ex-date').value,
         category: document.getElementById('ex-category').value,
         note: document.getElementById('ex-note').value,
-        paidBy, split
+        paidBy, split, status
       };
       if(x) Object.assign(x, payload);
-      else wallet().expenses.push({id:uid('x'), settled:false, ...payload});
+      else wallet().expenses.push({id:uid('x'), ...payload});
       persist(); closeModal(); render();
     };
   });
@@ -2486,6 +2795,9 @@ document.addEventListener('click', (e)=>{
     expandedDest[id] = !expandedDest[id];
     render();
   }
+  else if(action==='dayStep'){ stepDay(Number(id)); }
+  else if(action==='dayJump'){ todayIndex = Number(id); render(); }
+  else if(action==='toggleRow'){ expandedRow[id] = !expandedRow[id]; render(); }
   else if(action==='toggleDay'){
     expandedDays[id] = !expandedDays[id];
     render();
@@ -2500,6 +2812,10 @@ document.addEventListener('click', (e)=>{
     const day = sh().days.find(d=>d.id===t.dataset.day);
     const row = day && day.rows.find(r=>r.id===id);
     if(row) openExpenseModal(null, {title:row.act, amount:row.baht, currency:'THB', date:day.date, category:catFromSheet(row.cat)});
+  }
+  else if(action==='markPaid'){
+    const x = wallet().expenses.find(e=>e.id===id);
+    if(x){ x.status = 'paid'; persist(); render(); toast('נרשם כשולם'); }
   }
   else if(action==='settleUp'){ openSettleModal(); }
   else if(action==='editBudgets'){ openSharedBudgetModal(); }

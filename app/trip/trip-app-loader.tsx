@@ -20,7 +20,10 @@ function loadScript(src: string): Promise<void> {
     }
     const el = document.createElement('script');
     el.src = src;
-    el.async = false;
+    // Must be async: dynamically inserted scripts with async=false run in
+    // insertion order, so a slow CDN would hold the app's own scripts behind
+    // it. Order within the app is enforced by chaining these promises instead.
+    el.async = true;
     el.dataset.tripSrc = src;
     el.onload = () => resolve();
     el.onerror = () => reject(new Error(`failed to load ${src}`));
@@ -32,19 +35,32 @@ function loadScript(src: string): Promise<void> {
  * The trip app is plain DOM JavaScript that expects the markup to already be
  * on the page, so it is loaded here, after mount — Leaflet first, then the app.
  */
+let booting: Promise<void> | null = null;
+
 export default function TripAppLoader({ user }: { user: TripUser }) {
+  // The identity must be in place before the app script runs.
+  (globalThis as unknown as { TRIP_USER?: TripUser }).TRIP_USER = user;
+
   useEffect(() => {
-    (window as unknown as { TRIP_USER: TripUser }).TRIP_USER = user;
-    let cancelled = false;
-    loadScript(LEAFLET_SRC)
-      .catch(() => undefined) // the map degrades gracefully; the app must still boot
-      .then(() => (cancelled ? undefined : loadScript(SHARED_SEED_SRC)))
-      .then(() => (cancelled ? undefined : loadScript(APP_SRC)))
+    // Started once per page, never cancelled: a re-render must not abort a
+    // half-loaded app, and each script is a no-op if it is already there.
+    if (booting) return;
+    // The app's own scripts first, and never behind the CDN: a blocked or slow
+    // Leaflet must not stop the trip from loading.
+    booting = loadScript(SHARED_SEED_SRC)
+      .then(() => loadScript(APP_SRC))
       .catch(() => undefined);
-    return () => {
-      cancelled = true;
-    };
-  }, [user]);
+
+    // The map library arrives on its own; the map tab re-initialises when it does.
+    loadScript(LEAFLET_SRC)
+      .then(() => {
+        const app = window as unknown as { initMapIfNeeded?: () => void; activeTab?: string };
+        if (app.activeTab === 'map' && typeof app.initMapIfNeeded === 'function') {
+          app.initMapIfNeeded();
+        }
+      })
+      .catch(() => undefined);
+  }, []);
 
   return null;
 }

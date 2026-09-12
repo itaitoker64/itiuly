@@ -158,7 +158,8 @@ window.SHARED_SEED = {
      "link": "https://www.google.com/maps/search/?api=1&query=MBK+Center+Bangkok",
      "notes": "עושים את הקניונים היום כדי לא לדחוס אותם ליום החופשי",
      "id": "s_1_6",
-     "done": false
+     "done": false,
+     "wiki": "MBK Center"
     },
     {
      "time": "19:30",
@@ -171,7 +172,8 @@ window.SHARED_SEED = {
      "link": "https://www.google.com/maps/search/?api=1&query=Yaowarat+Road+Chinatown+Bangkok",
      "notes": "שרימפס נהר צלויים, חביתת צדפות, גוואי ג׳אב, מנגו סטיקי רייס",
      "id": "s_1_7",
-     "done": false
+     "done": false,
+     "wiki": "Yaowarat Road"
     },
     {
      "time": "22:15",
@@ -246,7 +248,8 @@ window.SHARED_SEED = {
      "link": "https://www.google.com/maps/search/?api=1&query=Grand+Palace+Bangkok",
      "notes": "฿500 לאדם · פתיחה 08:30, כניסה אחרונה 15:30 · כתפיים וברכיים מכוסות, נאכף",
      "id": "s_2_2",
-     "done": false
+     "done": false,
+     "wiki": "Grand Palace"
     },
     {
      "time": "10:50",
@@ -259,7 +262,8 @@ window.SHARED_SEED = {
      "link": "https://www.google.com/maps/search/?api=1&query=Wat+Pho+Bangkok",
      "notes": "฿300 לאדם · 46 מטר · אותו קוד לבוש",
      "id": "s_2_3",
-     "done": false
+     "done": false,
+     "wiki": "Wat Pho"
     },
     {
      "time": "12:30",
@@ -311,7 +315,8 @@ window.SHARED_SEED = {
      "link": "https://www.tablecheck.com/en/salarattanokosin-eateryandbar/reserve/message",
      "notes": "הלילה הכי מבוקש בשנה · תפריט סט מראש · wineanddine@salarattanakosin.com · גיבוי: פרה נאקהון או איקון סיאם",
      "id": "s_2_7",
-     "done": false
+     "done": false,
+     "wiki": "Wat Arun"
     },
     {
      "time": "20:30",
@@ -324,7 +329,8 @@ window.SHARED_SEED = {
      "link": "https://www.google.com/maps/search/?api=1&query=Wat+Arun+Bangkok",
      "notes": "ליל הירח המלא של החודש הירחי ה-12 — אומת לשני מקורות",
      "id": "s_2_8",
-     "done": false
+     "done": false,
+     "wiki": "Loy Krathong"
     },
     {
      "time": "22:30",
@@ -386,7 +392,8 @@ window.SHARED_SEED = {
      "link": "https://www.google.com/maps/search/?api=1&query=Lumphini+Park+Bangkok",
      "notes": "חינם · טאי צ׳י עם הזקנים, וורנים באגם",
      "id": "s_3_1",
-     "done": false
+     "done": false,
+     "wiki": "Lumphini Park"
     },
     {
      "time": "08:40",
@@ -425,7 +432,8 @@ window.SHARED_SEED = {
      "link": "https://www.isb.ac.th/community/alumni",
      "notes": "isbalum@isb.ac.th לפחות יומיים מראש · נסגר 14:25 · תעודה מזהה בשער · לבדוק חופשת חג ההודיה ב-26/11",
      "id": "s_3_4",
-     "done": false
+     "done": false,
+     "wiki": "International School Bangkok"
     },
     {
      "time": "13:10",
@@ -490,7 +498,8 @@ window.SHARED_SEED = {
      "link": "https://rajadamnern.com/tickets/",
      "notes": "קרבות יום רביעי מ-18:00 · מחלקה שלישית ฿1,000 לאדם · הכנה למחנה שמתחיל מחר",
      "id": "s_3_9",
-     "done": false
+     "done": false,
+     "wiki": "Rajadamnern Stadium"
     },
     {
      "time": "21:30",
@@ -530,6 +539,21 @@ window.SHARED_SEED = {
      "notes": "",
      "id": "s_3_12",
      "done": false
+    },
+    {
+     "id": "s_3_dream",
+     "time": "",
+     "dur": "7:00",
+     "act": "רעיון: יום בדרים וורלד",
+     "loc": "רנגסיט, צפונית לבנגקוק",
+     "cat": "אטרקציות",
+     "baht": 2400,
+     "status": "אופציונלי",
+     "link": "https://www.google.com/maps/search/?api=1&query=Dream+World+Bangkok",
+     "wiki": "Dream World (amusement park)",
+     "done": false,
+     "notes": "฿1,200 לאדם · יום שלם, ועוד שעה נסיעה לכל כיוון · לא נכנס בשלושת ימי בנגקוק בלי לוותר על ISB או על רג׳אדמנרן — להחליט מראש, לא באותו בוקר",
+     "managed": true
     }
    ],
    "summary": "לומפיני, ISB, ושוק לילה",
@@ -708,7 +732,8 @@ window.SHARED_SEED = {
      "link": "",
      "notes": "את החזק עושים מחר בבוקר",
      "id": "s_4_12",
-     "done": false
+     "done": false,
+     "wiki": "Muay Thai"
     },
     {
      "time": "18:30",
@@ -867,14 +892,15 @@ window.SHARED_SEED = {
      "id": "s_5_moto",
      "time": "10:45",
      "dur": "0:30",
-     "act": "השכרת שני קטנועים — ליומיים",
+     "act": "השכרת קטנוע — ליומיים",
      "loc": "קו יאו נוי, ליד הרציף",
      "cat": "תחבורה",
-     "baht": 1000,
+     "baht": 500,
      "status": "משלמים במקום",
      "link": "",
      "done": false,
-     "notes": "฿250 לקטנוע ליום · קסדות כלולות, לדרוש שתיים שמתאימות · פיקדון במזומן ฿2,000–3,000 — לא להשאיר דרכון · לצלם את הקטנוע מכל הצדדים לפני שיוצאים · דלק ฿60 למיכל, מספיק ליומיים על האי"
+     "notes": "฿250 ליום · שתי קסדות — גם למי שמאחור, זה חוק ונאכף · לבקש 125cc ומעלה, 110 מתקשה בשניים בעלייה · פיקדון במזומן ฿2,000–3,000, לא להשאיר דרכון · לצלם את הקטנוע לפני שיוצאים",
+     "managed": true
     }
    ],
    "summary": "שני אימונים ומזרן",
@@ -962,7 +988,8 @@ window.SHARED_SEED = {
      "link": "https://www.google.com/maps/search/?api=1&query=Phang+Nga+Bay+Thailand",
      "notes": "฿1,200–1,800 לסירה · מגיעים מהצד השני, אחרי שצי הסירות מפוקט כבר הלך",
      "id": "s_6_5",
-     "done": false
+     "done": false,
+     "wiki": "Phang Nga Bay"
     },
     {
      "time": "18:15",
@@ -993,15 +1020,16 @@ window.SHARED_SEED = {
     {
      "time": "",
      "dur": "",
-     "act": "חלופה לאחה״צ: שני קטנועים וסיבוב על האי",
+     "act": "חלופה לאחה״צ: סיבוב על האי בקטנוע",
      "loc": "קו יאו נוי",
      "cat": "תחבורה",
      "baht": null,
      "status": "אופציונלי",
      "link": "https://www.google.com/maps/search/?api=1&query=Koh+Yao+Noi+viewpoint",
-     "notes": "฿250 לקטנוע · כביש אחד לאורך החוף המזרחי, שדות אורז, מסגד, תצפית",
+     "notes": "כביש אחד לאורך החוף המזרחי, שדות אורז, מסגד, תצפית — בשניים על אותו קטנוע",
      "id": "s_6_8",
-     "done": false
+     "done": false,
+     "managed": true
     },
     {
      "time": "",
@@ -1141,7 +1169,8 @@ window.SHARED_SEED = {
      "link": "https://www.google.com/maps/search/?api=1&query=Phra+Nang+Cave+Beach+Railay+Krabi",
      "notes": "฿150 לאדם לכיוון, ฿200 אחרי החשכה",
      "id": "s_7_8",
-     "done": false
+     "done": false,
+     "wiki": "Railay Beach"
     },
     {
      "time": "19:45",
@@ -1173,14 +1202,15 @@ window.SHARED_SEED = {
      "id": "s_7_moto",
      "time": "14:45",
      "dur": "0:30",
-     "act": "השכרת שני קטנועים באאו נאנג — ליומיים",
+     "act": "השכרת קטנוע באאו נאנג — ליומיים",
      "loc": "אאו נאנג",
      "cat": "תחבורה",
-     "baht": 1000,
+     "baht": 500,
      "status": "משלמים במקום",
      "link": "",
      "done": false,
-     "notes": "฿250–300 לקטנוע ליום · מחר ריילאי (סירה בלבד, הקטנועים חונים) · הכביש לקראבי מהיר — נתיב שמאלי, לא לעקוף משאיות"
+     "notes": "฿250–300 ליום · מחר ריילאי (סירה בלבד, הקטנוע חונה) · הכביש לקראבי מהיר — בשניים מרחק הבלימה ארוך יותר, להשאיר פער",
+     "managed": true
     }
    ],
    "summary": "אימון אחרון, ואז חוצים את המפרץ",
@@ -1229,7 +1259,8 @@ window.SHARED_SEED = {
      "link": "http://www.railay.com/railay/climbing/climbing_courses.shtml",
      "notes": "฿1,000–1,500 לאדם כולל נעליים, רתמה, חבלים ומדריך",
      "id": "s_8_2",
-     "done": false
+     "done": false,
+     "wiki": "Railay Beach"
     },
     {
      "time": "13:00",
@@ -1255,7 +1286,8 @@ window.SHARED_SEED = {
      "link": "https://www.google.com/maps/search/?api=1&query=Phra+Nang+Cave+Beach+Railay+Krabi",
      "notes": "",
      "id": "s_8_4",
-     "done": false
+     "done": false,
+     "wiki": "Phra Nang Cave Beach"
     },
     {
      "time": "15:45",
@@ -1356,7 +1388,8 @@ window.SHARED_SEED = {
      "link": "https://www.google.com/maps/search/?api=1&query=Ao+Thalane+Krabi+kayaking",
      "notes": "฿600–800 לאדם כולל מדריך · לצאת בגאות · עיטי ים ומקוקים",
      "id": "s_9_2",
-     "done": false
+     "done": false,
+     "wiki": "Than Bok Khorani National Park"
     },
     {
      "time": "12:45",
@@ -1522,7 +1555,8 @@ window.SHARED_SEED = {
      "link": "",
      "notes": "מכאן והלאה זה פרק המנוחה",
      "id": "s_10_7",
-     "done": false
+     "done": false,
+     "wiki": "Khao Lak"
     },
     {
      "time": "19:30",
@@ -1554,14 +1588,15 @@ window.SHARED_SEED = {
      "id": "s_10_moto",
      "time": "15:00",
      "dur": "0:30",
-     "act": "השכרת שני קטנועים בקאו לק — לארבעה ימים",
+     "act": "השכרת קטנוע בקאו לק — לארבעה ימים",
      "loc": "קאו לק",
      "cat": "תחבורה",
-     "baht": 2000,
+     "baht": 1000,
      "status": "משלמים במקום",
      "link": "",
      "done": false,
-     "notes": "฿250 לקטנוע ליום · כביש 4 מהיר ועמוס — לנסוע בכביש החוף המקומי · כך מגיעים לחופי באנג סאק ולאאו תונג לבד, בלי מוניות"
+     "notes": "฿250 ליום · כביש 4 מהיר ועמוס משאיות — לנסוע בכביש החוף המקומי · כך מגיעים לבאנג סאק ולאאו תונג לבד, בלי מוניות",
+     "managed": true
     }
    ],
    "summary": "חוצים ליבשה",
@@ -1698,7 +1733,8 @@ window.SHARED_SEED = {
      "link": "https://www.khaolaklanddiscovery.com/khao-lak-tours/",
      "notes": "฿3,900 לאדם · כולל אגרות פארק, מדריך דובר אנגלית, צהריים, ציוד והסעות · הנוף היחיד בטיול שהוא לא חוף",
      "id": "s_12_2",
-     "done": false
+     "done": false,
+     "wiki": "Khao Sok National Park"
     },
     {
      "time": "12:30",
@@ -1877,17 +1913,33 @@ window.SHARED_SEED = {
      "done": false
     },
     {
-     "time": "",
+     "id": "s_14_zip",
+     "time": "09:30",
+     "dur": "3:30",
+     "act": "זיפליין ביער הגשם — Tree Top Adventure Park",
+     "loc": "קאו לק",
+     "cat": "אטרקציות",
+     "baht": 5000,
+     "status": "להזמין",
+     "link": "https://www.google.com/maps/search/?api=1&query=Tree+Top+Adventure+Park+Khao+Lak",
+     "wiki": "Zip line",
+     "done": false,
+     "notes": "฿2,200–2,600 לאדם · מסלול של פלטפורמות, גשרים וזיפליינים בין עצי הגומי · איסוף מהמלון כלול · נעליים סגורות, בלי כפכפים",
+     "managed": true
+    },
+    {
+     "time": "13:30",
      "dur": "",
-     "act": "יום ריק בכוונה — חוף, ספר, בריכה",
+     "act": "אחרי הזיפליין — חוף, ספר, בריכה",
      "loc": "קלימה",
      "cat": "אחר",
      "baht": null,
      "status": "משלמים במקום",
      "link": "",
-     "notes": "יום שמתחיל בלי שעה הוא חלק מהטיול, לא חור בו",
+     "notes": "הבוקר היה מספיק. מכאן שום דבר שדורש שעה",
      "id": "s_14_1",
-     "done": false
+     "done": false,
+     "managed": true
     },
     {
      "time": "13:00",
@@ -1942,7 +1994,7 @@ window.SHARED_SEED = {
      "done": false
     }
    ],
-   "summary": "היום הריק בכוונה",
+   "summary": "זיפליין בבוקר, ושום דבר אחרי",
    "id": "day_14"
   },
   {
@@ -1952,17 +2004,18 @@ window.SHARED_SEED = {
    "dest": "קאו לק",
    "rows": [
     {
-     "time": "08:30",
-     "dur": "1:00",
+     "time": "06:00",
+     "dur": "0:30",
      "act": "ארוחת בוקר",
      "loc": "קלימה",
      "cat": "אוכל",
      "baht": 400.0,
      "status": "משלמים במקום",
      "link": "",
-     "notes": "",
+     "notes": "מוקדם — היציאה לסימילן ב-07:00. לבקש מהמלון ארוחה מוקדמת או לקחת משהו לדרך",
      "id": "s_15_0",
-     "done": false
+     "done": false,
+     "managed": true
     },
     {
      "time": "07:00",
@@ -1971,24 +2024,13 @@ window.SHARED_SEED = {
      "loc": "איי סימילן",
      "cat": "אטרקציות",
      "baht": 7800.0,
-     "status": "אופציונלי",
+     "status": "להזמין",
      "link": "https://www.khaolaklanddiscovery.com/khao-lak-tours/",
-     "notes": "฿3,900 לאדם כולל אגרת פארק · הפארק פתוח 15/10–15/5 · ההפלגה הקצרה ביותר היא מקאו לק · מחוץ לתקציב, ועוגן שני ליום הזה",
+     "notes": "฿3,900 לאדם כולל אגרת פארק · הפארק פתוח 15/10–15/5 · יציאה מרציף תאב לאמו ב-07:00, חזרה אחה״צ · שמורת האלמוגים הכי טובה באנדמן",
      "id": "s_15_1",
-     "done": false
-    },
-    {
-     "time": "10:00",
-     "dur": "4:00",
-     "act": "או: חוף, בריכה וספא",
-     "loc": "קלימה",
-     "cat": "אטרקציות",
-     "baht": 800.0,
-     "status": "משלמים במקום",
-     "link": "",
-     "notes": "עוגן אחד מיוחד לפרק הזה, לא שניים",
-     "id": "s_15_2",
-     "done": false
+     "done": false,
+     "wiki": "Similan Islands",
+     "managed": true
     },
     {
      "time": "13:00",
@@ -2002,6 +2044,20 @@ window.SHARED_SEED = {
      "notes": "",
      "id": "s_15_3",
      "done": false
+    },
+    {
+     "time": "17:30",
+     "dur": "2:00",
+     "act": "חוף ובריכה אחרי סימילן",
+     "loc": "קלימה",
+     "cat": "אטרקציות",
+     "baht": null,
+     "status": "משלמים במקום",
+     "link": "",
+     "notes": "חוזרים שרופים ועייפים — הערב נשאר רגוע",
+     "id": "s_15_2",
+     "done": false,
+     "managed": true
     },
     {
      "time": "19:30",
@@ -2030,7 +2086,7 @@ window.SHARED_SEED = {
      "done": false
     }
    ],
-   "summary": "היום האחרון המלא",
+   "summary": "סימילן — היום הגדול של האנדמן",
    "id": "day_15"
   },
   {
@@ -2444,12 +2500,14 @@ window.SHARED_SEED = {
  "scooterInfo": {
   "title": "קטנועים",
   "lines": [
-   "רישיון: בינלאומי לפי אמנת 1949 עם קטגוריית אופנוע (A). רישיון רכב רגיל לא מספיק — בלעדיו הביטוח לא משלם, גם על שריטה.",
-   "קסדה חובה בחוק ונאכפת. קנס בלעדיה כ-฿500 לאדם, ובמחסום משטרתי יבקשו גם רישיון.",
+   "רק איתי רוכב, טליה מאחור — ולכן הרישיון הוא שלו: בינלאומי לפי אמנת 1949 עם קטגוריית אופנוע (A). רישיון רכב רגיל לא מספיק, ובלעדיו הביטוח לא משלם גם על שריטה.",
+   "שתי קסדות, תמיד. החוק בתאילנד מחייב גם את מי שמאחור, וזה נאכף. קנס כ-฿500 לאדם.",
+   "לבקש 125cc ומעלה. קטנוע 110 מתקשה בשניים בעליות, ובדיוק שם צריך כוח.",
+   "בשניים הקטנוע כבד יותר ומרחק הבלימה ארוך — להשאיר פער גדול מהרגיל, במיוחד על כבישים רטובים.",
    "פיקדון: לשלם במזומן ולא להשאיר דרכון. משכירים שמחזיקים דרכון הם הדרך המוכרת לסחוט תשלום על נזק קיים.",
    "לצלם וידאו סביב הקטנוע לפני היציאה — שריטות, מראות, פנסים, מד דלק.",
-   "ביטוח: לוודא מול הפוליסה שרכיבה על קטנוע מכוסה, ועד איזה נפח מנוע. הרבה פוליסות עוצרות ב-125cc.",
-   "לסרי לנקה צריך היתר נפרד — אישור של ה-AA המקומי על הרישיון הבינלאומי. לא מסתדרים עם מה שיש מתאילנד."
+   "ביטוח: לוודא שהפוליסה של איתי מכסה רכיבה, ושל טליה מכסה נסיעה כנוסעת. לבדוק גם עד איזה נפח מנוע — הרבה פוליסות עוצרות ב-125cc.",
+   "לסרי לנקה צריך היתר נפרד — אישור של ה-AA המקומי. רלוונטי רק אם טליה רוכבת שם בעצמה."
   ]
  }
 };
