@@ -160,3 +160,17 @@ body {
   font-size: 12px;
   color: var(--muted);
 }
+
+/* הצבע של מי שנבחר — אותה זהות שתפגוש אותו בפנים */
+.login-wrap[data-pick='itai']{
+  --terracotta:#2F6F6B; --terracotta-dark:#1F504D;
+  --cream:#F2F4F3; --line:#CFDBD8; --white:#FFFFFF; --ink:#22302E; --muted:#6F827E;
+  background:radial-gradient(circle at 85% -5%, rgba(47,111,107,.2), transparent 55%), var(--cream);
+}
+.login-wrap[data-pick='talia']{
+  --terracotta:#C9736A; --terracotta-dark:#A9564E;
+  --cream:#F7F1EA; --line:#E2D2C3; --white:#FFFCF9; --ink:#3B3230; --muted:#8C7B74;
+  background:radial-gradient(circle at 85% -5%, rgba(201,115,106,.22), transparent 55%), var(--cream);
+}
+.login-wrap{transition:background .35s ease;}
+.login-card,.login-user,.login-input,.login-submit,.login-hero{transition:border-color .25s ease,background .25s ease;}

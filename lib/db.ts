@@ -5,17 +5,46 @@ type SqlTag = (
   ...values: unknown[]
 ) => Promise<Record<string, unknown>[]>;
 
+/**
+ * Vercel's Neon integration names its variables after whichever prefix you
+ * pick when connecting the database, so the exact name is not predictable.
+ * Known names are tried first; failing that, any environment variable holding
+ * a Postgres connection string is used, preferring a pooled one.
+ */
+const KNOWN_URL_VARS = [
+  'DATABASE_URL',
+  'POSTGRES_URL',
+  'NEON_DATABASE_URL',
+  'DATABASE_POSTGRES_URL',
+  'STORAGE_URL',
+  'POSTGRES_PRISMA_URL',
+];
+
+function isPostgresUrl(value: string | undefined): value is string {
+  return !!value && /^postgres(ql)?:\/\//.test(value);
+}
+
 function connectionString(): string {
-  const url =
-    process.env.DATABASE_URL ||
-    process.env.POSTGRES_URL ||
-    process.env.NEON_DATABASE_URL;
-  if (!url) {
-    throw new Error(
-      'חסר DATABASE_URL — הגדירו את מחרוזת החיבור של Neon במשתני הסביבה של הפרויקט ב-Vercel'
-    );
+  for (const name of KNOWN_URL_VARS) {
+    if (isPostgresUrl(process.env[name])) return process.env[name] as string;
   }
-  return url;
+
+  const discovered = Object.entries(process.env)
+    .filter(([, value]) => isPostgresUrl(value))
+    .map(([name, value]) => ({ name, value: value as string }));
+
+  // A pooled endpoint suits serverless better than a direct one.
+  const pooled = discovered.find(
+    (entry) =>
+      entry.value.includes('-pooler.') && !entry.name.includes('UNPOOLED')
+  );
+  const chosen = pooled ?? discovered[0];
+  if (chosen) return chosen.value;
+
+  throw new Error(
+    'חסר DATABASE_URL — חברו מסד נתונים של Neon לפרויקט ב-Vercel (Storage → Neon), ' +
+      'ואז עשו Redeploy כדי שהמשתנה ייכנס לתוקף'
+  );
 }
 
 /**

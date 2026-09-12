@@ -38,12 +38,12 @@ export default function LoginForm({ users }: { users: TripUser[] }) {
   }
 
   return (
-    <main className="login-wrap">
+    <main className="login-wrap" data-pick={username}>
       <div className="login-card">
         <div className="login-hero">
           <div className="login-emoji">🌏</div>
           <h1>My Big Trip</h1>
-          <p>התכנון המשותף של איתי וטליה · תאילנד ומה שאחריה</p>
+          <p>{username === 'talia' ? 'הטיול הגדול · תאילנד, סרי לנקה, וייטנאם, פיליפינים' : 'השבועיים בתאילנד · מבנגקוק לאנדמן'}</p>
         </div>
 
         <form onSubmit={submit}>

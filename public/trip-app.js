@@ -43,8 +43,28 @@ function uid(p){ return (p||'id')+'_'+Math.random().toString(36).slice(2,9); }
 
 function defaultBudget(){ return {accommodation:0,food:0,transport:0,flights:0,activities:0,shopping:0,visasInsurance:0,other:0}; }
 
+/** רשימת הציוד של איתי — שבועיים בלבד, עם אימוני מואיי תאי בקו יאו נוי */
+function itaiPacking(){
+  const list = [
+    ["👕 בגדים", ["5 חולצות קלילות","2 מכנסיים קצרים","מכנס ארוך דק","2 סטים לאימון — מכנס ורשת","7 תחתונים","4 זוגות גרביים","בגד ים","חולצה ארוכה דקה לערב ולמקדשים","כובע","שק כביסה"]],
+    ["🥊 מואיי תאי", ["מגן שיניים — לקנות בארץ","כפפות 12–14 oz (או לשכור במחנה)","תחבושות ידיים — 2 זוגות","מגן מפשעה","קרם לשפשופים","סנדלים לחדר האימון"]],
+    ["👟 נעליים", ["נעלי ספורט","סנדלים נוחים","כפכפים"]],
+    ["🩹 עזרה ראשונה", ["פלסטרים ופלסטרים לשלפוחיות","חומר חיטוי","משכך כאבים","תרופה לשלשול","ORS מלחים","אנטיהיסטמין","דוחה יתושים","קרם לעקיצות","משחה לשרירים"]],
+    ["🧴 רחצה", ["שקית רחצה","מברשת ומשחת שיניים","דאודורנט","שמפו וסבון קטנים","קרם הגנה SPF 50","סכין גילוח","מגבת מיקרופייבר"]],
+    ["📱 אלקטרוניקה", ["טלפון","מטען וכבל נוסף","Power Bank","מתאם חשמל אוניברסלי","אוזניות","AirTag לתיק"]],
+    ["🪪 מסמכים וכסף", ["דרכון — תוקף 6+ חודשים","צילום דרכון + עותק בענן","TDAC — להגיש 72 שעות לפני","כרטיס אשראי + כרטיס גיבוי בנפרד","מזומן חירום","ביטוח נסיעות שמכסה ספורט מגע","רישיון בינלאומי 1949 — אם רוכבים על קטנוע"]],
+    ["🧳 ציוד", ["Packing Cubes","מנעול קטן","Dry Bag לסירות","תיק יום","בקבוק מים","שקיות Ziplock"]]
+  ];
+  const out = [];
+  list.forEach(([category, items])=>items.forEach(item=>{
+    out.push({id:uid('p'), owner:"itai", category, item, status:"need", quantity:"", notes:""});
+  }));
+  return out;
+}
+
 function seedData(){
-  const bangkokId = uid('d'), islandsId = uid('d'), chiangmaiId = uid('d'), paiId = uid('d');
+  const bangkokId = uid('d'), koyaoId = uid('d'), aonangId = uid('d'), khaolakId = uid('d');
+  const chiangmaiId = uid('d'), paiId = uid('d');
   const colomboId = uid('d'), mirissaId = uid('d'), ellaId = uid('d'), arugamId = uid('d');
   const hanoiId = uid('d'), manilaId = uid('d');
 
@@ -54,13 +74,65 @@ function seedData(){
     endDate:null,
     budgetTotal:50000,
     currency:"ILS",
+
+    /* מה שמשותף לשניים, ומה שממשיך אחרי שאיתי טס הביתה */
+    trip:{
+      splitDate:"2026-12-08",
+      together:{title:"תאילנד · מבנגקוק לאנדמן", subtitle:"22 בנובמבר – 8 בדצמבר 2026 · 15 לילות", nights:15},
+      itai:{title:"השבועיים שלי", subtitle:"22/11 – 8/12 · ואז הביתה", homeFlight:"ארקיע IZ598 · פוקט → תל אביב · 8/12, 17:20"},
+      talia:{title:"הטיול הגדול", subtitle:"מ-22/11/2026 והלאה · תאילנד, סרי לנקה, וייטנאם, פיליפינים"}
+    },
+
+    /* חלוקת הוצאות בסגנון Splitwise */
+    money:{
+      rate:0.08981,                 // ฿1 בשקלים
+      defaultSplit:{itai:0.6667, talia:0.3333},
+      budgets:{itai:12000, talia:8000},
+      expenses:[
+        {id:uid('x'), date:"2026-09-10", title:"ארקיע IZ591 · תל אביב → בנגקוק", category:"flights",
+         amount:3777, currency:"ILS", paidBy:"itai", split:"ratio", note:"לשניים · שולם", settled:false},
+        {id:uid('x'), date:"2026-09-10", title:"ארקיע IZ598 · פוקט → תל אביב", category:"flights",
+         amount:1891, currency:"ILS", paidBy:"talia", split:"full-itai", note:"הטיסה הביתה של איתי · שולם", settled:false},
+        {id:uid('x'), date:"2026-09-10", title:"Chermantra Aonang · 3 לילות", category:"accommodation",
+         amount:1839, currency:"ILS", paidBy:"itai", split:"ratio", note:"ביטול חינם עד 14/11", settled:false},
+        {id:uid('x'), date:"2026-09-10", title:"Kalima Resort · 6 לילות בקאו לק", category:"accommodation",
+         amount:4029, currency:"ILS", paidBy:"itai", split:"ratio", note:"ביטול חינם", settled:false}
+      ],
+      settlements:[]
+    },
+
     countries:[
-      {id:"thailand", name:"תאילנד", flag:"🇹🇭", color:"var(--thailand)", order:1, currency:"THB", notes:"",
+      {id:"thailand", owner:"both", name:"תאילנד", flag:"🇹🇭", color:"var(--thailand)", order:1, currency:"THB", notes:"",
         destinations:[
-          {id:bangkokId, name:"בנגקוק", lat:13.7563, lng:100.5018, arrival:"2026-11-23", departure:"2026-11-27", nights:4, accommodation:"", transport:"טיסה מישראל", notes:"התחלה משותפת עם בן הזוג", budget:2500, status:"planned", companions:["Boyfriend"], order:1},
-          {id:islandsId, name:"האיים הדרומיים (קו סמוי/פיפי)", lat:9.5357, lng:100.0623, arrival:"2026-11-27", departure:"2026-12-02", nights:5, accommodation:"", transport:"טיסה פנימית / פרי", notes:"חופים וצלילה עם בן הזוג", budget:4500, status:"planned", companions:["Boyfriend"], order:2},
-          {id:chiangmaiId, name:"צ'יאנג מאי", lat:18.7883, lng:98.9853, arrival:"2026-12-02", departure:"2026-12-06", nights:4, accommodation:"", transport:"טיסה פנימית", notes:"תחנת מעבר בדרך לפאי, סיום החלק הזוגי", budget:1800, status:"planned", companions:["Boyfriend"], order:3},
-          {id:paiId, name:"פאי — קורס מורים ליוגה", lat:19.3583, lng:98.4383, arrival:"2026-12-06", departure:"2027-01-05", nights:30, accommodation:"", transport:"מיניבאן מצ'יאנג מאי", notes:"קבוע במסלול — לא לזוז. קורס טיטשריניג חודשי.", budget:3000, status:"booked", companions:["Solo"], order:4}
+          {id:bangkokId, owner:"both", name:"בנגקוק", wiki:"Bangkok", hue:"#C97B5A",
+           lat:13.7563, lng:100.5018, arrival:"2026-11-23", departure:"2026-11-26", nights:3,
+           accommodation:"Montraj Coach Sukhumvit", transport:"ארקיע IZ591 מתל אביב",
+           notes:"לוי קראתונג בליל הירח המלא, הארמון המלכותי, ISB, ומואיי תאי ברג׳אדמנרן",
+           budget:2500, status:"booked", companions:["ביחד"], order:1},
+          {id:koyaoId, owner:"both", name:"קו יאו נוי — מחנה מואיי תאי", wiki:"Ko Yao Noi", hue:"#6F8F6A",
+           lat:8.1099, lng:98.5892, arrival:"2026-11-26", departure:"2026-11-29", nights:3,
+           accommodation:"Panoramic Sunset View · KYN Phoenix", transport:"Vietjet לפוקט ואז ספידבוט",
+           notes:"שני אימונים ביום, יוגה, ולונגטייל למפרץ פאנג נגה מהצד שאין בו סירות",
+           budget:2200, status:"planned", companions:["ביחד"], order:2},
+          {id:aonangId, owner:"both", name:"אאו נאנג וריילאי", wiki:"Ao Nang", hue:"#6E88A0",
+           lat:8.0320, lng:98.8210, arrival:"2026-11-29", departure:"2026-12-02", nights:3,
+           accommodation:"Chermantra Aonang · Mountain Pool Villa", transport:"ספידבוט מקו יאו נוי",
+           notes:"קורס טיפוס בריילאי, חוף פרה נאנג, קיאקים במנגרובים של אאו תלאנה",
+           budget:2600, status:"booked", companions:["ביחד"], order:3},
+          {id:khaolakId, owner:"both", name:"קאו לק", wiki:"Khao Lak", hue:"#C9A24C",
+           lat:8.6392, lng:98.2450, arrival:"2026-12-02", departure:"2026-12-08", nights:6,
+           accommodation:"Kalima Resort and Villas", transport:"רכב פרטי דרך פאנג נגה",
+           notes:"פרק המנוחה — ספא, בריכת אינפיניטי, ויום אחד באגם צ׳או לאן בקאו סוק",
+           budget:4400, status:"booked", companions:["ביחד"], order:4},
+          {id:chiangmaiId, owner:"talia", name:"צ'יאנג מאי", wiki:"Chiang Mai", hue:"#8C6FA0",
+           lat:18.7883, lng:98.9853, arrival:"2026-12-02", departure:"2026-12-06", nights:4,
+           accommodation:"", transport:"טיסה פנימית", notes:"תחנת מעבר בדרך לפאי",
+           budget:1800, status:"planned", companions:["לבד"], order:5},
+          {id:paiId, owner:"talia", name:"פאי — קורס מורים ליוגה", wiki:"Pai, Thailand", hue:"#4E8B8B",
+           lat:19.3583, lng:98.4383, arrival:"2026-12-06", departure:"2027-01-05", nights:30,
+           accommodation:"", transport:"מיניבאן מצ'יאנג מאי",
+           notes:"קבוע במסלול — לא לזוז. קורס טיטשריניג חודשי.",
+           budget:3000, status:"booked", companions:["לבד"], order:6}
         ],
         prepChecklist:[
           {id:uid('t'), title:"ויזה לתאילנד", status:"todo", deadline:"2026-11-01", notes:"לבדוק אם צריך ויזה מראש או ויזה בכניסה (Visa Exemption)", link:"", priority:"גבוהה", order:1},
@@ -74,12 +146,12 @@ function seedData(){
         ],
         accommodations:[], budget:defaultBudget()
       },
-      {id:"srilanka", name:"סרי לנקה", flag:"🇱🇰", color:"var(--srilanka)", order:2, currency:"LKR", notes:"",
+      {id:"srilanka", owner:"talia", name:"סרי לנקה", flag:"🇱🇰", color:"var(--srilanka)", order:2, currency:"LKR", notes:"",
         destinations:[
-          {id:colomboId, name:"קולומבו", lat:6.9271, lng:79.8612, arrival:"2027-01-05", departure:"2027-01-06", nights:1, accommodation:"", transport:"טיסה מתאילנד", notes:"תחנת כניסה", budget:600, status:"planned", companions:["Solo"], order:1},
-          {id:mirissaId, name:"מיריסה", lat:5.9483, lng:80.4589, arrival:"2027-01-06", departure:"2027-01-12", nights:6, accommodation:"", transport:"רכבת/אוטובוס", notes:"חופים, גלישה, יוגה", budget:2400, status:"planned", companions:["Solo"], order:2},
-          {id:ellaId, name:"אלה", lat:6.8667, lng:81.0466, arrival:"2027-01-12", departure:"2027-01-16", nights:4, accommodation:"", transport:"רכבת ההרים המפורסמת", notes:"טבע, טיולים, נופים", budget:1400, status:"optional", companions:["Solo"], order:3},
-          {id:arugamId, name:"ארוגם ביי", lat:6.8400, lng:81.8360, arrival:"2027-01-16", departure:"2027-01-22", nights:6, accommodation:"", transport:"אוטובוס", notes:"גלישה נוספת, חוף רגוע", budget:2000, status:"optional", companions:["Solo"], order:4}
+          {id:colomboId, owner:"talia", name:"קולומבו", lat:6.9271, lng:79.8612, arrival:"2027-01-05", departure:"2027-01-06", nights:1, accommodation:"", transport:"טיסה מתאילנד", notes:"תחנת כניסה", budget:600, status:"planned", companions:["Solo"], order:1},
+          {id:mirissaId, owner:"talia", name:"מיריסה", lat:5.9483, lng:80.4589, arrival:"2027-01-06", departure:"2027-01-12", nights:6, accommodation:"", transport:"רכבת/אוטובוס", notes:"חופים, גלישה, יוגה", budget:2400, status:"planned", companions:["Solo"], order:2},
+          {id:ellaId, owner:"talia", name:"אלה", lat:6.8667, lng:81.0466, arrival:"2027-01-12", departure:"2027-01-16", nights:4, accommodation:"", transport:"רכבת ההרים המפורסמת", notes:"טבע, טיולים, נופים", budget:1400, status:"optional", companions:["Solo"], order:3},
+          {id:arugamId, owner:"talia", name:"ארוגם ביי", lat:6.8400, lng:81.8360, arrival:"2027-01-16", departure:"2027-01-22", nights:6, accommodation:"", transport:"אוטובוס", notes:"גלישה נוספת, חוף רגוע", budget:2000, status:"optional", companions:["Solo"], order:4}
         ],
         prepChecklist:[
           {id:uid('t'), title:"ETA / ויזה אלקטרונית לסרי לנקה", status:"todo", deadline:"2026-12-20", notes:"", link:"", priority:"גבוהה", order:1},
@@ -87,16 +159,16 @@ function seedData(){
         ],
         transport:[], accommodations:[], budget:defaultBudget()
       },
-      {id:"vietnam", name:"וייטנאם", flag:"🇻🇳", color:"var(--vietnam)", order:3, currency:"VND", notes:"המסלול עדיין גמיש",
+      {id:"vietnam", owner:"talia", name:"וייטנאם", flag:"🇻🇳", color:"var(--vietnam)", order:3, currency:"VND", notes:"המסלול עדיין גמיש",
         destinations:[
-          {id:hanoiId, name:"האנוי (רעיון ראשוני)", lat:21.0278, lng:105.8342, arrival:"", departure:"", nights:null, accommodation:"", transport:"", notes:"המסלול עדיין גמיש — לא סופי", budget:null, status:"optional", companions:[], order:1}
+          {id:hanoiId, owner:"talia", name:"האנוי (רעיון ראשוני)", lat:21.0278, lng:105.8342, arrival:"", departure:"", nights:null, accommodation:"", transport:"", notes:"המסלול עדיין גמיש — לא סופי", budget:null, status:"optional", companions:[], order:1}
         ],
         prepChecklist:[{id:uid('t'), title:"לבדוק דרישת ויזה לווייטנאם", status:"todo", deadline:"", notes:"", link:"", priority:"בינונית", order:1}],
         transport:[], accommodations:[], budget:defaultBudget()
       },
-      {id:"philippines", name:"פיליפינים", flag:"🇵🇭", color:"var(--philippines)", order:4, currency:"PHP", notes:"המסלול עדיין גמיש",
+      {id:"philippines", owner:"talia", name:"פיליפינים", flag:"🇵🇭", color:"var(--philippines)", order:4, currency:"PHP", notes:"המסלול עדיין גמיש",
         destinations:[
-          {id:manilaId, name:"מנילה / פלאוואן (רעיון ראשוני)", lat:14.5995, lng:120.9842, arrival:"", departure:"", nights:null, accommodation:"", transport:"", notes:"המסלול עדיין גמיש — לא סופי", budget:null, status:"optional", companions:[], order:1}
+          {id:manilaId, owner:"talia", name:"מנילה / פלאוואן (רעיון ראשוני)", lat:14.5995, lng:120.9842, arrival:"", departure:"", nights:null, accommodation:"", transport:"", notes:"המסלול עדיין גמיש — לא סופי", budget:null, status:"optional", companions:[], order:1}
         ],
         prepChecklist:[{id:uid('t'), title:"לבדוק דרישת ויזה לפיליפינים", status:"todo", deadline:"", notes:"", link:"", priority:"בינונית", order:1}],
         transport:[], accommodations:[], budget:defaultBudget()
@@ -109,110 +181,126 @@ function seedData(){
       {id:uid('m'), category:"טלפון/eSIM", title:"להשוות ספקי eSIM אזוריים", status:"todo", deadline:"", notes:"", priority:"נמוכה", link:"", countryId:null, order:4},
       {id:uid('m'), category:"מסמכים וגיבויים", title:"לסרוק ולגבות את כל המסמכים החשובים", status:"todo", deadline:"", notes:"", priority:"בינונית", link:"", countryId:null, order:5},
       {id:uid('m'), category:"בישראל לפני הטיול", title:"לסגור עניינים פתוחים (דואר, מנויים, ביטוח לאומי)", status:"todo", deadline:"", notes:"", priority:"בינונית", link:"", countryId:null, order:6},
-      {id:uid('m'), category:"תרופות", title:"להצטייד בערכת תרופות בסיסית", status:"todo", deadline:"", notes:"", priority:"בינונית", link:"", countryId:null, order:7}
+      {id:uid('m'), category:"תרופות", title:"להצטייד בערכת תרופות בסיסית", status:"todo", deadline:"", notes:"", priority:"בינונית", link:"", countryId:null, order:7},
+      {id:uid('m'), owner:"both", category:"הזמנות", title:"לסגור את צ׳רמנטרה לפני הדדליין", status:"todo", deadline:"2026-11-14", notes:"אחרי 14/11 הכרטיס מחויב במלוא הסכום", priority:"גבוהה", link:"", countryId:"thailand", order:8},
+      {id:uid('m'), owner:"both", category:"הזמנות", title:"להזמין את טיסת Vietjet VZ314 לפוקט", status:"todo", deadline:"2026-11-01", notes:"฿4,720 לשניים, Deluxe עם 20 ק״ג", priority:"גבוהה", link:"", countryId:"thailand", order:9},
+      {id:uid('m'), owner:"both", category:"הזמנות", title:"לסגור את המחנה בקו יאו נוי", status:"todo", deadline:"2026-10-20", notes:"מקדמה 50% שאינה מוחזרת — לשאול אם ฿3,800 כולל ארוחות ואימונים", priority:"גבוהה", link:"", countryId:"thailand", order:10},
+      {id:uid('m'), owner:"both", category:"כניסה לתאילנד", title:"להגיש TDAC — 72 שעות לפני הנחיתה", status:"todo", deadline:"2026-11-19", notes:"חובה, חינם, אונליין. כל אתר שגובה כסף הוא לא הרשמי", priority:"גבוהה", link:"", countryId:"thailand", order:11},
+
+      {id:uid('m'), owner:"itai", category:"מואיי תאי", title:"לקנות מגן שיניים בארץ", status:"todo", deadline:"2026-11-15", notes:"", priority:"בינונית", link:"", countryId:null, order:12},
+      {id:uid('m'), owner:"itai", category:"מואיי תאי", title:"לוודא שהביטוח מכסה ספורט מגע", status:"todo", deadline:"2026-11-10", notes:"מואיי תאי לא תמיד כלול בפוליסה רגילה", priority:"גבוהה", link:"", countryId:null, order:13},
+      {id:uid('m'), owner:"itai", category:"קטנוע", title:"רישיון בינלאומי 1949 — רק אם רוכבים", status:"todo", deadline:"2026-11-10", notes:"רישיון ישראלי לא מספיק, וגם בינלאומי רגיל לא", priority:"נמוכה", link:"", countryId:null, order:14},
+      {id:uid('m'), owner:"itai", category:"ISB", title:"לתאם ביקור בוגרים ב-ISB", status:"todo", deadline:"2026-11-20", notes:"isbalum@isb.ac.th, לפחות יומיים מראש, תעודה מזהה בשער", priority:"בינונית", link:"", countryId:"thailand", order:15},
+
+      {id:uid('m'), owner:"talia", category:"קורס יוגה", title:"לשלם את היתרה על הקורס בפאי", status:"todo", deadline:"2026-11-01", notes:"", priority:"גבוהה", link:"", countryId:"thailand", order:16},
+      {id:uid('m'), owner:"talia", category:"ויזה", title:"הארכת שהייה — הפטור קוצר ל-30 יום", status:"todo", deadline:"2026-12-15", notes:"הארכה של 30 יום במשרד ההגירה ฿1,900. רלוונטי כי את נשארת אחרי 8/12", priority:"גבוהה", link:"", countryId:"thailand", order:17},
+      {id:uid('m'), owner:"talia", category:"טיסות המשך", title:"טיסה מתאילנד לסרי לנקה", status:"todo", deadline:"2026-12-01", notes:"", priority:"בינונית", link:"", countryId:null, order:18}
     ],
     packingBreakdown:"Osprey Renn 65L לכל הציוד → Osprey Daylite Plus 20L למטוס, נסיעות וטיולי יום → קרוסבודי קטן לטלפון, כסף ודרכון ביום־יום.",
     packingCarryOn:["דרכון","ארנק","טלפון","Power Bank","תרופות למיגרנה","תרופה לבחילות","משקפי שמש","אטמי אוזניים","מסכת עיניים","אוזניות","מגבונים קטנים","טישו","AirTag מחובר למוצ'ילה הגדולה","חולצה + תחתונים להחלפה"],
     packingList:[
-      {id:uid('p'), category:"👕 בגדים", item:"4–5 חולצות / גופיות קלילות", status:"need", quantity:"", notes:""},
-      {id:uid('p'), category:"👕 בגדים", item:"2–3 מכנסיים קצרים", status:"need", quantity:"", notes:""},
-      {id:uid('p'), category:"👕 בגדים", item:"מכנס ארוך דק ונוח", status:"need", quantity:"", notes:""},
-      {id:uid('p'), category:"👕 בגדים", item:"4–5 סטים של בגדי ספורט / יוגה", status:"need", quantity:"", notes:""},
-      {id:uid('p'), category:"👕 בגדים", item:"טייץ ארוך נוסף", status:"need", quantity:"", notes:""},
-      {id:uid('p'), category:"👕 בגדים", item:"שמלה / אאוטפיט אחד יפה לערב", status:"need", quantity:"", notes:""},
-      {id:uid('p'), category:"👕 בגדים", item:"חולצה ארוכה דקה", status:"need", quantity:"", notes:""},
-      {id:uid('p'), category:"👕 בגדים", item:"פליז / סווטשירט דק", status:"need", quantity:"", notes:""},
-      {id:uid('p'), category:"👕 בגדים", item:"מעיל גשם / פונצ'ו מתקפל", status:"need", quantity:"", notes:""},
-      {id:uid('p'), category:"👕 בגדים", item:"7–8 תחתונים", status:"need", quantity:"", notes:""},
-      {id:uid('p'), category:"👕 בגדים", item:"2 חזיות רגילות", status:"need", quantity:"", notes:""},
-      {id:uid('p'), category:"👕 בגדים", item:"3–4 חזיות ספורט", status:"need", quantity:"", notes:""},
-      {id:uid('p'), category:"👕 בגדים", item:"4–5 זוגות גרביים", status:"need", quantity:"", notes:""},
-      {id:uid('p'), category:"👕 בגדים", item:"פיג'מה", status:"need", quantity:"", notes:""},
-      {id:uid('p'), category:"👕 בגדים", item:"2 בגדי ים", status:"need", quantity:"", notes:""},
-      {id:uid('p'), category:"👕 בגדים", item:"סרונג", status:"need", quantity:"", notes:""},
-      {id:uid('p'), category:"👕 בגדים", item:"כובע", status:"need", quantity:"", notes:""},
-      {id:uid('p'), category:"👕 בגדים", item:"שק כביסה", status:"need", quantity:"", notes:""},
-      {id:uid('p'), category:"👟 נעליים", item:"נעלי ספורט / הליכה", status:"need", quantity:"", notes:""},
-      {id:uid('p'), category:"👟 נעליים", item:"סנדלים נוחים", status:"need", quantity:"", notes:""},
-      {id:uid('p'), category:"👟 נעליים", item:"כפכפים", status:"need", quantity:"", notes:""},
-      {id:uid('p'), category:"😴 שינה", item:"אטמי אוזניים – 2–3 זוגות", status:"need", quantity:"", notes:""},
-      {id:uid('p'), category:"😴 שינה", item:"מסכת עיניים טובה", status:"need", quantity:"", notes:""},
-      {id:uid('p'), category:"😴 שינה", item:"אוזניות Noise Cancelling", status:"need", quantity:"", notes:""},
-      {id:uid('p'), category:"😴 שינה", item:"כרית צוואר קומפקטית / מתנפחת", status:"need", quantity:"", notes:""},
-      {id:uid('p'), category:"😴 שינה", item:"ציפית כרית דקה – אופציונלי", status:"need", quantity:"", notes:""},
-      {id:uid('p'), category:"🤢 בחילות ונסיעות", item:"תרופה לבחילות / מחלת נסיעה", status:"need", quantity:"", notes:""},
-      {id:uid('p'), category:"🤢 בחילות ונסיעות", item:"שקיות הקאה קטנות", status:"need", quantity:"", notes:""},
-      {id:uid('p'), category:"🤢 בחילות ונסיעות", item:"סוכריות / מסטיק ג'ינג'ר", status:"need", quantity:"", notes:""},
-      {id:uid('p'), category:"🤢 בחילות ונסיעות", item:"בקבוק מים", status:"need", quantity:"", notes:""},
-      {id:uid('p'), category:"🤢 בחילות ונסיעות", item:"מגבונים קטנים", status:"need", quantity:"", notes:""},
-      {id:uid('p'), category:"🤢 בחילות ונסיעות", item:"טישו", status:"need", quantity:"", notes:""},
-      {id:uid('p'), category:"🧠 מיגרנות", item:"תרופות למיגרנה", status:"need", quantity:"", notes:""},
-      {id:uid('p'), category:"🧠 מיגרנות", item:"משכך כאבים שמתאים לך", status:"need", quantity:"", notes:""},
-      {id:uid('p'), category:"🧠 מיגרנות", item:"משקפי שמש", status:"need", quantity:"", notes:""},
-      {id:uid('p'), category:"🧠 מיגרנות", item:"חטיף קטן", status:"need", quantity:"", notes:""},
-      {id:uid('p'), category:"🧠 מיגרנות", item:"קומפרס קר רב־פעמי – אופציונלי", status:"need", quantity:"", notes:""},
-      {id:uid('p'), category:"🧠 מיגרנות", item:"מרשם / מכתב רפואי באנגלית לתרופות מרשם, במידת הצורך", status:"need", quantity:"", notes:""},
-      {id:uid('p'), category:"🩹 עזרה ראשונה", item:"פלסטרים", status:"need", quantity:"", notes:""},
-      {id:uid('p'), category:"🩹 עזרה ראשונה", item:"פלסטרים לשלפוחיות", status:"need", quantity:"", notes:""},
-      {id:uid('p'), category:"🩹 עזרה ראשונה", item:"חומר חיטוי קטן", status:"need", quantity:"", notes:""},
-      {id:uid('p'), category:"🩹 עזרה ראשונה", item:"משכך כאבים", status:"need", quantity:"", notes:""},
-      {id:uid('p'), category:"🩹 עזרה ראשונה", item:"תרופה לשלשול", status:"need", quantity:"", notes:""},
-      {id:uid('p'), category:"🩹 עזרה ראשונה", item:"ORS / מלחים להחזרת נוזלים", status:"need", quantity:"", notes:""},
-      {id:uid('p'), category:"🩹 עזרה ראשונה", item:"אנטיהיסטמין", status:"need", quantity:"", notes:""},
-      {id:uid('p'), category:"🩹 עזרה ראשונה", item:"דוחה יתושים", status:"need", quantity:"", notes:""},
-      {id:uid('p'), category:"🩹 עזרה ראשונה", item:"קרם להרגעת עקיצות", status:"need", quantity:"", notes:""},
-      {id:uid('p'), category:"🩹 עזרה ראשונה", item:"תרופות קבועות + ספייר", status:"need", quantity:"", notes:""},
-      {id:uid('p'), category:"🧴 רחצה וטיפוח", item:"שקית רחצה שלא נרטבת", status:"need", quantity:"", notes:""},
-      {id:uid('p'), category:"🧴 רחצה וטיפוח", item:"מברשת שיניים", status:"need", quantity:"", notes:""},
-      {id:uid('p'), category:"🧴 רחצה וטיפוח", item:"משחת שיניים", status:"need", quantity:"", notes:""},
-      {id:uid('p'), category:"🧴 רחצה וטיפוח", item:"דאודורנט", status:"need", quantity:"", notes:""},
-      {id:uid('p'), category:"🧴 רחצה וטיפוח", item:"שמפו קטן", status:"need", quantity:"", notes:""},
-      {id:uid('p'), category:"🧴 רחצה וטיפוח", item:"מרכך קטן", status:"need", quantity:"", notes:""},
-      {id:uid('p'), category:"🧴 רחצה וטיפוח", item:"סבון", status:"need", quantity:"", notes:""},
-      {id:uid('p'), category:"🧴 רחצה וטיפוח", item:"מברשת שיער", status:"need", quantity:"", notes:""},
-      {id:uid('p'), category:"🧴 רחצה וטיפוח", item:"קרם פנים", status:"need", quantity:"", notes:""},
-      {id:uid('p'), category:"🧴 רחצה וטיפוח", item:"קרם הגנה SPF 50 לפנים ולגוף", status:"need", quantity:"", notes:""},
-      {id:uid('p'), category:"🧴 רחצה וטיפוח", item:"מוצרי הטיפוח הקבועים", status:"need", quantity:"", notes:""},
-      {id:uid('p'), category:"🧴 רחצה וטיפוח", item:"סכין גילוח", status:"need", quantity:"", notes:""},
-      {id:uid('p'), category:"🧴 רחצה וטיפוח", item:"פינצטה", status:"need", quantity:"", notes:""},
-      {id:uid('p'), category:"🧴 רחצה וטיפוח", item:"מוצרי מחזור", status:"need", quantity:"", notes:""},
-      {id:uid('p'), category:"🧴 רחצה וטיפוח", item:"מגבת מיקרופייבר", status:"need", quantity:"", notes:""},
-      {id:uid('p'), category:"🧴 רחצה וטיפוח", item:"גליל נייר טואלט קטן / טישו", status:"need", quantity:"", notes:""},
-      {id:uid('p'), category:"📱 אלקטרוניקה", item:"טלפון", status:"have", quantity:"", notes:""},
-      {id:uid('p'), category:"📱 אלקטרוניקה", item:"מטען", status:"need", quantity:"", notes:""},
-      {id:uid('p'), category:"📱 אלקטרוניקה", item:"כבל טעינה נוסף", status:"need", quantity:"", notes:""},
-      {id:uid('p'), category:"📱 אלקטרוניקה", item:"Power Bank", status:"need", quantity:"", notes:""},
-      {id:uid('p'), category:"📱 אלקטרוניקה", item:"מתאם חשמל אוניברסלי", status:"need", quantity:"", notes:""},
-      {id:uid('p'), category:"📱 אלקטרוניקה", item:"אוזניות", status:"need", quantity:"", notes:""},
-      {id:uid('p'), category:"📱 אלקטרוניקה", item:"AirTag למוצ'ילה", status:"need", quantity:"", notes:""},
-      {id:uid('p'), category:"🪪 מסמכים וכסף", item:"דרכון", status:"have", quantity:"", notes:""},
-      {id:uid('p'), category:"🪪 מסמכים וכסף", item:"צילום דרכון", status:"need", quantity:"", notes:""},
-      {id:uid('p'), category:"🪪 מסמכים וכסף", item:"עותק דיגיטלי של הדרכון בענן", status:"need", quantity:"", notes:""},
-      {id:uid('p'), category:"🪪 מסמכים וכסף", item:"רישיון נהיגה", status:"have", quantity:"", notes:""},
-      {id:uid('p'), category:"🪪 מסמכים וכסף", item:"רישיון נהיגה בינלאומי", status:"need", quantity:"", notes:""},
-      {id:uid('p'), category:"🪪 מסמכים וכסף", item:"כרטיס אשראי עיקרי", status:"have", quantity:"", notes:""},
-      {id:uid('p'), category:"🪪 מסמכים וכסף", item:"כרטיס אשראי נוסף – לשמור בנפרד", status:"need", quantity:"", notes:""},
-      {id:uid('p'), category:"🪪 מסמכים וכסף", item:"מזומן חירום", status:"need", quantity:"", notes:""},
-      {id:uid('p'), category:"🪪 מסמכים וכסף", item:"ביטוח נסיעות + פרטי הפוליסה", status:"need", quantity:"", notes:""},
-      {id:uid('p'), category:"🪪 מסמכים וכסף", item:"מסמכים רפואיים רלוונטיים", status:"need", quantity:"", notes:""},
-      {id:uid('p'), category:"🪪 מסמכים וכסף", item:"כמה תמונות פספורט", status:"need", quantity:"", notes:""},
-      {id:uid('p'), category:"🪪 מסמכים וכסף", item:"נרתיק מסמכים", status:"need", quantity:"", notes:""},
-      {id:uid('p'), category:"🧳 ציוד לטיול", item:"3–4 Packing Cubes", status:"need", quantity:"", notes:""},
-      {id:uid('p'), category:"🧳 ציוד לטיול", item:"כיסוי גשם למוצ'ילה", status:"need", quantity:"", notes:""},
-      {id:uid('p'), category:"🧳 ציוד לטיול", item:"מנעול קטן", status:"need", quantity:"", notes:""},
-      {id:uid('p'), category:"🧳 ציוד לטיול", item:"תיק יום Osprey Daylite Plus 20L – זה שבחרנו", status:"need", quantity:"", notes:""},
-      {id:uid('p'), category:"🧳 ציוד לטיול", item:"תיק צד קטן / קרוסבודי", status:"need", quantity:"", notes:""},
-      {id:uid('p'), category:"🧳 ציוד לטיול", item:"Dry Bag קטן", status:"need", quantity:"", notes:""},
-      {id:uid('p'), category:"🧳 ציוד לטיול", item:"כמה שקיות Ziplock", status:"need", quantity:"", notes:""},
-      {id:uid('p'), category:"🧳 ציוד לטיול", item:"חבל כביסה קטן + אטבים", status:"need", quantity:"", notes:""},
-      {id:uid('p'), category:"🧳 ציוד לטיול", item:"פנס ראש קטן", status:"need", quantity:"", notes:""},
-      {id:uid('p'), category:"🧳 ציוד לטיול", item:"בקבוק מים רב־פעמי", status:"need", quantity:"", notes:""},
-      {id:uid('p'), category:"🧳 ציוד לטיול", item:"שקית בד מתקפלת", status:"need", quantity:"", notes:""},
-      {id:uid('p'), category:"🧳 ציוד לטיול", item:"עט", status:"need", quantity:"", notes:""},
-      {id:uid('p'), category:"🧳 ציוד לטיול", item:"מחברת קטנה", status:"need", quantity:"", notes:""},
-      {id:uid('p'), category:"🧳 ציוד לטיול", item:"קלפים", status:"need", quantity:"", notes:""},
-      {id:uid('p'), category:"📚 דברים אישיים", item:"תהילים", status:"need", quantity:"", notes:""},
-      {id:uid('p'), category:"📚 דברים אישיים", item:"ספר לקריאה", status:"need", quantity:"", notes:""}
+      {id:uid('p'), owner:"talia", category:"👕 בגדים", item:"4–5 חולצות / גופיות קלילות", status:"need", quantity:"", notes:""},
+      {id:uid('p'), owner:"talia", category:"👕 בגדים", item:"2–3 מכנסיים קצרים", status:"need", quantity:"", notes:""},
+      {id:uid('p'), owner:"talia", category:"👕 בגדים", item:"מכנס ארוך דק ונוח", status:"need", quantity:"", notes:""},
+      {id:uid('p'), owner:"talia", category:"👕 בגדים", item:"4–5 סטים של בגדי ספורט / יוגה", status:"need", quantity:"", notes:""},
+      {id:uid('p'), owner:"talia", category:"👕 בגדים", item:"טייץ ארוך נוסף", status:"need", quantity:"", notes:""},
+      {id:uid('p'), owner:"talia", category:"👕 בגדים", item:"שמלה / אאוטפיט אחד יפה לערב", status:"need", quantity:"", notes:""},
+      {id:uid('p'), owner:"talia", category:"👕 בגדים", item:"חולצה ארוכה דקה", status:"need", quantity:"", notes:""},
+      {id:uid('p'), owner:"talia", category:"👕 בגדים", item:"פליז / סווטשירט דק", status:"need", quantity:"", notes:""},
+      {id:uid('p'), owner:"talia", category:"👕 בגדים", item:"מעיל גשם / פונצ'ו מתקפל", status:"need", quantity:"", notes:""},
+      {id:uid('p'), owner:"talia", category:"👕 בגדים", item:"7–8 תחתונים", status:"need", quantity:"", notes:""},
+      {id:uid('p'), owner:"talia", category:"👕 בגדים", item:"2 חזיות רגילות", status:"need", quantity:"", notes:""},
+      {id:uid('p'), owner:"talia", category:"👕 בגדים", item:"3–4 חזיות ספורט", status:"need", quantity:"", notes:""},
+      {id:uid('p'), owner:"talia", category:"👕 בגדים", item:"4–5 זוגות גרביים", status:"need", quantity:"", notes:""},
+      {id:uid('p'), owner:"talia", category:"👕 בגדים", item:"פיג'מה", status:"need", quantity:"", notes:""},
+      {id:uid('p'), owner:"talia", category:"👕 בגדים", item:"2 בגדי ים", status:"need", quantity:"", notes:""},
+      {id:uid('p'), owner:"talia", category:"👕 בגדים", item:"סרונג", status:"need", quantity:"", notes:""},
+      {id:uid('p'), owner:"talia", category:"👕 בגדים", item:"כובע", status:"need", quantity:"", notes:""},
+      {id:uid('p'), owner:"talia", category:"👕 בגדים", item:"שק כביסה", status:"need", quantity:"", notes:""},
+      {id:uid('p'), owner:"talia", category:"👟 נעליים", item:"נעלי ספורט / הליכה", status:"need", quantity:"", notes:""},
+      {id:uid('p'), owner:"talia", category:"👟 נעליים", item:"סנדלים נוחים", status:"need", quantity:"", notes:""},
+      {id:uid('p'), owner:"talia", category:"👟 נעליים", item:"כפכפים", status:"need", quantity:"", notes:""},
+      {id:uid('p'), owner:"talia", category:"😴 שינה", item:"אטמי אוזניים – 2–3 זוגות", status:"need", quantity:"", notes:""},
+      {id:uid('p'), owner:"talia", category:"😴 שינה", item:"מסכת עיניים טובה", status:"need", quantity:"", notes:""},
+      {id:uid('p'), owner:"talia", category:"😴 שינה", item:"אוזניות Noise Cancelling", status:"need", quantity:"", notes:""},
+      {id:uid('p'), owner:"talia", category:"😴 שינה", item:"כרית צוואר קומפקטית / מתנפחת", status:"need", quantity:"", notes:""},
+      {id:uid('p'), owner:"talia", category:"😴 שינה", item:"ציפית כרית דקה – אופציונלי", status:"need", quantity:"", notes:""},
+      {id:uid('p'), owner:"talia", category:"🤢 בחילות ונסיעות", item:"תרופה לבחילות / מחלת נסיעה", status:"need", quantity:"", notes:""},
+      {id:uid('p'), owner:"talia", category:"🤢 בחילות ונסיעות", item:"שקיות הקאה קטנות", status:"need", quantity:"", notes:""},
+      {id:uid('p'), owner:"talia", category:"🤢 בחילות ונסיעות", item:"סוכריות / מסטיק ג'ינג'ר", status:"need", quantity:"", notes:""},
+      {id:uid('p'), owner:"talia", category:"🤢 בחילות ונסיעות", item:"בקבוק מים", status:"need", quantity:"", notes:""},
+      {id:uid('p'), owner:"talia", category:"🤢 בחילות ונסיעות", item:"מגבונים קטנים", status:"need", quantity:"", notes:""},
+      {id:uid('p'), owner:"talia", category:"🤢 בחילות ונסיעות", item:"טישו", status:"need", quantity:"", notes:""},
+      {id:uid('p'), owner:"talia", category:"🧠 מיגרנות", item:"תרופות למיגרנה", status:"need", quantity:"", notes:""},
+      {id:uid('p'), owner:"talia", category:"🧠 מיגרנות", item:"משכך כאבים שמתאים לך", status:"need", quantity:"", notes:""},
+      {id:uid('p'), owner:"talia", category:"🧠 מיגרנות", item:"משקפי שמש", status:"need", quantity:"", notes:""},
+      {id:uid('p'), owner:"talia", category:"🧠 מיגרנות", item:"חטיף קטן", status:"need", quantity:"", notes:""},
+      {id:uid('p'), owner:"talia", category:"🧠 מיגרנות", item:"קומפרס קר רב־פעמי – אופציונלי", status:"need", quantity:"", notes:""},
+      {id:uid('p'), owner:"talia", category:"🧠 מיגרנות", item:"מרשם / מכתב רפואי באנגלית לתרופות מרשם, במידת הצורך", status:"need", quantity:"", notes:""},
+      {id:uid('p'), owner:"talia", category:"🩹 עזרה ראשונה", item:"פלסטרים", status:"need", quantity:"", notes:""},
+      {id:uid('p'), owner:"talia", category:"🩹 עזרה ראשונה", item:"פלסטרים לשלפוחיות", status:"need", quantity:"", notes:""},
+      {id:uid('p'), owner:"talia", category:"🩹 עזרה ראשונה", item:"חומר חיטוי קטן", status:"need", quantity:"", notes:""},
+      {id:uid('p'), owner:"talia", category:"🩹 עזרה ראשונה", item:"משכך כאבים", status:"need", quantity:"", notes:""},
+      {id:uid('p'), owner:"talia", category:"🩹 עזרה ראשונה", item:"תרופה לשלשול", status:"need", quantity:"", notes:""},
+      {id:uid('p'), owner:"talia", category:"🩹 עזרה ראשונה", item:"ORS / מלחים להחזרת נוזלים", status:"need", quantity:"", notes:""},
+      {id:uid('p'), owner:"talia", category:"🩹 עזרה ראשונה", item:"אנטיהיסטמין", status:"need", quantity:"", notes:""},
+      {id:uid('p'), owner:"talia", category:"🩹 עזרה ראשונה", item:"דוחה יתושים", status:"need", quantity:"", notes:""},
+      {id:uid('p'), owner:"talia", category:"🩹 עזרה ראשונה", item:"קרם להרגעת עקיצות", status:"need", quantity:"", notes:""},
+      {id:uid('p'), owner:"talia", category:"🩹 עזרה ראשונה", item:"תרופות קבועות + ספייר", status:"need", quantity:"", notes:""},
+      {id:uid('p'), owner:"talia", category:"🧴 רחצה וטיפוח", item:"שקית רחצה שלא נרטבת", status:"need", quantity:"", notes:""},
+      {id:uid('p'), owner:"talia", category:"🧴 רחצה וטיפוח", item:"מברשת שיניים", status:"need", quantity:"", notes:""},
+      {id:uid('p'), owner:"talia", category:"🧴 רחצה וטיפוח", item:"משחת שיניים", status:"need", quantity:"", notes:""},
+      {id:uid('p'), owner:"talia", category:"🧴 רחצה וטיפוח", item:"דאודורנט", status:"need", quantity:"", notes:""},
+      {id:uid('p'), owner:"talia", category:"🧴 רחצה וטיפוח", item:"שמפו קטן", status:"need", quantity:"", notes:""},
+      {id:uid('p'), owner:"talia", category:"🧴 רחצה וטיפוח", item:"מרכך קטן", status:"need", quantity:"", notes:""},
+      {id:uid('p'), owner:"talia", category:"🧴 רחצה וטיפוח", item:"סבון", status:"need", quantity:"", notes:""},
+      {id:uid('p'), owner:"talia", category:"🧴 רחצה וטיפוח", item:"מברשת שיער", status:"need", quantity:"", notes:""},
+      {id:uid('p'), owner:"talia", category:"🧴 רחצה וטיפוח", item:"קרם פנים", status:"need", quantity:"", notes:""},
+      {id:uid('p'), owner:"talia", category:"🧴 רחצה וטיפוח", item:"קרם הגנה SPF 50 לפנים ולגוף", status:"need", quantity:"", notes:""},
+      {id:uid('p'), owner:"talia", category:"🧴 רחצה וטיפוח", item:"מוצרי הטיפוח הקבועים", status:"need", quantity:"", notes:""},
+      {id:uid('p'), owner:"talia", category:"🧴 רחצה וטיפוח", item:"סכין גילוח", status:"need", quantity:"", notes:""},
+      {id:uid('p'), owner:"talia", category:"🧴 רחצה וטיפוח", item:"פינצטה", status:"need", quantity:"", notes:""},
+      {id:uid('p'), owner:"talia", category:"🧴 רחצה וטיפוח", item:"מוצרי מחזור", status:"need", quantity:"", notes:""},
+      {id:uid('p'), owner:"talia", category:"🧴 רחצה וטיפוח", item:"מגבת מיקרופייבר", status:"need", quantity:"", notes:""},
+      {id:uid('p'), owner:"talia", category:"🧴 רחצה וטיפוח", item:"גליל נייר טואלט קטן / טישו", status:"need", quantity:"", notes:""},
+      {id:uid('p'), owner:"talia", category:"📱 אלקטרוניקה", item:"טלפון", status:"have", quantity:"", notes:""},
+      {id:uid('p'), owner:"talia", category:"📱 אלקטרוניקה", item:"מטען", status:"need", quantity:"", notes:""},
+      {id:uid('p'), owner:"talia", category:"📱 אלקטרוניקה", item:"כבל טעינה נוסף", status:"need", quantity:"", notes:""},
+      {id:uid('p'), owner:"talia", category:"📱 אלקטרוניקה", item:"Power Bank", status:"need", quantity:"", notes:""},
+      {id:uid('p'), owner:"talia", category:"📱 אלקטרוניקה", item:"מתאם חשמל אוניברסלי", status:"need", quantity:"", notes:""},
+      {id:uid('p'), owner:"talia", category:"📱 אלקטרוניקה", item:"אוזניות", status:"need", quantity:"", notes:""},
+      {id:uid('p'), owner:"talia", category:"📱 אלקטרוניקה", item:"AirTag למוצ'ילה", status:"need", quantity:"", notes:""},
+      {id:uid('p'), owner:"talia", category:"🪪 מסמכים וכסף", item:"דרכון", status:"have", quantity:"", notes:""},
+      {id:uid('p'), owner:"talia", category:"🪪 מסמכים וכסף", item:"צילום דרכון", status:"need", quantity:"", notes:""},
+      {id:uid('p'), owner:"talia", category:"🪪 מסמכים וכסף", item:"עותק דיגיטלי של הדרכון בענן", status:"need", quantity:"", notes:""},
+      {id:uid('p'), owner:"talia", category:"🪪 מסמכים וכסף", item:"רישיון נהיגה", status:"have", quantity:"", notes:""},
+      {id:uid('p'), owner:"talia", category:"🪪 מסמכים וכסף", item:"רישיון נהיגה בינלאומי", status:"need", quantity:"", notes:""},
+      {id:uid('p'), owner:"talia", category:"🪪 מסמכים וכסף", item:"כרטיס אשראי עיקרי", status:"have", quantity:"", notes:""},
+      {id:uid('p'), owner:"talia", category:"🪪 מסמכים וכסף", item:"כרטיס אשראי נוסף – לשמור בנפרד", status:"need", quantity:"", notes:""},
+      {id:uid('p'), owner:"talia", category:"🪪 מסמכים וכסף", item:"מזומן חירום", status:"need", quantity:"", notes:""},
+      {id:uid('p'), owner:"talia", category:"🪪 מסמכים וכסף", item:"ביטוח נסיעות + פרטי הפוליסה", status:"need", quantity:"", notes:""},
+      {id:uid('p'), owner:"talia", category:"🪪 מסמכים וכסף", item:"מסמכים רפואיים רלוונטיים", status:"need", quantity:"", notes:""},
+      {id:uid('p'), owner:"talia", category:"🪪 מסמכים וכסף", item:"כמה תמונות פספורט", status:"need", quantity:"", notes:""},
+      {id:uid('p'), owner:"talia", category:"🪪 מסמכים וכסף", item:"נרתיק מסמכים", status:"need", quantity:"", notes:""},
+      {id:uid('p'), owner:"talia", category:"🧳 ציוד לטיול", item:"3–4 Packing Cubes", status:"need", quantity:"", notes:""},
+      {id:uid('p'), owner:"talia", category:"🧳 ציוד לטיול", item:"כיסוי גשם למוצ'ילה", status:"need", quantity:"", notes:""},
+      {id:uid('p'), owner:"talia", category:"🧳 ציוד לטיול", item:"מנעול קטן", status:"need", quantity:"", notes:""},
+      {id:uid('p'), owner:"talia", category:"🧳 ציוד לטיול", item:"תיק יום Osprey Daylite Plus 20L – זה שבחרנו", status:"need", quantity:"", notes:""},
+      {id:uid('p'), owner:"talia", category:"🧳 ציוד לטיול", item:"תיק צד קטן / קרוסבודי", status:"need", quantity:"", notes:""},
+      {id:uid('p'), owner:"talia", category:"🧳 ציוד לטיול", item:"Dry Bag קטן", status:"need", quantity:"", notes:""},
+      {id:uid('p'), owner:"talia", category:"🧳 ציוד לטיול", item:"כמה שקיות Ziplock", status:"need", quantity:"", notes:""},
+      {id:uid('p'), owner:"talia", category:"🧳 ציוד לטיול", item:"חבל כביסה קטן + אטבים", status:"need", quantity:"", notes:""},
+      {id:uid('p'), owner:"talia", category:"🧳 ציוד לטיול", item:"פנס ראש קטן", status:"need", quantity:"", notes:""},
+      {id:uid('p'), owner:"talia", category:"🧳 ציוד לטיול", item:"בקבוק מים רב־פעמי", status:"need", quantity:"", notes:""},
+      {id:uid('p'), owner:"talia", category:"🧳 ציוד לטיול", item:"שקית בד מתקפלת", status:"need", quantity:"", notes:""},
+      {id:uid('p'), owner:"talia", category:"🧳 ציוד לטיול", item:"עט", status:"need", quantity:"", notes:""},
+      {id:uid('p'), owner:"talia", category:"🧳 ציוד לטיול", item:"מחברת קטנה", status:"need", quantity:"", notes:""},
+      {id:uid('p'), owner:"talia", category:"🧳 ציוד לטיול", item:"קלפים", status:"need", quantity:"", notes:""},
+      {id:uid('p'), owner:"talia", category:"📚 דברים אישיים", item:"תהילים", status:"need", quantity:"", notes:""},
+      {id:uid('p'), owner:"talia", category:"📚 דברים אישיים", item:"ספר לקריאה", status:"need", quantity:"", notes:""},
+
+      /* הרשימה של איתי — שבועיים, תיק אחד, ומחנה מואיי תאי באמצע */
+      ...itaiPacking()
     ],
     savedPlaces:[
       {id:uid('sp'), countryId:"thailand", destinationId:paiId, name:"Coffee in Love", category:"cafe", mapsLink:"", note:"נשמע כמו מקום שקט לעבוד ממנו", status:"want", priority:"בינונית", lat:19.3611, lng:98.4394},
@@ -235,6 +323,8 @@ function seedData(){
 let STATE = null;
 let activeTab = "home";
 let activeCountry = "thailand";
+let moneySection = "balance";
+let expandedDest = {};
 let activeCountrySection = "prep";
 let saveTimer = null;
 let leafletMap = null;
@@ -244,7 +334,6 @@ let mapAddMode = false;
 let mapFilter = "both";
 let expandedCats = {};
 let moreSection = "master";
-let sharedSection = "days";
 let expandedDays = {};
 let savedFilter = {country:'', dest:'', category:'', status:''};
 let expenseFilter = {country:'', dest:'', category:'', month:'', pay:'', currency:''};
@@ -252,9 +341,53 @@ let storageAvailable = true;
 let undoSnapshot = null;
 let undoTimer = null;
 
+/* =========================================================
+   מי אני — כל מסך באפליקציה נגזר מזה
+========================================================= */
+const PEOPLE = {
+  itai:  {id:'itai',  name:'איתי',  emoji:'🧭', theme:'itai'},
+  talia: {id:'talia', name:'טליה', emoji:'🌏', theme:'talia'}
+};
+function meId(){ return (window.TRIP_USER && window.TRIP_USER.username) || 'itai'; }
+function me(){ return PEOPLE[meId()] || PEOPLE.itai; }
+function other(){ return meId()==='itai' ? PEOPLE.talia : PEOPLE.itai; }
+function personName(id){ return (PEOPLE[id] && PEOPLE[id].name) || id; }
+
+/** כל פריט נושא owner: 'both' (הקטע המשותף) או שם של אחד מהשניים */
+function mine(item){
+  const owner = item && item.owner;
+  if(!owner || owner==='both') return true;
+  return owner === meId();
+}
+function ownerBadge(owner){
+  if(!owner || owner==='both') return `<span class="own-tag both">ביחד</span>`;
+  return `<span class="own-tag ${owner}">${PEOPLE[owner].emoji} ${PEOPLE[owner].name} לבד</span>`;
+}
+
+/** התאריך שבו איתי טס הביתה — הגבול בין הקטע המשותף להמשך של טליה */
+function splitDate(){ return (STATE.trip && STATE.trip.splitDate) || '2026-12-08'; }
+
+function applyTheme(){
+  document.documentElement.dataset.user = me().theme;
+}
+
 function ensureDefaults(){
   if(!STATE.savedPlaces) STATE.savedPlaces = [];
   if(!STATE.expenses) STATE.expenses = [];
+
+  /* מסמך שנשמר לפני שהאפליקציה התפצלה לשני משתמשים — משלימים את החסר */
+  const fresh = seedData();
+  if(!STATE.trip) STATE.trip = fresh.trip;
+  if(!STATE.money) STATE.money = fresh.money;
+  if(!STATE.money.settlements) STATE.money.settlements = [];
+  if(!STATE.money.budgets) STATE.money.budgets = fresh.money.budgets;
+  if(!STATE.money.defaultSplit) STATE.money.defaultSplit = fresh.money.defaultSplit;
+  if(!STATE.money.rate) STATE.money.rate = fresh.money.rate;
+  // רשימת ציוד ישנה הייתה כולה של טליה
+  if(!STATE.packingList.some(p=>p.owner==='itai')){
+    STATE.packingList.forEach(p=>{ if(!p.owner) p.owner = 'talia'; });
+    STATE.packingList.push(...itaiPacking());
+  }
   if(!STATE.packingBreakdown) STATE.packingBreakdown = "Osprey Renn 65L לכל הציוד → Osprey Daylite Plus 20L למטוס, נסיעות וטיולי יום → קרוסבודי קטן לטלפון, כסף ודרכון ביום־יום.";
   if(!STATE.packingCarryOn) STATE.packingCarryOn = ["דרכון","ארנק","טלפון","Power Bank","תרופות למיגרנה","תרופה לבחילות","משקפי שמש","אטמי אוזניים","מסכת עיניים","אוזניות","מגבונים קטנים","טישו","AirTag מחובר למוצ'ילה הגדולה","חולצה + תחתונים להחלפה"];
   STATE.countries.forEach((c,ci)=>{
@@ -494,6 +627,14 @@ function money(n){ if(n===null||n===undefined||n==="") return "—"; return "₪
 function allDestinations(){ let arr=[]; STATE.countries.forEach(c=>c.destinations.forEach(d=>arr.push({...d, countryId:c.id, countryName:c.name, countryColor:c.color, countryFlag:c.flag}))); return arr; }
 function findCountry(id){ return STATE.countries.find(c=>c.id===id); }
 function findDestination(countryId, destId){ const c=findCountry(countryId); return c? c.destinations.find(d=>d.id===destId) : null; }
+/** מקום שמור שייך למי שהיעד או המדינה שלו שייכים לו */
+function myPlace(p){
+  const c = findCountry(p.countryId);
+  if(c && !mine(c)) return false;
+  const d = p.destinationId ? findDestination(p.countryId, p.destinationId) : null;
+  if(d && !mine(d)) return false;
+  return true;
+}
 function placesFor(countryId, destId){ return STATE.savedPlaces.filter(p=>p.countryId===countryId && p.destinationId===destId); }
 function totalPlannedBudget(){ let sum=0; STATE.countries.forEach(c=>{ Object.values(c.budget).forEach(v=>sum+=(Number(v)||0)); }); return sum; }
 
@@ -506,6 +647,13 @@ function totalPlannedBudget(){ let sum=0; STATE.countries.forEach(c=>{ Object.va
    row clears the price on its source instead of creating a second copy. */
 function allExpenseRows(){
   let rows = [];
+  // הפנקס המשותף (Splitwise) — מקור האמת להוצאות בפועל
+  (wallet().expenses||[]).forEach(x=> rows.push({
+    id:'wallet_'+x.id, amountILS:expenseIls(x), localAmount:x.currency==='THB'?x.amount:'', localCurrency:x.currency==='THB'?'THB':'',
+    category:x.category||'other', countryId:x.countryId||null, destinationId:null, date:x.date||'',
+    description:x.title, note:x.note||'', paymentStatus:'שולם',
+    source:'wallet', sourceId:x.id
+  }));
   STATE.expenses.forEach(e=> rows.push({
     id:'manual_'+e.id, amountILS:Number(e.amountILS)||0, localAmount:e.localAmount||'', localCurrency:e.localCurrency||'',
     category:e.category||'other', countryId:e.countryId||null, destinationId:e.destinationId||null, date:e.date||'',
@@ -562,13 +710,13 @@ function spendSummary(rows){
 function totalActualSpent(){ return spendSummary(allExpenseRows()).actual; }
 function actualSpentFor(countryId, categoryId){ return spendSummary(allExpenseRows().filter(r=>r.countryId===countryId && (!categoryId||r.category===categoryId))).actual; }
 function routeEditExpenseRow(source, countryId, sourceId){
-  if(source==='manual') openExpenseModal(sourceId);
+  if(source==='wallet' || source==='manual') openExpenseModal(sourceId);
   else if(source==='transport') openTransportModal(countryId, sourceId);
   else if(source==='stay') openStayModal(countryId, sourceId);
   else if(source==='prepTask') openTaskModal('prep', countryId, sourceId);
   else if(source==='masterTask') openTaskModal('master', null, sourceId);
 }
-function sourceLabel(source){ return {manual:'הוצאה ידנית', transport:'טיסה/תחבורה', stay:'לינה', prepTask:'משימה', masterTask:'משימה כללית'}[source] || source; }
+function sourceLabel(source){ return {wallet:'הוצאה משותפת', manual:'הוצאה ידנית', transport:'טיסה/תחבורה', stay:'לינה', prepTask:'משימה', masterTask:'משימה כללית'}[source] || source; }
 function tripProgressPercent(){
   const mc = STATE.masterChecklist;
   const mcDone = mc.filter(x=>x.status==='done').length;
@@ -579,18 +727,26 @@ function tripProgressPercent(){
 }
 function computeNextSteps(){
   let items=[];
-  STATE.countries.forEach(c=>{
-    c.prepChecklist.filter(t=>t.status!=='done').slice(0,2).forEach(t=>{ items.push({label:`${c.flag} ${t.title}`, sub: t.deadline? `עד ${fmtDateShort(t.deadline)}`:'ללא דדליין'}); });
+  STATE.masterChecklist.filter(t=>mine(t) && t.status!=='done' && t.deadline)
+    .sort((a,b)=>a.deadline.localeCompare(b.deadline)).slice(0,3)
+    .forEach(t=>{ items.push({label:t.title, sub:`עד ${fmtDateShort(t.deadline)}`}); });
+  STATE.countries.filter(mine).forEach(c=>{
+    c.prepChecklist.filter(t=>mine(t) && t.status!=='done').slice(0,2).forEach(t=>{ items.push({label:`${c.flag} ${t.title}`, sub: t.deadline? `עד ${fmtDateShort(t.deadline)}`:'ללא דדליין'}); });
     c.transport.filter(f=>f.status==='מחפשת').forEach(f=>{ items.push({label:`${c.flag} להזמין: ${f.from} → ${f.to}`, sub:f.date? fmtDateShort(f.date):''}); });
   });
   return items.slice(0,6);
 }
 function computeWarnings(){
   let warns=[];
-  const dests = allDestinations().filter(d=>d.arrival && d.departure);
+  const dests = allDestinations().filter(d=>mine(d) && d.arrival && d.departure);
   dests.forEach(d=>{ if(!d.accommodation && d.status!=='optional'){ warns.push(`אין עדיין לינה מאושרת ב${d.name}`); } });
-  STATE.countries.forEach(c=>{
-    c.prepChecklist.forEach(t=>{
+  STATE.masterChecklist.filter(t=>mine(t) && t.deadline && t.status!=='done').forEach(t=>{
+    const dd = daysUntil(t.deadline);
+    if(dd<=14 && dd>=0) warns.push(`"${t.title}" — נותרו ${dd} ימים`);
+    if(dd<0) warns.push(`"${t.title}" — עבר הדדליין!`);
+  });
+  STATE.countries.filter(mine).forEach(c=>{
+    c.prepChecklist.filter(mine).forEach(t=>{
       if(t.deadline && t.status!=='done'){
         const dd = daysUntil(t.deadline);
         if(dd<=14 && dd>=0) warns.push(`${c.flag} "${t.title}" — נותרו ${dd} ימים`);
@@ -630,25 +786,102 @@ function getCssVar(v){
    RENDER: ROOT
 ========================================================= */
 function render(){
+  applyTheme();
   document.getElementById('storage-banner').classList.toggle('hidden', storageAvailable);
-  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.toggle('active', b.dataset.tab===activeTab));
+  renderNav();
   const c = document.getElementById('content');
   if(activeTab==='home') c.innerHTML = renderHome();
+  else if(activeTab==='route') c.innerHTML = renderRouteTab();
+  else if(activeTab==='money') c.innerHTML = renderMoney();
   else if(activeTab==='map') { c.innerHTML = renderMapShell(); initMapIfNeeded(); }
   else if(activeTab==='countries') c.innerHTML = renderCountries();
-  else if(activeTab==='timeline') c.innerHTML = renderTimeline();
-  else if(activeTab==='more') c.innerHTML = renderMore();
-  else if(activeTab==='shared') c.innerHTML = renderShared();
+  else if(activeTab==='more'){ c.innerHTML = renderMore(); if(moreSection==='map') initMapIfNeeded(); }
+  else { activeTab='home'; c.innerHTML = renderHome(); }
   renderWhoPill();
+  loadVisibleImages();
 }
 
 /* =========================================================
-   ביחד — השבועיים הראשונים של איתי וטליה
+   ניווט — לכל אחד הלשוניות שרלוונטיות לו
+========================================================= */
+function navItems(){
+  const common = [
+    {tab:'home',  icon:'🏠', label:'בית'},
+    {tab:'route', icon:'🧭', label:'המסלול'},
+    {tab:'money', icon:'💸', label:'כסף'}
+  ];
+  // לטליה יש ארבע מדינות לנהל; לאיתי יש שבועיים במדינה אחת, ולכן מפה במקום
+  const mid = meId()==='talia'
+    ? [{tab:'countries', icon:'🌍', label:'מדינות'}]
+    : [{tab:'map', icon:'🗺️', label:'מפה'}];
+  return [...common, ...mid, {tab:'more', icon:'🎒', label:'עוד'}];
+}
+function renderNav(){
+  const nav = document.getElementById('bottomnav');
+  if(!nav) return;
+  nav.innerHTML = navItems().map(n=>
+    `<button class="nav-btn ${activeTab===n.tab?'active':''}" data-action="setTab" data-id="${n.tab}">
+       <span class="ni">${n.icon}</span>${n.label}
+     </button>`).join('');
+}
+
+/* =========================================================
+   תמונות — נטענות מוויקיפדיה בזמן אמת, עם נפילה רכה לגרדיאנט
+========================================================= */
+const imageCache = {};
+function imageBox(wiki, hue, cls){
+  const key = wiki || '';
+  const cached = imageCache[key];
+  const style = `--hue:${hue||'#C97B5A'}`;
+  return `<div class="photo ${cls||''} ${cached?'loaded':''}" style="${style}" data-wiki="${escapeAttr(key)}">
+    ${cached?`<img src="${cached}" alt="" loading="lazy">`:''}
+  </div>`;
+}
+async function loadVisibleImages(){
+  const boxes = [...document.querySelectorAll('.photo[data-wiki]:not(.loaded)')];
+  for(const box of boxes){
+    const title = box.dataset.wiki;
+    if(!title) continue;
+    if(imageCache[title]){ paintImage(box, imageCache[title]); continue; }
+    const url = await wikiImage(title);
+    if(url){ imageCache[title] = url; paintImage(box, url); }
+  }
+}
+/** תמונה מוויקיפדיה — קודם בעברית, ואם אין ערך כזה אז באנגלית */
+async function wikiImage(title){
+  for(const lang of ['he','en']){
+    try{
+      const res = await fetch(
+        `https://${lang}.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(title)}?redirect=true`
+      );
+      if(!res.ok) continue;
+      const data = await res.json();
+      const url = (data.originalimage && data.originalimage.source) ||
+                  (data.thumbnail && data.thumbnail.source);
+      if(url) return url;
+    }catch(e){ /* אין רשת — הגרדיאנט נשאר */ }
+  }
+  return null;
+}
+function paintImage(box, url){
+  box.classList.add('loaded');
+  if(!box.querySelector('img')){
+    const img = document.createElement('img');
+    img.src = url; img.alt = ''; img.loading = 'lazy';
+    img.onerror = ()=>{ box.classList.remove('loaded'); img.remove(); };
+    box.appendChild(img);
+  }
+}
+
+/* =========================================================
+   עזרי כסף ומסלול
 ========================================================= */
 function sh(){ return STATE.shared; }
+function wallet(){ return STATE.money; }
 function baht(n){ return '฿' + Math.round(n).toLocaleString('he-IL'); }
 function ils(n){ return '₪' + Math.round(n).toLocaleString('he-IL'); }
-function toIls(bahtAmount){ return (Number(bahtAmount)||0) * (Number(sh().rate)||0); }
+function rate(){ return Number(wallet().rate) || 0.08981; }
+function toIls(bahtAmount){ return (Number(bahtAmount)||0) * rate(); }
 
 const SHARED_STATUS_CLASS = {
   'מוזמן':'booked', 'להזמין':'todo', 'משלמים במקום':'onsite', 'אופציונלי':'optional'
@@ -670,64 +903,123 @@ function sharedCategoryTotals(){
   return totals;
 }
 
-function renderShared(){
-  const s = sh();
-  if(!s) return `<div class="section"><div class="card">התוכנית המשותפת לא נטענה.</div></div>`;
-  const sections = [
-    ['days','יום אחר יום'], ['route','המסלול'], ['bookings','מה סגור'],
-    ['hotels','מלונות'], ['budget','תקציב'], ['info','מידע שימושי']
-  ];
-  const doneCount = s.days.reduce((n,d)=>n+d.rows.filter(r=>r.done).length,0);
-  const rowCount = s.days.reduce((n,d)=>n+d.rows.length,0);
-  const untilDays = daysUntil(s.startDate);
+/** היעדים שרלוונטיים למי שמחובר, לפי סדר התאריכים */
+function myDestinations(){
+  return allDestinations()
+    .filter(d=>mine(d))
+    .sort((a,b)=>(a.arrival||'9999').localeCompare(b.arrival||'9999'));
+}
+/** הימים המפורטים מהגיליון ששייכים ליעד מסוים */
+function daysForDest(dest){
+  if(!sh() || !dest.arrival) return [];
+  return sh().days.filter(d=> d.date >= dest.arrival && d.date < (dest.departure||dest.arrival));
+}
 
-  let body = '';
-  if(sharedSection==='days') body = renderSharedDays();
-  else if(sharedSection==='route') body = renderSharedRoute();
-  else if(sharedSection==='bookings') body = renderSharedBookings();
-  else if(sharedSection==='hotels') body = renderSharedHotels();
-  else if(sharedSection==='budget') body = renderSharedBudget();
-  else if(sharedSection==='info') body = renderSharedInfo();
+/* =========================================================
+   המסלול — יעד אחרי יעד, ובתוך כל יעד השעות מהגיליון
+========================================================= */
+function renderRouteTab(){
+  const dests = myDestinations();
+  const isItai = meId()==='itai';
+  const meta = STATE.trip[meId()] || {};
+  const untilDays = daysUntil(STATE.startDate);
+  const totalNights = dests.reduce((n,d)=>n+(Number(d.nights)||0),0);
 
   return `
-  <div class="hero">
-    <div class="hero-top">
-      <div>
-        <div class="hero-title">${s.title}</div>
-        <div class="hero-sub">${s.subtitle}</div>
-      </div>
-    </div>
-    <div class="hero-stats">
-      <div class="hero-stat"><b>${untilDays>0?untilDays:0}</b><span>ימים להמראה</span></div>
-      <div class="hero-stat"><b>${s.nights}</b><span>לילות</span></div>
-      <div class="hero-stat"><b>${doneCount}/${rowCount}</b><span>סומן כבוצע</span></div>
-    </div>
-  </div>
+  ${renderBigHero(meta.title||'המסלול', meta.subtitle||'', dests[0])}
   <div class="section">
-    <div class="seg-tabs">
-      ${sections.map(([id,label])=>`<button data-action="sharedSection" data-id="${id}" class="${sharedSection===id?'active':''}">${label}</button>`).join('')}
+    <div class="stat-strip">
+      <div class="stat-cell"><b>${untilDays>0?untilDays:0}</b><span>ימים להמראה</span></div>
+      <div class="stat-cell"><b>${dests.length}</b><span>תחנות</span></div>
+      <div class="stat-cell"><b>${totalNights}</b><span>לילות</span></div>
     </div>
-    ${body}
+    ${isItai ? '' : renderConflictNotice()}
+    ${dests.map((d,i)=>renderDestCard(d, i, dests.length)).join('')}
+    ${isItai ? `<div class="card dashed" style="text-align:center">
+        <div style="font-size:22px">✈️</div>
+        <b>${STATE.trip.itai.homeFlight}</b>
+        <div class="small" style="margin-top:6px">מכאן ${other().name} ממשיכה לבד — הטיול שלה נמשך</div>
+      </div>` : ''}
   </div>`;
 }
 
-function renderSharedDays(){
-  return sh().days.map(day=>{
-    const open = expandedDays[day.id] !== false; // ברירת מחדל: פתוח
-    const total = dayTotalBaht(day);
-    return `
-    <div class="day-card">
-      <div class="day-head" data-action="toggleDay" data-id="${day.id}">
-        <div class="dnum">${day.day}</div>
-        <div class="dmain">
-          <div class="dtitle">${day.dest}${day.summary?(' — '+day.summary):''}</div>
-          <div class="dsub">${day.dow} ${fmtDateShort(day.date)} · ${day.rows.length} שורות</div>
+/** התנגשות אמיתית בין שני המקורות — מוצגת ולא מוסתרת */
+function renderConflictNotice(){
+  const pai = allDestinations().find(d=>d.name.indexOf('פאי')===0);
+  const khaolak = allDestinations().find(d=>d.name.indexOf('קאו לק')===0);
+  if(!pai || !khaolak) return '';
+  if(pai.arrival >= khaolak.departure) return '';
+  return `
+  <div class="card warn">
+    <b>⚠️ התנגשות בתאריכים</b>
+    <div class="small" style="margin-top:6px">
+      הקורס בפאי מתחיל ב-${fmtDateShort(pai.arrival)}, אבל המסלול המשותף בקאו לק נמשך עד ${fmtDateShort(khaolak.departure)}.
+      אחד מהשניים צריך לזוז — או שאת עוזבת את קאו לק מוקדם.
+    </div>
+  </div>`;
+}
+
+function renderBigHero(title, subtitle, dest){
+  return `
+  <div class="big-hero">
+    ${imageBox(dest&&dest.wiki, dest&&dest.hue, 'hero-photo')}
+    <div class="big-hero-text">
+      <div class="bh-title">${title}</div>
+      <div class="bh-sub">${subtitle}</div>
+    </div>
+  </div>`;
+}
+
+function renderDestCard(d, index, total){
+  const open = expandedDest[d.id] === true;
+  const days = daysForDest(d);
+  const totalB = days.reduce((n,day)=>n+dayTotalBaht(day),0);
+  const mapsLink = 'https://www.google.com/maps/search/?api=1&query=' +
+    encodeURIComponent(d.name + ' ' + (d.countryName||''));
+  return `
+  <div class="dest-card ${open?'open':''}">
+    <div class="dest-top" data-action="toggleDest" data-id="${d.id}">
+      ${imageBox(d.wiki, d.hue, 'dest-photo')}
+      <div class="dest-overlay">
+        <div class="dest-step">${index+1}/${total}</div>
+        <div class="dest-name">${d.name}</div>
+        <div class="dest-dates">${fmtDateShort(d.arrival)} – ${fmtDateShort(d.departure)} · ${d.nights||0} לילות</div>
+        <div class="dest-tags">
+          ${ownerBadge(d.owner)}
+          ${d.status==='booked'?'<span class="own-tag booked">מוזמן</span>':''}
         </div>
-        <div class="dcost">${baht(total)}<br><span style="font-weight:400;color:var(--muted)">${ils(toIls(total))}</span></div>
       </div>
-      ${open ? `<div class="day-rows">${day.rows.map(r=>renderSharedRow(day,r)).join('')}</div>` : ''}
-    </div>`;
-  }).join('');
+    </div>
+    <div class="dest-body">
+      ${d.notes?`<div class="dest-note">${d.notes}</div>`:''}
+      ${d.accommodation?`<div class="dest-line">🏨 ${d.accommodation}</div>`:''}
+      ${d.transport?`<div class="dest-line">🚕 ${d.transport}</div>`:''}
+      <div class="chip-row">
+        <a class="chip" href="${mapsLink}" target="_blank" rel="noopener">🗺️ במפה</a>
+        ${d.wiki?`<a class="chip" href="https://he.wikipedia.org/wiki/${encodeURIComponent(d.wiki)}" target="_blank" rel="noopener">📖 קצת רקע</a>`:''}
+        ${days.length?`<button class="chip strong" data-action="toggleDest" data-id="${d.id}">${open?'▲ לסגור את הימים':'▼ '+days.length+' ימים, שעה אחר שעה'}</button>`:''}
+      </div>
+      ${days.length?`<div class="dest-cost">${baht(totalB)} · ${ils(toIls(totalB))} לתחנה הזאת</div>`:''}
+      ${open?`<div class="day-list">${days.map(day=>renderDayCard(day)).join('')}</div>`:''}
+    </div>
+  </div>`;
+}
+
+function renderDayCard(day){
+  const open = expandedDays[day.id] === true;
+  const total = dayTotalBaht(day);
+  return `
+  <div class="day-card">
+    <div class="day-head" data-action="toggleDay" data-id="${day.id}">
+      <div class="dnum">${day.day}</div>
+      <div class="dmain">
+        <div class="dtitle">${day.summary || day.dest}</div>
+        <div class="dsub">${day.dow} ${fmtDateShort(day.date)} · ${day.rows.length} שורות</div>
+      </div>
+      <div class="dcost">${baht(total)}<br><span style="font-weight:400;color:var(--muted)">${ils(toIls(total))}</span></div>
+    </div>
+    ${open ? `<div class="day-rows">${day.rows.map(r=>renderSharedRow(day,r)).join('')}</div>` : ''}
+  </div>`;
 }
 
 function renderSharedRow(day, r){
@@ -738,41 +1030,198 @@ function renderSharedRow(day, r){
     <input class="icheck" type="checkbox" ${r.done?'checked':''} data-action="toggleSharedRow" data-day="${day.id}" data-id="${r.id}">
     <div class="itime">${r.time||''}</div>
     <div class="ibody">
-      <div class="iact">${r.act}${r.link?` <a href="${r.link}" target="_blank" rel="noopener" style="font-size:11px">↗</a>`:''}</div>
+      <div class="iact">${r.act}</div>
       ${meta?`<div class="imeta">${meta}</div>`:''}
       ${r.notes?`<div class="inotes">${r.notes}</div>`:''}
+      <div class="chip-row tight">
+        ${r.link?`<a class="chip mini" href="${r.link}" target="_blank" rel="noopener">↗ פתיחה</a>`:''}
+        ${r.baht?`<button class="chip mini" data-action="expenseFromRow" data-day="${day.id}" data-id="${r.id}">💸 לרשום כהוצאה</button>`:''}
+        <button class="chip mini" data-action="editSharedRow" data-day="${day.id}" data-id="${r.id}">✏️ עריכה</button>
+      </div>
     </div>
     <div class="iside">
       ${r.baht?`<span class="ibaht">${baht(r.baht)}</span>`:''}
       <span class="tag-s ${statusCls}">${r.status||''}</span>
-      <button class="btn mini secondary" data-action="editSharedRow" data-day="${day.id}" data-id="${r.id}">✏️</button>
     </div>
   </div>`;
 }
 
-function renderSharedRoute(){
-  const s = sh();
-  return `
-  <h3 class="section-title">הטיסות</h3>
-  ${s.flights.map(f=>`
-    <div class="card">
-      <div style="font-weight:600;font-size:13.5px">${f.what}</div>
-      <div class="small" style="margin-top:4px">${f.when} · ${f.time}</div>
-      <div class="small" style="margin-top:6px">${f.status} · ${f.cost}</div>
-    </div>`).join('')}
-  <h3 class="section-title" style="margin-top:18px">ארבעה בסיסים</h3>
-  ${s.bases.map(b=>`
-    <div class="postcard">
-      <div style="font-weight:600;font-size:14px">${b.name} <span class="small">· ${b.nights} לילות</span></div>
-      <div class="small" style="margin-top:3px">${b.dates}</div>
-      <div class="small" style="margin-top:5px">${b.what}</div>
-    </div>`).join('')}`;
+/* =========================================================
+   כסף — חלוקת הוצאות בסגנון Splitwise
+========================================================= */
+function splitShares(expense){
+  const amount = expenseIls(expense);
+  const def = wallet().defaultSplit;
+  if(expense.split==='equal') return {itai:amount/2, talia:amount/2};
+  if(expense.split==='full-itai') return {itai:amount, talia:0};
+  if(expense.split==='full-talia') return {itai:0, talia:amount};
+  return {itai:amount*def.itai, talia:amount*def.talia};
+}
+function expenseIls(expense){
+  const amount = Number(expense.amount)||0;
+  return expense.currency==='THB' ? amount*rate() : amount;
+}
+function splitLabel(expense){
+  if(expense.split==='equal') return 'חצי-חצי';
+  if(expense.split==='full-itai') return 'על איתי';
+  if(expense.split==='full-talia') return 'על טליה';
+  const d = wallet().defaultSplit;
+  return Math.round(d.itai*100)+'/'+Math.round(d.talia*100);
 }
 
-function renderSharedBookings(){
+/** מי חייב למי, אחרי כל ההוצאות וההחזרים */
+function balance(){
+  let itaiPaid=0, taliaPaid=0, itaiOwes=0, taliaOwes=0;
+  wallet().expenses.forEach(x=>{
+    const amount = expenseIls(x);
+    const shares = splitShares(x);
+    if(x.paidBy==='itai') itaiPaid += amount; else taliaPaid += amount;
+    itaiOwes += shares.itai; taliaOwes += shares.talia;
+  });
+  let transfers = 0; // חיובי = איתי העביר לטליה
+  (wallet().settlements||[]).forEach(s=>{
+    transfers += (s.from==='itai' ? Number(s.amount)||0 : -(Number(s.amount)||0));
+  });
+  // נטו חיובי = טליה חייבת לאיתי
+  const net = (itaiPaid - itaiOwes) + transfers;
+  return {itaiPaid, taliaPaid, itaiOwes, taliaOwes, net, total:itaiPaid+taliaPaid};
+}
+
+function renderMoney(){
+  const sections = [['balance','מי חייב למי'],['list','ההוצאות'],['budget','התקציב']];
+  let body = '';
+  if(moneySection==='balance') body = renderBalance();
+  else if(moneySection==='list') body = renderExpenseList();
+  else body = renderMoneyBudget();
+  return `
+  <div class="section">
+    <div class="section-title">כסף 💸 <span class="tag">${wallet().expenses.length} הוצאות</span></div>
+    <div class="seg-tabs">
+      ${sections.map(([id,label])=>`<button data-action="moneySection" data-id="${id}" class="${moneySection===id?'active':''}">${label}</button>`).join('')}
+    </div>
+    ${body}
+  </div>`;
+}
+
+function renderBalance(){
+  const b = balance();
+  const net = b.net;
+  const iAmOwed = (meId()==='itai' && net>0) || (meId()==='talia' && net<0);
+  const amount = Math.abs(net);
+  const settled = amount < 1;
+
+  return `
+  <div class="balance-card ${settled?'even':(iAmOwed?'plus':'minus')}">
+    <div class="bal-label">${settled ? 'אתם מסודרים' : (iAmOwed ? `${other().name} חייב/ת לך` : `את/ה חייב/ת ל${other().name}`)}</div>
+    <div class="bal-amount">${settled ? '✓' : ils(amount)}</div>
+    ${settled?'':`<button class="btn full" data-action="settleUp" style="margin-top:14px">לסגור חשבון</button>`}
+  </div>
+
+  <div class="split-cards">
+    <div class="pcard itai">
+      <div class="pc-top">${PEOPLE.itai.emoji} ${PEOPLE.itai.name}</div>
+      <div class="pc-row"><span>שילם</span><b>${ils(b.itaiPaid)}</b></div>
+      <div class="pc-row"><span>חלקו</span><b>${ils(b.itaiOwes)}</b></div>
+    </div>
+    <div class="pcard talia">
+      <div class="pc-top">${PEOPLE.talia.emoji} ${PEOPLE.talia.name}</div>
+      <div class="pc-row"><span>שילמה</span><b>${ils(b.taliaPaid)}</b></div>
+      <div class="pc-row"><span>חלקה</span><b>${ils(b.taliaOwes)}</b></div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:12px">
+    <div class="row"><b>סה״כ הוצאות משותפות</b><b>${ils(b.total)}</b></div>
+    <div class="small" style="margin-top:6px">
+      ברירת המחדל לחלוקה היא ${Math.round(wallet().defaultSplit.itai*100)}% איתי · ${Math.round(wallet().defaultSplit.talia*100)}% טליה.
+      אפשר לשנות לכל הוצאה בנפרד.
+    </div>
+  </div>
+
+  ${(wallet().settlements||[]).length?`
+  <h3 class="section-title" style="margin-top:18px">החזרים</h3>
+  ${wallet().settlements.slice().reverse().map(s=>`
+    <div class="card small">
+      ${personName(s.from)} → ${personName(s.to)} · <b>${ils(s.amount)}</b>
+      <span style="color:var(--muted)"> · ${fmtDateShort(s.date)}</span>
+    </div>`).join('')}`:''}
+
+  <button class="btn full" data-action="addExpense" style="margin-top:16px">+ הוצאה חדשה</button>`;
+}
+
+function renderExpenseList(){
+  const list = wallet().expenses.slice().sort((a,b)=>(b.date||'').localeCompare(a.date||''));
+  if(!list.length) return `<div class="empty small">עוד לא נרשמו הוצאות</div>
+    <button class="btn full" data-action="addExpense" style="margin-top:12px">+ הוצאה חדשה</button>`;
+  return `
+  ${list.map(x=>{
+    const shares = splitShares(x);
+    const myShare = shares[meId()];
+    const iPaid = x.paidBy===meId();
+    return `
+    <div class="exp-card" data-action="editExpense" data-id="${x.id}">
+      <div class="exp-main">
+        <div class="exp-title">${x.title}</div>
+        <div class="exp-meta">
+          ${fmtDateShort(x.date)} · ${expCatLabel(x.category)} ·
+          שילם/ה ${personName(x.paidBy)} · ${splitLabel(x)}
+        </div>
+        ${x.note?`<div class="exp-note">${x.note}</div>`:''}
+      </div>
+      <div class="exp-side">
+        <div class="exp-amount">${x.currency==='THB'?baht(x.amount):ils(x.amount)}</div>
+        <div class="exp-share ${iPaid?'plus':'minus'}">
+          ${iPaid ? 'שילמת · חלקך '+ils(myShare) : 'חלקך '+ils(myShare)}
+        </div>
+      </div>
+    </div>`;
+  }).join('')}
+  <button class="btn full" data-action="addExpense" style="margin-top:12px">+ הוצאה חדשה</button>`;
+}
+
+function renderMoneyBudget(){
+  const b = balance();
+  const hasPlan = !!(sh() && sh().days);
+  const myBudget = wallet().budgets[meId()] || 0;
+  const mySpent = meId()==='itai' ? b.itaiOwes : b.taliaOwes;
+  const left = myBudget - mySpent;
+  const pct = myBudget ? Math.min(100, Math.round(mySpent/myBudget*100)) : 0;
+  const cats = hasPlan ? sharedCategoryTotals() : {};
+  const ground = hasPlan ? groundTotalBaht() : 0;
+
+  return `
+  <div class="card">
+    <div class="row"><b>התקציב שלי</b><span class="small">${ils(mySpent)} מתוך ${ils(myBudget)}</span></div>
+    <div class="bar" style="margin-top:10px"><div class="bar-fill ${left<0?'over':''}" style="width:${pct}%"></div></div>
+    <div class="small" style="margin-top:8px">
+      ${left>=0 ? `נשאר ${ils(left)}` : `<span style="color:var(--danger)">חריגה של ${ils(-left)}</span>`}
+      · מחושב מהחלק שלי בהוצאות שנרשמו
+    </div>
+    <button class="btn secondary full" style="margin-top:12px" data-action="editBudgets">✏️ תקציבים, שער המרה וחלוקה</button>
+  </div>
+
+  ${!hasPlan ? '' : `
+  <h3 class="section-title" style="margin-top:18px">התכנון לשבועיים המשותפים</h3>
+  <div class="small" style="margin-bottom:10px">מה שהגיליון צופה — לעומת מה שבאמת נרשם למעלה.</div>
+  <table class="split-table">
+    <tr><th>קטגוריה</th><th>בבאט</th><th>בשקלים</th></tr>
+    ${Object.entries(cats).sort((a,b)=>b[1]-a[1]).map(([cat,amount])=>`
+      <tr><td>${cat}</td><td class="num">${baht(amount)}</td><td class="num">${ils(toIls(amount))}</td></tr>`).join('')}
+    <tr><td>רזרבה</td><td class="num">${baht(sh().reserveBaht)}</td><td class="num">${ils(toIls(sh().reserveBaht))}</td></tr>
+    <tr class="total"><td>סה״כ על הקרקע</td><td class="num">${baht(ground)}</td><td class="num">${ils(toIls(ground))}</td></tr>
+  </table>
+
+  <h3 class="section-title" style="margin-top:18px">אם צריך לחתוך</h3>
+  ${sh().cuts.map(c=>`<div class="info-row"><b>${c.what} — ${c.save}</b><span>${c.lose}</span></div>`).join('')}`}`;
+}
+
+/* =========================================================
+   מה כבר סגור ומידע שימושי — בתוך ״עוד״
+========================================================= */
+function renderBookingsSection(){
   const s = sh();
   return `
-  <div class="card dashed" style="border-color:var(--terracotta)">
+  <div class="card warn">
     <b>הדדליין הקרוב · ${fmtDate(s.deadline.date)}</b>
     <div class="small" style="margin-top:5px">${s.deadline.text}</div>
   </div>
@@ -782,13 +1231,11 @@ function renderSharedBookings(){
       <div class="small" style="margin-top:4px">${[b.when,b.details].filter(Boolean).join(' · ')}</div>
       <div class="small" style="margin-top:6px">${b.payment||''}</div>
       <div class="small" style="margin-top:4px;color:var(--muted)">אישור: ${b.ref||'—'} · ביטול חינם: ${b.freeCancel||'—'}</div>
-    </div>`).join('')}`;
-}
+    </div>`).join('')}
 
-function renderSharedHotels(){
-  return sh().hotels.map(h=>{
-    const perNight = Number(h.perNight);
-    const nights = Number(h.nights);
+  <h3 class="section-title" style="margin-top:18px">מלונות שנבדקו</h3>
+  ${s.hotels.map(h=>{
+    const perNight = Number(h.perNight), nights = Number(h.nights);
     const totalB = (perNight && nights) ? perNight*nights : null;
     return `
     <div class="card">
@@ -800,109 +1247,119 @@ function renderSharedHotels(){
         <span class="stamp ${h.choice==='מוזמן'?'booked':'planned'}">${h.choice||''}</span>
       </div>
       <div class="small" style="margin-top:7px">${h.what||''}</div>
-      <div class="small" style="margin-top:7px;color:var(--muted)">
-        ${totalB?`${baht(totalB)} · ${ils(toIls(totalB))} · `:''}ביטול חינם: ${h.freeCancel||'—'}
-        ${h.linkLink?` · <a href="${h.linkLink}" target="_blank" rel="noopener">בוקינג ↗</a>`:''}
+      <div class="chip-row tight" style="margin-top:8px">
+        ${totalB?`<span class="chip mini">${baht(totalB)} · ${ils(toIls(totalB))}</span>`:''}
+        ${h.linkLink?`<a class="chip mini" href="${h.linkLink}" target="_blank" rel="noopener">↗ בוקינג</a>`:''}
       </div>
     </div>`;
-  }).join('');
+  }).join('')}`;
 }
 
-function renderSharedBudget(){
-  const s = sh();
-  const cats = sharedCategoryTotals();
-  const ground = groundTotalBaht();
-  const groundIls = toIls(ground);
-  const itaiTotal = s.flightsPaidItai + groundIls*s.splitItai;
-  const taliaTotal = s.flightsPaidTalia + groundIls*s.splitTalia;
-  const catRows = Object.entries(cats).sort((a,b)=>b[1]-a[1]).map(([cat,amount])=>`
-    <tr><td>${cat}</td><td class="num">${baht(amount)}</td><td class="num">${ils(toIls(amount))}</td></tr>`).join('');
-
-  return `
-  <table class="split-table" style="margin-bottom:16px">
-    <tr><th>קטגוריה</th><th>בבאט</th><th>בשקלים</th></tr>
-    ${catRows}
-    <tr><td>רזרבה</td><td class="num">${baht(s.reserveBaht)}</td><td class="num">${ils(toIls(s.reserveBaht))}</td></tr>
-    <tr class="total"><td>סה״כ על הקרקע</td><td class="num">${baht(ground)}</td><td class="num">${ils(groundIls)}</td></tr>
-  </table>
-
-  <h3 class="section-title">המספר התחתון <span class="tag">2/3 איתי · 1/3 טליה</span></h3>
-  <table class="split-table">
-    <tr><th></th><th>איתי</th><th>טליה</th></tr>
-    <tr><td>טיסות ששולמו</td><td class="num">${ils(s.flightsPaidItai)}</td><td class="num">${ils(s.flightsPaidTalia)}</td></tr>
-    <tr><td>על הקרקע</td><td class="num">${ils(groundIls*s.splitItai)}</td><td class="num">${ils(groundIls*s.splitTalia)}</td></tr>
-    <tr class="total"><td>סה״כ</td><td class="num">${ils(itaiTotal)}</td><td class="num">${ils(taliaTotal)}</td></tr>
-    <tr><td>התקציב</td><td class="num">${ils(s.budgetItai)}</td><td class="num">${ils(s.budgetTalia)}</td></tr>
-    <tr>
-      <td>נשאר</td>
-      <td class="num ${s.budgetItai-itaiTotal<0?'neg':''}">${ils(s.budgetItai-itaiTotal)}</td>
-      <td class="num ${s.budgetTalia-taliaTotal<0?'neg':''}">${ils(s.budgetTalia-taliaTotal)}</td>
-    </tr>
-  </table>
-  <div class="small" style="margin-top:8px">שער ההמרה: ฿1 = ${s.rate} ₪. משנים אותו — והכל מתעדכן.</div>
-  <button class="btn secondary full" style="margin-top:10px" data-action="editSharedRate">✏️ עדכון שער, תקציבים ורזרבה</button>
-
-  <h3 class="section-title" style="margin-top:20px">אם צריך לחתוך</h3>
-  ${s.cuts.map(c=>`
-    <div class="info-row"><b>${c.what} — ${c.save}</b><span>${c.lose}</span></div>`).join('')}`;
-}
-
-function renderSharedInfo(){
+function renderInfoSection(){
   return sh().info.map(i=>`<div class="info-row"><b>${i.topic}</b><span>${i.detail}</span></div>`).join('');
 }
 
 function renderWhoPill(){
   const el = document.getElementById('who-pill');
   if(!el) return;
-  const me = window.TRIP_USER;
-  if(!me){ el.innerHTML=''; return; }
-  el.innerHTML = `${me.emoji} ${me.displayName} <button data-action="logout">יציאה</button>`;
+  el.innerHTML = `${me().emoji} ${me().name} <button data-action="logout">יציאה</button>`;
 }
 
-/* ===== HOME ===== */
 function renderHome(){
   const days = daysUntil(STATE.startDate);
   const tripDays = days<=0 ? Math.abs(days) : 0;
-  const order = [...STATE.countries].sort((a,b)=>a.order-b.order).map(c=>`${c.flag} ${c.name}`).join(' ← ');
-  const dests = allDestinations().filter(d=>d.arrival && d.departure);
+  const dests = myDestinations().filter(d=>d.arrival && d.departure);
   const now = new Date();
-  let current = dests.find(d=> new Date(d.arrival)<=now && new Date(d.departure)>=now);
-  let next = dests.filter(d=>new Date(d.arrival)>now).sort((a,b)=>new Date(a.arrival)-new Date(b.arrival))[0];
-  const spent = totalActualSpent();
-  const pct = Math.min(100, Math.round((spent/STATE.budgetTotal)*100));
+  const current = dests.find(d=> new Date(d.arrival)<=now && new Date(d.departure)>=now);
+  const next = dests.filter(d=>new Date(d.arrival)>now)[0];
+  const b = balance();
+  const myBudget = wallet().budgets[meId()] || 0;
+  const mySpent = meId()==='itai' ? b.itaiOwes : b.taliaOwes;
+  const pct = myBudget ? Math.min(100, Math.round(mySpent/myBudget*100)) : 0;
   const nextSteps = computeNextSteps();
   const warnings = computeWarnings();
-  const progress = tripProgressPercent();
+  const meta = STATE.trip[meId()] || {};
+  const isItai = meId()==='itai';
+
+  const net = b.net;
+  const iAmOwed = (isItai && net>0) || (!isItai && net<0);
+  const owedAmount = Math.abs(net);
+
+  const totalNights = dests.reduce((n,d)=>n+(Number(d.nights)||0),0);
+  const openTasks = STATE.masterChecklist.filter(t=>mine(t) && t.status!=='done').length;
 
   return `
-  <div class="hero">
-    <div class="hero-top">
-      <div><div class="hero-title">${STATE.tripName}</div><div class="hero-sub">${fmtDate(STATE.startDate)} → תאריך חזרה עדיין לא ידוע</div></div>
-    </div>
-    <div class="hero-stats">
-      <div class="hero-stat"><b>${days>0?days:tripDays}</b><span>${days>0?'ימים לטיסה':'ימים בטיול'}</span></div>
-      <div class="hero-stat"><b>${STATE.countries.length}</b><span>מדינות במסלול</span></div>
-      <div class="hero-stat"><b>${progress}%</b><span>מהטיול מתוכנן</span></div>
-    </div>
-  </div>
+  ${renderBigHero(meta.title || STATE.tripName, meta.subtitle || '', next || current || dests[0])}
+
   <div class="section">
-    <div class="card dashed"><div class="muted small" style="margin-bottom:6px;">סדר המסלול</div><div style="font-size:14.5px;font-weight:500;">${order} ← ...</div></div>
-    <div class="row" style="gap:10px;">
-      <div class="card" style="flex:1;"><div class="muted small">היעד הנוכחי</div><div style="font-weight:700;font-size:15px;margin-top:3px;">${current? current.countryFlag+' '+current.name : 'טרם התחיל'}</div></div>
-      <div class="card" style="flex:1;"><div class="muted small">היעד הבא</div><div style="font-weight:700;font-size:15px;margin-top:3px;">${next? next.countryFlag+' '+next.name : '—'}</div></div>
+    <div class="greeting">${me().emoji} ${greetingFor()}, ${me().name}</div>
+
+    <div class="stat-strip">
+      <div class="stat-cell"><b>${days>0?days:tripDays}</b><span>${days>0?'ימים לטיסה':'ימים בטיול'}</span></div>
+      <div class="stat-cell"><b>${totalNights}</b><span>לילות</span></div>
+      <div class="stat-cell"><b>${openTasks}</b><span>משימות פתוחות</span></div>
     </div>
-    <div class="card">
-      <div class="row"><b>תקציב הטיול</b><span class="small muted">${money(spent)} / ${money(STATE.budgetTotal)}</span></div>
-      <div class="progress-track"><div class="progress-fill" style="width:${pct}%;background:${pct>100?'var(--danger)':'var(--sage)'};"></div></div>
-      <div class="muted small">נותרו כ־${money(STATE.budgetTotal-spent)} (לפי הוצאות בפועל, לא כולל קורס היוגה) · <button class="btn ghost small" data-action="addExpense" style="margin-top:6px;">+ הוצאה</button></div>
+
+    ${next ? `
+    <div class="next-up" data-action="setTab" data-id="route">
+      ${imageBox(next.wiki, next.hue, 'nextup-photo')}
+      <div class="nu-text">
+        <div class="nu-label">${current ? 'התחנה הבאה' : 'מתחילים כאן'}</div>
+        <div class="nu-name">${next.name}</div>
+        <div class="nu-dates">${fmtDateShort(next.arrival)} · ${next.nights||0} לילות · ${ownerBadge(next.owner)}</div>
+      </div>
+    </div>` : ''}
+
+    <div class="mini-grid">
+      <div class="mini-card" data-action="setTab" data-id="money">
+        <div class="mc-label">${owedAmount<1 ? 'החשבון ביניכם' : (iAmOwed ? `${other().name} חייב/ת לך` : `את/ה חייב/ת ל${other().name}`)}</div>
+        <div class="mc-value ${owedAmount<1?'':(iAmOwed?'plus':'minus')}">${owedAmount<1 ? 'מסודר ✓' : ils(owedAmount)}</div>
+      </div>
+      <div class="mini-card" data-action="setTab" data-id="money">
+        <div class="mc-label">התקציב שלי</div>
+        <div class="mc-value">${ils(myBudget-mySpent)}</div>
+        <div class="bar"><div class="bar-fill ${mySpent>myBudget?'over':''}" style="width:${pct}%"></div></div>
+      </div>
     </div>
+
+    ${isItai ? `
+      <div class="card soft">
+        <b>השבועיים שלך</b>
+        <div class="small" style="margin-top:6px">
+          נוחתים ב-23/11 בבנגקוק, ארבעה בסיסים, מטוס פנימי אחד, ובלי לילת מעבר.
+          הטיסה הביתה: ${STATE.trip.itai.homeFlight}.
+        </div>
+      </div>` : `
+      <div class="card soft">
+        <b>אחרי ש${other().name} טס הביתה</b>
+        <div class="small" style="margin-top:6px">
+          מ-${fmtDateShort(splitDate())} הטיול ממשיך לבד — צ׳יאנג מאי, הקורס בפאי, ואז סרי לנקה, וייטנאם והפיליפינים.
+        </div>
+      </div>`}
   </div>
+
   <div class="section" style="padding-top:0;">
     <div class="section-title">מה הצעד הבא <span class="tag">${nextSteps.length}</span></div>
-    ${nextSteps.length? nextSteps.map(n=>`<div class="next-card"><span>👉</span><div><div style="font-weight:500;font-size:13.5px;">${n.label}</div><div class="muted small">${n.sub}</div></div></div>`).join('') : `<div class="empty small">הכל סגור לעכשיו ✨</div>`}
+    ${nextSteps.length
+      ? nextSteps.map(n=>`<div class="next-card"><span>👉</span><div><div style="font-weight:500;font-size:13.5px;">${n.label}</div><div class="muted small">${n.sub}</div></div></div>`).join('')
+      : `<div class="empty small">הכל סגור לעכשיו ✨</div>`}
   </div>
-  ${warnings.length? `<div class="section" style="padding-top:0;"><div class="section-title">התרעות <span class="tag">${warnings.length}</span></div>${warnings.map(w=>`<div class="warning-card"><span>⚠️</span><div class="small">${w}</div></div>`).join('')}</div>`:''}
+
+  ${warnings.length ? `
+  <div class="section" style="padding-top:0;">
+    <div class="section-title">התרעות <span class="tag">${warnings.length}</span></div>
+    ${warnings.map(w=>`<div class="warning-card"><span>⚠️</span><div class="small">${w}</div></div>`).join('')}
+  </div>`:''}
   `;
+}
+
+function greetingFor(){
+  const h = new Date().getHours();
+  if(h < 5) return 'לילה טוב';
+  if(h < 12) return 'בוקר טוב';
+  if(h < 17) return 'צהריים טובים';
+  if(h < 21) return 'ערב טוב';
+  return 'לילה טוב';
 }
 
 /* ===== MAP ===== */
@@ -919,7 +1376,7 @@ function renderMapShell(){
     <button class="btn small" id="btnAddPin">+ הוסף יעד מהמפה</button>
     <button class="btn ghost small" id="btnCancelPin">ביטול</button>
   </div>
-  <div class="map-legend">${STATE.countries.map(c=>`<div class="legend-chip"><span class="legend-dot" style="background:${getCssVar(c.color)};"></span>${c.flag} ${c.name}</div>`).join('')}</div>
+  <div class="map-legend">${STATE.countries.filter(mine).map(c=>`<div class="legend-chip"><span class="legend-dot" style="background:${getCssVar(c.color)};"></span>${c.flag} ${c.name}</div>`).join('')}</div>
   <div class="section" style="padding-top:0;"><div class="muted small">● נקודה גדולה = יעד במסלול · ❤ נקודה קטנה = מקום שמור. לחיצה על נקודה תפתח פרטים לעריכה.</div></div>
   `;
 }
@@ -947,7 +1404,7 @@ function drawMapMarkers(){
   if(mapPolyline){ leafletMap.removeLayer(mapPolyline); mapPolyline=null; }
   const latlngs = [];
   if(mapFilter==='routes' || mapFilter==='both'){
-    const dests = allDestinations().filter(d=>d.lat && d.lng).sort((a,b)=>(a.arrival||'').localeCompare(b.arrival||''));
+    const dests = allDestinations().filter(d=>mine(d) && d.lat && d.lng).sort((a,b)=>(a.arrival||'').localeCompare(b.arrival||''));
     dests.forEach(d=>{
       const opacity = d.status==='optional'?0.55:1;
       const color = getCssVar(d.countryColor);
@@ -960,7 +1417,7 @@ function drawMapMarkers(){
     if(latlngs.length>1){ mapPolyline = L.polyline(latlngs, {color:'#8C8272', weight:2, dashArray:'6 6'}).addTo(leafletMap); }
   }
   if(mapFilter==='places' || mapFilter==='both'){
-    STATE.savedPlaces.filter(p=>p.lat && p.lng).forEach(p=>{
+    STATE.savedPlaces.filter(p=>p.lat && p.lng && myPlace(p)).forEach(p=>{
       const c = findCountry(p.countryId);
       const color = c? getCssVar(c.color) : '#8C8272';
       const icon = L.divIcon({className:'', html:`<div style="width:11px;height:11px;border-radius:50% 50% 50% 0;background:${color};border:1.5px solid white;transform:rotate(45deg);box-shadow:0 1px 3px rgba(0,0,0,.4);"></div>`, iconSize:[11,11]});
@@ -998,13 +1455,15 @@ function placePopupHtml(p){
 
 /* ===== COUNTRIES ===== */
 function renderCountries(){
-  const c = findCountry(activeCountry) || STATE.countries[0];
+  const visible = STATE.countries.filter(mine);
+  if(!visible.find(x=>x.id===activeCountry) && visible[0]) activeCountry = visible[0].id;
+  const c = findCountry(activeCountry) || visible[0];
   if(c) activeCountry = c.id;
   return `
   <div class="section" style="padding-bottom:0;">
     <div class="section-title">מדינות</div>
     <div class="pillrow">
-      ${STATE.countries.map(co=>`<button class="pill ${co.id===activeCountry?'active':''}" style="--accent:${getCssVar(co.color)}" data-action="setCountry" data-id="${co.id}">${co.flag} ${co.name}</button>`).join('')}
+      ${visible.map(co=>`<button class="pill ${co.id===activeCountry?'active':''}" style="--accent:${getCssVar(co.color)}" data-action="setCountry" data-id="${co.id}">${co.flag} ${co.name}</button>`).join('')}
       <button class="pill addnew" data-action="addCountry">+ מדינה</button>
     </div>
     ${c? `
@@ -1056,7 +1515,7 @@ function renderPrep(c){
   </div>`;
 }
 function renderRoute(c){
-  const list = [...c.destinations].sort((a,b)=>(a.order||0)-(b.order||0));
+  const list = c.destinations.filter(mine).sort((a,b)=>(a.order||0)-(b.order||0));
   return `
   <div class="row" style="margin-bottom:8px;"><b>מסלול / יעדים — ${c.flag} ${c.name}</b><button class="icon-btn" data-action="addDest" data-id="${c.id}">+</button></div>
   ${list.length? list.map((d,i)=>`
@@ -1178,7 +1637,7 @@ function renderPlaceCard(p){
 
 /* ===== TIMELINE ===== */
 function renderTimeline(){
-  const dests = allDestinations().filter(d=>d.arrival).sort((a,b)=>a.arrival.localeCompare(b.arrival));
+  const dests = allDestinations().filter(d=>mine(d) && d.arrival).sort((a,b)=>a.arrival.localeCompare(b.arrival));
   let byMonth = {};
   dests.forEach(d=>{ const dt=new Date(d.arrival+"T00:00:00"); const key=dt.toLocaleDateString('he-IL',{month:'long',year:'numeric'}); (byMonth[key]=byMonth[key]||[]).push(d); });
   return `
@@ -1194,21 +1653,32 @@ function renderTimeline(){
 
 /* ===== MORE ===== */
 function renderMore(){
+  const tabs = [
+    ['master','רשימת הכנה'], ['packing','ציוד'], ['bookings','מה סגור'],
+    ['info','מידע שימושי'], ['saved','מקומות שמורים'], ['timeline','ציר זמן'],
+    ['docs','מסמכים']
+  ];
+  // לטליה המפה יושבת כאן, כי בניווט התחתון יש לה ״מדינות״ במקום
+  if(meId()==='talia') tabs.splice(5, 0, ['map','מפה']);
+  if(!tabs.find(t=>t[0]===moreSection)) moreSection = 'master';
   return `
   <div class="section" style="padding-bottom:0;">
     <div class="section-title">עוד</div>
-    <div class="subnav">${[['master','רשימת הכנה'],['packing','ציוד'],['docs','מסמכים'],['saved','מקומות שמורים'],['expenses','הוצאות']].map(s=>`<button class="${moreSection===s[0]?'active':''}" data-action="setMore" data-id="${s[0]}">${s[1]}</button>`).join('')}</div>
+    <div class="subnav">${tabs.map(t=>`<button class="${moreSection===t[0]?'active':''}" data-action="setMore" data-id="${t[0]}">${t[1]}</button>`).join('')}</div>
   </div>
   <div class="section" style="padding-top:0;">
     ${moreSection==='master'?renderMasterChecklist():''}
     ${moreSection==='packing'?renderPacking():''}
-    ${moreSection==='docs'?renderDocs():''}
+    ${moreSection==='bookings'?renderBookingsSection():''}
+    ${moreSection==='info'?renderInfoSection():''}
     ${moreSection==='saved'?renderSavedGlobal():''}
-    ${moreSection==='expenses'?renderExpensesGlobal():''}
+    ${moreSection==='timeline'?renderTimeline():''}
+    ${moreSection==='map'?renderMapShell():''}
+    ${moreSection==='docs'?renderDocs():''}
   </div>`;
 }
 function renderMasterChecklist(){
-  const list = [...STATE.masterChecklist].sort((a,b)=>(a.order||0)-(b.order||0));
+  const list = STATE.masterChecklist.filter(mine).sort((a,b)=>(a.order||0)-(b.order||0));
   const groups = {}; list.forEach(t=>{ (groups[t.category]=groups[t.category]||[]).push(t); });
   return `
   <div class="row" style="margin-bottom:8px;"><b>רשימת הכנה כללית 🎒</b><button class="icon-btn" data-action="addMaster">+</button></div>
@@ -1240,11 +1710,13 @@ function renderMasterChecklist(){
 }
 function renderPacking(){
   const groups = {};
-  STATE.packingList.forEach(p=>{ (groups[p.category]=groups[p.category]||[]).push(p); });
+  STATE.packingList.filter(mine).forEach(p=>{ (groups[p.category]=groups[p.category]||[]).push(p); });
   return `
-  <div class="row" style="margin-bottom:8px;"><b>רשימת ציוד — מוצ'ילה 65L 🎒</b><button class="icon-btn" data-action="addPacking">+</button></div>
+  <div class="row" style="margin-bottom:8px;"><b>הציוד של ${me().name} ${me().emoji}</b><button class="icon-btn" data-action="addPacking">+</button></div>
+  ${meId()==='talia' ? `
   <div class="card dashed"><div class="muted small" style="margin-bottom:4px;font-weight:600;">🎒 חלוקת הציוד</div><div class="small">${STATE.packingBreakdown}</div></div>
-  <div class="card"><div class="muted small" style="margin-bottom:4px;font-weight:600;">✈️ בתיק ה־20L בזמן טיסות ומעברים</div><div class="small muted" style="margin-bottom:4px;">את הדברים האלה לא להכניס ל־65L:</div><div class="small">${STATE.packingCarryOn.join(' · ')}</div></div>
+  <div class="card"><div class="muted small" style="margin-bottom:4px;font-weight:600;">✈️ בתיק ה־20L בזמן טיסות ומעברים</div><div class="small muted" style="margin-bottom:4px;">את הדברים האלה לא להכניס ל־65L:</div><div class="small">${STATE.packingCarryOn.join(' · ')}</div></div>`
+  : `<div class="card dashed"><div class="muted small" style="margin-bottom:4px;font-weight:600;">🎒 שבועיים, תיק אחד</div><div class="small">תיק עלייה למטוס + תיק יום. הכביסה נעשית בדרך, אז אין צורך ביותר מזה — חוץ מציוד האימונים.</div></div>`}
   ${Object.keys(groups).map(cat=>`
     <div class="card">
       <div class="muted small" style="margin-bottom:4px;font-weight:600;">${cat}</div>
@@ -1314,66 +1786,6 @@ function renderSavedGlobal(){
   }).join('') : `<div class="empty small">אין מקומות שתואמים את הסינון</div>`}
   `;
 }
-function renderExpensesGlobal(){
-  const countryOpts = STATE.countries.map(c=>`<option value="${c.id}" ${expenseFilter.country===c.id?'selected':''}>${c.flag} ${c.name}</option>`).join('');
-  let destOpts = '<option value="">כל היעדים</option>';
-  if(expenseFilter.country){ const cc=findCountry(expenseFilter.country); if(cc) destOpts += cc.destinations.map(d=>`<option value="${d.id}" ${expenseFilter.dest===d.id?'selected':''}>${d.name}</option>`).join(''); }
-  const catOpts = EXPENSE_CATEGORIES.map(c=>`<option value="${c.id}" ${expenseFilter.category===c.id?'selected':''}>${c.label}</option>`).join('');
-  const payOpts = ['מתוכנן','הוזמן','שולם'].map(s=>`<option value="${s}" ${expenseFilter.pay===s?'selected':''}>${s}</option>`).join('');
-
-  let all = allExpenseRows();
-  const months = [...new Set(all.map(r=>r.date? r.date.slice(0,7):null).filter(Boolean))].sort();
-  const monthOpts = months.map(m=>{
-    const label = new Date(m+'-01T00:00:00').toLocaleDateString('he-IL',{month:'long',year:'numeric'});
-    return `<option value="${m}" ${expenseFilter.month===m?'selected':''}>${label}</option>`;
-  }).join('');
-  const currencies = [...new Set(all.map(r=>r.localCurrency).filter(Boolean))];
-  const curOpts = currencies.map(cu=>`<option value="${cu}" ${expenseFilter.currency===cu?'selected':''}>${cu}</option>`).join('');
-
-  let list = all;
-  if(expenseFilter.country) list = list.filter(r=>r.countryId===expenseFilter.country);
-  if(expenseFilter.dest) list = list.filter(r=>r.destinationId===expenseFilter.dest);
-  if(expenseFilter.category) list = list.filter(r=>r.category===expenseFilter.category);
-  if(expenseFilter.month) list = list.filter(r=>r.date && r.date.slice(0,7)===expenseFilter.month);
-  if(expenseFilter.pay) list = list.filter(r=>r.paymentStatus===expenseFilter.pay);
-  if(expenseFilter.currency) list = list.filter(r=>r.localCurrency===expenseFilter.currency);
-  list = list.sort((a,b)=>(b.date||'').localeCompare(a.date||''));
-
-  const sAll = spendSummary(all);
-  return `
-  <div class="row" style="margin-bottom:10px;"><b>הוצאות 💸</b><button class="btn small" data-action="addExpense">+ הוצאה (אחר)</button></div>
-  <div class="muted small" style="margin-bottom:10px;">כל הוצאה שנרשמת בכל מסך באפליקציה (טיסה, לינה, משימה עם עלות) מופיעה כאן פעם אחת — אין הזנה כפולה.</div>
-  <div class="cat-grid">
-    <div class="cat-chip"><span>💰 תקציב כולל</span><b>${money(STATE.budgetTotal)}</b></div>
-    <div class="cat-chip"><span>🗓️ מתוכנן</span><b>${money(sAll.planned)}</b></div>
-    <div class="cat-chip"><span>📌 הוזמן</span><b>${money(sAll.booked)}</b></div>
-    <div class="cat-chip"><span>✅ שולם</span><b>${money(sAll.paid)}</b></div>
-    <div class="cat-chip"><span>📊 הוצאה בפועל</span><b>${money(sAll.actual)}</b></div>
-    <div class="cat-chip"><span>💸 נותר בתקציב</span><b>${money(STATE.budgetTotal-sAll.actual)}</b></div>
-  </div>
-  <div class="filters-grid" style="margin-top:10px;">
-    <select data-action="setExpenseFilter" data-key="country"><option value="">כל המדינות</option>${countryOpts}</select>
-    <select data-action="setExpenseFilter" data-key="dest">${destOpts}</select>
-    <select data-action="setExpenseFilter" data-key="category"><option value="">כל הקטגוריות</option>${catOpts}</select>
-    <select data-action="setExpenseFilter" data-key="month"><option value="">כל החודשים</option>${monthOpts}</select>
-    <select data-action="setExpenseFilter" data-key="pay"><option value="">כל סטטוסי התשלום</option>${payOpts}</select>
-    ${currencies.length?`<select data-action="setExpenseFilter" data-key="currency"><option value="">כל המטבעות</option>${curOpts}</select>`:''}
-  </div>
-  ${list.length? list.map(r=>{
-    const c = findCountry(r.countryId); const dest = r.destinationId?findDestination(r.countryId,r.destinationId):null;
-    return `<div class="place-card">
-      <div class="row"><b>${money(r.amountILS)}</b><span class="small muted">${fmtDateShort(r.date)}</span></div>
-      <div class="muted small" style="margin:3px 0;">${expCatLabel(r.category)}${c?(' · '+c.flag+' '+c.name):''}${dest?(' · '+dest.name):''}${r.localAmount?(' · '+r.localAmount+' '+(r.localCurrency||'')):''} · ${r.paymentStatus}</div>
-      <div class="small">${r.description}${r.note?(' — '+r.note):''}</div>
-      <div class="row" style="margin-top:6px;"><span class="small muted">מקור: ${sourceLabel(r.source)}</span><div class="place-actions">${r.source==='manual'?`<button data-action="dup" data-type="expense" data-id="${r.sourceId}">⎘</button>`:''}<button data-action="editExpenseRow" data-source="${r.source}" data-country="${r.countryId||''}" data-sourceid="${r.sourceId}">✎</button><button data-action="confirmDelExpenseRow" data-source="${r.source}" data-country="${r.countryId||''}" data-sourceid="${r.sourceId}" data-label="${r.description}">✕</button></div></div>
-    </div>`;
-  }).join('') : `<div class="empty small">אין הוצאות שתואמות את הסינון</div>`}
-  `;
-}
-
-/* =========================================================
-   MODAL SYSTEM
-========================================================= */
 function openModal(html, onOpen){
   document.getElementById('modal').innerHTML = `<div class="modal-handle"></div>${html}`;
   document.getElementById('modal-backdrop').classList.add('open');
@@ -1398,6 +1810,11 @@ function openDestinationModal(countryId, lat, lng, editId){
       </select></div>
       <div class="field"><label>תקציב משוער (₪)</label><input type="number" id="f-budget" value="${d?d.budget||'':''}"></div>
     </div>
+    <div class="field"><label>מי בקטע הזה</label><select id="f-owner">
+      <option value="both" ${!d||!d.owner||d.owner==='both'?'selected':''}>ביחד — שנינו</option>
+      <option value="itai" ${d&&d.owner==='itai'?'selected':''}>${PEOPLE.itai.emoji} איתי לבד</option>
+      <option value="talia" ${d&&d.owner==='talia'?'selected':''}>${PEOPLE.talia.emoji} טליה לבד</option>
+    </select></div>
     <div class="field"><label>איך מגיעים</label><input id="f-transport" value="${d?d.transport||'':''}"></div>
     <div class="field"><label>מקום לינה</label><input id="f-accommodation" value="${d?d.accommodation||'':''}"></div>
     <div class="field"><label>הערות</label><textarea id="f-notes">${d?d.notes||'':''}</textarea></div>
@@ -1420,7 +1837,8 @@ function openDestinationModal(countryId, lat, lng, editId){
         name: document.getElementById('f-name').value || 'יעד ללא שם', arrival, departure, nights,
         status: document.getElementById('f-status').value, budget: document.getElementById('f-budget').value || null,
         transport: document.getElementById('f-transport').value, accommodation: document.getElementById('f-accommodation').value,
-        notes: document.getElementById('f-notes').value, lat: d? d.lat : lat, lng: d? d.lng : lng, companions: d? d.companions : []
+        notes: document.getElementById('f-notes').value, owner: document.getElementById('f-owner').value,
+        lat: d? d.lat : lat, lng: d? d.lng : lng, companions: d? d.companions : []
       };
       if(d){
         if(targetCountryId!==c.id){ c.destinations = c.destinations.filter(x=>x.id!==d.id); targetCountry.destinations.push({...d, ...payload, order: targetCountry.destinations.length+1}); }
@@ -1573,7 +1991,7 @@ function openTaskModal(kind, countryId, editId){
         cost:document.getElementById('tk-cost').value, expenseCategory:document.getElementById('tk-expcat').value, paymentStatus:document.getElementById('tk-paystatus').value};
       if(kind==='master'){ payload.category = document.getElementById('tk-category').value||'כללי'; payload.countryId = document.getElementById('tk-country').value||null; }
       if(item) Object.assign(item,payload);
-      else if(kind==='master') STATE.masterChecklist.push({id:uid('m'), order:STATE.masterChecklist.length+1, ...payload});
+      else if(kind==='master') STATE.masterChecklist.push({id:uid('m'), owner:meId(), order:STATE.masterChecklist.length+1, ...payload});
       else c.prepChecklist.push({id:uid('t'), order:c.prepChecklist.length+1, ...payload});
       persist(); closeModal(); render();
     };
@@ -1596,46 +2014,148 @@ function openPackingModal(editId){
     document.getElementById('pk-save').onclick = ()=>{
       const payload = {category:document.getElementById('pk-category').value||'כללי', item:document.getElementById('pk-item').value||'פריט',
         quantity:document.getElementById('pk-qty').value, status:document.getElementById('pk-status').value, notes:document.getElementById('pk-notes').value};
-      if(p) Object.assign(p,payload); else STATE.packingList.push({id:uid('p'), ...payload});
+      if(p) Object.assign(p,payload); else STATE.packingList.push({id:uid('p'), owner:meId(), ...payload});
       persist(); closeModal(); render();
     };
   });
 }
 
-function openExpenseModal(editId, presetCountry){
-  const e = editId ? STATE.expenses.find(x=>x.id===editId) : null;
-  const countryId = e? e.countryId : (presetCountry||STATE.countries[0].id);
-  const countryOptions = STATE.countries.map(co=>`<option value="${co.id}" ${countryId===co.id?'selected':''}>${co.flag} ${co.name}</option>`).join('');
-  const destOptions = ()=>{
-    const cc = findCountry(document.getElementById('ex-country')?document.getElementById('ex-country').value:countryId);
-    return '<option value="">ללא יעד ספציפי</option>'+(cc?cc.destinations.map(d=>`<option value="${d.id}" ${e&&e.destinationId===d.id?'selected':''}>${d.name}</option>`).join(''):'');
-  };
-  const catOptions = EXPENSE_CATEGORIES.map(c=>`<option value="${c.id}" ${e&&e.category===c.id?'selected':''}>${c.label}</option>`).join('');
+/** קטגוריה בגיליון → קטגוריית הוצאה באפליקציה */
+function catFromSheet(cat){
+  const map = {'לינה':'accommodation','אוכל':'food','תחבורה':'transport','אטרקציות':'activities','אחר':'other'};
+  return map[cat] || 'other';
+}
+
+/** הוצאה חדשה או עריכה — כולל מי שילם ואיך מתחלק */
+function openExpenseModal(editId, preset){
+  const x = editId ? wallet().expenses.find(e=>e.id===editId) : null;
+  const p = preset || {};
+  const val = (key, fallback)=> x ? (x[key]!=null?x[key]:'') : (p[key]!=null?p[key]:(fallback!==undefined?fallback:''));
+  const d = wallet().defaultSplit;
+  const splitValue = x ? x.split : 'ratio';
+  const cats = EXPENSE_CATEGORIES.map(c=>
+    `<option value="${c.id}" ${val('category','other')===c.id?'selected':''}>${c.label}</option>`).join('');
+
   openModal(`
-    <h3 style="margin-bottom:14px;">${e?'עריכת הוצאה':'הוצאה חדשה'}</h3>
-    <div class="field"><label>סכום בשקלים (₪) — משמש לחישוב התקציב</label><input type="number" id="ex-ils" value="${e?e.amountILS||'':''}"></div>
-    <div class="field-row"><div class="field"><label>סכום במטבע מקומי (לא חובה)</label><input type="number" id="ex-local" value="${e?e.localAmount||'':''}"></div><div class="field"><label>מטבע מקומי</label><input id="ex-currency" value="${e?e.localCurrency||'':''}" placeholder="THB / LKR..."></div></div>
-    <div class="field-row"><div class="field"><label>מדינה</label><select id="ex-country">${countryOptions}</select></div><div class="field"><label>יעד / עיר</label><select id="ex-dest">${destOptions()}</select></div></div>
-    <div class="field-row"><div class="field"><label>קטגוריה</label><select id="ex-category">${catOptions}</select></div><div class="field"><label>תאריך</label><input type="date" id="ex-date" value="${e?e.date||'':''}"></div></div>
-    <div class="field"><label>סטטוס תשלום</label><select id="ex-paystatus">${['מתוכנן','הוזמן','שולם'].map(s=>`<option value="${s}" ${e&&e.paymentStatus===s?'selected':(!e&&s==='שולם'?'selected':'')}>${s}</option>`).join('')}</select></div>
-    <div class="field"><label>הערה</label><input id="ex-note" value="${e?e.note||'':''}"></div>
-    <div class="modal-actions"><button class="btn full" id="ex-save">שמירה</button>${e?'<button class="btn ghost" id="ex-delete">מחיקה</button>':''}<button class="btn secondary" id="ex-cancel">ביטול</button></div>
+    <h3 style="margin-bottom:14px;">${x?'עריכת הוצאה':'הוצאה חדשה'}</h3>
+    <div class="field"><label>על מה</label><input id="ex-title" value="${escapeAttr(val('title'))}" placeholder="ארוחת ערב ביאווארט"></div>
+    <div class="field-row">
+      <div class="field"><label>סכום</label><input id="ex-amount" type="number" inputmode="decimal" value="${val('amount')}"></div>
+      <div class="field"><label>מטבע</label><select id="ex-currency">
+        <option value="ILS" ${val('currency','ILS')==='ILS'?'selected':''}>₪ שקל</option>
+        <option value="THB" ${val('currency')==='THB'?'selected':''}>฿ באט</option>
+      </select></div>
+    </div>
+    <div class="field-row">
+      <div class="field"><label>תאריך</label><input id="ex-date" type="date" value="${val('date', new Date().toISOString().slice(0,10))}"></div>
+      <div class="field"><label>קטגוריה</label><select id="ex-category">${cats}</select></div>
+    </div>
+    <div class="field"><label>מי שילם</label><div class="choice-row" id="ex-paid">
+      ${['itai','talia'].map(pid=>`
+        <button type="button" class="choice ${val('paidBy', meId())===pid?'active':''}" data-value="${pid}">
+          ${PEOPLE[pid].emoji} ${PEOPLE[pid].name}
+        </button>`).join('')}
+    </div></div>
+    <div class="field"><label>איך מתחלק</label><div class="choice-col" id="ex-split">
+      <button type="button" class="choice ${splitValue==='ratio'?'active':''}" data-value="ratio">
+        לפי היחס הקבוע · ${Math.round(d.itai*100)}% איתי / ${Math.round(d.talia*100)}% טליה
+      </button>
+      <button type="button" class="choice ${splitValue==='equal'?'active':''}" data-value="equal">חצי-חצי</button>
+      <button type="button" class="choice ${splitValue==='full-itai'?'active':''}" data-value="full-itai">הכל על איתי</button>
+      <button type="button" class="choice ${splitValue==='full-talia'?'active':''}" data-value="full-talia">הכל על טליה</button>
+    </div></div>
+    <div class="field"><label>הערה</label><input id="ex-note" value="${escapeAttr(val('note'))}"></div>
+    <div id="ex-preview" class="split-preview"></div>
+    <div class="modal-actions">
+      <button class="btn full" id="ex-save">שמירה</button>
+      ${x?'<button class="btn ghost" id="ex-delete">מחיקה</button>':''}
+      <button class="btn secondary" id="ex-cancel">ביטול</button>
+    </div>
   `, ()=>{
+    let paidBy = val('paidBy', meId());
+    let split = splitValue;
+
+    function chooser(containerId, onPick){
+      const box = document.getElementById(containerId);
+      box.querySelectorAll('.choice').forEach(btn=>{
+        btn.onclick = ()=>{
+          box.querySelectorAll('.choice').forEach(b=>b.classList.remove('active'));
+          btn.classList.add('active');
+          onPick(btn.dataset.value);
+          preview();
+        };
+      });
+    }
+    function preview(){
+      const amount = Number(document.getElementById('ex-amount').value)||0;
+      const currency = document.getElementById('ex-currency').value;
+      const shares = splitShares({amount, currency, split});
+      document.getElementById('ex-preview').innerHTML = amount
+        ? `<div>${PEOPLE.itai.name}: <b>${ils(shares.itai)}</b></div>
+           <div>${PEOPLE.talia.name}: <b>${ils(shares.talia)}</b></div>`
+        : '';
+    }
+    chooser('ex-paid', v=>paidBy=v);
+    chooser('ex-split', v=>split=v);
+    document.getElementById('ex-amount').oninput = preview;
+    document.getElementById('ex-currency').onchange = preview;
+    preview();
+
     document.getElementById('ex-cancel').onclick = closeModal;
-    document.getElementById('ex-country').onchange = ()=>{ document.getElementById('ex-dest').innerHTML = destOptions(); };
-    if(e) document.getElementById('ex-delete').onclick = ()=> confirmThenDelete('הוצאה', ()=>{ STATE.expenses = STATE.expenses.filter(x=>x.id!==e.id); });
+    if(x) document.getElementById('ex-delete').onclick = ()=> confirmThenDelete(x.title, ()=>{
+      wallet().expenses = wallet().expenses.filter(e=>e.id!==x.id);
+    });
     document.getElementById('ex-save').onclick = ()=>{
-      const payload = {amountILS:document.getElementById('ex-ils').value||0, localAmount:document.getElementById('ex-local').value,
-        localCurrency:document.getElementById('ex-currency').value, countryId:document.getElementById('ex-country').value,
-        destinationId:document.getElementById('ex-dest').value||null, category:document.getElementById('ex-category').value,
-        date:document.getElementById('ex-date').value, paymentStatus:document.getElementById('ex-paystatus').value, note:document.getElementById('ex-note').value};
-      if(e) Object.assign(e,payload); else STATE.expenses.push({id:uid('exp'), ...payload});
+      const payload = {
+        title: document.getElementById('ex-title').value || 'הוצאה',
+        amount: Number(document.getElementById('ex-amount').value)||0,
+        currency: document.getElementById('ex-currency').value,
+        date: document.getElementById('ex-date').value,
+        category: document.getElementById('ex-category').value,
+        note: document.getElementById('ex-note').value,
+        paidBy, split
+      };
+      if(x) Object.assign(x, payload);
+      else wallet().expenses.push({id:uid('x'), settled:false, ...payload});
       persist(); closeModal(); render();
     };
   });
 }
 
-/* ===== מודאלים של הפרק המשותף ===== */
+/** סגירת חשבון — מי מעביר למי, וכמה */
+function openSettleModal(){
+  const b = balance();
+  const net = b.net;
+  const from = net > 0 ? 'talia' : 'itai';   // נטו חיובי = טליה חייבת לאיתי
+  const to   = net > 0 ? 'itai' : 'talia';
+  const amount = Math.abs(net);
+  openModal(`
+    <h3 style="margin-bottom:10px;">לסגור חשבון</h3>
+    <div class="small" style="margin-bottom:16px;">
+      ${personName(from)} מעביר/ה ל${personName(to)} <b>${ils(amount)}</b>, והחשבון מתאפס.
+    </div>
+    <div class="field"><label>סכום בפועל (₪)</label><input id="st-amount" type="number" value="${Math.round(amount)}"></div>
+    <div class="field"><label>תאריך</label><input id="st-date" type="date" value="${new Date().toISOString().slice(0,10)}"></div>
+    <div class="modal-actions">
+      <button class="btn full" id="st-save">נסגר ✓</button>
+      <button class="btn secondary" id="st-cancel">ביטול</button>
+    </div>
+  `, ()=>{
+    document.getElementById('st-cancel').onclick = closeModal;
+    document.getElementById('st-save').onclick = ()=>{
+      const value = Number(document.getElementById('st-amount').value)||0;
+      if(value > 0){
+        wallet().settlements = wallet().settlements || [];
+        wallet().settlements.push({
+          id: uid('s'), from, to, amount: value,
+          date: document.getElementById('st-date').value
+        });
+      }
+      persist(); closeModal(); render();
+    };
+  });
+}
+
 function openSharedRowModal(dayId, rowId){
   const day = sh().days.find(d=>d.id===dayId);
   const r = day && day.rows.find(x=>x.id===rowId);
@@ -1750,9 +2270,14 @@ document.addEventListener('click', (e)=>{
   const id = t.dataset.id;
   const country = t.dataset.country;
 
-  if(action==='sharedSection'){ sharedSection=id; render(); }
+  if(action==='setTab'){ activeTab=id; render(); window.scrollTo(0,0); }
+  else if(action==='moneySection'){ moneySection=id; render(); }
+  else if(action==='toggleDest'){
+    expandedDest[id] = !expandedDest[id];
+    render();
+  }
   else if(action==='toggleDay'){
-    expandedDays[id] = expandedDays[id]===false ? true : false;
+    expandedDays[id] = !expandedDays[id];
     render();
   }
   else if(action==='toggleSharedRow'){
@@ -1761,7 +2286,13 @@ document.addEventListener('click', (e)=>{
     if(row){ row.done = !row.done; persist(); render(); }
   }
   else if(action==='editSharedRow'){ openSharedRowModal(t.dataset.day, id); }
-  else if(action==='editSharedRate'){ openSharedBudgetModal(); }
+  else if(action==='expenseFromRow'){
+    const day = sh().days.find(d=>d.id===t.dataset.day);
+    const row = day && day.rows.find(r=>r.id===id);
+    if(row) openExpenseModal(null, {title:row.act, amount:row.baht, currency:'THB', date:day.date, category:catFromSheet(row.cat)});
+  }
+  else if(action==='settleUp'){ openSettleModal(); }
+  else if(action==='editBudgets'){ openSharedBudgetModal(); }
   else if(action==='logout'){ logout(); }
   else if(action==='setCountry'){ activeCountry=id; render(); }
   else if(action==='setCSection'){ activeCountrySection=id; render(); }
@@ -1866,7 +2397,6 @@ document.addEventListener('blur', (e)=>{
   }
 }, true);
 
-document.querySelectorAll('.nav-btn').forEach(b=>{ b.addEventListener('click', ()=>{ activeTab=b.dataset.tab; render(); }); });
 
 /* INIT */
 loadState();
