@@ -69,7 +69,7 @@ function seedData(){
   const hanoiId = uid('d'), manilaId = uid('d');
 
   return {
-    schema:3,
+    schema:4,
     tripName:"My Big Trip 🌏",
     startDate:"2026-11-22",
     endDate:null,
@@ -110,31 +110,43 @@ function seedData(){
            lat:13.7563, lng:100.5018, arrival:"2026-11-23", departure:"2026-11-26", nights:3,
            accommodation:"Montraj Coach Sukhumvit", transport:"ארקיע IZ591 מתל אביב",
            notes:"לוי קראתונג בליל הירח המלא, הארמון המלכותי, ISB, ומואיי תאי ברג׳אדמנרן",
+           scooter:{ok:false, headline:"לא בבנגקוק",
+             note:"תנועה, מתחלפי נתיבים ואוטובוסים — מקום גרוע ללמוד בו. ה-BTS והסירה על הנהר מהירים יותר, וגראב עולה ฿120–300 לנסיעה."},
            budget:2500, status:"booked", companions:["ביחד"], order:1},
           {id:koyaoId, owner:"both", name:"קו יאו נוי — מחנה מואיי תאי", wiki:"Ko Yao Noi", hue:"#6F8F6A",
            lat:8.1099, lng:98.5892, arrival:"2026-11-26", departure:"2026-11-29", nights:3,
            accommodation:"Panoramic Sunset View · KYN Phoenix", transport:"Vietjet לפוקט ואז ספידבוט",
            notes:"שני אימונים ביום, יוגה, ולונגטייל למפרץ פאנג נגה מהצד שאין בו סירות",
+           scooter:{ok:true, perDay:250, bikes:2, days:2, headline:"המקום הכי טוב באי לקטנוע",
+             note:"כביש אחד לאורך החוף המזרחי, כמעט בלי תנועה. שדות אורז, המסגד, התצפית, והחופים שאין אליהם סונגתאו."},
            budget:2200, status:"planned", companions:["ביחד"], order:2},
           {id:aonangId, owner:"both", name:"אאו נאנג וריילאי", wiki:"Ao Nang", hue:"#6E88A0",
            lat:8.0320, lng:98.8210, arrival:"2026-11-29", departure:"2026-12-02", nights:3,
            accommodation:"Chermantra Aonang · Mountain Pool Villa", transport:"ספידבוט מקו יאו נוי",
            notes:"קורס טיפוס בריילאי, חוף פרה נאנג, קיאקים במנגרובים של אאו תלאנה",
+           scooter:{ok:true, perDay:250, bikes:2, days:2, headline:"כן — חוץ מיום ריילאי",
+             note:"฿250–300 ליום, תלוי במשכיר. לריילאי אין כביש, רק סירה, אז ביום הטיפוס הקטנועים חונים. שווה לאאו תלאנה, לקראבי ולחופים שמצפון."},
            budget:2600, status:"booked", companions:["ביחד"], order:3},
           {id:khaolakId, owner:"both", name:"קאו לק", wiki:"Khao Lak", hue:"#C9A24C",
            lat:8.6392, lng:98.2450, arrival:"2026-12-02", departure:"2026-12-08", nights:6,
            accommodation:"Kalima Resort and Villas", transport:"רכב פרטי דרך פאנג נגה",
            notes:"פרק המנוחה — ספא, בריכת אינפיניטי, ויום אחד באגם צ׳או לאן בקאו סוק",
+           scooter:{ok:true, perDay:250, bikes:2, days:4, headline:"כן, אבל לא על כביש 4",
+             note:"כביש 4 מהיר ועמוס משאיות. בכביש החוף המקומי מגיעים לבד לבאנג סאק, לאאו תונג ולמסעדות שמחוץ לריזורט."},
            budget:4400, status:"booked", companions:["ביחד"], order:4},
           {id:chiangmaiId, owner:"talia", name:"צ'יאנג מאי", wiki:"Chiang Mai", hue:"#8C6FA0",
            lat:18.7883, lng:98.9853, arrival:"2026-12-08", departure:"2026-12-09", nights:1,
            accommodation:"", transport:"טיסה מפוקט — באותו יום שאיתי טס הביתה",
            notes:"לילה אחד בדרך לפאי. הטיסה מפוקט לצ׳יאנג מאי היא עם עצירה — לבדוק שעות מול שעת הצ׳ק-אאוט בקאו לק.",
+           scooter:{ok:true, perDay:250, bikes:1, days:1, headline:"אפשרי, ליום אחד",
+             note:"בעיר עצמה התנועה סבירה מחוץ לשעות העומס. לילה אחד — אולי פשוט לוותר."},
            budget:600, status:"planned", companions:["לבד"], order:5},
           {id:paiId, owner:"talia", name:"פאי — קורס מורים ליוגה", wiki:"Pai, Thailand", hue:"#4E8B8B",
            lat:19.3583, lng:98.4383, arrival:"2026-12-09", departure:"2027-01-08", nights:30,
            accommodation:"", transport:"מיניבאן מצ'יאנג מאי",
            notes:"קבוע במסלול — לא לזוז. קורס טיטשריניג חודשי.",
+           scooter:{ok:true, perDay:180, bikes:1, days:30, headline:"בפאי זה כמעט חובה",
+             note:"฿150–200 ליום, וזול יותר בחודש. הקניון, המעיינות החמים והכפרים מסביב הם מרחק קטנוע. הכביש מצ׳יאנג מאי הוא 762 עיקולים — אם עושים אותו, לא בלילה ולא בגשם."},
            budget:3000, status:"booked", companions:["לבד"], order:6}
         ],
         prepChecklist:[
@@ -192,7 +204,8 @@ function seedData(){
 
       {id:uid('m'), owner:"itai", category:"מואיי תאי", title:"לקנות מגן שיניים בארץ", status:"todo", deadline:"2026-11-15", notes:"", priority:"בינונית", link:"", countryId:null, order:12},
       {id:uid('m'), owner:"itai", category:"מואיי תאי", title:"לוודא שהביטוח מכסה ספורט מגע", status:"todo", deadline:"2026-11-10", notes:"מואיי תאי לא תמיד כלול בפוליסה רגילה", priority:"גבוהה", link:"", countryId:null, order:13},
-      {id:uid('m'), owner:"itai", category:"קטנוע", title:"רישיון בינלאומי 1949 — רק אם רוכבים", status:"todo", deadline:"2026-11-10", notes:"רישיון ישראלי לא מספיק, וגם בינלאומי רגיל לא", priority:"נמוכה", link:"", countryId:null, order:14},
+      {id:uid('m'), owner:"both", category:"קטנוע", title:"רישיון בינלאומי 1949 עם קטגוריית אופנוע (A)", status:"todo", deadline:"2026-11-10", notes:"בלי קטגוריה A הביטוח לא משלם גם על שריטה. מוציאים בארץ לפני הטיסה — אי אפשר להסתדר עם זה בתאילנד.", priority:"גבוהה", link:"", countryId:null, order:14},
+      {id:uid('m'), owner:"both", category:"קטנוע", title:"לוודא שהביטוח מכסה רכיבה על קטנוע", status:"todo", deadline:"2026-11-10", notes:"לבדוק גם עד איזה נפח מנוע — הרבה פוליסות עוצרות ב-125cc", priority:"גבוהה", link:"", countryId:null, order:15},
       {id:uid('m'), owner:"itai", category:"ISB", title:"לתאם ביקור בוגרים ב-ISB", status:"todo", deadline:"2026-11-20", notes:"isbalum@isb.ac.th, לפחות יומיים מראש, תעודה מזהה בשער", priority:"בינונית", link:"", countryId:"thailand", order:15},
 
       {id:uid('m'), owner:"talia", category:"קורס יוגה", title:"לשלם את היתרה על הקורס בפאי", status:"todo", deadline:"2026-11-01", notes:"", priority:"גבוהה", link:"", countryId:"thailand", order:16},
@@ -439,15 +452,49 @@ function ensureDefaults(){
       });
     });
 
-    // משימות שנוספו עם הפיצול — מתווספות למי שעוד אין לו אותן
-    fresh.masterChecklist.forEach(seedTask=>{
-      if(!STATE.masterChecklist.some(t=>t.title===seedTask.title)){
-        STATE.masterChecklist.push(JSON.parse(JSON.stringify(seedTask)));
-      }
-    });
-
     STATE.schema = 3;
   }
+
+  /* שכבת הקטנועים — נוספה אחרי שהתוכנית כבר נשמרה */
+  if(STATE.schema < 4){
+    const seedShared = window.SHARED_SEED;
+    if(seedShared && STATE.shared && STATE.shared.days){
+      seedShared.days.forEach(seedDay=>{
+        const day = STATE.shared.days.find(d=>d.id===seedDay.id);
+        if(!day) return;
+        seedDay.rows.forEach(seedRow=>{
+          if(!day.rows.some(r=>r.id===seedRow.id)) day.rows.push(JSON.parse(JSON.stringify(seedRow)));
+        });
+      });
+      if(!STATE.shared.scooterInfo) STATE.shared.scooterInfo = seedShared.scooterInfo;
+    }
+    // טקסטים מהתוכנית הראשונה שכבר לא נכונים אחרי שהמסלול המשותף נקבע
+    const staleNotes = [
+      'התחלה משותפת עם בן הזוג',
+      'חופים וצלילה עם בן הזוג',
+      'תחנת מעבר בדרך לפאי, סיום החלק הזוגי'
+    ];
+    fresh.countries.forEach(seedCountry=>{
+      const country = findCountry(seedCountry.id);
+      if(!country) return;
+      seedCountry.destinations.forEach(seedDest=>{
+        const dest = country.destinations.find(d=>d.name===seedDest.name);
+        if(!dest) return;
+        if(seedDest.scooter && !dest.scooter) dest.scooter = seedDest.scooter;
+        if(seedDest.notes && staleNotes.includes((dest.notes||'').trim())) dest.notes = seedDest.notes;
+        if(seedDest.accommodation && !dest.accommodation) dest.accommodation = seedDest.accommodation;
+        if(seedDest.transport && staleNotes.includes((dest.transport||'').trim())) dest.transport = seedDest.transport;
+      });
+    });
+    STATE.schema = 4;
+  }
+
+  /* משימות חדשות מתווספות בכל גרסה, לפי כותרת */
+  fresh.masterChecklist.forEach(seedTask=>{
+    if(!STATE.masterChecklist.some(t=>t.title===seedTask.title)){
+      STATE.masterChecklist.push(JSON.parse(JSON.stringify(seedTask)));
+    }
+  });
   if(!STATE.trip) STATE.trip = fresh.trip;
   if(!STATE.money) STATE.money = fresh.money;
   if(!STATE.money.settlements) STATE.money.settlements = [];
@@ -1125,6 +1172,7 @@ function renderDestCard(d, index, total){
     </div>
     <div class="dest-body">
       ${d.notes?`<div class="dest-note">${d.notes}</div>`:''}
+      ${renderScooter(d)}
       ${d.accommodation?`<div class="dest-line">🏨 ${d.accommodation}</div>`:''}
       ${d.transport?`<div class="dest-line">🚕 ${d.transport}</div>`:''}
       <div class="chip-row">
@@ -1134,6 +1182,29 @@ function renderDestCard(d, index, total){
       </div>
       ${days.length?`<div class="dest-cost">${baht(totalB)} · ${ils(toIls(totalB))} לתחנה הזאת</div>`:''}
       ${open?`<div class="day-list">${days.map(day=>renderDayCard(day)).join('')}</div>`:''}
+    </div>
+  </div>`;
+}
+
+/** הקטנוע בתחנה הזאת — כמה, כמה זה עולה, ומתי לא לגעת */
+function renderScooter(d){
+  const sc = d.scooter;
+  if(!sc) return '';
+  if(!sc.ok){
+    return `<div class="moto off">
+      <span class="moto-icon">🛵</span>
+      <div><b>${sc.headline}</b><div class="moto-note">${sc.note}</div></div>
+    </div>`;
+  }
+  const total = (Number(sc.perDay)||0) * (Number(sc.bikes)||1) * (Number(sc.days)||1);
+  const bikes = sc.bikes===1 ? 'קטנוע אחד' : sc.bikes+' קטנועים';
+  const days  = sc.days===1 ? 'ליום' : `ל-${sc.days} ימים`;
+  return `<div class="moto">
+    <span class="moto-icon">🛵</span>
+    <div>
+      <b>${sc.headline}</b>
+      <div class="moto-line">${bikes} ${days} · ฿${sc.perDay} לקטנוע ליום · ${baht(total)} · ${ils(toIls(total))}</div>
+      <div class="moto-note">${sc.note}</div>
     </div>
   </div>`;
 }
@@ -1389,7 +1460,13 @@ function renderBookingsSection(){
 }
 
 function renderInfoSection(){
-  return sh().info.map(i=>`<div class="info-row"><b>${i.topic}</b><span>${i.detail}</span></div>`).join('');
+  const moto = sh().scooterInfo;
+  const motoBlock = moto ? `
+    <div class="card warn">
+      <b>🛵 ${moto.title}</b>
+      <ul class="moto-list">${moto.lines.map(l=>`<li>${l}</li>`).join('')}</ul>
+    </div>` : '';
+  return motoBlock + sh().info.map(i=>`<div class="info-row"><b>${i.topic}</b><span>${i.detail}</span></div>`).join('');
 }
 
 function renderWhoPill(){
