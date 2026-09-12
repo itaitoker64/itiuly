@@ -1,0 +1,282 @@
+{
+ "bookings": [
+  {
+   "what": "ארקיע IZ591",
+   "when": "22/11",
+   "details": "תל אביב → בנגקוק, ישירה",
+   "ref": "IL-603978",
+   "payment": "שולם ₪3,777 לשניים",
+   "freeCancel": "—"
+  },
+  {
+   "what": "ארקיע IZ598",
+   "when": "8/12",
+   "details": "פוקט → תל אביב, ישירה",
+   "ref": "IL-604062",
+   "payment": "שולם ₪1,891",
+   "freeCancel": "—"
+  },
+  {
+   "what": "Montraj Coach Sukhumvit",
+   "when": "23–26/11",
+   "details": "בנגקוק · 3 לילות · 1st Class Coach",
+   "ref": "5123136373",
+   "payment": "₪1,128 — משלמים במקום",
+   "freeCancel": "ביטול חינם עד 20/11 23:59"
+  },
+  {
+   "what": "Chermantra Aonang Resort",
+   "when": "29/11–2/12",
+   "details": "אאו נאנג · 3 לילות · Mountain Pool Villa · ארוחת בוקר",
+   "ref": "5553772333",
+   "payment": "₪1,839",
+   "freeCancel": "ביטול חינם עד 14/11 23:59"
+  },
+  {
+   "what": "Kalima Resort and Villas",
+   "when": "2–8/12",
+   "details": "קאו לק · 6 לילות · 5 כוכבים, ספא מלא",
+   "ref": "—",
+   "payment": "₪4,029",
+   "freeCancel": "ביטול חינם"
+  },
+  {
+   "what": "Phor Liang Meun, צ׳יאנג מאי",
+   "when": "—",
+   "details": "בוטל ללא עלות",
+   "ref": "6357383035",
+   "payment": "฿0",
+   "freeCancel": "בוטל 10/9"
+  }
+ ],
+ "hotels": [
+  {
+   "dest": "בנגקוק",
+   "dates": "23–26/11",
+   "nights": 3,
+   "hotel": "Montraj Coach Sukhumvit",
+   "what": "1st Class Coach, מיטה זוגית · בריכה על הגג · אישור 5123136373 · פיקדון ฿1,000 מזומן · משלמים במקום · ₪1,128 לשלושת הלילות.",
+   "perNight": 4186.67,
+   "totalB": "=C5*F5",
+   "ils": "=G5*סקירה!$B$5",
+   "choice": "מוזמן",
+   "freeCancel": "עד 20/11",
+   "link": "בוקינג",
+   "linkLink": "https://secure.booking.com/"
+  },
+  {
+   "dest": "בנגקוק",
+   "dates": "23–26/11",
+   "nights": 3,
+   "hotel": "Maison Hotel Bangkok",
+   "what": "8.8 · סאונה, ספא, בריכה, עיסוי זוגי. סוכומוויט, ליד נאנה. מה שהתקציב המקורי הניח.",
+   "perNight": 2852,
+   "totalB": "=C6*F6",
+   "ils": "=G6*סקירה!$B$5",
+   "choice": "חלופה",
+   "freeCancel": "לבדוק",
+   "link": "בוקינג",
+   "linkLink": "https://www.booking.com/hotel/th/maisonbangkok.html"
+  },
+  {
+   "dest": "בנגקוק — ליל לוי קראתונג",
+   "dates": "24/11",
+   "nights": 1,
+   "hotel": "Sala Rattanakosin",
+   "what": "8.8 · מול ואט ארון מהחדר ומהגג, בלי להילחם על שולחן. תוספת כ-฿7,110 מול המלון הרגיל.",
+   "perNight": 9962,
+   "totalB": "=C7*F7",
+   "ils": "=G7*סקירה!$B$5",
+   "choice": "מחוץ לתקציב",
+   "freeCancel": "לבדוק",
+   "link": "בוקינג",
+   "linkLink": "https://www.booking.com/hotel/th/sala-rattanakosin-bangkok.html"
+  },
+  {
+   "dest": "קו יאו נוי",
+   "dates": "26–29/11",
+   "nights": 3,
+   "hotel": "Panoramic Sunset View · KYN Phoenix",
+   "what": "המחנה עצמו. מי שלא מתאכסן אצלם מקבל שיעורים פרטיים בלבד — זה ההבדל המהותי.",
+   "perNight": 3800,
+   "totalB": "=C8*F8",
+   "ils": "=G8*סקירה!$B$5",
+   "choice": "הבחירה",
+   "freeCancel": "אין — מקדמה 50%",
+   "link": "בוקינג",
+   "linkLink": "https://www.phuket-krabi-muaythai.com/prices-accomodation/"
+  },
+  {
+   "dest": "קו יאו נוי",
+   "dates": "26–29/11",
+   "nights": 3,
+   "hotel": "Deluxe A/C Room · KYN Phoenix",
+   "what": "חדר מזגן במחנה בלי הנוף. חוסך ฿3,900 על שלושת הלילות.",
+   "perNight": 2500,
+   "totalB": "=C9*F9",
+   "ils": "=G9*סקירה!$B$5",
+   "choice": "חלופה",
+   "freeCancel": "אין — מקדמה 50%",
+   "link": "בוקינג",
+   "linkLink": "https://www.phuket-krabi-muaythai.com/prices-accomodation/"
+  },
+  {
+   "dest": "קו יאו נוי",
+   "dates": "26–29/11",
+   "nights": 3,
+   "hotel": "Holiday Resort",
+   "what": "8.1 על 1,178 ביקורות · למבוגרים בלבד, חוף פרטי, בריכה, בריכת טבילה, ספא. הזול והמאובזר מבין הגיבויים.",
+   "perNight": 1710,
+   "totalB": "=C10*F10",
+   "ils": "=G10*סקירה!$B$5",
+   "choice": "גיבוי",
+   "freeCancel": "יש",
+   "link": "בוקינג",
+   "linkLink": "https://www.booking.com/hotel/th/holiday-resort.html"
+  },
+  {
+   "dest": "קו יאו נוי",
+   "dates": "26–29/11",
+   "nights": 3,
+   "hotel": "Sunrise House",
+   "what": "8.9 על 490 ביקורות · מול הים בתא קאו, בריכה, מרחצאות באוויר הפתוח, חוף פרטי, עיסויים.",
+   "perNight": 2033,
+   "totalB": "=C11*F11",
+   "ils": "=G11*סקירה!$B$5",
+   "choice": "גיבוי",
+   "freeCancel": "יש",
+   "link": "בוקינג",
+   "linkLink": "https://www.booking.com/hotel/th/baan-tha-khao-bungalow.html"
+  },
+  {
+   "dest": "קו יאו נוי",
+   "dates": "26–29/11",
+   "nights": 3,
+   "hotel": "Rongna Villas",
+   "what": "8.8 על 241 ביקורות · וילות, עיסוי זוגות, מסעדה. בלי בריכה. הכי זול באי.",
+   "perNight": 1249,
+   "totalB": "=C12*F12",
+   "ils": "=G12*סקירה!$B$5",
+   "choice": "גיבוי",
+   "freeCancel": "יש",
+   "link": "בוקינג",
+   "linkLink": "https://www.booking.com/hotel/th/orngnaawillaa.html"
+  },
+  {
+   "dest": "אאו נאנג",
+   "dates": "29/11–2/12",
+   "nights": 3,
+   "hotel": "Chermantra Aonang Resort & Pool Suite",
+   "what": "Mountain Pool Villa עם אמבטיה ובריכה פרטית · ארוחת בוקר כלולה · אישור 5553772333 · בוקינג מחייבת את הכרטיס.",
+   "perNight": 6825.67,
+   "totalB": "=C13*F13",
+   "ils": "=G13*סקירה!$B$5",
+   "choice": "מוזמן",
+   "freeCancel": "עד 14/11 — הדדליין הקרוב",
+   "link": "בוקינג",
+   "linkLink": "https://secure.booking.com/"
+  },
+  {
+   "dest": "אאו נאנג",
+   "dates": "29/11–2/12",
+   "nights": 3,
+   "hotel": "At Thara Aonang",
+   "what": "8.4 · בריכה, ספא, עיסוי זוגי. הליכה לסירות של ריילאי. מה שהתקציב המקורי הניח.",
+   "perNight": 1843,
+   "totalB": "=C14*F14",
+   "ils": "=G14*סקירה!$B$5",
+   "choice": "חלופה",
+   "freeCancel": "לבדוק",
+   "link": "בוקינג",
+   "linkLink": "https://www.booking.com/hotel/th/at-thara-aonang.html"
+  },
+  {
+   "dest": "קאו לק",
+   "dates": "2–8/12",
+   "nights": 6,
+   "hotel": "Kalima Resort and Villas Khao Lak",
+   "what": "8.8 על 2,576 ביקורות · 5 כוכבים · ספא מלא עם חדר אדים, עיסוי זוגות, טיפולי גוף, בריכת אינפיניטי, בריכת מים מלוחים, בר-בריכה, יוגה וחדר כושר. גם פארק מים ומועדון ילדים.",
+   "perNight": 7476.83,
+   "totalB": "=C15*F15",
+   "ils": "=G15*סקירה!$B$5",
+   "choice": "מוזמן",
+   "freeCancel": "יש",
+   "link": "בוקינג",
+   "linkLink": "https://www.booking.com/hotel/th/kalima-resort-amp-villas-khao-lak.html"
+  },
+  {
+   "dest": "קאו סוק",
+   "dates": "4–5/12",
+   "nights": 1,
+   "hotel": "בונגלו צף על אגם צ׳או לאן",
+   "what": "כלול בסיור של ฿8,500 לאדם — לינה, אגרות פארק, מדריך, ארוחות, קאנו ומערה. הרציף כשעתיים מקאו לק, ולכן לילה ולא יום. שימו לב: החדר בקלימה משולם גם בלילה הזה.",
+   "perNight": "כלול",
+   "totalB": "",
+   "ils": "",
+   "choice": "מומלץ",
+   "freeCancel": "לבדוק מול המפעיל",
+   "link": "בוקינג",
+   "linkLink": "https://www.khaolaklanddiscovery.com/khao-lak-tours/cheow-lan-lake-khao-sok-floating-bungalows-tour/"
+  },
+  {
+   "dest": "קו לנטה — הגרסה שנזנחה",
+   "dates": "2–7/12",
+   "nights": 5,
+   "hotel": "Tropicana Lanta Resort",
+   "what": "9.0 על 829 ביקורות · ג׳קוזי, מרחצאות פתוחים, בריכת טבילה. נשאר כאן להשוואה — דורש להחזיר את לילת המעבר בפוקט.",
+   "perNight": 2925,
+   "totalB": "=C17*F17",
+   "ils": "=G17*סקירה!$B$5",
+   "choice": "חלופה",
+   "freeCancel": "יש",
+   "link": "בוקינג",
+   "linkLink": "https://www.booking.com/hotel/th/chaw-ka-cher-tropicana-lanta-resort.html"
+  }
+ ],
+ "info": [
+  {
+   "topic": "ויזה",
+   "detail": "ישראל ברשימת 60 המדינות שנשארות בפטור מוויזה אחרי 15/9/2026, והפטור קוצר מ-60 יום ל-30. הארכה של 30 יום במשרד הגירה ฿1,900. צריך הוכחה ליציאה מתאילנד בתוך החלון — ארקיע תבקש בצ׳ק-אין."
+  },
+  {
+   "topic": "כרטיס כניסה דיגיטלי",
+   "detail": "TDAC חובה, חינם, אונליין, ואפשר להגיש רק 72 שעות לפני הנחיתה. כל אתר שגובה עליו כסף הוא הונאה."
+  },
+  {
+   "topic": "רישיון לקטנוע",
+   "detail": "הרישיון הישראלי לא מספיק וגם בינלאומי רגיל לא — צריך רישיון בינלאומי לפי אמנת 1949 עם קטגוריית אופנוע (A). בלי זה הביטוח מבטל תביעה גם על שריטה. לסדר לפני הטיסה."
+  },
+  {
+   "topic": "כסף",
+   "detail": "כספומטים גובים ฿220 עמלה קבועה לכל משיכה — למשוך הרבה ולעיתים רחוקות. אוכל רחוב, סונגתאו, לונגטייל, מקדשים ופארקים לאומיים: מזומן בלבד."
+  },
+  {
+   "topic": "סים",
+   "detail": "סים תיירים של AIS או True בשדה, ฿300–600 לשבועיים דאטה. בדוכן הרשמי בטרמינל הנכנסים. כיסוי טוב בכל המסלול."
+  },
+  {
+   "topic": "תחבורה",
+   "detail": "גראב בבנגקוק ובפוקט. עם סונגתאו, טוק-טוק ולונגטייל — לסכם מחיר לפני שנכנסים. BTS ו-MRT מנצחים כל רכב בבנגקוק בין 07:00 ל-20:00."
+  },
+  {
+   "topic": "סירות ועונה",
+   "detail": "כל המעברים בין ריילאי, לנטה, קו יאו נוי ופוקט הם סירות עונתיות מנובמבר עד אפריל. לוחות 2026 מתפרסמים חודש-חודשיים מראש — המעבר ודאי, השעה פתוחה. לא לתכנן חיבור צמוד לטיסה."
+  },
+  {
+   "topic": "מזג אוויר",
+   "detail": "בנגקוק כ-32° ביום, 23° בלילה, בעיקר יבש. קראבי, לנטה ופוקט 31° ביום, ים כ-29°. תחילת דצמבר היא שיא הראות במים."
+  },
+  {
+   "topic": "קוד לבוש",
+   "detail": "הארמון המלכותי וואט פו אוכפים כתפיים וברכיים מכוסות על כולם. מכנסיים ארוכים קלים וחולצה עם שרוולים לכל אחד."
+  },
+  {
+   "topic": "ממה להתעלם",
+   "detail": "טוק-טוק שמציע סיור עיר ב-฿20, חנויות אבני חן, מי שאומר שהארמון סגור היום, וכל חוויית פילים שמפרסמת רכיבה. אותה הונאה בארבעה בגדים."
+  },
+  {
+   "topic": "",
+   "detail": "מוזמן: שתי טיסות ארקיע, מונטראג׳, צ׳רמנטרה, קלימה. כל השאר פתוח."
+  }
+ ]
+}
