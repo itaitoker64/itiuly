@@ -989,6 +989,25 @@ function render(){
 /* =========================================================
    ניווט — לכל אחד הלשוניות שרלוונטיות לו
 ========================================================= */
+function uiIcon(name){
+  const paths = {
+    home:'<path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1Z"/>',
+    today:'<rect x="3" y="5" width="18" height="16" rx="3"/><path d="M7 3v4m10-4v4M3 11h18m-13 5h3"/>',
+    route:'<circle cx="12" cy="12" r="9"/><path d="m16 8-3 5-5 3 3-5Z"/>',
+    money:'<rect x="3" y="5" width="18" height="15" rx="3"/><path d="M3 9h18m-5 5h2"/>',
+    more:'<circle cx="5" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/>',
+    'אוכל':'<path d="M5 3v7m4-7v7M3 3v5a4 4 0 0 0 8 0V3M7 12v9m11-18v18m0-18c-5 4-5 10 0 10"/>',
+    'תחבורה':'<rect x="4" y="5" width="16" height="13" rx="3"/><path d="M4 12h16M7 18v3m10-3v3M8 8h8"/>',
+    'אטרקציות':'<path d="M20 10c0 6-8 11-8 11S4 16 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2"/>',
+    'לינה':'<path d="M3 21V5h18v16M8 21v-5h8v5M7 9h2m6 0h2"/>',
+    'אחר':'<circle cx="12" cy="12" r="8"/><path d="M12 8v4m0 4h.01"/>'
+  };
+  return `<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${paths[name]||paths['אחר']}</svg>`;
+}
+// Isolate embedded Latin identifiers and numeric values inside Hebrew copy.
+function itineraryText(value){
+  return String(value||'').split(/([A-Za-z0-9][A-Za-z0-9:.,/–−+() -]*)/g).map((text,i)=>i%2?`<bdi dir="ltr">${escapeHtml(text)}</bdi>`:escapeHtml(text)).join('');
+}
 function navItems(){
   const common = [
     {tab:'home',  icon:'🏠', label:'בית'},
@@ -996,18 +1015,15 @@ function navItems(){
     {tab:'route', icon:'🧭', label:'המסלול'},
     {tab:'money', icon:'💸', label:'כסף'}
   ];
-  // לטליה יש ארבע מדינות לנהל; לאיתי יש שבועיים במדינה אחת, ולכן מפה במקום
-  const mid = meId()==='talia'
-    ? [{tab:'countries', icon:'🌍', label:'מדינות'}]
-    : [{tab:'map', icon:'🗺️', label:'מפה'}];
-  return [...common, ...mid, {tab:'more', icon:'🎒', label:'עוד'}];
+  return [...common, {tab:'more', icon:'more', label:'עוד'}];
 }
+
 function renderNav(){
   const nav = document.getElementById('bottomnav');
   if(!nav) return;
   nav.innerHTML = navItems().map(n=>
-    `<button class="nav-btn ${activeTab===n.tab?'active':''}" data-action="setTab" data-id="${n.tab}">
-       <span class="ni">${n.icon}</span>${n.label}
+    `<button class="nav-btn ${(activeTab===n.tab || (n.tab==='more' && ['map','countries'].includes(activeTab)))?'active':''}" data-action="setTab" data-id="${n.tab}">
+       <span class="ni">${uiIcon(n.tab)}</span>${n.label}
      </button>`).join('');
 }
 
@@ -1304,7 +1320,7 @@ const ROW_ICONS = {'אוכל':'🍜','תחבורה':'🛵','אטרקציות':'�
 
 function rowThumb(r){
   if(r.wiki) return imageBox(r.wiki, '#8C8272', 'row-photo');
-  return `<div class="row-icon">${ROW_ICONS[r.cat] || '•'}</div>`;
+  return `<div class="row-icon">${uiIcon(r.cat)}</div>`;
 }
 
 function renderDayCard(day){
@@ -1331,16 +1347,16 @@ function renderSharedRow(day, r){
   const hasMore = !!(r.notes || r.link || r.baht);
   return `
   <div class="irow ${r.done?'done':''} ${open?'open':''}">
-    <input class="icheck" type="checkbox" ${r.done?'checked':''} data-action="toggleSharedRow" data-day="${day.id}" data-id="${r.id}">
+    <input class="icheck" aria-label="${escapeAttr(r.act)}" type="checkbox" ${r.done?'checked':''} data-action="toggleSharedRow" data-day="${day.id}" data-id="${r.id}">
     ${rowThumb(r)}
     <div class="ibody" ${hasMore?`data-action="toggleRow" data-id="${r.id}"`:''}>
       <div class="irow-top">
-        <div class="iact">${r.act}</div>
-        ${r.time?`<div class="itime">${r.time}</div>`:''}
+        <div class="iact">${itineraryText(r.act)}</div>
+        ${r.time?`<div class="itime" dir="ltr">${escapeHtml(r.time)}</div>`:''}
       </div>
       <div class="imeta">
-        ${meta}
-        ${r.baht?`<span class="ibaht">${baht(r.baht)}</span>`:''}
+        ${itineraryText(meta)}
+        ${r.baht?`<span class="ibaht" dir="ltr">${baht(r.baht)}</span>`:''}
         <span class="tag-s ${statusCls}">${r.status||''}</span>
       </div>
       ${open ? `
@@ -1414,23 +1430,19 @@ function renderToday(){
         <div class="deck-hero">
           ${imageBox(dest && dest.wiki, dest && dest.hue, 'deck-photo')}
           <div class="deck-hero-text">
-            <div class="deck-when">${when} · יום ${day.day} מתוך ${days.length}</div>
+            <div class="deck-when">יום ${day.day} מתוך ${days.length}</div>
             <div class="deck-place">${day.dest}</div>
-            <div class="deck-date">${day.dow} ${fmtDate(day.date)}</div>
+            <div class="deck-date">${day.dow} <bdi dir="ltr">${fmtDate(day.date)}</bdi></div>
           </div>
-          <div class="deck-ring">
-            <svg viewBox="0 0 36 36" class="ring">
-              <path class="ring-bg" d="M18 2.5a15.5 15.5 0 1 1 0 31 15.5 15.5 0 0 1 0-31"/>
-              <path class="ring-fill" stroke-dasharray="${pct}, 100"
-                    d="M18 2.5a15.5 15.5 0 1 1 0 31 15.5 15.5 0 0 1 0-31"/>
-            </svg>
-            <span>${done}/${day.rows.length}</span>
-          </div>
+        </div>
+        <div class="deck-status">
+          <span>${when}</span>
+          <span class="day-progress"><bdi dir="ltr">${done}/${day.rows.length}</bdi><span class="progress-track" role="progressbar" aria-label="התקדמות היום" aria-valuenow="${done}" aria-valuemin="0" aria-valuemax="${day.rows.length}"><span style="width:${pct}%"></span></span></span>
         </div>
 
         <div class="deck-body">
-          ${day.summary?`<div class="deck-summary">${day.summary}</div>`:''}
-          ${day.rows.map(r=>renderTodayRow(day, r)).join('')}
+          ${day.summary?`<h1 class="deck-summary">${itineraryText(day.summary)}</h1>`:''}
+          <div class="activity-timeline">${day.rows.map(r=>renderTodayRow(day, r)).join('')}</div>
           <div class="deck-total">
             סה״כ היום · ${baht(dayTotalBaht(day))} · ${ils(toIls(dayTotalBaht(day)))}
           </div>
@@ -1444,21 +1456,20 @@ function renderToday(){
 
 function renderTodayRow(day, r){
   const statusCls = SHARED_STATUS_CLASS[r.status] || 'onsite';
-  const meta = [r.time, r.loc].filter(Boolean).join(' · ');
   return `
   <div class="tcard ${r.done?'done':''}">
     ${rowThumb(r)}
     <div class="tbody">
-      <div class="tact">${r.act}</div>
-      <div class="tmeta">${meta}</div>
+      <div class="activity-heading">${r.time?`<div class="activity-time" dir="ltr">${escapeHtml(r.time)}</div>`:''}<div class="tact">${itineraryText(r.act)}</div></div>
+      ${r.loc?`<div class="tmeta">${itineraryText(r.loc)}</div>`:''}
       <div class="chip-row tight">
-        ${r.baht?`<span class="chip mini">${baht(r.baht)}</span>`:''}
+        ${r.baht?`<span class="chip mini price-badge" dir="ltr">${baht(r.baht)}</span>`:''}
         <span class="tag-s ${statusCls}">${r.status||''}</span>
         ${r.link?`<a class="chip mini" href="${r.link}" target="_blank" rel="noopener">↗</a>`:''}
       </div>
-      ${r.notes?`<div class="tnotes">${r.notes}</div>`:''}
+      ${r.notes?`<div class="tnotes">${itineraryText(r.notes)}</div>`:''}
     </div>
-    <input class="icheck" type="checkbox" ${r.done?'checked':''}
+    <input class="icheck" aria-label="${escapeAttr(r.act)}" type="checkbox" ${r.done?'checked':''}
            data-action="toggleSharedRow" data-day="${day.id}" data-id="${r.id}">
   </div>`;
 }
@@ -2177,6 +2188,7 @@ function renderMore(){
   return `
   <div class="section" style="padding-bottom:0;">
     <div class="section-title">עוד</div>
+    <div class="chip-row more-destinations"><button class="chip" data-action="setTab" data-id="map">מפה</button>${meId()==='talia'?`<button class="chip" data-action="setTab" data-id="countries">מדינות</button>`:''}</div>
     <div class="subnav">${tabs.map(t=>`<button class="${moreSection===t[0]?'active':''}" data-action="setMore" data-id="${t[0]}">${t[1]}</button>`).join('')}</div>
   </div>
   <div class="section" style="padding-top:0;">
