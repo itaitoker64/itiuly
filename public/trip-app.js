@@ -62,6 +62,172 @@ function itaiPacking(){
   return out;
 }
 
+
+// Rates are confirmed by email; totals assume three second-person days.
+function kynPackageExpense(){
+  return {id:'x_kyn_package_2026', bookingKey:'kyn-2026-11', date:'2026-11-26',
+    title:'KYN Phoenix · חבילת דירה, ארוחות ואימונים לשניים · 3 לילות',
+    category:'accommodation', amount:14580, currency:'THB', paidBy:'itai',
+    split:'ratio', status:'due', note:"฿3,800 לדירה ללילה כולל לינה, ארוחות ואימון לאדם אחד; לאדם השני ฿660 אימון + ฿400 ארוחות ליום. אומדן לשלושה לילות ושלושה ימי תוספת: ฿14,580; מקדמה 50%: ฿7,290. נשלחה בקשה להתקדם; טרם שולם. הסכום הסופי וכיסוי יום העזיבה טעונים אישור. הסכום כולו מסווג כלינה כחבילה; אין להוסיף את הארוחות והאימונים הכלולים שוב. איתי מסומן כמשלם מתוכנן לפי ברירת המחדל וניתן לשנות."};
+}
+
+// Only replace fields that still match the previous seed. User edits and done flags survive.
+const KYN_PREVIOUS_FIELDS = {
+  "s_4_8": {
+    "act": "הסעה מהרציף למחנה",
+    "notes": "לסכם עם המחנה מראש"
+  },
+  "s_4_9": {
+    "status": "להזמין",
+    "notes": "מקדמה 50% שאינה מוחזרת"
+  },
+  "s_4_10": {
+    "baht": 350,
+    "status": "משלמים במקום",
+    "notes": ""
+  },
+  "s_4_11": {
+    "notes": "חמש שעות עד האימון — תנצלו אותן"
+  },
+  "s_4_12": {
+    "baht": 850,
+    "status": "להזמין",
+    "notes": "את החזק עושים מחר בבוקר"
+  },
+  "s_4_13": {
+    "baht": 350,
+    "status": "משלמים במקום",
+    "notes": ""
+  },
+  "s_4_14": {
+    "act": "לינה — Panoramic Sunset View Apartment",
+    "baht": 3800,
+    "status": "להזמין",
+    "notes": "לשאול על חבילה שכוללת חדר, ארוחות ואימונים — ואם ฿3,800 הוא לחדר או לאדם"
+  },
+  "s_5_0": {
+    "baht": 150,
+    "status": "משלמים במקום",
+    "notes": "לא לאכול כבד לפני אימון"
+  },
+  "s_5_1": {
+    "time": "07:30",
+    "baht": 850,
+    "status": "משלמים במקום",
+    "notes": "฿400–500 לאימון · חבילות רב-יומיות זולות יותר"
+  },
+  "s_5_2": {
+    "time": "09:45",
+    "dur": "0:45",
+    "baht": 300,
+    "status": "משלמים במקום",
+    "notes": "שני אימונים ביום = 1,400–1,800 קלוריות מעל הרגיל. לא לרוץ בגירעון"
+  },
+  "s_5_3": {
+    "status": "משלמים במקום",
+    "notes": "בדרך כלל כלול"
+  },
+  "s_5_4": {
+    "notes": ""
+  },
+  "s_5_6": {
+    "time": "16:00",
+    "baht": 850,
+    "status": "משלמים במקום",
+    "notes": ""
+  },
+  "s_5_7": {
+    "time": "18:30",
+    "baht": 400,
+    "status": "משלמים במקום",
+    "notes": ""
+  },
+  "s_5_8": {
+    "act": "לינה — Panoramic Sunset View Apartment",
+    "baht": 3800,
+    "status": "להזמין",
+    "notes": ""
+  },
+  "s_6_0": {
+    "baht": 150,
+    "status": "משלמים במקום",
+    "notes": ""
+  },
+  "s_6_1": {
+    "time": "07:30",
+    "baht": 850,
+    "status": "משלמים במקום",
+    "notes": "אחה״צ חופשי — יוצאים למפרץ"
+  },
+  "s_6_2": {
+    "time": "09:45",
+    "dur": "0:45",
+    "baht": 300,
+    "status": "משלמים במקום",
+    "notes": ""
+  },
+  "s_6_3": {
+    "notes": ""
+  },
+  "s_6_7": {
+    "notes": ""
+  },
+  "s_6_9": {
+    "act": "לינה — Panoramic Sunset View Apartment",
+    "baht": 3800,
+    "status": "להזמין",
+    "notes": ""
+  },
+  "s_7_0": {
+    "baht": 150,
+    "status": "משלמים במקום",
+    "notes": ""
+  },
+  "s_7_1": {
+    "time": "07:30",
+    "baht": 850,
+    "status": "משלמים במקום",
+    "notes": "אם הרגליים מרשות"
+  },
+  "s_7_2": {
+    "time": "09:45",
+    "dur": "0:45",
+    "notes": ""
+  },
+  "s_7_3": {
+    "act": "הסעה לרציף",
+    "notes": ""
+  }
+};
+function migrateKynBooking(){
+  const seed = window.SHARED_SEED;
+  if(!seed || !STATE.shared) return;
+  const clone = value=>JSON.parse(JSON.stringify(value));
+  const seedRows = new Map(seed.days.flatMap(d=>d.rows).map(r=>[r.id,r]));
+  STATE.shared.days.forEach(day=>day.rows.forEach(row=>{
+    const before = KYN_PREVIOUS_FIELDS[row.id], next = seedRows.get(row.id);
+    if(!before || !next) return;
+    Object.keys(before).forEach(key=>{
+      if((row[key] ?? null) === before[key]) row[key] = next[key];
+      else if(key==='notes' && !String(row.notes||'').includes(next.notes))
+        row.notes = [row.notes,next.notes].filter(Boolean).join(' · ');
+    });
+  }));
+  for(const key of ['bookings','info']){
+    if(!STATE.shared[key]) STATE.shared[key]=[];
+    const item = key==='bookings' ? seed.bookings.find(b=>b.id==='kyn-2026-11') : seed.info.find(i=>i.topic==='KYN · פרטי המחנה');
+    if(item && !STATE.shared[key].some(x=>key==='bookings' ? x.id===item.id || /KYN/i.test(x.what||'') : x.topic===item.topic)) STATE.shared[key].push(clone(item));
+  }
+  const oldHotel = {"dest":"קו יאו נוי","dates":"26–29/11","nights":3,"hotel":"Panoramic Sunset View · KYN Phoenix","what":"המחנה עצמו. מי שלא מתאכסן אצלם מקבל שיעורים פרטיים בלבד — זה ההבדל המהותי.","perNight":3800,"choice":"הבחירה","freeCancel":"אין — מקדמה 50%","link":"בוקינג","linkLink":"https://www.phuket-krabi-muaythai.com/prices-accomodation/"};
+  const newHotel = seed.hotels.find(h=>h.hotel===oldHotel.hotel);
+  const hotel = (STATE.shared.hotels||[]).find(h=>h.hotel===oldHotel.hotel);
+  if(hotel && newHotel) Object.keys(newHotel).forEach(key=>{ if(hotel[key]===oldHotel[key]) hotel[key]=newHotel[key]; });
+  const dest = STATE.countries.flatMap(c=>c.destinations).find(d=>d.name==='קו יאו נוי — מחנה מואיי תאי');
+  if(dest && !String(dest.notes||'').includes("ממתינים לפרטי בנק ולתשלום מקדמה")) dest.notes = [dest.notes,"ממתינים לפרטי בנק ולתשלום מקדמה · ฿3,800 לדירה ללילה כולל לינה, ארוחות ואימון לאדם אחד; לאדם השני ฿660 אימון + ฿400 ארוחות ליום. אומדן לשלושה לילות ושלושה ימי תוספת: ฿14,580; מקדמה 50%: ฿7,290. נשלחה בקשה להתקדם; טרם שולם. הסכום הסופי וכיסוי יום העזיבה טעונים אישור. המחנה אישר אימוני קבוצה ב-08:00 וב-17:00. איתי: התאמת עמידה ובעיטות למואיי תאי, טיפים, מרפקים וקלינץ׳; טליה: יסודות למתחילה. ניתן להזמין אימון פרטי משותף; מחיר ומועד טרם נקבעו."].filter(Boolean).join(' · ');
+  if(!STATE.money.expenses.some(x=>x.bookingKey==='kyn-2026-11' || /KYN|Phoenix|Panoramic Sunset/i.test(x.title||''))) STATE.money.expenses.push(kynPackageExpense());
+  STATE.schema=6;
+}
+
 function seedData(){
   const bangkokId = uid('d'), koyaoId = uid('d'), aonangId = uid('d'), khaolakId = uid('d');
   const chiangmaiId = uid('d'), paiId = uid('d');
@@ -69,7 +235,7 @@ function seedData(){
   const hanoiId = uid('d'), manilaId = uid('d');
 
   return {
-    schema:5,
+    schema:6,
     tripName:"My Big Trip 🌏",
     startDate:"2026-11-22",
     endDate:null,
@@ -91,6 +257,7 @@ function seedData(){
       defaultSplit:{itai:0.6667, talia:0.3333},
       budgets:{itai:12000, talia:8000},
       expenses:[
+        kynPackageExpense(),
         {id:uid('x'), date:"2026-09-10", title:"ארקיע IZ591 · תל אביב → בנגקוק", category:"flights",
          amount:3777, currency:"ILS", paidBy:"itai", split:"ratio", status:"paid", note:"לשניים · אישור IL-603978"},
         {id:uid('x'), date:"2026-09-10", title:"ארקיע IZ598 · פוקט → תל אביב", category:"flights",
@@ -119,7 +286,7 @@ function seedData(){
           {id:koyaoId, owner:"both", name:"קו יאו נוי — מחנה מואיי תאי", wiki:"Ko Yao Noi", hue:"#6F8F6A",
            lat:8.1099, lng:98.5892, arrival:"2026-11-26", departure:"2026-11-29", nights:3,
            accommodation:"Panoramic Sunset View · KYN Phoenix", transport:"Vietjet לפוקט ואז ספידבוט",
-           notes:"שני אימונים ביום, יוגה, ולונגטייל למפרץ פאנג נגה מהצד שאין בו סירות",
+           notes:"ממתינים לפרטי בנק ולתשלום מקדמה · ฿3,800 לדירה ללילה כולל לינה, ארוחות ואימון לאדם אחד; לאדם השני ฿660 אימון + ฿400 ארוחות ליום. אומדן לשלושה לילות ושלושה ימי תוספת: ฿14,580; מקדמה 50%: ฿7,290. נשלחה בקשה להתקדם; טרם שולם. הסכום הסופי וכיסוי יום העזיבה טעונים אישור. המחנה אישר אימוני קבוצה ב-08:00 וב-17:00. איתי: התאמת עמידה ובעיטות למואיי תאי, טיפים, מרפקים וקלינץ׳; טליה: יסודות למתחילה. ניתן להזמין אימון פרטי משותף; מחיר ומועד טרם נקבעו.",
            scooter:{ok:true, perDay:250, bikes:1, days:2, rider:"itai", pillion:"talia", headline:"המקום הכי טוב באי לקטנוע",
              note:"כביש אחד לאורך החוף המזרחי, כמעט בלי תנועה. שדות אורז, המסגד, התצפית, והחופים שאין אליהם סונגתאו."},
            budget:2200, status:"planned", companions:["ביחד"], order:2},
@@ -343,6 +510,8 @@ let STATE = null;
 let activeTab = "home";
 let activeCountry = "thailand";
 let moneySection = "balance";
+let moneyCategory = "";
+let moneyPayment = "";
 let expandedDest = {};
 let expandedRow = {};
 let todayIndex = null;
@@ -402,6 +571,7 @@ function ensureDefaults(){
   /* ברירות מחדל חייבות להיות במקום לפני שהמיגרציות נשענות עליהן */
   if(!STATE.trip) STATE.trip = fresh.trip;
   if(!STATE.money) STATE.money = fresh.money;
+  if(!STATE.money.expenses) STATE.money.expenses = [];
   if(!STATE.money.settlements) STATE.money.settlements = [];
   if(!STATE.money.budgets) STATE.money.budgets = fresh.money.budgets;
   if(!STATE.money.defaultSplit) STATE.money.defaultSplit = fresh.money.defaultSplit;
@@ -587,6 +757,7 @@ function ensureDefaults(){
   if(!STATE.shared && window.SHARED_SEED){
     STATE.shared = JSON.parse(JSON.stringify(window.SHARED_SEED));
   }
+  if(STATE.schema < 6) migrateKynBooking();
 }
 
 /* ---------------------------------------------------------
@@ -1136,7 +1307,8 @@ function rate(){ return Number(wallet().rate) || 0.08981; }
 function toIls(bahtAmount){ return (Number(bahtAmount)||0) * rate(); }
 
 const SHARED_STATUS_CLASS = {
-  'מוזמן':'booked', 'להזמין':'todo', 'משלמים במקום':'onsite', 'אופציונלי':'optional'
+  'מוזמן':'booked', 'להזמין':'todo', 'משלמים במקום':'onsite', 'אופציונלי':'optional',
+  'כלול בחבילה':'booked', 'לברר':'todo', 'ממתינים לפרטי בנק ולתשלום מקדמה':'todo'
 };
 
 /** סכום היום בבאט — בלי השורות המסומנות ״אופציונלי״, בדיוק כמו בגיליון */
@@ -1665,11 +1837,43 @@ function renderBalance(){
   <button class="btn full" data-action="addExpense" style="margin-top:16px">+ הוצאה חדשה</button>`;
 }
 
+function moneyCategoryId(x){
+  return EXPENSE_CATEGORIES.some(c=>c.id===x.category) ? x.category : 'other';
+}
+function moneyTotals(rows){
+  return rows.reduce((totals,x)=>{
+    const amount=expenseIls(x);
+    totals[isDue(x)?'due':'paid']+=amount;
+    totals.share+=splitShares(x)[meId()];
+    return totals;
+  },{paid:0,due:0,share:0});
+}
+function filteredMoneyExpenses(){
+  return wallet().expenses.filter(x=>(!moneyCategory || moneyCategoryId(x)===moneyCategory)
+    && (!moneyPayment || (isDue(x)?'due':'paid')===moneyPayment))
+    .sort((a,b)=>(b.date||'').localeCompare(a.date||''));
+}
 function renderExpenseList(){
-  const list = wallet().expenses.slice().sort((a,b)=>(b.date||'').localeCompare(a.date||''));
-  if(!list.length) return `<div class="empty small">עוד לא נרשמו הוצאות</div>
-    <button class="btn full" data-action="addExpense" style="margin-top:12px">+ הוצאה חדשה</button>`;
+  const list=filteredMoneyExpenses();
+  const totals=moneyTotals(list);
+  const categories=EXPENSE_CATEGORIES.map(cat=>{
+    const rows=wallet().expenses.filter(x=>moneyCategoryId(x)===cat.id);
+    return {...cat,count:rows.length,...moneyTotals(rows)};
+  });
   return `
+  <div class="money-categories" role="group" aria-label="סינון לפי קטגוריה">
+    <button class="money-category ${!moneyCategory?'selected':''}" data-action="moneyCategory" data-id="" aria-pressed="${!moneyCategory}"><b>כל ההוצאות</b><span>${wallet().expenses.length} הוצאות</span></button>
+    ${categories.map(cat=>`<button class="money-category ${moneyCategory===cat.id?'selected':''}" data-action="moneyCategory" data-id="${cat.id}" aria-pressed="${moneyCategory===cat.id}"><b>${cat.label} · ${cat.count}</b><span>שולם ${ils(cat.paid)}</span><span>טרם שולם ${ils(cat.due)}</span></button>`).join('')}
+  </div>
+  <div class="pillrow money-payment" role="group" aria-label="סינון לפי מצב תשלום">
+    ${[['','הכל'],['paid','שולם'],['due','טרם שולם']].map(([id,label])=>`<button class="pill ${moneyPayment===id?'active':''}" data-action="moneyPayment" data-id="${id}" aria-pressed="${moneyPayment===id}">${label}</button>`).join('')}
+  </div>
+  <div class="money-summary" aria-live="polite">
+    <b>${list.length} הוצאות · ${ils(totals.paid+totals.due)}</b>
+    <span>שולם ${ils(totals.paid)} · טרם שולם ${ils(totals.due)}</span>
+    <span>חלקך, כולל טרם שולם: ${ils(totals.share)}</span>
+    <small>סיכומים בשקלים · באט מומר לפי השער המוגדר. חבילות לינה כוללות גם את הארוחות והאימונים הכלולים במחירן.</small>
+  </div>
   ${list.map(x=>{
     const shares = splitShares(x);
     const myShare = shares[meId()];
@@ -1677,12 +1881,12 @@ function renderExpenseList(){
     return `
     <div class="exp-card ${isDue(x)?'due':''}">
       <div class="exp-main" data-action="editExpense" data-id="${x.id}">
-        <div class="exp-title">${x.title}${isDue(x)?' <span class="due-tag">טרם שולם</span>':''}</div>
+        <div class="exp-title">${escapeHtml(x.title)}${isDue(x)?' <span class="due-tag">טרם שולם</span>':''}</div>
         <div class="exp-meta">
           ${fmtDateShort(x.date)} · ${expCatLabel(x.category)} ·
-          שילם/ה ${personName(x.paidBy)} · ${splitLabel(x)}
+          ${isDue(x)?'משלם/ת מתוכנן/ת':'שילם/ה'} ${personName(x.paidBy)} · ${splitLabel(x)}
         </div>
-        ${x.note?`<div class="exp-note">${x.note}</div>`:''}
+        ${x.note?`<div class="exp-note">${escapeHtml(x.note)}</div>`:''}
       </div>
       <div class="exp-side">
         <div class="exp-amount">${x.currency==='THB'?baht(x.amount):ils(x.amount)}</div>
@@ -1694,6 +1898,7 @@ function renderExpenseList(){
       </div>
     </div>`;
   }).join('')}
+  ${!list.length?'<div class="empty small">אין הוצאות במסננים שנבחרו</div>':''}
   <button class="btn full" data-action="addExpense" style="margin-top:12px">+ הוצאה חדשה</button>`;
 }
 
@@ -2591,7 +2796,7 @@ function openExpenseModal(editId, preset){
     </div></div>
     <div class="field"><label>מצב תשלום</label><div class="choice-row" id="ex-status">
       <button type="button" class="choice ${val('status','paid')!=='due'?'active':''}" data-value="paid">כבר שולם</button>
-      <button type="button" class="choice ${val('status')==='due'?'active':''}" data-value="due">משלמים במקום</button>
+      <button type="button" class="choice ${val('status')==='due'?'active':''}" data-value="due">טרם שולם</button>
     </div></div>
     <div class="field"><label>הערה</label><input id="ex-note" value="${escapeAttr(val('note'))}"></div>
     <div id="ex-preview" class="split-preview"></div>
@@ -2691,7 +2896,7 @@ function openSharedRowModal(dayId, rowId){
   const day = sh().days.find(d=>d.id===dayId);
   const r = day && day.rows.find(x=>x.id===rowId);
   if(!r) return;
-  const statuses = ['מוזמן','להזמין','משלמים במקום','אופציונלי'];
+  const statuses = Object.keys(SHARED_STATUS_CLASS);
   openModal(`
     <h3 style="margin-bottom:14px;">עריכת שורה · יום ${day.day}</h3>
     <div class="field"><label>מה</label><input id="sr-act" value="${escapeAttr(r.act)}"></div>
@@ -2803,6 +3008,8 @@ document.addEventListener('click', (e)=>{
 
   if(action==='setTab'){ activeTab=id; render(); window.scrollTo(0,0); }
   else if(action==='moneySection'){ moneySection=id; render(); }
+  else if(action==='moneyCategory'){ moneyCategory=id; render(); }
+  else if(action==='moneyPayment'){ moneyPayment=id; render(); }
   else if(action==='toggleDest'){
     expandedDest[id] = !expandedDest[id];
     render();
