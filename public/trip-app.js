@@ -758,6 +758,7 @@ function ensureDefaults(){
     STATE.shared = JSON.parse(JSON.stringify(window.SHARED_SEED));
   }
   if(STATE.schema < 6) migrateKynBooking();
+  ensureSharedPriceEstimates();
 }
 
 /* ---------------------------------------------------------
@@ -1313,7 +1314,7 @@ const SHARED_STATUS_CLASS = {
 
 /** סכום היום בבאט — בלי השורות המסומנות ״אופציונלי״, בדיוק כמו בגיליון */
 function dayTotalBaht(day){
-  return day.rows.reduce((sum,r)=> r.status==='אופציונלי' ? sum : sum + (Number(r.baht)||0), 0);
+  return day.rows.reduce((sum,r)=> optionalPrice(r) ? sum : sum + sharedRowPrice(r).base / rate(), 0);
 }
 function groundTotalBaht(){
   return sh().days.reduce((sum,d)=>sum+dayTotalBaht(d), 0) + (Number(sh().reserveBaht)||0);
@@ -1321,8 +1322,9 @@ function groundTotalBaht(){
 function sharedCategoryTotals(){
   const totals = {};
   sh().days.forEach(d=>d.rows.forEach(r=>{
-    if(r.status==='אופציונלי') return;
-    totals[r.cat||'אחר'] = (totals[r.cat||'אחר']||0) + (Number(r.baht)||0);
+    if(optionalPrice(r)) return;
+    const category=expCatLabel(sharedRowCategory(r));
+    totals[category] = (totals[category]||0) + sharedRowPrice(r).base / rate();
   }));
   return totals;
 }
@@ -1455,7 +1457,7 @@ function renderDestCard(d, index, total){
         ${d.wiki?`<a class="chip" href="https://he.wikipedia.org/wiki/${encodeURIComponent(d.wiki)}" target="_blank" rel="noopener">📖 קצת רקע</a>`:''}
         ${days.length?`<button class="chip strong" data-action="toggleDest" data-id="${d.id}">${open?'▲ לסגור את הימים':'▼ '+days.length+' ימים, שעה אחר שעה'}</button>`:''}
       </div>
-      ${days.length?`<div class="dest-cost">${baht(totalB)} · ${ils(toIls(totalB))} לתחנה הזאת</div>`:''}
+      ${days.length?`<div class="dest-cost">אומדן ${ils(toIls(totalB))} לתחנה הזאת</div>`:''}
       ${open?`<div class="day-list">${days.map(day=>renderDayCard(day)).join('')}</div>`:''}
     </div>
   </div>`;
@@ -1481,7 +1483,7 @@ function renderScooter(d){
     <span class="moto-icon">🛵</span>
     <div>
       <b>${sc.headline}</b>
-      <div class="moto-line">${bikes} ${days} · ฿${sc.perDay} ליום · ${baht(total)} · ${ils(toIls(total))}</div>
+      <div class="moto-line">${bikes} ${days} · ${ils(toIls(sc.perDay))} ליום · ${ils(toIls(total))} בסך הכל</div>
       ${who}
       <div class="moto-note">${sc.note}</div>
     </div>
@@ -1506,7 +1508,7 @@ function renderDayCard(day){
         <div class="dtitle">${day.summary || day.dest}</div>
         <div class="dsub">${day.dow} ${fmtDateShort(day.date)} · ${day.rows.length} שורות</div>
       </div>
-      <div class="dcost">${baht(total)}<br><span style="font-weight:400;color:var(--muted)">${ils(toIls(total))}</span></div>
+      <div class="dcost">${ils(toIls(total))}<br><span style="font-weight:400;color:var(--muted)">אומדן</span></div>
     </div>
     ${open ? `<div class="day-rows">${day.rows.map(r=>renderSharedRow(day,r)).join('')}</div>` : ''}
   </div>`;
@@ -1528,7 +1530,7 @@ function renderSharedRow(day, r){
       </div>
       <div class="imeta">
         ${itineraryText(meta)}
-        ${r.baht?`<span class="ibaht" dir="ltr">${baht(r.baht)}</span>`:''}
+        ${renderPriceBadge(r)}
         <span class="tag-s ${statusCls}">${r.status||''}</span>
       </div>
       ${open ? `
@@ -1616,7 +1618,7 @@ function renderToday(){
           ${day.summary?`<h1 class="deck-summary">${itineraryText(day.summary)}</h1>`:''}
           <div class="activity-timeline">${day.rows.map(r=>renderTodayRow(day, r)).join('')}</div>
           <div class="deck-total">
-            סה״כ היום · ${baht(dayTotalBaht(day))} · ${ils(toIls(dayTotalBaht(day)))}
+            אומדן היום · ${ils(toIls(dayTotalBaht(day)))}
           </div>
         </div>
       </div>
@@ -1635,7 +1637,7 @@ function renderTodayRow(day, r){
       <div class="activity-heading">${r.time?`<div class="activity-time" dir="ltr">${escapeHtml(r.time)}</div>`:''}<div class="tact">${itineraryText(r.act)}</div></div>
       ${r.loc?`<div class="tmeta">${itineraryText(r.loc)}</div>`:''}
       <div class="chip-row tight">
-        ${r.baht?`<span class="chip mini price-badge" dir="ltr">${baht(r.baht)}</span>`:''}
+        ${renderPriceBadge(r)}
         <span class="tag-s ${statusCls}">${r.status||''}</span>
         ${r.link?`<a class="chip mini" href="${r.link}" target="_blank" rel="noopener">↗</a>`:''}
       </div>
@@ -1909,8 +1911,6 @@ function renderMoneyBudget(){
   const mySpent = meId()==='itai' ? b.itaiOwes : b.taliaOwes;
   const left = myBudget - mySpent;
   const pct = myBudget ? Math.min(100, Math.round(mySpent/myBudget*100)) : 0;
-  const cats = hasPlan ? sharedCategoryTotals() : {};
-  const ground = hasPlan ? groundTotalBaht() : 0;
 
   return `
   <div class="card">
@@ -1923,19 +1923,7 @@ function renderMoneyBudget(){
     <button class="btn secondary full" style="margin-top:12px" data-action="editBudgets">✏️ תקציבים, שער המרה וחלוקה</button>
   </div>
 
-  ${!hasPlan ? '' : `
-  <h3 class="section-title" style="margin-top:18px">התכנון לשבועיים המשותפים</h3>
-  <div class="small" style="margin-bottom:10px">מה שהגיליון צופה — לעומת מה שבאמת נרשם למעלה.</div>
-  <table class="split-table">
-    <tr><th>קטגוריה</th><th>בבאט</th><th>בשקלים</th></tr>
-    ${Object.entries(cats).sort((a,b)=>b[1]-a[1]).map(([cat,amount])=>`
-      <tr><td>${cat}</td><td class="num">${baht(amount)}</td><td class="num">${ils(toIls(amount))}</td></tr>`).join('')}
-    <tr><td>רזרבה</td><td class="num">${baht(sh().reserveBaht)}</td><td class="num">${ils(toIls(sh().reserveBaht))}</td></tr>
-    <tr class="total"><td>סה״כ על הקרקע</td><td class="num">${baht(ground)}</td><td class="num">${ils(toIls(ground))}</td></tr>
-  </table>
-
-  <h3 class="section-title" style="margin-top:18px">אם צריך לחתוך</h3>
-  ${sh().cuts.map(c=>`<div class="info-row"><b>${c.what} — ${c.save}</b><span>${c.lose}</span></div>`).join('')}`}`;
+  ${hasPlan ? renderSharedForecast() : ''}`;
 }
 
 /* =========================================================
@@ -2897,12 +2885,15 @@ function openSharedRowModal(dayId, rowId){
   const r = day && day.rows.find(x=>x.id===rowId);
   if(!r) return;
   const statuses = Object.keys(SHARED_STATUS_CLASS);
+  const currentPrice = sharedRowPrice(r);
   openModal(`
     <h3 style="margin-bottom:14px;">עריכת שורה · יום ${day.day}</h3>
     <div class="field"><label>מה</label><input id="sr-act" value="${escapeAttr(r.act)}"></div>
     <div class="field"><label>שעה</label><input id="sr-time" value="${escapeAttr(r.time||'')}" placeholder="09:30"></div>
     <div class="field"><label>מיקום</label><input id="sr-loc" value="${escapeAttr(r.loc||'')}"></div>
-    <div class="field"><label>עלות בבאט (฿)</label><input id="sr-baht" type="number" inputmode="decimal" value="${r.baht!=null?r.baht:''}"></div>
+    <div class="field"><label>אומדן מחיר בשקלים (₪)</label><input id="sr-baht" type="number" min="0" step="0.01" inputmode="decimal" value="${currentPrice.base.toFixed(2)}"></div>
+    <div class="small muted">${escapeHtml(r.priceEstimate?.basis||'אומדן תכנון')} שינוי המחיר כאן מעדכן את האומדן בלבד.</div>
+    <div class="field"><label><input id="sr-include" type="checkbox" ${!optionalPrice(r)?'checked':''}> לכלול באומדן הראשי</label></div>
     <div class="field"><label>סטטוס</label><select id="sr-status">
       ${statuses.map(s=>`<option value="${s}" ${r.status===s?'selected':''}>${s}</option>`).join('')}
     </select></div>
@@ -2914,12 +2905,20 @@ function openSharedRowModal(dayId, rowId){
   `, ()=>{
     document.getElementById('sr-cancel').onclick = closeModal;
     document.getElementById('sr-save').onclick = ()=>{
+      const bahtValue = document.getElementById('sr-baht').value;
+      const nextPrice=Number(bahtValue);
+      if(bahtValue==='' || !Number.isFinite(nextPrice) || nextPrice<0){toast('יש להזין סכום תקין בשקלים');return;}
       r.act = document.getElementById('sr-act').value || r.act;
       r.time = document.getElementById('sr-time').value;
       r.loc = document.getElementById('sr-loc').value;
-      const bahtValue = document.getElementById('sr-baht').value;
-      r.baht = bahtValue==='' ? null : Number(bahtValue);
+      if(Math.abs(nextPrice-currentPrice.base)>0.011){
+        r.priceEstimate={...(r.priceEstimate||{}),kind:'custom',fixedIls:nextPrice,lowFactor:1,highFactor:1,basis:'אומדן שנערך ידנית בשקלים',sourceUrl:''};
+        r.baht=nextPrice/rate();
+      }
       r.status = document.getElementById('sr-status').value;
+      const include=document.getElementById('sr-include').checked;
+      r.priceEstimate={...(r.priceEstimate||{}),optional:!include};
+      if(include && r.status==='אופציונלי') r.status='משלמים במקום';
       r.notes = document.getElementById('sr-notes').value;
       persist(); closeModal(); render();
     };
@@ -2930,8 +2929,8 @@ function openSharedBudgetModal(){
   const s = sh();
   openModal(`
     <h3 style="margin-bottom:14px;">התקציב המשותף</h3>
-    <div class="field"><label>שער המרה · ฿1 בשקלים</label><input id="sb-rate" type="number" step="0.00001" value="${s.rate}"></div>
-    <div class="field"><label>רזרבה (฿)</label><input id="sb-reserve" type="number" value="${s.reserveBaht}"></div>
+    <div class="field"><label>שער המרה · באט אחד בשקלים</label><input id="sb-rate" type="number" min="0.00001" step="0.00001" value="${rate()}"></div>
+    <div class="field"><label>רזרבה (₪)</label><input id="sb-reserve" type="number" min="0" step="0.01" value="${(Math.max(0,Number(s.reserveBaht)||0)*rate()).toFixed(2)}"></div>
     <div class="field"><label>התקציב של איתי (₪)</label><input id="sb-bi" type="number" value="${s.budgetItai}"></div>
     <div class="field"><label>התקציב של טליה (₪)</label><input id="sb-bt" type="number" value="${s.budgetTalia}"></div>
     <div class="field"><label>חלקו של איתי בהוצאות המשותפות (0–1)</label><input id="sb-si" type="number" step="0.0001" value="${s.splitItai}"></div>
@@ -2942,12 +2941,17 @@ function openSharedBudgetModal(){
   `, ()=>{
     document.getElementById('sb-cancel').onclick = closeModal;
     document.getElementById('sb-save').onclick = ()=>{
-      s.rate = Number(document.getElementById('sb-rate').value) || s.rate;
-      s.reserveBaht = Number(document.getElementById('sb-reserve').value) || 0;
+      const newRate=Number(document.getElementById('sb-rate').value),reserveIls=Number(document.getElementById('sb-reserve').value);
+      if(!Number.isFinite(newRate)||newRate<=0||!Number.isFinite(reserveIls)||reserveIls<0){toast('יש להזין שער ורזרבה תקינים');return;}
+      s.rate = newRate;
+      wallet().rate=newRate;
+      s.reserveBaht = reserveIls/newRate;
       s.budgetItai = Number(document.getElementById('sb-bi').value) || 0;
       s.budgetTalia = Number(document.getElementById('sb-bt').value) || 0;
       const split = Number(document.getElementById('sb-si').value);
       if(split > 0 && split < 1){ s.splitItai = split; s.splitTalia = 1 - split; }
+      wallet().budgets={itai:s.budgetItai,talia:s.budgetTalia};
+      wallet().defaultSplit={itai:s.splitItai,talia:s.splitTalia};
       persist(); closeModal(); render();
     };
   });
@@ -3008,6 +3012,7 @@ document.addEventListener('click', (e)=>{
 
   if(action==='setTab'){ activeTab=id; render(); window.scrollTo(0,0); }
   else if(action==='moneySection'){ moneySection=id; render(); }
+  else if(action==='editForecastRow'){ openSharedRowModal(t.dataset.day,id); }
   else if(action==='moneyCategory'){ moneyCategory=id; render(); }
   else if(action==='moneyPayment'){ moneyPayment=id; render(); }
   else if(action==='toggleDest'){
@@ -3141,6 +3146,97 @@ document.addEventListener('blur', (e)=>{
     const c = findCountry(e.target.dataset.id); if(c){ c.notes = e.target.value; persist(); }
   }
 }, true);
+
+
+// Forecasts are separate from the payment ledger. They never create paid expenses.
+function sharedEstimateDays(){
+  return (sh()?.days||[]).filter(d=>d.date>='2026-11-22' && d.date<='2026-12-08' && d.owner!=='talia');
+}
+function ensureSharedPriceEstimates(){
+  const seed=window.SHARED_SEED;
+  if(!STATE.shared || !seed || STATE.shared.priceEstimateVersion>=1) return;
+  const previous=seed.priceEstimateBaseline||{};
+  for(const day of STATE.shared.days||[]){
+    if(day.date<'2026-11-22'||day.date>'2026-12-08'||day.owner==='talia')continue;
+    const seedDay=seed.days.find(d=>d.id===day.id);
+    if(!seedDay)continue;
+    for(const row of day.rows){
+      const fresh=seedDay.rows.find(r=>r.id===row.id),before=previous[row.id];
+      if(!fresh || !before || row.priceEstimate)continue;
+      row.priceEstimate=JSON.parse(JSON.stringify(fresh.priceEstimate));
+      if((row.baht??null)===(before.baht??null)) row.baht=fresh.baht;
+      else row.priceEstimate={...row.priceEstimate,kind:'custom',fixedIls:(Number(row.baht)||0)*rate(),lowFactor:1,highFactor:1,basis:'מחיר קיים שנערך ידנית — נשמר',sourceUrl:''};
+      if(row.cat===before.cat)row.cat=fresh.cat;
+    }
+    for(const fresh of seedDay.rows){
+      if(!previous[fresh.id] && !day.rows.some(r=>r.id===fresh.id))day.rows.push(JSON.parse(JSON.stringify(fresh)));
+    }
+  }
+  STATE.shared.priceEstimateVersion=1;
+}
+function optionalPrice(row){return row.status==='אופציונלי'||!!row.priceEstimate?.optional;}
+function sharedRowCategory(row){return row.priceEstimate?.category || row.priceEstimate?.booking?.category || catFromSheet(row.cat);}
+function sharedRowPrice(row){
+  const p=row.priceEstimate||{},booking=p.booking;
+  let base=p.fixedIls!=null?Number(p.fixedIls):(Number(row.baht)||0)*rate();
+  let split=p.split||booking?.split||'ratio',kind=p.kind||(base?'estimate':'no-extra');
+  if(booking){
+    const expense=wallet().expenses.find(x=>booking.key==='kyn' ? x.bookingKey==='kyn-2026-11' || x.id==='x_kyn_package_2026' : (x.title||'').includes(booking.match));
+    if(expense)split=expense.split||split;
+    if(p.fixedIls==null)base=(expense?expenseIls(expense):booking.totalIls??booking.totalThb*rate())/booking.rows;
+  }
+  base=Math.max(0,Number.isFinite(base)?base:0);
+  const low=base*Math.max(0,Math.min(1,p.lowFactor??.8));
+  const high=base*Math.max(1,p.highFactor??1.3);
+  const shares=splitShares({amount:base,currency:'ILS',split});
+  return {base,low,high,kind,shares};
+}
+function priceKindLabel(kind){return ({estimate:'אומדן',published:'מחירון · אומדן',booking:'מחיר מההזמנה',quote:'הצעת KYN',included:'כלול', 'no-extra':'ללא חיוב נפרד',custom:'אומדן ידני'})[kind]||'אומדן';}
+function renderPriceBadge(row){
+  const p=sharedRowPrice(row);
+  return `<span class="estimate-price">${p.base?ils(p.base):p.kind==='included'?'כלול':'₪0'} · ${priceKindLabel(p.kind)}${optionalPrice(row)?' · לבחירה':''}</span>`;
+}
+function sharedForecast(){
+  const days=sharedEstimateDays().map(day=>({day,rows:day.rows.filter(r=>r.cat||r.priceEstimate?.booking).map(row=>({row,...sharedRowPrice(row),category:sharedRowCategory(row),optional:optionalPrice(row)}))}));
+  const result={days,base:0,low:0,high:0,optional:0,known:0,categories:{},itai:0,talia:0};
+  for(const {rows} of days)for(const p of rows){
+    if(p.optional){result.optional+=p.base;continue;}
+    result.base+=p.base;result.low+=p.low;result.high+=p.high;
+    result.itai+=p.shares.itai;result.talia+=p.shares.talia;
+    result.categories[p.category]=(result.categories[p.category]||0)+p.base;
+    if(p.kind==='booking'||p.kind==='quote')result.known+=p.base;
+  }
+  result.reserve=Math.max(0,Number(sh().reserveBaht)||0)*rate();
+  const shares=splitShares({amount:result.reserve,currency:'ILS',split:'ratio'});
+  for(const key of ['base','low','high'])result[key]+=result.reserve;
+  result.itai+=shares.itai;result.talia+=shares.talia;
+  return result;
+}
+function renderSharedForecast(){
+  const f=sharedForecast();
+  return `<div class="forecast-hero">
+    <b>אומדן כל הטיול · בשקלים</b>
+    <div class="forecast-meta">22/11–8/12/2026 · בנגקוק, קו יאו נוי, אאו נאנג וקאו לק · כולל הטיסה של איתי הביתה</div>
+    <div class="forecast-amount">${ils(f.base)}</div>
+    <div class="small">טווח תכנון: ${ils(f.low)}–${ils(f.high)} · החלק של איתי: <b>${ils(f.itai)}</b></div>
+    <div class="forecast-meta">כולל הזמנות קיימות ורזרבה של ${ils(f.reserve)}. אופציות לבחירה: עוד ${ils(f.optional)} — אינן נכללות בסכום הראשי, וחלקן חלופות זו לזו.</div>
+    <div class="forecast-meta">הוצאות ששולמו כבר כלולות במחיר הטיול; אין להוסיף את פנקס ההוצאות שוב. אומדנים אינם יוצרים חוב או תשלום. פיקדונות מוחזרים אינם הוצאה.</div>
+    <div class="forecast-meta">הסכומים לזוג, פרט לטיסת החזור, ביטוח איתי ונסיעותיו לנתב״ג. אין כאן את ההמשך של טליה. טווחי התכנון הם מרווחי תקציב, לא הצעות מחיר. ההמרה לפי השער השמור: ₪${rate().toFixed(5)} לבאט.</div>
+  </div>
+  <table class="forecast-table"><thead><tr><th>קטגוריה</th><th>אומדן בשקלים</th></tr></thead><tbody>
+    ${EXPENSE_CATEGORIES.filter(c=>f.categories[c.id]!=null).map(c=>`<tr><td>${c.label}</td><td class="num">${ils(f.categories[c.id])}</td></tr>`).join('')}
+    <tr><td>רזרבה</td><td class="num">${ils(f.reserve)}</td></tr><tr class="total"><td>סה״כ כולל רזרבה</td><td class="num">${ils(f.base)}</td></tr>
+  </tbody></table>
+  <div class="forecast-meta">מחירי הזמנות והצעת KYN: ${ils(f.known)}. שאר הסכום הוא אומדנים ורזרבה. מחירון אינטרנט אינו אישור מחיר לתאריכי הנסיעה. קניות גדולות וציוד לפני הנסיעה אינם כלולים; הקצבת הביטוח טעונה הצעה אישית.</div>
+  <h3 class="section-title" style="margin-top:18px">פירוט לפי יום</h3>
+  <div class="small muted">פתחו יום כדי לראות כל מחיר, את הבסיס לאומדן ולערוך אותו בשקלים. הקצבות לכל הטיול מרוכזות ביום הראשון או ביום ההשכרה.</div>
+  ${f.days.map(({day,rows})=>`<details class="forecast-day"><summary><span>${fmtDateShort(day.date)} · ${escapeHtml(day.dest)}</span><b>${ils(rows.filter(p=>!p.optional).reduce((s,p)=>s+p.base,0))}</b></summary>
+    ${rows.map(p=>`<div class="forecast-item"><div class="row"><b class="small">${escapeHtml(p.row.act)}</b><button class="btn ghost mini" data-action="editForecastRow" data-day="${escapeAttr(day.id)}" data-id="${escapeAttr(p.row.id)}">${ils(p.base)} ✎</button></div>
+      <div class="forecast-meta">${priceKindLabel(p.kind)}${p.optional?' · לבחירה, מחוץ לסה״כ':''}${p.low!==p.high?' · '+ils(p.low)+'–'+ils(p.high):''}</div>
+      <div class="small muted">${escapeHtml(p.row.priceEstimate?.basis||'לפי המסלול השמור')}</div>
+      ${p.row.priceEstimate?.sourceUrl?`<a class="forecast-source" href="${escapeAttr(p.row.priceEstimate.sourceUrl)}" target="_blank" rel="noopener">מקור המחיר · נבדק ${escapeHtml(p.row.priceEstimate.checked)}</a>`:''}
+    </div>`).join('')}</details>`).join('')}`;
+}
 
 
 /* INIT */

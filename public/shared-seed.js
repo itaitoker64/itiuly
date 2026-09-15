@@ -80,7 +80,23 @@ window.SHARED_SEED = {
      "link": "https://www.google.com/maps/search/?api=1&query=Suvarnabhumi+Airport+Bangkok",
      "notes": "IL-603978 · המריאה 21:30 ב-22/11",
      "id": "s_1_0",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "booking",
+      "basis": "המחיר מההזמנה השמורה; נספר פעם אחת בלבד ומחולק בין לילות הלינה.",
+      "lowFactor": 1,
+      "highFactor": 1,
+      "sourceUrl": "",
+      "checked": "2026-09-14",
+      "booking": {
+       "key": "outbound",
+       "match": "IZ591",
+       "totalIls": 3777,
+       "rows": 1,
+       "category": "flights",
+       "split": "ratio"
+      }
+     }
     },
     {
      "time": "13:15",
@@ -93,7 +109,15 @@ window.SHARED_SEED = {
      "link": "",
      "notes": "כספומט: ฿220 עמלה קבועה לכל משיכה — למשוך גדול",
      "id": "s_1_1",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "no-extra",
+      "basis": "לא הוקצה חיוב נפרד לפעולה הזאת; חיובים כלולים מופיעים בחבילה או בהזמנה.",
+      "lowFactor": 1,
+      "highFactor": 1,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "14:00",
@@ -101,12 +125,20 @@ window.SHARED_SEED = {
      "act": "סים תיירים AIS או True",
      "loc": "דוכן רשמי, טרמינל נכנסים",
      "cat": "אחר",
-     "baht": 800,
+     "baht": 1600,
      "status": "משלמים במקום",
      "link": "",
      "notes": "฿300–600 לאדם לשבועיים דאטה. רק בדוכן הרשמי",
      "id": "s_1_2",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "שני כרטיסי SIM: מחירון AIS ל-15 יום ועוד מרווח להשלמת היום ה-16 או לחבילה ארוכה יותר.",
+      "lowFactor": 0.87375,
+      "highFactor": 1.25,
+      "sourceUrl": "https://www.ais.th/en/consumers/package/international/tourist-plan",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "14:20",
@@ -119,7 +151,15 @@ window.SHARED_SEED = {
      "link": "https://www.google.com/maps/search/?api=1&query=Airport+Rail+Link+Phaya+Thai+Station+Bangkok",
      "notes": "฿45 לאדם · מנצחת מונית בשעה הזאת",
      "id": "s_1_3",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
+      "lowFactor": 0.8,
+      "highFactor": 1.3,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "14:55",
@@ -132,7 +172,15 @@ window.SHARED_SEED = {
      "link": "https://www.google.com/maps/search/?api=1&query=Asok+BTS+Station+Bangkok",
      "notes": "החלפה בסיאם · המלון 5 דק׳ הליכה מאסוק",
      "id": "s_1_4",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
+      "lowFactor": 0.8,
+      "highFactor": 1.3,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "15:30",
@@ -145,7 +193,15 @@ window.SHARED_SEED = {
      "link": "",
      "notes": "צ׳ק-אין מ-14:00 · פיקדון ฿1,000 מזומן, מוחזר בצ׳ק-אאוט",
      "id": "s_1_5",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "no-extra",
+      "basis": "לא הוקצה חיוב נפרד לפעולה הזאת; חיובים כלולים מופיעים בחבילה או בהזמנה.",
+      "lowFactor": 1,
+      "highFactor": 1,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "16:30",
@@ -153,13 +209,22 @@ window.SHARED_SEED = {
      "act": "MBK וסנטרל וורלד",
      "loc": "סיאם",
      "cat": "אחר",
-     "baht": null,
+     "baht": 2000,
      "status": "משלמים במקום",
      "link": "https://www.google.com/maps/search/?api=1&query=MBK+Center+Bangkok",
      "notes": "עושים את הקניונים היום כדי לא לדחוס אותם ליום החופשי",
      "id": "s_1_6",
      "done": false,
-     "wiki": "MBK Center"
+     "wiki": "MBK Center",
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "תקציב קניות אישי לבחירה, מעבר לכניסה החופשית לקניונים.",
+      "lowFactor": 0.5,
+      "highFactor": 2,
+      "sourceUrl": "",
+      "checked": "2026-09-14",
+      "optional": true
+     }
     },
     {
      "time": "19:30",
@@ -173,7 +238,15 @@ window.SHARED_SEED = {
      "notes": "שרימפס נהר צלויים, חביתת צדפות, גוואי ג׳אב, מנגו סטיקי רייס",
      "id": "s_1_7",
      "done": false,
-     "wiki": "Yaowarat Road"
+     "wiki": "Yaowarat Road",
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
+      "lowFactor": 0.8,
+      "highFactor": 1.3,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "22:15",
@@ -186,7 +259,15 @@ window.SHARED_SEED = {
      "link": "",
      "notes": "",
      "id": "s_1_8",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
+      "lowFactor": 0.8,
+      "highFactor": 1.3,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "",
@@ -199,7 +280,140 @@ window.SHARED_SEED = {
      "link": "https://secure.booking.com/",
      "notes": "אישור 5123136373 · ₪1,128 לשלושת הלילות · בריכה על הגג · ביטול חינם עד 20/11 · משלמים במקום",
      "id": "s_1_9",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "booking",
+      "basis": "המחיר מההזמנה השמורה; נספר פעם אחת בלבד ומחולק בין לילות הלינה.",
+      "lowFactor": 1,
+      "highFactor": 1,
+      "sourceUrl": "",
+      "checked": "2026-09-14",
+      "booking": {
+       "category": "accommodation",
+       "split": "ratio",
+       "key": "bangkok",
+       "match": "Montraj Coach",
+       "totalIls": 1128,
+       "rows": 3
+      }
+     }
+    },
+    {
+     "id": "s_1_atm",
+     "act": "עמלות כספומט — לכל הטיול",
+     "time": "",
+     "dur": "",
+     "loc": "תקציב לכל התקופה",
+     "cat": "אחר",
+     "baht": 500,
+     "status": "משלמים במקום",
+     "notes": "מרווח לשתי משיכות; עמלת הכרטיס הישראלי עשויה להתווסף.",
+     "link": "",
+     "done": false,
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "מרווח לשתי משיכות; עמלת הכרטיס הישראלי עשויה להתווסף.",
+      "lowFactor": 0.8,
+      "highFactor": 1.4,
+      "sourceUrl": "",
+      "checked": "2026-09-14",
+      "category": "other",
+      "split": "ratio"
+     }
+    },
+    {
+     "id": "s_1_laundry",
+     "act": "כביסה, מים ונשנושים — לכל הטיול",
+     "time": "",
+     "dur": "",
+     "loc": "תקציב לכל התקופה",
+     "cat": "אחר",
+     "baht": 1500,
+     "status": "משלמים במקום",
+     "notes": "תקציב משותף מעבר לארוחות הרשומות ולמה שכלול בסיורים.",
+     "link": "",
+     "done": false,
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "תקציב משותף מעבר לארוחות הרשומות ולמה שכלול בסיורים.",
+      "lowFactor": 0.6666666666666666,
+      "highFactor": 1.6,
+      "sourceUrl": "",
+      "checked": "2026-09-14",
+      "category": "other",
+      "split": "ratio"
+     }
+    },
+    {
+     "id": "s_1_tips",
+     "act": "טיפים והוצאות קטנות — לכל הטיול",
+     "time": "",
+     "dur": "",
+     "loc": "תקציב לכל התקופה",
+     "cat": "אחר",
+     "baht": 600,
+     "status": "משלמים במקום",
+     "notes": "מרווח תכנון, לא תשלום חובה.",
+     "link": "",
+     "done": false,
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "מרווח תכנון, לא תשלום חובה.",
+      "lowFactor": 0.5,
+      "highFactor": 2,
+      "sourceUrl": "",
+      "checked": "2026-09-14",
+      "category": "other",
+      "split": "ratio"
+     }
+    },
+    {
+     "id": "s_1_insurance",
+     "act": "ביטוח נסיעות של איתי — הקצבה",
+     "time": "",
+     "dur": "",
+     "loc": "תקציב לכל התקופה",
+     "cat": "אחר",
+     "baht": null,
+     "status": "משלמים במקום",
+     "notes": "הקצבה בשקלים, לא הצעת ביטוח. מחיר וכיסוי לאימונים תלויים בהצעה האישית.",
+     "link": "",
+     "done": false,
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "הקצבה בשקלים, לא הצעת ביטוח. מחיר וכיסוי לאימונים תלויים בהצעה האישית.",
+      "lowFactor": 0.5714285714285714,
+      "highFactor": 1.7142857142857142,
+      "sourceUrl": "",
+      "checked": "2026-09-14",
+      "category": "visasInsurance",
+      "split": "full-itai",
+      "fixedIls": 350
+     }
+    },
+    {
+     "id": "s_1_airport_il",
+     "act": "נסיעות נתב״ג של איתי — הלוך וחזור",
+     "time": "",
+     "dur": "",
+     "loc": "תקציב לכל התקופה",
+     "cat": "תחבורה",
+     "baht": null,
+     "status": "משלמים במקום",
+     "notes": "אומדן בשקלים; תלוי במוצא ובבחירת רכבת או מונית.",
+     "link": "",
+     "done": false,
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "אומדן בשקלים; תלוי במוצא ובבחירת רכבת או מונית.",
+      "lowFactor": 0.4,
+      "highFactor": 2,
+      "sourceUrl": "",
+      "checked": "2026-09-14",
+      "category": "transport",
+      "split": "full-itai",
+      "fixedIls": 250
+     }
     }
    ],
    "summary": "לנחות, ולאכול",
@@ -222,7 +436,15 @@ window.SHARED_SEED = {
      "link": "",
      "notes": "המלון לא כולל ארוחת בוקר",
      "id": "s_2_0",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
+      "lowFactor": 0.8,
+      "highFactor": 1.3,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "07:50",
@@ -235,7 +457,15 @@ window.SHARED_SEED = {
      "link": "https://www.google.com/maps/search/?api=1&query=Tha+Tien+Pier+Bangkok",
      "notes": "BTS עד סאפאן טקסין, ואז Chao Phraya Express קו כתום",
      "id": "s_2_1",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
+      "lowFactor": 0.8,
+      "highFactor": 1.3,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "08:40",
@@ -249,7 +479,15 @@ window.SHARED_SEED = {
      "notes": "฿500 לאדם · פתיחה 08:30, כניסה אחרונה 15:30 · כתפיים וברכיים מכוסות, נאכף",
      "id": "s_2_2",
      "done": false,
-     "wiki": "Grand Palace"
+     "wiki": "Grand Palace",
+     "priceEstimate": {
+      "kind": "published",
+      "basis": "מחירון הארמון: שני מבוגרים. לבדוק מחיר סמוך לביקור.",
+      "lowFactor": 1,
+      "highFactor": 1,
+      "sourceUrl": "https://www.royalgrandpalace.th/en/buy-ticket",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "10:50",
@@ -263,7 +501,15 @@ window.SHARED_SEED = {
      "notes": "฿300 לאדם · 46 מטר · אותו קוד לבוש",
      "id": "s_2_3",
      "done": false,
-     "wiki": "Wat Pho"
+     "wiki": "Wat Pho",
+     "priceEstimate": {
+      "kind": "published",
+      "basis": "מחירון ואט פו: שני מבוגרים.",
+      "lowFactor": 1,
+      "highFactor": 1,
+      "sourceUrl": "https://watpho.org/en/contact/plan",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "12:30",
@@ -276,20 +522,36 @@ window.SHARED_SEED = {
      "link": "",
      "notes": "",
      "id": "s_2_4",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
+      "lowFactor": 0.8,
+      "highFactor": 1.3,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "14:00",
      "dur": "2:30",
      "act": "חזרה למלון ומנוחה",
      "loc": "סוכומוויט",
-     "cat": "אחר",
+     "cat": "תחבורה",
      "baht": 130,
      "status": "משלמים במקום",
      "link": "",
      "notes": "סירה ו-BTS חזרה · הערב ארוך",
      "id": "s_2_5",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
+      "lowFactor": 0.8,
+      "highFactor": 1.3,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "17:00",
@@ -302,7 +564,15 @@ window.SHARED_SEED = {
      "link": "",
      "notes": "฿50–100 · מעלה בננה, לא קלקר",
      "id": "s_2_6",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
+      "lowFactor": 0.8,
+      "highFactor": 1.3,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "17:30",
@@ -316,7 +586,15 @@ window.SHARED_SEED = {
      "notes": "הלילה הכי מבוקש בשנה · תפריט סט מראש · wineanddine@salarattanakosin.com · גיבוי: פרה נאקהון או איקון סיאם",
      "id": "s_2_7",
      "done": false,
-     "wiki": "Wat Arun"
+     "wiki": "Wat Arun",
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
+      "lowFactor": 0.8,
+      "highFactor": 1.3,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "20:30",
@@ -330,7 +608,15 @@ window.SHARED_SEED = {
      "notes": "ליל הירח המלא של החודש הירחי ה-12 — אומת לשני מקורות",
      "id": "s_2_8",
      "done": false,
-     "wiki": "Loy Krathong"
+     "wiki": "Loy Krathong",
+     "priceEstimate": {
+      "kind": "no-extra",
+      "basis": "לא הוקצה חיוב נפרד לפעולה הזאת; חיובים כלולים מופיעים בחבילה או בהזמנה.",
+      "lowFactor": 1,
+      "highFactor": 1,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "22:30",
@@ -343,7 +629,15 @@ window.SHARED_SEED = {
      "link": "",
      "notes": "תעריף מוגבר בליל החג",
      "id": "s_2_9",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
+      "lowFactor": 0.8,
+      "highFactor": 1.3,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "",
@@ -356,7 +650,23 @@ window.SHARED_SEED = {
      "link": "https://secure.booking.com/",
      "notes": "",
      "id": "s_2_10",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "booking",
+      "basis": "המחיר מההזמנה השמורה; נספר פעם אחת בלבד ומחולק בין לילות הלינה.",
+      "lowFactor": 1,
+      "highFactor": 1,
+      "sourceUrl": "",
+      "checked": "2026-09-14",
+      "booking": {
+       "category": "accommodation",
+       "split": "ratio",
+       "key": "bangkok",
+       "match": "Montraj Coach",
+       "totalIls": 1128,
+       "rows": 3
+      }
+     }
     }
    ],
    "summary": "העיר העתיקה ביום, הנהר בלילה — לוי קראתונג",
@@ -379,7 +689,15 @@ window.SHARED_SEED = {
      "link": "https://www.google.com/maps/search/?api=1&query=Lumphini+Park+Bangkok",
      "notes": "",
      "id": "s_3_0",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
+      "lowFactor": 0.8,
+      "highFactor": 1.3,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "07:00",
@@ -393,7 +711,15 @@ window.SHARED_SEED = {
      "notes": "חינם · טאי צ׳י עם הזקנים, וורנים באגם",
      "id": "s_3_1",
      "done": false,
-     "wiki": "Lumphini Park"
+     "wiki": "Lumphini Park",
+     "priceEstimate": {
+      "kind": "no-extra",
+      "basis": "לא הוקצה חיוב נפרד לפעולה הזאת; חיובים כלולים מופיעים בחבילה או בהזמנה.",
+      "lowFactor": 1,
+      "highFactor": 1,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "08:40",
@@ -406,7 +732,15 @@ window.SHARED_SEED = {
      "link": "",
      "notes": "",
      "id": "s_3_2",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
+      "lowFactor": 0.8,
+      "highFactor": 1.3,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "09:20",
@@ -419,7 +753,15 @@ window.SHARED_SEED = {
      "link": "https://www.google.com/maps/search/?api=1&query=International+School+Bangkok+Pakkret",
      "notes": "40–60 דקות, תלוי בפקקים",
      "id": "s_3_3",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
+      "lowFactor": 0.8,
+      "highFactor": 1.3,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "10:30",
@@ -433,7 +775,15 @@ window.SHARED_SEED = {
      "notes": "isbalum@isb.ac.th לפחות יומיים מראש · נסגר 14:25 · תעודה מזהה בשער · לבדוק חופשת חג ההודיה ב-26/11",
      "id": "s_3_4",
      "done": false,
-     "wiki": "International School Bangkok"
+     "wiki": "International School Bangkok",
+     "priceEstimate": {
+      "kind": "no-extra",
+      "basis": "לא הוקצה חיוב נפרד לפעולה הזאת; חיובים כלולים מופיעים בחבילה או בהזמנה.",
+      "lowFactor": 1,
+      "highFactor": 1,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "13:10",
@@ -446,7 +796,15 @@ window.SHARED_SEED = {
      "link": "",
      "notes": "",
      "id": "s_3_5",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
+      "lowFactor": 0.8,
+      "highFactor": 1.3,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "14:10",
@@ -459,7 +817,15 @@ window.SHARED_SEED = {
      "link": "",
      "notes": "",
      "id": "s_3_6",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
+      "lowFactor": 0.8,
+      "highFactor": 1.3,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "15:45",
@@ -472,7 +838,15 @@ window.SHARED_SEED = {
      "link": "",
      "notes": "",
      "id": "s_3_7",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
+      "lowFactor": 0.8,
+      "highFactor": 1.3,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "17:40",
@@ -485,7 +859,15 @@ window.SHARED_SEED = {
      "link": "",
      "notes": "",
      "id": "s_3_8",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
+      "lowFactor": 0.8,
+      "highFactor": 1.3,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "18:15",
@@ -493,13 +875,21 @@ window.SHARED_SEED = {
      "act": "מואיי תאי באצטדיון רג׳אדמנרן",
      "loc": "Rajadamnern Stadium",
      "cat": "אטרקציות",
-     "baht": 2000,
+     "baht": 3000,
      "status": "להזמין",
      "link": "https://rajadamnern.com/tickets/",
      "notes": "קרבות יום רביעי מ-18:00 · מחלקה שלישית ฿1,000 לאדם · הכנה למחנה שמתחיל מחר",
      "id": "s_3_9",
      "done": false,
-     "wiki": "Rajadamnern Stadium"
+     "wiki": "Rajadamnern Stadium",
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "תקציב לשני כרטיסים; המחיר משתנה לפי אירוע ומושב. אינו מחיר מאושר ל-25/11.",
+      "lowFactor": 0.6666666666666666,
+      "highFactor": 1.3333333333333333,
+      "sourceUrl": "https://rajadamnern.com/tickets/",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "21:30",
@@ -512,7 +902,15 @@ window.SHARED_SEED = {
      "link": "",
      "notes": "",
      "id": "s_3_10",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
+      "lowFactor": 0.8,
+      "highFactor": 1.3,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "22:50",
@@ -525,7 +923,15 @@ window.SHARED_SEED = {
      "link": "",
      "notes": "",
      "id": "s_3_11",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
+      "lowFactor": 0.8,
+      "highFactor": 1.3,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "",
@@ -538,7 +944,23 @@ window.SHARED_SEED = {
      "link": "https://secure.booking.com/",
      "notes": "",
      "id": "s_3_12",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "booking",
+      "basis": "המחיר מההזמנה השמורה; נספר פעם אחת בלבד ומחולק בין לילות הלינה.",
+      "lowFactor": 1,
+      "highFactor": 1,
+      "sourceUrl": "",
+      "checked": "2026-09-14",
+      "booking": {
+       "category": "accommodation",
+       "split": "ratio",
+       "key": "bangkok",
+       "match": "Montraj Coach",
+       "totalIls": 1128,
+       "rows": 3
+      }
+     }
     },
     {
      "id": "s_3_dream",
@@ -553,7 +975,15 @@ window.SHARED_SEED = {
      "wiki": "Dream World (amusement park)",
      "done": false,
      "notes": "฿1,200 לאדם · יום שלם, ועוד שעה נסיעה לכל כיוון · לא נכנס בשלושת ימי בנגקוק בלי לוותר על ISB או על רג׳אדמנרן — להחליט מראש, לא באותו בוקר",
-     "managed": true
+     "managed": true,
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
+      "lowFactor": 0.8,
+      "highFactor": 1.3,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
     }
    ],
    "summary": "לומפיני, ISB, ושוק לילה",
@@ -576,7 +1006,15 @@ window.SHARED_SEED = {
      "link": "",
      "notes": "היום הכי קשה במסלול · שקול להעביר את הטיסה ל-09:00–10:00 ולוותר על אימון ההגעה",
      "id": "s_4_0",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "no-extra",
+      "basis": "לא הוקצה חיוב נפרד לפעולה הזאת; חיובים כלולים מופיעים בחבילה או בהזמנה.",
+      "lowFactor": 1,
+      "highFactor": 1,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "05:00",
@@ -589,7 +1027,15 @@ window.SHARED_SEED = {
      "link": "",
      "notes": "לפני שהפקקים מתחילים",
      "id": "s_4_1",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
+      "lowFactor": 0.8,
+      "highFactor": 1.3,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "05:50",
@@ -602,7 +1048,15 @@ window.SHARED_SEED = {
      "link": "",
      "notes": "",
      "id": "s_4_2",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "no-extra",
+      "basis": "לא הוקצה חיוב נפרד לפעולה הזאת; חיובים כלולים מופיעים בחבילה או בהזמנה.",
+      "lowFactor": 1,
+      "highFactor": 1,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "06:50",
@@ -615,7 +1069,16 @@ window.SHARED_SEED = {
      "link": "https://www.vietjetair.com/",
      "notes": "Deluxe · ישירה · 20 ק״ג לכל אחד, בחירת מושב ושינוי תאריך · ฿738 מעל הזול",
      "id": "s_4_3",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "אומדן לשני כרטיסי טיסה עם כבודה לפי התכנון הקודם; טרם נבדקה הצעה לתאריך הנסיעה.",
+      "lowFactor": 0.85,
+      "highFactor": 1.5,
+      "sourceUrl": "",
+      "checked": "2026-09-14",
+      "category": "flights"
+     }
     },
     {
      "time": "08:25",
@@ -628,7 +1091,15 @@ window.SHARED_SEED = {
      "link": "",
      "notes": "",
      "id": "s_4_4",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "no-extra",
+      "basis": "לא הוקצה חיוב נפרד לפעולה הזאת; חיובים כלולים מופיעים בחבילה או בהזמנה.",
+      "lowFactor": 1,
+      "highFactor": 1,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "09:00",
@@ -641,7 +1112,15 @@ window.SHARED_SEED = {
      "link": "https://www.google.com/maps/search/?api=1&query=Bang+Rong+Pier+Phuket",
      "notes": "25–30 דקות — הסיבה לטוס לפוקט ולא לקראבי",
      "id": "s_4_5",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
+      "lowFactor": 0.8,
+      "highFactor": 1.3,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "09:35",
@@ -654,7 +1133,15 @@ window.SHARED_SEED = {
      "link": "",
      "notes": "סירות: 08:40, 10:00, 11:00, 12:30, 13:30, 14:30, 16:00, 17:00",
      "id": "s_4_6",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "no-extra",
+      "basis": "לא הוקצה חיוב נפרד לפעולה הזאת; חיובים כלולים מופיעים בחבילה או בהזמנה.",
+      "lowFactor": 1,
+      "highFactor": 1,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "10:00",
@@ -667,7 +1154,15 @@ window.SHARED_SEED = {
      "link": "https://www.google.com/maps/search/?api=1&query=Manoh+Pier+Koh+Yao+Noi",
      "notes": "฿550 לאדם",
      "id": "s_4_7",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
+      "lowFactor": 0.8,
+      "highFactor": 1.3,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "10:40",
@@ -680,7 +1175,15 @@ window.SHARED_SEED = {
      "link": "",
      "notes": "המחנה אינו מארגן העברות מבאנג רונג או מאנו. לתאם מונית עצמאית; המחנה יכול לספק הכוונה. ฿200 הוא אומדן קודם, לא הצעת מחיר.",
      "id": "s_4_8",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
+      "lowFactor": 0.8,
+      "highFactor": 1.3,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "11:00",
@@ -693,7 +1196,15 @@ window.SHARED_SEED = {
      "link": "https://www.phuket-krabi-muaythai.com/",
      "notes": "฿3,800 לדירה ללילה כולל לינה, ארוחות ואימון לאדם אחד; לאדם השני ฿660 אימון + ฿400 ארוחות ליום. אומדן לשלושה לילות ושלושה ימי תוספת: ฿14,580; מקדמה 50%: ฿7,290. נשלחה בקשה להתקדם; טרם שולם. הסכום הסופי וכיסוי יום העזיבה טעונים אישור. הגעה מתוכננת סביב 11:00; שעת קבלת החדר טרם אושרה.",
      "id": "s_4_9",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "no-extra",
+      "basis": "לא הוקצה חיוב נפרד לפעולה הזאת; חיובים כלולים מופיעים בחבילה או בהזמנה.",
+      "lowFactor": 1,
+      "highFactor": 1,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "12:00",
@@ -706,7 +1217,15 @@ window.SHARED_SEED = {
      "link": "",
      "notes": "ארוחות במחנה כלולות בחבילת הלינה והאימונים; שעות וסוגי הארוחות לתיאום עם המחנה.",
      "id": "s_4_10",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "included",
+      "basis": "כלול במחיר ההזמנה או החבילה; אין חיוב נוסף באומדן.",
+      "lowFactor": 1,
+      "highFactor": 1,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "13:00",
@@ -719,7 +1238,15 @@ window.SHARED_SEED = {
      "link": "",
      "notes": "מנוחה עד אימון הטכניקה שאושר ל-16:00.",
      "id": "s_4_11",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "no-extra",
+      "basis": "לא הוקצה חיוב נפרד לפעולה הזאת; חיובים כלולים מופיעים בחבילה או בהזמנה.",
+      "lowFactor": 1,
+      "highFactor": 1,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "16:00",
@@ -733,7 +1260,15 @@ window.SHARED_SEED = {
      "notes": "אושר ליום ההגעה ב-16:00: דגש על טכניקה ללא כושר עצים; אימון מלא ראשון למחרת בבוקר. המחנה אישר אימוני קבוצה ב-08:00 וב-17:00. איתי: התאמת עמידה ובעיטות למואיי תאי, טיפים, מרפקים וקלינץ׳; טליה: יסודות למתחילה. ניתן להזמין אימון פרטי משותף; מחיר ומועד טרם נקבעו.",
      "id": "s_4_12",
      "done": false,
-     "wiki": "Muay Thai"
+     "wiki": "Muay Thai",
+     "priceEstimate": {
+      "kind": "included",
+      "basis": "כלול במחיר ההזמנה או החבילה; אין חיוב נוסף באומדן.",
+      "lowFactor": 1,
+      "highFactor": 1,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "18:30",
@@ -746,7 +1281,15 @@ window.SHARED_SEED = {
      "link": "",
      "notes": "ארוחות במחנה כלולות בחבילת הלינה והאימונים; שעות וסוגי הארוחות לתיאום עם המחנה.",
      "id": "s_4_13",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "included",
+      "basis": "כלול במחיר ההזמנה או החבילה; אין חיוב נוסף באומדן.",
+      "lowFactor": 1,
+      "highFactor": 1,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "",
@@ -759,7 +1302,23 @@ window.SHARED_SEED = {
      "link": "https://www.phuket-krabi-muaythai.com/prices-accomodation/",
      "notes": "฿3,800 לדירה ללילה כולל לינה, ארוחות ואימון לאדם אחד; לאדם השני ฿660 אימון + ฿400 ארוחות ליום. אומדן לשלושה לילות ושלושה ימי תוספת: ฿14,580; מקדמה 50%: ฿7,290. נשלחה בקשה להתקדם; טרם שולם. הסכום הסופי וכיסוי יום העזיבה טעונים אישור.",
      "id": "s_4_14",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "quote",
+      "basis": "המחיר מההזמנה השמורה; נספר פעם אחת בלבד ומחולק בין לילות הלינה.",
+      "lowFactor": 1,
+      "highFactor": 1,
+      "sourceUrl": "",
+      "checked": "2026-09-14",
+      "booking": {
+       "category": "accommodation",
+       "split": "ratio",
+       "key": "kyn",
+       "match": "KYN Phoenix",
+       "totalThb": 14580,
+       "rows": 3
+      }
+     }
     }
    ],
    "summary": "דרומה, ואז מחוץ למפה",
@@ -782,7 +1341,15 @@ window.SHARED_SEED = {
      "link": "",
      "notes": "ארוחות במחנה כלולות בחבילת הלינה והאימונים; שעות וסוגי הארוחות לתיאום עם המחנה.",
      "id": "s_5_0",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "included",
+      "basis": "כלול במחיר ההזמנה או החבילה; אין חיוב נוסף באומדן.",
+      "lowFactor": 1,
+      "highFactor": 1,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "08:00",
@@ -795,7 +1362,15 @@ window.SHARED_SEED = {
      "link": "",
      "notes": "המחנה אישר אימוני קבוצה ב-08:00 וב-17:00. איתי: התאמת עמידה ובעיטות למואיי תאי, טיפים, מרפקים וקלינץ׳; טליה: יסודות למתחילה. ניתן להזמין אימון פרטי משותף; מחיר ומועד טרם נקבעו.",
      "id": "s_5_1",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "included",
+      "basis": "כלול במחיר ההזמנה או החבילה; אין חיוב נוסף באומדן.",
+      "lowFactor": 1,
+      "highFactor": 1,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "10:00",
@@ -808,7 +1383,15 @@ window.SHARED_SEED = {
      "link": "",
      "notes": "ארוחות במחנה כלולות בחבילת הלינה והאימונים; שעות וסוגי הארוחות לתיאום עם המחנה.",
      "id": "s_5_2",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "included",
+      "basis": "כלול במחיר ההזמנה או החבילה; אין חיוב נוסף באומדן.",
+      "lowFactor": 1,
+      "highFactor": 1,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "11:00",
@@ -816,12 +1399,20 @@ window.SHARED_SEED = {
      "act": "יוגה",
      "loc": "KYN Phoenix",
      "cat": "אטרקציות",
-     "baht": null,
+     "baht": 800,
      "status": "אופציונלי",
      "link": "",
      "notes": "יוגה לא אושרה כחלק מהחבילה; לברר זמינות, שעה ומחיר.",
      "id": "s_5_3",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "תקציב לשיעור יוגה לשניים אם אינו כלול. לא התקבלה הצעה מהמחנה.",
+      "lowFactor": 0.5,
+      "highFactor": 1.5,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "12:30",
@@ -834,7 +1425,15 @@ window.SHARED_SEED = {
      "link": "",
      "notes": "תקציב לארוחה מחוץ למחנה. ארוחות במחנה כלולות בחבילה; אם אוכלים במחנה אין הוצאה נוספת.",
      "id": "s_5_4",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
+      "lowFactor": 0.8,
+      "highFactor": 1.3,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "13:45",
@@ -847,7 +1446,15 @@ window.SHARED_SEED = {
      "link": "",
      "notes": "אמצע היום מת בכוונה",
      "id": "s_5_5",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "no-extra",
+      "basis": "לא הוקצה חיוב נפרד לפעולה הזאת; חיובים כלולים מופיעים בחבילה או בהזמנה.",
+      "lowFactor": 1,
+      "highFactor": 1,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "17:00",
@@ -860,7 +1467,15 @@ window.SHARED_SEED = {
      "link": "",
      "notes": "המחנה אישר אימוני קבוצה ב-08:00 וב-17:00. איתי: התאמת עמידה ובעיטות למואיי תאי, טיפים, מרפקים וקלינץ׳; טליה: יסודות למתחילה. ניתן להזמין אימון פרטי משותף; מחיר ומועד טרם נקבעו.",
      "id": "s_5_6",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "included",
+      "basis": "כלול במחיר ההזמנה או החבילה; אין חיוב נוסף באומדן.",
+      "lowFactor": 1,
+      "highFactor": 1,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "19:15",
@@ -873,7 +1488,15 @@ window.SHARED_SEED = {
      "link": "",
      "notes": "ארוחות במחנה כלולות בחבילת הלינה והאימונים; שעות וסוגי הארוחות לתיאום עם המחנה.",
      "id": "s_5_7",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "included",
+      "basis": "כלול במחיר ההזמנה או החבילה; אין חיוב נוסף באומדן.",
+      "lowFactor": 1,
+      "highFactor": 1,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "",
@@ -886,7 +1509,23 @@ window.SHARED_SEED = {
      "link": "https://www.phuket-krabi-muaythai.com/prices-accomodation/",
      "notes": "฿3,800 לדירה ללילה כולל לינה, ארוחות ואימון לאדם אחד; לאדם השני ฿660 אימון + ฿400 ארוחות ליום. אומדן לשלושה לילות ושלושה ימי תוספת: ฿14,580; מקדמה 50%: ฿7,290. נשלחה בקשה להתקדם; טרם שולם. הסכום הסופי וכיסוי יום העזיבה טעונים אישור.",
      "id": "s_5_8",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "quote",
+      "basis": "המחיר מההזמנה השמורה; נספר פעם אחת בלבד ומחולק בין לילות הלינה.",
+      "lowFactor": 1,
+      "highFactor": 1,
+      "sourceUrl": "",
+      "checked": "2026-09-14",
+      "booking": {
+       "category": "accommodation",
+       "split": "ratio",
+       "key": "kyn",
+       "match": "KYN Phoenix",
+       "totalThb": 14580,
+       "rows": 3
+      }
+     }
     },
     {
      "id": "s_5_moto",
@@ -900,7 +1539,61 @@ window.SHARED_SEED = {
      "link": "",
      "done": false,
      "notes": "฿250 ליום · שתי קסדות — גם למי שמאחור, זה חוק ונאכף · לבקש 125cc ומעלה, 110 מתקשה בשניים בעלייה · פיקדון במזומן ฿2,000–3,000, לא להשאיר דרכון · לצלם את הקטנוע לפני שיוצאים",
-     "managed": true
+     "managed": true,
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
+      "lowFactor": 0.8,
+      "highFactor": 1.3,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
+    },
+    {
+     "id": "s_5_fuel",
+     "act": "דלק לקטנוע — לכל ההשכרות",
+     "time": "",
+     "dur": "",
+     "loc": "תקציב לכל התקופה",
+     "cat": "תחבורה",
+     "baht": 600,
+     "status": "משלמים במקום",
+     "notes": "קטנוע אחד בשניים, בתקופות ההשכרה שכבר במסלול.",
+     "link": "",
+     "done": false,
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "קטנוע אחד בשניים, בתקופות ההשכרה שכבר במסלול.",
+      "lowFactor": 0.6666666666666666,
+      "highFactor": 1.5,
+      "sourceUrl": "",
+      "checked": "2026-09-14",
+      "category": "transport",
+      "split": "ratio"
+     }
+    },
+    {
+     "id": "s_5_private",
+     "act": "אימון פרטי משותף ב-KYN — לבחירה",
+     "time": "",
+     "dur": "",
+     "loc": "תקציב לכל התקופה",
+     "cat": "אטרקציות",
+     "baht": 1800,
+     "status": "אופציונלי",
+     "notes": "אומדן בלבד; המחנה אישר את האפשרות אך לא מסר מחיר.",
+     "link": "",
+     "done": false,
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "אומדן בלבד; המחנה אישר את האפשרות אך לא מסר מחיר.",
+      "lowFactor": 0.5555555555555556,
+      "highFactor": 1.4444444444444444,
+      "sourceUrl": "",
+      "checked": "2026-09-14",
+      "category": "activities",
+      "split": "ratio"
+     }
     }
    ],
    "summary": "שני אימונים ומזרן",
@@ -923,7 +1616,15 @@ window.SHARED_SEED = {
      "link": "",
      "notes": "ארוחות במחנה כלולות בחבילת הלינה והאימונים; שעות וסוגי הארוחות לתיאום עם המחנה.",
      "id": "s_6_0",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "included",
+      "basis": "כלול במחיר ההזמנה או החבילה; אין חיוב נוסף באומדן.",
+      "lowFactor": 1,
+      "highFactor": 1,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "08:00",
@@ -936,7 +1637,15 @@ window.SHARED_SEED = {
      "link": "",
      "notes": "המחנה אישר אימוני קבוצה ב-08:00 וב-17:00. איתי: התאמת עמידה ובעיטות למואיי תאי, טיפים, מרפקים וקלינץ׳; טליה: יסודות למתחילה. ניתן להזמין אימון פרטי משותף; מחיר ומועד טרם נקבעו. אחר הצהריים מתוכנן טיול במפרץ במקום אימון.",
      "id": "s_6_1",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "included",
+      "basis": "כלול במחיר ההזמנה או החבילה; אין חיוב נוסף באומדן.",
+      "lowFactor": 1,
+      "highFactor": 1,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "10:00",
@@ -949,7 +1658,15 @@ window.SHARED_SEED = {
      "link": "",
      "notes": "ארוחות במחנה כלולות בחבילת הלינה והאימונים; שעות וסוגי הארוחות לתיאום עם המחנה.",
      "id": "s_6_2",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "included",
+      "basis": "כלול במחיר ההזמנה או החבילה; אין חיוב נוסף באומדן.",
+      "lowFactor": 1,
+      "highFactor": 1,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "12:00",
@@ -962,7 +1679,15 @@ window.SHARED_SEED = {
      "link": "",
      "notes": "תקציב לארוחה מחוץ למחנה. ארוחות במחנה כלולות בחבילה; אם אוכלים במחנה אין הוצאה נוספת.",
      "id": "s_6_3",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
+      "lowFactor": 0.8,
+      "highFactor": 1.3,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "13:30",
@@ -975,7 +1700,15 @@ window.SHARED_SEED = {
      "link": "",
      "notes": "",
      "id": "s_6_4",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
+      "lowFactor": 0.8,
+      "highFactor": 1.3,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "14:00",
@@ -989,7 +1722,15 @@ window.SHARED_SEED = {
      "notes": "฿1,200–1,800 לסירה · מגיעים מהצד השני, אחרי שצי הסירות מפוקט כבר הלך",
      "id": "s_6_5",
      "done": false,
-     "wiki": "Phang Nga Bay"
+     "wiki": "Phang Nga Bay",
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
+      "lowFactor": 0.8,
+      "highFactor": 1.3,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "18:15",
@@ -1002,7 +1743,15 @@ window.SHARED_SEED = {
      "link": "",
      "notes": "",
      "id": "s_6_6",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
+      "lowFactor": 0.8,
+      "highFactor": 1.3,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "19:00",
@@ -1015,7 +1764,15 @@ window.SHARED_SEED = {
      "link": "",
      "notes": "תקציב לארוחה מחוץ למחנה. ארוחות במחנה כלולות בחבילה; אם אוכלים במחנה אין הוצאה נוספת.",
      "id": "s_6_7",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
+      "lowFactor": 0.8,
+      "highFactor": 1.3,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "",
@@ -1023,13 +1780,21 @@ window.SHARED_SEED = {
      "act": "חלופה לאחה״צ: סיבוב על האי בקטנוע",
      "loc": "קו יאו נוי",
      "cat": "תחבורה",
-     "baht": null,
+     "baht": 0,
      "status": "אופציונלי",
      "link": "https://www.google.com/maps/search/?api=1&query=Koh+Yao+Noi+viewpoint",
      "notes": "כביש אחד לאורך החוף המזרחי, שדות אורז, מסגד, תצפית — בשניים על אותו קטנוע",
      "id": "s_6_8",
      "done": false,
-     "managed": true
+     "managed": true,
+     "priceEstimate": {
+      "kind": "included",
+      "basis": "הקטנוע כבר נספר בשורת ההשכרה; הדלק בתקציב ההשלמות.",
+      "lowFactor": 1,
+      "highFactor": 1,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "",
@@ -1042,7 +1807,23 @@ window.SHARED_SEED = {
      "link": "https://www.phuket-krabi-muaythai.com/prices-accomodation/",
      "notes": "฿3,800 לדירה ללילה כולל לינה, ארוחות ואימון לאדם אחד; לאדם השני ฿660 אימון + ฿400 ארוחות ליום. אומדן לשלושה לילות ושלושה ימי תוספת: ฿14,580; מקדמה 50%: ฿7,290. נשלחה בקשה להתקדם; טרם שולם. הסכום הסופי וכיסוי יום העזיבה טעונים אישור.",
      "id": "s_6_9",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "quote",
+      "basis": "המחיר מההזמנה השמורה; נספר פעם אחת בלבד ומחולק בין לילות הלינה.",
+      "lowFactor": 1,
+      "highFactor": 1,
+      "sourceUrl": "",
+      "checked": "2026-09-14",
+      "booking": {
+       "category": "accommodation",
+       "split": "ratio",
+       "key": "kyn",
+       "match": "KYN Phoenix",
+       "totalThb": 14580,
+       "rows": 3
+      }
+     }
     }
    ],
    "summary": "אימון בוקר, ואז המפרץ",
@@ -1060,12 +1841,20 @@ window.SHARED_SEED = {
      "act": "ארוחת בוקר קלה",
      "loc": "המחנה",
      "cat": "אוכל",
-     "baht": null,
+     "baht": 300,
      "status": "לברר",
      "link": "",
      "notes": "לברר אם ארוחת הבוקר ביום העזיבה כלולה בשלושת ימי החבילה; לא תומחרה בנפרד.",
      "id": "s_7_0",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "מרווח לארוחת עזיבה לשניים אם אינה כלולה בחבילת KYN.",
+      "lowFactor": 0,
+      "highFactor": 1.3333333333333333,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "08:00",
@@ -1073,12 +1862,20 @@ window.SHARED_SEED = {
      "act": "אימון אחרון",
      "loc": "KYN Phoenix",
      "cat": "אטרקציות",
-     "baht": null,
+     "baht": 1320,
      "status": "אופציונלי",
      "link": "",
      "notes": "לברר אם מתקיים אימון ביום ראשון ואם יום העזיבה כלול בחבילה; טרם אושר או תומחר. לוודא התאמה לשעת הסירה.",
      "id": "s_7_1",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "מרווח לאימון נוסף לשניים ביום העזיבה; ייתכן שכלול. זמינות ומחיר דורשים אישור.",
+      "lowFactor": 0,
+      "highFactor": 1.5,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "10:00",
@@ -1091,7 +1888,15 @@ window.SHARED_SEED = {
      "link": "",
      "notes": "אם מתקיים אימון בוקר, נשאר חלון קצר לסירה; לתאם את המעבר מראש.",
      "id": "s_7_2",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "no-extra",
+      "basis": "לא הוקצה חיוב נפרד לפעולה הזאת; חיובים כלולים מופיעים בחבילה או בהזמנה.",
+      "lowFactor": 1,
+      "highFactor": 1,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "10:35",
@@ -1104,7 +1909,15 @@ window.SHARED_SEED = {
      "link": "",
      "notes": "המחנה אינו מארגן העברות. לתאם מונית עצמאית; ฿200 הוא אומדן קודם.",
      "id": "s_7_3",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
+      "lowFactor": 0.8,
+      "highFactor": 1.3,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "11:00",
@@ -1117,7 +1930,15 @@ window.SHARED_SEED = {
      "link": "https://www.google.com/maps/search/?api=1&query=Ao+Nang+Krabi",
      "notes": "฿500–600 לאדם · עונת שיא בלבד",
      "id": "s_7_4",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
+      "lowFactor": 0.8,
+      "highFactor": 1.3,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "12:00",
@@ -1130,7 +1951,15 @@ window.SHARED_SEED = {
      "link": "",
      "notes": "",
      "id": "s_7_5",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
+      "lowFactor": 0.8,
+      "highFactor": 1.3,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "14:00",
@@ -1143,7 +1972,15 @@ window.SHARED_SEED = {
      "link": "https://secure.booking.com/",
      "notes": "צ׳ק-אין 14:00–23:30 · פיקדון ฿1,000 מזומן",
      "id": "s_7_6",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "no-extra",
+      "basis": "לא הוקצה חיוב נפרד לפעולה הזאת; חיובים כלולים מופיעים בחבילה או בהזמנה.",
+      "lowFactor": 1,
+      "highFactor": 1,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "15:00",
@@ -1156,7 +1993,15 @@ window.SHARED_SEED = {
      "link": "",
      "notes": "אחרי ארבעה ימי מחנה",
      "id": "s_7_7",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "no-extra",
+      "basis": "לא הוקצה חיוב נפרד לפעולה הזאת; חיובים כלולים מופיעים בחבילה או בהזמנה.",
+      "lowFactor": 1,
+      "highFactor": 1,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "17:30",
@@ -1170,7 +2015,15 @@ window.SHARED_SEED = {
      "notes": "฿150 לאדם לכיוון, ฿200 אחרי החשכה",
      "id": "s_7_8",
      "done": false,
-     "wiki": "Railay Beach"
+     "wiki": "Railay Beach",
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
+      "lowFactor": 0.8,
+      "highFactor": 1.3,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "19:45",
@@ -1183,7 +2036,15 @@ window.SHARED_SEED = {
      "link": "",
      "notes": "",
      "id": "s_7_9",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
+      "lowFactor": 0.8,
+      "highFactor": 1.3,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "",
@@ -1196,7 +2057,23 @@ window.SHARED_SEED = {
      "link": "https://secure.booking.com/",
      "notes": "אישור 5553772333 · ₪1,839 לשלושת הלילות · Mountain Pool Villa · ארוחת בוקר כלולה · ביטול חינם עד 14/11",
      "id": "s_7_10",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "booking",
+      "basis": "המחיר מההזמנה השמורה; נספר פעם אחת בלבד ומחולק בין לילות הלינה.",
+      "lowFactor": 1,
+      "highFactor": 1,
+      "sourceUrl": "",
+      "checked": "2026-09-14",
+      "booking": {
+       "category": "accommodation",
+       "split": "ratio",
+       "key": "aonang",
+       "match": "Chermantra",
+       "totalIls": 1839,
+       "rows": 3
+      }
+     }
     },
     {
      "id": "s_7_moto",
@@ -1210,7 +2087,15 @@ window.SHARED_SEED = {
      "link": "",
      "done": false,
      "notes": "฿250–300 ליום · מחר ריילאי (סירה בלבד, הקטנוע חונה) · הכביש לקראבי מהיר — בשניים מרחק הבלימה ארוך יותר, להשאיר פער",
-     "managed": true
+     "managed": true,
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
+      "lowFactor": 0.8,
+      "highFactor": 1.3,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
     }
    ],
    "summary": "אימון אחרון, ואז חוצים את המפרץ",
@@ -1233,7 +2118,15 @@ window.SHARED_SEED = {
      "link": "",
      "notes": "כלולה במחיר החדר",
      "id": "s_8_0",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "included",
+      "basis": "כלול במחיר ההזמנה או החבילה; אין חיוב נוסף באומדן.",
+      "lowFactor": 1,
+      "highFactor": 1,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "08:40",
@@ -1241,12 +2134,20 @@ window.SHARED_SEED = {
      "act": "לונגטייל לריילאי מערב",
      "loc": "אאו נאנג → ריילאי",
      "cat": "תחבורה",
-     "baht": 300,
+     "baht": 0,
      "status": "משלמים במקום",
      "link": "https://www.google.com/maps/search/?api=1&query=Railay+Beach+Krabi",
      "notes": "฿150 לאדם · יוצאים כשמתמלאת סירה",
      "id": "s_8_1",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "included",
+      "basis": "העברה לריילאי כלולה במחירון Real Rocks ששימש לאומדן הטיפוס. אם בוחרים ספק אחר יש להוסיף אותה.",
+      "lowFactor": 1,
+      "highFactor": 1,
+      "sourceUrl": "https://www.realrocksclimbing.com/group-course/",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "09:10",
@@ -1260,7 +2161,15 @@ window.SHARED_SEED = {
      "notes": "฿1,000–1,500 לאדם כולל נעליים, רתמה, חבלים ומדריך",
      "id": "s_8_2",
      "done": false,
-     "wiki": "Railay Beach"
+     "wiki": "Railay Beach",
+     "priceEstimate": {
+      "kind": "published",
+      "basis": "חצי יום טיפוס קבוצתי לשני מבוגרים לפי Real Rocks. כולל ציוד והעברות מאאו נאנג; זמינות ההעברות טעונה אישור.",
+      "lowFactor": 1,
+      "highFactor": 1.2,
+      "sourceUrl": "https://www.realrocksclimbing.com/group-course/",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "13:00",
@@ -1273,7 +2182,15 @@ window.SHARED_SEED = {
      "link": "",
      "notes": "",
      "id": "s_8_3",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
+      "lowFactor": 0.8,
+      "highFactor": 1.3,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "14:30",
@@ -1287,7 +2204,15 @@ window.SHARED_SEED = {
      "notes": "",
      "id": "s_8_4",
      "done": false,
-     "wiki": "Phra Nang Cave Beach"
+     "wiki": "Phra Nang Cave Beach",
+     "priceEstimate": {
+      "kind": "no-extra",
+      "basis": "לא הוקצה חיוב נפרד לפעולה הזאת; חיובים כלולים מופיעים בחבילה או בהזמנה.",
+      "lowFactor": 1,
+      "highFactor": 1,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "15:45",
@@ -1300,7 +2225,15 @@ window.SHARED_SEED = {
      "link": "https://www.google.com/maps/search/?api=1&query=Railay+Viewpoint+and+Lagoon",
      "notes": "חינם · טיפוס בוץ אנכי בחבלים, 20 דק׳ למעלה · נעליים עם אחיזה · לוותר בגשם",
      "id": "s_8_5",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "no-extra",
+      "basis": "לא הוקצה חיוב נפרד לפעולה הזאת; חיובים כלולים מופיעים בחבילה או בהזמנה.",
+      "lowFactor": 1,
+      "highFactor": 1,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "17:45",
@@ -1308,12 +2241,20 @@ window.SHARED_SEED = {
      "act": "לונגטייל חזרה",
      "loc": "ריילאי → אאו נאנג",
      "cat": "תחבורה",
-     "baht": 300,
+     "baht": 0,
      "status": "משלמים במקום",
      "link": "",
      "notes": "לסכם שעת חזרה עם הסירן מראש",
      "id": "s_8_6",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "included",
+      "basis": "העברה חזרה כלולה באותו סיור טיפוס; לוודא שעת חזרה התואמת לתכנון.",
+      "lowFactor": 1,
+      "highFactor": 1,
+      "sourceUrl": "https://www.realrocksclimbing.com/group-course/",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "19:45",
@@ -1326,7 +2267,15 @@ window.SHARED_SEED = {
      "link": "",
      "notes": "",
      "id": "s_8_7",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
+      "lowFactor": 0.8,
+      "highFactor": 1.3,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "",
@@ -1339,7 +2288,23 @@ window.SHARED_SEED = {
      "link": "https://secure.booking.com/",
      "notes": "",
      "id": "s_8_8",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "booking",
+      "basis": "המחיר מההזמנה השמורה; נספר פעם אחת בלבד ומחולק בין לילות הלינה.",
+      "lowFactor": 1,
+      "highFactor": 1,
+      "sourceUrl": "",
+      "checked": "2026-09-14",
+      "booking": {
+       "category": "accommodation",
+       "split": "ratio",
+       "key": "aonang",
+       "match": "Chermantra",
+       "totalIls": 1839,
+       "rows": 3
+      }
+     }
     }
    ],
    "summary": "יום ריילאי — לטפס על משהו",
@@ -1362,7 +2327,15 @@ window.SHARED_SEED = {
      "link": "",
      "notes": "",
      "id": "s_9_0",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "no-extra",
+      "basis": "לא הוקצה חיוב נפרד לפעולה הזאת; חיובים כלולים מופיעים בחבילה או בהזמנה.",
+      "lowFactor": 1,
+      "highFactor": 1,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "08:15",
@@ -1375,7 +2348,15 @@ window.SHARED_SEED = {
      "link": "https://www.google.com/maps/search/?api=1&query=Ao+Thalane+Krabi+kayaking",
      "notes": "ההסעה כלולה במחיר הסיור",
      "id": "s_9_1",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "included",
+      "basis": "כלול במחיר ההזמנה או החבילה; אין חיוב נוסף באומדן.",
+      "lowFactor": 1,
+      "highFactor": 1,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "09:00",
@@ -1389,7 +2370,15 @@ window.SHARED_SEED = {
      "notes": "฿600–800 לאדם כולל מדריך · לצאת בגאות · עיטי ים ומקוקים",
      "id": "s_9_2",
      "done": false,
-     "wiki": "Than Bok Khorani National Park"
+     "wiki": "Than Bok Khorani National Park",
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
+      "lowFactor": 0.8,
+      "highFactor": 1.3,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "12:45",
@@ -1402,7 +2391,15 @@ window.SHARED_SEED = {
      "link": "",
      "notes": "",
      "id": "s_9_3",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
+      "lowFactor": 0.8,
+      "highFactor": 1.3,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "15:00",
@@ -1415,7 +2412,15 @@ window.SHARED_SEED = {
      "link": "",
      "notes": "",
      "id": "s_9_4",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
+      "lowFactor": 0.8,
+      "highFactor": 1.3,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "19:30",
@@ -1428,7 +2433,15 @@ window.SHARED_SEED = {
      "link": "",
      "notes": "ברגל ולא בסירה — היתרון של לישון פה",
      "id": "s_9_5",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
+      "lowFactor": 0.8,
+      "highFactor": 1.3,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "",
@@ -1441,7 +2454,23 @@ window.SHARED_SEED = {
      "link": "https://secure.booking.com/",
      "notes": "",
      "id": "s_9_6",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "booking",
+      "basis": "המחיר מההזמנה השמורה; נספר פעם אחת בלבד ומחולק בין לילות הלינה.",
+      "lowFactor": 1,
+      "highFactor": 1,
+      "sourceUrl": "",
+      "checked": "2026-09-14",
+      "booking": {
+       "category": "accommodation",
+       "split": "ratio",
+       "key": "aonang",
+       "match": "Chermantra",
+       "totalIls": 1839,
+       "rows": 3
+      }
+     }
     }
    ],
    "summary": "קיאקים במנגרובים",
@@ -1464,7 +2493,15 @@ window.SHARED_SEED = {
      "link": "",
      "notes": "",
      "id": "s_10_0",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "no-extra",
+      "basis": "לא הוקצה חיוב נפרד לפעולה הזאת; חיובים כלולים מופיעים בחבילה או בהזמנה.",
+      "lowFactor": 1,
+      "highFactor": 1,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "09:00",
@@ -1477,7 +2514,15 @@ window.SHARED_SEED = {
      "link": "",
      "notes": "צ׳ק-אאוט עד 11:30",
      "id": "s_10_1",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "no-extra",
+      "basis": "לא הוקצה חיוב נפרד לפעולה הזאת; חיובים כלולים מופיעים בחבילה או בהזמנה.",
+      "lowFactor": 1,
+      "highFactor": 1,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "09:40",
@@ -1485,12 +2530,20 @@ window.SHARED_SEED = {
      "act": "רכב פרטי לקאו לק",
      "loc": "אאו נאנג → קראבי → כביש 4 → פאנג נגה → קאו לק",
      "cat": "תחבורה",
-     "baht": 3500,
+     "baht": 4100,
      "status": "להזמין",
      "link": "https://www.google.com/maps/search/?api=1&query=Khao+Lak+Phang+Nga",
      "notes": "כ-2:30–2:45 נהיגה · ואן משותף זול יותר אך עם איסופים ומגיע ל-4 שעות",
      "id": "s_10_2",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "תקציב לרכב פרטי קראבי–קאו לק על סמך מחירון העברות; יש לקבל הצעה לאיסוף המדויק באאו נאנג.",
+      "lowFactor": 0.8536585365853658,
+      "highFactor": 1.2195121951219512,
+      "sourceUrl": "https://www.khaolaklanddiscovery.com/",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "11:30",
@@ -1503,7 +2556,15 @@ window.SHARED_SEED = {
      "link": "",
      "notes": "",
      "id": "s_10_3",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
+      "lowFactor": 0.8,
+      "highFactor": 1.3,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "12:50",
@@ -1516,7 +2577,15 @@ window.SHARED_SEED = {
      "link": "",
      "notes": "",
      "id": "s_10_4",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "no-extra",
+      "basis": "לא הוקצה חיוב נפרד לפעולה הזאת; חיובים כלולים מופיעים בחבילה או בהזמנה.",
+      "lowFactor": 1,
+      "highFactor": 1,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "13:10",
@@ -1529,7 +2598,15 @@ window.SHARED_SEED = {
      "link": "",
      "notes": "",
      "id": "s_10_5",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
+      "lowFactor": 0.8,
+      "highFactor": 1.3,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "14:30",
@@ -1542,7 +2619,15 @@ window.SHARED_SEED = {
      "link": "https://www.booking.com/hotel/th/kalima-resort-amp-villas-khao-lak.html",
      "notes": "₪4,029 לשישה לילות · ביטול חינם",
      "id": "s_10_6",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "no-extra",
+      "basis": "לא הוקצה חיוב נפרד לפעולה הזאת; חיובים כלולים מופיעים בחבילה או בהזמנה.",
+      "lowFactor": 1,
+      "highFactor": 1,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "15:30",
@@ -1556,7 +2641,15 @@ window.SHARED_SEED = {
      "notes": "מכאן והלאה זה פרק המנוחה",
      "id": "s_10_7",
      "done": false,
-     "wiki": "Khao Lak"
+     "wiki": "Khao Lak",
+     "priceEstimate": {
+      "kind": "no-extra",
+      "basis": "לא הוקצה חיוב נפרד לפעולה הזאת; חיובים כלולים מופיעים בחבילה או בהזמנה.",
+      "lowFactor": 1,
+      "highFactor": 1,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "19:30",
@@ -1569,7 +2662,15 @@ window.SHARED_SEED = {
      "link": "",
      "notes": "",
      "id": "s_10_8",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
+      "lowFactor": 0.8,
+      "highFactor": 1.3,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "",
@@ -1582,7 +2683,23 @@ window.SHARED_SEED = {
      "link": "https://www.booking.com/hotel/th/kalima-resort-amp-villas-khao-lak.html",
      "notes": "8.8 על 2,576 ביקורות · 5 כוכבים · ספא מלא, חדר אדים, עיסוי זוגות, בריכת מים מלוחים, יוגה",
      "id": "s_10_9",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "booking",
+      "basis": "המחיר מההזמנה השמורה; נספר פעם אחת בלבד ומחולק בין לילות הלינה.",
+      "lowFactor": 1,
+      "highFactor": 1,
+      "sourceUrl": "",
+      "checked": "2026-09-14",
+      "booking": {
+       "category": "accommodation",
+       "split": "ratio",
+       "key": "khaolak",
+       "match": "Kalima",
+       "totalIls": 4029,
+       "rows": 6
+      }
+     }
     },
     {
      "id": "s_10_moto",
@@ -1596,7 +2713,15 @@ window.SHARED_SEED = {
      "link": "",
      "done": false,
      "notes": "฿250 ליום · כביש 4 מהיר ועמוס משאיות — לנסוע בכביש החוף המקומי · כך מגיעים לבאנג סאק ולאאו תונג לבד, בלי מוניות",
-     "managed": true
+     "managed": true,
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
+      "lowFactor": 0.8,
+      "highFactor": 1.3,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
     }
    ],
    "summary": "חוצים ליבשה",
@@ -1619,7 +2744,15 @@ window.SHARED_SEED = {
      "link": "",
      "notes": "לבדוק מול המלון אם ארוחת בוקר כלולה בתעריף שלכם",
      "id": "s_11_0",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
+      "lowFactor": 0.8,
+      "highFactor": 1.3,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "09:30",
@@ -1632,7 +2765,15 @@ window.SHARED_SEED = {
      "link": "",
      "notes": "",
      "id": "s_11_1",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "no-extra",
+      "basis": "לא הוקצה חיוב נפרד לפעולה הזאת; חיובים כלולים מופיעים בחבילה או בהזמנה.",
+      "lowFactor": 1,
+      "highFactor": 1,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "13:00",
@@ -1645,7 +2786,15 @@ window.SHARED_SEED = {
      "link": "",
      "notes": "",
      "id": "s_11_2",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
+      "lowFactor": 0.8,
+      "highFactor": 1.3,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "15:30",
@@ -1658,7 +2807,15 @@ window.SHARED_SEED = {
      "link": "",
      "notes": "חדר אדים, טיפולי גוף, אמבט רגליים · זה הפרק שבשבילו באתם",
      "id": "s_11_3",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
+      "lowFactor": 0.8,
+      "highFactor": 1.3,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "19:30",
@@ -1671,7 +2828,15 @@ window.SHARED_SEED = {
      "link": "",
      "notes": "",
      "id": "s_11_4",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
+      "lowFactor": 0.8,
+      "highFactor": 1.3,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "",
@@ -1684,7 +2849,23 @@ window.SHARED_SEED = {
      "link": "https://www.booking.com/hotel/th/kalima-resort-amp-villas-khao-lak.html",
      "notes": "",
      "id": "s_11_5",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "booking",
+      "basis": "המחיר מההזמנה השמורה; נספר פעם אחת בלבד ומחולק בין לילות הלינה.",
+      "lowFactor": 1,
+      "highFactor": 1,
+      "sourceUrl": "",
+      "checked": "2026-09-14",
+      "booking": {
+       "category": "accommodation",
+       "split": "ratio",
+       "key": "khaolak",
+       "match": "Kalima",
+       "totalIls": 4029,
+       "rows": 6
+      }
+     }
     }
    ],
    "summary": "ריזורט וספא",
@@ -1707,7 +2888,15 @@ window.SHARED_SEED = {
      "link": "",
      "notes": "יום ארוך — לאכול טוב",
      "id": "s_12_0",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
+      "lowFactor": 0.8,
+      "highFactor": 1.3,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "07:15",
@@ -1720,7 +2909,15 @@ window.SHARED_SEED = {
      "link": "https://www.google.com/maps/search/?api=1&query=Ratchaprapha+Dam+Pier+Khao+Sok",
      "notes": "כשעתיים לכיוון — לא שעה. ההסעה כלולה בסיור",
      "id": "s_12_1",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "included",
+      "basis": "כלול במחיר ההזמנה או החבילה; אין חיוב נוסף באומדן.",
+      "lowFactor": 1,
+      "highFactor": 1,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "09:45",
@@ -1734,7 +2931,15 @@ window.SHARED_SEED = {
      "notes": "฿3,900 לאדם · כולל אגרות פארק, מדריך דובר אנגלית, צהריים, ציוד והסעות · הנוף היחיד בטיול שהוא לא חוף",
      "id": "s_12_2",
      "done": false,
-     "wiki": "Khao Sok National Park"
+     "wiki": "Khao Sok National Park",
+     "priceEstimate": {
+      "kind": "published",
+      "basis": "מחיר פתיחה לסיור אגם לשני מבוגרים, עם העברות וצהריים. לבדוק אגרות ותוספות בהצעה הסופית.",
+      "lowFactor": 1,
+      "highFactor": 1.2,
+      "sourceUrl": "https://www.khaolaklanddiscovery.com/khao-sok-lake-day-trip/",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "12:30",
@@ -1747,7 +2952,15 @@ window.SHARED_SEED = {
      "link": "",
      "notes": "כלול בסיור",
      "id": "s_12_3",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "included",
+      "basis": "כלול במחיר ההזמנה או החבילה; אין חיוב נוסף באומדן.",
+      "lowFactor": 1,
+      "highFactor": 1,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "15:00",
@@ -1760,7 +2973,15 @@ window.SHARED_SEED = {
      "link": "",
      "notes": "כלול · עצירה בבאן נאם ראד לשחייה",
      "id": "s_12_4",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "included",
+      "basis": "כלול במחיר ההזמנה או החבילה; אין חיוב נוסף באומדן.",
+      "lowFactor": 1,
+      "highFactor": 1,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "17:45",
@@ -1773,7 +2994,15 @@ window.SHARED_SEED = {
      "link": "",
      "notes": "יום של כ-11 שעות, מתוכן 4:30 בוואן",
      "id": "s_12_5",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "no-extra",
+      "basis": "לא הוקצה חיוב נפרד לפעולה הזאת; חיובים כלולים מופיעים בחבילה או בהזמנה.",
+      "lowFactor": 1,
+      "highFactor": 1,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "19:45",
@@ -1786,7 +3015,15 @@ window.SHARED_SEED = {
      "link": "",
      "notes": "",
      "id": "s_12_6",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
+      "lowFactor": 0.8,
+      "highFactor": 1.3,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "",
@@ -1799,7 +3036,23 @@ window.SHARED_SEED = {
      "link": "https://www.booking.com/hotel/th/kalima-resort-amp-villas-khao-lak.html",
      "notes": "",
      "id": "s_12_7",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "booking",
+      "basis": "המחיר מההזמנה השמורה; נספר פעם אחת בלבד ומחולק בין לילות הלינה.",
+      "lowFactor": 1,
+      "highFactor": 1,
+      "sourceUrl": "",
+      "checked": "2026-09-14",
+      "booking": {
+       "category": "accommodation",
+       "split": "ratio",
+       "key": "khaolak",
+       "match": "Kalima",
+       "totalIls": 4029,
+       "rows": 6
+      }
+     }
     }
    ],
    "summary": "לאגם צ׳או לאן",
@@ -1822,7 +3075,15 @@ window.SHARED_SEED = {
      "link": "",
      "notes": "",
      "id": "s_13_0",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
+      "lowFactor": 0.8,
+      "highFactor": 1.3,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "10:00",
@@ -1835,7 +3096,15 @@ window.SHARED_SEED = {
      "link": "",
      "notes": "היום שאחרי קאו סוק — בלי תוכנית",
      "id": "s_13_1",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "no-extra",
+      "basis": "לא הוקצה חיוב נפרד לפעולה הזאת; חיובים כלולים מופיעים בחבילה או בהזמנה.",
+      "lowFactor": 1,
+      "highFactor": 1,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "13:00",
@@ -1848,7 +3117,15 @@ window.SHARED_SEED = {
      "link": "",
      "notes": "",
      "id": "s_13_2",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
+      "lowFactor": 0.8,
+      "highFactor": 1.3,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "16:00",
@@ -1861,7 +3138,15 @@ window.SHARED_SEED = {
      "link": "",
      "notes": "",
      "id": "s_13_3",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
+      "lowFactor": 0.8,
+      "highFactor": 1.3,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "19:30",
@@ -1874,7 +3159,15 @@ window.SHARED_SEED = {
      "link": "",
      "notes": "",
      "id": "s_13_4",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
+      "lowFactor": 0.8,
+      "highFactor": 1.3,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "",
@@ -1887,7 +3180,23 @@ window.SHARED_SEED = {
      "link": "https://www.booking.com/hotel/th/kalima-resort-amp-villas-khao-lak.html",
      "notes": "",
      "id": "s_13_5",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "booking",
+      "basis": "המחיר מההזמנה השמורה; נספר פעם אחת בלבד ומחולק בין לילות הלינה.",
+      "lowFactor": 1,
+      "highFactor": 1,
+      "sourceUrl": "",
+      "checked": "2026-09-14",
+      "booking": {
+       "category": "accommodation",
+       "split": "ratio",
+       "key": "khaolak",
+       "match": "Kalima",
+       "totalIls": 4029,
+       "rows": 6
+      }
+     }
     }
    ],
    "summary": "בוקר על האגם, וחזרה",
@@ -1910,7 +3219,15 @@ window.SHARED_SEED = {
      "link": "",
      "notes": "",
      "id": "s_14_0",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
+      "lowFactor": 0.8,
+      "highFactor": 1.3,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
     },
     {
      "id": "s_14_zip",
@@ -1925,7 +3242,15 @@ window.SHARED_SEED = {
      "wiki": "Zip line",
      "done": false,
      "notes": "฿2,200–2,600 לאדם · מסלול של פלטפורמות, גשרים וזיפליינים בין עצי הגומי · איסוף מהמלון כלול · נעליים סגורות, בלי כפכפים",
-     "managed": true
+     "managed": true,
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
+      "lowFactor": 0.8,
+      "highFactor": 1.3,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "13:30",
@@ -1939,7 +3264,15 @@ window.SHARED_SEED = {
      "notes": "הבוקר היה מספיק. מכאן שום דבר שדורש שעה",
      "id": "s_14_1",
      "done": false,
-     "managed": true
+     "managed": true,
+     "priceEstimate": {
+      "kind": "no-extra",
+      "basis": "לא הוקצה חיוב נפרד לפעולה הזאת; חיובים כלולים מופיעים בחבילה או בהזמנה.",
+      "lowFactor": 1,
+      "highFactor": 1,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "13:00",
@@ -1952,7 +3285,15 @@ window.SHARED_SEED = {
      "link": "",
      "notes": "",
      "id": "s_14_2",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
+      "lowFactor": 0.8,
+      "highFactor": 1.3,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "16:00",
@@ -1965,7 +3306,15 @@ window.SHARED_SEED = {
      "link": "",
      "notes": "שיעורי יוגה וכושר במקום",
      "id": "s_14_3",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "no-extra",
+      "basis": "לא הוקצה חיוב נפרד לפעולה הזאת; חיובים כלולים מופיעים בחבילה או בהזמנה.",
+      "lowFactor": 1,
+      "highFactor": 1,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "19:30",
@@ -1978,7 +3327,15 @@ window.SHARED_SEED = {
      "link": "",
      "notes": "",
      "id": "s_14_4",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
+      "lowFactor": 0.8,
+      "highFactor": 1.3,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "",
@@ -1991,7 +3348,23 @@ window.SHARED_SEED = {
      "link": "https://www.booking.com/hotel/th/kalima-resort-amp-villas-khao-lak.html",
      "notes": "",
      "id": "s_14_5",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "booking",
+      "basis": "המחיר מההזמנה השמורה; נספר פעם אחת בלבד ומחולק בין לילות הלינה.",
+      "lowFactor": 1,
+      "highFactor": 1,
+      "sourceUrl": "",
+      "checked": "2026-09-14",
+      "booking": {
+       "category": "accommodation",
+       "split": "ratio",
+       "key": "khaolak",
+       "match": "Kalima",
+       "totalIls": 4029,
+       "rows": 6
+      }
+     }
     }
    ],
    "summary": "זיפליין בבוקר, ושום דבר אחרי",
@@ -2015,7 +3388,15 @@ window.SHARED_SEED = {
      "notes": "מוקדם — היציאה לסימילן ב-07:00. לבקש מהמלון ארוחה מוקדמת או לקחת משהו לדרך",
      "id": "s_15_0",
      "done": false,
-     "managed": true
+     "managed": true,
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
+      "lowFactor": 0.8,
+      "highFactor": 1.3,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "07:00",
@@ -2030,7 +3411,15 @@ window.SHARED_SEED = {
      "id": "s_15_1",
      "done": false,
      "wiki": "Similan Islands",
-     "managed": true
+     "managed": true,
+     "priceEstimate": {
+      "kind": "published",
+      "basis": "מחיר פתיחה לסימילן לשני מבוגרים; הספק מפרט העברות, אגרות, ציוד, ארוחת בוקר קלה וצהריים.",
+      "lowFactor": 1,
+      "highFactor": 1.2,
+      "sourceUrl": "https://www.khaolaklanddiscovery.com/khao-lak-tours/similan-islands-tour/",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "13:00",
@@ -2038,12 +3427,20 @@ window.SHARED_SEED = {
      "act": "צהריים",
      "loc": "קאו לק",
      "cat": "אוכל",
-     "baht": 450,
+     "baht": 0,
      "status": "משלמים במקום",
      "link": "",
      "notes": "",
      "id": "s_15_3",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "included",
+      "basis": "צהריים כלולים בסיור סימילן שעליו מבוסס האומדן.",
+      "lowFactor": 1,
+      "highFactor": 1,
+      "sourceUrl": "https://www.khaolaklanddiscovery.com/khao-lak-tours/similan-islands-tour/",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "17:30",
@@ -2057,7 +3454,15 @@ window.SHARED_SEED = {
      "notes": "חוזרים שרופים ועייפים — הערב נשאר רגוע",
      "id": "s_15_2",
      "done": false,
-     "managed": true
+     "managed": true,
+     "priceEstimate": {
+      "kind": "no-extra",
+      "basis": "לא הוקצה חיוב נפרד לפעולה הזאת; חיובים כלולים מופיעים בחבילה או בהזמנה.",
+      "lowFactor": 1,
+      "highFactor": 1,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "19:30",
@@ -2070,7 +3475,15 @@ window.SHARED_SEED = {
      "link": "",
      "notes": "",
      "id": "s_15_4",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
+      "lowFactor": 0.8,
+      "highFactor": 1.3,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "",
@@ -2083,7 +3496,23 @@ window.SHARED_SEED = {
      "link": "https://www.booking.com/hotel/th/kalima-resort-amp-villas-khao-lak.html",
      "notes": "",
      "id": "s_15_5",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "booking",
+      "basis": "המחיר מההזמנה השמורה; נספר פעם אחת בלבד ומחולק בין לילות הלינה.",
+      "lowFactor": 1,
+      "highFactor": 1,
+      "sourceUrl": "",
+      "checked": "2026-09-14",
+      "booking": {
+       "category": "accommodation",
+       "split": "ratio",
+       "key": "khaolak",
+       "match": "Kalima",
+       "totalIls": 4029,
+       "rows": 6
+      }
+     }
     }
    ],
    "summary": "סימילן — היום הגדול של האנדמן",
@@ -2106,7 +3535,15 @@ window.SHARED_SEED = {
      "link": "",
      "notes": "",
      "id": "s_16_0",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
+      "lowFactor": 0.8,
+      "highFactor": 1.3,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "10:00",
@@ -2119,7 +3556,15 @@ window.SHARED_SEED = {
      "link": "",
      "notes": "",
      "id": "s_16_1",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "no-extra",
+      "basis": "לא הוקצה חיוב נפרד לפעולה הזאת; חיובים כלולים מופיעים בחבילה או בהזמנה.",
+      "lowFactor": 1,
+      "highFactor": 1,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "11:00",
@@ -2132,7 +3577,15 @@ window.SHARED_SEED = {
      "link": "",
      "notes": "צ׳ק-אאוט 11:00–12:00 · הם ישמרו את התיקים",
      "id": "s_16_2",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "no-extra",
+      "basis": "לא הוקצה חיוב נפרד לפעולה הזאת; חיובים כלולים מופיעים בחבילה או בהזמנה.",
+      "lowFactor": 1,
+      "highFactor": 1,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "11:45",
@@ -2145,7 +3598,15 @@ window.SHARED_SEED = {
      "link": "",
      "notes": "",
      "id": "s_16_3",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
+      "lowFactor": 0.8,
+      "highFactor": 1.3,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "12:45",
@@ -2158,7 +3619,15 @@ window.SHARED_SEED = {
      "link": "https://www.google.com/maps/search/?api=1&query=Phuket+International+Airport",
      "notes": "כ-70 ק״מ · יוצאים 12:45, לא 13:30 — טיסה בינלאומית",
      "id": "s_16_4",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "published",
+      "basis": "מחיר פתיחה לרכב קאו לק–שדה התעופה בפוקט; המחיר המדויק תלוי בכתובת, ברכב ובשעה.",
+      "lowFactor": 1,
+      "highFactor": 1.3,
+      "sourceUrl": "https://www.khaolaklanddiscovery.com/",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "14:00",
@@ -2171,7 +3640,15 @@ window.SHARED_SEED = {
      "link": "",
      "notes": "להגיע 3 שעות לפני",
      "id": "s_16_5",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "no-extra",
+      "basis": "לא הוקצה חיוב נפרד לפעולה הזאת; חיובים כלולים מופיעים בחבילה או בהזמנה.",
+      "lowFactor": 1,
+      "highFactor": 1,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "17:20",
@@ -2184,7 +3661,23 @@ window.SHARED_SEED = {
      "link": "",
      "notes": "ישירה · IL-604062",
      "id": "s_16_6",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "booking",
+      "basis": "המחיר מההזמנה השמורה; נספר פעם אחת בלבד ומחולק בין לילות הלינה.",
+      "lowFactor": 1,
+      "highFactor": 1,
+      "sourceUrl": "",
+      "checked": "2026-09-14",
+      "booking": {
+       "key": "return",
+       "match": "IZ598",
+       "totalIls": 1891,
+       "rows": 1,
+       "category": "flights",
+       "split": "full-itai"
+      }
+     }
     },
     {
      "time": "23:00",
@@ -2197,7 +3690,15 @@ window.SHARED_SEED = {
      "link": "",
      "notes": "",
      "id": "s_16_7",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "no-extra",
+      "basis": "לא הוקצה חיוב נפרד לפעולה הזאת; חיובים כלולים מופיעים בחבילה או בהזמנה.",
+      "lowFactor": 1,
+      "highFactor": 1,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "",
@@ -2210,7 +3711,15 @@ window.SHARED_SEED = {
      "link": "",
      "notes": "",
      "id": "s_16_8",
-     "done": false
+     "done": false,
+     "priceEstimate": {
+      "kind": "no-extra",
+      "basis": "לא הוקצה חיוב נפרד לפעולה הזאת; חיובים כלולים מופיעים בחבילה או בהזמנה.",
+      "lowFactor": 1,
+      "highFactor": 1,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
     }
    ],
    "summary": "בוקר בריזורט, ואז הביתה",
@@ -2522,5 +4031,612 @@ window.SHARED_SEED = {
    "ביטוח: לוודא שהפוליסה של איתי מכסה רכיבה, ושל טליה מכסה נסיעה כנוסעת. לבדוק גם עד איזה נפח מנוע — הרבה פוליסות עוצרות ב-125cc.",
    "לסרי לנקה צריך היתר נפרד — אישור של ה-AA המקומי. רלוונטי רק אם טליה רוכבת שם בעצמה."
   ]
+ },
+ "priceEstimateVersion": 1,
+ "priceEstimateBaseline": {
+  "s_1_0": {
+   "baht": null,
+   "cat": "תחבורה"
+  },
+  "s_1_1": {
+   "baht": null,
+   "cat": "אחר"
+  },
+  "s_1_2": {
+   "baht": 800,
+   "cat": "אחר"
+  },
+  "s_1_3": {
+   "baht": 90,
+   "cat": "תחבורה"
+  },
+  "s_1_4": {
+   "baht": 90,
+   "cat": "תחבורה"
+  },
+  "s_1_5": {
+   "baht": null,
+   "cat": "אחר"
+  },
+  "s_1_6": {
+   "baht": null,
+   "cat": "אחר"
+  },
+  "s_1_7": {
+   "baht": 700,
+   "cat": "אוכל"
+  },
+  "s_1_8": {
+   "baht": 180,
+   "cat": "תחבורה"
+  },
+  "s_1_9": {
+   "baht": 4186.67,
+   "cat": "לינה"
+  },
+  "s_2_0": {
+   "baht": 250,
+   "cat": "אוכל"
+  },
+  "s_2_1": {
+   "baht": 130,
+   "cat": "תחבורה"
+  },
+  "s_2_2": {
+   "baht": 1000,
+   "cat": "אטרקציות"
+  },
+  "s_2_3": {
+   "baht": 600,
+   "cat": "אטרקציות"
+  },
+  "s_2_4": {
+   "baht": 400,
+   "cat": "אוכל"
+  },
+  "s_2_5": {
+   "baht": 130,
+   "cat": "אחר"
+  },
+  "s_2_6": {
+   "baht": 150,
+   "cat": "אטרקציות"
+  },
+  "s_2_7": {
+   "baht": 2800,
+   "cat": "אוכל"
+  },
+  "s_2_8": {
+   "baht": null,
+   "cat": "אטרקציות"
+  },
+  "s_2_9": {
+   "baht": 300,
+   "cat": "תחבורה"
+  },
+  "s_2_10": {
+   "baht": 4186.67,
+   "cat": "לינה"
+  },
+  "s_3_0": {
+   "baht": 120,
+   "cat": "תחבורה"
+  },
+  "s_3_1": {
+   "baht": null,
+   "cat": "אטרקציות"
+  },
+  "s_3_2": {
+   "baht": 300,
+   "cat": "אוכל"
+  },
+  "s_3_3": {
+   "baht": 500,
+   "cat": "תחבורה"
+  },
+  "s_3_4": {
+   "baht": null,
+   "cat": "אטרקציות"
+  },
+  "s_3_5": {
+   "baht": 400,
+   "cat": "אוכל"
+  },
+  "s_3_6": {
+   "baht": 500,
+   "cat": "תחבורה"
+  },
+  "s_3_7": {
+   "baht": 700,
+   "cat": "אטרקציות"
+  },
+  "s_3_8": {
+   "baht": 200,
+   "cat": "תחבורה"
+  },
+  "s_3_9": {
+   "baht": 2000,
+   "cat": "אטרקציות"
+  },
+  "s_3_10": {
+   "baht": 800,
+   "cat": "אוכל"
+  },
+  "s_3_11": {
+   "baht": 180,
+   "cat": "תחבורה"
+  },
+  "s_3_12": {
+   "baht": 4186.67,
+   "cat": "לינה"
+  },
+  "s_3_dream": {
+   "baht": 2400,
+   "cat": "אטרקציות"
+  },
+  "s_4_0": {
+   "baht": null,
+   "cat": "אחר"
+  },
+  "s_4_1": {
+   "baht": 400,
+   "cat": "תחבורה"
+  },
+  "s_4_2": {
+   "baht": null,
+   "cat": "אחר"
+  },
+  "s_4_3": {
+   "baht": 4720,
+   "cat": "תחבורה"
+  },
+  "s_4_4": {
+   "baht": null,
+   "cat": "אחר"
+  },
+  "s_4_5": {
+   "baht": 800,
+   "cat": "תחבורה"
+  },
+  "s_4_6": {
+   "baht": null,
+   "cat": "אחר"
+  },
+  "s_4_7": {
+   "baht": 1100,
+   "cat": "תחבורה"
+  },
+  "s_4_8": {
+   "baht": 200,
+   "cat": "תחבורה"
+  },
+  "s_4_9": {
+   "baht": null,
+   "cat": "אחר"
+  },
+  "s_4_10": {
+   "baht": 0,
+   "cat": "אוכל"
+  },
+  "s_4_11": {
+   "baht": null,
+   "cat": "אחר"
+  },
+  "s_4_12": {
+   "baht": 0,
+   "cat": "אטרקציות"
+  },
+  "s_4_13": {
+   "baht": 0,
+   "cat": "אוכל"
+  },
+  "s_4_14": {
+   "baht": 4860,
+   "cat": "לינה"
+  },
+  "s_5_0": {
+   "baht": 0,
+   "cat": "אוכל"
+  },
+  "s_5_1": {
+   "baht": 0,
+   "cat": "אטרקציות"
+  },
+  "s_5_2": {
+   "baht": 0,
+   "cat": "אוכל"
+  },
+  "s_5_3": {
+   "baht": null,
+   "cat": "אטרקציות"
+  },
+  "s_5_4": {
+   "baht": 400,
+   "cat": "אוכל"
+  },
+  "s_5_5": {
+   "baht": null,
+   "cat": "אחר"
+  },
+  "s_5_6": {
+   "baht": 0,
+   "cat": "אטרקציות"
+  },
+  "s_5_7": {
+   "baht": 0,
+   "cat": "אוכל"
+  },
+  "s_5_8": {
+   "baht": 4860,
+   "cat": "לינה"
+  },
+  "s_5_moto": {
+   "baht": 500,
+   "cat": "תחבורה"
+  },
+  "s_6_0": {
+   "baht": 0,
+   "cat": "אוכל"
+  },
+  "s_6_1": {
+   "baht": 0,
+   "cat": "אטרקציות"
+  },
+  "s_6_2": {
+   "baht": 0,
+   "cat": "אוכל"
+  },
+  "s_6_3": {
+   "baht": 400,
+   "cat": "אוכל"
+  },
+  "s_6_4": {
+   "baht": 150,
+   "cat": "תחבורה"
+  },
+  "s_6_5": {
+   "baht": 1500,
+   "cat": "אטרקציות"
+  },
+  "s_6_6": {
+   "baht": 150,
+   "cat": "תחבורה"
+  },
+  "s_6_7": {
+   "baht": 450,
+   "cat": "אוכל"
+  },
+  "s_6_8": {
+   "baht": null,
+   "cat": "תחבורה"
+  },
+  "s_6_9": {
+   "baht": 4860,
+   "cat": "לינה"
+  },
+  "s_7_0": {
+   "baht": null,
+   "cat": "אוכל"
+  },
+  "s_7_1": {
+   "baht": null,
+   "cat": "אטרקציות"
+  },
+  "s_7_2": {
+   "baht": null,
+   "cat": "אחר"
+  },
+  "s_7_3": {
+   "baht": 200,
+   "cat": "תחבורה"
+  },
+  "s_7_4": {
+   "baht": 1200,
+   "cat": "תחבורה"
+  },
+  "s_7_5": {
+   "baht": 450,
+   "cat": "אוכל"
+  },
+  "s_7_6": {
+   "baht": null,
+   "cat": "אחר"
+  },
+  "s_7_7": {
+   "baht": null,
+   "cat": "אחר"
+  },
+  "s_7_8": {
+   "baht": 600,
+   "cat": "אטרקציות"
+  },
+  "s_7_9": {
+   "baht": 700,
+   "cat": "אוכל"
+  },
+  "s_7_10": {
+   "baht": 6825.67,
+   "cat": "לינה"
+  },
+  "s_7_moto": {
+   "baht": 500,
+   "cat": "תחבורה"
+  },
+  "s_8_0": {
+   "baht": null,
+   "cat": "אוכל"
+  },
+  "s_8_1": {
+   "baht": 300,
+   "cat": "תחבורה"
+  },
+  "s_8_2": {
+   "baht": 3000,
+   "cat": "אטרקציות"
+  },
+  "s_8_3": {
+   "baht": 500,
+   "cat": "אוכל"
+  },
+  "s_8_4": {
+   "baht": null,
+   "cat": "אטרקציות"
+  },
+  "s_8_5": {
+   "baht": null,
+   "cat": "אטרקציות"
+  },
+  "s_8_6": {
+   "baht": 300,
+   "cat": "תחבורה"
+  },
+  "s_8_7": {
+   "baht": 700,
+   "cat": "אוכל"
+  },
+  "s_8_8": {
+   "baht": 6825.67,
+   "cat": "לינה"
+  },
+  "s_9_0": {
+   "baht": null,
+   "cat": "אוכל"
+  },
+  "s_9_1": {
+   "baht": null,
+   "cat": "תחבורה"
+  },
+  "s_9_2": {
+   "baht": 1600,
+   "cat": "אטרקציות"
+  },
+  "s_9_3": {
+   "baht": 450,
+   "cat": "אוכל"
+  },
+  "s_9_4": {
+   "baht": 800,
+   "cat": "אטרקציות"
+  },
+  "s_9_5": {
+   "baht": 750,
+   "cat": "אוכל"
+  },
+  "s_9_6": {
+   "baht": 6825.67,
+   "cat": "לינה"
+  },
+  "s_10_0": {
+   "baht": null,
+   "cat": "אוכל"
+  },
+  "s_10_1": {
+   "baht": null,
+   "cat": "אחר"
+  },
+  "s_10_2": {
+   "baht": 3500,
+   "cat": "תחבורה"
+  },
+  "s_10_3": {
+   "baht": 150,
+   "cat": "אוכל"
+  },
+  "s_10_4": {
+   "baht": null,
+   "cat": "אחר"
+  },
+  "s_10_5": {
+   "baht": 450,
+   "cat": "אוכל"
+  },
+  "s_10_6": {
+   "baht": null,
+   "cat": "אחר"
+  },
+  "s_10_7": {
+   "baht": null,
+   "cat": "אחר"
+  },
+  "s_10_8": {
+   "baht": 800,
+   "cat": "אוכל"
+  },
+  "s_10_9": {
+   "baht": 7476.83,
+   "cat": "לינה"
+  },
+  "s_10_moto": {
+   "baht": 1000,
+   "cat": "תחבורה"
+  },
+  "s_11_0": {
+   "baht": 400,
+   "cat": "אוכל"
+  },
+  "s_11_1": {
+   "baht": null,
+   "cat": "אחר"
+  },
+  "s_11_2": {
+   "baht": 450,
+   "cat": "אוכל"
+  },
+  "s_11_3": {
+   "baht": 1600,
+   "cat": "אטרקציות"
+  },
+  "s_11_4": {
+   "baht": 850,
+   "cat": "אוכל"
+  },
+  "s_11_5": {
+   "baht": 7476.83,
+   "cat": "לינה"
+  },
+  "s_12_0": {
+   "baht": 400,
+   "cat": "אוכל"
+  },
+  "s_12_1": {
+   "baht": null,
+   "cat": "תחבורה"
+  },
+  "s_12_2": {
+   "baht": 7800,
+   "cat": "אטרקציות"
+  },
+  "s_12_3": {
+   "baht": null,
+   "cat": "אוכל"
+  },
+  "s_12_4": {
+   "baht": null,
+   "cat": "תחבורה"
+  },
+  "s_12_5": {
+   "baht": null,
+   "cat": "אחר"
+  },
+  "s_12_6": {
+   "baht": 800,
+   "cat": "אוכל"
+  },
+  "s_12_7": {
+   "baht": 7476.83,
+   "cat": "לינה"
+  },
+  "s_13_0": {
+   "baht": 400,
+   "cat": "אוכל"
+  },
+  "s_13_1": {
+   "baht": null,
+   "cat": "אחר"
+  },
+  "s_13_2": {
+   "baht": 450,
+   "cat": "אוכל"
+  },
+  "s_13_3": {
+   "baht": 800,
+   "cat": "אטרקציות"
+  },
+  "s_13_4": {
+   "baht": 850,
+   "cat": "אוכל"
+  },
+  "s_13_5": {
+   "baht": 7476.83,
+   "cat": "לינה"
+  },
+  "s_14_0": {
+   "baht": 400,
+   "cat": "אוכל"
+  },
+  "s_14_zip": {
+   "baht": 5000,
+   "cat": "אטרקציות"
+  },
+  "s_14_1": {
+   "baht": null,
+   "cat": "אחר"
+  },
+  "s_14_2": {
+   "baht": 450,
+   "cat": "אוכל"
+  },
+  "s_14_3": {
+   "baht": null,
+   "cat": "אטרקציות"
+  },
+  "s_14_4": {
+   "baht": 850,
+   "cat": "אוכל"
+  },
+  "s_14_5": {
+   "baht": 7476.83,
+   "cat": "לינה"
+  },
+  "s_15_0": {
+   "baht": 400,
+   "cat": "אוכל"
+  },
+  "s_15_1": {
+   "baht": 7800,
+   "cat": "אטרקציות"
+  },
+  "s_15_3": {
+   "baht": 450,
+   "cat": "אוכל"
+  },
+  "s_15_2": {
+   "baht": null,
+   "cat": "אטרקציות"
+  },
+  "s_15_4": {
+   "baht": 900,
+   "cat": "אוכל"
+  },
+  "s_15_5": {
+   "baht": 7476.83,
+   "cat": "לינה"
+  },
+  "s_16_0": {
+   "baht": 400,
+   "cat": "אוכל"
+  },
+  "s_16_1": {
+   "baht": null,
+   "cat": "אחר"
+  },
+  "s_16_2": {
+   "baht": null,
+   "cat": "אחר"
+  },
+  "s_16_3": {
+   "baht": 450,
+   "cat": "אוכל"
+  },
+  "s_16_4": {
+   "baht": 1800,
+   "cat": "תחבורה"
+  },
+  "s_16_5": {
+   "baht": null,
+   "cat": "אחר"
+  },
+  "s_16_6": {
+   "baht": null,
+   "cat": "תחבורה"
+  },
+  "s_16_7": {
+   "baht": null,
+   "cat": "אחר"
+  },
+  "s_16_8": {
+   "baht": null,
+   "cat": ""
+  }
  }
 };
