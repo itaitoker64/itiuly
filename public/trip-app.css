@@ -70,6 +70,19 @@ button{font-family:inherit;}
 .chk-title.done{text-decoration:line-through;color:var(--muted);}
 .chk-meta{font-size:11.5px;color:var(--muted);margin-top:2px;}
 .chk-actions{display:flex;flex-direction:column;gap:2px;align-items:center;}
+
+/* רשימת הקניות */
+.shop-tick{width:26px;height:26px;border-radius:50%;border:2px solid var(--sage);background:var(--white);color:var(--sage);
+  flex-shrink:0;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:13px;line-height:1;margin-top:1px;}
+.shop-tick:active{background:var(--sage);color:#fff;}
+.shop-price{font-size:12.5px;font-weight:600;color:var(--muted);white-space:nowrap;margin-top:2px;
+  font-variant-numeric:tabular-nums;}
+.shop-sum{font-size:13px;font-weight:600;color:var(--muted);font-variant-numeric:tabular-nums;}
+.shop-total{font-size:19px;font-variant-numeric:tabular-nums;}
+.buy-tag{display:inline-block;margin-inline-start:6px;padding:1px 7px;border-radius:999px;font-size:10.5px;font-weight:600;
+  vertical-align:middle;direction:ltr;unicode-bidi:isolate;}
+.buy-tag.il{background:var(--sand);color:var(--terracotta);}
+.buy-tag.th{background:rgba(143,160,124,.22);color:var(--sage-dark);}
 .mini-btn{background:none;border:none;color:var(--muted);font-size:13px;cursor:pointer;padding:1px 5px;line-height:1;}
 .reorder-col{display:flex;flex-direction:column;gap:0;}
 

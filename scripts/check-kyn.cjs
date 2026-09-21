@@ -9,7 +9,7 @@ vm.runInContext(read('public/shared-seed.js'),ctx);
 vm.runInContext(read('public/trip-app.js').replace(/loadState\(\);\s*$/,''),ctx);
 const run = s=>vm.runInContext(s,ctx);
 run('STATE=seedData(); ensureDefaults();');
-assert.equal(run('STATE.schema'),9);
+assert.equal(run('STATE.schema'),10);
 // Talia has not paid for anything on this trip yet — every booking so far is Itai's.
 assert.equal(run('wallet().expenses.filter(x=>x.paidBy==="talia").length'),0);
 assert.equal(run('balance().taliaPaid'),0);

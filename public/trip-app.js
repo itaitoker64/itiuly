@@ -62,6 +62,158 @@ function itaiPacking(){
   return out;
 }
 
+/*
+ * רשימת הקניות האמיתית.
+ *
+ * רשימת הציוד נולדה כשכל פריט מסומן "לקנות", מה שהפך אותה לחסרת שימוש —
+ * היא אמרה לקנות דרכון, טלפון וגרביים. כאן כתוב מה באמת צריך לקנות, איפה
+ * כדאי לקנות אותו ובכמה; כל מה שלא מופיע כאן הוא משהו שכבר יש בבית וצריך
+ * רק לארוז.
+ *
+ * buyIn:'il' — המחיר בשקלים · buyIn:'th' — המחיר בבאט.
+ * optional — נחמד שיהיה, לא נספר בסכום.
+ *
+ * ההיגיון בחלוקה: בארץ קונים מה שחייב התאמה אישית (מגן שיניים), מה שלא
+ * מוכרים שם (טמפונים, קרם הגנה שאינו מלבין), ומה שצריך להיות ביד ברגע
+ * הנחיתה. בתאילנד קונים את כל ציוד המואיי תאי — משם הוא מגיע מלכתחילה,
+ * והוא עולה שם שליש — ואת כל הנוזלים, כדי לא לסחוב אותם.
+ */
+const SHOPPING = {
+  itai: {
+    /* בארץ */
+    "מגן שיניים — לקנות בארץ": {buyIn:'il', cost:90,
+      notes:"מסוג שמרתיחים ונושכים, מחנות ספורט או בית מרקחת. לא לקנות שם — התאמה והיגיינה"},
+    "ביטוח נסיעות שמכסה ספורט מגע": {buyIn:'il', cost:280,
+      notes:"מואיי תאי הוא ספורט מגע — פוליסה רגילה מחריגה אותו. לוודא שכתוב במפורש, וגם רכיבה על קטנוע"},
+    "רישיון בינלאומי 1949 — אם רוכבים על קטנוע": {buyIn:'il', cost:75,
+      notes:"ממס״י או מזהב, אמנת 1949 דווקא. בלי זה גם הביטוח לא תקף אם קורה משהו על הקטנוע"},
+    "קרם הגנה SPF 50": {buyIn:'il', cost:60,
+      notes:"לקנות כאן — כמעט כל קרמי ההגנה בתאילנד הם מסוג whitening"},
+    "מתאם חשמל אוניברסלי": {buyIn:'il', cost:30,
+      notes:"התקע הישראלי לא נכנס לשקע התאילנדי. שם השקעים מקבלים שני פינים שטוחים או עגולים"},
+    "פלסטרים ופלסטרים לשלפוחיות": {buyIn:'il', cost:35, notes:"שלפוחיות מגיעות מהסנדלים ומהחבלים על הרגליים"},
+    "חומר חיטוי": {buyIn:'il', cost:20, notes:"שפשופים מהשק ומהרינג נפתחים מהר בלחות"},
+    "משכך כאבים": {buyIn:'il', cost:25},
+    "תרופה לשלשול": {buyIn:'il', cost:35, notes:"שיהיה ביד ביום הראשון, לא למצוא בית מרקחת ב-03:00"},
+    "ORS מלחים": {buyIn:'il', cost:25, notes:"אחרי אימון בחום ואחרי קלקול קיבה — זה מה שמחזיר לתפקוד"},
+    "אנטיהיסטמין": {buyIn:'il', cost:30},
+    "AirTag לתיק": {buyIn:'il', cost:130, optional:true, notes:"5 מעברים בין יעדים ושתי סירות — שווה לדעת איפה התיק"},
+    "Packing Cubes": {buyIn:'il', cost:90, optional:true},
+
+    /* בתאילנד */
+    "תחבושות ידיים — 2 זוגות": {buyIn:'th', cost:300,
+      notes:"Fairtex או Twins, 4.5 מטר · ฿150 לזוג ב-MBK · בארץ פי שלושה"},
+    "כפפות 12–14 oz (או לשכור במחנה)": {buyIn:'th', cost:1500, optional:true,
+      notes:"המחנה משאיל, אז זה לא חובה. אם כן — Fairtex/Twins בבנגקוק, ฿1,200–1,800, כחצי מהמחיר בארץ"},
+    "מגן מפשעה": {buyIn:'th', cost:500, notes:"קונים יחד עם הכפפות, אותה חנות"},
+    "2 סטים לאימון — מכנס ורשת": {buyIn:'th', cost:800,
+      notes:"מכנסי מואיי תאי ฿300–450 לזוג · משם הם מגיעים בכלל, וזה חצי מהמחיר בארץ"},
+    "משחה לשרירים": {buyIn:'th', cost:80,
+      notes:"Namman Muay — שמן המואיי תאי התאילנדי. כל בית מרקחת, ฿60–100"},
+    "קרם לשפשופים": {buyIn:'th', cost:60, notes:"וזלין פשוט מ-7-Eleven"},
+    "דוחה יתושים": {buyIn:'th', cost:80, notes:"Sketolene או Soffell — חזק וזול יותר מכל מה שיש בארץ"},
+    "קרם לעקיצות": {buyIn:'th', cost:60},
+    "Dry Bag לסירות": {buyIn:'th', cost:250,
+      notes:"כל דוכן ליד רציף · לספידבוט לקו יאו נוי, לסימילן ולקאו סוק"},
+    "כפכפים": {buyIn:'th', cost:150, notes:"฿100–200 בכל שוק — ואפשר לזרוק בסוף"},
+    "סנדלים לחדר האימון": {buyIn:'th', cost:150, notes:"מתאמנים יחפים; אלה בשביל הדרך לרינג ובחזרה"},
+    "שק כביסה": {buyIn:'th', cost:60},
+    "בקבוק מים": {buyIn:'th', cost:60}
+  },
+
+  talia: {
+    /* בארץ */
+    "תרופות למיגרנה": {buyIn:'il', cost:80,
+      notes:"כמות לכל התקופה ולא רק לשבועיים — את ממשיכה לפאי ולסרי לנקה עד ינואר"},
+    "מרשם / מכתב רפואי באנגלית לתרופות מרשם, במידת הצורך": {buyIn:'il', cost:0,
+      notes:"מהרופא, בלי עלות — ומונע בעיה גם בבידוק וגם בבית מרקחת שם"},
+    "תרופה לבחילות / מחלת נסיעה": {buyIn:'il', cost:40,
+      notes:"במסלול יש ספידבוט לקו יאו נוי, סירה לריילאי ויום שלם בסימילן"},
+    "מוצרי מחזור": {buyIn:'il', cost:80,
+      notes:"טמפונים כמעט לא נמכרים בתאילנד — שם זה כמעט רק פדים. להביא לכל התקופה"},
+    "קרם הגנה SPF 50 לפנים ולגוף": {buyIn:'il', cost:80,
+      notes:"לקנות כאן — כמעט כל קרמי ההגנה בתאילנד הם מסוג whitening"},
+    "ביטוח נסיעות + פרטי הפוליסה": {buyIn:'il', cost:600,
+      notes:"טיול ארוך, לא שבועיים. לוודא כיסוי ליוגה, לקטנוע ולספורט מים, ולהאריך מפאי"},
+    "רישיון נהיגה בינלאומי": {buyIn:'il', cost:75, notes:"אמנת 1949"},
+    "תיק יום Osprey Daylite Plus 20L – זה שבחרנו": {buyIn:'il', cost:250},
+    "3–4 Packing Cubes": {buyIn:'il', cost:90},
+    "כיסוי גשם למוצ'ילה": {buyIn:'il', cost:60},
+    "כרית צוואר קומפקטית / מתנפחת": {buyIn:'il', cost:70},
+    "אטמי אוזניים – 2–3 זוגות": {buyIn:'il', cost:40},
+    "מסכת עיניים טובה": {buyIn:'il', cost:40},
+    "אוזניות Noise Cancelling": {buyIn:'il', cost:250, optional:true},
+    "פנס ראש קטן": {buyIn:'il', cost:60},
+    "מגבת מיקרופייבר": {buyIn:'il', cost:50},
+    "כמה תמונות פספורט": {buyIn:'il', cost:30,
+      notes:"להארכת שהייה ולוויזות בהמשך — קורס היוגה בפאי עלול לבקש"},
+    "פלסטרים": {buyIn:'il', cost:25},
+    "פלסטרים לשלפוחיות": {buyIn:'il', cost:30},
+    "חומר חיטוי קטן": {buyIn:'il', cost:20},
+    "משכך כאבים": {buyIn:'il', cost:25},
+    "תרופה לשלשול": {buyIn:'il', cost:35},
+    "ORS / מלחים להחזרת נוזלים": {buyIn:'il', cost:25},
+    "אנטיהיסטמין": {buyIn:'il', cost:30},
+    "שקיות הקאה קטנות": {buyIn:'il', cost:15},
+
+    /* בתאילנד */
+    "סרונג": {buyIn:'th', cost:150,
+      notes:"בכל שוק · משמש כמגבת, כשמיכה במטוס וככיסוי כתפיים במקדש"},
+    "כפכפים": {buyIn:'th', cost:150},
+    "שמפו קטן": {buyIn:'th', cost:80, notes:"לא לסחוב נוזלים — 7-Eleven בכל פינה"},
+    "מרכך קטן": {buyIn:'th', cost:80},
+    "סבון": {buyIn:'th', cost:40},
+    "דוחה יתושים": {buyIn:'th', cost:80, notes:"Sketolene או Soffell"},
+    "קרם להרגעת עקיצות": {buyIn:'th', cost:60},
+    "מגבונים קטנים": {buyIn:'th', cost:40},
+    "גליל נייר טואלט קטן / טישו": {buyIn:'th', cost:30},
+    "Dry Bag קטן": {buyIn:'th', cost:250},
+    "חבל כביסה קטן + אטבים": {buyIn:'th', cost:60},
+    "שקית בד מתקפלת": {buyIn:'th', cost:50},
+    "בקבוק מים רב־פעמי": {buyIn:'th', cost:80},
+    "4–5 סטים של בגדי ספורט / יוגה": {buyIn:'th', cost:1000, optional:true,
+      notes:"בגדי יוגה זולים שם. להביא 2 מהארץ ולהשלים בצ׳יאנג מאי או בפאי"},
+    "ספר לקריאה": {buyIn:'th', cost:0, optional:true,
+      notes:"החלפות ספרים בפאי ובצ׳יאנג מאי — אין סיבה לסחוב"}
+  }
+};
+
+/*
+ * פריטים שאינם קנייה ואינם משהו שכבר יש בבית — הם משימות. נשארים
+ * מסומנים כפתוחים ברשימת הציוד, אבל לא נכנסים לרשימת הקניות.
+ */
+const PACKING_TASKS = new Set([
+  "דרכון — תוקף 6+ חודשים","צילום דרכון + עותק בענן","TDAC — להגיש 72 שעות לפני",
+  "כרטיס אשראי + כרטיס גיבוי בנפרד","מזומן חירום",
+  "צילום דרכון","עותק דיגיטלי של הדרכון בענן","כרטיס אשראי נוסף – לשמור בנפרד",
+  "מסמכים רפואיים רלוונטיים","תרופות קבועות + ספייר"
+]);
+
+/**
+ * מחיל את רשימת הקניות על רשימת הציוד: מה לקנות, איפה ובכמה, וכל השאר
+ * מסומן כמשהו שכבר יש. `respectEdits` משאיר בלי נגיעה פריטים שנערכו ידנית.
+ */
+function applyShopping(list, respectEdits){
+  list.forEach(p=>{
+    const info = (SHOPPING[p.owner] || {})[p.item];
+    if(info){
+      p.buyIn = info.buyIn;
+      p.cost = info.cost;
+      p.optional = !!info.optional;
+      if(info.quantity && !p.quantity) p.quantity = info.quantity;
+      if(info.notes && !p.notes) p.notes = info.notes;
+      return;   // סטטוס לא נוגעים בו — "יש כבר" כאן פירושו שכבר נקנה
+    }
+    p.buyIn = '';
+    p.cost = 0;
+    p.optional = false;
+    // כל מה שאינו קנייה ואינו משימה — כבר יש בבית, רק לארוז
+    const stillDefault = !respectEdits || (p.status === 'need' && !p.notes && !p.quantity);
+    if(stillDefault && !PACKING_TASKS.has(p.item)) p.status = 'have';
+  });
+  return list;
+}
+
 
 // Confirmed by email, including the correction from ฿14,580 to ฿12,150.
 function kynPackageExpense(){
@@ -235,7 +387,7 @@ function seedData(){
   const hanoiId = uid('d'), manilaId = uid('d');
 
   return {
-    schema:9,
+    schema:10,
     tripName:"My Big Trip 🌏",
     startDate:"2026-11-22",
     endDate:null,
@@ -387,7 +539,7 @@ function seedData(){
     ],
     packingBreakdown:"Osprey Renn 65L לכל הציוד → Osprey Daylite Plus 20L למטוס, נסיעות וטיולי יום → קרוסבודי קטן לטלפון, כסף ודרכון ביום־יום.",
     packingCarryOn:["דרכון","ארנק","טלפון","Power Bank","תרופות למיגרנה","תרופה לבחילות","משקפי שמש","אטמי אוזניים","מסכת עיניים","אוזניות","מגבונים קטנים","טישו","AirTag מחובר למוצ'ילה הגדולה","חולצה + תחתונים להחלפה"],
-    packingList:[
+    packingList: applyShopping([
       {id:uid('p'), owner:"talia", category:"👕 בגדים", item:"4–5 חולצות / גופיות קלילות", status:"need", quantity:"", notes:""},
       {id:uid('p'), owner:"talia", category:"👕 בגדים", item:"2–3 מכנסיים קצרים", status:"need", quantity:"", notes:""},
       {id:uid('p'), owner:"talia", category:"👕 בגדים", item:"מכנס ארוך דק ונוח", status:"need", quantity:"", notes:""},
@@ -490,7 +642,7 @@ function seedData(){
 
       /* הרשימה של איתי — שבועיים, תיק אחד, ומחנה מואיי תאי באמצע */
       ...itaiPacking()
-    ],
+    ]),
     savedPlaces:[
       {id:uid('sp'), countryId:"thailand", destinationId:paiId, name:"Coffee in Love", category:"cafe", mapsLink:"", note:"נשמע כמו מקום שקט לעבוד ממנו", status:"want", priority:"בינונית", lat:19.3611, lng:98.4394},
       {id:uid('sp'), countryId:"thailand", destinationId:paiId, name:"Yoga Garden Pai", category:"yoga", mapsLink:"", note:"", status:"must", priority:"גבוהה", lat:null, lng:null},
@@ -804,6 +956,17 @@ function ensureDefaults(){
     const koyao = STATE.countries.flatMap(c=>c.destinations).find(d=>d.name==='קו יאו נוי — מחנה מואיי תאי');
     if(koyao && /Vietjet/.test(koyao.transport||'')) koyao.transport = "Thai Airways TG203 לפוקט ואז ספידבוט";
     STATE.schema = 9;
+  }
+
+  /*
+   * רשימת הציוד נשמרה כשכל פריט מסומן "לקנות" — כלומר היא אמרה לקנות דרכון,
+   * טלפון וגרביים, ורשימת הקניות לא הייתה שווה כלום. עכשיו רק מה שבאמת קונים
+   * מסומן כך, עם מקום ומחיר; השאר מסומן כמשהו שכבר יש. פריטים שנערכו ידנית
+   * (סטטוס שנבחר, הערה או כמות שנכתבו) נשארים כפי שהם.
+   */
+  if(STATE.schema < 10){
+    applyShopping(STATE.packingList, true);
+    STATE.schema = 10;
   }
 
   /* משימות חדשות מתווספות בכל גרסה, לפי כותרת */
@@ -2789,7 +2952,7 @@ function renderTimeline(){
 /* ===== MORE ===== */
 function renderMore(){
   const tabs = [
-    ['master','רשימת הכנה'], ['packing','ציוד'], ['bookings','מה סגור'],
+    ['master','רשימת הכנה'], ['packing','ציוד'], ['shopping','קניות'], ['bookings','מה סגור'],
     ['info','מידע שימושי'], ['saved','מקומות שמורים'], ['timeline','ציר זמן'],
     ['docs','מסמכים']
   ];
@@ -2805,6 +2968,7 @@ function renderMore(){
   <div class="section" style="padding-top:0;">
     ${moreSection==='master'?renderMasterChecklist():''}
     ${moreSection==='packing'?renderPacking():''}
+    ${moreSection==='shopping'?renderShopping():''}
     ${moreSection==='bookings'?renderBookingsSection():''}
     ${moreSection==='info'?renderInfoSection():''}
     ${moreSection==='saved'?renderSavedGlobal():''}
@@ -2844,6 +3008,90 @@ function renderMasterChecklist(){
     </div>`).join('')}
   `;
 }
+/** רק מה שבאמת צריך לקנות — פריטים שיש להם מקום קנייה */
+function shoppingItems(){
+  return STATE.packingList.filter(mine).filter(p=>p.buyIn==='il' || p.buyIn==='th');
+}
+
+/** סיכום רשימת הקניות בשקלים, בלי פריטי הרשות ובלי מה שכבר נקנה */
+function shoppingTotals(){
+  const open = shoppingItems().filter(p=>p.status==='need' && !p.optional);
+  const il = open.filter(p=>p.buyIn==='il').reduce((s,p)=>s+(Number(p.cost)||0),0);
+  const th = open.filter(p=>p.buyIn==='th').reduce((s,p)=>s+(Number(p.cost)||0),0);
+  return {il, th, thIls: th*rate(), total: il + th*rate()};
+}
+
+function renderShoppingGroup(where){
+  const all = shoppingItems().filter(p=>p.buyIn===where);
+  const open = all.filter(p=>p.status==='need');
+  if(!all.length) return '';
+  const price = p=> where==='il' ? ils(p.cost) : baht(p.cost);
+  const bought = all.length - open.length;
+  const line = p=>`
+    <div class="checklist-item">
+      <button class="shop-tick" data-action="buyItem" data-id="${p.id}" aria-label="נקנה">○</button>
+      <div class="chk-body" data-action="editPacking" data-id="${p.id}">
+        <div class="chk-title">${p.item}${p.quantity?(' ×'+p.quantity):''}</div>
+        ${p.notes?`<div class="chk-meta">${p.notes}</div>`:''}
+      </div>
+      <div class="shop-price">${p.cost?price(p):''}</div>
+    </div>`;
+  const must = open.filter(p=>!p.optional), extra = open.filter(p=>p.optional);
+  const sum = must.reduce((s,p)=>s+(Number(p.cost)||0),0);
+  const head = where==='il'
+    ? {title:'🇮🇱 בארץ, לפני הטיסה', why:'מה שחייב התאמה אישית, מה שלא מוכרים שם, ומה שצריך להיות ביד ברגע הנחיתה.'}
+    : {title:'🇹🇭 שם — זול יותר וטוב יותר', why:'ציוד המואיי תאי מגיע משם מלכתחילה ועולה שם כשליש, והנוזלים פשוט לא שווים את הסחיבה.'};
+  return `
+  <div class="card">
+    <div class="row"><b>${head.title}</b><span class="shop-sum">${where==='il'?ils(sum):baht(sum)}</span></div>
+    <div class="small muted" style="margin:2px 0 8px;">${head.why}</div>
+    ${must.map(line).join('')}
+    ${extra.length?`
+      <div class="muted small" style="margin:10px 0 2px;font-weight:600;">אם בא לכם — לא בסכום</div>
+      ${extra.map(line).join('')}`:''}
+    ${bought?`<div class="muted small" style="margin-top:8px;">✓ ${bought} כבר נקנו</div>`:''}
+    ${!open.length?`<div class="muted small">הכול נקנה 🎉</div>`:''}
+  </div>`;
+}
+
+function renderShopping(){
+  const t = shoppingTotals();
+  const hasThai = shoppingItems().some(p=>p.buyIn==='th' && p.status==='need');
+  return `
+  <div class="row" style="margin-bottom:8px;"><b>הקניות של ${me().name} ${me().emoji}</b></div>
+
+  <div class="card">
+    <div class="row"><b>סך הכול לפני הטיול</b><b class="shop-total">${ils(t.total)}</b></div>
+    <div class="small muted" style="margin-top:4px;">
+      ${ils(t.il)} בארץ · ${baht(t.th)} שם, שהם ${ils(t.thIls)} · לפי ${baht(100)} ≈ ${ils(rate()*100)}
+    </div>
+    <div class="small muted" style="margin-top:6px;">
+      זה לא נכנס לפנקס ההוצאות של הטיול — הפנקס סופר את מה שקורה בדרך, וזה מה שקונים לפניה.
+    </div>
+  </div>
+
+  ${renderShoppingGroup('il')}
+  ${renderShoppingGroup('th')}
+
+  ${hasThai?`
+  <div class="card dashed">
+    <div class="muted small" style="margin-bottom:4px;font-weight:600;">🛍️ איפה קונים את זה</div>
+    <div class="small">
+      ${shoppingItems().some(p=>p.buyIn==='th' && p.status==='need' && p.category==='🥊 מואיי תאי')?`
+      <b>ציוד מואיי תאי — MBK Center</b>, קומה 4: כמה חנויות זו לצד זו (Fairtex, Twins, Yokkao).
+      פתוח כל יום 10:00–22:00, תחנת BTS National Stadium. יש דוכנים גם ליד
+      <b>רג׳אדמנרן</b> בערב הקרב.<br><br>`:''}
+      <b>הדברים הקטנים</b> — סבון, שמפו, דוחה יתושים, כפכפים, Namman Muay —
+      ב-7-Eleven ובבתי המרקחת בכל פינה, גם בקו יאו נוי ובאאו נאנג. אין סיבה לקנות מראש.<br><br>
+      <b>שימו לב לתאריכים:</b> אתם בבנגקוק ב-23–26/11, שני עד חמישי — ו<b>צ׳טוצ׳אק סגור</b>,
+      הוא שוק של סוף שבוע. סרונגים, בגדי יוגה ומזכרות אפשר להשלים בצ׳יאנג מאי או בפאי.
+    </div>
+  </div>`:''}
+
+  <div class="muted small">לחיצה על ○ מסמנת שנקנה. לחיצה על השם פותחת עריכה.</div>
+  `;
+}
+
 function renderPacking(){
   const groups = {};
   STATE.packingList.filter(mine).forEach(p=>{ (groups[p.category]=groups[p.category]||[]).push(p); });
@@ -2859,7 +3107,10 @@ function renderPacking(){
       ${groups[cat].map(p=>`
         <div class="checklist-item">
           <div class="chk-body" data-action="editPacking" data-id="${p.id}">
-            <div class="chk-title">${p.item}${p.quantity?(' ×'+p.quantity):''}</div>
+            <div class="chk-title">${p.item}${p.quantity?(' ×'+p.quantity):''}${
+              p.buyIn && p.status==='need'
+                ? `<span class="buy-tag ${p.buyIn}">${p.buyIn==='il'?'בארץ':'שם'}${p.cost?' · '+(p.buyIn==='il'?ils(p.cost):baht(p.cost)):''}</span>`
+                : ''}</div>
             ${p.notes?`<div class="chk-meta">${p.notes}</div>`:''}
           </div>
           <select data-action="setPackStatus" data-id="${p.id}" style="border:1px solid var(--line);border-radius:8px;padding:4px 6px;font-size:12px;">
@@ -3576,6 +3827,10 @@ document.addEventListener('click', (e)=>{
 
   else if(action==='editPacking'){ openPackingModal(id); }
   else if(action==='addPacking'){ openPackingModal(null); }
+  else if(action==='buyItem'){
+    const p = STATE.packingList.find(x=>x.id===id);
+    if(p){ p.status = 'have'; buzz(); persist(); render(); }
+  }
 
   else if(action==='revealDoc'){ const d=STATE.documents.find(x=>x.id===id); d.revealed=!d.revealed; render(); }
   else if(action==='addDoc'){
@@ -3736,7 +3991,7 @@ function renderSharedForecast(){
     ${EXPENSE_CATEGORIES.filter(c=>f.categories[c.id]!=null).map(c=>`<tr><td>${c.label}</td><td class="num">${ils(f.categories[c.id])}</td></tr>`).join('')}
     <tr><td>רזרבה</td><td class="num">${ils(f.reserve)}</td></tr><tr class="total"><td>סה״כ כולל רזרבה</td><td class="num">${ils(f.base)}</td></tr>
   </tbody></table>
-  <div class="forecast-meta">מחירי הזמנות והצעת KYN: ${ils(f.known)}. שאר הסכום הוא אומדנים ורזרבה. מחירון אינטרנט אינו אישור מחיר לתאריכי הנסיעה. קניות גדולות וציוד לפני הנסיעה אינם כלולים; הקצבת הביטוח טעונה הצעה אישית.</div>
+  <div class="forecast-meta">מחירי הזמנות והצעת KYN: ${ils(f.known)}. שאר הסכום הוא אומדנים ורזרבה. מחירון אינטרנט אינו אישור מחיר לתאריכי הנסיעה. ציוד וקניות לפני הנסיעה אינם כלולים כאן — הם יושבים בלשונית ״עוד → קניות״, ${ils(shoppingTotals().total)} נכון לעכשיו. הקצבת הביטוח טעונה הצעה אישית.</div>
   <h3 class="section-title" style="margin-top:18px">פירוט לפי יום</h3>
   <div class="small muted">פתחו יום כדי לראות כל מחיר, את הבסיס לאומדן ולערוך אותו בשקלים. הקצבות לכל הטיול מרוכזות ביום הראשון או ביום ההשכרה.</div>
   ${f.days.map(({day,rows})=>`<details class="forecast-day"><summary><span>${fmtDateShort(day.date)} · ${escapeHtml(day.dest)}</span><b>${ils(rows.filter(p=>!p.optional).reduce((s,p)=>s+p.base,0))}</b></summary>
