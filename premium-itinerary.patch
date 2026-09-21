@@ -1,0 +1,222 @@
+diff --git a/public/trip-app.css b/public/trip-app.css
+index b11b568..d62e8ea 100644
+--- a/public/trip-app.css
++++ b/public/trip-app.css
+@@ -394,3 +394,66 @@ button{font-family:inherit;}
+ .tact{font-size:14px;font-weight:600;}
+ .tmeta{font-size:11.5px;color:var(--muted);margin-top:3px;}
+ .tnotes{font-size:11.5px;color:var(--ink);opacity:.75;margin-top:6px;line-height:1.6;}
++
++/* Premium itinerary: shared spacing, quiet surfaces and RTL-safe alignment. */
++:root, :root[data-user="itai"], :root[data-user="talia"]{
++  --cream:#f6f7f7;--white:#fff;--ink:#233330;--muted:#697773;--line:#e5eae8;
++  --sand:#edf1ef;--sand-dark:#d7dfdc;
++  --space-1:4px;--space-2:8px;--space-3:12px;--space-4:16px;--space-6:24px;--space-8:32px;
++}
++#shell{direction:rtl;padding-bottom:calc(88px + env(safe-area-inset-bottom));}
++.today-wrap{padding:16px 16px 24px;}
++.today-rail{gap:12px;margin-bottom:16px;}
++.rail-btn{width:44px;height:44px;}
++.deck-card{background:transparent;border:0;border-radius:0;box-shadow:none;}
++.deck-hero{height:200px;border-radius:16px;overflow:hidden;}
++.deck-hero::after{background:linear-gradient(to top,rgba(13,29,25,.8),rgba(13,29,25,.12) 80%);}
++.deck-hero-text{padding:24px;}
++.deck-place{font-family:inherit;font-size:32px;font-weight:700;line-height:1.25;margin-top:8px;}
++.deck-when,.deck-date{font-size:12px;font-weight:400;line-height:1.5;}
++.deck-date{margin-top:8px;}
++.deck-status{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 4px;color:var(--muted);font-size:12px;}
++.day-progress{display:flex;align-items:center;gap:8px;font-variant-numeric:tabular-nums;}
++.progress-track{width:64px;height:4px;border-radius:8px;background:var(--sand-dark);overflow:hidden;}
++.progress-track>span{display:block;height:100%;background:var(--accent,var(--sage-dark));border-radius:inherit;}
++.deck-body{padding:8px 0 0;}
++.deck-summary{font-family:inherit;font-size:24px;font-weight:700;line-height:1.4;margin:0 0 24px;letter-spacing:-.4px;}
++.activity-timeline,.day-rows{position:relative;padding-inline-start:16px;}
++.activity-timeline::before,.day-rows::before{content:"";position:absolute;inset-inline-start:3px;top:24px;bottom:24px;width:1px;background:#dbe3df;}
++.tcard,.irow{position:relative;display:grid;grid-template-columns:minmax(0,1fr) 24px;gap:12px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px;margin:0 0 12px;align-items:start;box-shadow:0 2px 4px rgba(30,50,42,.015);}
++.tcard:last-of-type,.irow:last-child{border-bottom:1px solid var(--line);}
++.tcard::before,.irow::before{content:"";position:absolute;inset-inline-start:-17px;top:25px;width:7px;height:7px;border-radius:50%;background:var(--cream);border:1px solid #b2c3bb;}
++.tcard>.tbody,.irow>.ibody{grid-column:1;grid-row:1;min-width:0;}
++.tcard>.row-icon,.tcard>.row-photo,.irow>.row-icon,.irow>.row-photo{grid-column:2;grid-row:1;margin-top:72px;}
++.row-icon{width:24px;height:24px;flex-basis:24px;background:transparent;border-radius:8px;color:#84918b;font-size:14px;}
++.row-icon svg{width:18px;height:18px;}
++.row-photo{width:24px;height:24px;flex-basis:24px;border-radius:8px;}
++.tcard>.icheck,.irow>.icheck{grid-column:2;grid-row:1;align-self:start;margin:35px 2px 0;width:18px;height:18px;min-width:18px;accent-color:var(--accent,var(--sage-dark));cursor:pointer;}
++.tcard:not(:has(.activity-time))>.icheck{margin-top:4px;}
++.irow:not(:has(.itime))>.icheck{margin-top:4px;}
++.activity-time,.irow .itime{display:block;width:fit-content;direction:ltr;unicode-bidi:isolate;font-size:20px;line-height:1.2;font-weight:700;color:var(--accent-dark,var(--ink));font-variant-numeric:tabular-nums;margin-bottom:8px;}
++.tact,.irow .iact{font-size:16px;font-weight:700;line-height:1.5;overflow-wrap:anywhere;}
++.irow-top{display:flex;flex-direction:column-reverse;align-items:flex-start;gap:0;}
++.tmeta,.irow .imeta{font-size:13px;line-height:1.6;color:var(--muted);margin-top:8px;gap:8px;overflow-wrap:anywhere;}
++.tnotes,.irow .imore,.irow .inotes{font-size:12px;font-weight:400;color:var(--muted);line-height:1.75;opacity:1;margin-top:12px;overflow-wrap:anywhere;}
++.tcard .chip-row,.irow .chip-row{gap:8px;margin-top:12px;align-items:center;}
++.tcard .chip.mini,.irow .chip.mini,.irow .ibaht,.tag-s{border:0;border-radius:8px;padding:4px 8px;background:#f0f3f2;font-size:11px;line-height:1.6;font-weight:500;color:#52625c;}
++.tag-s.booked,.tag-s.paid{background:#e8f3ed;color:#35634e;}
++.tag-s.onsite{background:#f0f3f2;color:#59675f;}
++.tcard.done,.irow.done{opacity:1;background:#fbfcfb;}
++.tcard.done .tact,.irow.done .iact{color:var(--muted);}
++.tcard.done::before,.irow.done::before{background:#719482;border-color:#719482;}
++.deck-total{border:0;margin-top:24px;padding:16px;background:#edf2ef;border-radius:12px;font-size:12px;line-height:1.8;}
++.deck-hint{margin-top:24px;font-size:12px;}
++.day-card .dtitle{font-family:inherit;font-size:18px;font-weight:700;line-height:1.5;}
++.day-rows{margin:16px 12px;}
++#bottomnav{padding:8px 8px calc(8px + env(safe-area-inset-bottom));background:rgba(255,255,255,.97);border-top:1px solid var(--line);box-shadow:0 -4px 24px rgba(30,50,42,.035);gap:4px;}
++.nav-btn{min-width:0;min-height:52px;flex:1;color:#7b8781;font-size:11px;gap:4px;border-radius:12px;}
++.nav-btn .ni{display:flex;align-items:center;justify-content:center;font-size:20px;}
++.nav-btn.active{color:var(--accent-dark,var(--sage-dark));background:var(--accent-soft,#edf3ef);font-weight:700;}
++.nav-btn.active::before,.nav-btn.active::after{display:none;}
++.more-destinations{margin-bottom:16px;}
++bdi,[dir="ltr"]{unicode-bidi:isolate;}
++button:focus-visible,a:focus-visible,input:focus-visible{outline:2px solid var(--accent,var(--sage-dark));outline-offset:4px;}
++@media(prefers-reduced-motion:reduce){.photo img{animation:none;}.deck-card{transition:none!important;}}
++.tcard .icheck:checked,.irow .icheck:checked{background-color:var(--accent,var(--sage-dark));border-color:var(--accent,var(--sage-dark));background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 18'%3E%3Cpath d='m4 9 3 3 7-7' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");}
+diff --git a/public/trip-app.js b/public/trip-app.js
+index b23e0f3..12f294a 100644
+--- a/public/trip-app.js
++++ b/public/trip-app.js
+@@ -989,6 +989,25 @@ function render(){
+ /* =========================================================
+    ניווט — לכל אחד הלשוניות שרלוונטיות לו
+ ========================================================= */
++function uiIcon(name){
++  const paths = {
++    home:'<path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1Z"/>',
++    today:'<rect x="3" y="5" width="18" height="16" rx="3"/><path d="M7 3v4m10-4v4M3 11h18m-13 5h3"/>',
++    route:'<circle cx="12" cy="12" r="9"/><path d="m16 8-3 5-5 3 3-5Z"/>',
++    money:'<rect x="3" y="5" width="18" height="15" rx="3"/><path d="M3 9h18m-5 5h2"/>',
++    more:'<circle cx="5" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/>',
++    'אוכל':'<path d="M5 3v7m4-7v7M3 3v5a4 4 0 0 0 8 0V3M7 12v9m11-18v18m0-18c-5 4-5 10 0 10"/>',
++    'תחבורה':'<rect x="4" y="5" width="16" height="13" rx="3"/><path d="M4 12h16M7 18v3m10-3v3M8 8h8"/>',
++    'אטרקציות':'<path d="M20 10c0 6-8 11-8 11S4 16 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2"/>',
++    'לינה':'<path d="M3 21V5h18v16M8 21v-5h8v5M7 9h2m6 0h2"/>',
++    'אחר':'<circle cx="12" cy="12" r="8"/><path d="M12 8v4m0 4h.01"/>'
++  };
++  return `<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${paths[name]||paths['אחר']}</svg>`;
++}
++// Isolate embedded Latin identifiers and numeric values inside Hebrew copy.
++function itineraryText(value){
++  return String(value||'').split(/([A-Za-z0-9][A-Za-z0-9:.,/–−+() -]*)/g).map((text,i)=>i%2?`<bdi dir="ltr">${escapeHtml(text)}</bdi>`:escapeHtml(text)).join('');
++}
+ function navItems(){
+   const common = [
+     {tab:'home',  icon:'🏠', label:'בית'},
+@@ -996,18 +1015,15 @@ function navItems(){
+     {tab:'route', icon:'🧭', label:'המסלול'},
+     {tab:'money', icon:'💸', label:'כסף'}
+   ];
+-  // לטליה יש ארבע מדינות לנהל; לאיתי יש שבועיים במדינה אחת, ולכן מפה במקום
+-  const mid = meId()==='talia'
+-    ? [{tab:'countries', icon:'🌍', label:'מדינות'}]
+-    : [{tab:'map', icon:'🗺️', label:'מפה'}];
+-  return [...common, ...mid, {tab:'more', icon:'🎒', label:'עוד'}];
++  return [...common, {tab:'more', icon:'more', label:'עוד'}];
+ }
++
+ function renderNav(){
+   const nav = document.getElementById('bottomnav');
+   if(!nav) return;
+   nav.innerHTML = navItems().map(n=>
+-    `<button class="nav-btn ${activeTab===n.tab?'active':''}" data-action="setTab" data-id="${n.tab}">
+-       <span class="ni">${n.icon}</span>${n.label}
++    `<button class="nav-btn ${(activeTab===n.tab || (n.tab==='more' && ['map','countries'].includes(activeTab)))?'active':''}" data-action="setTab" data-id="${n.tab}">
++       <span class="ni">${uiIcon(n.tab)}</span>${n.label}
+      </button>`).join('');
+ }
+ 
+@@ -1304,7 +1320,7 @@ const ROW_ICONS = {'אוכל':'🍜','תחבורה':'🛵','אטרקציות':'
+ 
+ function rowThumb(r){
+   if(r.wiki) return imageBox(r.wiki, '#8C8272', 'row-photo');
+-  return `<div class="row-icon">${ROW_ICONS[r.cat] || '•'}</div>`;
++  return `<div class="row-icon">${uiIcon(r.cat)}</div>`;
+ }
+ 
+ function renderDayCard(day){
+@@ -1331,16 +1347,16 @@ function renderSharedRow(day, r){
+   const hasMore = !!(r.notes || r.link || r.baht);
+   return `
+   <div class="irow ${r.done?'done':''} ${open?'open':''}">
+-    <input class="icheck" type="checkbox" ${r.done?'checked':''} data-action="toggleSharedRow" data-day="${day.id}" data-id="${r.id}">
++    <input class="icheck" aria-label="${escapeAttr(r.act)}" type="checkbox" ${r.done?'checked':''} data-action="toggleSharedRow" data-day="${day.id}" data-id="${r.id}">
+     ${rowThumb(r)}
+     <div class="ibody" ${hasMore?`data-action="toggleRow" data-id="${r.id}"`:''}>
+       <div class="irow-top">
+-        <div class="iact">${r.act}</div>
+-        ${r.time?`<div class="itime">${r.time}</div>`:''}
++        <div class="iact">${itineraryText(r.act)}</div>
++        ${r.time?`<div class="itime" dir="ltr">${escapeHtml(r.time)}</div>`:''}
+       </div>
+       <div class="imeta">
+-        ${meta}
+-        ${r.baht?`<span class="ibaht">${baht(r.baht)}</span>`:''}
++        ${itineraryText(meta)}
++        ${r.baht?`<span class="ibaht" dir="ltr">${baht(r.baht)}</span>`:''}
+         <span class="tag-s ${statusCls}">${r.status||''}</span>
+       </div>
+       ${open ? `
+@@ -1414,23 +1430,19 @@ function renderToday(){
+         <div class="deck-hero">
+           ${imageBox(dest && dest.wiki, dest && dest.hue, 'deck-photo')}
+           <div class="deck-hero-text">
+-            <div class="deck-when">${when} · יום ${day.day} מתוך ${days.length}</div>
++            <div class="deck-when">יום ${day.day} מתוך ${days.length}</div>
+             <div class="deck-place">${day.dest}</div>
+-            <div class="deck-date">${day.dow} ${fmtDate(day.date)}</div>
+-          </div>
+-          <div class="deck-ring">
+-            <svg viewBox="0 0 36 36" class="ring">
+-              <path class="ring-bg" d="M18 2.5a15.5 15.5 0 1 1 0 31 15.5 15.5 0 0 1 0-31"/>
+-              <path class="ring-fill" stroke-dasharray="${pct}, 100"
+-                    d="M18 2.5a15.5 15.5 0 1 1 0 31 15.5 15.5 0 0 1 0-31"/>
+-            </svg>
+-            <span>${done}/${day.rows.length}</span>
++            <div class="deck-date">${day.dow} <bdi dir="ltr">${fmtDate(day.date)}</bdi></div>
+           </div>
+         </div>
++        <div class="deck-status">
++          <span>${when}</span>
++          <span class="day-progress"><bdi dir="ltr">${done}/${day.rows.length}</bdi><span class="progress-track" role="progressbar" aria-label="התקדמות היום" aria-valuenow="${done}" aria-valuemin="0" aria-valuemax="${day.rows.length}"><span style="width:${pct}%"></span></span></span>
++        </div>
+ 
+         <div class="deck-body">
+-          ${day.summary?`<div class="deck-summary">${day.summary}</div>`:''}
+-          ${day.rows.map(r=>renderTodayRow(day, r)).join('')}
++          ${day.summary?`<h1 class="deck-summary">${itineraryText(day.summary)}</h1>`:''}
++          <div class="activity-timeline">${day.rows.map(r=>renderTodayRow(day, r)).join('')}</div>
+           <div class="deck-total">
+             סה״כ היום · ${baht(dayTotalBaht(day))} · ${ils(toIls(dayTotalBaht(day)))}
+           </div>
+@@ -1444,21 +1456,20 @@ function renderToday(){
+ 
+ function renderTodayRow(day, r){
+   const statusCls = SHARED_STATUS_CLASS[r.status] || 'onsite';
+-  const meta = [r.time, r.loc].filter(Boolean).join(' · ');
+   return `
+   <div class="tcard ${r.done?'done':''}">
+     ${rowThumb(r)}
+     <div class="tbody">
+-      <div class="tact">${r.act}</div>
+-      <div class="tmeta">${meta}</div>
++      <div class="activity-heading">${r.time?`<div class="activity-time" dir="ltr">${escapeHtml(r.time)}</div>`:''}<div class="tact">${itineraryText(r.act)}</div></div>
++      ${r.loc?`<div class="tmeta">${itineraryText(r.loc)}</div>`:''}
+       <div class="chip-row tight">
+-        ${r.baht?`<span class="chip mini">${baht(r.baht)}</span>`:''}
++        ${r.baht?`<span class="chip mini price-badge" dir="ltr">${baht(r.baht)}</span>`:''}
+         <span class="tag-s ${statusCls}">${r.status||''}</span>
+         ${r.link?`<a class="chip mini" href="${r.link}" target="_blank" rel="noopener">↗</a>`:''}
+       </div>
+-      ${r.notes?`<div class="tnotes">${r.notes}</div>`:''}
++      ${r.notes?`<div class="tnotes">${itineraryText(r.notes)}</div>`:''}
+     </div>
+-    <input class="icheck" type="checkbox" ${r.done?'checked':''}
++    <input class="icheck" aria-label="${escapeAttr(r.act)}" type="checkbox" ${r.done?'checked':''}
+            data-action="toggleSharedRow" data-day="${day.id}" data-id="${r.id}">
+   </div>`;
+ }
+@@ -2177,6 +2188,7 @@ function renderMore(){
+   return `
+   <div class="section" style="padding-bottom:0;">
+     <div class="section-title">עוד</div>
++    <div class="chip-row more-destinations"><button class="chip" data-action="setTab" data-id="map">מפה</button>${meId()==='talia'?`<button class="chip" data-action="setTab" data-id="countries">מדינות</button>`:''}</div>
+     <div class="subnav">${tabs.map(t=>`<button class="${moreSection===t[0]?'active':''}" data-action="setMore" data-id="${t[0]}">${t[1]}</button>`).join('')}</div>
+   </div>
+   <div class="section" style="padding-top:0;">
