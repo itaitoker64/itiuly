@@ -701,12 +701,13 @@ window.SHARED_SEED = {
      "act": "צהריים במחנה",
      "loc": "KYN Phoenix",
      "cat": "אוכל",
-     "baht": 350.0,
+     "baht": null,
      "status": "משלמים במקום",
      "link": "",
-     "notes": "",
+     "notes": "כלול בחבילת המחנה — אוכל ואימונים כלולים חוץ מיום ראשון",
      "id": "s_4_10",
-     "done": false
+     "done": false,
+     "managed": true
     },
     {
      "time": "13:00",
@@ -727,13 +728,14 @@ window.SHARED_SEED = {
      "act": "אימון ראשון — טכניקה, לא כושר",
      "loc": "KYN Phoenix",
      "cat": "אטרקציות",
-     "baht": 850.0,
-     "status": "להזמין",
+     "baht": null,
+     "status": "משלמים במקום",
      "link": "",
-     "notes": "את החזק עושים מחר בבוקר",
+     "notes": "כלול בחבילת המחנה — אוכל ואימונים כלולים חוץ מיום ראשון",
      "id": "s_4_12",
      "done": false,
-     "wiki": "Muay Thai"
+     "wiki": "Muay Thai",
+     "managed": true
     },
     {
      "time": "18:30",
@@ -741,25 +743,27 @@ window.SHARED_SEED = {
      "act": "ארוחת ערב במחנה",
      "loc": "KYN Phoenix",
      "cat": "אוכל",
-     "baht": 350.0,
+     "baht": null,
      "status": "משלמים במקום",
      "link": "",
-     "notes": "",
+     "notes": "כלול בחבילת המחנה — אוכל ואימונים כלולים חוץ מיום ראשון",
      "id": "s_4_13",
-     "done": false
+     "done": false,
+     "managed": true
     },
     {
      "time": "",
      "dur": "",
-     "act": "לינה — Panoramic Sunset View Apartment",
+     "act": "חבילת KYN Phoenix — Sea House Room · 3 לילות",
      "loc": "KYN Phoenix, קו יאו נוי",
      "cat": "לינה",
-     "baht": 3800.0,
+     "baht": 12150,
      "status": "להזמין",
      "link": "https://www.phuket-krabi-muaythai.com/prices-accomodation/",
-     "notes": "לשאול על חבילה שכוללת חדר, ארוחות ואימונים — ואם ฿3,800 הוא לחדר או לאדם",
+     "notes": "฿12,150 לכל השהייה, כולל חדר, ארוחות ואימוני קבוצה — חוץ מיום ראשון, שבו אין אימונים ואין הגשת אוכל. מקדמה 50% (฿6,075) ב-Wise והיתרה במזומן בהגעה; אין כרטיסי אשראי במקום. המחיר תוקן מ-฿14,580 שהיה תעריף הדירה הפנורמית.",
      "id": "s_4_14",
-     "done": false
+     "done": false,
+     "managed": true
     }
    ],
    "summary": "דרומה, ואז מחוץ למפה",
@@ -777,12 +781,13 @@ window.SHARED_SEED = {
      "act": "ארוחת בוקר קלה",
      "loc": "המחנה",
      "cat": "אוכל",
-     "baht": 150.0,
+     "baht": null,
      "status": "משלמים במקום",
      "link": "",
-     "notes": "לא לאכול כבד לפני אימון",
+     "notes": "כלול בחבילת המחנה — אוכל ואימונים כלולים חוץ מיום ראשון",
      "id": "s_5_0",
-     "done": false
+     "done": false,
+     "managed": true
     },
     {
      "time": "07:30",
@@ -790,12 +795,13 @@ window.SHARED_SEED = {
      "act": "אימון בוקר — חבל, פאדים, שק, קלינץ׳",
      "loc": "KYN Phoenix",
      "cat": "אטרקציות",
-     "baht": 850.0,
+     "baht": null,
      "status": "משלמים במקום",
      "link": "",
-     "notes": "฿400–500 לאימון · חבילות רב-יומיות זולות יותר",
+     "notes": "כלול בחבילת המחנה — אוכל ואימונים כלולים חוץ מיום ראשון",
      "id": "s_5_1",
-     "done": false
+     "done": false,
+     "managed": true
     },
     {
      "time": "09:45",
@@ -803,12 +809,13 @@ window.SHARED_SEED = {
      "act": "ארוחת בוקר אמיתית",
      "loc": "המחנה",
      "cat": "אוכל",
-     "baht": 300.0,
+     "baht": null,
      "status": "משלמים במקום",
      "link": "",
-     "notes": "שני אימונים ביום = 1,400–1,800 קלוריות מעל הרגיל. לא לרוץ בגירעון",
+     "notes": "כלול בחבילת המחנה — אוכל ואימונים כלולים חוץ מיום ראשון",
      "id": "s_5_2",
-     "done": false
+     "done": false,
+     "managed": true
     },
     {
      "time": "11:00",
@@ -832,9 +839,10 @@ window.SHARED_SEED = {
      "baht": 400.0,
      "status": "משלמים במקום",
      "link": "",
-     "notes": "",
+     "notes": "מחוץ למחנה — לא כלול בחבילה",
      "id": "s_5_4",
-     "done": false
+     "done": false,
+     "managed": true
     },
     {
      "time": "13:45",
@@ -855,12 +863,13 @@ window.SHARED_SEED = {
      "act": "אימון שני",
      "loc": "KYN Phoenix",
      "cat": "אטרקציות",
-     "baht": 850.0,
+     "baht": null,
      "status": "משלמים במקום",
      "link": "",
-     "notes": "",
+     "notes": "כלול בחבילת המחנה — אוכל ואימונים כלולים חוץ מיום ראשון",
      "id": "s_5_6",
-     "done": false
+     "done": false,
+     "managed": true
     },
     {
      "time": "18:30",
@@ -868,25 +877,27 @@ window.SHARED_SEED = {
      "act": "ארוחת ערב",
      "loc": "המחנה",
      "cat": "אוכל",
-     "baht": 400.0,
+     "baht": null,
      "status": "משלמים במקום",
      "link": "",
-     "notes": "",
+     "notes": "כלול בחבילת המחנה — אוכל ואימונים כלולים חוץ מיום ראשון",
      "id": "s_5_7",
-     "done": false
+     "done": false,
+     "managed": true
     },
     {
      "time": "",
      "dur": "",
-     "act": "לינה — Panoramic Sunset View Apartment",
+     "act": "לינה — Sea House Room · KYN Phoenix",
      "loc": "KYN Phoenix",
      "cat": "לינה",
-     "baht": 3800.0,
+     "baht": null,
      "status": "להזמין",
      "link": "https://www.phuket-krabi-muaythai.com/prices-accomodation/",
-     "notes": "",
+     "notes": "כלול בחבילת המחנה — אוכל ואימונים כלולים חוץ מיום ראשון",
      "id": "s_5_8",
-     "done": false
+     "done": false,
+     "managed": true
     },
     {
      "id": "s_5_moto",
@@ -918,12 +929,13 @@ window.SHARED_SEED = {
      "act": "ארוחת בוקר קלה",
      "loc": "המחנה",
      "cat": "אוכל",
-     "baht": 150.0,
+     "baht": null,
      "status": "משלמים במקום",
      "link": "",
-     "notes": "",
+     "notes": "כלול בחבילת המחנה — אוכל ואימונים כלולים חוץ מיום ראשון",
      "id": "s_6_0",
-     "done": false
+     "done": false,
+     "managed": true
     },
     {
      "time": "07:30",
@@ -931,12 +943,13 @@ window.SHARED_SEED = {
      "act": "אימון בוקר",
      "loc": "KYN Phoenix",
      "cat": "אטרקציות",
-     "baht": 850.0,
+     "baht": null,
      "status": "משלמים במקום",
      "link": "",
-     "notes": "אחה״צ חופשי — יוצאים למפרץ",
+     "notes": "כלול בחבילת המחנה — אוכל ואימונים כלולים חוץ מיום ראשון",
      "id": "s_6_1",
-     "done": false
+     "done": false,
+     "managed": true
     },
     {
      "time": "09:45",
@@ -944,12 +957,13 @@ window.SHARED_SEED = {
      "act": "ארוחת בוקר",
      "loc": "המחנה",
      "cat": "אוכל",
-     "baht": 300.0,
+     "baht": null,
      "status": "משלמים במקום",
      "link": "",
-     "notes": "",
+     "notes": "כלול בחבילת המחנה — אוכל ואימונים כלולים חוץ מיום ראשון",
      "id": "s_6_2",
-     "done": false
+     "done": false,
+     "managed": true
     },
     {
      "time": "12:00",
@@ -960,9 +974,10 @@ window.SHARED_SEED = {
      "baht": 400.0,
      "status": "משלמים במקום",
      "link": "",
-     "notes": "",
+     "notes": "מחוץ למחנה — לא כלול בחבילה",
      "id": "s_6_3",
-     "done": false
+     "done": false,
+     "managed": true
     },
     {
      "time": "13:30",
@@ -1013,9 +1028,10 @@ window.SHARED_SEED = {
      "baht": 450.0,
      "status": "משלמים במקום",
      "link": "",
-     "notes": "",
+     "notes": "מחוץ למחנה — לא כלול בחבילה",
      "id": "s_6_7",
-     "done": false
+     "done": false,
+     "managed": true
     },
     {
      "time": "",
@@ -1034,15 +1050,16 @@ window.SHARED_SEED = {
     {
      "time": "",
      "dur": "",
-     "act": "לינה — Panoramic Sunset View Apartment",
+     "act": "לינה — Sea House Room · KYN Phoenix",
      "loc": "KYN Phoenix",
      "cat": "לינה",
-     "baht": 3800.0,
+     "baht": null,
      "status": "להזמין",
      "link": "https://www.phuket-krabi-muaythai.com/prices-accomodation/",
-     "notes": "",
+     "notes": "כלול בחבילת המחנה — אוכל ואימונים כלולים חוץ מיום ראשון",
      "id": "s_6_9",
-     "done": false
+     "done": false,
+     "managed": true
     }
    ],
    "summary": "אימון בוקר, ואז המפרץ",
@@ -1057,28 +1074,30 @@ window.SHARED_SEED = {
     {
      "time": "06:45",
      "dur": "0:30",
-     "act": "ארוחת בוקר קלה",
-     "loc": "המחנה",
+     "act": "ארוחת בוקר מחוץ למחנה",
+     "loc": "קו יאו נוי",
      "cat": "אוכל",
-     "baht": 150.0,
+     "baht": 250,
      "status": "משלמים במקום",
      "link": "",
-     "notes": "",
+     "notes": "יום ראשון — המחנה לא מגיש ארוחות. לאכול בכפר לפני הסירה",
      "id": "s_7_0",
-     "done": false
+     "done": false,
+     "managed": true
     },
     {
      "time": "07:30",
      "dur": "2:00",
-     "act": "אימון אחרון",
+     "act": "בוקר חופשי — אין אימון ביום ראשון",
      "loc": "KYN Phoenix",
      "cat": "אטרקציות",
-     "baht": 850.0,
+     "baht": null,
      "status": "משלמים במקום",
      "link": "",
-     "notes": "אם הרגליים מרשות",
+     "notes": "המחנה לא מאמן בימי ראשון. האימון האחרון הוא של שבת בבוקר — לתכנן אותו כחזק",
      "id": "s_7_1",
-     "done": false
+     "done": false,
+     "managed": true
     },
     {
      "time": "09:45",
@@ -1213,7 +1232,7 @@ window.SHARED_SEED = {
      "managed": true
     }
    ],
-   "summary": "אימון אחרון, ואז חוצים את המפרץ",
+   "summary": "יוצאים מהאי — בלי אימון, יום ראשון",
    "id": "day_7"
   },
   {
@@ -2243,6 +2262,14 @@ window.SHARED_SEED = {
    "freeCancel": "ביטול חינם עד 20/11 23:59"
   },
   {
+   "what": "KYN Phoenix Muay Thai · Sea House Room",
+   "when": "26–29/11",
+   "details": "קו יאו נוי · 3 לילות · חדר, ארוחות ואימוני קבוצה",
+   "ref": "אושר במייל — נסגר עם המקדמה",
+   "payment": "฿12,150 · מקדמה ฿6,075 ב-Wise, היתרה ฿6,075 במזומן בהגעה",
+   "freeCancel": "אין — המקדמה אינה מוחזרת"
+  },
+  {
    "what": "Chermantra Aonang Resort",
    "when": "29/11–2/12",
    "details": "אאו נאנג · 3 לילות · Mountain Pool Villa · ארוחת בוקר",
@@ -2308,11 +2335,11 @@ window.SHARED_SEED = {
    "dest": "קו יאו נוי",
    "dates": "26–29/11",
    "nights": 3,
-   "hotel": "Panoramic Sunset View · KYN Phoenix",
-   "what": "המחנה עצמו. מי שלא מתאכסן אצלם מקבל שיעורים פרטיים בלבד — זה ההבדל המהותי.",
-   "perNight": 3800,
+   "hotel": "Sea House Room · KYN Phoenix",
+   "what": "החבילה שנסגרה מול המחנה: חדר, ארוחות ואימוני קבוצה ל-3 לילות ב-฿12,150. ביום ראשון אין אימונים ואין הגשת אוכל.",
+   "perNight": 4050,
    "choice": "הבחירה",
-   "freeCancel": "אין — מקדמה 50%",
+   "freeCancel": "אין — מקדמה 50% שאינה מוחזרת",
    "link": "בוקינג",
    "linkLink": "https://www.phuket-krabi-muaythai.com/prices-accomodation/"
   },
@@ -2508,6 +2535,16 @@ window.SHARED_SEED = {
    "לצלם וידאו סביב הקטנוע לפני היציאה — שריטות, מראות, פנסים, מד דלק.",
    "ביטוח: לוודא שהפוליסה של איתי מכסה רכיבה, ושל טליה מכסה נסיעה כנוסעת. לבדוק גם עד איזה נפח מנוע — הרבה פוליסות עוצרות ב-125cc.",
    "לסרי לנקה צריך היתר נפרד — אישור של ה-AA המקומי. רלוונטי רק אם טליה רוכבת שם בעצמה."
+  ]
+ },
+ "campPayment": {
+  "title": "תשלום למחנה בקו יאו נוי",
+  "lines": [
+   "סה״כ ฿12,150 לשהייה. מקדמה 50% — ฿6,075 — ב-Wise מראש; היתרה ฿6,075 במזומן בהגעה.",
+   "במקום לא מקבלים כרטיסי אשראי ולא העברות בנקאיות — להגיע עם המזומן.",
+   "פרטי החשבון שנשלחו: Government Savings Bank (GSB) תאילנד · חשבון 020488417021 · SWIFT GSBATHBKXXX · על שם Pattama Srikanha.",
+   "לפני ההעברה — לאשר את פרטי החשבון בערוץ שני (טלפון או וואטסאפ למחנה). פרטי בנק שמגיעים במייל הם הדבר הכי מזויף בהזמנות טיולים, והחשבון כאן הוא על שם פרטי ובכתובת בחון קאן ולא באי.",
+   "המחיר תוקן מ-฿14,580 ל-฿12,150 — לוודא שהסכום בבקשת התשלום תואם."
   ]
  }
 };

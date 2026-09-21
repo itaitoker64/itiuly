@@ -69,7 +69,7 @@ function seedData(){
   const hanoiId = uid('d'), manilaId = uid('d');
 
   return {
-    schema:5,
+    schema:6,
     tripName:"My Big Trip 🌏",
     startDate:"2026-11-22",
     endDate:null,
@@ -97,6 +97,12 @@ function seedData(){
          amount:1891, currency:"ILS", paidBy:"talia", split:"full-itai", status:"paid", note:"הטיסה הביתה של איתי · אישור IL-604062"},
         {id:uid('x'), date:"2026-09-10", title:"Chermantra Aonang · 3 לילות", category:"accommodation",
          amount:1839, currency:"ILS", paidBy:"itai", split:"ratio", status:"paid", note:"אישור 5553772333 · ביטול חינם עד 14/11"},
+        {id:uid('x'), date:"2026-10-01", title:"KYN Phoenix · מקדמה 50%", category:"accommodation",
+         amount:6075, currency:"THB", paidBy:"itai", split:"ratio", status:"due",
+         note:"ב-Wise, לפני ההגעה · GSB תאילנד, חשבון 020488417021, SWIFT GSBATHBKXXX, על שם Pattama Srikanha · לאשר את הפרטים בטלפון לפני ההעברה"},
+        {id:uid('x'), date:"2026-11-26", title:"KYN Phoenix · יתרה במזומן בהגעה", category:"accommodation",
+         amount:6075, currency:"THB", paidBy:"itai", split:"ratio", status:"due",
+         note:"מזומן בלבד — במחנה לא מקבלים כרטיסים ולא העברות"},
         {id:uid('x'), date:"2026-11-23", title:"Montraj Coach Sukhumvit · 3 לילות בבנגקוק", category:"accommodation",
          amount:1128, currency:"ILS", paidBy:"itai", split:"ratio", status:"due",
          note:"אישור 5123136373 · משלמים במקום בצ׳ק-אין · פיקדון ฿1,000 מזומן, מוחזר בצ׳ק-אאוט"},
@@ -202,7 +208,9 @@ function seedData(){
       {id:uid('m'), category:"תרופות", title:"להצטייד בערכת תרופות בסיסית", status:"todo", deadline:"", notes:"", priority:"בינונית", link:"", countryId:null, order:7},
       {id:uid('m'), owner:"both", category:"הזמנות", title:"לסגור את צ׳רמנטרה לפני הדדליין", status:"todo", deadline:"2026-11-14", notes:"אחרי 14/11 הכרטיס מחויב במלוא הסכום", priority:"גבוהה", link:"", countryId:"thailand", order:8},
       {id:uid('m'), owner:"both", category:"הזמנות", title:"להזמין את טיסת Vietjet VZ314 לפוקט", status:"todo", deadline:"2026-11-01", notes:"฿4,720 לשניים, Deluxe עם 20 ק״ג", priority:"גבוהה", link:"", countryId:"thailand", order:9},
-      {id:uid('m'), owner:"both", category:"הזמנות", title:"לסגור את המחנה בקו יאו נוי", status:"todo", deadline:"2026-10-20", notes:"מקדמה 50% שאינה מוחזרת — לשאול אם ฿3,800 כולל ארוחות ואימונים", priority:"גבוהה", link:"", countryId:"thailand", order:10},
+      {id:uid('m'), owner:"both", category:"הזמנות", title:"לאשר טלפונית את פרטי החשבון של המחנה", status:"todo", deadline:"2026-10-05", notes:"לפני שמעבירים ฿6,075 — פרטי בנק במייל הם הדבר הכי מזויף בהזמנות. החשבון על שם פרטי ובכתובת בחון קאן, לא באי", priority:"גבוהה", link:"", countryId:"thailand", order:10},
+      {id:uid('m'), owner:"both", category:"הזמנות", title:"להעביר מקדמה ฿6,075 ב-Wise למחנה", status:"todo", deadline:"2026-10-10", notes:"זה מה שסוגר את ההזמנה. ฿12,150 סה״כ, היתרה במזומן בהגעה", priority:"גבוהה", link:"", countryId:"thailand", order:11},
+      {id:uid('m'), owner:"both", category:"הזמנות", title:"למשוך ฿6,075 מזומן ליתרה במחנה", status:"todo", deadline:"2026-11-25", notes:"אין כרטיסים ואין העברות במקום. כספומט גובה ฿220 לכל משיכה — למשוך בבת אחת", priority:"בינונית", link:"", countryId:"thailand", order:12},
       {id:uid('m'), owner:"both", category:"כניסה לתאילנד", title:"להגיש TDAC — 72 שעות לפני הנחיתה", status:"todo", deadline:"2026-11-19", notes:"חובה, חינם, אונליין. כל אתר שגובה כסף הוא לא הרשמי", priority:"גבוהה", link:"", countryId:"thailand", order:11},
 
       {id:uid('m'), owner:"itai", category:"מואיי תאי", title:"לקנות מגן שיניים בארץ", status:"todo", deadline:"2026-11-15", notes:"", priority:"בינונית", link:"", countryId:null, order:12},
@@ -559,6 +567,24 @@ function ensureDefaults(){
       }
     });
     STATE.schema = 5;
+  }
+
+  /* חבילת המחנה בקו יאו נוי, אחרי שהמחיר והתנאים סוכמו מול KYN Phoenix */
+  if(STATE.schema < 6){
+    const seedShared = window.SHARED_SEED;
+    if(seedShared && STATE.shared){
+      if(seedShared.campPayment) STATE.shared.campPayment = seedShared.campPayment;
+      if(seedShared.bookings) STATE.shared.bookings = JSON.parse(JSON.stringify(seedShared.bookings));
+      if(seedShared.hotels) STATE.shared.hotels = JSON.parse(JSON.stringify(seedShared.hotels));
+    }
+    fresh.money.expenses.forEach(seedExpense=>{
+      if(!STATE.money.expenses.some(x=>x.title===seedExpense.title)){
+        STATE.money.expenses.push(JSON.parse(JSON.stringify(seedExpense)));
+      }
+    });
+    // ההערה הישנה על המחנה כבר לא נכונה — הוחלפה במשימות אמיתיות
+    STATE.masterChecklist = STATE.masterChecklist.filter(t=>t.title!=='לסגור את המחנה בקו יאו נוי');
+    STATE.schema = 6;
   }
 
   /* משימות חדשות מתווספות בכל גרסה, לפי כותרת */
@@ -1763,13 +1789,19 @@ function renderBookingsSection(){
 }
 
 function renderInfoSection(){
+  const camp = sh().campPayment;
+  const campBlock = camp ? `
+    <div class="card warn">
+      <b>💳 ${camp.title}</b>
+      <ul class="moto-list">${camp.lines.map(l=>`<li>${l}</li>`).join('')}</ul>
+    </div>` : '';
   const moto = sh().scooterInfo;
   const motoBlock = moto ? `
     <div class="card warn">
       <b>🛵 ${moto.title}</b>
       <ul class="moto-list">${moto.lines.map(l=>`<li>${l}</li>`).join('')}</ul>
     </div>` : '';
-  return motoBlock + sh().info.map(i=>`<div class="info-row"><b>${i.topic}</b><span>${i.detail}</span></div>`).join('');
+  return campBlock + motoBlock + sh().info.map(i=>`<div class="info-row"><b>${i.topic}</b><span>${i.detail}</span></div>`).join('');
 }
 
 function renderWhoPill(){
