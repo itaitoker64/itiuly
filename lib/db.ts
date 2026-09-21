@@ -101,5 +101,43 @@ export async function ensureSchema(): Promise<void> {
       updated_by TEXT
     )
   `;
+  await sql`
+    CREATE TABLE IF NOT EXISTS trip_state_history (
+      id         BIGSERIAL PRIMARY KEY,
+      state_id   TEXT NOT NULL,
+      data       JSONB NOT NULL,
+      version    BIGINT NOT NULL,
+      saved_at   TIMESTAMPTZ NOT NULL DEFAULT now(),
+      saved_by   TEXT
+    )
+  `;
+  await sql`
+    CREATE INDEX IF NOT EXISTS trip_state_history_lookup
+      ON trip_state_history (state_id, version DESC)
+  `;
+  await sql`
+    CREATE TABLE IF NOT EXISTS login_attempts (
+      username   TEXT NOT NULL,
+      at         TIMESTAMPTZ NOT NULL DEFAULT now(),
+      ok         BOOLEAN NOT NULL
+    )
+  `;
+  await sql`
+    CREATE INDEX IF NOT EXISTS login_attempts_recent ON login_attempts (username, at DESC)
+  `;
+  await sql`
+    CREATE TABLE IF NOT EXISTS trip_files (
+      id         TEXT PRIMARY KEY,
+      name       TEXT NOT NULL,
+      mime       TEXT NOT NULL,
+      bytes      BYTEA NOT NULL,
+      size       INTEGER NOT NULL,
+      uploaded_by TEXT,
+      uploaded_at TIMESTAMPTZ NOT NULL DEFAULT now()
+    )
+  `;
   initialized = true;
 }
+
+/** כמה גרסאות אחורה שומרים לכל מסמך */
+export const HISTORY_DEPTH = 30;

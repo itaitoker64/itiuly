@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
-import { sql, ensureSchema } from '@/lib/db';
+import { sql, ensureSchema, HISTORY_DEPTH } from '@/lib/db';
+import { mergeTripState } from '@/lib/merge';
 import { SESSION_COOKIE, verifySessionToken } from '@/lib/auth';
 import { getUser } from '@/lib/users';
 
@@ -86,6 +87,19 @@ export async function PUT(request: Request) {
     await ensureSchema();
     const json = JSON.stringify(data);
 
+    /** Keeps the last few versions, so a bad write is never the end of it. */
+    async function remember(row: StateRow) {
+      await sql`
+        INSERT INTO trip_state_history (state_id, data, version, saved_by)
+        VALUES (${STATE_ID}, ${JSON.stringify(row.data)}::jsonb, ${Number(row.version)}, ${user!.username})
+      `;
+      await sql`
+        DELETE FROM trip_state_history
+         WHERE state_id = ${STATE_ID}
+           AND version <= ${Number(row.version) - HISTORY_DEPTH}
+      `;
+    }
+
     if (baseVersion === 0) {
       // First write ever — only succeeds while the row does not exist yet.
       const inserted = (await sql`
@@ -95,6 +109,7 @@ export async function PUT(request: Request) {
         RETURNING data, version, updated_at, updated_by
       `) as StateRow[];
       if (inserted.length > 0) {
+        await remember(inserted[0]);
         return NextResponse.json({ ...describe(inserted[0]), me: user });
       }
     } else {
@@ -108,17 +123,53 @@ export async function PUT(request: Request) {
         RETURNING data, version, updated_at, updated_by
       `) as StateRow[];
       if (updated.length > 0) {
+        await remember(updated[0]);
         return NextResponse.json({ ...describe(updated[0]), me: user });
       }
     }
 
-    // Someone else wrote first — hand back what is actually stored.
+    // Someone else saved first. With the version this client started from still
+    // in history, both sets of edits can be combined instead of one being lost.
     const rows = (await sql`
       SELECT data, version, updated_at, updated_by
         FROM trip_state WHERE id = ${STATE_ID}
     `) as StateRow[];
+    const current = rows[0];
+
+    if (current && baseVersion > 0) {
+      const baseRows = (await sql`
+        SELECT data FROM trip_state_history
+         WHERE state_id = ${STATE_ID} AND version = ${baseVersion}
+         LIMIT 1
+      `) as { data: unknown }[];
+
+      if (baseRows.length > 0) {
+        const { merged, conflicts } = mergeTripState(baseRows[0].data, data, current.data);
+        const saved = (await sql`
+          UPDATE trip_state
+             SET data = ${JSON.stringify(merged)}::jsonb,
+                 version = version + 1,
+                 updated_at = now(),
+                 updated_by = ${user.username}
+           WHERE id = ${STATE_ID} AND version = ${Number(current.version)}
+          RETURNING data, version, updated_at, updated_by
+        `) as StateRow[];
+
+        if (saved.length > 0) {
+          await remember(saved[0]);
+          return NextResponse.json({
+            ...describe(saved[0]),
+            me: user,
+            merged: true,
+            conflicts,
+          });
+        }
+      }
+    }
+
+    // No common ancestor to merge from — hand back what is stored.
     return NextResponse.json(
-      { conflict: true, ...describe(rows[0]), me: user },
+      { conflict: true, ...describe(current), me: user },
       { status: 409 }
     );
   } catch (e) {

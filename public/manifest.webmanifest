@@ -1,0 +1,14 @@
+{
+  "name": "My Big Trip",
+  "short_name": "My Big Trip",
+  "lang": "he",
+  "dir": "rtl",
+  "start_url": "/trip",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#f6f7f7",
+  "theme_color": "#2f6f6b",
+  "icons": [
+    { "src": "/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}

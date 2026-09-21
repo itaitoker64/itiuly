@@ -254,6 +254,7 @@ function seedData(){
     /* חלוקת הוצאות בסגנון Splitwise */
     money:{
       rate:0.08981,                 // ฿1 בשקלים
+      rateChecked:"2026-09-10",      // מתי נבדק — משמש לאזהרה כשהוא מתיישן
       defaultSplit:{itai:0.6667, talia:0.3333},
       budgets:{itai:12000, talia:8000},
       expenses:[
@@ -804,7 +805,7 @@ function setSyncStatus(status){
     loading: ['טוען…', 'loading'],
     saving:  ['שומר…', 'saving'],
     saved:   [lastUpdatedBy ? ('מסונכרן · ' + lastUpdatedBy.displayName) : 'מסונכרן', 'saved'],
-    offline: ['אין חיבור — לא נשמר', 'offline'],
+    offline: [hasPendingOffline() ? 'אין חיבור — נשמר במכשיר' : 'אין חיבור', 'offline'],
     conflict:['עודכן במכשיר אחר', 'conflict']
   };
   const [label, cls] = map[status] || map.saved;
@@ -821,16 +822,65 @@ function adoptServerState(payload){
   }
 }
 
+/* ---------------------------------------------------------
+   עותק מקומי — כדי שהאפליקציה תיפתח גם בלי קליטה
+--------------------------------------------------------- */
+const CACHE_KEY = 'trip-state-cache-v1';
+
+function cacheState(){
+  try{
+    localStorage.setItem(CACHE_KEY, JSON.stringify({
+      data: STATE, version: serverVersion, by: lastUpdatedBy, at: Date.now()
+    }));
+  }catch(e){ /* אין מקום או שהאחסון חסום — ממשיכים בלי */ }
+}
+function readCachedState(){
+  try{
+    const raw = localStorage.getItem(CACHE_KEY);
+    return raw ? JSON.parse(raw) : null;
+  }catch(e){ return null; }
+}
+/** האם יש שינוי מקומי שממתין לקליטה */
+function hasPendingOffline(){
+  const cached = readCachedState();
+  return !!(cached && cached.pending);
+}
+function markOfflinePending(pending){
+  try{
+    const cached = readCachedState() || {};
+    cached.data = STATE; cached.version = serverVersion; cached.pending = pending; cached.at = Date.now();
+    localStorage.setItem(CACHE_KEY, JSON.stringify(cached));
+  }catch(e){}
+}
+
 async function loadState(){
   setSyncStatus('loading');
+
+  // קודם מהעותק המקומי, כדי שהמסך יהיה שם מיד גם בלי רשת
+  const cached = readCachedState();
+  if(cached && cached.data){
+    STATE = cached.data;
+    serverVersion = Number(cached.version) || 0;
+    lastUpdatedBy = cached.by || null;
+    ensureDefaults();
+    render();
+  }
+
   try{
     const res = await fetch('/api/state', {cache:'no-store'});
     if(res.status === 401){ window.location.href = '/login'; return; }
     if(!res.ok) throw new Error('load failed');
     const payload = await res.json();
     if(payload.data){
-      adoptServerState(payload);
-      setSyncStatus('saved');
+      // שינוי מקומי שנעשה בלי רשת גובר על מה שהיה בשרת לפניו
+      if(cached && cached.pending && Number(payload.version) === Number(cached.version)){
+        setSyncStatus('saving');
+        await flushSave();
+      }else{
+        adoptServerState(payload);
+        cacheState();
+        setSyncStatus('saved');
+      }
     }else{
       // מסד נתונים ריק — זורעים את התוכנית ההתחלתית ושומרים אותה לשרת
       STATE = seedData();
@@ -846,6 +896,7 @@ async function loadState(){
   }
   render();
   startSyncLoop();
+  registerServiceWorker();
 }
 
 /** שולח את המסמך לשרת. מחזיר true אם נשמר. */
@@ -872,15 +923,29 @@ async function flushSave(){
       return false;
     }
     if(!res.ok) throw new Error(payload.error || 'save failed');
+
+    // השרת מיזג את שני הצדדים — לוקחים את התוצאה
+    if(payload.merged && payload.data){
+      STATE = payload.data;
+      ensureDefaults();
+      render();
+      const clash = (payload.conflicts||[]).length;
+      toast(clash
+        ? 'אוחד עם השינויים של ' + (other().name) + ' · ' + clash + ' שדות נשמרו לפי הגרסה שלהם'
+        : 'אוחד עם השינויים של ' + other().name);
+    }
     serverVersion = Number(payload.version) || serverVersion;
     lastUpdatedBy = payload.me || lastUpdatedBy;
     storageAvailable = true;
     setSyncStatus('saved');
+    cacheState();
+    markOfflinePending(false);
     return true;
   }catch(e){
     storageAvailable = false;
     savePending = true;
     setSyncStatus('offline');
+    markOfflinePending(true);   // נשמר מקומית, יעלה כשתחזור קליטה
     return false;
   }finally{
     saveInFlight = false;
@@ -928,6 +993,16 @@ function startSyncLoop(){
       ));
     }
   });
+}
+
+function registerServiceWorker(){
+  if(!('serviceWorker' in navigator)) return;
+  navigator.serviceWorker.register('/sw.js').catch(()=>{ /* לא קריטי */ });
+  window.addEventListener('online', ()=>{
+    if(savePending || hasPendingOffline()) flushSave();
+    else syncNow();
+  });
+  window.addEventListener('offline', ()=> setSyncStatus('offline'));
 }
 
 function modalOpen(){
@@ -1003,7 +1078,31 @@ function reorder(list, id, dir){
 ========================================================= */
 function fmtDate(d){ if(!d) return "—"; const dt=new Date(d+"T00:00:00"); if(isNaN(dt)) return d; return dt.toLocaleDateString('he-IL',{day:'numeric',month:'short',year:'numeric'}); }
 function fmtDateShort(d){ if(!d) return "—"; const dt=new Date(d+"T00:00:00"); if(isNaN(dt)) return d; return dt.toLocaleDateString('he-IL',{day:'numeric',month:'short'}); }
-function daysUntil(d){ const now=new Date(); now.setHours(0,0,0,0); const dt=new Date(d+"T00:00:00"); return Math.round((dt-now)/86400000); }
+/**
+ * התאריך של הטיול — לפי שעון בנגקוק ולא לפי UTC.
+ * toISOString מחזיר UTC, ולכן עד 07:00 בתאילנד הוא עוד מראה את אתמול —
+ * בדיוק בשעות של ההשכמות המוקדמות והסירות.
+ */
+const TRIP_TZ = 'Asia/Bangkok';
+function tripToday(){
+  try{
+    return new Intl.DateTimeFormat('en-CA', {timeZone:TRIP_TZ, year:'numeric', month:'2-digit', day:'2-digit'})
+      .format(new Date());
+  }catch(e){
+    const d = new Date(Date.now() + 7*3600*1000);   // בלי Intl — היסט קבוע
+    return d.toISOString().slice(0,10);
+  }
+}
+/** התאריך המקומי של מי שמחזיק את הטלפון — לרישום הוצאות והחזרים */
+function localToday(){
+  const d = new Date();
+  return [d.getFullYear(), String(d.getMonth()+1).padStart(2,'0'), String(d.getDate()).padStart(2,'0')].join('-');
+}
+
+/** ימים עד תאריך — נמדד מול היום בשעון הטיול, כדי ש״היום״ ו״מחר״ יסכימו זה עם זה */
+function daysUntil(d){ if(!d) return 0;
+  const from=new Date(tripToday()+"T00:00:00Z"), to=new Date(d+"T00:00:00Z");
+  return Math.round((to-from)/86400000); }
 function money(n){ if(n===null||n===undefined||n==="") return "—"; return "₪"+Number(n).toLocaleString('he-IL'); }
 function allDestinations(){ let arr=[]; STATE.countries.forEach(c=>c.destinations.forEach(d=>arr.push({...d, countryId:c.id, countryName:c.name, countryColor:c.color, countryFlag:c.flag}))); return arr; }
 function findCountry(id){ return STATE.countries.find(c=>c.id===id); }
@@ -1177,7 +1276,11 @@ function render(){
   else if(activeTab==='money') c.innerHTML = renderMoney();
   else if(activeTab==='map') { c.innerHTML = renderMapShell(); initMapIfNeeded(); }
   else if(activeTab==='countries') c.innerHTML = renderCountries();
-  else if(activeTab==='more'){ c.innerHTML = renderMore(); if(moreSection==='map') initMapIfNeeded(); }
+  else if(activeTab==='more'){
+    c.innerHTML = renderMore();
+    if(moreSection==='map') initMapIfNeeded();
+    if(moreSection==='docs') loadFiles();
+  }
   else { activeTab='home'; c.innerHTML = renderHome(); }
   renderWhoPill();
   loadVisibleImages();
@@ -1583,7 +1686,7 @@ function myDays(){
 function defaultDayIndex(){
   const days = myDays();
   if(!days.length) return 0;
-  const today = new Date().toISOString().slice(0,10);
+  const today = tripToday();
   const exact = days.findIndex(d=>d.date === today);
   if(exact >= 0) return exact;
   const next = days.findIndex(d=>d.date > today);
@@ -1601,7 +1704,7 @@ function renderToday(){
   if(!days.length) return `<div class="section"><div class="empty">אין ימים מפורטים להצגה</div></div>`;
   const i = currentDayIndex();
   const day = days[i];
-  const isToday = day.date === new Date().toISOString().slice(0,10);
+  const isToday = day.date === tripToday();
   const until = daysUntil(day.date);
   const done = day.rows.filter(r=>r.done).length;
   const pct = day.rows.length ? Math.round(done/day.rows.length*100) : 0;
@@ -1653,6 +1756,32 @@ function renderToday(){
   </div>`;
 }
 
+/* פעילויות שדורשות ציוד מסוים — מוצג על הכרטיס של היום עצמו */
+const GEAR_HINTS = [
+  {match:/זיפליין/,            gear:'נעליים סגורות — לא כפכפים'},
+  {match:/אימון|מואיי תאי/,    gear:'תחבושות ידיים, מגן שיניים, בגדי אימון'},
+  {match:/טיפוס/,              gear:'נעליים עם אחיזה · הציוד מגיע מהמדריך'},
+  {match:/קיאק|שנורקל|סימילן/, gear:'בגד ים, קרם הגנה עמיד במים, Dry Bag לטלפון'},
+  {match:/הארמון|ואט /,        gear:'כתפיים וברכיים מכוסות — נאכף בכניסה'},
+  {match:/קטנוע/,              gear:'רישיון בינלאומי 1949 עם קטגוריה A · שתי קסדות'},
+  {match:/לונגטייל|ספידבוט|סירה/, gear:'Dry Bag — הרסס נכנס לתיק'},
+  {match:/אגם צ׳או לאן|קאו סוק/, gear:'נעליים שנרטבות, החלפה יבשה, דוחה יתושים'}
+];
+/**
+ * התזכורת מופיעה פעם אחת ביום, על השורה הראשונה שדורשת אותה — שתי נסיעות
+ * בלונגטייל באותו יום לא אומרות לארוז Dry Bag פעמיים.
+ */
+function gearFor(row, day){
+  if(/^אחרי\b/.test(row.act)) return null;
+  const hit = GEAR_HINTS.find(h=>h.match.test(row.act));
+  if(!hit) return null;
+  if(day && Array.isArray(day.rows)){
+    const first = day.rows.find(r=>!/^אחרי\b/.test(r.act) && hit.match.test(r.act));
+    if(first && first.id !== row.id) return null;
+  }
+  return hit.gear;
+}
+
 function renderTodayRow(day, r){
   const statusCls = SHARED_STATUS_CLASS[r.status] || 'onsite';
   return `
@@ -1667,6 +1796,7 @@ function renderTodayRow(day, r){
         ${r.link?`<a class="chip mini" href="${r.link}" target="_blank" rel="noopener">↗</a>`:''}
       </div>
       ${r.notes?`<div class="tnotes">${itineraryText(r.notes)}</div>`:''}
+      ${gearFor(r, day)?`<div class="gear-note">🎒 ${gearFor(r, day)}</div>`:''}
     </div>
     <input class="icheck" aria-label="${escapeAttr(r.act)}" type="checkbox" ${r.done?'checked':''}
            data-action="toggleSharedRow" data-day="${day.id}" data-id="${r.id}">
@@ -1929,6 +2059,19 @@ function renderExpenseList(){
   <button class="btn full" data-action="addExpense" style="margin-top:12px">+ הוצאה חדשה</button>`;
 }
 
+/** השער נקבע ידנית. אחרי חודש הוא כבר לא באמת נכון. */
+function rateWarning(){
+  const checked = wallet().rateChecked;
+  if(!checked) return '';
+  const age = Math.round((Date.now() - new Date(checked+'T00:00:00').getTime())/86400000);
+  if(age < 30) return '';
+  return `<div class="rate-warn">
+    <span>⚠️</span>
+    <div>שער ההמרה (฿1 = ${wallet().rate} ₪) נבדק לפני ${age} ימים.
+    כדאי לעדכן אותו — כל האומדנים בשקלים נגזרים ממנו.</div>
+  </div>`;
+}
+
 function renderMoneyBudget(){
   const b = balance();
   const hasPlan = !!(sh() && sh().days);
@@ -1945,6 +2088,7 @@ function renderMoneyBudget(){
       ${left>=0 ? `נשאר ${ils(left)}` : `<span style="color:var(--danger)">חריגה של ${ils(-left)}</span>`}
       · מחושב מהחלק שלי בהוצאות שנרשמו
     </div>
+    ${rateWarning()}
     <button class="btn secondary full" style="margin-top:12px" data-action="editBudgets">✏️ תקציבים, שער המרה וחלוקה</button>
   </div>
 
@@ -2048,6 +2192,8 @@ function renderHome(){
       <div class="stat-cell"><b>${openTasks}</b><span>משימות פתוחות</span></div>
     </div>
 
+    ${renderDeadlines()}
+
     ${next ? `
     <div class="next-up" data-action="setTab" data-id="route">
       ${imageBox(next.wiki, next.hue, 'nextup-photo')}
@@ -2099,6 +2245,26 @@ function renderHome(){
     ${warnings.map(w=>`<div class="warning-card"><span>⚠️</span><div class="small">${w}</div></div>`).join('')}
   </div>`:''}
   `;
+}
+
+/** מה שנסגר בקרוב — דברים שעולים כסף אם מפספסים אותם */
+function renderDeadlines(){
+  const soon = STATE.masterChecklist
+    .filter(t=>mine(t) && t.status!=='done' && t.deadline)
+    .map(t=>({...t, days: daysUntil(t.deadline)}))
+    .filter(t=>t.days <= 21)
+    .sort((a,b)=>a.days-b.days)
+    .slice(0,3);
+  if(!soon.length) return '';
+  return `
+  <div class="deadlines" data-action="setTab" data-id="more">
+    <div class="dl-head">⏳ נסגר בקרוב</div>
+    ${soon.map(t=>`
+      <div class="dl-row ${t.days<0?'late':(t.days<=3?'urgent':'')}">
+        <span class="dl-when">${t.days<0 ? 'עבר' : (t.days===0 ? 'היום' : (t.days===1 ? 'מחר' : t.days+' ימים'))}</span>
+        <span class="dl-title">${t.title}</span>
+      </div>`).join('')}
+  </div>`;
 }
 
 function greetingFor(){
@@ -2487,7 +2653,18 @@ function renderPacking(){
 function renderDocs(){
   return `
   <div class="row" style="margin-bottom:8px;"><b>מסמכים 📄</b><button class="icon-btn" data-action="addDoc">+</button></div>
+
   <div class="card">
+    <div class="row"><b>קבצים</b><button class="btn small" data-action="uploadFile">+ העלאה</button></div>
+    <div class="small" style="margin-top:6px;color:var(--muted)">
+      צילום דרכון, פוליסת ביטוח, אישורי הזמנה — שמורים מאחורי ההתחברות, וזמינים לשניכם.
+      תמונות ו-PDF עד 6MB.
+    </div>
+    <div id="file-list" class="file-list">${renderFileList()}</div>
+  </div>
+
+  <div class="card">
+    <div class="muted small" style="margin-bottom:6px;font-weight:600;">רשימת מה שצריך</div>
     ${STATE.documents.map(doc=>`
       <div class="checklist-item">
         <div class="chk-body">
@@ -2502,6 +2679,69 @@ function renderDocs(){
   <div class="muted small">מסמכים רגישים מוסתרים כברירת מחדל.</div>
   `;
 }
+
+/* הקבצים חיים בשרת ולא במסמך המשותף, ולכן נטענים בנפרד */
+let uploadedFiles = null;
+
+function renderFileList(){
+  if(uploadedFiles === null) return '<div class="small" style="color:var(--muted)">טוען…</div>';
+  if(!uploadedFiles.length) return '<div class="small" style="color:var(--muted)">עוד לא הועלו קבצים</div>';
+  return uploadedFiles.map(f=>`
+    <div class="file-row">
+      <a class="file-name" href="/api/files/${f.id}" target="_blank" rel="noopener">
+        ${f.mime==='application/pdf'?'📄':'🖼️'} ${escapeHtml(f.name)}
+      </a>
+      <span class="file-meta">${Math.round(f.size/1024)}KB · ${personName(f.uploaded_by)}</span>
+      <button class="chk-del" data-action="deleteFile" data-id="${f.id}" data-label="${escapeAttr(f.name)}">✕</button>
+    </div>`).join('');
+}
+
+async function loadFiles(force){
+  if(uploadedFiles !== null && !force) return;
+  try{
+    const res = await fetch('/api/files', {cache:'no-store'});
+    if(!res.ok) throw new Error('files');
+    uploadedFiles = (await res.json()).files || [];
+  }catch(e){
+    uploadedFiles = [];
+  }
+  const box = document.getElementById('file-list');
+  if(box) box.innerHTML = renderFileList();
+}
+
+function pickAndUploadFile(){
+  const input = document.createElement('input');
+  input.type = 'file';
+  input.accept = 'image/*,application/pdf';
+  input.onchange = async ()=>{
+    const file = input.files && input.files[0];
+    if(!file) return;
+    toast('מעלה את ' + file.name + '…');
+    const form = new FormData();
+    form.append('file', file);
+    form.append('name', file.name);
+    try{
+      const res = await fetch('/api/files', {method:'POST', body:form});
+      const payload = await res.json();
+      if(!res.ok) throw new Error(payload.error || 'ההעלאה נכשלה');
+      await loadFiles(true);
+      toast('הועלה');
+    }catch(e){
+      toast(e.message || 'ההעלאה נכשלה');
+    }
+  };
+  input.click();
+}
+
+async function deleteFile(id, label){
+  confirmThenDelete(label, async ()=>{
+    try{
+      await fetch('/api/files/'+id, {method:'DELETE'});
+      await loadFiles(true);
+    }catch(e){ toast('המחיקה נכשלה'); }
+  });
+}
+
 function renderSavedGlobal(){
   const countryOpts = STATE.countries.map(c=>`<option value="${c.id}" ${savedFilter.country===c.id?'selected':''}>${c.flag} ${c.name}</option>`).join('');
   let destOpts = '<option value="">כל היעדים</option>';
@@ -2796,7 +3036,7 @@ function openExpenseModal(editId, preset){
       </select></div>
     </div>
     <div class="field-row">
-      <div class="field"><label>תאריך</label><input id="ex-date" type="date" value="${val('date', new Date().toISOString().slice(0,10))}"></div>
+      <div class="field"><label>תאריך</label><input id="ex-date" type="date" value="${val('date', localToday())}"></div>
       <div class="field"><label>קטגוריה</label><select id="ex-category">${cats}</select></div>
     </div>
     <div class="field"><label>מי שילם</label><div class="choice-row" id="ex-paid">
@@ -2890,7 +3130,7 @@ function openSettleModal(){
       ${personName(from)} מעביר/ה ל${personName(to)} <b>${ils(amount)}</b>, והחשבון מתאפס.
     </div>
     <div class="field"><label>סכום בפועל (₪)</label><input id="st-amount" type="number" value="${Math.round(amount)}"></div>
-    <div class="field"><label>תאריך</label><input id="st-date" type="date" value="${new Date().toISOString().slice(0,10)}"></div>
+    <div class="field"><label>תאריך</label><input id="st-date" type="date" value="${localToday()}"></div>
     <div class="modal-actions">
       <button class="btn full" id="st-save">נסגר ✓</button>
       <button class="btn secondary" id="st-cancel">ביטול</button>
@@ -2974,6 +3214,7 @@ function openSharedBudgetModal(){
     document.getElementById('sb-save').onclick = ()=>{
       const newRate=Number(document.getElementById('sb-rate').value),reserveIls=Number(document.getElementById('sb-reserve').value);
       if(!Number.isFinite(newRate)||newRate<=0||!Number.isFinite(reserveIls)||reserveIls<0){toast('יש להזין שער ורזרבה תקינים');return;}
+      if(newRate !== s.rate) wallet().rateChecked = localToday();   // נבדק היום
       s.rate = newRate;
       wallet().rate=newRate;
       s.reserveBaht = reserveIls/newRate;
@@ -3068,6 +3309,8 @@ document.addEventListener('click', (e)=>{
     const row = day && day.rows.find(r=>r.id===id);
     if(row) openExpenseModal(null, {title:row.act, amount:row.baht, currency:'THB', date:day.date, category:catFromSheet(row.cat)});
   }
+  else if(action==='uploadFile'){ pickAndUploadFile(); }
+  else if(action==='deleteFile'){ deleteFile(id, t.dataset.label); }
   else if(action==='markPaid'){
     const x = wallet().expenses.find(e=>e.id===id);
     if(x){ x.status = 'paid'; persist(); render(); toast('נרשם כשולם'); }

@@ -31,6 +31,10 @@ export default async function TripPage() {
         href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@500;700;900&family=Heebo:wght@300;400;500;600;700&display=swap"
       />
       <link rel="stylesheet" href="/trip-app.css" />
+      <link rel="manifest" href="/manifest.webmanifest" />
+      <link rel="apple-touch-icon" href="/icon.svg" />
+      <meta name="apple-mobile-web-app-capable" content="yes" />
+      <meta name="apple-mobile-web-app-title" content="My Big Trip" />
       <div dangerouslySetInnerHTML={{ __html: shell }} />
       <TripAppLoader user={user} />
     </>
