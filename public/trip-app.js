@@ -685,6 +685,9 @@ let expenseFilter = {country:'', dest:'', category:'', month:'', pay:'', currenc
 let storageAvailable = true;
 let undoSnapshot = null;
 let undoTimer = null;
+/* רשימת הקניות: איזה מקום מוצג, ואילו קבוצות "כבר נקנו" פתוחות */
+let shopFilter = 'all';
+let shopBoughtOpen = {il:false, th:false};
 
 /* =========================================================
    מי אני — כל מסך באפליקציה נגזר מזה
@@ -1354,11 +1357,12 @@ async function logout(){
 /* =========================================================
    UNDO / CONFIRM
 ========================================================= */
-function snapshotUndo(label){
+/** `what` הוא מה שקרה — ברירת המחדל מחיקה, אבל כל פעולה הפיכה יכולה להשתמש בזה */
+function snapshotUndo(label, what){
   undoSnapshot = JSON.parse(JSON.stringify(STATE));
   clearTimeout(undoTimer);
   const el = document.getElementById('undo-toast');
-  el.querySelector('.ut-label').textContent = (label?('"'+label+'" '):'')+'נמחק';
+  el.querySelector('.ut-label').textContent = (label?('"'+label+'" '):'')+(what||'נמחק');
   el.classList.remove('hidden');
   undoTimer = setTimeout(()=>{ el.classList.add('hidden'); undoSnapshot=null; }, 7000);
 }
@@ -1606,6 +1610,7 @@ function render(){
     c.innerHTML = renderMore();
     if(moreSection==='map') initMapIfNeeded();
     if(moreSection==='docs') loadFiles();
+    if(moreSection==='shopping') initShopSwipe();
   }
   else { activeTab='home'; c.innerHTML = renderHome(); }
   renderWhoPill();
@@ -3015,59 +3020,113 @@ function shoppingItems(){
 
 /** סיכום רשימת הקניות בשקלים, בלי פריטי הרשות ובלי מה שכבר נקנה */
 function shoppingTotals(){
-  const open = shoppingItems().filter(p=>p.status==='need' && !p.optional);
+  const mineShop = shoppingItems();
+  const open = mineShop.filter(p=>p.status==='need' && !p.optional);
   const il = open.filter(p=>p.buyIn==='il').reduce((s,p)=>s+(Number(p.cost)||0),0);
   const th = open.filter(p=>p.buyIn==='th').reduce((s,p)=>s+(Number(p.cost)||0),0);
-  return {il, th, thIls: th*rate(), total: il + th*rate()};
+
+  /* מה שכבר נקנה — לפי מה ששולם בפועל אם נרשם, אחרת לפי האומדן */
+  const done = mineShop.filter(p=>p.status!=='need');
+  const spent = done.reduce((s,p)=>{
+    const paid = p.paid===undefined || p.paid==='' ? Number(p.cost)||0 : Number(p.paid)||0;
+    return s + (p.buyIn==='th' ? paid*rate() : paid);
+  }, 0);
+
+  const musts = mineShop.filter(p=>!p.optional);
+  return {
+    il, th, thIls: th*rate(), total: il + th*rate(),
+    spent, done: done.length, count: mineShop.length,
+    doneMust: musts.filter(p=>p.status!=='need').length, countMust: musts.length
+  };
+}
+
+/** מה שמוצג כרגע — לפי הסינון שנבחר למעלה */
+function shopVisible(where){
+  return shoppingItems().filter(p=>p.buyIn===where)
+    .filter(p=>shopFilter==='all' || shopFilter===where);
+}
+
+/** שורה אחת ברשימת הקניות — אפשר לסמן, להחליק, ולתקן את המחיר בלחיצה */
+function shopLine(p){
+  const unit = p.buyIn==='il' ? '₪' : '฿';
+  const done = p.status!=='need';
+  const paid = p.paid===undefined || p.paid==='' ? null : Number(p.paid);
+  const shown = done && paid!==null ? paid : p.cost;
+  return `
+  <div class="shop-row${done?' bought':''}" data-swipe-buy="${done?'':p.id}">
+    <button class="shop-tick${done?' on':''}" data-action="${done?'unbuyItem':'buyItem'}" data-id="${p.id}"
+            aria-label="${done?'לבטל את הסימון':'סמנו שנקנה'}">${done?'✓':'○'}</button>
+    <div class="chk-body" data-action="editPacking" data-id="${p.id}">
+      <div class="chk-title">${p.item}${p.quantity?(' ×'+p.quantity):''}</div>
+      ${p.notes?`<div class="chk-meta">${p.notes}</div>`:''}
+      ${done && paid!==null && paid!==p.cost
+        ? `<div class="chk-meta">שולם ${unit}${paid.toLocaleString('he-IL')} · האומדן היה ${unit}${Number(p.cost).toLocaleString('he-IL')}</div>`
+        : ''}
+    </div>
+    <button class="shop-price${done?' bought':''}" data-action="editPrice" data-id="${p.id}"
+            aria-label="לתקן את המחיר">${shown ? unit+Number(shown).toLocaleString('he-IL') : '＋מחיר'}</button>
+  </div>`;
 }
 
 function renderShoppingGroup(where){
-  const all = shoppingItems().filter(p=>p.buyIn===where);
-  const open = all.filter(p=>p.status==='need');
+  const all = shopVisible(where);
   if(!all.length) return '';
-  const price = p=> where==='il' ? ils(p.cost) : baht(p.cost);
-  const bought = all.length - open.length;
-  const line = p=>`
-    <div class="checklist-item">
-      <button class="shop-tick" data-action="buyItem" data-id="${p.id}" aria-label="נקנה">○</button>
-      <div class="chk-body" data-action="editPacking" data-id="${p.id}">
-        <div class="chk-title">${p.item}${p.quantity?(' ×'+p.quantity):''}</div>
-        ${p.notes?`<div class="chk-meta">${p.notes}</div>`:''}
-      </div>
-      <div class="shop-price">${p.cost?price(p):''}</div>
-    </div>`;
+  const open = all.filter(p=>p.status==='need');
+  const bought = all.filter(p=>p.status!=='need');
   const must = open.filter(p=>!p.optional), extra = open.filter(p=>p.optional);
   const sum = must.reduce((s,p)=>s+(Number(p.cost)||0),0);
   const head = where==='il'
     ? {title:'🇮🇱 בארץ, לפני הטיסה', why:'מה שחייב התאמה אישית, מה שלא מוכרים שם, ומה שצריך להיות ביד ברגע הנחיתה.'}
     : {title:'🇹🇭 שם — זול יותר וטוב יותר', why:'ציוד המואיי תאי מגיע משם מלכתחילה ועולה שם כשליש, והנוזלים פשוט לא שווים את הסחיבה.'};
+  const open_ = shopBoughtOpen[where];
   return `
   <div class="card">
     <div class="row"><b>${head.title}</b><span class="shop-sum">${where==='il'?ils(sum):baht(sum)}</span></div>
     <div class="small muted" style="margin:2px 0 8px;">${head.why}</div>
-    ${must.map(line).join('')}
+    ${must.map(shopLine).join('')}
     ${extra.length?`
-      <div class="muted small" style="margin:10px 0 2px;font-weight:600;">אם בא לכם — לא בסכום</div>
-      ${extra.map(line).join('')}`:''}
-    ${bought?`<div class="muted small" style="margin-top:8px;">✓ ${bought} כבר נקנו</div>`:''}
-    ${!open.length?`<div class="muted small">הכול נקנה 🎉</div>`:''}
+      <div class="muted small shop-divider">אם בא לכם — לא בסכום</div>
+      ${extra.map(shopLine).join('')}`:''}
+    ${!open.length?`<div class="muted small" style="padding:6px 0;">הכול נקנה 🎉</div>`:''}
+    ${bought.length?`
+      <button class="shop-fold" data-action="toggleBought" data-id="${where}">
+        <span>✓ ${bought.length} כבר נקנו</span><span class="shop-caret">${open_?'▾':'▸'}</span>
+      </button>
+      ${open_ ? bought.map(shopLine).join('') : ''}`:''}
   </div>`;
 }
 
 function renderShopping(){
   const t = shoppingTotals();
   const hasThai = shoppingItems().some(p=>p.buyIn==='th' && p.status==='need');
+  const pct = t.countMust ? Math.round(t.doneMust/t.countMust*100) : 0;
+  const chips = [['all','הכול'],['il','בארץ'],['th','שם']];
   return `
-  <div class="row" style="margin-bottom:8px;"><b>הקניות של ${me().name} ${me().emoji}</b></div>
+  <div class="row" style="margin-bottom:8px;">
+    <b>הקניות של ${me().name} ${me().emoji}</b>
+    <button class="icon-btn" data-action="addShopping">+</button>
+  </div>
 
   <div class="card">
-    <div class="row"><b>סך הכול לפני הטיול</b><b class="shop-total">${ils(t.total)}</b></div>
-    <div class="small muted" style="margin-top:4px;">
+    <div class="row"><b>${t.doneMust===t.countMust?'הכול נקנה':'נשאר לקנות'}</b>
+      <b class="shop-total">${ils(t.total)}</b></div>
+    <div class="progress-track"><div class="progress-fill" style="width:${pct}%"></div></div>
+    <div class="row muted small">
+      <span>${t.doneMust} מתוך ${t.countMust} · ${pct}%</span>
+      <span>${t.spent?('כבר יצאו '+ils(t.spent)):''}</span>
+    </div>
+    <div class="small muted" style="margin-top:8px;">
       ${ils(t.il)} בארץ · ${baht(t.th)} שם, שהם ${ils(t.thIls)} · לפי ${baht(100)} ≈ ${ils(rate()*100)}
     </div>
     <div class="small muted" style="margin-top:6px;">
       זה לא נכנס לפנקס ההוצאות של הטיול — הפנקס סופר את מה שקורה בדרך, וזה מה שקונים לפניה.
     </div>
+  </div>
+
+  <div class="pillrow" style="margin-bottom:10px;">
+    ${chips.map(([id,label])=>`
+      <button class="pill${shopFilter===id?' active':''}" data-action="shopFilter" data-id="${id}">${label}</button>
+    `).join('')}
   </div>
 
   ${renderShoppingGroup('il')}
@@ -3088,8 +3147,98 @@ function renderShopping(){
     </div>
   </div>`:''}
 
-  <div class="muted small">לחיצה על ○ מסמנת שנקנה. לחיצה על השם פותחת עריכה.</div>
+  <div class="muted small">
+    לחיצה על ○ או החלקה של השורה מסמנת שנקנה — ואפשר לבטל מיד.
+    לחיצה על המחיר מתקנת אותו למה ששילמתם בפועל.
+  </div>
   `;
+}
+
+/**
+ * סימון פריט כנקנה. מחכים רגע עם הרינדור כדי שהאנימציה תיראה, ומציעים
+ * ביטול — לחיצה אחת בטעות לא אמורה למחוק פריט מהרשימה בלי דרך חזרה.
+ */
+function markBought(id){
+  const p = STATE.packingList.find(x=>x.id===id);
+  if(!p || p.status!=='need') return;
+  snapshotUndo(p.item, 'סומן כנקנה');
+  const row = document.querySelector(`.shop-row [data-id="${id}"]`);
+  const el = row && row.closest('.shop-row');
+  if(el) el.classList.add('buying');
+  buzz();
+  p.status = 'have';
+  persist();
+  setTimeout(render, el ? 260 : 0);
+}
+
+/** תיקון המחיר במקום, בלי מודאל — עומדים בחנות ומקלידים כמה זה באמת עלה */
+function startPriceEdit(button, id){
+  const p = STATE.packingList.find(x=>x.id===id);
+  if(!p || button.querySelector('input')) return;
+  const unit = p.buyIn==='il' ? '₪' : '฿';
+  const current = p.status!=='need' && p.paid!==undefined && p.paid!=='' ? p.paid : p.cost;
+  button.classList.add('editing');
+  button.innerHTML = `<span class="shop-unit">${unit}</span><input class="shop-input" type="number"
+    inputmode="decimal" min="0" step="1" value="${current||''}" aria-label="מחיר">`;
+  const input = button.querySelector('input');
+  input.focus();
+  input.select();
+  let closed = false;
+  const commit = (save)=>{
+    if(closed) return;
+    closed = true;
+    if(save){
+      const val = input.value==='' ? 0 : Math.max(0, Number(input.value));
+      if(!Number.isNaN(val)){
+        // פריט שכבר נקנה — המחיר החדש הוא מה ששולם; אחרת זה תיקון האומדן
+        if(p.status!=='need') p.paid = val; else p.cost = val;
+        persist();
+      }
+    }
+    render();
+  };
+  input.addEventListener('keydown', e=>{
+    if(e.key==='Enter'){ e.preventDefault(); commit(true); }
+    if(e.key==='Escape'){ e.preventDefault(); commit(false); }
+  });
+  input.addEventListener('blur', ()=>commit(true));
+}
+
+/**
+ * החלקה של שורה מסמנת אותה כנקנה — אותה תנועה שכבר קיימת בלשונית "היום",
+ * כדי שלא צריך לכוון לעיגול הקטן כשהידיים תפוסות בשקיות.
+ */
+function initShopSwipe(){
+  const rows = document.querySelectorAll('.shop-row[data-swipe-buy]:not([data-swipe-buy=""])');
+  rows.forEach(row=>{
+    let x0 = 0, y0 = 0, dx = 0, active = false;
+    const start = e=>{
+      const t = e.touches[0];
+      x0 = t.clientX; y0 = t.clientY; dx = 0; active = true;
+      row.style.transition = 'none';
+    };
+    const move = e=>{
+      if(!active) return;
+      const t = e.touches[0];
+      const ox = t.clientX - x0, oy = t.clientY - y0;
+      if(Math.abs(oy) > Math.abs(ox)){ active = false; row.style.transform = ''; return; }
+      dx = ox;
+      row.style.transform = `translateX(${dx}px)`;
+      row.classList.toggle('will-buy', Math.abs(dx) > 70);
+    };
+    const end = ()=>{
+      if(!active) return;
+      active = false;
+      row.style.transition = '';
+      row.style.transform = '';
+      row.classList.remove('will-buy');
+      if(Math.abs(dx) > 70) markBought(row.dataset.swipeBuy);
+    };
+    row.addEventListener('touchstart', start, {passive:true});
+    row.addEventListener('touchmove', move, {passive:true});
+    row.addEventListener('touchend', end);
+    row.addEventListener('touchcancel', end);
+  });
 }
 
 function renderPacking(){
@@ -3459,22 +3608,37 @@ function openTaskModal(kind, countryId, editId){
   });
 }
 
-function openPackingModal(editId){
+function openPackingModal(editId, opts){
   const p = editId ? STATE.packingList.find(x=>x.id===editId) : null;
+  const shopping = (opts && opts.shopping) || (p && !!p.buyIn);
+  const buyIn = p ? (p.buyIn||'') : (shopping ? 'il' : '');
   openModal(`
-    <h3 style="margin-bottom:14px;">${p?'עריכת פריט':'פריט חדש לציוד'}</h3>
+    <h3 style="margin-bottom:14px;">${p?'עריכת פריט':(shopping?'מה עוד צריך לקנות':'פריט חדש לציוד')}</h3>
     <div class="field"><label>קטגוריה (אפשר להקליד קטגוריה חדשה)</label><input id="pk-category" value="${p?p.category:''}" placeholder="לדוגמה: 👕 בגדים"></div>
     <div class="field"><label>שם הפריט</label><input id="pk-item" value="${p?p.item:''}"></div>
     <div class="field-row"><div class="field"><label>כמות</label><input id="pk-qty" value="${p?p.quantity||'':''}" placeholder="לדוגמה: 2"></div>
-    <div class="field"><label>סטטוס</label><select id="pk-status"><option value="need" ${p&&p.status==='need'?'selected':''}>לקנות</option><option value="have" ${p&&p.status==='have'?'selected':''}>יש כבר</option><option value="packed" ${p&&p.status==='packed'?'selected':''}>ארוז</option></select></div></div>
+    <div class="field"><label>סטטוס</label><select id="pk-status"><option value="need" ${!p||p.status==='need'?'selected':''}>לקנות</option><option value="have" ${p&&p.status==='have'?'selected':''}>יש כבר</option><option value="packed" ${p&&p.status==='packed'?'selected':''}>ארוז</option></select></div></div>
+    <div class="field-row">
+      <div class="field"><label>איפה קונים</label><select id="pk-where">
+        <option value="" ${!buyIn?'selected':''}>לא קנייה — כבר יש</option>
+        <option value="il" ${buyIn==='il'?'selected':''}>🇮🇱 בארץ</option>
+        <option value="th" ${buyIn==='th'?'selected':''}>🇹🇭 בתאילנד</option>
+      </select></div>
+      <div class="field"><label>מחיר משוער</label><input id="pk-cost" type="number" inputmode="decimal" min="0" value="${p&&p.cost?p.cost:''}" placeholder="₪ בארץ · ฿ שם"></div>
+    </div>
+    <div class="field"><label class="row"><span>נחמד שיהיה — לא נספר בסכום</span>
+      <input id="pk-optional" type="checkbox" ${p&&p.optional?'checked':''}></label></div>
     <div class="field"><label>הערות</label><textarea id="pk-notes">${p?p.notes||'':''}</textarea></div>
     <div class="modal-actions"><button class="btn full" id="pk-save">שמירה</button>${p?'<button class="btn ghost" id="pk-delete">מחיקה</button>':''}<button class="btn secondary" id="pk-cancel">ביטול</button></div>
   `, ()=>{
     document.getElementById('pk-cancel').onclick = closeModal;
     if(p) document.getElementById('pk-delete').onclick = ()=> confirmThenDelete(p.item, ()=>{ STATE.packingList = STATE.packingList.filter(x=>x.id!==p.id); });
     document.getElementById('pk-save').onclick = ()=>{
+      const where = document.getElementById('pk-where').value;
       const payload = {category:document.getElementById('pk-category').value||'כללי', item:document.getElementById('pk-item').value||'פריט',
-        quantity:document.getElementById('pk-qty').value, status:document.getElementById('pk-status').value, notes:document.getElementById('pk-notes').value};
+        quantity:document.getElementById('pk-qty').value, status:document.getElementById('pk-status').value, notes:document.getElementById('pk-notes').value,
+        buyIn:where, cost: where ? (Number(document.getElementById('pk-cost').value)||0) : 0,
+        optional: where ? document.getElementById('pk-optional').checked : false};
       if(p) Object.assign(p,payload); else STATE.packingList.push({id:uid('p'), owner:meId(), ...payload});
       persist(); closeModal(); render();
     };
@@ -3827,10 +3991,15 @@ document.addEventListener('click', (e)=>{
 
   else if(action==='editPacking'){ openPackingModal(id); }
   else if(action==='addPacking'){ openPackingModal(null); }
-  else if(action==='buyItem'){
+  else if(action==='buyItem'){ markBought(id); }
+  else if(action==='unbuyItem'){
     const p = STATE.packingList.find(x=>x.id===id);
-    if(p){ p.status = 'have'; buzz(); persist(); render(); }
+    if(p){ p.status = 'need'; delete p.paid; buzz(); persist(); render(); }
   }
+  else if(action==='toggleBought'){ shopBoughtOpen[id] = !shopBoughtOpen[id]; render(); }
+  else if(action==='shopFilter'){ shopFilter = id; render(); }
+  else if(action==='editPrice'){ startPriceEdit(t, id); }
+  else if(action==='addShopping'){ openPackingModal(null, {shopping:true}); }
 
   else if(action==='revealDoc'){ const d=STATE.documents.find(x=>x.id===id); d.revealed=!d.revealed; render(); }
   else if(action==='addDoc'){
