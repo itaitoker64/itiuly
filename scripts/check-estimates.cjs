@@ -13,7 +13,7 @@ assert.ok(f.low<=f.base&&f.base<=f.high);
 near(f.itai+f.talia,f.base);
 near(Object.values(f.categories).reduce((a,b)=>a+b,0)+f.reserve,f.base);
 near(run('sharedEstimateDays().reduce((s,d)=>s+dayTotalBaht(d)*rate(),0)')+f.reserve,f.base);
-near(f.categories.flights,3777+1891+4720*.08981); // Includes domestic flight classified below.
+near(f.categories.flights,3777+1891+5390*.08981); // Includes TG203, the later Phuket flight.
 assert.ok(f.optional>0);
 near(f.categories.accommodation,1128+1839+4029+12150*.08981); // KYN corrected from 14,580.
 near(run('sharedRowPrice(sh().days[0].rows.find(r=>r.id==="s_1_0")).base'),3777);

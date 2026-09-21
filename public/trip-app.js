@@ -235,7 +235,7 @@ function seedData(){
   const hanoiId = uid('d'), manilaId = uid('d');
 
   return {
-    schema:7,
+    schema:9,
     tripName:"My Big Trip 🌏",
     startDate:"2026-11-22",
     endDate:null,
@@ -262,7 +262,7 @@ function seedData(){
         {id:uid('x'), date:"2026-09-10", title:"ארקיע IZ591 · תל אביב → בנגקוק", category:"flights",
          amount:3777, currency:"ILS", paidBy:"itai", split:"ratio", status:"paid", note:"לשניים · אישור IL-603978"},
         {id:uid('x'), date:"2026-09-10", title:"ארקיע IZ598 · פוקט → תל אביב", category:"flights",
-         amount:1891, currency:"ILS", paidBy:"talia", split:"full-itai", status:"paid", note:"הטיסה הביתה של איתי · אישור IL-604062"},
+         amount:1891, currency:"ILS", paidBy:"itai", split:"full-itai", status:"paid", note:"הטיסה הביתה של איתי · אישור IL-604062"},
         {id:uid('x'), date:"2026-09-10", title:"Chermantra Aonang · 3 לילות", category:"accommodation",
          amount:1839, currency:"ILS", paidBy:"itai", split:"ratio", status:"paid", note:"אישור 5553772333 · ביטול חינם עד 14/11"},
         {id:uid('x'), date:"2026-11-23", title:"Montraj Coach Sukhumvit · 3 לילות בבנגקוק", category:"accommodation",
@@ -286,7 +286,7 @@ function seedData(){
            budget:2500, status:"booked", companions:["ביחד"], order:1},
           {id:koyaoId, owner:"both", name:"קו יאו נוי — מחנה מואיי תאי", wiki:"Ko Yao Noi", hue:"#6F8F6A",
            lat:8.1099, lng:98.5892, arrival:"2026-11-26", departure:"2026-11-29", nights:3,
-           accommodation:"Sea House Room · KYN Phoenix", transport:"Vietjet לפוקט ואז ספידבוט",
+           accommodation:"Sea House Room · KYN Phoenix", transport:"Thai Airways TG203 לפוקט ואז ספידבוט",
            notes:"אושר מול המחנה · Sea House Room לשניים · ฿12,150 לכל השהייה, כולל חדר, ארוחות ואימוני קבוצה. ביום ראשון אין אימונים ואין הגשת אוכל. מקדמה 50% (฿6,075) ב-Wise, היתרה במזומן בהגעה. המחיר תוקן מ-฿14,580 שהיה תעריף הדירה הפנורמית. המחנה אישר אימוני קבוצה ב-08:00 וב-17:00; ביום ההגעה אימון טכניקה ב-16:00. להביא תחבושות ידיים ומגני שיניים; כפפות זמינות להשאלה.",
            scooter:{ok:true, perDay:250, bikes:1, days:2, rider:"itai", pillion:"talia", headline:"המקום הכי טוב באי לקטנוע",
              note:"כביש אחד לאורך החוף המזרחי, כמעט בלי תנועה. שדות אורז, המסגד, התצפית, והחופים שאין אליהם סונגתאו."},
@@ -369,7 +369,7 @@ function seedData(){
       {id:uid('m'), category:"בישראל לפני הטיול", title:"לסגור עניינים פתוחים (דואר, מנויים, ביטוח לאומי)", status:"todo", deadline:"", notes:"", priority:"בינונית", link:"", countryId:null, order:6},
       {id:uid('m'), category:"תרופות", title:"להצטייד בערכת תרופות בסיסית", status:"todo", deadline:"", notes:"", priority:"בינונית", link:"", countryId:null, order:7},
       {id:uid('m'), owner:"both", category:"הזמנות", title:"לסגור את צ׳רמנטרה לפני הדדליין", status:"todo", deadline:"2026-11-14", notes:"אחרי 14/11 הכרטיס מחויב במלוא הסכום", priority:"גבוהה", link:"", countryId:"thailand", order:8},
-      {id:uid('m'), owner:"both", category:"הזמנות", title:"להזמין את טיסת Vietjet VZ314 לפוקט", status:"todo", deadline:"2026-11-01", notes:"฿4,720 לשניים, Deluxe עם 20 ק״ג", priority:"גבוהה", link:"", countryId:"thailand", order:9},
+      {id:uid('m'), owner:"both", category:"הזמנות", title:"להזמין את טיסת TG203 לפוקט", status:"todo", deadline:"2026-11-01", notes:"08:00 → 09:25 · ฿5,390 לשניים, 23 ק״ג לכל אחד. הוזזה מ-06:50 כדי לישון עוד שעה ועדיין לתפוס את סירת 11:00", priority:"גבוהה", link:"https://www.thaiairways.com/", countryId:"thailand", order:9},
       {id:uid('m'), owner:"both", category:"הזמנות", title:"לאשר טלפונית את פרטי החשבון של המחנה", status:"todo", deadline:"2026-10-05", notes:"לפני שמעבירים ฿6,075 — פרטי בנק במייל הם הדבר הכי מזויף בהזמנות. החשבון על שם פרטי ובכתובת בחון קאן, לא באי", priority:"גבוהה", link:"", countryId:"thailand", order:10},
       {id:uid('m'), owner:"both", category:"הזמנות", title:"להעביר מקדמה ฿6,075 ב-Wise למחנה", status:"todo", deadline:"2026-10-10", notes:"זה מה שסוגר את ההזמנה. ฿12,150 סה״כ, היתרה במזומן בהגעה", priority:"גבוהה", link:"", countryId:"thailand", order:11},
       {id:uid('m'), owner:"both", category:"הזמנות", title:"למשוך ฿6,075 מזומן ליתרה במחנה", status:"todo", deadline:"2026-11-25", notes:"אין כרטיסים ואין העברות במקום. כספומט גובה ฿220 לכל משיכה — למשוך בבת אחת", priority:"בינונית", link:"", countryId:"thailand", order:12},
@@ -756,6 +756,54 @@ function ensureDefaults(){
     }
     STATE.masterChecklist = STATE.masterChecklist.filter(t=>t.title!=='לסגור את המחנה בקו יאו נוי');
     STATE.schema = 7;
+  }
+
+  /*
+   * טליה עוד לא הוציאה שקל על הטיול. טיסת החזור של איתי נרשמה בטעות על שמה,
+   * וזה הפך את הפנקס על פניו — היא נראתה כמי ששילמה ₪1,891 ואיתי כמי שחייב לה.
+   * הכרטיס נשאר כולו על חשבונו (full-itai), רק המשלם מתוקן.
+   */
+  if(STATE.schema < 8){
+    (STATE.money.expenses||[]).forEach(x=>{
+      const isHomeFlight = /IZ598/.test(x.title||'') || /IL-604062/.test(x.note||'');
+      if(isHomeFlight && x.paidBy==='talia') x.paidBy = 'itai';
+    });
+    STATE.schema = 8;
+  }
+
+  /*
+   * יום 4 נבנה מחדש סביב טיסה מאוחרת יותר: TG203 ב-08:00 במקום VZ314 ב-06:50.
+   * השכמה ב-05:30 במקום 04:30, וסירת 11:00 מבאנג רונג — כך שגם צ׳ק-אין,
+   * צהריים, מנוחה ואימון הטכניקה ב-16:00 נשארים במקום.
+   */
+  if(STATE.schema < 9){
+    const seedShared = window.SHARED_SEED;
+    const seedDay = seedShared && seedShared.days.find(d=>d.date==='2026-11-26');
+    const day = STATE.shared && (STATE.shared.days||[]).find(d=>d.date==='2026-11-26');
+    if(seedDay && day){
+      seedDay.rows.forEach(seedRow=>{
+        if(!seedRow.managed) return;
+        // השורה מזוהה לפי המזהה שלה; הכותרת עצמה השתנתה עם שם הטיסה
+        const row = day.rows.find(r=>r.id===seedRow.id);
+        if(!row) return;
+        ['act','time','dur','baht','status','notes','link'].forEach(k=>{
+          if(seedRow[k]!==undefined) row[k] = seedRow[k];
+        });
+        if(seedRow.priceEstimate) row.priceEstimate = JSON.parse(JSON.stringify(seedRow.priceEstimate));
+        row.managed = true;
+      });
+    }
+    if(seedShared && STATE.shared) STATE.shared.flights = JSON.parse(JSON.stringify(seedShared.flights));
+    const task = STATE.masterChecklist.find(t=>/VZ314/.test(t.title||''));
+    const freshTask = fresh.masterChecklist.find(t=>/TG203/.test(t.title||''));
+    if(task && freshTask && task.status!=='done'){
+      task.title = freshTask.title;
+      task.notes = freshTask.notes;
+      task.link  = freshTask.link;
+    }
+    const koyao = STATE.countries.flatMap(c=>c.destinations).find(d=>d.name==='קו יאו נוי — מחנה מואיי תאי');
+    if(koyao && /Vietjet/.test(koyao.transport||'')) koyao.transport = "Thai Airways TG203 לפוקט ואז ספידבוט";
+    STATE.schema = 9;
   }
 
   /* משימות חדשות מתווספות בכל גרסה, לפי כותרת */

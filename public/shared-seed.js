@@ -49,10 +49,10 @@ window.SHARED_SEED = {
   },
   {
    "when": "ה׳ 26/11",
-   "what": "Thai Vietjet VZ314 · בנגקוק → פוקט, Deluxe",
-   "time": "06:50 → 08:25, ישירה",
+   "what": "Thai Airways TG203 · בנגקוק → פוקט",
+   "time": "08:00 → 09:25, ישירה",
    "status": "להזמין",
-   "cost": "฿4,720 לשניים · 20 ק״ג לכל אחד"
+   "cost": "฿5,390 לשניים · 23 ק״ג לכל אחד"
   },
   {
    "when": "ג׳ 8/12",
@@ -996,7 +996,7 @@ window.SHARED_SEED = {
    "dest": "קו יאו נוי",
    "rows": [
     {
-     "time": "04:30",
+     "time": "05:30",
      "dur": "0:30",
      "act": "השכמה ואריזה",
      "loc": "המלון",
@@ -1004,7 +1004,7 @@ window.SHARED_SEED = {
      "baht": null,
      "status": "משלמים במקום",
      "link": "",
-     "notes": "היום הכי קשה במסלול · שקול להעביר את הטיסה ל-09:00–10:00 ולוותר על אימון ההגעה",
+     "notes": "שעה שלמה יותר של שינה מהתכנון הישן · הטיסה הוזזה ל-08:00 כדי לתפוס את סירת 11:00 ולהגיע לאימון ב-16:00",
      "id": "s_4_0",
      "done": false,
      "priceEstimate": {
@@ -1014,10 +1014,11 @@ window.SHARED_SEED = {
       "highFactor": 1,
       "sourceUrl": "",
       "checked": "2026-09-14"
-     }
+     },
+     "managed": true
     },
     {
-     "time": "05:00",
+     "time": "06:00",
      "dur": "0:45",
      "act": "גראב לסובארנבומי",
      "loc": "סוכומוויט → BKK",
@@ -1035,10 +1036,11 @@ window.SHARED_SEED = {
       "highFactor": 1.3,
       "sourceUrl": "",
       "checked": "2026-09-14"
-     }
+     },
+     "managed": true
     },
     {
-     "time": "05:50",
+     "time": "06:50",
      "dur": "1:00",
      "act": "צ׳ק-אין, כבודה ובידוק",
      "loc": "טרמינל יוצאים",
@@ -1056,32 +1058,34 @@ window.SHARED_SEED = {
       "highFactor": 1,
       "sourceUrl": "",
       "checked": "2026-09-14"
-     }
+     },
+     "managed": true
     },
     {
-     "time": "06:50",
-     "dur": "1:35",
-     "act": "Thai Vietjet VZ314 · בנגקוק → פוקט",
+     "time": "08:00",
+     "dur": "1:25",
+     "act": "Thai Airways TG203 · בנגקוק → פוקט",
      "loc": "סובארנבומי → HKT",
      "cat": "תחבורה",
-     "baht": 4720,
+     "baht": 5390,
      "status": "להזמין",
-     "link": "https://www.vietjetair.com/",
-     "notes": "Deluxe · ישירה · 20 ק״ג לכל אחד, בחירת מושב ושינוי תאריך · ฿738 מעל הזול",
+     "link": "https://www.thaiairways.com/",
+     "notes": "Thai Airways · ישירה · 23 ק״ג לכל אחד, ארוחה ובחירת מושב · נבדק 21/09/2026 ב-Kiwi",
      "id": "s_4_3",
      "done": false,
      "priceEstimate": {
       "kind": "estimate",
-      "basis": "אומדן לשני כרטיסי טיסה עם כבודה לפי התכנון הקודם; טרם נבדקה הצעה לתאריך הנסיעה.",
-      "lowFactor": 0.85,
-      "highFactor": 1.5,
-      "sourceUrl": "",
-      "checked": "2026-09-14",
+      "basis": "מחיר שנבדק לשני כרטיסים עם כבודה לתאריך הנסיעה.",
+      "lowFactor": 0.95,
+      "highFactor": 1.25,
+      "sourceUrl": "https://www.kiwi.com/",
+      "checked": "2026-09-21",
       "category": "flights"
-     }
+     },
+     "managed": true
     },
     {
-     "time": "08:25",
+     "time": "09:25",
      "dur": "0:35",
      "act": "נחיתה וכבודה",
      "loc": "פוקט",
@@ -1099,10 +1103,11 @@ window.SHARED_SEED = {
       "highFactor": 1,
       "sourceUrl": "",
       "checked": "2026-09-14"
-     }
+     },
+     "managed": true
     },
     {
-     "time": "09:00",
+     "time": "10:00",
      "dur": "0:30",
      "act": "מונית לרציף באנג רונג",
      "loc": "HKT → Bang Rong Pier",
@@ -1120,18 +1125,19 @@ window.SHARED_SEED = {
       "highFactor": 1.3,
       "sourceUrl": "",
       "checked": "2026-09-14"
-     }
+     },
+     "managed": true
     },
     {
-     "time": "09:35",
-     "dur": "0:25",
+     "time": "10:30",
+     "dur": "0:30",
      "act": "המתנה ברציף וכרטיסים",
      "loc": "באנג רונג",
      "cat": "אחר",
      "baht": null,
      "status": "משלמים במקום",
      "link": "",
-     "notes": "סירות: 08:40, 10:00, 11:00, 12:30, 13:30, 14:30, 16:00, 17:00",
+     "notes": "סירות: 08:40, 10:00, 11:00, 12:30, 13:30, 14:30, 16:00, 17:00 · חצי שעה רזרבה לפני ההפלגה",
      "id": "s_4_6",
      "done": false,
      "priceEstimate": {
@@ -1141,10 +1147,11 @@ window.SHARED_SEED = {
       "highFactor": 1,
       "sourceUrl": "",
       "checked": "2026-09-14"
-     }
+     },
+     "managed": true
     },
     {
-     "time": "10:00",
+     "time": "11:00",
      "dur": "0:35",
      "act": "ספידבוט לקו יאו נוי",
      "loc": "באנג רונג → רציף מאנו",
@@ -1162,10 +1169,11 @@ window.SHARED_SEED = {
       "highFactor": 1.3,
       "sourceUrl": "",
       "checked": "2026-09-14"
-     }
+     },
+     "managed": true
     },
     {
-     "time": "10:40",
+     "time": "11:40",
      "dur": "0:20",
      "act": "מונית עצמאית מרציף מאנו למחנה",
      "loc": "קו יאו נוי",
@@ -1183,10 +1191,11 @@ window.SHARED_SEED = {
       "highFactor": 1.3,
       "sourceUrl": "",
       "checked": "2026-09-14"
-     }
+     },
+     "managed": true
     },
     {
-     "time": "11:00",
+     "time": "12:00",
      "dur": "0:30",
      "act": "צ׳ק-אין במחנה",
      "loc": "KYN Phoenix",
@@ -1208,7 +1217,7 @@ window.SHARED_SEED = {
      "managed": true
     },
     {
-     "time": "12:00",
+     "time": "12:45",
      "dur": "1:00",
      "act": "צהריים במחנה",
      "loc": "KYN Phoenix",
@@ -1226,11 +1235,12 @@ window.SHARED_SEED = {
       "highFactor": 1,
       "sourceUrl": "",
       "checked": "2026-09-14"
-     }
+     },
+     "managed": true
     },
     {
-     "time": "13:00",
-     "dur": "3:00",
+     "time": "14:00",
+     "dur": "2:00",
      "act": "שינה אמיתית",
      "loc": "המחנה",
      "cat": "אחר",
@@ -1247,7 +1257,8 @@ window.SHARED_SEED = {
       "highFactor": 1,
       "sourceUrl": "",
       "checked": "2026-09-14"
-     }
+     },
+     "managed": true
     },
     {
      "time": "16:00",
