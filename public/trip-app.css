@@ -505,3 +505,42 @@ button:focus-visible,a:focus-visible,input:focus-visible{outline:2px solid var(-
 .file-name{flex:1;min-width:0;font-size:13px;color:var(--ink);text-decoration:none;
   overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
 .file-meta{font-size:11px;color:var(--muted);white-space:nowrap;}
+
+/* ===== נוכחות: מי בפנים עכשיו ===== */
+.presence-pill{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:500;
+  padding:4px 10px;border-radius:20px;background:rgba(110,143,126,.16);color:var(--sage-dark);white-space:nowrap;}
+.presence-pill.hidden{display:none;}
+.live-dot{width:6px;height:6px;border-radius:50%;background:var(--sage-dark);
+  animation:livePulse 1.8s ease-in-out infinite;}
+@keyframes livePulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(.7)}}
+
+/* ===== משיכה לרענון ===== */
+.pull-hint{height:0;overflow:hidden;display:flex;align-items:center;justify-content:center;
+  font-size:11.5px;color:var(--muted);transition:height .18s ease;}
+
+/* ===== תגובה למגע ===== */
+.tcard{cursor:pointer;transition:background .18s ease,opacity .2s ease,transform .12s ease;}
+.tcard:active{transform:scale(.985);background:rgba(0,0,0,.02);}
+.tcard.pulse{animation:tickPulse .32s ease;}
+@keyframes tickPulse{
+  0%{transform:scale(1)} 35%{transform:scale(.975)} 100%{transform:scale(1)}
+}
+.tcard .icheck{transition:background .2s ease,border-color .2s ease,transform .2s ease;}
+.tcard.done .icheck{transform:scale(1.08);}
+.tcard .tact{transition:opacity .2s ease;}
+.ring-fill{transition:stroke-dasharray .45s ease;}
+.deck-card{transition:transform .28s ease,opacity .28s ease;}
+.chip:active,.rail-btn:active,.nav-btn:active{transform:scale(.94);}
+.chip,.rail-btn,.nav-btn{transition:transform .1s ease;}
+
+/* ===== שיחה על שורה ===== */
+.row-notes{margin-top:10px;border-top:1px dashed var(--line);padding-top:10px;}
+.note{display:flex;gap:8px;align-items:flex-start;margin-bottom:7px;font-size:12px;line-height:1.55;}
+.note-who{flex:0 0 auto;font-weight:700;font-size:11px;}
+.note-who.itai{color:#2F6F6B;} .note-who.talia{color:#A9564E;}
+.note-text{flex:1;min-width:0;}
+.note-del{background:none;border:none;color:var(--muted);cursor:pointer;font-size:12px;padding:0 2px;}
+.note-add{display:flex;gap:6px;margin-top:8px;}
+.note-add input{flex:1;min-width:0;background:var(--cream);border:1px solid var(--line);
+  border-radius:12px;padding:9px 11px;font-size:13px;font-family:inherit;color:var(--ink);}
+.note-count{font-size:10.5px;color:var(--muted);}

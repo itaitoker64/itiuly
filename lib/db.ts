@@ -136,6 +136,12 @@ export async function ensureSchema(): Promise<void> {
       uploaded_at TIMESTAMPTZ NOT NULL DEFAULT now()
     )
   `;
+  await sql`
+    CREATE TABLE IF NOT EXISTS presence (
+      username TEXT PRIMARY KEY,
+      at       TIMESTAMPTZ NOT NULL DEFAULT now()
+    )
+  `;
   initialized = true;
 }
 

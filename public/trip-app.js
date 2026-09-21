@@ -897,6 +897,7 @@ async function loadState(){
   render();
   startSyncLoop();
   registerServiceWorker();
+  startPresence();
 }
 
 /** שולח את המסמך לשרת. מחזיר true אם נשמר. */
@@ -961,8 +962,14 @@ function persist(){
 }
 
 /** בדיקה תקופתית — אם הצד השני שמר, מרעננים את המסך */
+/** אמצע הקלדה — עדכון מהשרת ימחק את מה שכותבים, אז מחכים */
+function isTyping(){
+  const el = document.activeElement;
+  return !!el && (el.tagName==='INPUT' || el.tagName==='TEXTAREA' || el.isContentEditable);
+}
+
 async function syncNow(){
-  if(savePending || saveInFlight || modalOpen()) return;
+  if(savePending || saveInFlight || modalOpen() || isTyping()) return;
   try{
     const res = await fetch('/api/state?meta=1', {cache:'no-store'});
     if(!res.ok) return;
@@ -980,7 +987,13 @@ async function syncNow(){
 
 function startSyncLoop(){
   if(syncTimer) return;
-  syncTimer = setInterval(()=>{ if(!document.hidden) syncNow(); }, 8000);
+  let lastSync = 0;
+  syncTimer = setInterval(()=>{
+    if(document.hidden) return;
+    if(Date.now() - lastSync < syncInterval()) return;
+    lastSync = Date.now();
+    syncNow();
+  }, 1500);
   document.addEventListener('visibilitychange', ()=>{
     if(document.hidden) return;
     if(savePending) flushSave(); else syncNow();
@@ -995,6 +1008,91 @@ function startSyncLoop(){
   });
 }
 
+/* =========================================================
+   שכבת המגע — מה שהופך את זה מדף לאפליקציה
+========================================================= */
+
+/** רטט קצר. בלי זה סימון מרגיש כמו לחיצה על טקסט. */
+function buzz(pattern){
+  try{ if(navigator.vibrate) navigator.vibrate(pattern || 12); }catch(e){}
+}
+
+/** מי עוד נמצא באפליקציה ברגע זה */
+let othersHere = [];
+let presenceTimer = null;
+
+async function beatPresence(){
+  if(document.hidden) return;
+  try{
+    const res = await fetch('/api/presence', {method:'POST'});
+    if(!res.ok) return;
+    const payload = await res.json();
+    const was = othersHere.length;
+    othersHere = payload.others || [];
+    if(othersHere.length !== was) renderPresence();
+  }catch(e){ /* אין רשת — הנוכחות פשוט לא מתעדכנת */ }
+}
+
+function renderPresence(){
+  const el = document.getElementById('presence-pill');
+  if(!el) return;
+  if(!othersHere.length){ el.classList.add('hidden'); el.innerHTML=''; return; }
+  const who = othersHere[0];
+  el.classList.remove('hidden');
+  el.innerHTML = `<span class="live-dot"></span>${who.emoji} ${who.displayName} כאן עכשיו`;
+}
+
+/** כששניכם בפנים, שווה לבדוק עדכונים מהר יותר */
+function syncInterval(){ return othersHere.length ? 3000 : 8000; }
+
+function startPresence(){
+  if(presenceTimer) return;
+  beatPresence();
+  presenceTimer = setInterval(beatPresence, 20000);
+  document.addEventListener('visibilitychange', ()=>{ if(!document.hidden) beatPresence(); });
+}
+
+/** משיכה למטה בראש הרשימה — רענון, כמו בכל אפליקציה */
+function initPullToRefresh(){
+  const content = document.getElementById('content');
+  if(!content || content.dataset.pullReady) return;
+  content.dataset.pullReady = '1';
+
+  let startY = 0, pulling = false, distance = 0;
+  const bar = document.getElementById('pull-hint');
+
+  content.addEventListener('touchstart', (e)=>{
+    if(window.scrollY > 4 || modalOpen()) return;
+    startY = e.touches[0].clientY; pulling = true; distance = 0;
+  }, {passive:true});
+
+  content.addEventListener('touchmove', (e)=>{
+    if(!pulling) return;
+    distance = e.touches[0].clientY - startY;
+    if(distance <= 0){ pulling = false; if(bar) bar.style.height='0px'; return; }
+    if(bar){
+      bar.style.height = Math.min(64, distance*0.5) + 'px';
+      bar.textContent = distance > 90 ? 'שחררו לרענון' : 'משכו לרענון';
+    }
+  }, {passive:true});
+
+  const finish = async ()=>{
+    if(!pulling) return;
+    pulling = false;
+    if(bar) bar.style.height = '0px';
+    if(distance > 90){
+      buzz(18);
+      setSyncStatus('loading');
+      await syncNow();
+      await beatPresence();
+      setSyncStatus(storageAvailable ? 'saved' : 'offline');
+    }
+    distance = 0;
+  };
+  content.addEventListener('touchend', finish);
+  content.addEventListener('touchcancel', finish);
+}
+
 function registerServiceWorker(){
   if(!('serviceWorker' in navigator)) return;
   navigator.serviceWorker.register('/sw.js').catch(()=>{ /* לא קריטי */ });
@@ -1003,6 +1101,23 @@ function registerServiceWorker(){
     else syncNow();
   });
   window.addEventListener('offline', ()=> setSyncStatus('offline'));
+}
+
+/** סימון שורה — עם רטט ואנימציה, כדי שהמגע יחזיר משהו */
+function toggleRowDone(dayId, rowId, el){
+  const day = sh().days.find(d=>d.id===dayId);
+  const row = day && day.rows.find(r=>r.id===rowId);
+  if(!row) return;
+  row.done = !row.done;
+  buzz(row.done ? [10,30,14] : 10);
+  if(el){
+    el.classList.toggle('done', row.done);
+    el.classList.remove('pulse'); void el.offsetWidth; el.classList.add('pulse');
+  }
+  persist();
+  cacheState();
+  clearTimeout(toggleRowDone.redraw);
+  toggleRowDone.redraw = setTimeout(render, 320);   // נותנים לאנימציה לרוץ
 }
 
 function modalOpen(){
@@ -1283,6 +1398,8 @@ function render(){
   }
   else { activeTab='home'; c.innerHTML = renderHome(); }
   renderWhoPill();
+  renderPresence();
+  initPullToRefresh();
   loadVisibleImages();
 }
 
@@ -1782,10 +1899,64 @@ function gearFor(row, day){
   return hit.gear;
 }
 
+/* =========================================================
+   שיחה על שורה — במקום להתכתב בוואטסאפ על מה שכתוב כאן
+========================================================= */
+function rowNotes(row){ return Array.isArray(row.talk) ? row.talk : []; }
+
+function renderRowNotes(day, r){
+  const talk = rowNotes(r);
+  const open = expandedRow['talk_'+r.id] === true;
+  if(!talk.length && !open){
+    return `<button class="chip mini" data-action="openTalk" data-id="${r.id}">💬 להגיד משהו</button>`;
+  }
+  if(!open){
+    const last = talk[talk.length-1];
+    return `<button class="chip mini" data-action="openTalk" data-id="${r.id}">
+      💬 ${talk.length} · ${escapeHtml(personName(last.by))}: ${escapeHtml(last.text.slice(0,24))}${last.text.length>24?'…':''}
+    </button>`;
+  }
+  return `
+  <div class="row-notes">
+    ${talk.map(n=>`
+      <div class="note">
+        <span class="note-who ${n.by}">${escapeHtml(personName(n.by))}</span>
+        <span class="note-text">${escapeHtml(n.text)}</span>
+        ${n.by===meId()?`<button class="note-del" data-action="delNote" data-day="${day.id}" data-id="${r.id}" data-note="${n.id}">✕</button>`:''}
+      </div>`).join('') || '<div class="note-count">עוד לא נאמר כלום</div>'}
+    <div class="note-add">
+      <input id="note-${r.id}" placeholder="מה חושבים?" maxlength="280"
+             data-action="noteKey" data-day="${day.id}" data-id="${r.id}">
+      <button class="chip strong" data-action="addNote" data-day="${day.id}" data-id="${r.id}">שליחה</button>
+    </div>
+  </div>`;
+}
+
+function addRowNote(dayId, rowId){
+  const input = document.getElementById('note-'+rowId);
+  const text = input && input.value.trim();
+  if(!text) return;
+  const day = sh().days.find(d=>d.id===dayId);
+  const row = day && day.rows.find(r=>r.id===rowId);
+  if(!row) return;
+  if(!Array.isArray(row.talk)) row.talk = [];
+  row.talk.push({id:uid('n'), by:meId(), text, at:new Date().toISOString()});
+  buzz(12);
+  persist(); cacheState(); render();
+}
+
+function deleteRowNote(dayId, rowId, noteId){
+  const day = sh().days.find(d=>d.id===dayId);
+  const row = day && day.rows.find(r=>r.id===rowId);
+  if(!row || !Array.isArray(row.talk)) return;
+  row.talk = row.talk.filter(n=>n.id!==noteId);
+  persist(); cacheState(); render();
+}
+
 function renderTodayRow(day, r){
   const statusCls = SHARED_STATUS_CLASS[r.status] || 'onsite';
   return `
-  <div class="tcard ${r.done?'done':''}">
+  <div class="tcard ${r.done?'done':''}" data-action="tapRow" data-day="${day.id}" data-id="${r.id}">
     ${rowThumb(r)}
     <div class="tbody">
       <div class="activity-heading">${r.time?`<div class="activity-time" dir="ltr">${escapeHtml(r.time)}</div>`:''}<div class="tact">${itineraryText(r.act)}</div></div>
@@ -1797,6 +1968,7 @@ function renderTodayRow(day, r){
       </div>
       ${r.notes?`<div class="tnotes">${itineraryText(r.notes)}</div>`:''}
       ${gearFor(r, day)?`<div class="gear-note">🎒 ${gearFor(r, day)}</div>`:''}
+      <div class="chip-row tight">${renderRowNotes(day, r)}</div>
     </div>
     <input class="icheck" aria-label="${escapeAttr(r.act)}" type="checkbox" ${r.done?'checked':''}
            data-action="toggleSharedRow" data-day="${day.id}" data-id="${r.id}">
@@ -1809,6 +1981,7 @@ function stepDay(delta){
   const next = currentDayIndex() + delta;
   if(next < 0 || next >= days.length) return false;
   todayIndex = next;
+  buzz(8);
   render();
   return true;
 }
@@ -3298,10 +3471,16 @@ document.addEventListener('click', (e)=>{
     expandedDays[id] = !expandedDays[id];
     render();
   }
+  else if(action==='openTalk'){ expandedRow['talk_'+id] = !expandedRow['talk_'+id]; render(); }
+  else if(action==='addNote'){ addRowNote(t.dataset.day, id); }
+  else if(action==='delNote'){ deleteRowNote(t.dataset.day, id, t.dataset.note); }
+  else if(action==='tapRow'){
+    // כל הכרטיס הוא כפתור — חוץ מקישורים וכפתורים שבתוכו
+    if(e.target.closest('a,button,input')) return;
+    toggleRowDone(t.dataset.day, id, t);
+  }
   else if(action==='toggleSharedRow'){
-    const day = sh().days.find(d=>d.id===t.dataset.day);
-    const row = day && day.rows.find(r=>r.id===id);
-    if(row){ row.done = !row.done; persist(); render(); }
+    toggleRowDone(t.dataset.day, id, t.closest('.tcard,.irow'));
   }
   else if(action==='editSharedRow'){ openSharedRowModal(t.dataset.day, id); }
   else if(action==='expenseFromRow'){
@@ -3407,6 +3586,14 @@ document.addEventListener('click', (e)=>{
       else if(type==='expense'){ STATE.expenses = STATE.expenses.filter(x=>x.id!==id); }
     });
   }
+});
+
+document.addEventListener('keydown', (e)=>{
+  if(e.key!=='Enter') return;
+  const input = e.target.closest('[data-action="noteKey"]');
+  if(!input) return;
+  e.preventDefault();
+  addRowNote(input.dataset.day, input.dataset.id);
 });
 
 document.addEventListener('change', (e)=>{
