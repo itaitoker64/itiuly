@@ -191,7 +191,7 @@ window.SHARED_SEED = {
      "baht": null,
      "status": "מוזמן",
      "link": "",
-     "notes": "צ׳ק-אין מ-14:00 · פיקדון ฿1,000 מזומן, מוחזר בצ׳ק-אאוט",
+     "notes": "צ׳ק-אין מ-14:00, צ׳ק-אאוט עד 12:00 · פיקדון ฿1,000 מזומן, מוחזר בצ׳ק-אאוט",
      "id": "s_1_5",
      "done": false,
      "priceEstimate": {
@@ -201,7 +201,8 @@ window.SHARED_SEED = {
       "highFactor": 1,
       "sourceUrl": "",
       "checked": "2026-09-14"
-     }
+     },
+     "managed": true
     },
     {
      "time": "16:30",
@@ -275,10 +276,10 @@ window.SHARED_SEED = {
      "act": "לינה — Montraj Coach Sukhumvit",
      "loc": "סוי סוכומוויט 14",
      "cat": "לינה",
-     "baht": 4186.67,
+     "baht": 2723.29,
      "status": "מוזמן",
-     "link": "https://secure.booking.com/",
-     "notes": "אישור 5123136373 · ₪1,128 לשלושת הלילות · בריכה על הגג · ביטול חינם עד 20/11 · משלמים במקום",
+     "link": "https://reservation.thecoachbangkok.com/propertyibe2/booking-management?propertyId=890&onlineId=4&mobileredirect=false&accesscode=Member&lang=en",
+     "notes": "אישור 3051425 · הזמנה ישירה באתר המלון עם קוד Member · Historic Cabin Family, מיטת קינג, 27 מ״ר · ฿8,169.87 לשלושת הלילות, כולל מסים ושירות · משלמים במלון · ביטול חינם עד 21/11, בכתב",
      "id": "s_1_9",
      "done": false,
      "priceEstimate": {
@@ -287,16 +288,17 @@ window.SHARED_SEED = {
       "lowFactor": 1,
       "highFactor": 1,
       "sourceUrl": "",
-      "checked": "2026-09-14",
+      "checked": "2026-09-28",
       "booking": {
        "category": "accommodation",
        "split": "ratio",
        "key": "bangkok",
        "match": "Montraj Coach",
-       "totalIls": 1128,
-       "rows": 3
+       "rows": 3,
+       "totalThb": 8169.87
       }
-     }
+     },
+     "managed": true
     },
     {
      "id": "s_1_atm",
@@ -646,9 +648,9 @@ window.SHARED_SEED = {
      "act": "לינה — Montraj Coach Sukhumvit",
      "loc": "סוכומוויט",
      "cat": "לינה",
-     "baht": 4186.67,
+     "baht": 2723.29,
      "status": "מוזמן",
-     "link": "https://secure.booking.com/",
+     "link": "https://reservation.thecoachbangkok.com/propertyibe2/booking-management?propertyId=890&onlineId=4&mobileredirect=false&accesscode=Member&lang=en",
      "notes": "",
      "id": "s_2_10",
      "done": false,
@@ -658,16 +660,17 @@ window.SHARED_SEED = {
       "lowFactor": 1,
       "highFactor": 1,
       "sourceUrl": "",
-      "checked": "2026-09-14",
+      "checked": "2026-09-28",
       "booking": {
        "category": "accommodation",
        "split": "ratio",
        "key": "bangkok",
        "match": "Montraj Coach",
-       "totalIls": 1128,
-       "rows": 3
+       "rows": 3,
+       "totalThb": 8169.87
       }
-     }
+     },
+     "managed": true
     }
    ],
    "summary": "העיר העתיקה ביום, הנהר בלילה — לוי קראתונג",
@@ -940,9 +943,9 @@ window.SHARED_SEED = {
      "act": "לינה — Montraj Coach Sukhumvit",
      "loc": "סוכומוויט",
      "cat": "לינה",
-     "baht": 4186.67,
+     "baht": 2723.29,
      "status": "מוזמן",
-     "link": "https://secure.booking.com/",
+     "link": "https://reservation.thecoachbangkok.com/propertyibe2/booking-management?propertyId=890&onlineId=4&mobileredirect=false&accesscode=Member&lang=en",
      "notes": "",
      "id": "s_3_12",
      "done": false,
@@ -952,16 +955,17 @@ window.SHARED_SEED = {
       "lowFactor": 1,
       "highFactor": 1,
       "sourceUrl": "",
-      "checked": "2026-09-14",
+      "checked": "2026-09-28",
       "booking": {
        "category": "accommodation",
        "split": "ratio",
        "key": "bangkok",
        "match": "Montraj Coach",
-       "totalIls": 1128,
-       "rows": 3
+       "rows": 3,
+       "totalThb": 8169.87
       }
-     }
+     },
+     "managed": true
     },
     {
      "id": "s_3_dream",
@@ -3782,10 +3786,10 @@ window.SHARED_SEED = {
   {
    "what": "Montraj Coach Sukhumvit",
    "when": "23–26/11",
-   "details": "בנגקוק · 3 לילות · 1st Class Coach",
-   "ref": "5123136373",
-   "payment": "₪1,128 — משלמים במקום",
-   "freeCancel": "ביטול חינם עד 20/11 23:59"
+   "details": "בנגקוק · 3 לילות · Historic Cabin Family · הזמנה ישירה",
+   "ref": "3051425",
+   "payment": "฿8,169.87 (כ-₪734) — משלמים במלון",
+   "freeCancel": "ביטול חינם עד 21/11 · בכתב, ל-rsvns.coach@montraj.com"
   },
   {
    "what": "Chermantra Aonang Resort",
@@ -3827,12 +3831,12 @@ window.SHARED_SEED = {
    "dates": "23–26/11",
    "nights": 3,
    "hotel": "Montraj Coach Sukhumvit",
-   "what": "1st Class Coach, מיטה זוגית · בריכה על הגג · אישור 5123136373 · פיקדון ฿1,000 מזומן · משלמים במקום · ₪1,128 לשלושת הלילות.",
-   "perNight": 4186.67,
+   "what": "Historic Cabin Family, מיטת קינג, 27 מ״ר · בריכה על הגג · אישור 3051425 — הזמנה ישירה באתר המלון עם קוד Member · ฿8,169.87 לשלושת הלילות, כולל מסים ושירות · פיקדון ฿1,000 מזומן · משלמים במלון · החליפה הזמנה בבוקינג ב-₪1,128.",
+   "perNight": 2723.29,
    "choice": "מוזמן",
-   "freeCancel": "עד 20/11",
-   "link": "בוקינג",
-   "linkLink": "https://secure.booking.com/"
+   "freeCancel": "עד 21/11 — בכתב, ל-rsvns.coach@montraj.com",
+   "link": "אתר המלון",
+   "linkLink": "https://reservation.thecoachbangkok.com/propertyibe2/booking-management?propertyId=890&onlineId=4&mobileredirect=false&accesscode=Member&lang=en"
   },
   {
    "dest": "בנגקוק",

@@ -15,7 +15,7 @@ near(Object.values(f.categories).reduce((a,b)=>a+b,0)+f.reserve,f.base);
 near(run('sharedEstimateDays().reduce((s,d)=>s+dayTotalBaht(d)*rate(),0)')+f.reserve,f.base);
 near(f.categories.flights,3777+1891+5390*.08981); // Includes TG203, the later Phuket flight.
 assert.ok(f.optional>0);
-near(f.categories.accommodation,1128+1839+4029+12150*.08981); // KYN corrected from 14,580.
+near(f.categories.accommodation,8169.87*.08981+1839+4029+12150*.08981); // Montraj booked direct; KYN corrected from 14,580.
 near(run('sharedRowPrice(sh().days[0].rows.find(r=>r.id==="s_1_0")).base'),3777);
 near(run('sharedRowPrice(sh().days[15].rows.find(r=>r.id==="s_16_6")).shares.itai'),1891);
 assert.equal(run('sh().days.flatMap(d=>d.rows).find(r=>r.id==="s_15_3").baht'),0);

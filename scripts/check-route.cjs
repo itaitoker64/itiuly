@@ -25,7 +25,7 @@ const day = (run, date) => JSON.parse(run(`JSON.stringify(sh().days.find(d=>d.da
 const acts = d => d.rows.map(r => r.act).join(' | ');
 
 const run = boot();
-assert.equal(run('STATE.schema'), 12);
+assert.equal(run('STATE.schema'), 13);
 
 // Similan moved to 3/12, with two free days after it that can take it if the sea says no.
 const d3 = day(run, '2026-12-03'), d4 = day(run, '2026-12-04');
@@ -118,7 +118,7 @@ sim.done=true; sim.talk=[{by:'talia',text:'רוצה את זה!'}];
 at('2026-12-04').rows.push({id:'custom-ks',act:'לקחת מגבת לאגם',done:false});
 STATE.schema=10;
 ensureDefaults();`);
-assert.equal(old('STATE.schema'), 12);
+assert.equal(old('STATE.schema'), 13);
 const o3 = day(old, '2026-12-03'), o5 = day(old, '2026-12-05');
 const moved = o3.rows.find(r => r.id === 's_15_1');
 assert.ok(moved, 'Similan reached 3/12 in the saved document');
@@ -133,4 +133,47 @@ old('STATE.schema=10; ensureDefaults();');
 assert.equal(old('JSON.stringify(sh().days)'), JSON.stringify(JSON.parse(settled).shared.days),
   'the rows, not the date, decide whether to move — so a second pass is a no-op');
 
-console.log('PASS: Similan with two backup days, Khao Sok as a day trip, shared van on 2/12, Loy Krathong date, saved-document move and idempotence.');
+// --- the Bangkok hotel, booked direct ---------------------------------------
+const bkk = boot();
+const mx = JSON.parse(bkk('JSON.stringify(wallet().expenses.find(x=>/Montraj Coach/.test(x.title)))'));
+assert.equal(mx.amount, 8169.87);
+assert.equal(mx.currency, 'THB');
+assert.equal(mx.status, 'due', 'paid at the hotel, so still due');
+assert.ok(/3051425/.test(mx.note));
+// The forecast takes the price from the ledger, once, split across the three nights.
+const nightIls = bkk('sharedRowPrice(sh().days[0].rows.find(r=>r.id==="s_1_9")).base');
+assert.ok(Math.abs(nightIls - 8169.87 * bkk('rate()') / 3) < 0.001);
+const mb = JSON.parse(bkk('JSON.stringify(sh().bookings.find(b=>b.what==="Montraj Coach Sukhumvit"))'));
+assert.equal(mb.ref, '3051425');
+assert.ok(/21\/11/.test(mb.freeCancel));
+const mh = JSON.parse(bkk('JSON.stringify(sh().hotels.find(h=>h.hotel==="Montraj Coach Sukhumvit"))'));
+assert.equal(mh.perNight, 2723.29);
+assert.ok(!/booking\.com/.test(mh.linkLink), 'links to the hotel, not Booking');
+for (const id of ['s_1_9', 's_2_10', 's_3_12']) {
+  const r = JSON.parse(bkk(`JSON.stringify(sh().days.flatMap(d=>d.rows).find(r=>r.id==="${id}"))`));
+  assert.equal(r.baht, 2723.29, id);
+  assert.ok(!/5123136373/.test(r.notes || ''), 'no Booking reference left on ' + id);
+}
+assert.ok(/12:00/.test(bkk('sh().days[0].rows.find(r=>r.id==="s_1_5").notes')), 'check-out time from the confirmation');
+// A reminder to cancel the Booking reservation, so there are not two.
+assert.ok(bkk('STATE.masterChecklist.some(t=>/לבטל את הזמנת בוקינג של Montraj/.test(t.title) && t.owner==="itai")'));
+
+// A saved document still holding the Booking reservation is moved over...
+const oldBkk = boot();
+oldBkk(`STATE=seedData();
+const x=wallet().expenses.find(e=>/Montraj Coach/.test(e.title));
+Object.assign(x,{amount:1128,currency:'ILS',note:'אישור 5123136373'});
+sh().days[0].rows.find(r=>r.id==='s_1_9').done=true;
+STATE.schema=12;
+ensureDefaults();`);
+assert.equal(oldBkk('wallet().expenses.find(e=>/Montraj Coach/.test(e.title)).amount'), 8169.87);
+assert.equal(oldBkk('sh().days[0].rows.find(r=>r.id==="s_1_9").done'), true, 'keeping the tick');
+assert.equal(oldBkk('sh().bookings.find(b=>b.what==="Montraj Coach Sukhumvit").ref'), '3051425');
+// ...but an amount someone corrected by hand is left alone.
+const edited = boot();
+edited(`STATE=seedData();
+Object.assign(wallet().expenses.find(e=>/Montraj Coach/.test(e.title)),{amount:9000,currency:'THB'});
+STATE.schema=12; ensureDefaults();`);
+assert.equal(edited('wallet().expenses.find(e=>/Montraj Coach/.test(e.title)).amount'), 9000);
+
+console.log('PASS: Similan with two backup days, Khao Sok as a day trip, shared van on 2/12, Bangkok hotel booked direct, Loy Krathong date, saved-document move and idempotence.');

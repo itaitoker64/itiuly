@@ -387,7 +387,7 @@ function seedData(){
   const hanoiId = uid('d'), manilaId = uid('d');
 
   return {
-    schema:12,
+    schema:13,
     tripName:"My Big Trip 🌏",
     startDate:"2026-11-22",
     endDate:null,
@@ -418,8 +418,8 @@ function seedData(){
         {id:uid('x'), date:"2026-09-10", title:"Chermantra Aonang · 3 לילות", category:"accommodation",
          amount:1839, currency:"ILS", paidBy:"itai", split:"ratio", status:"paid", note:"אישור 5553772333 · ביטול חינם עד 14/11"},
         {id:uid('x'), date:"2026-11-23", title:"Montraj Coach Sukhumvit · 3 לילות בבנגקוק", category:"accommodation",
-         amount:1128, currency:"ILS", paidBy:"itai", split:"ratio", status:"due",
-         note:"אישור 5123136373 · משלמים במקום בצ׳ק-אין · פיקדון ฿1,000 מזומן, מוחזר בצ׳ק-אאוט"},
+         amount:8169.87, currency:"THB", paidBy:"itai", split:"ratio", status:"due",
+         note:"אישור 3051425 · הזמנה ישירה באתר המלון עם קוד Member · Historic Cabin Family · משלמים בצ׳ק-אין · ביטול חינם עד 21/11 · פיקדון ฿1,000 מזומן, מוחזר בצ׳ק-אאוט · החליפה את הזמנת בוקינג 5123136373 ב-₪1,128"},
         {id:uid('x'), date:"2026-09-10", title:"Kalima Resort · 6 לילות בקאו לק", category:"accommodation",
          amount:4029, currency:"ILS", paidBy:"itai", split:"ratio", status:"paid", note:"6 לילות · ביטול חינם"}
       ],
@@ -521,6 +521,7 @@ function seedData(){
       {id:uid('m'), category:"בישראל לפני הטיול", title:"לסגור עניינים פתוחים (דואר, מנויים, ביטוח לאומי)", status:"todo", deadline:"", notes:"", priority:"בינונית", link:"", countryId:null, order:6},
       {id:uid('m'), category:"תרופות", title:"להצטייד בערכת תרופות בסיסית", status:"todo", deadline:"", notes:"", priority:"בינונית", link:"", countryId:null, order:7},
       {id:uid('m'), owner:"both", category:"הזמנות", title:"לסגור את צ׳רמנטרה לפני הדדליין", status:"todo", deadline:"2026-11-14", notes:"אחרי 14/11 הכרטיס מחויב במלוא הסכום", priority:"גבוהה", link:"", countryId:"thailand", order:8},
+      {id:uid('m'), owner:"itai", category:"הזמנות", title:"לבטל את הזמנת בוקינג של Montraj (5123136373)", status:"todo", deadline:"2026-11-20", notes:"ההזמנה הישירה (3051425, ฿8,169.87) כבר מאושרת. לבטל עכשיו — אחרת נשארות שתי הזמנות, ואי-הגעה לאחת מהן עלולה לעלות לילה. ביטול חינם עד 20/11", priority:"גבוהה", link:"https://secure.booking.com/myreservations.html", countryId:"thailand", order:14},
       {id:uid('m'), owner:"both", category:"הזמנות", title:"להזמין ואן משותף מאאו נאנג לקאו לק", status:"todo", deadline:"2026-11-15", notes:"2/12, איסוף מצ׳רמנטרה בין 11:30 ל-14:30 · Trip Store Krabi, ฿450 לאדם · הורדה בקלימה · השעה המדויקת מגיעה במייל", priority:"בינונית", link:"https://www.tripstorekrabi.com/Transfers/From-Krabi/To-Khao-Lak/By-Hat-Yai-World", countryId:"thailand", order:13},
       {id:uid('m'), owner:"both", category:"הזמנות", title:"להזמין את טיסת TG203 לפוקט", status:"todo", deadline:"2026-11-01", notes:"08:00 → 09:25 · ฿5,390 לשניים, 23 ק״ג לכל אחד. הוזזה מ-06:50 כדי לישון עוד שעה ועדיין לתפוס את סירת 11:00", priority:"גבוהה", link:"https://www.thaiairways.com/", countryId:"thailand", order:9},
       {id:uid('m'), owner:"both", category:"הזמנות", title:"לאשר טלפונית את פרטי החשבון של המחנה", status:"todo", deadline:"2026-10-05", notes:"לפני שמעבירים ฿6,075 — פרטי בנק במייל הם הדבר הכי מזויף בהזמנות. החשבון על שם פרטי ובכתובת בחון קאן, לא באי", priority:"גבוהה", link:"", countryId:"thailand", order:10},
@@ -1046,6 +1047,45 @@ function ensureDefaults(){
     // משימה שכבר סומנה כבוצעה פירושה שהוזמן רכב — לא משנים אותה מתחת לידיים
     if(task && freshTask && task.status!=='done') Object.assign(task, {title:freshTask.title, notes:freshTask.notes, link:freshTask.link});
     STATE.schema = 12;
+  }
+
+  /*
+   * המלון בבנגקוק הוזמן ישירות באתר עם קוד Member: Historic Cabin Family,
+   * ฿8,169.87 לשלושה לילות (אישור 3051425), במקום ₪1,128 בבוקינג. מעדכנים את
+   * ההוצאה בפנקס — ממנה התחזית לוקחת את המחיר — ואת ההזמנה, המלון ושורות הלינה.
+   */
+  if(STATE.schema < 13){
+    const seedShared = window.SHARED_SEED;
+    const days = (STATE.shared && STATE.shared.days) || [];
+    ['2026-11-23','2026-11-24','2026-11-25'].forEach(date=>{
+      const seedDay = seedShared && seedShared.days.find(d=>d.date===date);
+      const day = days.find(d=>d.date===date);
+      if(!seedDay || !day) return;
+      seedDay.rows.forEach(seedRow=>{
+        if(!seedRow.managed || !/Montraj|מונטראג/.test(seedRow.act)) return;
+        const row = day.rows.find(r=>r.id===seedRow.id);
+        if(!row) return;
+        ['act','time','baht','status','notes','link'].forEach(k=>{ if(seedRow[k]!==undefined) row[k] = seedRow[k]; });
+        if(seedRow.priceEstimate) row.priceEstimate = JSON.parse(JSON.stringify(seedRow.priceEstimate));
+        row.managed = true;
+      });
+    });
+    const replaceBy = (list, seedList, key)=>{
+      const seedItem = (seedList||[]).find(x=>x[key]==='Montraj Coach Sukhumvit');
+      const item = (list||[]).find(x=>x[key]==='Montraj Coach Sukhumvit');
+      if(seedItem && item) Object.assign(item, JSON.parse(JSON.stringify(seedItem)));
+    };
+    if(seedShared && STATE.shared){
+      replaceBy(STATE.shared.bookings, seedShared.bookings, 'what');
+      replaceBy(STATE.shared.hotels, seedShared.hotels, 'hotel');
+    }
+    // רק אם ההוצאה עדיין הזמנת בוקינג המקורית — סכום שתוקן ידנית נשאר
+    const expense = (STATE.money.expenses||[]).find(x=>/Montraj Coach/.test(x.title||''));
+    const freshExpense = fresh.money.expenses.find(x=>/Montraj Coach/.test(x.title||''));
+    if(expense && freshExpense && expense.amount===1128 && expense.currency==='ILS'){
+      Object.assign(expense, {amount:freshExpense.amount, currency:freshExpense.currency, note:freshExpense.note});
+    }
+    STATE.schema = 13;
   }
 
   /* משימות חדשות מתווספות בכל גרסה, לפי כותרת */
