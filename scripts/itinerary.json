@@ -499,7 +499,7 @@
     "baht": null,
     "status": "משלמים במקום",
     "link": "https://www.google.com/maps/search/?api=1&query=Wat+Arun+Bangkok",
-    "notes": "ליל הירח המלא של החודש הירחי ה-12 — אומת לשני מקורות",
+    "notes": "ליל הירח המלא של החודש הירחי ה-12 · לפי לוח השנה התאילנדי יום שלישי 24/11 (ขึ้น 15 ค่ำ เดือน 12). אתרים באנגלית כותבים 25/11 — זו טעות",
     "priceEstimate": {
      "kind": "no-extra",
      "basis": "לא הוקצה חיוב נפרד לפעולה הזאת; חיובים כלולים מופיעים בחבילה או בהזמנה.",
@@ -507,7 +507,8 @@
      "highFactor": 1,
      "sourceUrl": "",
      "checked": "2026-09-14"
-    }
+    },
+    "managed": true
    },
    {
     "time": "22:30",
@@ -2184,18 +2185,19 @@
     "act": "רכב פרטי לקאו לק",
     "loc": "אאו נאנג → קראבי → כביש 4 → פאנג נגה → קאו לק",
     "cat": "תחבורה",
-    "baht": 4100,
+    "baht": 3300,
     "status": "להזמין",
-    "link": "https://www.google.com/maps/search/?api=1&query=Khao+Lak+Phang+Nga",
-    "notes": "כ-2:30–2:45 נהיגה · ואן משותף זול יותר אך עם איסופים ומגיע ל-4 שעות",
+    "link": "https://kiwitaxi.com/en/thailand/ao-nang-beach-khao-lak",
+    "notes": "להזמין מראש · Kiwitaxi, רכב Comfort לשניים ושלושה תיקים — $92 (כ-฿3,300), מחיר קבוע ששולם מראש · איסוף מצ׳רמנטרה · 154 ק״מ, כ-2:50 · חלופה זולה: ואן משותף ב-12Go מ-฿450 לאדם, עם איסופים ועד 4 שעות",
     "priceEstimate": {
      "kind": "estimate",
-     "basis": "תקציב לרכב פרטי קראבי–קאו לק על סמך מחירון העברות; יש לקבל הצעה לאיסוף המדויק באאו נאנג.",
-     "lowFactor": 0.8536585365853658,
-     "highFactor": 1.2195121951219512,
-     "sourceUrl": "https://www.khaolaklanddiscovery.com/",
-     "checked": "2026-09-14"
-    }
+     "basis": "מחיר רכב פרטי שנבדק ב-Kiwitaxi למסלול אאו נאנג → קאו לק.",
+     "lowFactor": 0.95,
+     "highFactor": 1.1,
+     "sourceUrl": "https://kiwitaxi.com/en/thailand/ao-nang-beach-khao-lak",
+     "checked": "2026-09-28"
+    },
+    "managed": true
    },
    {
     "time": "11:30",
@@ -2282,7 +2284,7 @@
     "baht": null,
     "status": "משלמים במקום",
     "link": "",
-    "notes": "מכאן והלאה זה פרק המנוחה",
+    "notes": "מחר סימילן, יציאה ב-07:00 — ערב רגוע ולישון מוקדם",
     "priceEstimate": {
      "kind": "no-extra",
      "basis": "לא הוקצה חיוב נפרד לפעולה הזאת; חיובים כלולים מופיעים בחבילה או בהזמנה.",
@@ -2290,7 +2292,8 @@
      "highFactor": 1,
      "sourceUrl": "",
      "checked": "2026-09-14"
-    }
+    },
+    "managed": true
    },
    {
     "time": "19:30",
@@ -2348,7 +2351,7 @@
   "dest": "קאו לק",
   "rows": [
    {
-    "time": "08:00",
+    "time": "08:30",
     "dur": "1:00",
     "act": "ארוחת בוקר",
     "loc": "קלימה",
@@ -2356,7 +2359,125 @@
     "baht": 400,
     "status": "משלמים במקום",
     "link": "",
-    "notes": "לבדוק מול המלון אם ארוחת בוקר כלולה בתעריף שלכם",
+    "notes": ""
+   },
+   {
+    "time": "07:00",
+    "dur": "10:00",
+    "act": "סימילן — יום שנורקלינג",
+    "loc": "איי סימילן",
+    "cat": "אטרקציות",
+    "baht": 7800,
+    "status": "אופציונלי",
+    "link": "https://www.khaolaklanddiscovery.com/khao-lak-tours/",
+    "notes": "฿3,900 לאדם כולל אגרת פארק · הפארק פתוח 15/10–15/5 · יציאה מרציף תאב לאמו ב-07:00, חזרה אחה״צ · שמורת האלמוגים הכי טובה באנדמן · אם השייט מבוטל בגלל הים, המפעילים מזיזים תאריך בלי עלות — יש גיבוי ב-4/12 וב-7/12",
+    "priceEstimate": {
+     "kind": "published",
+     "basis": "מחיר פתיחה לסימילן לשני מבוגרים; הספק מפרט העברות, אגרות, ציוד, ארוחת בוקר קלה וצהריים.",
+     "lowFactor": 1,
+     "highFactor": 1.2,
+     "sourceUrl": "https://www.khaolaklanddiscovery.com/khao-lak-tours/similan-islands-tour/",
+     "checked": "2026-09-14"
+    },
+    "managed": true
+   },
+   {
+    "time": "10:00",
+    "dur": "4:00",
+    "act": "או: חוף, בריכה וספא",
+    "loc": "קלימה",
+    "cat": "אטרקציות",
+    "baht": 800,
+    "status": "משלמים במקום",
+    "link": "",
+    "notes": "עוגן אחד מיוחד לפרק הזה, לא שניים"
+   },
+   {
+    "time": "13:00",
+    "dur": "1:00",
+    "act": "צהריים",
+    "loc": "קאו לק",
+    "cat": "אוכל",
+    "baht": 0,
+    "status": "משלמים במקום",
+    "link": "",
+    "notes": "על הסירה או באי — כלול בסיור",
+    "priceEstimate": {
+     "kind": "included",
+     "basis": "צהריים כלולים בסיור סימילן שעליו מבוסס האומדן.",
+     "lowFactor": 1,
+     "highFactor": 1,
+     "sourceUrl": "https://www.khaolaklanddiscovery.com/khao-lak-tours/similan-islands-tour/",
+     "checked": "2026-09-14"
+    },
+    "managed": true
+   },
+   {
+    "time": "19:30",
+    "dur": "2:00",
+    "act": "ארוחת ערב",
+    "loc": "קאו לק",
+    "cat": "אוכל",
+    "baht": 900,
+    "status": "משלמים במקום",
+    "link": "",
+    "notes": "",
+    "priceEstimate": {
+     "kind": "estimate",
+     "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
+     "lowFactor": 0.8,
+     "highFactor": 1.3,
+     "sourceUrl": "",
+     "checked": "2026-09-14"
+    },
+    "managed": true
+   },
+   {
+    "time": "",
+    "dur": "",
+    "act": "לינה — Kalima Resort and Villas",
+    "loc": "קאו לק",
+    "cat": "לינה",
+    "baht": 7476.83,
+    "status": "מוזמן",
+    "link": "https://www.booking.com/hotel/th/kalima-resort-amp-villas-khao-lak.html",
+    "notes": "",
+    "priceEstimate": {
+     "kind": "booking",
+     "basis": "המחיר מההזמנה השמורה; נספר פעם אחת בלבד ומחולק בין לילות הלינה.",
+     "lowFactor": 1,
+     "highFactor": 1,
+     "sourceUrl": "",
+     "checked": "2026-09-14",
+     "booking": {
+      "category": "accommodation",
+      "split": "ratio",
+      "key": "khaolak",
+      "match": "Kalima",
+      "totalIls": 4029,
+      "rows": 6
+     }
+    }
+   }
+  ],
+  "summary": "סימילן — היום הגדול של האנדמן"
+ },
+ {
+  "day": 12,
+  "date": "2026-12-04",
+  "dow": "ו׳",
+  "dest": "קאו לק",
+  "rows": [
+   {
+    "time": "08:30",
+    "dur": "1:00",
+    "act": "ארוחת בוקר",
+    "loc": "קלימה",
+    "cat": "אוכל",
+    "baht": 400,
+    "status": "משלמים במקום",
+    "link": "",
+    "notes": "",
     "priceEstimate": {
      "kind": "estimate",
      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
@@ -2367,7 +2488,7 @@
     }
    },
    {
-    "time": "09:30",
+    "time": "10:00",
     "dur": "3:00",
     "act": "חוף ובריכה",
     "loc": "קלימה",
@@ -2375,7 +2496,7 @@
     "baht": null,
     "status": "משלמים במקום",
     "link": "",
-    "notes": "",
+    "notes": "היום שאחרי סימילן — בלי תוכנית. אם הסירה לא יצאה אתמול, זה יום הגיבוי הראשון",
     "priceEstimate": {
      "kind": "no-extra",
      "basis": "לא הוקצה חיוב נפרד לפעולה הזאת; חיובים כלולים מופיעים בחבילה או בהזמנה.",
@@ -2383,7 +2504,8 @@
      "highFactor": 1,
      "sourceUrl": "",
      "checked": "2026-09-14"
-    }
+    },
+    "managed": true
    },
    {
     "time": "13:00",
@@ -2405,15 +2527,15 @@
     }
    },
    {
-    "time": "15:30",
-    "dur": "2:00",
-    "act": "ספא — עיסוי זוגי",
-    "loc": "הספא בקלימה",
+    "time": "16:00",
+    "dur": "1:30",
+    "act": "מסאז׳ים",
+    "loc": "קאו לק",
     "cat": "אטרקציות",
-    "baht": 1600,
+    "baht": 800,
     "status": "משלמים במקום",
     "link": "",
-    "notes": "חדר אדים, טיפולי גוף, אמבט רגליים · זה הפרק שבשבילו באתם",
+    "notes": "",
     "priceEstimate": {
      "kind": "estimate",
      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
@@ -2470,12 +2592,12 @@
     }
    }
   ],
-  "summary": "ריזורט וספא"
+  "summary": "יום אחרי סימילן — וגיבוי אם הסירה לא יצאה"
  },
  {
-  "day": 12,
-  "date": "2026-12-04",
-  "dow": "ו׳",
+  "day": 13,
+  "date": "2026-12-05",
+  "dow": "ש׳",
   "dest": "קאו סוק",
   "rows": [
    {
@@ -2639,138 +2761,7 @@
     }
    }
   ],
-  "summary": "לאגם צ׳או לאן"
- },
- {
-  "day": 13,
-  "date": "2026-12-05",
-  "dow": "ש׳",
-  "dest": "קאו סוק → קאו לק",
-  "rows": [
-   {
-    "time": "08:30",
-    "dur": "1:00",
-    "act": "ארוחת בוקר",
-    "loc": "קלימה",
-    "cat": "אוכל",
-    "baht": 400,
-    "status": "משלמים במקום",
-    "link": "",
-    "notes": "",
-    "priceEstimate": {
-     "kind": "estimate",
-     "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
-     "lowFactor": 0.8,
-     "highFactor": 1.3,
-     "sourceUrl": "",
-     "checked": "2026-09-14"
-    }
-   },
-   {
-    "time": "10:00",
-    "dur": "3:00",
-    "act": "חוף ובריכה",
-    "loc": "קלימה",
-    "cat": "אחר",
-    "baht": null,
-    "status": "משלמים במקום",
-    "link": "",
-    "notes": "היום שאחרי קאו סוק — בלי תוכנית",
-    "priceEstimate": {
-     "kind": "no-extra",
-     "basis": "לא הוקצה חיוב נפרד לפעולה הזאת; חיובים כלולים מופיעים בחבילה או בהזמנה.",
-     "lowFactor": 1,
-     "highFactor": 1,
-     "sourceUrl": "",
-     "checked": "2026-09-14"
-    }
-   },
-   {
-    "time": "13:00",
-    "dur": "1:00",
-    "act": "צהריים",
-    "loc": "קאו לק",
-    "cat": "אוכל",
-    "baht": 450,
-    "status": "משלמים במקום",
-    "link": "",
-    "notes": "",
-    "priceEstimate": {
-     "kind": "estimate",
-     "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
-     "lowFactor": 0.8,
-     "highFactor": 1.3,
-     "sourceUrl": "",
-     "checked": "2026-09-14"
-    }
-   },
-   {
-    "time": "16:00",
-    "dur": "1:30",
-    "act": "מסאז׳ים",
-    "loc": "קאו לק",
-    "cat": "אטרקציות",
-    "baht": 800,
-    "status": "משלמים במקום",
-    "link": "",
-    "notes": "",
-    "priceEstimate": {
-     "kind": "estimate",
-     "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
-     "lowFactor": 0.8,
-     "highFactor": 1.3,
-     "sourceUrl": "",
-     "checked": "2026-09-14"
-    }
-   },
-   {
-    "time": "19:30",
-    "dur": "1:30",
-    "act": "ארוחת ערב",
-    "loc": "קאו לק",
-    "cat": "אוכל",
-    "baht": 850,
-    "status": "משלמים במקום",
-    "link": "",
-    "notes": "",
-    "priceEstimate": {
-     "kind": "estimate",
-     "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
-     "lowFactor": 0.8,
-     "highFactor": 1.3,
-     "sourceUrl": "",
-     "checked": "2026-09-14"
-    }
-   },
-   {
-    "time": "",
-    "dur": "",
-    "act": "לינה — Kalima Resort and Villas",
-    "loc": "קאו לק",
-    "cat": "לינה",
-    "baht": 7476.83,
-    "status": "מוזמן",
-    "link": "https://www.booking.com/hotel/th/kalima-resort-amp-villas-khao-lak.html",
-    "notes": "",
-    "priceEstimate": {
-     "kind": "booking",
-     "basis": "המחיר מההזמנה השמורה; נספר פעם אחת בלבד ומחולק בין לילות הלינה.",
-     "lowFactor": 1,
-     "highFactor": 1,
-     "sourceUrl": "",
-     "checked": "2026-09-14",
-     "booking": {
-      "category": "accommodation",
-      "split": "ratio",
-      "key": "khaolak",
-      "match": "Kalima",
-      "totalIls": 4029,
-      "rows": 6
-     }
-    }
-   }
-  ],
-  "summary": "בוקר על האגם, וחזרה"
+  "summary": "טיול יום לאגם צ׳או לאן"
  },
  {
   "day": 14,
@@ -2902,7 +2893,7 @@
   "dest": "קאו לק",
   "rows": [
    {
-    "time": "08:30",
+    "time": "08:00",
     "dur": "1:00",
     "act": "ארוחת בוקר",
     "loc": "קלימה",
@@ -2910,37 +2901,34 @@
     "baht": 400,
     "status": "משלמים במקום",
     "link": "",
-    "notes": ""
-   },
-   {
-    "time": "07:00",
-    "dur": "10:00",
-    "act": "סימילן — יום שנורקלינג",
-    "loc": "איי סימילן",
-    "cat": "אטרקציות",
-    "baht": 7800,
-    "status": "אופציונלי",
-    "link": "https://www.khaolaklanddiscovery.com/khao-lak-tours/",
-    "notes": "฿3,900 לאדם כולל אגרת פארק · הפארק פתוח 15/10–15/5 · ההפלגה הקצרה ביותר היא מקאו לק · מחוץ לתקציב, ועוגן שני ליום הזה",
+    "notes": "לבדוק מול המלון אם ארוחת בוקר כלולה בתעריף שלכם",
     "priceEstimate": {
-     "kind": "published",
-     "basis": "מחיר פתיחה לסימילן לשני מבוגרים; הספק מפרט העברות, אגרות, ציוד, ארוחת בוקר קלה וצהריים.",
-     "lowFactor": 1,
-     "highFactor": 1.2,
-     "sourceUrl": "https://www.khaolaklanddiscovery.com/khao-lak-tours/similan-islands-tour/",
+     "kind": "estimate",
+     "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
+     "lowFactor": 0.8,
+     "highFactor": 1.3,
+     "sourceUrl": "",
      "checked": "2026-09-14"
     }
    },
    {
-    "time": "10:00",
-    "dur": "4:00",
-    "act": "או: חוף, בריכה וספא",
+    "time": "09:30",
+    "dur": "3:00",
+    "act": "חוף ובריכה",
     "loc": "קלימה",
-    "cat": "אטרקציות",
-    "baht": 800,
+    "cat": "אחר",
+    "baht": null,
     "status": "משלמים במקום",
     "link": "",
-    "notes": "עוגן אחד מיוחד לפרק הזה, לא שניים"
+    "notes": "",
+    "priceEstimate": {
+     "kind": "no-extra",
+     "basis": "לא הוקצה חיוב נפרד לפעולה הזאת; חיובים כלולים מופיעים בחבילה או בהזמנה.",
+     "lowFactor": 1,
+     "highFactor": 1,
+     "sourceUrl": "",
+     "checked": "2026-09-14"
+    }
    },
    {
     "time": "13:00",
@@ -2948,26 +2936,7 @@
     "act": "צהריים",
     "loc": "קאו לק",
     "cat": "אוכל",
-    "baht": 0,
-    "status": "משלמים במקום",
-    "link": "",
-    "notes": "",
-    "priceEstimate": {
-     "kind": "included",
-     "basis": "צהריים כלולים בסיור סימילן שעליו מבוסס האומדן.",
-     "lowFactor": 1,
-     "highFactor": 1,
-     "sourceUrl": "https://www.khaolaklanddiscovery.com/khao-lak-tours/similan-islands-tour/",
-     "checked": "2026-09-14"
-    }
-   },
-   {
-    "time": "19:30",
-    "dur": "2:00",
-    "act": "ארוחת ערב אחרונה",
-    "loc": "קאו לק",
-    "cat": "אוכל",
-    "baht": 900,
+    "baht": 450,
     "status": "משלמים במקום",
     "link": "",
     "notes": "",
@@ -2979,6 +2948,45 @@
      "sourceUrl": "",
      "checked": "2026-09-14"
     }
+   },
+   {
+    "time": "15:30",
+    "dur": "2:00",
+    "act": "ספא — עיסוי זוגי",
+    "loc": "הספא בקלימה",
+    "cat": "אטרקציות",
+    "baht": 1600,
+    "status": "משלמים במקום",
+    "link": "",
+    "notes": "חדר אדים, טיפולי גוף, אמבט רגליים · זה הפרק שבשבילו באתם",
+    "priceEstimate": {
+     "kind": "estimate",
+     "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
+     "lowFactor": 0.8,
+     "highFactor": 1.3,
+     "sourceUrl": "",
+     "checked": "2026-09-14"
+    }
+   },
+   {
+    "time": "19:30",
+    "dur": "1:30",
+    "act": "ארוחת ערב אחרונה",
+    "loc": "קאו לק",
+    "cat": "אוכל",
+    "baht": 850,
+    "status": "משלמים במקום",
+    "link": "",
+    "notes": "",
+    "priceEstimate": {
+     "kind": "estimate",
+     "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
+     "lowFactor": 0.8,
+     "highFactor": 1.3,
+     "sourceUrl": "",
+     "checked": "2026-09-14"
+    },
+    "managed": true
    },
    {
     "time": "",
@@ -3008,7 +3016,7 @@
     }
    }
   ],
-  "summary": "היום האחרון המלא"
+  "summary": "ריזורט וספא — ויום גיבוי אחרון לסימילן"
  },
  {
   "day": 16,

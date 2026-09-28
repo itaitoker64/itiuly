@@ -25,7 +25,7 @@ const itai = boot('itai');
 const talia = boot('talia');
 
 // A fresh document is already precise: most of the list is owned, not bought.
-assert.equal(itai('STATE.schema'), 10);
+assert.equal(itai('STATE.schema'), 11);
 for(const [run, who] of [[itai,'itai'], [talia,'talia']]){
   const mineAll = run('STATE.packingList.filter(mine)');
   assert.ok(run('STATE.packingList.filter(mine).filter(p=>p.status==="have").length') > 20,
@@ -148,7 +148,7 @@ STATE.packingList.forEach(p=>{ p.status='need'; delete p.buyIn; delete p.cost; d
 const edited=STATE.packingList.find(p=>p.item==="בגד ים");
 edited.status='packed'; edited.notes='כבר בתיק';
 ensureDefaults();`);
-assert.equal(old('STATE.schema'), 10);
+assert.equal(old('STATE.schema'), 11);
 assert.equal(old('STATE.packingList.find(p=>p.item==="4 זוגות גרביים").status'), 'have');
 assert.equal(old('STATE.packingList.find(p=>p.item==="מגן שיניים — לקנות בארץ").buyIn'), 'il');
 // ...without touching anything the user edited by hand.

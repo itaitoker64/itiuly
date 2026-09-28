@@ -387,7 +387,7 @@ function seedData(){
   const hanoiId = uid('d'), manilaId = uid('d');
 
   return {
-    schema:10,
+    schema:11,
     tripName:"My Big Trip 🌏",
     startDate:"2026-11-22",
     endDate:null,
@@ -521,6 +521,7 @@ function seedData(){
       {id:uid('m'), category:"בישראל לפני הטיול", title:"לסגור עניינים פתוחים (דואר, מנויים, ביטוח לאומי)", status:"todo", deadline:"", notes:"", priority:"בינונית", link:"", countryId:null, order:6},
       {id:uid('m'), category:"תרופות", title:"להצטייד בערכת תרופות בסיסית", status:"todo", deadline:"", notes:"", priority:"בינונית", link:"", countryId:null, order:7},
       {id:uid('m'), owner:"both", category:"הזמנות", title:"לסגור את צ׳רמנטרה לפני הדדליין", status:"todo", deadline:"2026-11-14", notes:"אחרי 14/11 הכרטיס מחויב במלוא הסכום", priority:"גבוהה", link:"", countryId:"thailand", order:8},
+      {id:uid('m'), owner:"both", category:"הזמנות", title:"להזמין רכב מאאו נאנג לקאו לק", status:"todo", deadline:"2026-11-15", notes:"2/12 ב-09:40, איסוף מצ׳רמנטרה · Kiwitaxi, רכב Comfort לשניים — $92 במחיר קבוע, משולם מראש · 154 ק״מ, כ-2:50", priority:"בינונית", link:"https://kiwitaxi.com/en/thailand/ao-nang-beach-khao-lak", countryId:"thailand", order:13},
       {id:uid('m'), owner:"both", category:"הזמנות", title:"להזמין את טיסת TG203 לפוקט", status:"todo", deadline:"2026-11-01", notes:"08:00 → 09:25 · ฿5,390 לשניים, 23 ק״ג לכל אחד. הוזזה מ-06:50 כדי לישון עוד שעה ועדיין לתפוס את סירת 11:00", priority:"גבוהה", link:"https://www.thaiairways.com/", countryId:"thailand", order:9},
       {id:uid('m'), owner:"both", category:"הזמנות", title:"לאשר טלפונית את פרטי החשבון של המחנה", status:"todo", deadline:"2026-10-05", notes:"לפני שמעבירים ฿6,075 — פרטי בנק במייל הם הדבר הכי מזויף בהזמנות. החשבון על שם פרטי ובכתובת בחון קאן, לא באי", priority:"גבוהה", link:"", countryId:"thailand", order:10},
       {id:uid('m'), owner:"both", category:"הזמנות", title:"להעביר מקדמה ฿6,075 ב-Wise למחנה", status:"todo", deadline:"2026-10-10", notes:"זה מה שסוגר את ההזמנה. ฿12,150 סה״כ, היתרה במזומן בהגעה", priority:"גבוהה", link:"", countryId:"thailand", order:11},
@@ -970,6 +971,49 @@ function ensureDefaults(){
   if(STATE.schema < 10){
     applyShopping(STATE.packingList, true);
     STATE.schema = 10;
+  }
+
+  /*
+   * ימי קאו לק מסודרים מחדש. סימילן עבר מ-7/12 ל-3/12: אם הים מבטל את השייט,
+   * יש עכשיו שני ימי גיבוי (4/12 ו-7/12) במקום אף אחד לפני הטיסה. קאו סוק —
+   * טיול יום, בלי לינה — עבר ל-5/12, כדי ששני הימים הארוכים לא יהיו צמודים.
+   *
+   * מזיזים את תוכן הימים כיחידה — השורות עוברות עם הסימונים, ההערות והשיחות
+   * שלהן. מזהים לפי השורות עצמן ולא לפי התאריך, כך שמסמך שכבר הוזז לא יוזז שוב.
+   */
+  if(STATE.schema < 11){
+    const days = (STATE.shared && STATE.shared.days) || [];
+    const at = date => days.find(d=>d.date===date);
+    const holds = (day, prefix) => !!day && day.rows.some(r=>String(r.id||'').startsWith(prefix));
+    const swap = (a, b)=>{ ['dest','rows','summary'].forEach(k=>{ const t=a[k]; a[k]=b[k]; b[k]=t; }); };
+    if(holds(at('2026-12-07'),'s_15_') && holds(at('2026-12-03'),'s_11_')) swap(at('2026-12-03'), at('2026-12-07'));
+    if(holds(at('2026-12-04'),'s_12_') && holds(at('2026-12-05'),'s_13_')) swap(at('2026-12-04'), at('2026-12-05'));
+
+    // כותרות הימים והשורות שהתוכנית מנהלת — לבנגקוק (לוי קראתונג), למעבר ולימי קאו לק
+    const seedShared = window.SHARED_SEED;
+    ['2026-11-24','2026-12-02','2026-12-03','2026-12-04','2026-12-05','2026-12-07'].forEach(date=>{
+      const seedDay = seedShared && seedShared.days.find(d=>d.date===date);
+      const day = at(date);
+      if(!seedDay || !day) return;
+      day.dest = seedDay.dest;
+      day.summary = seedDay.summary;
+      seedDay.rows.forEach(seedRow=>{
+        if(!seedRow.managed) return;
+        const row = day.rows.find(r=>r.id===seedRow.id);
+        if(!row) return;
+        ['act','time','dur','baht','status','notes','link'].forEach(k=>{
+          if(seedRow[k]!==undefined) row[k] = seedRow[k];
+        });
+        if(seedRow.priceEstimate) row.priceEstimate = JSON.parse(JSON.stringify(seedRow.priceEstimate));
+        row.managed = true;
+      });
+    });
+
+    // הלילה על האגם הוא הגרסה שלא נבחרה
+    const seedBungalow = seedShared && (seedShared.hotels||[]).find(h=>h.hotel==='בונגלו צף על אגם צ׳או לאן');
+    const bungalow = STATE.shared && (STATE.shared.hotels||[]).find(h=>h.hotel==='בונגלו צף על אגם צ׳או לאן');
+    if(seedBungalow && bungalow) Object.assign(bungalow, JSON.parse(JSON.stringify(seedBungalow)));
+    STATE.schema = 11;
   }
 
   /* משימות חדשות מתווספות בכל גרסה, לפי כותרת */
