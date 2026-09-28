@@ -387,7 +387,7 @@ function seedData(){
   const hanoiId = uid('d'), manilaId = uid('d');
 
   return {
-    schema:11,
+    schema:12,
     tripName:"My Big Trip 🌏",
     startDate:"2026-11-22",
     endDate:null,
@@ -521,7 +521,7 @@ function seedData(){
       {id:uid('m'), category:"בישראל לפני הטיול", title:"לסגור עניינים פתוחים (דואר, מנויים, ביטוח לאומי)", status:"todo", deadline:"", notes:"", priority:"בינונית", link:"", countryId:null, order:6},
       {id:uid('m'), category:"תרופות", title:"להצטייד בערכת תרופות בסיסית", status:"todo", deadline:"", notes:"", priority:"בינונית", link:"", countryId:null, order:7},
       {id:uid('m'), owner:"both", category:"הזמנות", title:"לסגור את צ׳רמנטרה לפני הדדליין", status:"todo", deadline:"2026-11-14", notes:"אחרי 14/11 הכרטיס מחויב במלוא הסכום", priority:"גבוהה", link:"", countryId:"thailand", order:8},
-      {id:uid('m'), owner:"both", category:"הזמנות", title:"להזמין רכב מאאו נאנג לקאו לק", status:"todo", deadline:"2026-11-15", notes:"2/12 ב-09:40, איסוף מצ׳רמנטרה · Kiwitaxi, רכב Comfort לשניים — $92 במחיר קבוע, משולם מראש · 154 ק״מ, כ-2:50", priority:"בינונית", link:"https://kiwitaxi.com/en/thailand/ao-nang-beach-khao-lak", countryId:"thailand", order:13},
+      {id:uid('m'), owner:"both", category:"הזמנות", title:"להזמין ואן משותף מאאו נאנג לקאו לק", status:"todo", deadline:"2026-11-15", notes:"2/12, איסוף מצ׳רמנטרה בין 11:30 ל-14:30 · Trip Store Krabi, ฿450 לאדם · הורדה בקלימה · השעה המדויקת מגיעה במייל", priority:"בינונית", link:"https://www.tripstorekrabi.com/Transfers/From-Krabi/To-Khao-Lak/By-Hat-Yai-World", countryId:"thailand", order:13},
       {id:uid('m'), owner:"both", category:"הזמנות", title:"להזמין את טיסת TG203 לפוקט", status:"todo", deadline:"2026-11-01", notes:"08:00 → 09:25 · ฿5,390 לשניים, 23 ק״ג לכל אחד. הוזזה מ-06:50 כדי לישון עוד שעה ועדיין לתפוס את סירת 11:00", priority:"גבוהה", link:"https://www.thaiairways.com/", countryId:"thailand", order:9},
       {id:uid('m'), owner:"both", category:"הזמנות", title:"לאשר טלפונית את פרטי החשבון של המחנה", status:"todo", deadline:"2026-10-05", notes:"לפני שמעבירים ฿6,075 — פרטי בנק במייל הם הדבר הכי מזויף בהזמנות. החשבון על שם פרטי ובכתובת בחון קאן, לא באי", priority:"גבוהה", link:"", countryId:"thailand", order:10},
       {id:uid('m'), owner:"both", category:"הזמנות", title:"להעביר מקדמה ฿6,075 ב-Wise למחנה", status:"todo", deadline:"2026-10-10", notes:"זה מה שסוגר את ההזמנה. ฿12,150 סה״כ, היתרה במזומן בהגעה", priority:"גבוהה", link:"", countryId:"thailand", order:11},
@@ -1014,6 +1014,38 @@ function ensureDefaults(){
     const bungalow = STATE.shared && (STATE.shared.hotels||[]).find(h=>h.hotel==='בונגלו צף על אגם צ׳או לאן');
     if(seedBungalow && bungalow) Object.assign(bungalow, JSON.parse(JSON.stringify(seedBungalow)));
     STATE.schema = 11;
+  }
+
+  /*
+   * מאאו נאנג לקאו לק בוואן משותף במקום רכב פרטי: ฿900 לשניים במקום ฿3,300.
+   * הוואן אוסף בין 11:30 ל-14:30, אז היום נבנה סביבו — בוקר בווילה עם הבריכה,
+   * צ׳ק-אאוט ב-11:00, והגעה לקלימה אחר הצהריים. שורות שנוספו ידנית נשארות,
+   * אחרי שורות התוכנית.
+   */
+  if(STATE.schema < 12){
+    const seedDay = window.SHARED_SEED && window.SHARED_SEED.days.find(d=>d.date==='2026-12-02');
+    const day = STATE.shared && (STATE.shared.days||[]).find(d=>d.date==='2026-12-02');
+    if(seedDay && day){
+      seedDay.rows.forEach((seedRow, i)=>{
+        if(!day.rows.some(r=>r.id===seedRow.id)) day.rows.splice(Math.min(i, day.rows.length), 0, JSON.parse(JSON.stringify(seedRow)));
+      });
+      seedDay.rows.forEach(seedRow=>{
+        if(!seedRow.managed) return;
+        const row = day.rows.find(r=>r.id===seedRow.id);
+        ['act','time','dur','loc','baht','status','notes','link'].forEach(k=>{
+          if(seedRow[k]!==undefined) row[k] = seedRow[k];
+        });
+        if(seedRow.priceEstimate) row.priceEstimate = JSON.parse(JSON.stringify(seedRow.priceEstimate));
+        row.managed = true;
+      });
+      const order = new Map(seedDay.rows.map((r,i)=>[r.id, i]));
+      day.rows.sort((a,b)=>(order.has(a.id)?order.get(a.id):1e6) - (order.has(b.id)?order.get(b.id):1e6));
+    }
+    const task = STATE.masterChecklist.find(t=>t.title==='להזמין רכב מאאו נאנג לקאו לק');
+    const freshTask = fresh.masterChecklist.find(t=>t.title==='להזמין ואן משותף מאאו נאנג לקאו לק');
+    // משימה שכבר סומנה כבוצעה פירושה שהוזמן רכב — לא משנים אותה מתחת לידיים
+    if(task && freshTask && task.status!=='done') Object.assign(task, {title:freshTask.title, notes:freshTask.notes, link:freshTask.link});
+    STATE.schema = 12;
   }
 
   /* משימות חדשות מתווספות בכל גרסה, לפי כותרת */

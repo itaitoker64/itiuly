@@ -2485,15 +2485,15 @@ window.SHARED_SEED = {
    "dest": "קאו לק",
    "rows": [
     {
-     "time": "07:30",
-     "dur": "0:45",
+     "time": "08:30",
+     "dur": "1:00",
      "act": "ארוחת בוקר — כלולה",
      "loc": "צ׳רמנטרה",
      "cat": "אוכל",
      "baht": null,
      "status": "משלמים במקום",
      "link": "",
-     "notes": "",
+     "notes": "ארוחה גדולה ומאוחרת — היא הצהריים של היום",
      "id": "s_10_0",
      "done": false,
      "priceEstimate": {
@@ -2503,10 +2503,33 @@ window.SHARED_SEED = {
       "highFactor": 1,
       "sourceUrl": "",
       "checked": "2026-09-14"
-     }
+     },
+     "managed": true
     },
     {
-     "time": "09:00",
+     "time": "09:30",
+     "dur": "1:30",
+     "act": "בוקר אחרון בבריכה הפרטית",
+     "loc": "צ׳רמנטרה",
+     "cat": "אחר",
+     "baht": null,
+     "status": "משלמים במקום",
+     "link": "",
+     "notes": "הוואן אוסף רק מ-11:30 — הבוקר הזה בא על חשבון הנסיעה המהירה, ושווה אותו",
+     "priceEstimate": {
+      "kind": "no-extra",
+      "basis": "לא הוקצה חיוב נפרד לפעולה הזאת; חיובים כלולים מופיעים בחבילה או בהזמנה.",
+      "lowFactor": 1,
+      "highFactor": 1,
+      "sourceUrl": "",
+      "checked": "2026-09-28"
+     },
+     "id": "s_10_villa",
+     "done": false,
+     "managed": true
+    },
+    {
+     "time": "11:00",
      "dur": "0:30",
      "act": "צ׳ק-אאוט ואריזה",
      "loc": "צ׳רמנטרה",
@@ -2514,7 +2537,7 @@ window.SHARED_SEED = {
      "baht": null,
      "status": "משלמים במקום",
      "link": "",
-     "notes": "צ׳ק-אאוט עד 11:30",
+     "notes": "צ׳ק-אאוט עד 11:30 · להשאיר את התיקים בקבלה ולחכות לוואן בלובי",
      "id": "s_10_1",
      "done": false,
      "priceEstimate": {
@@ -2524,40 +2547,41 @@ window.SHARED_SEED = {
       "highFactor": 1,
       "sourceUrl": "",
       "checked": "2026-09-14"
-     }
-    },
-    {
-     "time": "09:40",
-     "dur": "2:45",
-     "act": "רכב פרטי לקאו לק",
-     "loc": "אאו נאנג → קראבי → כביש 4 → פאנג נגה → קאו לק",
-     "cat": "תחבורה",
-     "baht": 3300,
-     "status": "להזמין",
-     "link": "https://kiwitaxi.com/en/thailand/ao-nang-beach-khao-lak",
-     "notes": "להזמין מראש · Kiwitaxi, רכב Comfort לשניים ושלושה תיקים — $92 (כ-฿3,300), מחיר קבוע ששולם מראש · איסוף מצ׳רמנטרה · 154 ק״מ, כ-2:50 · חלופה זולה: ואן משותף ב-12Go מ-฿450 לאדם, עם איסופים ועד 4 שעות",
-     "id": "s_10_2",
-     "done": false,
-     "priceEstimate": {
-      "kind": "estimate",
-      "basis": "מחיר רכב פרטי שנבדק ב-Kiwitaxi למסלול אאו נאנג → קאו לק.",
-      "lowFactor": 0.95,
-      "highFactor": 1.1,
-      "sourceUrl": "https://kiwitaxi.com/en/thailand/ao-nang-beach-khao-lak",
-      "checked": "2026-09-28"
      },
      "managed": true
     },
     {
      "time": "11:30",
-     "dur": "0:25",
-     "act": "עצירת קפה בדרך",
-     "loc": "פאנג נגה",
+     "dur": "3:30",
+     "act": "ואן משותף לקאו לק",
+     "loc": "אאו נאנג → קאו לק",
+     "cat": "תחבורה",
+     "baht": 900,
+     "status": "להזמין",
+     "link": "https://www.tripstorekrabi.com/Transfers/From-Krabi/To-Khao-Lak/By-Hat-Yai-World",
+     "notes": "להזמין מראש · Trip Store Krabi, ฿450 לאדם · איסוף מצ׳רמנטרה בין 11:30 ל-14:30 — השעה המדויקת מגיעה במייל אחרי ההזמנה · הורדה בקלימה · כ-3 שעות עם האיסופים · מוצ׳ילה אחת ותיק יום לאדם · וואטסאפ ‎+66 64 189 4777",
+     "id": "s_10_2",
+     "done": false,
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "מחיר ואן משותף שנבדק ב-Trip Store Krabi, ฿450 לאדם.",
+      "lowFactor": 1,
+      "highFactor": 1.15,
+      "sourceUrl": "https://www.tripstorekrabi.com/Transfers/From-Krabi/To-Khao-Lak/By-Hat-Yai-World",
+      "checked": "2026-09-28"
+     },
+     "managed": true
+    },
+    {
+     "time": "13:30",
+     "dur": "0:20",
+     "act": "עצירה בדרך — קפה וחטיף",
+     "loc": "בדרך",
      "cat": "אוכל",
      "baht": 150,
      "status": "משלמים במקום",
      "link": "",
-     "notes": "",
+     "notes": "הוואנים עוצרים פעם אחת באמצע · אם האיסוף נקבע ל-14:30, לאכול צהריים באאו נאנג לפני",
      "id": "s_10_3",
      "done": false,
      "priceEstimate": {
@@ -2567,10 +2591,11 @@ window.SHARED_SEED = {
       "highFactor": 1.3,
       "sourceUrl": "",
       "checked": "2026-09-14"
-     }
+     },
+     "managed": true
     },
     {
-     "time": "12:50",
+     "time": "15:00",
      "dur": "",
      "act": "הגעה לקאו לק",
      "loc": "קאו לק",
@@ -2578,7 +2603,7 @@ window.SHARED_SEED = {
      "baht": null,
      "status": "משלמים במקום",
      "link": "",
-     "notes": "",
+     "notes": "בין 14:30 ל-17:30, לפי שעת האיסוף",
      "id": "s_10_4",
      "done": false,
      "priceEstimate": {
@@ -2588,31 +2613,11 @@ window.SHARED_SEED = {
       "highFactor": 1,
       "sourceUrl": "",
       "checked": "2026-09-14"
-     }
+     },
+     "managed": true
     },
     {
-     "time": "13:10",
-     "dur": "1:00",
-     "act": "צהריים",
-     "loc": "קאו לק",
-     "cat": "אוכל",
-     "baht": 450,
-     "status": "משלמים במקום",
-     "link": "",
-     "notes": "",
-     "id": "s_10_5",
-     "done": false,
-     "priceEstimate": {
-      "kind": "estimate",
-      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
-      "lowFactor": 0.8,
-      "highFactor": 1.3,
-      "sourceUrl": "",
-      "checked": "2026-09-14"
-     }
-    },
-    {
-     "time": "14:30",
+     "time": "15:00",
      "dur": "0:30",
      "act": "צ׳ק-אין — קלימה",
      "loc": "3/88 Moo 2, Petchkasem Road",
@@ -2630,11 +2635,34 @@ window.SHARED_SEED = {
       "highFactor": 1,
       "sourceUrl": "",
       "checked": "2026-09-14"
-     }
+     },
+     "managed": true
     },
     {
      "time": "15:30",
-     "dur": "3:00",
+     "dur": "0:45",
+     "act": "צהריים מאוחרים או נשנוש",
+     "loc": "קאו לק",
+     "cat": "אוכל",
+     "baht": 300,
+     "status": "משלמים במקום",
+     "link": "",
+     "notes": "ארוחת הבוקר המאוחרת והעצירה בדרך מחזיקות עד כאן",
+     "id": "s_10_5",
+     "done": false,
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
+      "lowFactor": 0.8,
+      "highFactor": 1.3,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     },
+     "managed": true
+    },
+    {
+     "time": "16:30",
+     "dur": "2:00",
      "act": "בריכת אינפיניטי וחוף",
      "loc": "קלימה",
      "cat": "אחר",
@@ -2654,6 +2682,28 @@ window.SHARED_SEED = {
       "checked": "2026-09-14"
      },
      "managed": true
+    },
+    {
+     "id": "s_10_moto",
+     "time": "17:00",
+     "dur": "0:30",
+     "act": "השכרת קטנוע בקאו לק — לארבעה ימים",
+     "loc": "קאו לק",
+     "cat": "תחבורה",
+     "baht": 1000,
+     "status": "משלמים במקום",
+     "link": "",
+     "done": false,
+     "notes": "฿250 ליום · כביש 4 מהיר ועמוס משאיות — לנסוע בכביש החוף המקומי · כך מגיעים לבאנג סאק ולאאו תונג לבד, בלי מוניות",
+     "managed": true,
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
+      "lowFactor": 0.8,
+      "highFactor": 1.3,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
     },
     {
      "time": "19:30",
@@ -2703,28 +2753,6 @@ window.SHARED_SEED = {
        "totalIls": 4029,
        "rows": 6
       }
-     }
-    },
-    {
-     "id": "s_10_moto",
-     "time": "15:00",
-     "dur": "0:30",
-     "act": "השכרת קטנוע בקאו לק — לארבעה ימים",
-     "loc": "קאו לק",
-     "cat": "תחבורה",
-     "baht": 1000,
-     "status": "משלמים במקום",
-     "link": "",
-     "done": false,
-     "notes": "฿250 ליום · כביש 4 מהיר ועמוס משאיות — לנסוע בכביש החוף המקומי · כך מגיעים לבאנג סאק ולאאו תונג לבד, בלי מוניות",
-     "managed": true,
-     "priceEstimate": {
-      "kind": "estimate",
-      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
-      "lowFactor": 0.8,
-      "highFactor": 1.3,
-      "sourceUrl": "",
-      "checked": "2026-09-14"
      }
     }
    ],
