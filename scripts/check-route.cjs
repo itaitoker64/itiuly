@@ -25,7 +25,7 @@ const day = (run, date) => JSON.parse(run(`JSON.stringify(sh().days.find(d=>d.da
 const acts = d => d.rows.map(r => r.act).join(' | ');
 
 const run = boot();
-assert.equal(run('STATE.schema'), 13);
+assert.equal(run('STATE.schema'), 14);
 
 // Similan moved to 3/12, with two free days after it that can take it if the sea says no.
 const d3 = day(run, '2026-12-03'), d4 = day(run, '2026-12-04');
@@ -118,7 +118,7 @@ sim.done=true; sim.talk=[{by:'talia',text:'רוצה את זה!'}];
 at('2026-12-04').rows.push({id:'custom-ks',act:'לקחת מגבת לאגם',done:false});
 STATE.schema=10;
 ensureDefaults();`);
-assert.equal(old('STATE.schema'), 13);
+assert.equal(old('STATE.schema'), 14);
 const o3 = day(old, '2026-12-03'), o5 = day(old, '2026-12-05');
 const moved = o3.rows.find(r => r.id === 's_15_1');
 assert.ok(moved, 'Similan reached 3/12 in the saved document');
@@ -177,3 +177,25 @@ STATE.schema=12; ensureDefaults();`);
 assert.equal(edited('wallet().expenses.find(e=>/Montraj Coach/.test(e.title)).amount'), 9000);
 
 console.log('PASS: Similan with two backup days, Khao Sok as a day trip, shared van on 2/12, Bangkok hotel booked direct, Loy Krathong date, saved-document move and idempotence.');
+
+// --- nightlife --------------------------------------------------------------
+{
+  const n = boot();
+  const nights = JSON.parse(n('JSON.stringify(sh().days.flatMap(d=>d.rows.filter(r=>/_night$/.test(r.id)).map(r=>d.date)))'));
+  assert.deepEqual(nights, ['2026-11-23','2026-11-29','2026-12-01','2026-12-06','2026-12-07']);
+  // never the night before an early start
+  for (const date of nights) {
+    const i = JSON.parse(n('JSON.stringify(sh().days.map(d=>d.date))')).indexOf(date);
+    const next = JSON.parse(n(`JSON.stringify(sh().days[${i+1}].rows.find(r=>r.time))`));
+    assert.ok(next.time >= '07:15', date + ' is followed by ' + next.time);
+  }
+  const d1 = JSON.parse(n('JSON.stringify(sh().days[0].rows.map(r=>r.act))'));
+  assert.ok(d1.indexOf('גראב חזרה למלון') > d1.findIndex(a=>a.startsWith('חאו סן')), 'the ride home comes after Khao San');
+  // a saved document gets the nights once
+  const o = boot();
+  o(`STATE=seedData(); sh().days.forEach(d=>d.rows=d.rows.filter(r=>!/_night$/.test(r.id))); STATE.schema=13; ensureDefaults();`);
+  assert.equal(o('sh().days.flatMap(d=>d.rows).filter(r=>/_night$/.test(r.id)).length'), 5);
+  o('STATE.schema=13; ensureDefaults();');
+  assert.equal(o('sh().days.flatMap(d=>d.rows).filter(r=>/_night$/.test(r.id)).length'), 5);
+  console.log('PASS: nightlife on five evenings, none before an early start, migration once.');
+}

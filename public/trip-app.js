@@ -387,7 +387,7 @@ function seedData(){
   const hanoiId = uid('d'), manilaId = uid('d');
 
   return {
-    schema:13,
+    schema:14,
     tripName:"My Big Trip 🌏",
     startDate:"2026-11-22",
     endDate:null,
@@ -1086,6 +1086,33 @@ function ensureDefaults(){
       Object.assign(expense, {amount:freshExpense.amount, currency:freshExpense.currency, note:freshExpense.note});
     }
     STATE.schema = 13;
+  }
+
+  /* יותר חיי לילה: חאו סן, שני לילות באאו נאנג ושניים בקאו לק — רק בערבים שאחריהם אין השכמה מוקדמת */
+  if(STATE.schema < 14){
+    const seedShared = window.SHARED_SEED;
+    ['2026-11-23','2026-11-29','2026-12-01','2026-12-06','2026-12-07'].forEach(date=>{
+      const seedDay = seedShared && seedShared.days.find(d=>d.date===date);
+      const day = STATE.shared && (STATE.shared.days||[]).find(d=>d.date===date);
+      if(!seedDay || !day) return;
+      seedDay.rows.forEach((seedRow, i)=>{
+        if(/_night$/.test(seedRow.id) && !day.rows.some(r=>r.id===seedRow.id)){
+          const prev = seedDay.rows[i-1];
+          const at = prev ? day.rows.findIndex(r=>r.id===prev.id) : -1;
+          day.rows.splice(at>=0 ? at+1 : day.rows.length, 0, JSON.parse(JSON.stringify(seedRow)));
+        }
+      });
+      // הגראב חזרה זז אחרי הלילה בחאו סן
+      seedDay.rows.filter(r=>r.managed && /גראב חזרה למלון/.test(r.act)).forEach(seedRow=>{
+        const idx = day.rows.findIndex(r=>r.id===seedRow.id);
+        if(idx<0) return;
+        const [row] = day.rows.splice(idx,1);
+        Object.assign(row, {time:seedRow.time, notes:seedRow.notes, managed:true});
+        const night = day.rows.findIndex(r=>r.id==='s_1_night');
+        day.rows.splice(night>=0 ? night+1 : idx, 0, row);
+      });
+    });
+    STATE.schema = 14;
   }
 
   /* משימות חדשות מתווספות בכל גרסה, לפי כותרת */

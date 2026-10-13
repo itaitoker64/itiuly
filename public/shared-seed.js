@@ -250,7 +250,29 @@ window.SHARED_SEED = {
      }
     },
     {
-     "time": "22:15",
+     "time": "21:45",
+     "dur": "2:30",
+     "act": "חאו סן ורחוב רמבוטרי — הלילה הראשון",
+     "loc": "חאו סן רואד",
+     "cat": "אטרקציות",
+     "baht": 700,
+     "notes": "ברים, מוזיקה חיה, דליים ותרמילאים מכל העולם · רמבוטרי שקט יותר ומקומי · מחר 07:15 — לחזור עד 00:30",
+     "status": "משלמים במקום",
+     "link": "",
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "אומדן ערב בבר לשניים — כניסה, שתייה ותחבורה.",
+      "lowFactor": 0.7,
+      "highFactor": 1.6,
+      "sourceUrl": "",
+      "checked": "2026-10-13"
+     },
+     "managed": true,
+     "id": "s_1_night",
+     "done": false
+    },
+    {
+     "time": "00:30",
      "dur": "0:25",
      "act": "גראב חזרה למלון",
      "loc": "יאווארט → סוכומוויט",
@@ -258,7 +280,7 @@ window.SHARED_SEED = {
      "baht": 180,
      "status": "משלמים במקום",
      "link": "",
-     "notes": "",
+     "notes": "מחאו סן · ฿250–300 בלילה",
      "id": "s_1_8",
      "done": false,
      "priceEstimate": {
@@ -268,7 +290,8 @@ window.SHARED_SEED = {
       "highFactor": 1.3,
       "sourceUrl": "",
       "checked": "2026-09-14"
-     }
+     },
+     "managed": true
     },
     {
      "time": "",
@@ -2053,6 +2076,28 @@ window.SHARED_SEED = {
      }
     },
     {
+     "time": "21:30",
+     "dur": "2:00",
+     "act": "ברים על רצועת אאו נאנג",
+     "loc": "אאו נאנג",
+     "cat": "אטרקציות",
+     "baht": 600,
+     "notes": "ברי רגאיי על החוף ומוזיקה חיה בסוי הראשי · ערב פתיחה רגוע — הלילה הגדול ב-1/12",
+     "status": "משלמים במקום",
+     "link": "",
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "אומדן ערב בבר לשניים — כניסה, שתייה ותחבורה.",
+      "lowFactor": 0.7,
+      "highFactor": 1.6,
+      "sourceUrl": "",
+      "checked": "2026-10-13"
+     },
+     "managed": true,
+     "id": "s_7_night",
+     "done": false
+    },
+    {
      "time": "",
      "dur": "",
      "act": "לינה — Chermantra Aonang Resort & Pool Suite",
@@ -2448,6 +2493,28 @@ window.SHARED_SEED = {
       "sourceUrl": "",
       "checked": "2026-09-14"
      }
+    },
+    {
+     "time": "22:00",
+     "dur": "3:00",
+     "act": "הלילה הגדול — מופעי אש וברים באאו נאנג",
+     "loc": "אאו נאנג",
+     "cat": "אטרקציות",
+     "baht": 1200,
+     "notes": "מופעי אש על החוף, ברים עם DJ וקהל צעיר · למחרת אין לחץ: בוקר בווילה והוואן רק מ-11:30",
+     "status": "משלמים במקום",
+     "link": "",
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "אומדן ערב בבר לשניים — כניסה, שתייה ותחבורה.",
+      "lowFactor": 0.7,
+      "highFactor": 1.6,
+      "sourceUrl": "",
+      "checked": "2026-10-13"
+     },
+     "managed": true,
+     "id": "s_9_night",
+     "done": false
     },
     {
      "time": "",
@@ -3381,6 +3448,28 @@ window.SHARED_SEED = {
      }
     },
     {
+     "time": "21:30",
+     "dur": "2:30",
+     "act": "מוזיקה חיה בבאנג לה און",
+     "loc": "מרכז קאו לק",
+     "cat": "אטרקציות",
+     "baht": 600,
+     "notes": "רחוב הברים של קאו לק — להקות חיות וקהל צעיר יותר מהריזורטים · מחר יום חופשי · בקטנוע או גראב",
+     "status": "משלמים במקום",
+     "link": "",
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "אומדן ערב בבר לשניים — כניסה, שתייה ותחבורה.",
+      "lowFactor": 0.7,
+      "highFactor": 1.6,
+      "sourceUrl": "",
+      "checked": "2026-10-13"
+     },
+     "managed": true,
+     "id": "s_14_night",
+     "done": false
+    },
+    {
      "time": "",
      "dur": "",
      "act": "לינה — Kalima Resort and Villas",
@@ -3524,6 +3613,28 @@ window.SHARED_SEED = {
       "checked": "2026-09-14"
      },
      "managed": true
+    },
+    {
+     "time": "21:30",
+     "dur": "2:30",
+     "act": "לילה אחרון — בר על החוף",
+     "loc": "קאו לק",
+     "cat": "אטרקציות",
+     "baht": 600,
+     "notes": "משקה אחרון מול הים · הטיסה רק ב-17:20 מחר, אז אפשר לישון",
+     "status": "משלמים במקום",
+     "link": "",
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "אומדן ערב בבר לשניים — כניסה, שתייה ותחבורה.",
+      "lowFactor": 0.7,
+      "highFactor": 1.6,
+      "sourceUrl": "",
+      "checked": "2026-10-13"
+     },
+     "managed": true,
+     "id": "s_15_night",
+     "done": false
     },
     {
      "time": "",
