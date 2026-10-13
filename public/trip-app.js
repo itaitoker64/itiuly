@@ -1452,7 +1452,15 @@ function initPullToRefresh(){
 
 function registerServiceWorker(){
   if(!('serviceWorker' in navigator)) return;
-  navigator.serviceWorker.register('/sw.js').catch(()=>{ /* לא קריטי */ });
+  // כשגרסה חדשה של האפליקציה נכנסת לתוקף — טוענים מחדש פעם אחת, כדי לא להישאר על הישנה
+  const hadController = !!navigator.serviceWorker.controller;
+  let reloaded = false;
+  navigator.serviceWorker.addEventListener('controllerchange', ()=>{
+    if(!hadController || reloaded || isTyping()) return;
+    reloaded = true;
+    window.location.reload();
+  });
+  navigator.serviceWorker.register('/sw.js').then(reg=>reg.update()).catch(()=>{ /* לא קריטי */ });
   window.addEventListener('online', ()=>{
     if(savePending || hasPendingOffline()) flushSave();
     else syncNow();
@@ -2238,6 +2246,8 @@ function renderToday(){
 
         <div class="deck-body">
           ${day.summary?`<h1 class="deck-summary">${itineraryText(day.summary)}</h1>`:''}
+          ${renderDayShape(day)}
+          ${renderDayPhotos(day)}
 
           ${focus?`
           <div class="focus-card" data-action="expandRow" data-id="${focus.id}">
@@ -2285,12 +2295,58 @@ function centerDayStrip(){
   stripCenteredOn = key;
 }
 
+/** צבע לפי סוג — אותו צבע בפס היום ובאייקון של השורה */
+function rowKind(r){
+  const e = rowEmoji(r);
+  if(e==='🍸') return 'night';
+  if(e==='✈️'||e==='🚤'||r.cat==='תחבורה') return 'move';
+  if(r.cat==='אוכל') return 'food';
+  if(e==='🥊'||e==='💆'||e==='🏖️') return 'body';
+  if(r.cat==='אטרקציות') return 'see';
+  return 'other';
+}
+const KIND_LABEL = {move:'דרכים', see:'אטרקציות', food:'אוכל', body:'גוף וים', night:'לילה', other:'אחר'};
+function minutesOf(t){ const m=/^(\d{1,2}):(\d{2})$/.exec(t||''); return m ? (+m[1])*60 + (+m[2]) : null; }
+
+/** פס היום: מ-06:00 עד 02:00, כל פעילות בצבע שלה לפי השעה והמשך */
+function renderDayShape(day){
+  const START = 6*60, END = 26*60, span = END-START;
+  const segs = day.rows.filter(r=>r.time).map(r=>{
+    let a = minutesOf(r.time); if(a===null) return '';
+    if(a < START) a += 24*60;
+    const d = Math.max(20, minutesOf(r.dur) || 30);
+    const left = Math.max(0, Math.min(100, (a-START)/span*100));
+    const width = Math.max(1.2, Math.min(100-left, d/span*100));
+    return `<span class="shape-seg k-${rowKind(r)} ${r.done?'done':''}" style="inset-inline-start:${left}%;width:${width}%"
+              data-action="expandRow" data-id="${r.id}" title="${escapeAttr(r.time+' '+r.act)}"></span>`;
+  }).join('');
+  const kinds = [...new Set(day.rows.filter(r=>r.time).map(rowKind))];
+  return `
+  <div class="day-shape">
+    <div class="shape-bar">${segs}</div>
+    <div class="shape-hours"><span>06</span><span>12</span><span>18</span><span>00</span></div>
+    <div class="shape-legend">${kinds.map(k=>`<span><i class="k-${k}"></i>${KIND_LABEL[k]}</span>`).join('')}</div>
+  </div>`;
+}
+
+/** תמונות של הרגעים הגדולים ביום — מה שבשבילו קמים */
+function renderDayPhotos(day){
+  const shots = day.rows.filter(r=>r.wiki && r.time);
+  if(!shots.length) return '';
+  return `<div class="day-photos">${shots.map(r=>`
+    <button class="photo-card ${r.done?'done':''}" data-action="expandRow" data-id="${r.id}">
+      ${imageBox(r.wiki, '#8C8272', 'photo-img')}
+      <span class="photo-cap"><b dir="ltr">${escapeHtml(r.time)}</b>${itineraryText(r.act)}</span>
+      ${r.done?'<span class="photo-done">✓</span>':''}
+    </button>`).join('')}</div>`;
+}
+
 /** אייקון לפי סוג הפעילות — כדי שאפשר לסרוק את היום בעין */
 function rowEmoji(r){
   const a = r.act || '';
   if(/טיסה|ארקיע|Airways|Vietjet|נחיתה/.test(a)) return '✈️';
   if(/ספידבוט|סירה|לונגטייל|סימילן|קיאק/.test(a)) return '🚤';
-  if(/בר|ברים|חאו סן|לילה|מוזיקה חיה|מופעי אש/.test(a) && r.cat==='אטרקציות') return '🍸';
+  if(r.cat==='אטרקציות' && /(^|[\s—])(בר|ברים|ברי)(?=[\s—]|$)|חאו סן|מוזיקה חיה|מופעי אש|הלילה הגדול|לילה אחרון/.test(a)) return '🍸';
   if(/אימון|מואיי תאי/.test(a)) return '🥊';
   if(/קטנוע/.test(a)) return '🛵';
   if(/ספא|עיסוי|מסאז/.test(a)) return '💆';
@@ -2384,10 +2440,10 @@ function renderTodayRow(day, r, focus){
   const gear = gearFor(r, day);
   const talk = rowNotes(r).length;
   return `
-  <div class="trow ${r.done?'done':''} ${open?'open':''} ${focus&&focus.id===r.id?'focus':''}" id="trow-${r.id}">
+  <div class="trow k-${rowKind(r)} ${r.done?'done':''} ${open?'open':''} ${focus&&focus.id===r.id?'focus':''}" id="trow-${r.id}">
     <div class="trow-main" data-action="expandRow" data-id="${r.id}">
       <div class="trow-time" dir="ltr">${r.time?escapeHtml(r.time):''}</div>
-      <div class="trow-emoji">${rowEmoji(r)}</div>
+      <div class="trow-emoji k-${rowKind(r)}">${r.wiki?imageBox(r.wiki,'#8C8272','trow-photo'):rowEmoji(r)}</div>
       <div class="trow-text">
         <div class="tact">${itineraryText(r.act)}</div>
         <div class="trow-sub">${r.loc?itineraryText(r.loc):''}${gear?` · 🎒`:''}${talk?` · 💬${talk}`:''}</div>

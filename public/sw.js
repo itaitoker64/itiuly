@@ -1,12 +1,13 @@
 /*
  * Service worker — the app has to open on a speedboat.
  *
- * The shell (page, script, styles, seed) is cached on install and served
- * cache-first, so the app starts with no signal at all. Wikimedia photos are
+ * The shell (page, script, styles, seed) is fetched network-first so an
+ * update shows on the very next open, and falls back to the cached copy
+ * after a few seconds or with no signal at all. Wikimedia photos are
  * cached as they are seen. The plan itself is not cached here: the page keeps
  * its own copy in localStorage, which it can also write to while offline.
  */
-const VERSION = 'trip-v1';
+const VERSION = 'trip-v2';
 const SHELL = `${VERSION}-shell`;
 const PHOTOS = `${VERSION}-photos`;
 
@@ -78,14 +79,14 @@ self.addEventListener('fetch', (event) => {
   event.respondWith(
     caches.open(SHELL).then(async (cache) => {
       const hit = await cache.match(request, { ignoreSearch: true });
-      const live = fetch(request)
-        .then((response) => {
-          if (response.ok) cache.put(request, response.clone());
-          return response;
-        })
-        .catch(() => hit);
-      // Cached first so it opens instantly; the fresh copy lands for next time.
-      return hit || live;
+      const live = fetch(request, { cache: 'no-store' }).then((response) => {
+        if (response.ok) cache.put(request, response.clone());
+        return response;
+      });
+      if (!hit) return live.catch(() => Response.error());
+      // Fresh when the network answers; the cached copy on a slow or dead connection.
+      const timeout = new Promise((resolve) => setTimeout(() => resolve(hit), 4000));
+      return Promise.race([live.catch(() => hit), timeout]);
     })
   );
 });
