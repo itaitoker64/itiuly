@@ -695,3 +695,23 @@ button:focus-visible,a:focus-visible,input:focus-visible{outline:2px solid var(-
 .leaflet-popup-content{font-family:Heebo,sans-serif;direction:rtl;text-align:right;font-size:12.5px;line-height:1.6;}
 .trow-hero{height:150px;border-radius:12px;overflow:hidden;position:relative;margin-top:10px;}
 .trow-hero .trow-hero-img{position:absolute;inset:0;}
+
+/* ===== המסלול: מפה, גלריה לתחנה, תמונה ליום ===== */
+.route-map-wrap{margin:14px 0 18px;}
+.route-map{height:260px;border-radius:18px;overflow:hidden;border:1px solid var(--line);background:#e8eeeb;z-index:0;}
+.map-pin.big{width:32px;height:32px;line-height:32px;font-size:14px;}
+.dest-gallery{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;margin:2px -2px 12px;padding:2px;}
+.dest-gallery::-webkit-scrollbar{display:none;}
+.gal-card{position:relative;flex:0 0 auto;width:128px;height:92px;border-radius:12px;overflow:hidden;border:0;padding:0;cursor:pointer;background:#ddd;}
+.gal-card .gal-img{position:absolute;inset:0;}
+.gal-card::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.72),rgba(0,0,0,0) 62%);}
+.gal-cap{position:absolute;bottom:6px;right:8px;left:8px;z-index:2;color:#fff;font-size:11px;font-weight:600;line-height:1.25;text-align:start;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+.dnum-photo{position:relative;width:46px;height:46px;border-radius:12px;overflow:hidden;flex:0 0 auto;background:var(--accent-soft,#eef3f1);
+  display:flex;align-items:center;justify-content:center;}
+.dnum-photo .dnum-img{position:absolute;inset:0;}
+.dnum-photo .dnum{position:relative;z-index:2;background:rgba(0,0,0,.45);color:#fff;border-radius:8px;min-width:22px;height:22px;
+  display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;margin:0;}
+.dnum-photo:not(:has(.photo)) .dnum{background:var(--accent,#2F6F6B);}
+.today-legend{align-items:center;}
+.legend-btn{border:1px solid var(--line);background:#fff;border-radius:999px;padding:5px 12px;font:600 12px Heebo,sans-serif;color:var(--accent-dark,var(--ink));cursor:pointer;}

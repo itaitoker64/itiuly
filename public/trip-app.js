@@ -1753,7 +1753,7 @@ function render(){
   const c = document.getElementById('content');
   if(activeTab==='home') c.innerHTML = renderHome();
   else if(activeTab==='today'){ c.innerHTML = renderToday(); initSwipe(); centerDayStrip(); initDayMap(myDays()[currentDayIndex()]); }
-  else if(activeTab==='route') c.innerHTML = renderRouteTab();
+  else if(activeTab==='route'){ c.innerHTML = renderRouteTab(); initRouteMap(); }
   else if(activeTab==='money') c.innerHTML = renderMoney();
   else if(activeTab==='map') { c.innerHTML = renderMapShell(); initMapIfNeeded(); }
   else if(activeTab==='countries') c.innerHTML = renderCountries();
@@ -1987,6 +1987,8 @@ function renderRouteTab(){
       <div class="stat-cell"><b>${dests.length}</b><span>תחנות</span></div>
       <div class="stat-cell"><b>${totalNights}</b><span>לילות</span></div>
     </div>
+    <div class="route-map-wrap"><div id="route-map" class="route-map"></div>
+      <div class="day-map-cap">כל התחנות לפי הסדר · לחיצה על מספר קופצת לתחנה</div></div>
     ${isItai ? '' : ''}
     ${dests.map((d,i)=>{
       const marker = (!isItai && d.arrival >= splitDate() &&
@@ -2039,6 +2041,47 @@ function datesLabel(d){
   const nights = nightsLabel(d.nights);
   return nights ? `${range} · ${nights}` : range;
 }
+/** התמונות של התחנה — מכל הימים בה, בלי כפילויות */
+function destGallery(d){
+  const seen = new Set([d.wiki]);
+  const shots = [];
+  daysForDest(d).forEach(day=>day.rows.filter(r=>r.time).forEach(r=>{
+    const w = rowWiki(r);
+    if(w && !seen.has(w)){ seen.add(w); shots.push({w, r, day}); }
+  }));
+  if(!shots.length) return '';
+  return `<div class="dest-gallery">${shots.slice(0,8).map(x=>`
+    <button class="gal-card" data-action="toggleDest" data-id="${d.id}">
+      ${imageBox(x.w, d.hue, 'gal-img')}
+      <span class="gal-cap">${itineraryText(x.r.act)}</span>
+    </button>`).join('')}</div>`;
+}
+
+/** מפת הטיול כולו — תחנה ממוספרת לכל יעד, וקו לפי הסדר */
+let routeMap = null;
+function initRouteMap(){
+  const el = document.getElementById('route-map');
+  if(!el) return;
+  if(routeMap){ try{ routeMap.remove(); }catch(e){} routeMap = null; }
+  if(typeof L === 'undefined'){ setTimeout(()=>{ if(activeTab==='route') initRouteMap(); }, 800); return; }
+  const dests = myDestinations().filter(d=>d.lat && d.lng);
+  if(!dests.length){ el.style.display='none'; return; }
+  routeMap = L.map(el, {zoomControl:false, scrollWheelZoom:false, dragging:!L.Browser.mobile, tap:false});
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:18, attribution:'© OpenStreetMap'}).addTo(routeMap);
+  const pts = dests.map(d=>[d.lat, d.lng]);
+  const accent = getComputedStyle(document.documentElement).getPropertyValue('--accent').trim() || '#2F6F6B';
+  if(pts.length > 1) L.polyline(pts, {color:accent, weight:3, dashArray:'6 6', opacity:.85}).addTo(routeMap);
+  const today = tripToday();
+  dests.forEach((d,i)=>{
+    const past = (d.departure||d.arrival) < today;
+    const icon = L.divIcon({className:'', html:`<div class="map-pin big ${past?'done':''}">${i+1}</div>`, iconSize:[32,32], iconAnchor:[16,16]});
+    L.marker([d.lat, d.lng], {icon}).addTo(routeMap)
+      .bindPopup(`<b>${escapeHtml(d.name)}</b><br>${escapeHtml(datesLabel(d))}`)
+      .on('click', ()=>{ const card=document.getElementById('dest-'+d.id); if(card) card.scrollIntoView({behavior:'smooth', block:'start'}); });
+  });
+  routeMap.fitBounds(pts, {padding:[28,28]});
+}
+
 function renderDestCard(d, index, total){
   const open = expandedDest[d.id] === true;
   const days = daysForDest(d);
@@ -2046,7 +2089,7 @@ function renderDestCard(d, index, total){
   const mapsLink = 'https://www.google.com/maps/search/?api=1&query=' +
     encodeURIComponent(d.name + ' ' + (d.countryName||''));
   return `
-  <div class="dest-card ${open?'open':''}">
+  <div class="dest-card ${open?'open':''}" id="dest-${d.id}">
     <div class="dest-top" data-action="toggleDest" data-id="${d.id}">
       ${imageBox(d.wiki, d.hue, 'dest-photo')}
       <div class="dest-overlay">
@@ -2060,6 +2103,7 @@ function renderDestCard(d, index, total){
       </div>
     </div>
     <div class="dest-body">
+      ${destGallery(d)}
       ${d.notes?`<div class="dest-note">${d.notes}</div>`:''}
       ${renderScooter(d)}
       ${d.accommodation?`<div class="dest-line">🏨 ${d.accommodation}</div>`:''}
@@ -2105,7 +2149,8 @@ function renderScooter(d){
 const ROW_ICONS = {'אוכל':'🍜','תחבורה':'🛵','אטרקציות':'📍','לינה':'🏨','אחר':'•'};
 
 function rowThumb(r){
-  if(r.wiki) return imageBox(r.wiki, '#8C8272', 'row-photo');
+  const w = rowWiki(r);
+  if(w) return imageBox(w, '#8C8272', 'row-photo');
   return `<div class="row-icon">${uiIcon(r.cat)}</div>`;
 }
 
@@ -2115,7 +2160,7 @@ function renderDayCard(day){
   return `
   <div class="day-card">
     <div class="day-head" data-action="toggleDay" data-id="${day.id}">
-      <div class="dnum">${day.day}</div>
+      <div class="dnum-photo">${(()=>{ const r=day.rows.find(x=>x.time&&rowWiki(x)); return r?imageBox(rowWiki(r),'#8C8272','dnum-img'):''; })()}<span class="dnum">${day.day}</span></div>
       <div class="dmain">
         <div class="dtitle">${day.summary || day.dest}</div>
         <div class="dsub">${day.dow} ${fmtDateShort(day.date)} · ${day.rows.length} שורות</div>
@@ -2258,7 +2303,11 @@ function renderToday(){
             ${focus.loc?`<div class="focus-loc">📍 ${itineraryText(focus.loc)}</div>`:''}
           </div>`:`<div class="focus-card all-done"><div class="focus-label">כל היום סומן 🎉</div></div>`}
 
-          <div class="today-legend"><span>הקישו על פעילות לפרטים</span><span>✓ = עשינו</span></div>
+          <div class="today-legend">
+            <span>הקישו על פעילות לפרטים · ✓ = עשינו</span>
+            ${(()=>{ const allOpen = day.rows.every(r=>expandedRow['t_'+r.id]);
+              return `<button class="legend-btn" data-action="${allOpen?'collapseAllRows':'expandAllRows'}">${allOpen?'▴ סגירת הכל':'▾ פתיחת הכל'}</button>`; })()}
+          </div>
           <div class="trow-list">${day.rows.filter(r=>r.time).map(r=>renderTodayRow(day, r, focus)).join('')}</div>
           ${day.rows.some(r=>!r.time)?`
           <details class="trow-extra" ${expandedRow.extra?'open':''}>
@@ -4312,6 +4361,13 @@ document.addEventListener('click', (e)=>{
     // כל הכרטיס הוא כפתור — חוץ מקישורים וכפתורים שבתוכו
     if(e.target.closest('a,button,input')) return;
     toggleRowDone(t.dataset.day, id, t);
+  }
+  else if(action==='expandAllRows' || action==='collapseAllRows'){
+    const day = myDays()[currentDayIndex()];
+    const open = action==='expandAllRows';
+    day.rows.forEach(r=>{ expandedRow['t_'+r.id] = open; });
+    expandedRow.extra = open;
+    render();
   }
   else if(action==='expandRow'){
     expandedRow['t_'+id] = !expandedRow['t_'+id];
