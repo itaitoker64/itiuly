@@ -1752,7 +1752,7 @@ function render(){
   renderNav();
   const c = document.getElementById('content');
   if(activeTab==='home') c.innerHTML = renderHome();
-  else if(activeTab==='today'){ c.innerHTML = renderToday(); initSwipe(); centerDayStrip(); }
+  else if(activeTab==='today'){ c.innerHTML = renderToday(); initSwipe(); centerDayStrip(); initDayMap(myDays()[currentDayIndex()]); }
   else if(activeTab==='route') c.innerHTML = renderRouteTab();
   else if(activeTab==='money') c.innerHTML = renderMoney();
   else if(activeTab==='map') { c.innerHTML = renderMapShell(); initMapIfNeeded(); }
@@ -2247,6 +2247,7 @@ function renderToday(){
         <div class="deck-body">
           ${day.summary?`<h1 class="deck-summary">${itineraryText(day.summary)}</h1>`:''}
           ${renderDayShape(day)}
+          <div class="day-map-wrap"><div id="day-map" class="day-map"></div><div class="day-map-cap">המסלול של היום · המספרים לפי סדר השעות</div></div>
           ${renderDayPhotos(day)}
 
           ${focus?`
@@ -2295,6 +2296,97 @@ function centerDayStrip(){
   stripCenteredOn = key;
 }
 
+/*
+ * מקומות מוכרים במסלול — לכל אחד עמוד ויקיפדיה (לתמונה) וקואורדינטות (למפת היום).
+ * מותאם לפי הפעילות והמיקום של השורה; הראשון שמתאים מנצח, אז הספציפי לפני הכללי.
+ */
+const PLACES = [
+  {m:/סובארנבומי|BKK/,                 wiki:'Suvarnabhumi Airport',       ll:[13.6900,100.7501]},
+  {m:/IZ598|פוקט → תל אביב|לשדה התעופה/, wiki:'Phuket International Airport', ll:[8.1132,98.3169]},
+  {m:/HKT|נחיתה וכבודה/,                wiki:'Phuket International Airport', ll:[8.1132,98.3169]},
+  {m:/רכבת שדה התעופה|ARL/,             wiki:'Airport Rail Link (Bangkok)', ll:[13.7563,100.5348]},
+  {m:/הארמון המלכותי|Grand Palace/,     wiki:'Grand Palace',               ll:[13.7500,100.4913]},
+  {m:/ואט פו|Wat Pho/,                  wiki:'Wat Pho',                    ll:[13.7465,100.4930]},
+  {m:/ואט ארון|סאלה ראטנקוסין|קראתונג/,  wiki:'Wat Arun',                   ll:[13.7437,100.4889]},
+  {m:/חאו סן|רמבוטרי/,                  wiki:'Khao San Road',              ll:[13.7589,100.4974]},
+  {m:/יאווארט|צ׳יינטאון/,               wiki:'Yaowarat Road',              ll:[13.7398,100.5097]},
+  {m:/לומפיני/,                         wiki:'Lumphini Park',              ll:[13.7314,100.5414]},
+  {m:/רג׳אדמנרן/,                       wiki:'Rajadamnern Stadium',        ll:[13.7595,100.5050]},
+  {m:/MBK|סנטרל וורלד/,                 wiki:'MBK Center',                 ll:[13.7446,100.5297]},
+  {m:/ISB/,                             wiki:'International School Bangkok', ll:[13.9122,100.5470]},
+  {m:/סירת נהר|תא טיין|Chao Phraya/,    wiki:'Chao Phraya Express Boat',   ll:[13.7442,100.4904]},
+  {m:/BTS|אסוק/,                        wiki:'BTS Skytrain',               ll:[13.7370,100.5603]},
+  {m:/מונטראג׳|Montraj|סוכומוויט/,       wiki:'Sukhumvit Road',             ll:[13.7375,100.5585]},
+  {m:/באנג רונג|Bang Rong/,             wiki:'Phang Nga Bay',              ll:[8.0478,98.4199]},
+  {m:/מאנו|KYN|המחנה|אימון|קו יאו נוי/,  wiki:'Ko Yao Noi',                 ll:[8.1270,98.6170]},
+  {m:/מפרץ|פאנג נגה/,                   wiki:'Phang Nga Bay',              ll:[8.2700,98.5000]},
+  {m:/ריילאי|פרה נאנג|טיפוס/,           wiki:'Railay Beach',               ll:[8.0118,98.8378]},
+  {m:/אאו תלאנה|מנגרוב|קיאק/,           wiki:'Sea kayak',                  ll:[8.0920,98.7600]},
+  {m:/צ׳רמנטרה|Chermantra/,             wiki:'Ao Nang',                    ll:[8.0350,98.8190]},
+  {m:/אאו נאנג/,                        wiki:'Ao Nang',                    ll:[8.0310,98.8236]},
+  {m:/תאב לאמו|סימילן/,                 wiki:'Similan Islands',            ll:[8.6500,97.6440]},
+  {m:/צ׳או לאן|רצ׳פרפה|קאו סוק/,        wiki:'Khao Sok National Park',     ll:[8.9690,98.8170]},
+  {m:/זיפליין/,                         wiki:'Zip line',                   ll:[8.7000,98.2700]},
+  {m:/באנג לה און/,                     wiki:'Khao Lak',                   ll:[8.6630,98.2520]},
+  {m:/קלימה|Kalima|קאו לק/,             wiki:'Khao Lak',                   ll:[8.6430,98.2470]}
+];
+/* תמונה כללית לפי סוג, כשאין מקום מוכר */
+const KIND_WIKI = [
+  {m:/מואיי תאי|אימון/, wiki:'Muay Thai'},
+  {m:/מסאז׳|עיסוי|ספא/, wiki:'Thai massage'},
+  {m:/טוק-טוק/, wiki:'Tuk-tuk'},
+  {m:/לונגטייל/, wiki:'Long-tail boat'},
+  {m:/ספידבוט/, wiki:'Phang Nga Bay'},
+  {m:/שוק לילה/, wiki:'Street food'},
+  {m:/מופעי אש/, wiki:'Fire dancing'},
+  {m:/קטנוע/, wiki:'Motorcycle taxi'},
+  {m:/TG203|Thai Airways/, wiki:'Thai Airways'},
+  {m:/ארקיע|IZ591/, wiki:'Arkia'}
+];
+function rowPlace(r){
+  const txt = `${r.act||''} ${r.loc||''}`;
+  return PLACES.find(p=>p.m.test(txt)) || null;
+}
+function rowWiki(r){
+  if(r.wiki) return r.wiki;
+  const txt = `${r.act||''} ${r.loc||''}`;
+  const k = KIND_WIKI.find(x=>x.m.test(r.act||''));
+  if(k) return k.wiki;
+  const p = rowPlace(r);
+  return p ? p.wiki : null;
+}
+
+/** מפת היום — נקודה ממוספרת לכל מקום לפי סדר השעות, וקו שמחבר ביניהן */
+let dayMap = null;
+function initDayMap(day){
+  const el = document.getElementById('day-map');
+  if(!el) return;
+  if(dayMap){ try{ dayMap.remove(); }catch(e){} dayMap = null; }
+  if(typeof L === 'undefined'){ setTimeout(()=>{ if(activeTab==='today') initDayMap(day); }, 800); return; }
+  const stops = [];
+  day.rows.filter(r=>r.time).forEach(r=>{
+    const p = rowPlace(r);
+    if(!p) return;
+    const last = stops[stops.length-1];
+    if(last && last.ll[0]===p.ll[0] && last.ll[1]===p.ll[1]){ last.rows.push(r); return; }
+    stops.push({ll:p.ll, rows:[r]});
+  });
+  if(!stops.length){ el.style.display='none'; return; }
+  dayMap = L.map(el, {zoomControl:false, attributionControl:true, scrollWheelZoom:false, dragging:!L.Browser.mobile, tap:false});
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:18, attribution:'© OpenStreetMap'}).addTo(dayMap);
+  const pts = stops.map(s=>s.ll);
+  if(pts.length > 1) L.polyline(pts, {color:getComputedStyle(document.documentElement).getPropertyValue('--accent').trim()||'#2F6F6B', weight:3, dashArray:'6 6', opacity:.8}).addTo(dayMap);
+  stops.forEach((s,i)=>{
+    const done = s.rows.every(r=>r.done);
+    const icon = L.divIcon({className:'', html:`<div class="map-pin ${done?'done':''}">${i+1}</div>`, iconSize:[26,26], iconAnchor:[13,13]});
+    L.marker(s.ll, {icon}).addTo(dayMap)
+      .bindPopup(s.rows.map(r=>`<b dir="ltr">${escapeHtml(r.time)}</b> ${escapeHtml(r.act)}`).join('<br>'))
+      .on('click', ()=>{ const r=s.rows[0]; expandedRow['t_'+r.id]=true; });
+  });
+  if(pts.length === 1) dayMap.setView(pts[0], 13);
+  else dayMap.fitBounds(pts, {padding:[24,24], maxZoom:15});
+}
+
 /** צבע לפי סוג — אותו צבע בפס היום ובאייקון של השורה */
 function rowKind(r){
   const e = rowEmoji(r);
@@ -2331,11 +2423,12 @@ function renderDayShape(day){
 
 /** תמונות של הרגעים הגדולים ביום — מה שבשבילו קמים */
 function renderDayPhotos(day){
-  const shots = day.rows.filter(r=>r.wiki && r.time);
+  const seen = new Set();
+  const shots = day.rows.filter(r=>r.time && rowWiki(r)).filter(r=>{ const w=rowWiki(r); if(seen.has(w)) return false; seen.add(w); return true; });
   if(!shots.length) return '';
   return `<div class="day-photos">${shots.map(r=>`
     <button class="photo-card ${r.done?'done':''}" data-action="expandRow" data-id="${r.id}">
-      ${imageBox(r.wiki, '#8C8272', 'photo-img')}
+      ${imageBox(rowWiki(r), '#8C8272', 'photo-img')}
       <span class="photo-cap"><b dir="ltr">${escapeHtml(r.time)}</b>${itineraryText(r.act)}</span>
       ${r.done?'<span class="photo-done">✓</span>':''}
     </button>`).join('')}</div>`;
@@ -2443,7 +2536,7 @@ function renderTodayRow(day, r, focus){
   <div class="trow k-${rowKind(r)} ${r.done?'done':''} ${open?'open':''} ${focus&&focus.id===r.id?'focus':''}" id="trow-${r.id}">
     <div class="trow-main" data-action="expandRow" data-id="${r.id}">
       <div class="trow-time" dir="ltr">${r.time?escapeHtml(r.time):''}</div>
-      <div class="trow-emoji k-${rowKind(r)}">${r.wiki?imageBox(r.wiki,'#8C8272','trow-photo'):rowEmoji(r)}</div>
+      <div class="trow-emoji k-${rowKind(r)}">${rowWiki(r)?imageBox(rowWiki(r),'#8C8272','trow-photo'):rowEmoji(r)}</div>
       <div class="trow-text">
         <div class="tact">${itineraryText(r.act)}</div>
         <div class="trow-sub">${r.loc?itineraryText(r.loc):''}${gear?` · 🎒`:''}${talk?` · 💬${talk}`:''}</div>
@@ -2459,7 +2552,9 @@ function renderTodayRow(day, r, focus){
         <span class="tag-s ${statusCls}">${r.status||''}</span>
         ${r.dur?`<span class="tag-s">⏱ ${escapeHtml(r.dur)}</span>`:''}
         ${r.link?`<a class="chip mini" href="${r.link}" target="_blank" rel="noopener">פתיחה ↗</a>`:''}
+        ${(r.loc||rowPlace(r))?`<a class="chip mini" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(rowPlace(r)?rowPlace(r).ll.join(','):(r.loc+' Thailand'))}">📍 ניווט</a>`:''}
       </div>
+      ${rowWiki(r)?`<div class="trow-hero">${imageBox(rowWiki(r),'#8C8272','trow-hero-img')}</div>`:''}
       ${r.notes?`<div class="tnotes">${itineraryText(r.notes)}</div>`:''}
       ${gear?`<div class="gear-note">🎒 ${gear}</div>`:''}
       <div class="chip-row tight">${renderRowNotes(day, r)}</div>
@@ -2518,7 +2613,7 @@ function initSwipe(){
   deck.addEventListener('touchend', onEnd);
   deck.addEventListener('touchcancel', onEnd);
 
-  deck.addEventListener('mousedown', e=>{ if(e.target.closest('input,button,a')) return; onStart(e.clientX, e.clientY); });
+  deck.addEventListener('mousedown', e=>{ if(e.target.closest('input,button,a,.day-map')) return; onStart(e.clientX, e.clientY); });
   window.addEventListener('mousemove', e=>onMove(e.clientX, e.clientY, null));
   window.addEventListener('mouseup', onEnd);
 
