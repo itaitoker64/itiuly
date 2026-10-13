@@ -2966,6 +2966,39 @@ function renderWhoPill(){
   el.innerHTML = `${me().emoji} ${me().name} <button data-action="logout">יציאה</button>`;
 }
 
+/** הבית בתמונות: התחנות, ומה מחכה בדרך */
+function renderHomeGallery(){
+  const dests = myDestinations().filter(d=>d.arrival);
+  const days = myDays();
+  const seen = new Set(dests.map(d=>d.wiki));
+  const moments = [];
+  days.forEach((day, idx)=>day.rows.filter(r=>r.time && r.cat!=='תחבורה').forEach(r=>{
+    const w = rowWiki(r);
+    if(!w || seen.has(w)) return;
+    seen.add(w);
+    moments.push({w, r, day, idx});
+  }));
+  return `
+  <div class="section" style="padding-top:0;">
+    <div class="section-title">התחנות</div>
+    <div class="home-mosaic">${dests.map((d,i)=>`
+      <button class="mosaic-tile ${i===0 || (i===dests.length-1 && (dests.length-1)%2===1)?'wide':''}" data-action="setTab" data-id="route">
+        ${imageBox(d.wiki, d.hue, 'mosaic-img')}
+        <span class="mosaic-cap"><b>${escapeHtml(d.name.split(' — ')[0])}</b>${escapeHtml(datesLabel(d))}</span>
+      </button>`).join('')}</div>
+  </div>
+  ${moments.length?`
+  <div class="section" style="padding-top:0;">
+    <div class="section-title">רגעים שמחכים לכם <span class="tag">${moments.length}</span></div>
+    <div class="moments">${moments.map(m=>`
+      <button class="moment ${m.r.done?'done':''}" data-action="jumpToDay" data-id="${m.idx}">
+        ${imageBox(m.w, '#8C8272', 'moment-img')}
+        <span class="moment-date">${m.day.dow} ${Number(m.day.date.slice(8))}/${Number(m.day.date.slice(5,7))}</span>
+        <span class="moment-cap">${itineraryText(m.r.act)}</span>
+      </button>`).join('')}</div>
+  </div>`:''}`;
+}
+
 function renderHome(){
   const days = daysUntil(STATE.startDate);
   const tripDays = days<=0 ? Math.abs(days) : 0;
@@ -3040,6 +3073,8 @@ function renderHome(){
         </div>
       </div>`}
   </div>
+
+  ${renderHomeGallery()}
 
   <div class="section" style="padding-top:0;">
     <div class="section-title">מה הצעד הבא <span class="tag">${nextSteps.length}</span></div>
@@ -4348,6 +4383,7 @@ document.addEventListener('click', (e)=>{
     render();
   }
   else if(action==='dayStep'){ stepDay(Number(id)); }
+  else if(action==='jumpToDay'){ todayIndex = Number(id); activeTab='today'; render(); window.scrollTo(0,0); }
   else if(action==='dayJump'){ todayIndex = Number(id); buzz(8); render(); }
   else if(action==='toggleRow'){ expandedRow[id] = !expandedRow[id]; render(); }
   else if(action==='toggleDay'){
