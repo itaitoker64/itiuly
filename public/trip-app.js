@@ -1744,7 +1744,7 @@ function render(){
   renderNav();
   const c = document.getElementById('content');
   if(activeTab==='home') c.innerHTML = renderHome();
-  else if(activeTab==='today'){ c.innerHTML = renderToday(); initSwipe(); }
+  else if(activeTab==='today'){ c.innerHTML = renderToday(); initSwipe(); centerDayStrip(); }
   else if(activeTab==='route') c.innerHTML = renderRouteTab();
   else if(activeTab==='money') c.innerHTML = renderMoney();
   else if(activeTab==='map') { c.innerHTML = renderMapShell(); initMapIfNeeded(); }
@@ -2183,8 +2183,10 @@ function renderToday(){
   const isToday = day.date === tripToday();
   const until = daysUntil(day.date);
   const done = day.rows.filter(r=>r.done).length;
-  const pct = day.rows.length ? Math.round(done/day.rows.length*100) : 0;
+  const total = day.rows.length;
+  const pct = total ? Math.round(done/total*100) : 0;
   const dest = myDestinations().find(d=>d.arrival <= day.date && day.date <= (d.departure||d.arrival));
+  const prev = days[i-1], next = days[i+1];
 
   const when = isToday ? 'היום'
     : until === 1 ? 'מחר'
@@ -2192,15 +2194,23 @@ function renderToday(){
     : until === -1 ? 'אתמול'
     : `לפני ${Math.abs(until)} ימים`;
 
+  const timed = day.rows.filter(r=>r.time);
+  const nowHM = new Intl.DateTimeFormat('en-GB',{timeZone:TRIP_TZ,hour:'2-digit',minute:'2-digit',hour12:false}).format(new Date());
+  const focus = isToday
+    ? (timed.find(r=>!r.done && r.time >= nowHM) || timed.find(r=>!r.done))
+    : timed.find(r=>!r.done);
+  const ring = 2*Math.PI*20;
+
   return `
   <div class="today-wrap">
-    <div class="today-rail">
-      <button class="rail-btn ${i>=days.length-1?'off':''}" data-action="dayStep" data-id="1">‹</button>
-      <div class="rail-dots">
-        ${days.map((d,idx)=>`<span class="dot ${idx===i?'on':''} ${d.rows.every(r=>r.done)?'full':''}"
-            data-action="dayJump" data-id="${idx}"></span>`).join('')}
-      </div>
-      <button class="rail-btn ${i<=0?'off':''}" data-action="dayStep" data-id="-1">›</button>
+    <div class="day-strip" id="day-strip">
+      ${days.map((d,idx)=>{
+        const dd = d.rows.length && d.rows.every(r=>r.done);
+        return `<button class="dchip ${idx===i?'on':''} ${dd?'full':''} ${d.date===tripToday()?'is-today':''}" data-action="dayJump" data-id="${idx}">
+          <span class="dchip-dow">${d.dow}</span>
+          <span class="dchip-num">${Number(d.date.slice(8))}</span>
+          <span class="dchip-place">${escapeHtml(String(d.dest).split(/\s*[→—]\s*/)[0].trim())}</span>
+        </button>`;}).join('')}
     </div>
 
     <div class="day-deck" id="day-deck">
@@ -2208,28 +2218,84 @@ function renderToday(){
         <div class="deck-hero">
           ${imageBox(dest && dest.wiki, dest && dest.hue, 'deck-photo')}
           <div class="deck-hero-text">
-            <div class="deck-when">יום ${day.day} מתוך ${days.length}</div>
+            <div class="deck-when">יום ${day.day} מתוך ${days.length} · ${when}</div>
             <div class="deck-place">${day.dest}</div>
             <div class="deck-date">${day.dow} <bdi dir="ltr">${fmtDate(day.date)}</bdi></div>
           </div>
+          <div class="hero-ring" title="מה כבר עשיתם היום">
+            <svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="20" class="ring-bg"/><circle cx="24" cy="24" r="20" class="ring-fg"
+              style="stroke-dasharray:${ring};stroke-dashoffset:${ring*(1-pct/100)}"/></svg>
+            <span><b>${done}</b>/${total}</span>
+          </div>
         </div>
-        <div class="deck-status">
-          <span>${when}</span>
-          <span class="day-progress"><bdi dir="ltr">${done}/${day.rows.length}</bdi><span class="progress-track" role="progressbar" aria-label="התקדמות היום" aria-valuenow="${done}" aria-valuemin="0" aria-valuemax="${day.rows.length}"><span style="width:${pct}%"></span></span></span>
+
+        <div class="day-nav">
+          <button class="nav-day ${prev?'':'off'}" data-action="dayStep" data-id="-1" ${prev?'':'disabled'}>
+            <span class="nav-arrow">→</span><span><small>יום קודם</small>${prev?escapeHtml(prev.dest):'—'}</span></button>
+          <button class="nav-day next ${next?'':'off'}" data-action="dayStep" data-id="1" ${next?'':'disabled'}>
+            <span><small>יום הבא</small>${next?escapeHtml(next.dest):'—'}</span><span class="nav-arrow">←</span></button>
         </div>
 
         <div class="deck-body">
           ${day.summary?`<h1 class="deck-summary">${itineraryText(day.summary)}</h1>`:''}
-          <div class="activity-timeline">${day.rows.map(r=>renderTodayRow(day, r)).join('')}</div>
-          <div class="deck-total">
-            אומדן היום · ${ils(toIls(dayTotalBaht(day)))}
-          </div>
+
+          ${focus?`
+          <div class="focus-card" data-action="expandRow" data-id="${focus.id}">
+            <div class="focus-label">${isToday?'עכשיו / הבא בתור':'הדבר הראשון ביום'}</div>
+            <div class="focus-main"><span class="focus-time" dir="ltr">${escapeHtml(focus.time)}</span>
+              <span class="focus-act">${rowEmoji(focus)} ${itineraryText(focus.act)}</span></div>
+            ${focus.loc?`<div class="focus-loc">📍 ${itineraryText(focus.loc)}</div>`:''}
+          </div>`:`<div class="focus-card all-done"><div class="focus-label">כל היום סומן 🎉</div></div>`}
+
+          <div class="today-legend"><span>הקישו על פעילות לפרטים</span><span>✓ = עשינו</span></div>
+          <div class="trow-list">${day.rows.filter(r=>r.time).map(r=>renderTodayRow(day, r, focus)).join('')}</div>
+          ${day.rows.some(r=>!r.time)?`
+          <details class="trow-extra" ${expandedRow.extra?'open':''}>
+            <summary>לינה והוצאות בלי שעה · ${day.rows.filter(r=>!r.time).length}</summary>
+            <div class="trow-list">${day.rows.filter(r=>!r.time).map(r=>renderTodayRow(day, r, focus)).join('')}</div>
+          </details>`:''}
+
+          <div class="deck-total">אומדן היום · ${ils(toIls(dayTotalBaht(day)))}</div>
+
+          ${next?`
+          <button class="tomorrow" data-action="dayStep" data-id="1">
+            <div class="tomorrow-head"><span>מחר · ${next.dow} <bdi dir="ltr">${fmtDate(next.date)}</bdi></span><span>${escapeHtml(next.dest)} ←</span></div>
+            <div class="tomorrow-list">${next.rows.filter(r=>r.time).slice(0,3).map(r=>`<div><bdi dir="ltr">${escapeHtml(r.time)}</bdi> ${itineraryText(r.act)}</div>`).join('')}</div>
+            ${next.rows.find(r=>r.time) && next.rows.find(r=>r.time).time < '07:30' ? `<div class="tomorrow-warn">⏰ מתחילים מוקדם — ${escapeHtml(next.rows.find(r=>r.time).time)}</div>`:''}
+          </button>`:''}
         </div>
       </div>
     </div>
 
-    <div class="deck-hint">החליקו ימינה ושמאלה כדי לעבור בין הימים</div>
+    <div class="deck-hint">אפשר גם להחליק את המסך ימינה ושמאלה בין הימים</div>
   </div>`;
+}
+
+/** הפס העליון מתמרכז על היום הנבחר — רק כשהיום מתחלף, לא בכל סימון */
+let stripCenteredOn = null;
+function centerDayStrip(){
+  const strip = document.getElementById('day-strip');
+  const on = strip && strip.querySelector('.dchip.on');
+  if(!on) return;
+  const key = on.dataset.id;
+  if(key === stripCenteredOn && strip.dataset.ready) return;
+  const sr = strip.getBoundingClientRect(), or = on.getBoundingClientRect();
+  strip.scrollLeft += (or.left + or.width/2) - (sr.left + sr.width/2);
+  strip.dataset.ready = '1';
+  stripCenteredOn = key;
+}
+
+/** אייקון לפי סוג הפעילות — כדי שאפשר לסרוק את היום בעין */
+function rowEmoji(r){
+  const a = r.act || '';
+  if(/טיסה|ארקיע|Airways|Vietjet|נחיתה/.test(a)) return '✈️';
+  if(/ספידבוט|סירה|לונגטייל|סימילן|קיאק/.test(a)) return '🚤';
+  if(/בר|ברים|חאו סן|לילה|מוזיקה חיה|מופעי אש/.test(a) && r.cat==='אטרקציות') return '🍸';
+  if(/אימון|מואיי תאי/.test(a)) return '🥊';
+  if(/קטנוע/.test(a)) return '🛵';
+  if(/ספא|עיסוי|מסאז/.test(a)) return '💆';
+  if(/חוף|בריכה/.test(a)) return '🏖️';
+  return ({'תחבורה':'🚕','אוכל':'🍜','לינה':'🛏️','אטרקציות':'🎟️'})[r.cat] || '•';
 }
 
 /* פעילויות שדורשות ציוד מסוים — מוצג על הכרטיס של היום עצמו */
@@ -2312,25 +2378,36 @@ function deleteRowNote(dayId, rowId, noteId){
   persist(); cacheState(); render();
 }
 
-function renderTodayRow(day, r){
+function renderTodayRow(day, r, focus){
   const statusCls = SHARED_STATUS_CLASS[r.status] || 'onsite';
+  const open = expandedRow['t_'+r.id] === true;
+  const gear = gearFor(r, day);
+  const talk = rowNotes(r).length;
   return `
-  <div class="tcard ${r.done?'done':''}" data-action="tapRow" data-day="${day.id}" data-id="${r.id}">
-    ${rowThumb(r)}
-    <div class="tbody">
-      <div class="activity-heading">${r.time?`<div class="activity-time" dir="ltr">${escapeHtml(r.time)}</div>`:''}<div class="tact">${itineraryText(r.act)}</div></div>
-      ${r.loc?`<div class="tmeta">${itineraryText(r.loc)}</div>`:''}
+  <div class="trow ${r.done?'done':''} ${open?'open':''} ${focus&&focus.id===r.id?'focus':''}" id="trow-${r.id}">
+    <div class="trow-main" data-action="expandRow" data-id="${r.id}">
+      <div class="trow-time" dir="ltr">${r.time?escapeHtml(r.time):''}</div>
+      <div class="trow-emoji">${rowEmoji(r)}</div>
+      <div class="trow-text">
+        <div class="tact">${itineraryText(r.act)}</div>
+        <div class="trow-sub">${r.loc?itineraryText(r.loc):''}${gear?` · 🎒`:''}${talk?` · 💬${talk}`:''}</div>
+      </div>
+      <span class="trow-caret">${open?'▴':'▾'}</span>
+    </div>
+    <button class="tcheck ${r.done?'on':''}" aria-label="${r.done?'לבטל סימון':'סמנו שעשינו'}: ${escapeAttr(r.act)}"
+            data-action="toggleSharedRow" data-day="${day.id}" data-id="${r.id}">${r.done?'✓':''}</button>
+    ${open?`
+    <div class="trow-more">
       <div class="chip-row tight">
         ${renderPriceBadge(r)}
         <span class="tag-s ${statusCls}">${r.status||''}</span>
-        ${r.link?`<a class="chip mini" href="${r.link}" target="_blank" rel="noopener">↗</a>`:''}
+        ${r.dur?`<span class="tag-s">⏱ ${escapeHtml(r.dur)}</span>`:''}
+        ${r.link?`<a class="chip mini" href="${r.link}" target="_blank" rel="noopener">פתיחה ↗</a>`:''}
       </div>
       ${r.notes?`<div class="tnotes">${itineraryText(r.notes)}</div>`:''}
-      ${gearFor(r, day)?`<div class="gear-note">🎒 ${gearFor(r, day)}</div>`:''}
+      ${gear?`<div class="gear-note">🎒 ${gear}</div>`:''}
       <div class="chip-row tight">${renderRowNotes(day, r)}</div>
-    </div>
-    <input class="icheck" aria-label="${escapeAttr(r.act)}" type="checkbox" ${r.done?'checked':''}
-           data-action="toggleSharedRow" data-day="${day.id}" data-id="${r.id}">
+    </div>`:''}
   </div>`;
 }
 
@@ -4071,7 +4148,7 @@ document.addEventListener('click', (e)=>{
     render();
   }
   else if(action==='dayStep'){ stepDay(Number(id)); }
-  else if(action==='dayJump'){ todayIndex = Number(id); render(); }
+  else if(action==='dayJump'){ todayIndex = Number(id); buzz(8); render(); }
   else if(action==='toggleRow'){ expandedRow[id] = !expandedRow[id]; render(); }
   else if(action==='toggleDay'){
     expandedDays[id] = !expandedDays[id];
@@ -4085,8 +4162,14 @@ document.addEventListener('click', (e)=>{
     if(e.target.closest('a,button,input')) return;
     toggleRowDone(t.dataset.day, id, t);
   }
+  else if(action==='expandRow'){
+    expandedRow['t_'+id] = !expandedRow['t_'+id];
+    render();
+    const el = document.getElementById('trow-'+id);
+    if(el && expandedRow['t_'+id]) el.scrollIntoView({block:'nearest', behavior:'smooth'});
+  }
   else if(action==='toggleSharedRow'){
-    toggleRowDone(t.dataset.day, id, t.closest('.tcard,.irow'));
+    toggleRowDone(t.dataset.day, id, t.closest('.tcard,.irow,.trow'));
   }
   else if(action==='editSharedRow'){ openSharedRowModal(t.dataset.day, id); }
   else if(action==='expenseFromRow'){
@@ -4211,6 +4294,9 @@ document.addEventListener('keydown', (e)=>{
   addRowNote(input.dataset.day, input.dataset.id);
 });
 
+document.addEventListener('toggle', (e)=>{
+  if(e.target.classList && e.target.classList.contains('trow-extra')) expandedRow.extra = e.target.open;
+}, true);
 document.addEventListener('change', (e)=>{
   if(e.target.dataset.action==='setBudget'){ const c=findCountry(e.target.dataset.country); c.budget[e.target.dataset.key]=e.target.value; persist(); render(); }
   if(e.target.dataset.action==='setPackStatus'){ const p=STATE.packingList.find(x=>x.id===e.target.dataset.id); p.status=e.target.value; persist(); }
