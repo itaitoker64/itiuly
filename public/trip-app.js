@@ -1744,6 +1744,188 @@ function getCssVar(v){
 }
 
 /* =========================================================
+   תוכנית ב׳ — חזרה ב־10/12 וקופנגן באמצע.
+   זו טיוטה לצד המסלול המקורי, שלא משתנה עד שהטיסה תאושר.
+   התוכן קבוע כאן; מה שמשתנה (מלון שהוזמן, מה סומן) נשמר ב־shared.planB.
+========================================================= */
+const PLAN_B = {
+  flight: 'שינוי טיסת החזור ל־10/12 — ממתין לאישור lastminute (IL-604062)',
+  days: [
+    {date:'2026-12-02', place:'קופנגן', wiki:'Ko Pha-ngan', hue:'#3E8E9B', title:'אאו נאנג ← קופנגן · Halfmoon', rows:[
+      ['07:15','איסוף מהמלון באאו נאנג (Lomprayah, כ־฿150)'],
+      ['08:00','Lomprayah אאו נאנג → Thong Sala · כ־฿1,200 לאדם'],
+      ['12:45','מגיעים ל־Thong Sala · טקסי לבאן טאי'],
+      ['14:00','צ׳ק־אין · ים'],
+      ['21:30','Halfmoon Festival — לילה ראשון 🌙']]},
+    {date:'2026-12-03', place:'קופנגן', wiki:'Haad Rin', hue:'#3E8E9B', title:'חוף, ושוב Halfmoon', rows:[
+      ['11:00','בוקר איטי · Haad Rin / Haad Yuan'],
+      ['17:30','שקיעה ב־Zen Beach'],
+      ['21:30','Halfmoon · Magic Forest — לילה שני 🌙']]},
+    {date:'2026-12-04', place:'קופנגן', wiki:'Ko Pha-ngan', hue:'#3E8E9B', title:'יום התאוששות', rows:[
+      ['11:00','Bottle Beach / Thong Nai Pan בלונג־טייל'],
+      ['18:00','שוק הלילה ב־Thong Sala']]},
+    {date:'2026-12-05', place:'קאו סוק', wiki:'Khao Sok National Park', hue:'#4F7A4A', title:'קופנגן ← קאו סוק', rows:[
+      ['08:00','מעבורת + ואן לקאו סוק (כ־6–7 שעות, כרטיס משולב)'],
+      ['15:00','צ׳ק־אין בג׳ונגל · שחייה בנהר'],
+      ['19:00','ערב בכפר']]},
+    {date:'2026-12-06', place:'קאו לאק', wiki:'Cheow Lan Lake', hue:'#4F7A4A', title:'אגם צ׳או לאן ← קאו לאק', rows:[
+      ['08:00','סיור באגם צ׳או לאן — לונג־טייל, מערה, שחייה'],
+      ['15:30','ואן לקאו לאק (כשעה וחצי)'],
+      ['17:30','צ׳ק־אין בקלימה']]},
+    {date:'2026-12-07', place:'קאו לאק', wiki:'Similan Islands', hue:'#2E6FA0', title:'סימילן', rows:[
+      ['06:30','איסוף לסימילן · שנורקלינג כל היום'],
+      ['18:00','חזרה · ערב רגוע']]},
+    {date:'2026-12-08', place:'קאו לאק', wiki:'Khao Lak', hue:'#2E6FA0', title:'טליה לצ׳יאנג מאי', who:'split', rows:[
+      ['','טליה: HKT → CNX (AirAsia, כ־£91) — בצ׳יאנג מאי עוד היום'],
+      ['','איתי: יום גיבוי לסימילן, או זיפליין / חוף']]},
+    {date:'2026-12-09', place:'בנגקוק / פטונג', wiki:'Bangkok', hue:'#C97B5A', title:'הלילה האחרון של איתי', who:'itai', rows:[
+      ['','אם טסים מבנגקוק: HKT → DMK (מ־£47) · לינה ב־Soi 11'],
+      ['','אם טסים מפוקט: לילה בפטונג']]},
+    {date:'2026-12-10', place:'הביתה', wiki:'Suvarnabhumi Airport', hue:'#6B6B8A', title:'טיסה הביתה', who:'itai', rows:[
+      ['','טיסה הביתה — לפי מה ש־lastminute יאשרו']]}
+  ],
+  stays: [
+    {id:'phangan', dates:'2–5/12 · 3 לילות', place:'קופנגן, באן טאי',
+     options:'Sarana Bungalows ₪298 · Phangan Beach Resort ₪401 · Sea Love ₪684 · la plage ₪701'},
+    {id:'khaosok', dates:'5–6/12 · לילה', place:'קאו סוק',
+     options:'Morning Mist ₪137 · Palmview ₪230 · River Lodge ₪230 · Our Jungle House ₪459'},
+    {id:'kalima', dates:'6–9/12 · 3 לילות', place:'קלימה, קאו לאק',
+     options:'לשנות את ההזמנה הקיימת (2–8/12) · כ־₪2,103', url:'https://www.booking.com/hotel/th/kalima-resort-amp-villas-khao-lak.html?checkin=2026-12-06&checkout=2026-12-09&group_adults=2&selected_currency=ILS'},
+    {id:'bkk', dates:'9–10/12 · לילה · איתי', place:'בנגקוק (אם טסים משם)', who:'itai',
+     options:'Eleven Bangkok Soi 11 ₪303 · Pipa ₪348 · Ramada ₪227'}
+  ],
+  tasks: [
+    {id:'flight', text:'אישור מ־lastminute: חזרה ב־10/12 (IL-604062)', who:'itai'},
+    {id:'lomprayah', text:'Lomprayah אאו נאנג → קופנגן, 2/12 08:00, עם איסוף'},
+    {id:'halfmoon', text:'כרטיסים ל־Halfmoon, 2–3/12'},
+    {id:'transfer', text:'העברה קופנגן → קאו סוק, 5/12'},
+    {id:'cheowlan', text:'סיור אגם צ׳או לאן, 6/12, עם הסעה לקאו לאק'},
+    {id:'kalima', text:'לשנות את קלימה ל־6–9/12'},
+    {id:'talia', text:'טיסה HKT → CNX ב־8/12', who:'talia'},
+    {id:'itai9', text:'9/12: בנגקוק או פטונג, ו־HKT → DMK אם צריך', who:'itai'},
+    {id:'cancel', text:'לבטל את הוואן לקאו לק ואת סיור היום בקאו סוק מהמסלול המקורי'}
+  ],
+  pins: [
+    ['אאו נאנג', 8.033, 98.823], ['קופנגן', 9.711, 100.043], ['קאו סוק', 8.913, 98.528],
+    ['קאו לאק', 8.637, 98.250], ['פוקט HKT', 8.113, 98.317], ['בנגקוק', 13.741, 100.556]
+  ]
+};
+
+function planB(){ return sh().planB || {}; }
+function planBMine(x){ return !x.who || x.who==='split' || x.who===meId(); }
+
+function renderPlanB(){
+  const pb = planB();
+  const done = pb.done || {};
+  const tasks = PLAN_B.tasks.filter(planBMine);
+  const doneCount = tasks.filter(t=>done[t.id]).length;
+  const stays = PLAN_B.stays.filter(planBMine);
+  return `
+  ${renderBigHero('תוכנית ב׳ — קופנגן', 'חוזרים ב־10/12 · המסלול המקורי נשאר כמו שהוא', {wiki:'Ko Pha-ngan', hue:'#3E8E9B'})}
+  <div class="section">
+    <div class="card dashed planb-note">
+      <b>✈️ ${PLAN_B.flight}</b>
+      <div class="small" style="margin-top:6px">23/11–1/12 לא משתנה. ברגע שהטיסה תאושר — מעבירים את זה למסלול הרשמי.</div>
+    </div>
+    <div class="route-map-wrap"><div id="planb-map" class="route-map"></div>
+      <div class="day-map-cap">אאו נאנג ← קופנגן ← קאו סוק ← קאו לאק ← פוקט</div></div>
+
+    <div class="section-title" style="margin-top:18px">🏨 לינה</div>
+    ${stays.map(s=>{
+      const b = (pb.stays||{})[s.id] || {};
+      return `<div class="card planb-stay ${b.hotel?'booked':''}">
+        <div class="row"><b>${escapeHtml(s.place)}</b><span class="own-tag ${b.hotel?'booked':''}">${b.hotel?'מוזמן':'פתוח'}</span></div>
+        <div class="small muted">${escapeHtml(s.dates)}</div>
+        ${b.hotel?`<div class="dest-line">🏨 ${escapeHtml(b.hotel)}${b.price?` · ${escapeHtml(b.price)}`:''}${b.conf?` · אישור <bdi dir="ltr">${escapeHtml(b.conf)}</bdi>`:''}</div>`
+                 :`<div class="small" style="margin-top:4px">${escapeHtml(s.options)}</div>`}
+        <div class="chip-row" style="margin-top:8px">
+          <button class="chip" data-action="planBStay" data-id="${s.id}">${b.hotel?'עריכה':'מה הזמנו?'}</button>
+          ${s.url?`<a class="chip" href="${escapeAttr(s.url)}" target="_blank" rel="noopener">בוקינג</a>`:''}
+        </div>
+      </div>`;
+    }).join('')}
+
+    <div class="section-title" style="margin-top:18px">✅ מה לסגור · ${doneCount}/${tasks.length}</div>
+    <div class="card">
+      ${tasks.map(t=>`<label class="planb-task ${done[t.id]?'done':''}">
+        <input type="checkbox" data-action="planBTask" data-id="${t.id}" ${done[t.id]?'checked':''}>
+        <span>${escapeHtml(t.text)}</span></label>`).join('')}
+    </div>
+
+    <div class="section-title" style="margin-top:18px">🗓️ יום אחרי יום · 2–10/12</div>
+    ${PLAN_B.days.filter(d=>planBMine(d) || meId()==='itai').map(d=>`
+      <div class="dest-card open planb-day">
+        <div class="dest-top">
+          ${imageBox(d.wiki, d.hue, 'dest-photo')}
+          <div class="dest-overlay">
+            <div class="dest-step">${fmtDateShort(d.date)} · ${escapeHtml(d.place)}</div>
+            <div class="dest-name">${escapeHtml(d.title)}</div>
+            ${d.who==='itai'?'<div class="dest-tags">'+ownerBadge('itai')+'</div>':''}
+          </div>
+        </div>
+        <div class="dest-body">
+          ${d.rows.map(([time,act])=>`<div class="planb-row"><span class="planb-time">${time||'·'}</span><span>${escapeHtml(act)}</span></div>`).join('')}
+        </div>
+      </div>`).join('')}
+  </div>`;
+}
+
+let planBMap = null;
+function initPlanBMap(){
+  const el = document.getElementById('planb-map');
+  if(!el) return;
+  if(planBMap){ try{ planBMap.remove(); }catch(e){} planBMap = null; }
+  if(typeof L === 'undefined'){ setTimeout(()=>{ if(activeTab==='planb') initPlanBMap(); }, 800); return; }
+  planBMap = L.map(el, {zoomControl:false, scrollWheelZoom:false, dragging:!L.Browser.mobile, tap:false});
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:18, attribution:'© OpenStreetMap'}).addTo(planBMap);
+  const pins = PLAN_B.pins.slice(0, meId()==='itai' ? undefined : -1);
+  const pts = pins.map(p=>[p[1], p[2]]);
+  const accent = getComputedStyle(document.documentElement).getPropertyValue('--accent').trim() || '#2F6F6B';
+  L.polyline(pts, {color:accent, weight:3, dashArray:'6 6', opacity:.85}).addTo(planBMap);
+  pins.forEach((p,i)=>{
+    const icon = L.divIcon({className:'', html:`<div class="map-pin big">${i+1}</div>`, iconSize:[32,32], iconAnchor:[16,16]});
+    L.marker([p[1], p[2]], {icon}).addTo(planBMap).bindPopup(`<b>${escapeHtml(p[0])}</b>`);
+  });
+  // בנגקוק רחוקה צפונה ומכווצת את הדרום — המפה נפתחת על הדרום, ובנגקוק בגלילה
+  planBMap.fitBounds(pts.slice(0,5), {padding:[28,28]});
+}
+
+function togglePlanBTask(id){
+  const pb = sh().planB = sh().planB || {};
+  pb.done = pb.done || {};
+  if(pb.done[id]) delete pb.done[id]; else pb.done[id] = true;
+  persist(); render();
+}
+
+function openPlanBStay(id){
+  const s = PLAN_B.stays.find(x=>x.id===id);
+  if(!s) return;
+  const b = ((planB().stays)||{})[id] || {};
+  openModal(`
+    <h3 style="margin-bottom:6px;">${escapeHtml(s.place)}</h3>
+    <div class="small muted" style="margin-bottom:14px;">${escapeHtml(s.dates)}</div>
+    <div class="field"><label>שם המלון</label><input id="pb-hotel" value="${escapeAttr(b.hotel||'')}"></div>
+    <div class="field-row">
+      <div class="field"><label>מספר אישור</label><input id="pb-conf" value="${escapeAttr(b.conf||'')}"></div>
+      <div class="field"><label>מחיר</label><input id="pb-price" value="${escapeAttr(b.price||'')}" placeholder="₪298"></div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn full" id="pb-save">שמירה</button>
+      <button class="btn secondary" id="pb-cancel">ביטול</button>
+    </div>`, ()=>{
+    document.getElementById('pb-cancel').onclick = closeModal;
+    document.getElementById('pb-save').onclick = ()=>{
+      const pb = sh().planB = sh().planB || {};
+      pb.stays = pb.stays || {};
+      const hotel = document.getElementById('pb-hotel').value.trim();
+      if(hotel) pb.stays[id] = {hotel, conf:document.getElementById('pb-conf').value.trim(), price:document.getElementById('pb-price').value.trim()};
+      else delete pb.stays[id];
+      persist(); closeModal(); render();
+    };
+  });
+}
+
+/* =========================================================
    RENDER: ROOT
 ========================================================= */
 function render(){
@@ -1754,6 +1936,7 @@ function render(){
   if(activeTab==='home') c.innerHTML = renderHome();
   else if(activeTab==='today'){ c.innerHTML = renderToday(); initSwipe(); centerDayStrip(); initDayMap(myDays()[currentDayIndex()]); }
   else if(activeTab==='route'){ c.innerHTML = renderRouteTab(); initRouteMap(); }
+  else if(activeTab==='planb'){ c.innerHTML = renderPlanB(); initPlanBMap(); }
   else if(activeTab==='money') c.innerHTML = renderMoney();
   else if(activeTab==='map') { c.innerHTML = renderMapShell(); initMapIfNeeded(); }
   else if(activeTab==='countries') c.innerHTML = renderCountries();
@@ -1779,6 +1962,7 @@ function uiIcon(name){
     today:'<rect x="3" y="5" width="18" height="16" rx="3"/><path d="M7 3v4m10-4v4M3 11h18m-13 5h3"/>',
     route:'<circle cx="12" cy="12" r="9"/><path d="m16 8-3 5-5 3 3-5Z"/>',
     money:'<rect x="3" y="5" width="18" height="15" rx="3"/><path d="M3 9h18m-5 5h2"/>',
+    planb:'<path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5Z"/>',
     more:'<circle cx="5" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/>',
     'אוכל':'<path d="M5 3v7m4-7v7M3 3v5a4 4 0 0 0 8 0V3M7 12v9m11-18v18m0-18c-5 4-5 10 0 10"/>',
     'תחבורה':'<rect x="4" y="5" width="16" height="13" rx="3"/><path d="M4 12h16M7 18v3m10-3v3M8 8h8"/>',
@@ -1797,6 +1981,7 @@ function navItems(){
     {tab:'home',  icon:'🏠', label:'בית'},
     {tab:'today', icon:'📆', label:'היום'},
     {tab:'route', icon:'🧭', label:'המסלול'},
+    {tab:'planb', icon:'🌙', label:'תוכנית ב׳'},
     {tab:'money', icon:'💸', label:'כסף'}
   ];
   return [...common, {tab:'more', icon:'more', label:'עוד'}];
@@ -4374,6 +4559,8 @@ document.addEventListener('click', (e)=>{
   const country = t.dataset.country;
 
   if(action==='setTab'){ activeTab=id; render(); window.scrollTo(0,0); }
+  else if(action==='planBStay'){ openPlanBStay(id); }
+  else if(action==='planBTask'){ togglePlanBTask(id); }
   else if(action==='moneySection'){ moneySection=id; render(); }
   else if(action==='editForecastRow'){ openSharedRowModal(t.dataset.day,id); }
   else if(action==='moneyCategory'){ moneyCategory=id; render(); }
