@@ -1749,7 +1749,8 @@ function getCssVar(v){
    התוכן קבוע כאן; מה שמשתנה (מלון שהוזמן, מה סומן) נשמר ב־shared.planB.
 ========================================================= */
 const PLAN_B = {
-  flight: 'שינוי טיסת החזור ל־10/12 — ממתין לאישור lastminute (IL-604062)',
+  flight: 'טיסת החזור ל־10/12 — lastminute בודקים מעבר לבנגקוק (IL-604062)',
+  flightNote: 'ארקיע לא טסה מפוקט ב־10/12 (הבאה פנויה 15/12). מבנגקוק יש טיסה אחת ב־10/12 — אור מ־lastminute בודק אם אפשר להעביר את המוצא ומה העלות.',
   days: [
     {date:'2026-12-02', place:'קופנגן', wiki:'Ko Pha-ngan', hue:'#3E8E9B', title:'אאו נאנג ← קופנגן · Halfmoon', rows:[
       ['07:15','איסוף מהמלון באאו נאנג (Lomprayah, כ־฿150)'],
@@ -1778,31 +1779,36 @@ const PLAN_B = {
     {date:'2026-12-08', place:'קאו לאק', wiki:'Khao Lak', hue:'#2E6FA0', title:'טליה לצ׳יאנג מאי', who:'split', rows:[
       ['','טליה: HKT → CNX (AirAsia, כ־£91) — בצ׳יאנג מאי עוד היום'],
       ['','איתי: יום גיבוי לסימילן, או זיפליין / חוף']]},
-    {date:'2026-12-09', place:'בנגקוק / פטונג', wiki:'Bangkok', hue:'#C97B5A', title:'הלילה האחרון של איתי', who:'itai', rows:[
-      ['','אם טסים מבנגקוק: HKT → DMK (מ־£47) · לינה ב־Soi 11'],
-      ['','אם טסים מפוקט: לילה בפטונג']]},
+    {date:'2026-12-09', place:'בנגקוק', wiki:'Bangkok', hue:'#C97B5A', title:'הלילה האחרון של איתי', who:'itai', rows:[
+      ['','HKT → DMK (מ־£47)'],
+      ['14:00','צ׳ק־אין ב־Eleven Bangkok, Soi 11'],
+      ['21:00','לילה אחרון בסוקומווית']]},
     {date:'2026-12-10', place:'הביתה', wiki:'Suvarnabhumi Airport', hue:'#6B6B8A', title:'טיסה הביתה', who:'itai', rows:[
       ['','טיסה הביתה — לפי מה ש־lastminute יאשרו']]}
   ],
   stays: [
     {id:'phangan', dates:'2–5/12 · 3 לילות', place:'קופנגן, באן טאי',
-     options:'Sarana Bungalows ₪298 · Phangan Beach Resort ₪401 · Sea Love ₪684 · la plage ₪701'},
+     options:'Sarana Bungalows ₪298 · Phangan Beach Resort ₪401 · Sea Love ₪684 · la plage ₪701',
+     booked:{hotel:'Sarana Bungalows · Garden Bungalow', conf:'6196805940', price:'฿3,060 · משלמים במקום', cancel:'ביטול חינם עד 28/11'}},
     {id:'khaosok', dates:'5–6/12 · לילה', place:'קאו סוק',
-     options:'Morning Mist ₪137 · Palmview ₪230 · River Lodge ₪230 · Our Jungle House ₪459'},
+     options:'Morning Mist ₪137 · Palmview ₪230 · River Lodge ₪230 · Our Jungle House ₪459',
+     booked:{hotel:'Our Jungle House · Treehouse', conf:'6051801812090945732', price:'$138.89 · שולם', cancel:'ביטול חינם עד 8/11 — אחר כך $13.89, ומ־19/11 כל הסכום', urgent:'2026-11-08'}},
     {id:'kalima', dates:'6–9/12 · 3 לילות', place:'קלימה, קאו לאק',
      options:'לשנות את ההזמנה הקיימת (2–8/12) · כ־₪2,103', url:'https://www.booking.com/hotel/th/kalima-resort-amp-villas-khao-lak.html?checkin=2026-12-06&checkout=2026-12-09&group_adults=2&selected_currency=ILS'},
-    {id:'bkk', dates:'9–10/12 · לילה · איתי', place:'בנגקוק (אם טסים משם)', who:'itai',
-     options:'Eleven Bangkok Soi 11 ₪303 · Pipa ₪348 · Ramada ₪227'}
+    {id:'bkk', dates:'9–10/12 · לילה · איתי', place:'בנגקוק, Soi 11', who:'itai',
+     options:'Eleven Bangkok Soi 11 ₪303 · Pipa ₪348 · Ramada ₪227',
+     booked:{hotel:'Eleven Bangkok Sukhumvit 11 · Grand Deluxe King', conf:'5243050600', price:'฿3,010 · נגבה אוטומטית', cancel:'ביטול חינם עד 5/12 · פיקדון ฿1,000 במזומן'}}
   ],
   tasks: [
-    {id:'flight', text:'אישור מ־lastminute: חזרה ב־10/12 (IL-604062)', who:'itai'},
+    {id:'flight', text:'אישור מ־lastminute: חזרה מבנגקוק ב־10/12 (IL-604062)', who:'itai'},
+    {id:'junglecancel', text:'עד 8/11: לוודא שהטיסה אושרה — אחרת לבטל את Our Jungle House בחינם'},
     {id:'lomprayah', text:'Lomprayah אאו נאנג → קופנגן, 2/12 08:00, עם איסוף'},
     {id:'halfmoon', text:'כרטיסים ל־Halfmoon, 2–3/12'},
     {id:'transfer', text:'העברה קופנגן → קאו סוק, 5/12'},
     {id:'cheowlan', text:'סיור אגם צ׳או לאן, 6/12, עם הסעה לקאו לאק'},
     {id:'kalima', text:'לשנות את קלימה ל־6–9/12'},
     {id:'talia', text:'טיסה HKT → CNX ב־8/12', who:'talia'},
-    {id:'itai9', text:'9/12: בנגקוק או פטונג, ו־HKT → DMK אם צריך', who:'itai'},
+    {id:'itai9', text:'טיסה HKT → בנגקוק ב־9/12', who:'itai'},
     {id:'cancel', text:'לבטל את הוואן לקאו לק ואת סיור היום בקאו סוק מהמסלול המקורי'}
   ],
   pins: [
@@ -1825,6 +1831,7 @@ function renderPlanB(){
   <div class="section">
     <div class="card dashed planb-note">
       <b>✈️ ${PLAN_B.flight}</b>
+      <div class="small" style="margin-top:6px">${escapeHtml(PLAN_B.flightNote)}</div>
       <div class="small" style="margin-top:6px">23/11–1/12 לא משתנה. ברגע שהטיסה תאושר — מעבירים את זה למסלול הרשמי.</div>
     </div>
     <div class="route-map-wrap"><div id="planb-map" class="route-map"></div>
@@ -1832,11 +1839,11 @@ function renderPlanB(){
 
     <div class="section-title" style="margin-top:18px">🏨 לינה</div>
     ${stays.map(s=>{
-      const b = (pb.stays||{})[s.id] || {};
+      const b = (pb.stays||{})[s.id] || s.booked || {};
       return `<div class="card planb-stay ${b.hotel?'booked':''}">
         <div class="row"><b>${escapeHtml(s.place)}</b><span class="own-tag ${b.hotel?'booked':''}">${b.hotel?'מוזמן':'פתוח'}</span></div>
         <div class="small muted">${escapeHtml(s.dates)}</div>
-        ${b.hotel?`<div class="dest-line">🏨 ${escapeHtml(b.hotel)}${b.price?` · ${escapeHtml(b.price)}`:''}${b.conf?` · אישור <bdi dir="ltr">${escapeHtml(b.conf)}</bdi>`:''}</div>`
+        ${b.hotel?`<div class="dest-line">🏨 ${escapeHtml(b.hotel)}${b.price?` · ${escapeHtml(b.price)}`:''}${b.conf?` · אישור <bdi dir="ltr">${escapeHtml(b.conf)}</bdi>`:''}</div>${b.cancel?`<div class="small ${b.urgent?'planb-urgent':'muted'}">${b.urgent?'⏰ ':''}${escapeHtml(b.cancel)}</div>`:''}`
                  :`<div class="small" style="margin-top:4px">${escapeHtml(s.options)}</div>`}
         <div class="chip-row" style="margin-top:8px">
           <button class="chip" data-action="planBStay" data-id="${s.id}">${b.hotel?'עריכה':'מה הזמנו?'}</button>
@@ -1900,7 +1907,7 @@ function togglePlanBTask(id){
 function openPlanBStay(id){
   const s = PLAN_B.stays.find(x=>x.id===id);
   if(!s) return;
-  const b = ((planB().stays)||{})[id] || {};
+  const b = ((planB().stays)||{})[id] || s.booked || {};
   openModal(`
     <h3 style="margin-bottom:6px;">${escapeHtml(s.place)}</h3>
     <div class="small muted" style="margin-bottom:14px;">${escapeHtml(s.dates)}</div>
@@ -1918,7 +1925,9 @@ function openPlanBStay(id){
       const pb = sh().planB = sh().planB || {};
       pb.stays = pb.stays || {};
       const hotel = document.getElementById('pb-hotel').value.trim();
-      if(hotel) pb.stays[id] = {hotel, conf:document.getElementById('pb-conf').value.trim(), price:document.getElementById('pb-price').value.trim()};
+      // אותו מלון כמו בהזמנה הידועה — תנאי הביטול שלו נשארים
+      const keep = s.booked && s.booked.hotel===hotel ? s.booked : {};
+      if(hotel) pb.stays[id] = {...keep, hotel, conf:document.getElementById('pb-conf').value.trim(), price:document.getElementById('pb-price').value.trim()};
       else delete pb.stays[id];
       persist(); closeModal(); render();
     };

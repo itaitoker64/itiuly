@@ -743,3 +743,4 @@ button:focus-visible,a:focus-visible,input:focus-visible{outline:2px solid var(-
 .planb-row{display:flex;gap:10px;padding:6px 0;border-bottom:1px dashed var(--line)}
 .planb-row:last-child{border-bottom:none}
 .planb-time{flex:none;width:44px;font-variant-numeric:tabular-nums;color:var(--muted);direction:ltr;text-align:left}
+.planb-urgent{color:#b4532a;font-weight:600}
