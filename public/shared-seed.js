@@ -1,9 +1,9 @@
 /* התוכנית המשותפת לשבועיים הראשונים — נוצר מתוך הקובץ של טליה */
 window.SHARED_SEED = {
  "title": "תאילנד · מבנגקוק לאנדמן",
- "subtitle": "איתי וטליה · 22 בנובמבר – 8 בדצמבר 2026 · 15 לילות",
+ "subtitle": "איתי וטליה · 22 בנובמבר – 8 בדצמבר 2026 · ואיתי עד 10/12",
  "startDate": "2026-11-22",
- "endDate": "2026-12-08",
+ "endDate": "2026-12-10",
  "nights": 15,
  "rate": 0.08981,
  "splitItai": 0.6667,
@@ -33,10 +33,28 @@ window.SHARED_SEED = {
    "what": "ריילאי, קורס טיפוס, קיאקים באאו תלאנה"
   },
   {
-   "name": "קאו לק",
-   "dates": "ד׳ 2/12 – ב׳ 7/12",
-   "nights": 6,
-   "what": "פרק ה-wellness · יום אחד באגם צ׳או לאן"
+   "name": "קופנגן",
+   "dates": "ד׳ 2/12 – ו׳ 4/12",
+   "nights": 3,
+   "what": "Halfmoon פעמיים, באן טאי, Bottle Beach"
+  },
+  {
+   "name": "קאו סוק",
+   "dates": "ש׳ 5/12",
+   "nights": 1,
+   "what": "בית על העץ בג׳ונגל · אגם צ׳או לאן"
+  },
+  {
+   "name": "קאו לאק",
+   "dates": "א׳ 6/12 – ג׳ 8/12",
+   "nights": 3,
+   "what": "סימילן · טליה טסה ב־8/12, איתי נשאר לילה"
+  },
+  {
+   "name": "בנגקוק",
+   "dates": "ד׳ 9/12",
+   "nights": 1,
+   "what": "איתי · לילה אחרון, וטיסה ב־10/12"
   }
  ],
  "flights": [
@@ -56,10 +74,24 @@ window.SHARED_SEED = {
   },
   {
    "when": "ג׳ 8/12",
-   "what": "ארקיע IZ598 · פוקט → תל אביב, ישירה",
-   "time": "17:20 → 23:00",
+   "what": "פוקט → צ׳יאנג מאי · טליה",
+   "time": "לבחור",
+   "status": "להזמין",
+   "cost": "כ־£91"
+  },
+  {
+   "when": "ד׳ 9/12",
+   "what": "פוקט → בנגקוק · איתי",
+   "time": "לבחור",
+   "status": "להזמין",
+   "cost": "מ־£47"
+  },
+  {
+   "when": "ה׳ 10/12",
+   "what": "ארקיע IZ592 · בנגקוק → תל אביב, ישירה",
+   "time": "11:15 → 17:05",
    "status": "מוזמן · IL-604062",
-   "cost": "₪1,891 · שולם"
+   "cost": "₪1,891 + 210$ על השינוי · שולם"
   }
  ],
  "days": [
@@ -2329,6 +2361,28 @@ window.SHARED_SEED = {
      }
     },
     {
+     "time": "21:30",
+     "dur": "3:00",
+     "act": "הלילה הגדול — מופעי אש וברים באאו נאנג",
+     "loc": "אאו נאנג",
+     "cat": "אטרקציות",
+     "baht": 1200,
+     "notes": "מופעי אש על החוף, ברים עם DJ וקהל צעיר · למחרת אין לחץ: בוקר בווילה והוואן רק מ-11:30 · עבר מ-1/12 — למחרת יוצאים לקופנגן ב-07:15",
+     "status": "משלמים במקום",
+     "link": "",
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "אומדן ערב בבר לשניים — כניסה, שתייה ותחבורה.",
+      "lowFactor": 0.7,
+      "highFactor": 1.6,
+      "sourceUrl": "",
+      "checked": "2026-10-13"
+     },
+     "managed": true,
+     "id": "s_9_night",
+     "done": false
+    },
+    {
      "time": "",
      "dur": "",
      "act": "לינה — Chermantra Aonang Resort & Pool Suite",
@@ -2495,28 +2549,6 @@ window.SHARED_SEED = {
      }
     },
     {
-     "time": "22:00",
-     "dur": "3:00",
-     "act": "הלילה הגדול — מופעי אש וברים באאו נאנג",
-     "loc": "אאו נאנג",
-     "cat": "אטרקציות",
-     "baht": 1200,
-     "notes": "מופעי אש על החוף, ברים עם DJ וקהל צעיר · למחרת אין לחץ: בוקר בווילה והוואן רק מ-11:30",
-     "status": "משלמים במקום",
-     "link": "",
-     "priceEstimate": {
-      "kind": "estimate",
-      "basis": "אומדן ערב בבר לשניים — כניסה, שתייה ותחבורה.",
-      "lowFactor": 0.7,
-      "highFactor": 1.6,
-      "sourceUrl": "",
-      "checked": "2026-10-13"
-     },
-     "managed": true,
-     "id": "s_9_night",
-     "done": false
-    },
-    {
      "time": "",
      "dur": "",
      "act": "לינה — Chermantra Aonang Resort & Pool Suite",
@@ -2553,19 +2585,21 @@ window.SHARED_SEED = {
    "day": 10,
    "date": "2026-12-02",
    "dow": "ד׳",
-   "dest": "קאו לק",
+   "dest": "קופנגן",
+   "summary": "מאאו נאנג לקופנגן · Halfmoon",
+   "id": "day_10",
    "rows": [
     {
-     "time": "08:30",
-     "dur": "1:00",
-     "act": "ארוחת בוקר — כלולה",
+     "time": "06:45",
+     "dur": "0:30",
+     "act": "ארוחת בוקר מוקדמת — כלולה",
      "loc": "צ׳רמנטרה",
      "cat": "אוכל",
      "baht": null,
      "status": "משלמים במקום",
      "link": "",
-     "notes": "ארוחה גדולה ומאוחרת — היא הצהריים של היום",
-     "id": "s_10_0",
+     "notes": "לבקש מהקבלה ערב לפני — המסעדה נפתחת לפעמים רק ב־07:00",
+     "id": "s_p2_0",
      "done": false,
      "priceEstimate": {
       "kind": "no-extra",
@@ -2573,43 +2607,217 @@ window.SHARED_SEED = {
       "lowFactor": 1,
       "highFactor": 1,
       "sourceUrl": "",
-      "checked": "2026-09-14"
+      "checked": "2026-10-28"
      },
      "managed": true
     },
     {
-     "time": "09:30",
-     "dur": "1:30",
-     "act": "בוקר אחרון בבריכה הפרטית",
+     "time": "07:15",
+     "dur": "0:30",
+     "act": "צ׳ק-אאוט · איסוף Lomprayah מהמלון",
      "loc": "צ׳רמנטרה",
      "cat": "אחר",
      "baht": null,
      "status": "משלמים במקום",
      "link": "",
-     "notes": "הוואן אוסף רק מ-11:30 — הבוקר הזה בא על חשבון הנסיעה המהירה, ושווה אותו",
+     "notes": "האיסוף כלול בכרטיס המשולב",
+     "id": "s_p2_1",
+     "done": false,
      "priceEstimate": {
       "kind": "no-extra",
       "basis": "לא הוקצה חיוב נפרד לפעולה הזאת; חיובים כלולים מופיעים בחבילה או בהזמנה.",
       "lowFactor": 1,
       "highFactor": 1,
       "sourceUrl": "",
-      "checked": "2026-09-28"
+      "checked": "2026-10-28"
      },
-     "id": "s_10_villa",
-     "done": false,
      "managed": true
     },
+    {
+     "time": "08:00",
+     "dur": "4:45",
+     "act": "Lomprayah · אאו נאנג → Thong Sala",
+     "loc": "אאו נאנג → קופנגן",
+     "cat": "תחבורה",
+     "baht": 2700,
+     "status": "להזמין",
+     "link": "https://www.lomprayah.com/",
+     "notes": "להזמין מראש · ספידבוט + אוטובוס + קטמרן, כ־฿1,200 לאדם + ฿150 איסוף · הגעה ל־Thong Sala ב־12:45 · מזוודה אחת ותיק יום לאדם",
+     "id": "s_p2_2",
+     "done": false,
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "מחיר Lomprayah אאו נאנג–קופנגן שנבדק, ฿1,200 לאדם ו־฿150 איסוף.",
+      "lowFactor": 1,
+      "highFactor": 1.15,
+      "sourceUrl": "https://www.lomprayah.com/",
+      "checked": "2026-10-28"
+     },
+     "managed": true
+    },
+    {
+     "time": "13:00",
+     "dur": "0:30",
+     "act": "טקסי לבאן טאי",
+     "loc": "Thong Sala → באן טאי",
+     "cat": "תחבורה",
+     "baht": 300,
+     "status": "משלמים במקום",
+     "link": "",
+     "notes": "כ־10 דקות · ฿100–150 לאדם בסונגתאו",
+     "id": "s_p2_3",
+     "done": false,
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "מחיר סונגתאו מקובל מהרציף.",
+      "lowFactor": 0.8,
+      "highFactor": 1.3,
+      "sourceUrl": "",
+      "checked": "2026-10-28"
+     },
+     "managed": true
+    },
+    {
+     "time": "14:00",
+     "dur": "0:30",
+     "act": "צ׳ק-אין — Sarana Bungalows",
+     "loc": "באן טאי",
+     "cat": "אחר",
+     "baht": null,
+     "status": "מוזמן",
+     "link": "",
+     "notes": "צ׳ק-אין מ־14:00 · לכתוב להם בבוקינג שעת הגעה",
+     "id": "s_p2_4",
+     "done": false,
+     "priceEstimate": {
+      "kind": "no-extra",
+      "basis": "לא הוקצה חיוב נפרד לפעולה הזאת; חיובים כלולים מופיעים בחבילה או בהזמנה.",
+      "lowFactor": 1,
+      "highFactor": 1,
+      "sourceUrl": "",
+      "checked": "2026-10-28"
+     },
+     "managed": true
+    },
+    {
+     "time": "14:30",
+     "dur": "1:00",
+     "act": "צהריים ליד הים",
+     "loc": "באן טאי",
+     "cat": "אוכל",
+     "baht": 400,
+     "status": "משלמים במקום",
+     "link": "",
+     "notes": "",
+     "id": "s_p2_5",
+     "done": false,
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
+      "lowFactor": 0.8,
+      "highFactor": 1.3,
+      "sourceUrl": "",
+      "checked": "2026-10-28"
+     },
+     "managed": true
+    },
+    {
+     "time": "17:30",
+     "dur": "1:30",
+     "act": "שוק הלילה ב־Thong Sala",
+     "loc": "Thong Sala",
+     "cat": "אוכל",
+     "baht": 500,
+     "status": "משלמים במקום",
+     "link": "",
+     "notes": "ארוחת ערב לפני המסיבה",
+     "id": "s_p2_6",
+     "done": false,
+     "wiki": "Ko Pha-ngan",
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
+      "lowFactor": 0.8,
+      "highFactor": 1.3,
+      "sourceUrl": "",
+      "checked": "2026-10-28"
+     },
+     "managed": true
+    },
+    {
+     "time": "22:00",
+     "dur": "5:00",
+     "act": "Halfmoon Festival — לילה ראשון 🌙",
+     "loc": "באן טאי, יער",
+     "cat": "אטרקציות",
+     "baht": 3200,
+     "status": "להזמין",
+     "link": "https://www.halfmoonfestival.com/",
+     "notes": "כרטיסים מראש באתר הרשמי · כ־฿1,500–1,800 לאדם · הסעה מבאן טאי קצרה · לשמור על הכוס, לא לקחת כלום מזרים",
+     "id": "s_p2_night",
+     "done": false,
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "מחיר כרטיס Halfmoon לשניים לפי מהדורות קודמות; המחיר הסופי מתפרסם באתר.",
+      "lowFactor": 0.9,
+      "highFactor": 1.25,
+      "sourceUrl": "https://www.halfmoonfestival.com/",
+      "checked": "2026-10-28"
+     },
+     "managed": true
+    },
+    {
+     "time": "",
+     "dur": "",
+     "act": "לינה — Sarana Bungalows",
+     "loc": "באן טאי, קופנגן",
+     "cat": "לינה",
+     "baht": 1020,
+     "status": "מוזמן",
+     "link": "https://www.booking.com/hotel/th/sarana-bungalows.html",
+     "notes": "Garden Bungalow, מיטת קינג · אישור 6196805940 · ฿3,060 לשלושה לילות, משלמים בהגעה · ביטול חינם עד 28/11 · קבלה 9:00–21:00, וואטסאפ ‎+66 92 220 2060 · אם מישהו מבקש תשלום מראש בווטסאפ או במייל — זו הונאה",
+     "id": "s_p2_stay",
+     "done": false,
+     "wiki": "Ko Pha-ngan",
+     "priceEstimate": {
+      "kind": "booking",
+      "basis": "המחיר מההזמנה השמורה; נספר פעם אחת בלבד ומחולק בין לילות הלינה.",
+      "lowFactor": 1,
+      "highFactor": 1,
+      "sourceUrl": "",
+      "checked": "2026-10-28",
+      "booking": {
+       "category": "accommodation",
+       "split": "ratio",
+       "key": "phangan",
+       "match": "Sarana",
+       "rows": 3,
+       "totalThb": 3060
+      }
+     },
+     "managed": true
+    }
+   ]
+  },
+  {
+   "day": 11,
+   "date": "2026-12-03",
+   "dow": "ה׳",
+   "dest": "קופנגן",
+   "summary": "חוף, ושוב Halfmoon",
+   "id": "day_11",
+   "rows": [
     {
      "time": "11:00",
      "dur": "0:30",
-     "act": "צ׳ק-אאוט ואריזה",
-     "loc": "צ׳רמנטרה",
+     "act": "בוקר איטי",
+     "loc": "באן טאי",
      "cat": "אחר",
      "baht": null,
      "status": "משלמים במקום",
      "link": "",
-     "notes": "צ׳ק-אאוט עד 11:30 · להשאיר את התיקים בקבלה ולחכות לוואן בלובי",
-     "id": "s_10_1",
+     "notes": "אחרי לילה שלם — בלי שעון מעורר",
+     "id": "s_p3_0",
      "done": false,
      "priceEstimate": {
       "kind": "no-extra",
@@ -2617,43 +2825,218 @@ window.SHARED_SEED = {
       "lowFactor": 1,
       "highFactor": 1,
       "sourceUrl": "",
-      "checked": "2026-09-14"
+      "checked": "2026-10-28"
      },
      "managed": true
     },
     {
      "time": "11:30",
-     "dur": "3:30",
-     "act": "ואן משותף לקאו לק",
-     "loc": "אאו נאנג → קאו לק",
-     "cat": "תחבורה",
-     "baht": 900,
-     "status": "להזמין",
-     "link": "https://www.tripstorekrabi.com/Transfers/From-Krabi/To-Khao-Lak/By-Hat-Yai-World",
-     "notes": "להזמין מראש · Trip Store Krabi, ฿450 לאדם · איסוף מצ׳רמנטרה בין 11:30 ל-14:30 — השעה המדויקת מגיעה במייל אחרי ההזמנה · הורדה בקלימה · כ-3 שעות עם האיסופים · מוצ׳ילה אחת ותיק יום לאדם · וואטסאפ ‎+66 64 189 4777",
-     "id": "s_10_2",
+     "dur": "1:00",
+     "act": "בראנץ׳",
+     "loc": "באן טאי",
+     "cat": "אוכל",
+     "baht": 400,
+     "status": "משלמים במקום",
+     "link": "",
+     "notes": "",
+     "id": "s_p3_1",
      "done": false,
      "priceEstimate": {
       "kind": "estimate",
-      "basis": "מחיר ואן משותף שנבדק ב-Trip Store Krabi, ฿450 לאדם.",
+      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
+      "lowFactor": 0.8,
+      "highFactor": 1.3,
+      "sourceUrl": "",
+      "checked": "2026-10-28"
+     },
+     "managed": true
+    },
+    {
+     "time": "14:00",
+     "dur": "3:00",
+     "act": "Haad Yuan / Haad Rin",
+     "loc": "דרום קופנגן",
+     "cat": "אטרקציות",
+     "baht": 600,
+     "status": "משלמים במקום",
+     "link": "",
+     "notes": "לונג־טייל מ־Haad Rin ל־Haad Yuan, כ־฿150–300 לאדם",
+     "id": "s_p3_2",
+     "done": false,
+     "wiki": "Haad Rin",
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "מחיר לונג־טייל מקובל לשניים.",
+      "lowFactor": 0.8,
+      "highFactor": 1.3,
+      "sourceUrl": "",
+      "checked": "2026-10-28"
+     },
+     "managed": true
+    },
+    {
+     "time": "17:30",
+     "dur": "1:00",
+     "act": "שקיעה ב־Zen Beach",
+     "loc": "Sri Thanu",
+     "cat": "אטרקציות",
+     "baht": 300,
+     "status": "משלמים במקום",
+     "link": "",
+     "notes": "מוניות הלוך וחזור",
+     "id": "s_p3_3",
+     "done": false,
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "מוניות לשניים.",
+      "lowFactor": 0.8,
+      "highFactor": 1.3,
+      "sourceUrl": "",
+      "checked": "2026-10-28"
+     },
+     "managed": true
+    },
+    {
+     "time": "19:30",
+     "dur": "1:00",
+     "act": "ארוחת ערב",
+     "loc": "באן טאי",
+     "cat": "אוכל",
+     "baht": 600,
+     "status": "משלמים במקום",
+     "link": "",
+     "notes": "",
+     "id": "s_p3_4",
+     "done": false,
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
+      "lowFactor": 0.8,
+      "highFactor": 1.3,
+      "sourceUrl": "",
+      "checked": "2026-10-28"
+     },
+     "managed": true
+    },
+    {
+     "time": "22:00",
+     "dur": "5:00",
+     "act": "Halfmoon · Magic Forest — לילה שני 🌙",
+     "loc": "באן טאי, יער",
+     "cat": "אטרקציות",
+     "baht": 3200,
+     "status": "להזמין",
+     "link": "https://www.halfmoonfestival.com/",
+     "notes": "אותם כרטיסים — לבדוק אם יש כרטיס לשני הלילות",
+     "id": "s_p3_night",
+     "done": false,
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "מחיר כרטיס Halfmoon לשניים לפי מהדורות קודמות; המחיר הסופי מתפרסם באתר.",
+      "lowFactor": 0.9,
+      "highFactor": 1.25,
+      "sourceUrl": "https://www.halfmoonfestival.com/",
+      "checked": "2026-10-28"
+     },
+     "managed": true
+    },
+    {
+     "time": "",
+     "dur": "",
+     "act": "לינה — Sarana Bungalows",
+     "loc": "באן טאי, קופנגן",
+     "cat": "לינה",
+     "baht": 1020,
+     "status": "מוזמן",
+     "link": "https://www.booking.com/hotel/th/sarana-bungalows.html",
+     "notes": "Garden Bungalow, מיטת קינג · אישור 6196805940 · ฿3,060 לשלושה לילות, משלמים בהגעה · ביטול חינם עד 28/11 · קבלה 9:00–21:00, וואטסאפ ‎+66 92 220 2060 · אם מישהו מבקש תשלום מראש בווטסאפ או במייל — זו הונאה",
+     "id": "s_p3_stay",
+     "done": false,
+     "wiki": "Ko Pha-ngan",
+     "priceEstimate": {
+      "kind": "booking",
+      "basis": "המחיר מההזמנה השמורה; נספר פעם אחת בלבד ומחולק בין לילות הלינה.",
       "lowFactor": 1,
-      "highFactor": 1.15,
-      "sourceUrl": "https://www.tripstorekrabi.com/Transfers/From-Krabi/To-Khao-Lak/By-Hat-Yai-World",
-      "checked": "2026-09-28"
+      "highFactor": 1,
+      "sourceUrl": "",
+      "checked": "2026-10-28",
+      "booking": {
+       "category": "accommodation",
+       "split": "ratio",
+       "key": "phangan",
+       "match": "Sarana",
+       "rows": 3,
+       "totalThb": 3060
+      }
+     },
+     "managed": true
+    }
+   ]
+  },
+  {
+   "day": 12,
+   "date": "2026-12-04",
+   "dow": "ו׳",
+   "dest": "קופנגן",
+   "summary": "יום התאוששות",
+   "id": "day_12",
+   "rows": [
+    {
+     "time": "10:30",
+     "dur": "0:30",
+     "act": "בוקר איטי · קפה",
+     "loc": "באן טאי",
+     "cat": "אחר",
+     "baht": null,
+     "status": "משלמים במקום",
+     "link": "",
+     "notes": "",
+     "id": "s_p4_0",
+     "done": false,
+     "priceEstimate": {
+      "kind": "no-extra",
+      "basis": "לא הוקצה חיוב נפרד לפעולה הזאת; חיובים כלולים מופיעים בחבילה או בהזמנה.",
+      "lowFactor": 1,
+      "highFactor": 1,
+      "sourceUrl": "",
+      "checked": "2026-10-28"
+     },
+     "managed": true
+    },
+    {
+     "time": "11:30",
+     "dur": "5:00",
+     "act": "Bottle Beach בלונג־טייל",
+     "loc": "צפון קופנגן",
+     "cat": "אטרקציות",
+     "baht": 1200,
+     "status": "משלמים במקום",
+     "link": "",
+     "notes": "לונג־טייל מ־Chaloklum, כ־฿300 לאדם לכל כיוון · חוף בלי כביש",
+     "id": "s_p4_1",
+     "done": false,
+     "wiki": "Ko Pha-ngan",
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "מחיר לונג־טייל ומונית לשניים.",
+      "lowFactor": 0.8,
+      "highFactor": 1.3,
+      "sourceUrl": "",
+      "checked": "2026-10-28"
      },
      "managed": true
     },
     {
      "time": "13:30",
-     "dur": "0:20",
-     "act": "עצירה בדרך — קפה וחטיף",
-     "loc": "בדרך",
+     "dur": "1:00",
+     "act": "צהריים על החוף",
+     "loc": "Bottle Beach",
      "cat": "אוכל",
-     "baht": 150,
+     "baht": 500,
      "status": "משלמים במקום",
      "link": "",
-     "notes": "הוואנים עוצרים פעם אחת באמצע · אם האיסוף נקבע ל-14:30, לאכול צהריים באאו נאנג לפני",
-     "id": "s_10_3",
+     "notes": "",
+     "id": "s_p4_2",
      "done": false,
      "priceEstimate": {
       "kind": "estimate",
@@ -2661,43 +3044,150 @@ window.SHARED_SEED = {
       "lowFactor": 0.8,
       "highFactor": 1.3,
       "sourceUrl": "",
-      "checked": "2026-09-14"
+      "checked": "2026-10-28"
      },
      "managed": true
     },
     {
-     "time": "15:00",
-     "dur": "",
-     "act": "הגעה לקאו לק",
-     "loc": "קאו לק",
+     "time": "18:00",
+     "dur": "1:00",
+     "act": "מסאז׳ זוגי",
+     "loc": "באן טאי",
      "cat": "אחר",
-     "baht": null,
+     "baht": 800,
      "status": "משלמים במקום",
      "link": "",
-     "notes": "בין 14:30 ל-17:30, לפי שעת האיסוף",
-     "id": "s_10_4",
+     "notes": "",
+     "id": "s_p4_3",
      "done": false,
      "priceEstimate": {
-      "kind": "no-extra",
-      "basis": "לא הוקצה חיוב נפרד לפעולה הזאת; חיובים כלולים מופיעים בחבילה או בהזמנה.",
+      "kind": "estimate",
+      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
+      "lowFactor": 0.8,
+      "highFactor": 1.3,
+      "sourceUrl": "",
+      "checked": "2026-10-28"
+     },
+     "managed": true
+    },
+    {
+     "time": "19:30",
+     "dur": "1:00",
+     "act": "ארוחת ערב · לישון מוקדם",
+     "loc": "באן טאי",
+     "cat": "אוכל",
+     "baht": 600,
+     "status": "משלמים במקום",
+     "link": "",
+     "notes": "מחר יוצאים ב־08:00",
+     "id": "s_p4_4",
+     "done": false,
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
+      "lowFactor": 0.8,
+      "highFactor": 1.3,
+      "sourceUrl": "",
+      "checked": "2026-10-28"
+     },
+     "managed": true
+    },
+    {
+     "time": "",
+     "dur": "",
+     "act": "לינה — Sarana Bungalows",
+     "loc": "באן טאי, קופנגן",
+     "cat": "לינה",
+     "baht": 1020,
+     "status": "מוזמן",
+     "link": "https://www.booking.com/hotel/th/sarana-bungalows.html",
+     "notes": "Garden Bungalow, מיטת קינג · אישור 6196805940 · ฿3,060 לשלושה לילות, משלמים בהגעה · ביטול חינם עד 28/11 · קבלה 9:00–21:00, וואטסאפ ‎+66 92 220 2060 · אם מישהו מבקש תשלום מראש בווטסאפ או במייל — זו הונאה",
+     "id": "s_p4_stay",
+     "done": false,
+     "wiki": "Ko Pha-ngan",
+     "priceEstimate": {
+      "kind": "booking",
+      "basis": "המחיר מההזמנה השמורה; נספר פעם אחת בלבד ומחולק בין לילות הלינה.",
       "lowFactor": 1,
       "highFactor": 1,
       "sourceUrl": "",
-      "checked": "2026-09-14"
+      "checked": "2026-10-28",
+      "booking": {
+       "category": "accommodation",
+       "split": "ratio",
+       "key": "phangan",
+       "match": "Sarana",
+       "rows": 3,
+       "totalThb": 3060
+      }
+     },
+     "managed": true
+    }
+   ]
+  },
+  {
+   "day": 13,
+   "date": "2026-12-05",
+   "dow": "ש׳",
+   "dest": "קאו סוק",
+   "summary": "מקופנגן לג׳ונגל",
+   "id": "day_13",
+   "rows": [
+    {
+     "time": "07:00",
+     "dur": "0:30",
+     "act": "צ׳ק-אאוט · מונית לרציף",
+     "loc": "באן טאי → Thong Sala",
+     "cat": "תחבורה",
+     "baht": 300,
+     "status": "משלמים במקום",
+     "link": "",
+     "notes": "",
+     "id": "s_p5_0",
+     "done": false,
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "סונגתאו לשניים.",
+      "lowFactor": 0.8,
+      "highFactor": 1.3,
+      "sourceUrl": "",
+      "checked": "2026-10-28"
+     },
+     "managed": true
+    },
+    {
+     "time": "08:00",
+     "dur": "6:30",
+     "act": "מעבורת + ואן לקאו סוק",
+     "loc": "קופנגן → סוראט תאני → קאו סוק",
+     "cat": "תחבורה",
+     "baht": 2200,
+     "status": "להזמין",
+     "link": "",
+     "notes": "כרטיס משולב (Lomprayah או Seatran עד דונסאק, ואן לקאו סוק) · כ־฿1,000–1,200 לאדם · Sarana עוזרים להזמין",
+     "id": "s_p5_1",
+     "done": false,
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "מחיר כרטיס משולב קופנגן–קאו סוק לשניים.",
+      "lowFactor": 0.9,
+      "highFactor": 1.2,
+      "sourceUrl": "",
+      "checked": "2026-10-28"
      },
      "managed": true
     },
     {
      "time": "15:00",
      "dur": "0:30",
-     "act": "צ׳ק-אין — קלימה",
-     "loc": "3/88 Moo 2, Petchkasem Road",
+     "act": "צ׳ק-אין — Our Jungle House",
+     "loc": "קאו סוק",
      "cat": "אחר",
      "baht": null,
      "status": "מוזמן",
-     "link": "https://www.booking.com/hotel/th/kalima-resort-amp-villas-khao-lak.html",
-     "notes": "₪4,029 לשישה לילות · ביטול חינם",
-     "id": "s_10_6",
+     "link": "",
+     "notes": "צ׳ק-אין 14:00–20:30 · להציג דרכון ומספר צ׳ק-אין CN26102700536E",
+     "id": "s_p5_2",
      "done": false,
      "priceEstimate": {
       "kind": "no-extra",
@@ -2705,21 +3195,107 @@ window.SHARED_SEED = {
       "lowFactor": 1,
       "highFactor": 1,
       "sourceUrl": "",
-      "checked": "2026-09-14"
+      "checked": "2026-10-28"
      },
      "managed": true
     },
     {
-     "time": "15:30",
-     "dur": "0:45",
-     "act": "צהריים מאוחרים או נשנוש",
-     "loc": "קאו לק",
+     "time": "16:00",
+     "dur": "1:30",
+     "act": "טיובינג או שחייה בנהר סוק",
+     "loc": "קאו סוק",
+     "cat": "אטרקציות",
+     "baht": 400,
+     "status": "משלמים במקום",
+     "link": "",
+     "notes": "",
+     "id": "s_p5_3",
+     "done": false,
+     "wiki": "Khao Sok National Park",
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "השכרת טיובים לשניים.",
+      "lowFactor": 0.8,
+      "highFactor": 1.3,
+      "sourceUrl": "",
+      "checked": "2026-10-28"
+     },
+     "managed": true
+    },
+    {
+     "time": "19:00",
+     "dur": "1:00",
+     "act": "ארוחת ערב בכפר",
+     "loc": "קאו סוק",
+     "cat": "אוכל",
+     "baht": 600,
+     "status": "משלמים במקום",
+     "link": "",
+     "notes": "",
+     "id": "s_p5_4",
+     "done": false,
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
+      "lowFactor": 0.8,
+      "highFactor": 1.3,
+      "sourceUrl": "",
+      "checked": "2026-10-28"
+     },
+     "managed": true
+    },
+    {
+     "time": "",
+     "dur": "",
+     "act": "לינה — Our Jungle House",
+     "loc": "קאו סוק",
+     "cat": "לינה",
+     "baht": null,
+     "status": "מוזמן",
+     "link": "",
+     "notes": "Treehouse Triple · אישור 6051801812090945732 · שולם $138.89 · ביטול חינם עד 8/11, אחר כך $13.89, ומ־19/11 כל הסכום · בלי ארוחות · ‎+66 81 417 0546",
+     "id": "s_p5_stay",
+     "done": false,
+     "wiki": "Khao Sok National Park",
+     "priceEstimate": {
+      "kind": "booking",
+      "basis": "המחיר מההזמנה השמורה; נספר פעם אחת בלבד ומחולק בין לילות הלינה.",
+      "lowFactor": 1,
+      "highFactor": 1,
+      "sourceUrl": "",
+      "checked": "2026-10-28",
+      "booking": {
+       "category": "accommodation",
+       "split": "ratio",
+       "key": "khaosok",
+       "match": "Our Jungle House",
+       "rows": 1,
+       "totalIls": 514
+      }
+     },
+     "managed": true
+    }
+   ]
+  },
+  {
+   "day": 14,
+   "date": "2026-12-06",
+   "dow": "א׳",
+   "dest": "קאו לאק",
+   "summary": "אגם צ׳או לאן, ואז קאו לאק",
+   "id": "day_14",
+   "rows": [
+    {
+     "time": "06:45",
+     "dur": "1:00",
+     "act": "ארוחת בוקר מוקדמת",
+     "loc": "קאו סוק",
      "cat": "אוכל",
      "baht": 300,
      "status": "משלמים במקום",
      "link": "",
-     "notes": "ארוחת הבוקר המאוחרת והעצירה בדרך מחזיקות עד כאן",
-     "id": "s_10_5",
+     "notes": "",
+     "id": "s_p6_0",
      "done": false,
      "priceEstimate": {
       "kind": "estimate",
@@ -2727,66 +3303,88 @@ window.SHARED_SEED = {
       "lowFactor": 0.8,
       "highFactor": 1.3,
       "sourceUrl": "",
-      "checked": "2026-09-14"
+      "checked": "2026-10-28"
      },
      "managed": true
     },
     {
-     "time": "16:30",
-     "dur": "2:00",
-     "act": "בריכת אינפיניטי וחוף",
-     "loc": "קלימה",
+     "time": "07:30",
+     "dur": "6:30",
+     "act": "אגם צ׳או לאן — לונג־טייל, מערה, קאנו",
+     "loc": "פארק לאומי קאו סוק",
+     "cat": "אטרקציות",
+     "baht": 3600,
+     "status": "להזמין",
+     "link": "",
+     "notes": "סיור יום מקאו סוק, כ־฿1,500–1,800 לאדם כולל אגרות פארק וצהריים · מזמינים דרך Our Jungle House או סוכנות בכפר · הנוף היחיד בטיול שהוא לא חוף",
+     "id": "s_p6_1",
+     "done": false,
+     "wiki": "Cheow Lan Lake",
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "מחיר סיור אגם מקאו סוק לשני מבוגרים, עם אגרות וצהריים.",
+      "lowFactor": 0.9,
+      "highFactor": 1.2,
+      "sourceUrl": "",
+      "checked": "2026-10-28"
+     },
+     "managed": true
+    },
+    {
+     "time": "15:00",
+     "dur": "1:30",
+     "act": "ואן לקאו לאק",
+     "loc": "קאו סוק → קאו לאק",
+     "cat": "תחבורה",
+     "baht": 1800,
+     "status": "להזמין",
+     "link": "",
+     "notes": "כ־1.5 שעות · ואן משותף כ־฿400 לאדם או רכב פרטי כ־฿1,800 · לתאם עם הסיור שיחזיר לכפר",
+     "id": "s_p6_2",
+     "done": false,
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "רכב פרטי קאו סוק–קאו לאק.",
+      "lowFactor": 0.5,
+      "highFactor": 1.1,
+      "sourceUrl": "",
+      "checked": "2026-10-28"
+     },
+     "managed": true
+    },
+    {
+     "time": "17:00",
+     "dur": "0:30",
+     "act": "צ׳ק-אין — קלימה",
+     "loc": "קאו לאק",
      "cat": "אחר",
      "baht": null,
-     "status": "משלמים במקום",
+     "status": "מוזמן",
      "link": "",
-     "notes": "מחר סימילן, יציאה ב-07:00 — ערב רגוע ולישון מוקדם",
-     "id": "s_10_7",
+     "notes": "",
+     "id": "s_p6_3",
      "done": false,
-     "wiki": "Khao Lak",
      "priceEstimate": {
       "kind": "no-extra",
       "basis": "לא הוקצה חיוב נפרד לפעולה הזאת; חיובים כלולים מופיעים בחבילה או בהזמנה.",
       "lowFactor": 1,
       "highFactor": 1,
       "sourceUrl": "",
-      "checked": "2026-09-14"
+      "checked": "2026-10-28"
      },
      "managed": true
     },
     {
-     "id": "s_10_moto",
-     "time": "17:00",
-     "dur": "0:30",
-     "act": "השכרת קטנוע בקאו לק — לארבעה ימים",
-     "loc": "קאו לק",
-     "cat": "תחבורה",
-     "baht": 1000,
-     "status": "משלמים במקום",
-     "link": "",
-     "done": false,
-     "notes": "฿250 ליום · כביש 4 מהיר ועמוס משאיות — לנסוע בכביש החוף המקומי · כך מגיעים לבאנג סאק ולאאו תונג לבד, בלי מוניות",
-     "managed": true,
-     "priceEstimate": {
-      "kind": "estimate",
-      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
-      "lowFactor": 0.8,
-      "highFactor": 1.3,
-      "sourceUrl": "",
-      "checked": "2026-09-14"
-     }
-    },
-    {
      "time": "19:30",
-     "dur": "1:30",
+     "dur": "1:00",
      "act": "ארוחת ערב",
-     "loc": "קאו לק",
+     "loc": "קאו לאק",
      "cat": "אוכל",
      "baht": 800,
      "status": "משלמים במקום",
      "link": "",
      "notes": "",
-     "id": "s_10_8",
+     "id": "s_p6_4",
      "done": false,
      "priceEstimate": {
       "kind": "estimate",
@@ -2794,20 +3392,21 @@ window.SHARED_SEED = {
       "lowFactor": 0.8,
       "highFactor": 1.3,
       "sourceUrl": "",
-      "checked": "2026-09-14"
-     }
+      "checked": "2026-10-28"
+     },
+     "managed": true
     },
     {
      "time": "",
      "dur": "",
      "act": "לינה — Kalima Resort and Villas",
-     "loc": "קאו לק",
+     "loc": "קאו לאק",
      "cat": "לינה",
-     "baht": 7476.83,
+     "baht": null,
      "status": "מוזמן",
-     "link": "https://www.booking.com/hotel/th/kalima-resort-amp-villas-khao-lak.html",
-     "notes": "8.8 על 2,576 ביקורות · 5 כוכבים · ספא מלא, חדר אדים, עיסוי זוגות, בריכת מים מלוחים, יוגה",
-     "id": "s_10_9",
+     "link": "https://www.booking.com/hotel/th/kalima-resort-amp-villas-khao-lak.html?checkin=2026-12-06&checkout=2026-12-09&group_adults=2",
+     "notes": "6–9/12 · 3 לילות (היו 2–8/12 — לשנות בבוקינג) · 8.8 על 2,576 ביקורות · ספא מלא, בריכת אינפיניטי, יוגה",
+     "id": "s_p6_stay",
      "done": false,
      "priceEstimate": {
       "kind": "booking",
@@ -2815,51 +3414,52 @@ window.SHARED_SEED = {
       "lowFactor": 1,
       "highFactor": 1,
       "sourceUrl": "",
-      "checked": "2026-09-14",
+      "checked": "2026-10-28",
       "booking": {
        "category": "accommodation",
        "split": "ratio",
        "key": "khaolak",
        "match": "Kalima",
-       "totalIls": 4029,
-       "rows": 6
+       "rows": 3,
+       "totalIls": 2103
       }
-     }
+     },
+     "managed": true
     }
-   ],
-   "summary": "חוצים ליבשה",
-   "id": "day_10"
+   ]
   },
   {
-   "day": 11,
-   "date": "2026-12-03",
-   "dow": "ה׳",
-   "dest": "קאו לק",
+   "day": 15,
+   "date": "2026-12-07",
+   "dow": "ב׳",
+   "dest": "קאו לאק",
+   "summary": "סימילן — היום הגדול של האנדמן",
+   "id": "day_15",
    "rows": [
     {
      "time": "06:00",
-     "dur": "0:30",
+     "dur": "1:00",
      "act": "ארוחת בוקר",
      "loc": "קלימה",
      "cat": "אוכל",
-     "baht": 400,
+     "baht": null,
      "status": "משלמים במקום",
      "link": "",
-     "notes": "מוקדם — היציאה לסימילן ב-07:00. לבקש מהמלון ארוחה מוקדמת או לקחת משהו לדרך",
-     "id": "s_15_0",
+     "notes": "",
+     "id": "s_p7_0",
      "done": false,
-     "managed": true,
      "priceEstimate": {
-      "kind": "estimate",
-      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
-      "lowFactor": 0.8,
-      "highFactor": 1.3,
+      "kind": "no-extra",
+      "basis": "לא הוקצה חיוב נפרד לפעולה הזאת; חיובים כלולים מופיעים בחבילה או בהזמנה.",
+      "lowFactor": 1,
+      "highFactor": 1,
       "sourceUrl": "",
-      "checked": "2026-09-14"
-     }
+      "checked": "2026-10-28"
+     },
+     "managed": true
     },
     {
-     "time": "07:00",
+     "time": "06:30",
      "dur": "10:00",
      "act": "סימילן — יום שנורקלינג",
      "loc": "איי סימילן",
@@ -2867,8 +3467,8 @@ window.SHARED_SEED = {
      "baht": 7800,
      "status": "להזמין",
      "link": "https://www.khaolaklanddiscovery.com/khao-lak-tours/",
-     "notes": "฿3,900 לאדם כולל אגרת פארק · הפארק פתוח 15/10–15/5 · יציאה מרציף תאב לאמו ב-07:00, חזרה אחה״צ · שמורת האלמוגים הכי טובה באנדמן · אם השייט מבוטל בגלל הים, המפעילים מזיזים תאריך בלי עלות — יש גיבוי ב-4/12 וב-7/12",
-     "id": "s_15_1",
+     "notes": "฿3,900 לאדם כולל אגרת פארק · איסוף מקלימה · שמורת האלמוגים הכי טובה באנדמן · אם השייט מבוטל בגלל הים, המפעילים מזיזים תאריך בלי עלות — 8/12 הוא יום הגיבוי (לטליה רק עד הטיסה, לאיתי כל היום)",
+     "id": "s_p7_1",
      "done": false,
      "wiki": "Similan Islands",
      "managed": true,
@@ -2882,60 +3482,38 @@ window.SHARED_SEED = {
      }
     },
     {
-     "time": "13:00",
-     "dur": "1:00",
-     "act": "צהריים",
-     "loc": "קאו לק",
-     "cat": "אוכל",
-     "baht": 0,
-     "status": "משלמים במקום",
-     "link": "",
-     "notes": "על הסירה או באי — כלול בסיור",
-     "id": "s_15_3",
-     "done": false,
-     "priceEstimate": {
-      "kind": "included",
-      "basis": "צהריים כלולים בסיור סימילן שעליו מבוסס האומדן.",
-      "lowFactor": 1,
-      "highFactor": 1,
-      "sourceUrl": "https://www.khaolaklanddiscovery.com/khao-lak-tours/similan-islands-tour/",
-      "checked": "2026-09-14"
-     },
-     "managed": true
-    },
-    {
      "time": "17:30",
-     "dur": "2:00",
-     "act": "חוף ובריכה אחרי סימילן",
+     "dur": "1:30",
+     "act": "בריכה אחרי סימילן",
      "loc": "קלימה",
-     "cat": "אטרקציות",
+     "cat": "אחר",
      "baht": null,
      "status": "משלמים במקום",
      "link": "",
-     "notes": "חוזרים שרופים ועייפים — הערב נשאר רגוע",
-     "id": "s_15_2",
+     "notes": "",
+     "id": "s_p7_2",
      "done": false,
-     "managed": true,
      "priceEstimate": {
       "kind": "no-extra",
       "basis": "לא הוקצה חיוב נפרד לפעולה הזאת; חיובים כלולים מופיעים בחבילה או בהזמנה.",
       "lowFactor": 1,
       "highFactor": 1,
       "sourceUrl": "",
-      "checked": "2026-09-14"
-     }
+      "checked": "2026-10-28"
+     },
+     "managed": true
     },
     {
      "time": "19:30",
-     "dur": "2:00",
-     "act": "ארוחת ערב",
-     "loc": "קאו לק",
+     "dur": "1:00",
+     "act": "ארוחת ערב אחרונה ביחד",
+     "loc": "קאו לאק",
      "cat": "אוכל",
      "baht": 900,
      "status": "משלמים במקום",
      "link": "",
      "notes": "",
-     "id": "s_15_4",
+     "id": "s_p7_3",
      "done": false,
      "priceEstimate": {
       "kind": "estimate",
@@ -2943,710 +3521,43 @@ window.SHARED_SEED = {
       "lowFactor": 0.8,
       "highFactor": 1.3,
       "sourceUrl": "",
-      "checked": "2026-09-14"
-     },
-     "managed": true
-    },
-    {
-     "time": "",
-     "dur": "",
-     "act": "לינה — Kalima Resort and Villas",
-     "loc": "קאו לק",
-     "cat": "לינה",
-     "baht": 7476.83,
-     "status": "מוזמן",
-     "link": "https://www.booking.com/hotel/th/kalima-resort-amp-villas-khao-lak.html",
-     "notes": "",
-     "id": "s_15_5",
-     "done": false,
-     "priceEstimate": {
-      "kind": "booking",
-      "basis": "המחיר מההזמנה השמורה; נספר פעם אחת בלבד ומחולק בין לילות הלינה.",
-      "lowFactor": 1,
-      "highFactor": 1,
-      "sourceUrl": "",
-      "checked": "2026-09-14",
-      "booking": {
-       "category": "accommodation",
-       "split": "ratio",
-       "key": "khaolak",
-       "match": "Kalima",
-       "totalIls": 4029,
-       "rows": 6
-      }
-     }
-    }
-   ],
-   "summary": "סימילן — היום הגדול של האנדמן",
-   "id": "day_11"
-  },
-  {
-   "day": 12,
-   "date": "2026-12-04",
-   "dow": "ו׳",
-   "dest": "קאו לק",
-   "rows": [
-    {
-     "time": "08:30",
-     "dur": "1:00",
-     "act": "ארוחת בוקר",
-     "loc": "קלימה",
-     "cat": "אוכל",
-     "baht": 400,
-     "status": "משלמים במקום",
-     "link": "",
-     "notes": "",
-     "id": "s_13_0",
-     "done": false,
-     "priceEstimate": {
-      "kind": "estimate",
-      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
-      "lowFactor": 0.8,
-      "highFactor": 1.3,
-      "sourceUrl": "",
-      "checked": "2026-09-14"
-     }
-    },
-    {
-     "time": "10:00",
-     "dur": "3:00",
-     "act": "חוף ובריכה",
-     "loc": "קלימה",
-     "cat": "אחר",
-     "baht": null,
-     "status": "משלמים במקום",
-     "link": "",
-     "notes": "היום שאחרי סימילן — בלי תוכנית. אם הסירה לא יצאה אתמול, זה יום הגיבוי הראשון",
-     "id": "s_13_1",
-     "done": false,
-     "priceEstimate": {
-      "kind": "no-extra",
-      "basis": "לא הוקצה חיוב נפרד לפעולה הזאת; חיובים כלולים מופיעים בחבילה או בהזמנה.",
-      "lowFactor": 1,
-      "highFactor": 1,
-      "sourceUrl": "",
-      "checked": "2026-09-14"
-     },
-     "managed": true
-    },
-    {
-     "time": "13:00",
-     "dur": "1:00",
-     "act": "צהריים",
-     "loc": "קאו לק",
-     "cat": "אוכל",
-     "baht": 450,
-     "status": "משלמים במקום",
-     "link": "",
-     "notes": "",
-     "id": "s_13_2",
-     "done": false,
-     "priceEstimate": {
-      "kind": "estimate",
-      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
-      "lowFactor": 0.8,
-      "highFactor": 1.3,
-      "sourceUrl": "",
-      "checked": "2026-09-14"
-     }
-    },
-    {
-     "time": "16:00",
-     "dur": "1:30",
-     "act": "מסאז׳ים",
-     "loc": "קאו לק",
-     "cat": "אטרקציות",
-     "baht": 800,
-     "status": "משלמים במקום",
-     "link": "",
-     "notes": "",
-     "id": "s_13_3",
-     "done": false,
-     "priceEstimate": {
-      "kind": "estimate",
-      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
-      "lowFactor": 0.8,
-      "highFactor": 1.3,
-      "sourceUrl": "",
-      "checked": "2026-09-14"
-     }
-    },
-    {
-     "time": "19:30",
-     "dur": "1:30",
-     "act": "ארוחת ערב",
-     "loc": "קאו לק",
-     "cat": "אוכל",
-     "baht": 850,
-     "status": "משלמים במקום",
-     "link": "",
-     "notes": "",
-     "id": "s_13_4",
-     "done": false,
-     "priceEstimate": {
-      "kind": "estimate",
-      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
-      "lowFactor": 0.8,
-      "highFactor": 1.3,
-      "sourceUrl": "",
-      "checked": "2026-09-14"
-     }
-    },
-    {
-     "time": "",
-     "dur": "",
-     "act": "לינה — Kalima Resort and Villas",
-     "loc": "קאו לק",
-     "cat": "לינה",
-     "baht": 7476.83,
-     "status": "מוזמן",
-     "link": "https://www.booking.com/hotel/th/kalima-resort-amp-villas-khao-lak.html",
-     "notes": "",
-     "id": "s_13_5",
-     "done": false,
-     "priceEstimate": {
-      "kind": "booking",
-      "basis": "המחיר מההזמנה השמורה; נספר פעם אחת בלבד ומחולק בין לילות הלינה.",
-      "lowFactor": 1,
-      "highFactor": 1,
-      "sourceUrl": "",
-      "checked": "2026-09-14",
-      "booking": {
-       "category": "accommodation",
-       "split": "ratio",
-       "key": "khaolak",
-       "match": "Kalima",
-       "totalIls": 4029,
-       "rows": 6
-      }
-     }
-    }
-   ],
-   "summary": "יום אחרי סימילן — וגיבוי אם הסירה לא יצאה",
-   "id": "day_12"
-  },
-  {
-   "day": 13,
-   "date": "2026-12-05",
-   "dow": "ש׳",
-   "dest": "קאו סוק",
-   "rows": [
-    {
-     "time": "06:15",
-     "dur": "0:45",
-     "act": "ארוחת בוקר מוקדמת",
-     "loc": "קלימה",
-     "cat": "אוכל",
-     "baht": 400,
-     "status": "משלמים במקום",
-     "link": "",
-     "notes": "יום ארוך — לאכול טוב",
-     "id": "s_12_0",
-     "done": false,
-     "priceEstimate": {
-      "kind": "estimate",
-      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
-      "lowFactor": 0.8,
-      "highFactor": 1.3,
-      "sourceUrl": "",
-      "checked": "2026-09-14"
-     }
-    },
-    {
-     "time": "07:15",
-     "dur": "2:15",
-     "act": "איסוף מהמלון לרציף רצ׳פרפה",
-     "loc": "קאו לק → אגם צ׳או לאן",
-     "cat": "תחבורה",
-     "baht": null,
-     "status": "להזמין",
-     "link": "https://www.google.com/maps/search/?api=1&query=Ratchaprapha+Dam+Pier+Khao+Sok",
-     "notes": "כשעתיים לכיוון — לא שעה. ההסעה כלולה בסיור",
-     "id": "s_12_1",
-     "done": false,
-     "priceEstimate": {
-      "kind": "included",
-      "basis": "כלול במחיר ההזמנה או החבילה; אין חיוב נוסף באומדן.",
-      "lowFactor": 1,
-      "highFactor": 1,
-      "sourceUrl": "",
-      "checked": "2026-09-14"
-     }
-    },
-    {
-     "time": "09:45",
-     "dur": "5:00",
-     "act": "אגם צ׳או לאן — לונגטייל, טרק, מערת פאקרנג, קאנו",
-     "loc": "פארק לאומי קאו סוק",
-     "cat": "אטרקציות",
-     "baht": 7800,
-     "status": "להזמין",
-     "link": "https://www.khaolaklanddiscovery.com/khao-lak-tours/",
-     "notes": "฿3,900 לאדם · כולל אגרות פארק, מדריך דובר אנגלית, צהריים, ציוד והסעות · הנוף היחיד בטיול שהוא לא חוף",
-     "id": "s_12_2",
-     "done": false,
-     "wiki": "Khao Sok National Park",
-     "priceEstimate": {
-      "kind": "published",
-      "basis": "מחיר פתיחה לסיור אגם לשני מבוגרים, עם העברות וצהריים. לבדוק אגרות ותוספות בהצעה הסופית.",
-      "lowFactor": 1,
-      "highFactor": 1.2,
-      "sourceUrl": "https://www.khaolaklanddiscovery.com/khao-sok-lake-day-trip/",
-      "checked": "2026-09-14"
-     }
-    },
-    {
-     "time": "12:30",
-     "dur": "1:00",
-     "act": "צהריים על האגם",
-     "loc": "צ׳או לאן",
-     "cat": "אוכל",
-     "baht": null,
-     "status": "משלמים במקום",
-     "link": "",
-     "notes": "כלול בסיור",
-     "id": "s_12_3",
-     "done": false,
-     "priceEstimate": {
-      "kind": "included",
-      "basis": "כלול במחיר ההזמנה או החבילה; אין חיוב נוסף באומדן.",
-      "lowFactor": 1,
-      "highFactor": 1,
-      "sourceUrl": "",
-      "checked": "2026-09-14"
-     }
-    },
-    {
-     "time": "15:00",
-     "dur": "2:15",
-     "act": "חזרה לקאו לק",
-     "loc": "אגם צ׳או לאן → קאו לק",
-     "cat": "תחבורה",
-     "baht": null,
-     "status": "משלמים במקום",
-     "link": "",
-     "notes": "כלול · עצירה בבאן נאם ראד לשחייה",
-     "id": "s_12_4",
-     "done": false,
-     "priceEstimate": {
-      "kind": "included",
-      "basis": "כלול במחיר ההזמנה או החבילה; אין חיוב נוסף באומדן.",
-      "lowFactor": 1,
-      "highFactor": 1,
-      "sourceUrl": "",
-      "checked": "2026-09-14"
-     }
-    },
-    {
-     "time": "17:45",
-     "dur": "",
-     "act": "חזרה לריזורט",
-     "loc": "קלימה",
-     "cat": "אחר",
-     "baht": null,
-     "status": "משלמים במקום",
-     "link": "",
-     "notes": "יום של כ-11 שעות, מתוכן 4:30 בוואן",
-     "id": "s_12_5",
-     "done": false,
-     "priceEstimate": {
-      "kind": "no-extra",
-      "basis": "לא הוקצה חיוב נפרד לפעולה הזאת; חיובים כלולים מופיעים בחבילה או בהזמנה.",
-      "lowFactor": 1,
-      "highFactor": 1,
-      "sourceUrl": "",
-      "checked": "2026-09-14"
-     }
-    },
-    {
-     "time": "19:45",
-     "dur": "1:30",
-     "act": "ארוחת ערב",
-     "loc": "קאו לק",
-     "cat": "אוכל",
-     "baht": 800,
-     "status": "משלמים במקום",
-     "link": "",
-     "notes": "",
-     "id": "s_12_6",
-     "done": false,
-     "priceEstimate": {
-      "kind": "estimate",
-      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
-      "lowFactor": 0.8,
-      "highFactor": 1.3,
-      "sourceUrl": "",
-      "checked": "2026-09-14"
-     }
-    },
-    {
-     "time": "",
-     "dur": "",
-     "act": "לינה — Kalima Resort and Villas",
-     "loc": "קאו לק",
-     "cat": "לינה",
-     "baht": 7476.83,
-     "status": "מוזמן",
-     "link": "https://www.booking.com/hotel/th/kalima-resort-amp-villas-khao-lak.html",
-     "notes": "",
-     "id": "s_12_7",
-     "done": false,
-     "priceEstimate": {
-      "kind": "booking",
-      "basis": "המחיר מההזמנה השמורה; נספר פעם אחת בלבד ומחולק בין לילות הלינה.",
-      "lowFactor": 1,
-      "highFactor": 1,
-      "sourceUrl": "",
-      "checked": "2026-09-14",
-      "booking": {
-       "category": "accommodation",
-       "split": "ratio",
-       "key": "khaolak",
-       "match": "Kalima",
-       "totalIls": 4029,
-       "rows": 6
-      }
-     }
-    }
-   ],
-   "summary": "טיול יום לאגם צ׳או לאן",
-   "id": "day_13"
-  },
-  {
-   "day": 14,
-   "date": "2026-12-06",
-   "dow": "א׳",
-   "dest": "קאו לק",
-   "rows": [
-    {
-     "time": "08:30",
-     "dur": "1:00",
-     "act": "ארוחת בוקר",
-     "loc": "קלימה",
-     "cat": "אוכל",
-     "baht": 400,
-     "status": "משלמים במקום",
-     "link": "",
-     "notes": "",
-     "id": "s_14_0",
-     "done": false,
-     "priceEstimate": {
-      "kind": "estimate",
-      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
-      "lowFactor": 0.8,
-      "highFactor": 1.3,
-      "sourceUrl": "",
-      "checked": "2026-09-14"
-     }
-    },
-    {
-     "id": "s_14_zip",
-     "time": "09:30",
-     "dur": "3:30",
-     "act": "זיפליין ביער הגשם — Tree Top Adventure Park",
-     "loc": "קאו לק",
-     "cat": "אטרקציות",
-     "baht": 5000,
-     "status": "להזמין",
-     "link": "https://www.google.com/maps/search/?api=1&query=Tree+Top+Adventure+Park+Khao+Lak",
-     "wiki": "Zip line",
-     "done": false,
-     "notes": "฿2,200–2,600 לאדם · מסלול של פלטפורמות, גשרים וזיפליינים בין עצי הגומי · איסוף מהמלון כלול · נעליים סגורות, בלי כפכפים",
-     "managed": true,
-     "priceEstimate": {
-      "kind": "estimate",
-      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
-      "lowFactor": 0.8,
-      "highFactor": 1.3,
-      "sourceUrl": "",
-      "checked": "2026-09-14"
-     }
-    },
-    {
-     "time": "13:30",
-     "dur": "",
-     "act": "אחרי הזיפליין — חוף, ספר, בריכה",
-     "loc": "קלימה",
-     "cat": "אחר",
-     "baht": null,
-     "status": "משלמים במקום",
-     "link": "",
-     "notes": "הבוקר היה מספיק. מכאן שום דבר שדורש שעה",
-     "id": "s_14_1",
-     "done": false,
-     "managed": true,
-     "priceEstimate": {
-      "kind": "no-extra",
-      "basis": "לא הוקצה חיוב נפרד לפעולה הזאת; חיובים כלולים מופיעים בחבילה או בהזמנה.",
-      "lowFactor": 1,
-      "highFactor": 1,
-      "sourceUrl": "",
-      "checked": "2026-09-14"
-     }
-    },
-    {
-     "time": "13:00",
-     "dur": "1:00",
-     "act": "צהריים",
-     "loc": "קאו לק",
-     "cat": "אוכל",
-     "baht": 450,
-     "status": "משלמים במקום",
-     "link": "",
-     "notes": "",
-     "id": "s_14_2",
-     "done": false,
-     "priceEstimate": {
-      "kind": "estimate",
-      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
-      "lowFactor": 0.8,
-      "highFactor": 1.3,
-      "sourceUrl": "",
-      "checked": "2026-09-14"
-     }
-    },
-    {
-     "time": "16:00",
-     "dur": "2:00",
-     "act": "יוגה או חדר כושר בריזורט",
-     "loc": "קלימה",
-     "cat": "אטרקציות",
-     "baht": null,
-     "status": "משלמים במקום",
-     "link": "",
-     "notes": "שיעורי יוגה וכושר במקום",
-     "id": "s_14_3",
-     "done": false,
-     "priceEstimate": {
-      "kind": "no-extra",
-      "basis": "לא הוקצה חיוב נפרד לפעולה הזאת; חיובים כלולים מופיעים בחבילה או בהזמנה.",
-      "lowFactor": 1,
-      "highFactor": 1,
-      "sourceUrl": "",
-      "checked": "2026-09-14"
-     }
-    },
-    {
-     "time": "19:30",
-     "dur": "1:30",
-     "act": "ארוחת ערב",
-     "loc": "קאו לק",
-     "cat": "אוכל",
-     "baht": 850,
-     "status": "משלמים במקום",
-     "link": "",
-     "notes": "",
-     "id": "s_14_4",
-     "done": false,
-     "priceEstimate": {
-      "kind": "estimate",
-      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
-      "lowFactor": 0.8,
-      "highFactor": 1.3,
-      "sourceUrl": "",
-      "checked": "2026-09-14"
-     }
-    },
-    {
-     "time": "21:30",
-     "dur": "2:30",
-     "act": "מוזיקה חיה בבאנג לה און",
-     "loc": "מרכז קאו לק",
-     "cat": "אטרקציות",
-     "baht": 600,
-     "notes": "רחוב הברים של קאו לק — להקות חיות וקהל צעיר יותר מהריזורטים · מחר יום חופשי · בקטנוע או גראב",
-     "status": "משלמים במקום",
-     "link": "",
-     "priceEstimate": {
-      "kind": "estimate",
-      "basis": "אומדן ערב בבר לשניים — כניסה, שתייה ותחבורה.",
-      "lowFactor": 0.7,
-      "highFactor": 1.6,
-      "sourceUrl": "",
-      "checked": "2026-10-13"
-     },
-     "managed": true,
-     "id": "s_14_night",
-     "done": false
-    },
-    {
-     "time": "",
-     "dur": "",
-     "act": "לינה — Kalima Resort and Villas",
-     "loc": "קאו לק",
-     "cat": "לינה",
-     "baht": 7476.83,
-     "status": "מוזמן",
-     "link": "https://www.booking.com/hotel/th/kalima-resort-amp-villas-khao-lak.html",
-     "notes": "",
-     "id": "s_14_5",
-     "done": false,
-     "priceEstimate": {
-      "kind": "booking",
-      "basis": "המחיר מההזמנה השמורה; נספר פעם אחת בלבד ומחולק בין לילות הלינה.",
-      "lowFactor": 1,
-      "highFactor": 1,
-      "sourceUrl": "",
-      "checked": "2026-09-14",
-      "booking": {
-       "category": "accommodation",
-       "split": "ratio",
-       "key": "khaolak",
-       "match": "Kalima",
-       "totalIls": 4029,
-       "rows": 6
-      }
-     }
-    }
-   ],
-   "summary": "זיפליין בבוקר, ושום דבר אחרי",
-   "id": "day_14"
-  },
-  {
-   "day": 15,
-   "date": "2026-12-07",
-   "dow": "ב׳",
-   "dest": "קאו לק",
-   "rows": [
-    {
-     "time": "08:00",
-     "dur": "1:00",
-     "act": "ארוחת בוקר",
-     "loc": "קלימה",
-     "cat": "אוכל",
-     "baht": 400,
-     "status": "משלמים במקום",
-     "link": "",
-     "notes": "לבדוק מול המלון אם ארוחת בוקר כלולה בתעריף שלכם",
-     "id": "s_11_0",
-     "done": false,
-     "priceEstimate": {
-      "kind": "estimate",
-      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
-      "lowFactor": 0.8,
-      "highFactor": 1.3,
-      "sourceUrl": "",
-      "checked": "2026-09-14"
-     }
-    },
-    {
-     "time": "09:30",
-     "dur": "3:00",
-     "act": "חוף ובריכה",
-     "loc": "קלימה",
-     "cat": "אחר",
-     "baht": null,
-     "status": "משלמים במקום",
-     "link": "",
-     "notes": "",
-     "id": "s_11_1",
-     "done": false,
-     "priceEstimate": {
-      "kind": "no-extra",
-      "basis": "לא הוקצה חיוב נפרד לפעולה הזאת; חיובים כלולים מופיעים בחבילה או בהזמנה.",
-      "lowFactor": 1,
-      "highFactor": 1,
-      "sourceUrl": "",
-      "checked": "2026-09-14"
-     }
-    },
-    {
-     "time": "13:00",
-     "dur": "1:00",
-     "act": "צהריים",
-     "loc": "קאו לק",
-     "cat": "אוכל",
-     "baht": 450,
-     "status": "משלמים במקום",
-     "link": "",
-     "notes": "",
-     "id": "s_11_2",
-     "done": false,
-     "priceEstimate": {
-      "kind": "estimate",
-      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
-      "lowFactor": 0.8,
-      "highFactor": 1.3,
-      "sourceUrl": "",
-      "checked": "2026-09-14"
-     }
-    },
-    {
-     "time": "15:30",
-     "dur": "2:00",
-     "act": "ספא — עיסוי זוגי",
-     "loc": "הספא בקלימה",
-     "cat": "אטרקציות",
-     "baht": 1600,
-     "status": "משלמים במקום",
-     "link": "",
-     "notes": "חדר אדים, טיפולי גוף, אמבט רגליים · זה הפרק שבשבילו באתם",
-     "id": "s_11_3",
-     "done": false,
-     "priceEstimate": {
-      "kind": "estimate",
-      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
-      "lowFactor": 0.8,
-      "highFactor": 1.3,
-      "sourceUrl": "",
-      "checked": "2026-09-14"
-     }
-    },
-    {
-     "time": "19:30",
-     "dur": "1:30",
-     "act": "ארוחת ערב אחרונה",
-     "loc": "קאו לק",
-     "cat": "אוכל",
-     "baht": 850,
-     "status": "משלמים במקום",
-     "link": "",
-     "notes": "",
-     "id": "s_11_4",
-     "done": false,
-     "priceEstimate": {
-      "kind": "estimate",
-      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
-      "lowFactor": 0.8,
-      "highFactor": 1.3,
-      "sourceUrl": "",
-      "checked": "2026-09-14"
+      "checked": "2026-10-28"
      },
      "managed": true
     },
     {
      "time": "21:30",
-     "dur": "2:30",
-     "act": "לילה אחרון — בר על החוף",
-     "loc": "קאו לק",
+     "dur": "2:00",
+     "act": "לילה אחרון ביחד — בר על החוף",
+     "loc": "באנג ניאנג",
      "cat": "אטרקציות",
      "baht": 600,
-     "notes": "משקה אחרון מול הים · הטיסה רק ב-17:20 מחר, אז אפשר לישון",
      "status": "משלמים במקום",
      "link": "",
+     "notes": "",
+     "id": "s_p7_night",
+     "done": false,
      "priceEstimate": {
       "kind": "estimate",
-      "basis": "אומדן ערב בבר לשניים — כניסה, שתייה ותחבורה.",
-      "lowFactor": 0.7,
-      "highFactor": 1.6,
+      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
+      "lowFactor": 0.8,
+      "highFactor": 1.3,
       "sourceUrl": "",
-      "checked": "2026-10-13"
+      "checked": "2026-10-28"
      },
-     "managed": true,
-     "id": "s_15_night",
-     "done": false
+     "managed": true
     },
     {
      "time": "",
      "dur": "",
      "act": "לינה — Kalima Resort and Villas",
-     "loc": "קאו לק",
+     "loc": "קאו לאק",
      "cat": "לינה",
-     "baht": 7476.83,
+     "baht": null,
      "status": "מוזמן",
-     "link": "https://www.booking.com/hotel/th/kalima-resort-amp-villas-khao-lak.html",
-     "notes": "",
-     "id": "s_11_5",
+     "link": "https://www.booking.com/hotel/th/kalima-resort-amp-villas-khao-lak.html?checkin=2026-12-06&checkout=2026-12-09&group_adults=2",
+     "notes": "6–9/12 · 3 לילות (היו 2–8/12 — לשנות בבוקינג) · 8.8 על 2,576 ביקורות · ספא מלא, בריכת אינפיניטי, יוגה",
+     "id": "s_p7_stay",
      "done": false,
      "priceEstimate": {
       "kind": "booking",
@@ -3654,38 +3565,39 @@ window.SHARED_SEED = {
       "lowFactor": 1,
       "highFactor": 1,
       "sourceUrl": "",
-      "checked": "2026-09-14",
+      "checked": "2026-10-28",
       "booking": {
        "category": "accommodation",
        "split": "ratio",
        "key": "khaolak",
        "match": "Kalima",
-       "totalIls": 4029,
-       "rows": 6
+       "rows": 3,
+       "totalIls": 2103
       }
-     }
+     },
+     "managed": true
     }
-   ],
-   "summary": "ריזורט וספא — ויום גיבוי אחרון לסימילן",
-   "id": "day_15"
+   ]
   },
   {
    "day": 16,
    "date": "2026-12-08",
    "dow": "ג׳",
-   "dest": "קאו לק → הביתה",
+   "dest": "קאו לאק",
+   "summary": "טליה לצ׳יאנג מאי, איתי נשאר עוד יום",
+   "id": "day_16",
    "rows": [
     {
      "time": "08:30",
      "dur": "1:00",
-     "act": "ארוחת בוקר אחרונה",
+     "act": "ארוחת בוקר אחרונה ביחד",
      "loc": "קלימה",
      "cat": "אוכל",
      "baht": 400,
      "status": "משלמים במקום",
      "link": "",
      "notes": "",
-     "id": "s_16_0",
+     "id": "s_p8_0",
      "done": false,
      "priceEstimate": {
       "kind": "estimate",
@@ -3693,104 +3605,44 @@ window.SHARED_SEED = {
       "lowFactor": 0.8,
       "highFactor": 1.3,
       "sourceUrl": "",
-      "checked": "2026-09-14"
-     }
+      "checked": "2026-10-28"
+     },
+     "managed": true
     },
     {
      "time": "10:00",
-     "dur": "1:00",
-     "act": "אריזה",
-     "loc": "קלימה",
-     "cat": "אחר",
-     "baht": null,
-     "status": "משלמים במקום",
-     "link": "",
-     "notes": "",
-     "id": "s_16_1",
-     "done": false,
-     "priceEstimate": {
-      "kind": "no-extra",
-      "basis": "לא הוקצה חיוב נפרד לפעולה הזאת; חיובים כלולים מופיעים בחבילה או בהזמנה.",
-      "lowFactor": 1,
-      "highFactor": 1,
-      "sourceUrl": "",
-      "checked": "2026-09-14"
-     }
-    },
-    {
-     "time": "11:00",
-     "dur": "0:30",
-     "act": "צ׳ק-אאוט ואחסון תיקים",
-     "loc": "קלימה",
-     "cat": "אחר",
-     "baht": null,
-     "status": "משלמים במקום",
-     "link": "",
-     "notes": "צ׳ק-אאוט 11:00–12:00 · הם ישמרו את התיקים",
-     "id": "s_16_2",
-     "done": false,
-     "priceEstimate": {
-      "kind": "no-extra",
-      "basis": "לא הוקצה חיוב נפרד לפעולה הזאת; חיובים כלולים מופיעים בחבילה או בהזמנה.",
-      "lowFactor": 1,
-      "highFactor": 1,
-      "sourceUrl": "",
-      "checked": "2026-09-14"
-     }
-    },
-    {
-     "time": "11:45",
-     "dur": "0:45",
-     "act": "צהריים אחרון",
-     "loc": "קאו לק",
-     "cat": "אוכל",
-     "baht": 450,
-     "status": "משלמים במקום",
-     "link": "",
-     "notes": "",
-     "id": "s_16_3",
-     "done": false,
-     "priceEstimate": {
-      "kind": "estimate",
-      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
-      "lowFactor": 0.8,
-      "highFactor": 1.3,
-      "sourceUrl": "",
-      "checked": "2026-09-14"
-     }
-    },
-    {
-     "time": "12:45",
-     "dur": "1:15",
-     "act": "רכב פרטי לשדה התעופה",
-     "loc": "קאו לק → HKT",
+     "dur": "1:30",
+     "act": "טליה — רכב לשדה התעופה בפוקט",
+     "loc": "קאו לאק → HKT",
      "cat": "תחבורה",
      "baht": 1800,
      "status": "להזמין",
      "link": "https://www.google.com/maps/search/?api=1&query=Phuket+International+Airport",
-     "notes": "כ-70 ק״מ · יוצאים 12:45, לא 13:30 — טיסה בינלאומית",
-     "id": "s_16_4",
+     "notes": "כ־70 ק״מ, כשעה וחצי · לפי שעת הטיסה לצ׳יאנג מאי — להגיע שעתיים לפני",
+     "id": "s_p8_1",
      "done": false,
      "priceEstimate": {
       "kind": "published",
-      "basis": "מחיר פתיחה לרכב קאו לק–שדה התעופה בפוקט; המחיר המדויק תלוי בכתובת, ברכב ובשעה.",
+      "basis": "מחיר פתיחה לרכב קאו לק–שדה התעופה בפוקט.",
       "lowFactor": 1,
       "highFactor": 1.3,
       "sourceUrl": "https://www.khaolaklanddiscovery.com/",
-      "checked": "2026-09-14"
-     }
+      "checked": "2026-10-28",
+      "split": "full-talia"
+     },
+     "managed": true
     },
     {
-     "time": "14:00",
-     "dur": "3:20",
-     "act": "צ׳ק-אין, החזר מס ובידוק",
-     "loc": "HKT",
-     "cat": "אחר",
+     "time": "",
+     "dur": "",
+     "act": "טליה — HKT → CNX",
+     "loc": "פוקט → צ׳יאנג מאי",
+     "cat": "תחבורה",
      "baht": null,
-     "status": "משלמים במקום",
+     "status": "להזמין",
      "link": "",
-     "notes": "להגיע 3 שעות לפני",
-     "id": "s_16_5",
+     "notes": "AirAsia או Vietjet, יש כמה ביום · מכאן ממשיכים לפאי",
+     "id": "s_p8_2",
      "done": false,
      "priceEstimate": {
       "kind": "no-extra",
@@ -3798,20 +3650,67 @@ window.SHARED_SEED = {
       "lowFactor": 1,
       "highFactor": 1,
       "sourceUrl": "",
-      "checked": "2026-09-14"
+      "checked": "2026-10-28"
+     },
+     "managed": true
+    },
+    {
+     "id": "s_p8_zip",
+     "time": "11:30",
+     "dur": "3:30",
+     "act": "זיפליין ביער הגשם — Tree Top Adventure Park",
+     "loc": "קאו לק",
+     "cat": "אטרקציות",
+     "baht": 2500,
+     "status": "אופציונלי",
+     "link": "https://www.google.com/maps/search/?api=1&query=Tree+Top+Adventure+Park+Khao+Lak",
+     "wiki": "Zip line",
+     "done": false,
+     "notes": "לאיתי, אחרי שטליה יוצאת · ฿2,200–2,600 לאדם · איסוף מהמלון כלול · נעליים סגורות · אם סימילן בוטל ב־7/12 — במקומו, סימילן",
+     "managed": true,
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
+      "lowFactor": 0.8,
+      "highFactor": 1.3,
+      "sourceUrl": "",
+      "checked": "2026-10-28",
+      "split": "full-itai"
      }
     },
     {
-     "time": "17:20",
-     "dur": "10:40",
-     "act": "ארקיע IZ598 · פוקט → תל אביב",
-     "loc": "HKT → TLV",
-     "cat": "תחבורה",
+     "time": "19:30",
+     "dur": "1:00",
+     "act": "ארוחת ערב",
+     "loc": "קאו לאק",
+     "cat": "אוכל",
+     "baht": 450,
+     "status": "משלמים במקום",
+     "link": "",
+     "notes": "לבד — לאיתי",
+     "id": "s_p8_3",
+     "done": false,
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
+      "lowFactor": 0.8,
+      "highFactor": 1.3,
+      "sourceUrl": "",
+      "checked": "2026-10-28"
+     },
+     "managed": true
+    },
+    {
+     "time": "",
+     "dur": "",
+     "act": "לינה — Kalima Resort and Villas",
+     "loc": "קאו לאק",
+     "cat": "לינה",
      "baht": null,
      "status": "מוזמן",
-     "link": "",
-     "notes": "ישירה · IL-604062",
-     "id": "s_16_6",
+     "link": "https://www.booking.com/hotel/th/kalima-resort-amp-villas-khao-lak.html?checkin=2026-12-06&checkout=2026-12-09&group_adults=2",
+     "notes": "6–9/12 · 3 לילות (היו 2–8/12 — לשנות בבוקינג) · 8.8 על 2,576 ביקורות · ספא מלא, בריכת אינפיניטי, יוגה",
+     "id": "s_p8_stay",
      "done": false,
      "priceEstimate": {
       "kind": "booking",
@@ -3819,20 +3718,312 @@ window.SHARED_SEED = {
       "lowFactor": 1,
       "highFactor": 1,
       "sourceUrl": "",
-      "checked": "2026-09-14",
+      "checked": "2026-10-28",
+      "booking": {
+       "category": "accommodation",
+       "split": "ratio",
+       "key": "khaolak",
+       "match": "Kalima",
+       "rows": 3,
+       "totalIls": 2103
+      }
+     },
+     "managed": true
+    }
+   ]
+  },
+  {
+   "day": 17,
+   "date": "2026-12-09",
+   "dow": "ד׳",
+   "dest": "בנגקוק",
+   "summary": "הלילה האחרון של איתי",
+   "id": "day_17",
+   "owner": "itai",
+   "rows": [
+    {
+     "time": "08:30",
+     "dur": "1:00",
+     "act": "ארוחת בוקר",
+     "loc": "קלימה",
+     "cat": "אוכל",
+     "baht": null,
+     "status": "משלמים במקום",
+     "link": "",
+     "notes": "",
+     "id": "s_p9_0",
+     "done": false,
+     "priceEstimate": {
+      "kind": "no-extra",
+      "basis": "לא הוקצה חיוב נפרד לפעולה הזאת; חיובים כלולים מופיעים בחבילה או בהזמנה.",
+      "lowFactor": 1,
+      "highFactor": 1,
+      "sourceUrl": "",
+      "checked": "2026-10-28"
+     },
+     "managed": true
+    },
+    {
+     "time": "10:00",
+     "dur": "1:30",
+     "act": "צ׳ק-אאוט · רכב לשדה התעופה בפוקט",
+     "loc": "קאו לאק → HKT",
+     "cat": "תחבורה",
+     "baht": 1800,
+     "status": "להזמין",
+     "link": "",
+     "notes": "",
+     "id": "s_p9_1",
+     "done": false,
+     "priceEstimate": {
+      "kind": "published",
+      "basis": "מחיר פתיחה לרכב קאו לק–שדה התעופה בפוקט.",
+      "lowFactor": 1,
+      "highFactor": 1.3,
+      "sourceUrl": "https://www.khaolaklanddiscovery.com/",
+      "checked": "2026-10-28",
+      "split": "full-itai"
+     },
+     "managed": true
+    },
+    {
+     "time": "",
+     "dur": "",
+     "act": "HKT → בנגקוק",
+     "loc": "פוקט → DMK / BKK",
+     "cat": "תחבורה",
+     "baht": 2000,
+     "status": "להזמין",
+     "link": "",
+     "notes": "מ־£47 · AirAsia / Thai Lion לדון מואנג, או Thai / Bangkok Airways לסוברנבומי — כל אחד מתאים, הטיסה הביתה רק מחר",
+     "id": "s_p9_2",
+     "done": false,
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "מחיר טיסה פוקט–בנגקוק לאדם אחד.",
+      "lowFactor": 0.8,
+      "highFactor": 1.4,
+      "sourceUrl": "",
+      "checked": "2026-10-28"
+     },
+     "managed": true
+    },
+    {
+     "time": "15:00",
+     "dur": "0:30",
+     "act": "צ׳ק-אין — Eleven Bangkok",
+     "loc": "סוקומווית 11",
+     "cat": "אחר",
+     "baht": null,
+     "status": "מוזמן",
+     "link": "",
+     "notes": "צ׳ק-אין מ־14:00 · פיקדון ฿1,000 במזומן, מוחזר בצ׳ק-אאוט",
+     "id": "s_p9_3",
+     "done": false,
+     "priceEstimate": {
+      "kind": "no-extra",
+      "basis": "לא הוקצה חיוב נפרד לפעולה הזאת; חיובים כלולים מופיעים בחבילה או בהזמנה.",
+      "lowFactor": 1,
+      "highFactor": 1,
+      "sourceUrl": "",
+      "checked": "2026-10-28"
+     },
+     "managed": true
+    },
+    {
+     "time": "19:30",
+     "dur": "1:00",
+     "act": "ארוחת ערב בסוקומווית",
+     "loc": "בנגקוק",
+     "cat": "אוכל",
+     "baht": 400,
+     "status": "משלמים במקום",
+     "link": "",
+     "notes": "",
+     "id": "s_p9_4",
+     "done": false,
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
+      "lowFactor": 0.8,
+      "highFactor": 1.3,
+      "sourceUrl": "",
+      "checked": "2026-10-28"
+     },
+     "managed": true
+    },
+    {
+     "time": "21:30",
+     "dur": "3:00",
+     "act": "לילה אחרון — סוקומווית 11",
+     "loc": "בנגקוק",
+     "cat": "אטרקציות",
+     "baht": 800,
+     "status": "משלמים במקום",
+     "link": "",
+     "notes": "ברים על סוי 11 · לא מאוחר מדי — מחר יוצאים ב־07:45",
+     "id": "s_p9_night",
+     "done": false,
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "אומדן תכנון לאדם אחד.",
+      "lowFactor": 0.8,
+      "highFactor": 1.3,
+      "sourceUrl": "",
+      "checked": "2026-10-28",
+      "split": "full-itai"
+     },
+     "managed": true
+    },
+    {
+     "time": "",
+     "dur": "",
+     "act": "לינה — Eleven Bangkok Sukhumvit 11",
+     "loc": "בנגקוק",
+     "cat": "לינה",
+     "baht": null,
+     "status": "מוזמן",
+     "link": "https://www.booking.com/",
+     "notes": "Grand Deluxe King · אישור 5243050600 · ฿3,010.10, בוקינג מחייבת אוטומטית · ביטול חינם עד 5/12 · ‎+66 2 080 3111",
+     "id": "s_p9_stay",
+     "done": false,
+     "priceEstimate": {
+      "kind": "booking",
+      "basis": "המחיר מההזמנה השמורה; נספר פעם אחת בלבד ומחולק בין לילות הלינה.",
+      "lowFactor": 1,
+      "highFactor": 1,
+      "sourceUrl": "",
+      "checked": "2026-10-28",
+      "booking": {
+       "category": "accommodation",
+       "split": "full-itai",
+       "key": "bangkok_last",
+       "match": "Eleven Bangkok",
+       "rows": 1,
+       "totalThb": 3010.1
+      }
+     },
+     "managed": true
+    }
+   ]
+  },
+  {
+   "day": 18,
+   "date": "2026-12-10",
+   "dow": "ה׳",
+   "dest": "בנגקוק → הביתה",
+   "summary": "הביתה",
+   "id": "day_18",
+   "owner": "itai",
+   "rows": [
+    {
+     "time": "07:45",
+     "dur": "0:45",
+     "act": "צ׳ק-אאוט · מונית לסוברנבומי",
+     "loc": "סוקומווית → BKK",
+     "cat": "תחבורה",
+     "baht": 400,
+     "status": "משלמים במקום",
+     "link": "",
+     "notes": "30–45 דקות בבוקר · לקחת את הפיקדון",
+     "id": "s_p10_0",
+     "done": false,
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "מונית לשדה.",
+      "lowFactor": 0.8,
+      "highFactor": 1.3,
+      "sourceUrl": "",
+      "checked": "2026-10-28",
+      "split": "full-itai"
+     },
+     "managed": true
+    },
+    {
+     "time": "08:30",
+     "dur": "2:45",
+     "act": "צ׳ק-אין, החזר מס ובידוק",
+     "loc": "BKK",
+     "cat": "אחר",
+     "baht": null,
+     "status": "משלמים במקום",
+     "link": "",
+     "notes": "להגיע 3 שעות לפני",
+     "id": "s_p10_1",
+     "done": false,
+     "priceEstimate": {
+      "kind": "no-extra",
+      "basis": "לא הוקצה חיוב נפרד לפעולה הזאת; חיובים כלולים מופיעים בחבילה או בהזמנה.",
+      "lowFactor": 1,
+      "highFactor": 1,
+      "sourceUrl": "",
+      "checked": "2026-10-28"
+     },
+     "managed": true
+    },
+    {
+     "time": "11:15",
+     "dur": "5:50",
+     "act": "ארקיע IZ592 · בנגקוק → תל אביב",
+     "loc": "BKK → TLV",
+     "cat": "תחבורה",
+     "baht": null,
+     "status": "מוזמן",
+     "link": "",
+     "notes": "ישירה · IL-604062 · הוחלפה מ־IZ598 מפוקט ב־8/12, בתוספת 210$",
+     "id": "s_p10_2",
+     "done": false,
+     "priceEstimate": {
+      "kind": "booking",
+      "basis": "המחיר מההזמנה השמורה; נספר פעם אחת בלבד.",
+      "lowFactor": 1,
+      "highFactor": 1,
+      "sourceUrl": "",
+      "checked": "2026-10-28",
       "booking": {
        "key": "return",
-       "match": "IZ598",
+       "match": "IZ592",
        "totalIls": 1891,
        "rows": 1,
        "category": "flights",
        "split": "full-itai"
       }
-     }
+     },
+     "managed": true
     },
     {
-     "time": "23:00",
+     "time": "",
      "dur": "",
+     "act": "שינוי הטיסה הביתה — 210$",
+     "loc": "lastminute",
+     "cat": "תחבורה",
+     "baht": null,
+     "status": "מוזמן",
+     "link": "",
+     "notes": "שינוי מוצא ותאריך: פוקט 8/12 → בנגקוק 10/12",
+     "id": "s_p10_fee",
+     "done": false,
+     "priceEstimate": {
+      "kind": "booking",
+      "basis": "המחיר מההזמנה השמורה; נספר פעם אחת בלבד.",
+      "lowFactor": 1,
+      "highFactor": 1,
+      "sourceUrl": "",
+      "checked": "2026-10-28",
+      "booking": {
+       "key": "return_fee",
+       "match": "שינוי טיסה",
+       "totalIls": 777,
+       "rows": 1,
+       "category": "flights",
+       "split": "full-itai"
+      }
+     },
+     "managed": true
+    },
+    {
+     "time": "17:05",
+     "dur": "0:30",
      "act": "נחיתה בנתב״ג",
      "loc": "TLV",
      "cat": "אחר",
@@ -3840,7 +4031,7 @@ window.SHARED_SEED = {
      "status": "מוזמן",
      "link": "",
      "notes": "",
-     "id": "s_16_7",
+     "id": "s_p10_3",
      "done": false,
      "priceEstimate": {
       "kind": "no-extra",
@@ -3848,33 +4039,11 @@ window.SHARED_SEED = {
       "lowFactor": 1,
       "highFactor": 1,
       "sourceUrl": "",
-      "checked": "2026-09-14"
-     }
-    },
-    {
-     "time": "",
-     "dur": "",
-     "act": "מקרא: ירוק = מוזמן · אדום = צריך להזמין · תכלת = משלמים במקום · צהוב = אופציונלי, מחוץ לתקציב",
-     "loc": "",
-     "cat": "",
-     "baht": null,
-     "status": "",
-     "link": "",
-     "notes": "",
-     "id": "s_16_8",
-     "done": false,
-     "priceEstimate": {
-      "kind": "no-extra",
-      "basis": "לא הוקצה חיוב נפרד לפעולה הזאת; חיובים כלולים מופיעים בחבילה או בהזמנה.",
-      "lowFactor": 1,
-      "highFactor": 1,
-      "sourceUrl": "",
-      "checked": "2026-09-14"
-     }
+      "checked": "2026-10-28"
+     },
+     "managed": true
     }
-   ],
-   "summary": "בוקר בריזורט, ואז הביתה",
-   "id": "day_16"
+   ]
   }
  ],
  "bookings": [
@@ -3887,11 +4056,11 @@ window.SHARED_SEED = {
    "freeCancel": "—"
   },
   {
-   "what": "ארקיע IZ598",
-   "when": "8/12",
-   "details": "פוקט → תל אביב, ישירה",
+   "what": "ארקיע IZ592",
+   "when": "10/12",
+   "details": "בנגקוק → תל אביב, ישירה · 11:15 → 17:05 · הוחלפה מ־IZ598 (פוקט, 8/12)",
    "ref": "IL-604062",
-   "payment": "שולם ₪1,891",
+   "payment": "שולם ₪1,891 + 210$ על השינוי",
    "freeCancel": "—"
   },
   {
@@ -3911,12 +4080,36 @@ window.SHARED_SEED = {
    "freeCancel": "ביטול חינם עד 14/11 23:59"
   },
   {
+   "what": "Sarana Bungalows",
+   "when": "2–5/12",
+   "details": "קופנגן, באן טאי · 3 לילות · Garden Bungalow",
+   "ref": "6196805940",
+   "payment": "฿3,060 — משלמים בהגעה",
+   "freeCancel": "ביטול חינם עד 28/11"
+  },
+  {
+   "what": "Our Jungle House",
+   "when": "5–6/12",
+   "details": "קאו סוק · לילה · Treehouse",
+   "ref": "6051801812090945732",
+   "payment": "שולם $138.89",
+   "freeCancel": "ביטול חינם עד 8/11 · אחר כך $13.89, ומ־19/11 כל הסכום"
+  },
+  {
    "what": "Kalima Resort and Villas",
-   "when": "2–8/12",
-   "details": "קאו לק · 6 לילות · 5 כוכבים, ספא מלא",
+   "when": "6–9/12",
+   "details": "קאו לאק · 3 לילות · 5 כוכבים, ספא מלא · לשנות בבוקינג מ־2–8/12",
    "ref": "—",
-   "payment": "₪4,029",
+   "payment": "כ־₪2,103 אחרי השינוי (היה ₪4,029)",
    "freeCancel": "ביטול חינם"
+  },
+  {
+   "what": "Eleven Bangkok Sukhumvit 11",
+   "when": "9–10/12",
+   "details": "בנגקוק · לילה · איתי · Grand Deluxe King",
+   "ref": "5243050600",
+   "payment": "฿3,010.10 — בוקינג מחייבת אוטומטית",
+   "freeCancel": "ביטול חינם עד 5/12"
   },
   {
    "what": "Phor Liang Meun, צ׳יאנג מאי",
@@ -4058,16 +4251,52 @@ window.SHARED_SEED = {
    "linkLink": "https://www.booking.com/hotel/th/at-thara-aonang.html"
   },
   {
-   "dest": "קאו לק",
-   "dates": "2–8/12",
-   "nights": 6,
+   "dest": "קופנגן",
+   "dates": "2–5/12",
+   "nights": 3,
+   "hotel": "Sarana Bungalows",
+   "what": "8.8 · Garden Bungalow עם מיטת קינג בבאן טאי, ליד ה־Halfmoon · אישור 6196805940 · משלמים בהגעה.",
+   "perNight": 1020,
+   "choice": "מוזמן",
+   "freeCancel": "עד 28/11",
+   "link": "בוקינג",
+   "linkLink": "https://www.booking.com/hotel/th/sarana-bungalows.html"
+  },
+  {
+   "dest": "קאו סוק",
+   "dates": "5–6/12",
+   "nights": 1,
+   "hotel": "Our Jungle House",
+   "what": "8.6 · Treehouse ליד הנהר והצוקים · אישור 6051801812090945732 · שולם $138.89.",
+   "perNight": "$138.89",
+   "choice": "מוזמן",
+   "freeCancel": "עד 8/11",
+   "link": "בוקינג",
+   "linkLink": "https://www.booking.com/"
+  },
+  {
+   "dest": "קאו לאק",
+   "dates": "6–9/12",
+   "nights": 3,
    "hotel": "Kalima Resort and Villas Khao Lak",
    "what": "8.8 על 2,576 ביקורות · 5 כוכבים · ספא מלא עם חדר אדים, עיסוי זוגות, טיפולי גוף, בריכת אינפיניטי, בריכת מים מלוחים, בר-בריכה, יוגה וחדר כושר. גם פארק מים ומועדון ילדים.",
    "perNight": 7476.83,
    "choice": "מוזמן",
-   "freeCancel": "יש",
+   "freeCancel": "יש · לשנות את התאריכים מ־2–8/12",
    "link": "בוקינג",
-   "linkLink": "https://www.booking.com/hotel/th/kalima-resort-amp-villas-khao-lak.html"
+   "linkLink": "https://www.booking.com/hotel/th/kalima-resort-amp-villas-khao-lak.html?checkin=2026-12-06&checkout=2026-12-09&group_adults=2"
+  },
+  {
+   "dest": "בנגקוק — איתי",
+   "dates": "9–10/12",
+   "nights": 1,
+   "hotel": "Eleven Bangkok Sukhumvit 11",
+   "what": "Grand Deluxe King על סוי 11 · אישור 5243050600 · פיקדון ฿1,000 במזומן.",
+   "perNight": 3010.1,
+   "choice": "מוזמן",
+   "freeCancel": "עד 5/12",
+   "link": "בוקינג",
+   "linkLink": "https://www.booking.com/"
   },
   {
    "dest": "קאו סוק — הגרסה שנזנחה",
@@ -4145,11 +4374,6 @@ window.SHARED_SEED = {
   }
  ],
  "cuts": [
-  {
-   "what": "לוותר על קאו סוק",
-   "save": "כ-₪700 לזוג",
-   "lose": "הנוף היחיד בטיול שהוא לא חוף. נשארים שישה ימי חוף רצופים."
-  },
   {
    "what": "חדר Deluxe במחנה במקום הדירה הפנורמית",
    "save": "כ-₪175",

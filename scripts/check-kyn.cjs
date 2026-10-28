@@ -9,7 +9,7 @@ vm.runInContext(read('public/shared-seed.js'),ctx);
 vm.runInContext(read('public/trip-app.js').replace(/loadState\(\);\s*$/,''),ctx);
 const run = s=>vm.runInContext(s,ctx);
 run('STATE=seedData(); ensureDefaults();');
-assert.equal(run('STATE.schema'),14);
+assert.equal(run('STATE.schema'),15);
 // Talia has not paid for anything on this trip yet — every booking so far is Itai's.
 assert.equal(run('wallet().expenses.filter(x=>x.paidBy==="talia").length'),0);
 assert.equal(run('balance().taliaPaid'),0);
@@ -50,8 +50,9 @@ assert.equal(run('JSON.stringify(STATE)'),migrated);
 run(`STATE=seedData(); STATE.schema=5;
 STATE.money.expenses=[{id:'manual-kyn',title:'KYN Phoenix deposit',amount:7290,currency:'THB',paidBy:'talia',split:'equal',status:'paid'}];
 ensureDefaults();`);
-assert.equal(run('wallet().expenses.length'),1);
-assert.equal(run('wallet().expenses[0].status'),'paid');
+// (the Phangan move adds its own bookings, so count only the camp's)
+assert.equal(run('wallet().expenses.filter(x=>/KYN/.test(x.title)).length'),1);
+assert.equal(run('wallet().expenses.find(x=>x.id==="manual-kyn").status'),'paid');
 // A user-deleted package must not reappear after a reload of migrated data.
 run('wallet().expenses=[]; ensureDefaults();');
 assert.equal(run('wallet().expenses.length'),0);

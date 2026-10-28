@@ -8,17 +8,19 @@ const run=s=>vm.runInContext(s,ctx),near=(a,b)=>assert.ok(Math.abs(a-b)<.00001,`
 run('STATE=seedData();ensureDefaults();');
 const expenses=run('JSON.stringify(wallet())'),countries=run('JSON.stringify(STATE.countries)');
 const f=run('sharedForecast()');
-assert.equal(f.days.length,16);
+assert.equal(f.days.length,18); // Itai's 9–10/12 are his, and in his forecast.
 assert.ok(f.low<=f.base&&f.base<=f.high);
 near(f.itai+f.talia,f.base);
 near(Object.values(f.categories).reduce((a,b)=>a+b,0)+f.reserve,f.base);
 near(run('sharedEstimateDays().reduce((s,d)=>s+dayTotalBaht(d)*rate(),0)')+f.reserve,f.base);
-near(f.categories.flights,3777+1891+5390*.08981); // Includes TG203, the later Phuket flight.
+near(f.categories.flights,3777+1891+777+5390*.08981); // TG203, and the home flight moved to Bangkok on 10/12 with its change fee.
 assert.ok(f.optional>0);
-near(f.categories.accommodation,8169.87*.08981+1839+4029+12150*.08981); // Montraj booked direct; KYN corrected from 14,580.
+near(f.categories.accommodation,8169.87*.08981+1839+12150*.08981+3060*.08981+514+2103+3010.10*.08981); // Montraj direct; KYN corrected; Phangan, Khao Sok, Kalima for 3 nights, Itai's last night.
 near(run('sharedRowPrice(sh().days[0].rows.find(r=>r.id==="s_1_0")).base'),3777);
-near(run('sharedRowPrice(sh().days[15].rows.find(r=>r.id==="s_16_6")).shares.itai'),1891);
-assert.equal(run('sh().days.flatMap(d=>d.rows).find(r=>r.id==="s_15_3").baht'),0);
+near(run('sharedRowPrice(sh().days.find(d=>d.date==="2026-12-10").rows.find(r=>r.id==="s_p10_2")).shares.itai'),1891);
+assert.equal(run('sharedRowPrice(sh().days.find(d=>d.date==="2026-12-10").rows.find(r=>r.id==="s_p10_2")).shares.talia'),0);
+// Itai's last night is his alone.
+assert.equal(run('sharedRowPrice(sh().days.find(d=>d.date==="2026-12-09").rows.find(r=>r.id==="s_p9_stay")).shares.talia'),0);
 assert.equal(run('sh().days.flatMap(d=>d.rows).find(r=>r.id==="s_8_1").baht'),0);
 assert.equal(run('JSON.stringify(wallet())'),expenses);
 assert.equal(run('JSON.stringify(STATE.countries)'),countries);
@@ -29,7 +31,7 @@ near(run('sharedForecast().base'),f.base);
 run(`STATE=seedData();delete STATE.shared.priceEstimateVersion;
 for(const day of sh().days){day.rows=day.rows.filter(r=>!['s_1_atm','s_1_laundry','s_1_tips','s_5_fuel','s_5_private','s_1_insurance','s_1_airport_il'].includes(r.id));for(const row of day.rows)delete row.priceEstimate;}
 const sim=sh().days[0].rows.find(r=>r.id==='s_1_2');sim.baht=800;sim.notes='Custom note';sim.done=true;
-const lunch=sh().days.flatMap(d=>d.rows).find(r=>r.id==='s_15_3');lunch.baht=999;
+const lunch=sh().days.flatMap(d=>d.rows).find(r=>r.id==='s_9_3');lunch.baht=999;
 const beforeCountries=JSON.stringify(STATE.countries),beforeMoney=JSON.stringify(STATE.money);
 ensureDefaults();`);
 assert.equal(run('sim.baht'),1600);
@@ -49,6 +51,6 @@ near(run('sharedRowPrice(lunch).base'),123.45);
 near(run('sharedRowPrice(sh().days[0].rows.find(r=>r.id==="s_1_0")).base'),3777);
 assert.equal(run('renderSharedForecast().includes("฿")'),false);
 const source=JSON.parse(read('scripts/itinerary.json'));
-assert.equal(source.length,16);
+assert.equal(source.length,18);
 console.log('PASS: ILS forecast, both flights, no duplicate bookings/inclusions, sums/shares/ranges, optional separation, scope, migration preservation and fixed ILS edits.');
 console.log(JSON.stringify({base:f.base,low:f.low,high:f.high,itai:f.itai,optional:f.optional}));

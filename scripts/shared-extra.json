@@ -9,11 +9,11 @@
    "freeCancel": "—"
   },
   {
-   "what": "ארקיע IZ598",
-   "when": "8/12",
-   "details": "פוקט → תל אביב, ישירה",
+   "what": "ארקיע IZ592",
+   "when": "10/12",
+   "details": "בנגקוק → תל אביב, ישירה · 11:15 → 17:05 · הוחלפה מ־IZ598 (פוקט, 8/12)",
    "ref": "IL-604062",
-   "payment": "שולם ₪1,891",
+   "payment": "שולם ₪1,891 + 210$ על השינוי",
    "freeCancel": "—"
   },
   {
@@ -33,12 +33,36 @@
    "freeCancel": "ביטול חינם עד 14/11 23:59"
   },
   {
+   "what": "Sarana Bungalows",
+   "when": "2–5/12",
+   "details": "קופנגן, באן טאי · 3 לילות · Garden Bungalow",
+   "ref": "6196805940",
+   "payment": "฿3,060 — משלמים בהגעה",
+   "freeCancel": "ביטול חינם עד 28/11"
+  },
+  {
+   "what": "Our Jungle House",
+   "when": "5–6/12",
+   "details": "קאו סוק · לילה · Treehouse",
+   "ref": "6051801812090945732",
+   "payment": "שולם $138.89",
+   "freeCancel": "ביטול חינם עד 8/11 · אחר כך $13.89, ומ־19/11 כל הסכום"
+  },
+  {
    "what": "Kalima Resort and Villas",
-   "when": "2–8/12",
-   "details": "קאו לק · 6 לילות · 5 כוכבים, ספא מלא",
+   "when": "6–9/12",
+   "details": "קאו לאק · 3 לילות · 5 כוכבים, ספא מלא · לשנות בבוקינג מ־2–8/12",
    "ref": "—",
-   "payment": "₪4,029",
+   "payment": "כ־₪2,103 אחרי השינוי (היה ₪4,029)",
    "freeCancel": "ביטול חינם"
+  },
+  {
+   "what": "Eleven Bangkok Sukhumvit 11",
+   "when": "9–10/12",
+   "details": "בנגקוק · לילה · איתי · Grand Deluxe King",
+   "ref": "5243050600",
+   "payment": "฿3,010.10 — בוקינג מחייבת אוטומטית",
+   "freeCancel": "ביטול חינם עד 5/12"
   },
   {
    "what": "Phor Liang Meun, צ׳יאנג מאי",
@@ -105,13 +129,11 @@
    "dest": "קו יאו נוי",
    "dates": "26–29/11",
    "nights": 3,
-   "hotel": "Panoramic Sunset View · KYN Phoenix",
-   "what": "฿3,800 לדירה ללילה כולל לינה, ארוחות ואימון לאדם אחד; לאדם השני ฿660 אימון + ฿400 ארוחות ליום. אומדן לשלושה לילות ושלושה ימי תוספת: ฿14,580; מקדמה 50%: ฿7,290. נשלחה בקשה להתקדם; טרם שולם. הסכום הסופי וכיסוי יום העזיבה טעונים אישור.",
-   "perNight": 4860,
-   "totalB": "=C8*F8",
-   "ils": "=G8*סקירה!$B$5",
-   "choice": "ממתינים לפרטי בנק ולתשלום מקדמה",
-   "freeCancel": "לברר תנאי ביטול והחזר מקדמה",
+   "hotel": "Sea House Room · KYN Phoenix",
+   "what": "החבילה שאושרה: חדר, ארוחות ואימוני קבוצה לשניים, 3 לילות ב-฿12,150. ביום ראשון אין אימונים ואין הגשת אוכל.",
+   "perNight": 4050,
+   "choice": "הבחירה",
+   "freeCancel": "אין — מקדמה 50% שאינה מוחזרת",
    "link": "אתר המחנה",
    "linkLink": "https://www.phuket-krabi-muaythai.com/prices-accomodation/"
   },
@@ -200,29 +222,65 @@
    "linkLink": "https://www.booking.com/hotel/th/at-thara-aonang.html"
   },
   {
-   "dest": "קאו לק",
-   "dates": "2–8/12",
-   "nights": 6,
+   "dest": "קופנגן",
+   "dates": "2–5/12",
+   "nights": 3,
+   "hotel": "Sarana Bungalows",
+   "what": "8.8 · Garden Bungalow עם מיטת קינג בבאן טאי, ליד ה־Halfmoon · אישור 6196805940 · משלמים בהגעה.",
+   "perNight": 1020,
+   "choice": "מוזמן",
+   "freeCancel": "עד 28/11",
+   "link": "בוקינג",
+   "linkLink": "https://www.booking.com/hotel/th/sarana-bungalows.html"
+  },
+  {
+   "dest": "קאו סוק",
+   "dates": "5–6/12",
+   "nights": 1,
+   "hotel": "Our Jungle House",
+   "what": "8.6 · Treehouse ליד הנהר והצוקים · אישור 6051801812090945732 · שולם $138.89.",
+   "perNight": "$138.89",
+   "choice": "מוזמן",
+   "freeCancel": "עד 8/11",
+   "link": "בוקינג",
+   "linkLink": "https://www.booking.com/"
+  },
+  {
+   "dest": "קאו לאק",
+   "dates": "6–9/12",
+   "nights": 3,
    "hotel": "Kalima Resort and Villas Khao Lak",
    "what": "8.8 על 2,576 ביקורות · 5 כוכבים · ספא מלא עם חדר אדים, עיסוי זוגות, טיפולי גוף, בריכת אינפיניטי, בריכת מים מלוחים, בר-בריכה, יוגה וחדר כושר. גם פארק מים ומועדון ילדים.",
    "perNight": 7476.83,
    "totalB": "=C15*F15",
    "ils": "=G15*סקירה!$B$5",
    "choice": "מוזמן",
-   "freeCancel": "יש",
+   "freeCancel": "יש · לשנות את התאריכים מ־2–8/12",
    "link": "בוקינג",
-   "linkLink": "https://www.booking.com/hotel/th/kalima-resort-amp-villas-khao-lak.html"
+   "linkLink": "https://www.booking.com/hotel/th/kalima-resort-amp-villas-khao-lak.html?checkin=2026-12-06&checkout=2026-12-09&group_adults=2"
   },
   {
-   "dest": "קאו סוק",
-   "dates": "4–5/12",
+   "dest": "בנגקוק — איתי",
+   "dates": "9–10/12",
+   "nights": 1,
+   "hotel": "Eleven Bangkok Sukhumvit 11",
+   "what": "Grand Deluxe King על סוי 11 · אישור 5243050600 · פיקדון ฿1,000 במזומן.",
+   "perNight": 3010.1,
+   "choice": "מוזמן",
+   "freeCancel": "עד 5/12",
+   "link": "בוקינג",
+   "linkLink": "https://www.booking.com/"
+  },
+  {
+   "dest": "קאו סוק — הגרסה שנזנחה",
+   "dates": "5–6/12",
    "nights": 1,
    "hotel": "בונגלו צף על אגם צ׳או לאן",
-   "what": "כלול בסיור של ฿8,500 לאדם — לינה, אגרות פארק, מדריך, ארוחות, קאנו ומערה. הרציף כשעתיים מקאו לק, ולכן לילה ולא יום. שימו לב: החדר בקלימה משולם גם בלילה הזה.",
+   "what": "לילה בבונגלו צף, כלול בסיור של ฿8,500 לאדם. נשאר להשוואה — בחרנו בטיול יום (5/12, ฿3,900 לאדם): חוסך כ-฿9,200 לזוג, ולא משלמים על לילה ריק בקלימה.",
    "perNight": "כלול",
    "totalB": "",
    "ils": "",
-   "choice": "מומלץ",
+   "choice": "לא נבחר",
    "freeCancel": "לבדוק מול המפעיל",
    "link": "בוקינג",
    "linkLink": "https://www.khaolaklanddiscovery.com/khao-lak-tours/cheow-lan-lake-khao-sok-floating-bungalows-tour/"
@@ -240,6 +298,20 @@
    "freeCancel": "יש",
    "link": "בוקינג",
    "linkLink": "https://www.booking.com/hotel/th/chaw-ka-cher-tropicana-lanta-resort.html"
+  },
+  {
+   "dest": "קו יאו נוי",
+   "dates": "26–29/11",
+   "nights": 3,
+   "hotel": "Panoramic Sunset View · KYN Phoenix",
+   "what": "฿3,800 לדירה ללילה כולל לינה, ארוחות ואימון לאדם אחד; לאדם השני ฿660 אימון + ฿400 ארוחות ליום. אומדן לשלושה לילות ושלושה ימי תוספת: ฿14,580; מקדמה 50%: ฿7,290. נשלחה בקשה להתקדם; טרם שולם. הסכום הסופי וכיסוי יום העזיבה טעונים אישור.",
+   "perNight": 4860,
+   "totalB": "=C8*F8",
+   "ils": "=G8*סקירה!$B$5",
+   "choice": "ממתינים לפרטי בנק ולתשלום מקדמה",
+   "freeCancel": "לברר תנאי ביטול והחזר מקדמה",
+   "link": "אתר המחנה",
+   "linkLink": "https://www.phuket-krabi-muaythai.com/prices-accomodation/"
   }
  ],
  "info": [
