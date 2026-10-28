@@ -1749,8 +1749,8 @@ function getCssVar(v){
    התוכן קבוע כאן; מה שמשתנה (מלון שהוזמן, מה סומן) נשמר ב־shared.planB.
 ========================================================= */
 const PLAN_B = {
-  flight: 'טיסת החזור ל־10/12 — lastminute בודקים מעבר לבנגקוק (IL-604062)',
-  flightNote: 'ארקיע לא טסה מפוקט ב־10/12 (הבאה פנויה 15/12). מבנגקוק יש טיסה אחת ב־10/12 — אור מ־lastminute בודק אם אפשר להעביר את המוצא ומה העלות.',
+  flight: 'ארקיע IZ592 · בנגקוק 11:15 → תל אביב 17:05 · 10/12 — שינוי ב־210$, ממתין לאישור (IL-604062)',
+  flightNote: 'ארקיע לא טסה מפוקט ב־10/12, אז המוצא עובר לבנגקוק. כרטיס חדש לאותה טיסה מ־₪2,119 — השינוי זול בהרבה.',
   days: [
     {date:'2026-12-02', place:'קופנגן', wiki:'Ko Pha-ngan', hue:'#3E8E9B', title:'אאו נאנג ← קופנגן · Halfmoon', rows:[
       ['07:15','איסוף מהמלון באאו נאנג (Lomprayah, כ־฿150)'],
@@ -1783,8 +1783,9 @@ const PLAN_B = {
       ['','HKT → DMK (מ־£47)'],
       ['14:00','צ׳ק־אין ב־Eleven Bangkok, Soi 11'],
       ['21:00','לילה אחרון בסוקומווית']]},
-    {date:'2026-12-10', place:'הביתה', wiki:'Suvarnabhumi Airport', hue:'#6B6B8A', title:'טיסה הביתה', who:'itai', rows:[
-      ['','טיסה הביתה — לפי מה ש־lastminute יאשרו']]}
+    {date:'2026-12-10', place:'הביתה', wiki:'Suvarnabhumi Airport', hue:'#6B6B8A', title:'IZ592 הביתה', who:'itai', rows:[
+      ['07:45','צ׳ק־אאוט · מונית לסוברנבומי (30–45 דק׳)'],
+      ['11:15','ארקיע IZ592 · BKK → TLV · נוחתים 17:05']]}
   ],
   stays: [
     {id:'phangan', dates:'2–5/12 · 3 לילות', place:'קופנגן, באן טאי',
@@ -1800,7 +1801,7 @@ const PLAN_B = {
      booked:{hotel:'Eleven Bangkok Sukhumvit 11 · Grand Deluxe King', conf:'5243050600', price:'฿3,010 · נגבה אוטומטית', cancel:'ביטול חינם עד 5/12 · פיקדון ฿1,000 במזומן'}}
   ],
   tasks: [
-    {id:'flight', text:'אישור מ־lastminute: חזרה מבנגקוק ב־10/12 (IL-604062)', who:'itai'},
+    {id:'flight', text:'לאשר ל־lastminute: IZ592 מבנגקוק ב־10/12 ב־210$ (IL-604062)', who:'itai'},
     {id:'junglecancel', text:'עד 8/11: לוודא שהטיסה אושרה — אחרת לבטל את Our Jungle House בחינם'},
     {id:'lomprayah', text:'Lomprayah אאו נאנג → קופנגן, 2/12 08:00, עם איסוף'},
     {id:'halfmoon', text:'כרטיסים ל־Halfmoon, 2–3/12'},
