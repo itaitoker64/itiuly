@@ -410,6 +410,8 @@ const WEST_TASKS = [
    notes:"5/12 מקאו סוק · דרך המלון או סוכנות בכפר · לתאם ואן לקאו לאק אחרי הסיור", link:""},
   {owner:"both", title:"להזמין סימילן, 6/12", deadline:"2026-11-30", priority:"בינונית", order:13.95,
    notes:"฿3,900 לאדם כולל אגרת פארק · איסוף מקלימה · 7/12 יום הגיבוי", link:"https://www.khaolaklanddiscovery.com/khao-lak-tours/similan-islands-tour/"},
+  {owner:"talia", title:"להחליט מה עושים אחרי 10/12", deadline:"2026-11-20", priority:"בינונית", order:13.96,
+   notes:"באפליקציה כרגע: לילה בצ׳יאנג מאי ב-10/12 והקורס בפאי מ-11/12 — הנחה בלבד. לבדוק מתי הקורס מתחיל ולעדכן", link:""},
   {owner:"itai", title:"לבטל את Sarana Bungalows — חינם עד 28/11", deadline:"2026-11-28", priority:"בינונית", order:13.97,
    notes:"אישור 6196805940 · קופנגן כבר לא במסלול · לא שולם מראש", link:"https://secure.booking.com/myreservations.html?bn=6196805940"}
 ];
