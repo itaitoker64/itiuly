@@ -15,12 +15,12 @@ near(Object.values(f.categories).reduce((a,b)=>a+b,0)+f.reserve,f.base);
 near(run('sharedEstimateDays().reduce((s,d)=>s+dayTotalBaht(d)*rate(),0)')+f.reserve,f.base);
 near(f.categories.flights,3777+1891+777+5390*.08981); // TG203, and the home flight moved to Bangkok on 10/12 with its change fee.
 assert.ok(f.optional>0);
-near(f.categories.accommodation,8169.87*.08981+1839+12150*.08981+2661+3010.10*.08981+(2*3988+2059+5323)*.08981); // Montraj direct; KYN corrected; Kalima 5–8/12; Bangkok booked; Phi Phi, Khao Sok and Patong still estimates.
+near(f.categories.accommodation,8169.87*.08981+1839+12150*.08981+2072+3010.10*.08981+(2*3988+2*2574)*.08981); // Montraj direct; KYN corrected; Kalima 6–9/12; Bangkok booked; Phi Phi and two Khao Sok nights still estimates.
 near(run('sharedRowPrice(sh().days[0].rows.find(r=>r.id==="s_1_0")).base'),3777);
 near(run('sharedRowPrice(sh().days.find(d=>d.date==="2026-12-10").rows.find(r=>r.id==="s_f10_2")).shares.itai'),1891);
 assert.equal(run('sharedRowPrice(sh().days.find(d=>d.date==="2026-12-10").rows.find(r=>r.id==="s_f10_2")).shares.talia'),0);
 // The last night in Bangkok is shared now — Talia is there too.
-assert.ok(run('sharedRowPrice(sh().days.find(d=>d.date==="2026-12-09").rows.find(r=>r.id==="s_f9_stay")).shares.talia')>0);
+assert.ok(run('sharedRowPrice(sh().days.find(d=>d.date==="2026-12-09").rows.find(r=>r.id==="s_g9_stay")).shares.talia')>0);
 assert.equal(run('sh().days.flatMap(d=>d.rows).find(r=>r.id==="s_8_1").baht'),0);
 assert.equal(run('JSON.stringify(wallet())'),expenses);
 assert.equal(run('JSON.stringify(STATE.countries)'),countries);

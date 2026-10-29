@@ -40,21 +40,15 @@ window.SHARED_SEED = {
   },
   {
    "name": "קאו סוק",
-   "dates": "ו׳ 4/12",
-   "nights": 1,
-   "what": "לילה בג׳ונגל · אגם צ׳או לאן בבוקר"
+   "dates": "ו׳ 4/12 – ש׳ 5/12",
+   "nights": 2,
+   "what": "ג׳ונגל, נהר, ואגם צ׳או לאן"
   },
   {
    "name": "קאו לאק",
-   "dates": "ש׳ 5/12 – ב׳ 7/12",
+   "dates": "א׳ 6/12 – ג׳ 8/12",
    "nights": 3,
    "what": "קלימה · סימילן ויום גיבוי"
-  },
-  {
-   "name": "פטונג",
-   "dates": "ג׳ 8/12",
-   "nights": 1,
-   "what": "Bangla Road"
   },
   {
    "name": "בנגקוק",
@@ -2974,7 +2968,7 @@ window.SHARED_SEED = {
      "status": "משלמים במקום",
      "link": "",
      "notes": "",
-     "id": "s_f4_0",
+     "id": "s_g4_0",
      "done": false,
      "priceEstimate": {
       "kind": "estimate",
@@ -2996,7 +2990,7 @@ window.SHARED_SEED = {
      "status": "להזמין",
      "link": "https://12go.com/en/travel/koh-phi-phi/khao-sok",
      "notes": "כרטיס משולב, כ-18–23$ לאדם · יציאה סביב 09:00, הגעה בערך 15:00–15:30 · לפי ביקורות הנסיעה מתארכת — לא לתכנן משהו קשיח לאחר הצהריים",
-     "id": "s_f4_1",
+     "id": "s_g4_1",
      "done": false,
      "priceEstimate": {
       "kind": "estimate",
@@ -3017,8 +3011,8 @@ window.SHARED_SEED = {
      "baht": null,
      "status": "להזמין",
      "link": "",
-     "notes": "",
-     "id": "s_f4_2",
+     "notes": "שני לילות",
+     "id": "s_g4_2",
      "done": false,
      "priceEstimate": {
       "kind": "no-extra",
@@ -3040,7 +3034,7 @@ window.SHARED_SEED = {
      "status": "משלמים במקום",
      "link": "",
      "notes": "",
-     "id": "s_f4_3",
+     "id": "s_g4_3",
      "done": false,
      "wiki": "Khao Sok National Park",
      "priceEstimate": {
@@ -3063,7 +3057,7 @@ window.SHARED_SEED = {
      "status": "משלמים במקום",
      "link": "",
      "notes": "",
-     "id": "s_f4_4",
+     "id": "s_g4_4",
      "done": false,
      "priceEstimate": {
       "kind": "estimate",
@@ -3081,16 +3075,16 @@ window.SHARED_SEED = {
      "act": "לינה — Khao Sok Palmview",
      "loc": "קאו סוק",
      "cat": "לינה",
-     "baht": 2059,
+     "baht": 2574,
      "status": "להזמין",
-     "link": "https://www.booking.com/hotel/th/khao-sok-palmview-resort.html?checkin=2026-12-04&checkout=2026-12-05&group_adults=2",
-     "notes": "הבחירה — 8.9 על 2,187 ביקורות · כ-₪185 · חלופות: River Lodge (על הנהר) ₪185, River & Jungle ₪187 · Our Jungle House לא פנוי ב-4/12",
-     "id": "s_f4_stay",
+     "link": "https://www.booking.com/hotel/th/khao-sok-palmview-resort.html?checkin=2026-12-04&checkout=2026-12-06&group_adults=2",
+     "notes": "הבחירה — 8.9 על 2,187 ביקורות · כ-₪462 לשני הלילות · חלופות: River Lodge (על הנהר), River & Jungle · Our Jungle House לא פנוי ב-4/12",
+     "id": "s_g4_stay",
      "done": false,
      "wiki": "Khao Sok National Park",
      "priceEstimate": {
       "kind": "published",
-      "basis": "מחיר בבוקינג ל-4/12, נבדק 29/10.",
+      "basis": "מחיר בבוקינג לשני לילות, 4–6/12, נבדק 29/10.",
       "lowFactor": 0.9,
       "highFactor": 1.25,
       "sourceUrl": "https://www.booking.com/hotel/th/khao-sok-palmview-resort.html",
@@ -3104,8 +3098,8 @@ window.SHARED_SEED = {
    "day": 13,
    "date": "2026-12-05",
    "dow": "ש׳",
-   "dest": "קאו לאק",
-   "summary": "אגם צ׳או לאן, ואז קאו לאק",
+   "dest": "קאו סוק",
+   "summary": "אגם צ׳או לאן",
    "id": "day_13",
    "rows": [
     {
@@ -3118,7 +3112,7 @@ window.SHARED_SEED = {
      "status": "משלמים במקום",
      "link": "",
      "notes": "",
-     "id": "s_f5_0",
+     "id": "s_g5_0",
      "done": false,
      "priceEstimate": {
       "kind": "estimate",
@@ -3139,8 +3133,8 @@ window.SHARED_SEED = {
      "baht": 3600,
      "status": "להזמין",
      "link": "",
-     "notes": "סיור יום מקאו סוק, כ־฿1,500–1,800 לאדם כולל אגרות פארק וצהריים · מזמינים דרך Our Jungle House או סוכנות בכפר · הנוף היחיד בטיול שהוא לא חוף",
-     "id": "s_f5_1",
+     "notes": "סיור יום מקאו סוק, כ-฿1,500–1,800 לאדם כולל אגרות פארק וצהריים · מזמינים דרך המלון או סוכנות בכפר · חוזרים לכפר אחר הצהריים · הנוף היחיד בטיול שהוא לא חוף",
+     "id": "s_g5_1",
      "done": false,
      "wiki": "Cheow Lan Lake",
      "priceEstimate": {
@@ -3154,7 +3148,129 @@ window.SHARED_SEED = {
      "managed": true
     },
     {
-     "time": "15:00",
+     "time": "16:30",
+     "dur": "1:00",
+     "act": "מסאז׳ בכפר",
+     "loc": "קאו סוק",
+     "cat": "אחר",
+     "baht": 800,
+     "status": "משלמים במקום",
+     "link": "",
+     "notes": "",
+     "id": "s_g5_2",
+     "done": false,
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
+      "lowFactor": 0.8,
+      "highFactor": 1.3,
+      "sourceUrl": "",
+      "checked": "2026-10-29"
+     },
+     "managed": true
+    },
+    {
+     "time": "19:00",
+     "dur": "1:00",
+     "act": "ארוחת ערב בכפר",
+     "loc": "קאו סוק",
+     "cat": "אוכל",
+     "baht": 600,
+     "status": "משלמים במקום",
+     "link": "",
+     "notes": "",
+     "id": "s_g5_3",
+     "done": false,
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
+      "lowFactor": 0.8,
+      "highFactor": 1.3,
+      "sourceUrl": "",
+      "checked": "2026-10-29"
+     },
+     "managed": true
+    },
+    {
+     "time": "",
+     "dur": "",
+     "act": "לינה — Khao Sok Palmview",
+     "loc": "קאו סוק",
+     "cat": "לינה",
+     "baht": 2574,
+     "status": "להזמין",
+     "link": "https://www.booking.com/hotel/th/khao-sok-palmview-resort.html?checkin=2026-12-04&checkout=2026-12-06&group_adults=2",
+     "notes": "הבחירה — 8.9 על 2,187 ביקורות · כ-₪462 לשני הלילות · חלופות: River Lodge (על הנהר), River & Jungle · Our Jungle House לא פנוי ב-4/12",
+     "id": "s_g5_stay",
+     "done": false,
+     "wiki": "Khao Sok National Park",
+     "priceEstimate": {
+      "kind": "published",
+      "basis": "מחיר בבוקינג לשני לילות, 4–6/12, נבדק 29/10.",
+      "lowFactor": 0.9,
+      "highFactor": 1.25,
+      "sourceUrl": "https://www.booking.com/hotel/th/khao-sok-palmview-resort.html",
+      "checked": "2026-10-29"
+     },
+     "managed": true
+    }
+   ]
+  },
+  {
+   "day": 14,
+   "date": "2026-12-06",
+   "dow": "א׳",
+   "dest": "קאו לאק",
+   "summary": "בוקר בג׳ונגל, ואז קאו לאק",
+   "id": "day_14",
+   "rows": [
+    {
+     "time": "07:00",
+     "dur": "3:00",
+     "act": "הליכה מודרכת בג׳ונגל או קאנו על נהר סוק",
+     "loc": "פארק לאומי קאו סוק",
+     "cat": "אטרקציות",
+     "baht": 1500,
+     "status": "להזמין",
+     "link": "",
+     "notes": "בבוקר, כשהבעלי חיים פעילים · דרך המלון · כ-฿600–900 לאדם + אגרת פארק",
+     "id": "s_g6_0",
+     "done": false,
+     "wiki": "Khao Sok National Park",
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "אומדן סיור בוקר לשניים עם אגרת פארק.",
+      "lowFactor": 0.8,
+      "highFactor": 1.3,
+      "sourceUrl": "",
+      "checked": "2026-10-29"
+     },
+     "managed": true
+    },
+    {
+     "time": "10:30",
+     "dur": "1:00",
+     "act": "בראנץ׳ · צ׳ק-אאוט",
+     "loc": "קאו סוק",
+     "cat": "אוכל",
+     "baht": 400,
+     "status": "משלמים במקום",
+     "link": "",
+     "notes": "",
+     "id": "s_g6_1",
+     "done": false,
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
+      "lowFactor": 0.8,
+      "highFactor": 1.3,
+      "sourceUrl": "",
+      "checked": "2026-10-29"
+     },
+     "managed": true
+    },
+    {
+     "time": "13:00",
      "dur": "1:30",
      "act": "ואן לקאו לאק",
      "loc": "קאו סוק → קאו לאק",
@@ -3162,8 +3278,8 @@ window.SHARED_SEED = {
      "baht": 1800,
      "status": "להזמין",
      "link": "",
-     "notes": "כשעה וחצי · לתאם עם הסיור שיחזיר לכפר",
-     "id": "s_f5_2",
+     "notes": "כשעה וחצי · דרך המלון — ואן משותף כ-฿400 לאדם או רכב פרטי כ-฿1,800",
+     "id": "s_g6_2",
      "done": false,
      "priceEstimate": {
       "kind": "estimate",
@@ -3176,7 +3292,7 @@ window.SHARED_SEED = {
      "managed": true
     },
     {
-     "time": "17:00",
+     "time": "15:00",
      "dur": "0:30",
      "act": "צ׳ק-אין — קלימה",
      "loc": "קאו לאק",
@@ -3185,7 +3301,29 @@ window.SHARED_SEED = {
      "status": "מוזמן",
      "link": "",
      "notes": "",
-     "id": "s_f5_3",
+     "id": "s_g6_3",
+     "done": false,
+     "priceEstimate": {
+      "kind": "no-extra",
+      "basis": "לא הוקצה חיוב נפרד לפעולה הזאת; חיובים כלולים מופיעים בחבילה או בהזמנה.",
+      "lowFactor": 1,
+      "highFactor": 1,
+      "sourceUrl": "",
+      "checked": "2026-10-29"
+     },
+     "managed": true
+    },
+    {
+     "time": "16:00",
+     "dur": "2:00",
+     "act": "בריכה וחוף",
+     "loc": "קלימה",
+     "cat": "אחר",
+     "baht": null,
+     "status": "משלמים במקום",
+     "link": "",
+     "notes": "",
+     "id": "s_g6_4",
      "done": false,
      "priceEstimate": {
       "kind": "no-extra",
@@ -3207,7 +3345,7 @@ window.SHARED_SEED = {
      "status": "משלמים במקום",
      "link": "",
      "notes": "",
-     "id": "s_f5_4",
+     "id": "s_g6_5",
      "done": false,
      "priceEstimate": {
       "kind": "estimate",
@@ -3227,9 +3365,9 @@ window.SHARED_SEED = {
      "cat": "לינה",
      "baht": null,
      "status": "מוזמן",
-     "link": "https://www.booking.com/hotel/th/kalima-resort-amp-villas-khao-lak.html?checkin=2026-12-05&checkout=2026-12-08&group_adults=2",
-     "notes": "5–8/12 · 3 לילות (בהזמנה עדיין 2–8/12 — לשנות בבוקינג) · 8.9 על 2,551 ביקורות · ספא, בריכת אינפיניטי, יוגה",
-     "id": "s_f5_stay",
+     "link": "https://www.booking.com/hotel/th/kalima-resort-amp-villas-khao-lak.html?checkin=2026-12-06&checkout=2026-12-09&group_adults=2",
+     "notes": "6–9/12 · 3 לילות (בהזמנה עדיין 2–8/12 — לשנות בבוקינג) · 8.9 על 2,551 ביקורות · ספא, בריכת אינפיניטי, יוגה",
+     "id": "s_g6_stay",
      "done": false,
      "priceEstimate": {
       "kind": "booking",
@@ -3244,7 +3382,7 @@ window.SHARED_SEED = {
        "key": "khaolak",
        "match": "Kalima",
        "rows": 3,
-       "totalIls": 2661
+       "totalIls": 2072
       }
      },
      "managed": true
@@ -3252,12 +3390,12 @@ window.SHARED_SEED = {
    ]
   },
   {
-   "day": 14,
-   "date": "2026-12-06",
-   "dow": "א׳",
+   "day": 15,
+   "date": "2026-12-07",
+   "dow": "ב׳",
    "dest": "קאו לאק",
    "summary": "סימילן — היום הגדול של האנדמן",
-   "id": "day_14",
+   "id": "day_15",
    "rows": [
     {
      "time": "06:00",
@@ -3269,7 +3407,7 @@ window.SHARED_SEED = {
      "status": "משלמים במקום",
      "link": "",
      "notes": "",
-     "id": "s_f6_0",
+     "id": "s_g7_0",
      "done": false,
      "priceEstimate": {
       "kind": "no-extra",
@@ -3290,8 +3428,8 @@ window.SHARED_SEED = {
      "baht": 7800,
      "status": "להזמין",
      "link": "https://www.khaolaklanddiscovery.com/khao-lak-tours/",
-     "notes": "฿3,900 לאדם כולל אגרת פארק · איסוף מקלימה · שמורת האלמוגים הכי טובה באנדמן · אם השייט מבוטל בגלל הים, המפעילים מזיזים תאריך בלי עלות — 7/12 הוא יום הגיבוי",
-     "id": "s_f6_1",
+     "notes": "฿3,900 לאדם כולל אגרת פארק · איסוף מקלימה · שמורת האלמוגים הכי טובה באנדמן · אם השייט מבוטל בגלל הים, המפעילים מזיזים תאריך בלי עלות — 8/12 הוא יום הגיבוי",
+     "id": "s_g7_1",
      "done": false,
      "wiki": "Similan Islands",
      "managed": true,
@@ -3314,7 +3452,7 @@ window.SHARED_SEED = {
      "status": "משלמים במקום",
      "link": "",
      "notes": "",
-     "id": "s_f6_2",
+     "id": "s_g7_2",
      "done": false,
      "priceEstimate": {
       "kind": "no-extra",
@@ -3336,7 +3474,7 @@ window.SHARED_SEED = {
      "status": "משלמים במקום",
      "link": "",
      "notes": "",
-     "id": "s_f6_3",
+     "id": "s_g7_3",
      "done": false,
      "priceEstimate": {
       "kind": "estimate",
@@ -3356,9 +3494,9 @@ window.SHARED_SEED = {
      "cat": "לינה",
      "baht": null,
      "status": "מוזמן",
-     "link": "https://www.booking.com/hotel/th/kalima-resort-amp-villas-khao-lak.html?checkin=2026-12-05&checkout=2026-12-08&group_adults=2",
-     "notes": "5–8/12 · 3 לילות (בהזמנה עדיין 2–8/12 — לשנות בבוקינג) · 8.9 על 2,551 ביקורות · ספא, בריכת אינפיניטי, יוגה",
-     "id": "s_f6_stay",
+     "link": "https://www.booking.com/hotel/th/kalima-resort-amp-villas-khao-lak.html?checkin=2026-12-06&checkout=2026-12-09&group_adults=2",
+     "notes": "6–9/12 · 3 לילות (בהזמנה עדיין 2–8/12 — לשנות בבוקינג) · 8.9 על 2,551 ביקורות · ספא, בריכת אינפיניטי, יוגה",
+     "id": "s_g7_stay",
      "done": false,
      "priceEstimate": {
       "kind": "booking",
@@ -3373,7 +3511,7 @@ window.SHARED_SEED = {
        "key": "khaolak",
        "match": "Kalima",
        "rows": 3,
-       "totalIls": 2661
+       "totalIls": 2072
       }
      },
      "managed": true
@@ -3381,12 +3519,12 @@ window.SHARED_SEED = {
    ]
   },
   {
-   "day": 15,
-   "date": "2026-12-07",
-   "dow": "ב׳",
+   "day": 16,
+   "date": "2026-12-08",
+   "dow": "ג׳",
    "dest": "קאו לאק",
    "summary": "יום גיבוי לסימילן — או ספא",
-   "id": "day_15",
+   "id": "day_16",
    "rows": [
     {
      "time": "08:30",
@@ -3398,7 +3536,7 @@ window.SHARED_SEED = {
      "status": "משלמים במקום",
      "link": "",
      "notes": "",
-     "id": "s_f7_0",
+     "id": "s_g8_0",
      "done": false,
      "priceEstimate": {
       "kind": "estimate",
@@ -3420,7 +3558,7 @@ window.SHARED_SEED = {
      "status": "משלמים במקום",
      "link": "",
      "notes": "אם סימילן בוטל אתמול — היום יוצאים",
-     "id": "s_f7_1",
+     "id": "s_g8_1",
      "done": false,
      "priceEstimate": {
       "kind": "no-extra",
@@ -3433,7 +3571,7 @@ window.SHARED_SEED = {
      "managed": true
     },
     {
-     "id": "s_f7_zip",
+     "id": "s_g8_zip",
      "time": "13:30",
      "dur": "3:30",
      "act": "זיפליין ביער הגשם — Tree Top Adventure Park",
@@ -3444,7 +3582,7 @@ window.SHARED_SEED = {
      "link": "https://www.google.com/maps/search/?api=1&query=Tree+Top+Adventure+Park+Khao+Lak",
      "wiki": "Zip line",
      "done": false,
-     "notes": "אם סימילן יצא ב-6/12 · ฿2,200–2,600 לאדם · איסוף מהמלון כלול · נעליים סגורות",
+     "notes": "אם סימילן יצא ב-7/12 · ฿2,200–2,600 לאדם · איסוף מהמלון כלול · נעליים סגורות",
      "managed": true,
      "priceEstimate": {
       "kind": "estimate",
@@ -3465,7 +3603,7 @@ window.SHARED_SEED = {
      "status": "משלמים במקום",
      "link": "",
      "notes": "",
-     "id": "s_f7_2",
+     "id": "s_g8_2",
      "done": false,
      "priceEstimate": {
       "kind": "estimate",
@@ -3480,14 +3618,14 @@ window.SHARED_SEED = {
     {
      "time": "19:30",
      "dur": "1:00",
-     "act": "ארוחת ערב",
+     "act": "ארוחת ערב אחרונה בדרום",
      "loc": "קאו לאק",
      "cat": "אוכל",
      "baht": 850,
      "status": "משלמים במקום",
      "link": "",
      "notes": "",
-     "id": "s_f7_3",
+     "id": "s_g8_3",
      "done": false,
      "priceEstimate": {
       "kind": "estimate",
@@ -3509,7 +3647,7 @@ window.SHARED_SEED = {
      "status": "משלמים במקום",
      "link": "",
      "notes": "",
-     "id": "s_f7_night",
+     "id": "s_g8_night",
      "done": false,
      "priceEstimate": {
       "kind": "estimate",
@@ -3529,9 +3667,9 @@ window.SHARED_SEED = {
      "cat": "לינה",
      "baht": null,
      "status": "מוזמן",
-     "link": "https://www.booking.com/hotel/th/kalima-resort-amp-villas-khao-lak.html?checkin=2026-12-05&checkout=2026-12-08&group_adults=2",
-     "notes": "5–8/12 · 3 לילות (בהזמנה עדיין 2–8/12 — לשנות בבוקינג) · 8.9 על 2,551 ביקורות · ספא, בריכת אינפיניטי, יוגה",
-     "id": "s_f7_stay",
+     "link": "https://www.booking.com/hotel/th/kalima-resort-amp-villas-khao-lak.html?checkin=2026-12-06&checkout=2026-12-09&group_adults=2",
+     "notes": "6–9/12 · 3 לילות (בהזמנה עדיין 2–8/12 — לשנות בבוקינג) · 8.9 על 2,551 ביקורות · ספא, בריכת אינפיניטי, יוגה",
+     "id": "s_g8_stay",
      "done": false,
      "priceEstimate": {
       "kind": "booking",
@@ -3546,197 +3684,8 @@ window.SHARED_SEED = {
        "key": "khaolak",
        "match": "Kalima",
        "rows": 3,
-       "totalIls": 2661
+       "totalIls": 2072
       }
-     },
-     "managed": true
-    }
-   ]
-  },
-  {
-   "day": 16,
-   "date": "2026-12-08",
-   "dow": "ג׳",
-   "dest": "פטונג",
-   "summary": "מקאו לאק לפטונג · Bangla Road",
-   "id": "day_16",
-   "rows": [
-    {
-     "time": "08:30",
-     "dur": "1:00",
-     "act": "ארוחת בוקר אחרונה בקלימה",
-     "loc": "קלימה",
-     "cat": "אוכל",
-     "baht": 400,
-     "status": "משלמים במקום",
-     "link": "",
-     "notes": "",
-     "id": "s_f8_0",
-     "done": false,
-     "priceEstimate": {
-      "kind": "estimate",
-      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
-      "lowFactor": 0.8,
-      "highFactor": 1.3,
-      "sourceUrl": "",
-      "checked": "2026-10-29"
-     },
-     "managed": true
-    },
-    {
-     "time": "11:00",
-     "dur": "0:30",
-     "act": "צ׳ק-אאוט",
-     "loc": "קלימה",
-     "cat": "אחר",
-     "baht": null,
-     "status": "משלמים במקום",
-     "link": "",
-     "notes": "",
-     "id": "s_f8_1",
-     "done": false,
-     "priceEstimate": {
-      "kind": "no-extra",
-      "basis": "לא הוקצה חיוב נפרד לפעולה הזאת; חיובים כלולים מופיעים בחבילה או בהזמנה.",
-      "lowFactor": 1,
-      "highFactor": 1,
-      "sourceUrl": "",
-      "checked": "2026-10-29"
-     },
-     "managed": true
-    },
-    {
-     "time": "11:30",
-     "dur": "2:00",
-     "act": "רכב לפטונג",
-     "loc": "קאו לאק → פטונג",
-     "cat": "תחבורה",
-     "baht": 2200,
-     "status": "להזמין",
-     "link": "",
-     "notes": "כ-100 ק״מ, כשעתיים · דרך המלון או Grab",
-     "id": "s_f8_2",
-     "done": false,
-     "priceEstimate": {
-      "kind": "published",
-      "basis": "מחיר פתיחה לרכב קאו לאק–פטונג.",
-      "lowFactor": 0.9,
-      "highFactor": 1.3,
-      "sourceUrl": "",
-      "checked": "2026-10-29"
-     },
-     "managed": true
-    },
-    {
-     "time": "14:00",
-     "dur": "0:30",
-     "act": "צ׳ק-אין — Patong Beach Hotel",
-     "loc": "פטונג",
-     "cat": "אחר",
-     "baht": null,
-     "status": "להזמין",
-     "link": "",
-     "notes": "",
-     "id": "s_f8_3",
-     "done": false,
-     "priceEstimate": {
-      "kind": "no-extra",
-      "basis": "לא הוקצה חיוב נפרד לפעולה הזאת; חיובים כלולים מופיעים בחבילה או בהזמנה.",
-      "lowFactor": 1,
-      "highFactor": 1,
-      "sourceUrl": "",
-      "checked": "2026-10-29"
-     },
-     "managed": true
-    },
-    {
-     "time": "15:00",
-     "dur": "3:00",
-     "act": "חוף פטונג",
-     "loc": "פטונג",
-     "cat": "אחר",
-     "baht": null,
-     "status": "משלמים במקום",
-     "link": "",
-     "notes": "",
-     "id": "s_f8_4",
-     "done": false,
-     "wiki": "Patong",
-     "priceEstimate": {
-      "kind": "no-extra",
-      "basis": "לא הוקצה חיוב נפרד לפעולה הזאת; חיובים כלולים מופיעים בחבילה או בהזמנה.",
-      "lowFactor": 1,
-      "highFactor": 1,
-      "sourceUrl": "",
-      "checked": "2026-10-29"
-     },
-     "managed": true
-    },
-    {
-     "time": "19:30",
-     "dur": "1:00",
-     "act": "ארוחת ערב",
-     "loc": "פטונג",
-     "cat": "אוכל",
-     "baht": 800,
-     "status": "משלמים במקום",
-     "link": "",
-     "notes": "",
-     "id": "s_f8_5",
-     "done": false,
-     "priceEstimate": {
-      "kind": "estimate",
-      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
-      "lowFactor": 0.8,
-      "highFactor": 1.3,
-      "sourceUrl": "",
-      "checked": "2026-10-29"
-     },
-     "managed": true
-    },
-    {
-     "time": "22:00",
-     "dur": "4:00",
-     "act": "Bangla Road — הלילה הגדול",
-     "loc": "פטונג",
-     "cat": "אטרקציות",
-     "baht": 1500,
-     "status": "משלמים במקום",
-     "link": "",
-     "notes": "ברים ומועדונים לאורך הרחוב · מחר הטיסה רק בצהריים",
-     "id": "s_f8_night",
-     "done": false,
-     "wiki": "Bangla Road",
-     "priceEstimate": {
-      "kind": "estimate",
-      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
-      "lowFactor": 0.8,
-      "highFactor": 1.3,
-      "sourceUrl": "",
-      "checked": "2026-10-29"
-     },
-     "managed": true
-    },
-    {
-     "time": "",
-     "dur": "",
-     "act": "לינה — Patong Beach Hotel by See2Sea",
-     "loc": "פטונג",
-     "cat": "לינה",
-     "baht": 5323,
-     "status": "להזמין",
-     "link": "https://www.booking.com/hotel/th/patong-beach.html?checkin=2026-12-08&checkout=2026-12-09&group_adults=2",
-     "notes": "הבחירה — 9.1, על החוף, כמה דקות הליכה מ-Bangla Road · כ-₪478 · חלופות: Thanthip Beach ₪309, Patong Mansion ₪157",
-     "id": "s_f8_stay",
-     "done": false,
-     "wiki": "Patong",
-     "priceEstimate": {
-      "kind": "published",
-      "basis": "מחיר בבוקינג ל-8/12, נבדק 29/10.",
-      "lowFactor": 0.9,
-      "highFactor": 1.25,
-      "sourceUrl": "https://www.booking.com/hotel/th/patong-beach.html",
-      "checked": "2026-10-29"
      },
      "managed": true
     }
@@ -3751,45 +3700,45 @@ window.SHARED_SEED = {
    "id": "day_17",
    "rows": [
     {
-     "time": "09:00",
+     "time": "08:30",
      "dur": "1:00",
-     "act": "ארוחת בוקר",
-     "loc": "פטונג",
+     "act": "ארוחת בוקר אחרונה בקלימה",
+     "loc": "קלימה",
      "cat": "אוכל",
-     "baht": 400,
+     "baht": null,
      "status": "משלמים במקום",
      "link": "",
      "notes": "",
-     "id": "s_f9_0",
+     "id": "s_g9_0",
      "done": false,
      "priceEstimate": {
-      "kind": "estimate",
-      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
-      "lowFactor": 0.8,
-      "highFactor": 1.3,
+      "kind": "no-extra",
+      "basis": "לא הוקצה חיוב נפרד לפעולה הזאת; חיובים כלולים מופיעים בחבילה או בהזמנה.",
+      "lowFactor": 1,
+      "highFactor": 1,
       "sourceUrl": "",
       "checked": "2026-10-29"
      },
      "managed": true
     },
     {
-     "time": "11:00",
-     "dur": "0:45",
-     "act": "מונית לשדה התעופה בפוקט",
-     "loc": "פטונג → HKT",
+     "time": "10:30",
+     "dur": "1:30",
+     "act": "צ׳ק-אאוט · רכב לשדה התעופה בפוקט",
+     "loc": "קאו לאק → HKT",
      "cat": "תחבורה",
-     "baht": 800,
-     "status": "משלמים במקום",
+     "baht": 1800,
+     "status": "להזמין",
      "link": "",
-     "notes": "כ-45 דקות",
-     "id": "s_f9_1",
+     "notes": "כ-70 ק״מ, כשעה וחצי · לצאת שעתיים וחצי לפני הטיסה",
+     "id": "s_g9_1",
      "done": false,
      "priceEstimate": {
-      "kind": "estimate",
-      "basis": "מונית לשדה.",
-      "lowFactor": 0.8,
+      "kind": "published",
+      "basis": "מחיר פתיחה לרכב קאו לק–שדה התעופה בפוקט.",
+      "lowFactor": 1,
       "highFactor": 1.3,
-      "sourceUrl": "",
+      "sourceUrl": "https://www.khaolaklanddiscovery.com/",
       "checked": "2026-10-29"
      },
      "managed": true
@@ -3803,8 +3752,8 @@ window.SHARED_SEED = {
      "baht": 4000,
      "status": "להזמין",
      "link": "",
-     "notes": "לשניכם, באותה טיסה · מ-£47 לאדם · DMK או BKK — הטיסה הביתה רק מחר, מסוברנבומי",
-     "id": "s_f9_2",
+     "notes": "לשניכם, באותה טיסה · מ-£47 לאדם · עדיף אחרי 14:00, כדי לא למהר מקאו לאק · DMK או BKK — הטיסה הביתה רק מחר, מסוברנבומי",
+     "id": "s_g9_2",
      "done": false,
      "priceEstimate": {
       "kind": "estimate",
@@ -3817,7 +3766,7 @@ window.SHARED_SEED = {
      "managed": true
     },
     {
-     "time": "16:00",
+     "time": "17:30",
      "dur": "0:30",
      "act": "צ׳ק-אין — Eleven Bangkok",
      "loc": "סוקומווית 11",
@@ -3825,8 +3774,8 @@ window.SHARED_SEED = {
      "baht": null,
      "status": "מוזמן",
      "link": "",
-     "notes": "צ׳ק-אין מ-14:00 · פיקדון ฿1,000 במזומן, מוחזר בצ׳ק-אאוט",
-     "id": "s_f9_3",
+     "notes": "פיקדון ฿1,000 במזומן, מוחזר בצ׳ק-אאוט",
+     "id": "s_g9_3",
      "done": false,
      "priceEstimate": {
       "kind": "no-extra",
@@ -3848,7 +3797,7 @@ window.SHARED_SEED = {
      "status": "משלמים במקום",
      "link": "",
      "notes": "",
-     "id": "s_f9_4",
+     "id": "s_g9_4",
      "done": false,
      "priceEstimate": {
       "kind": "estimate",
@@ -3870,7 +3819,7 @@ window.SHARED_SEED = {
      "status": "משלמים במקום",
      "link": "",
      "notes": "ברים על סוי 11 · לא מאוחר מדי — איתי יוצא ב-07:45",
-     "id": "s_f9_night",
+     "id": "s_g9_night",
      "done": false,
      "priceEstimate": {
       "kind": "estimate",
@@ -3892,7 +3841,7 @@ window.SHARED_SEED = {
      "status": "מוזמן",
      "link": "https://www.booking.com/",
      "notes": "Grand Deluxe King · אישור 5243050600 · ההזמנה לאדם אחד — לעדכן לשניים · ביטול חינם עד 5/12 · ‎+66 2 080 3111",
-     "id": "s_f9_stay",
+     "id": "s_g9_stay",
      "done": false,
      "priceEstimate": {
       "kind": "booking",
@@ -4125,10 +4074,10 @@ window.SHARED_SEED = {
   },
   {
    "what": "Kalima Resort and Villas",
-   "when": "5–8/12",
+   "when": "6–9/12",
    "details": "קאו לאק · 3 לילות · 5 כוכבים, ספא מלא · לשנות בבוקינג מ-2–8/12",
    "ref": "—",
-   "payment": "כ-₪2,661 אחרי השינוי (היה ₪4,029)",
+   "payment": "כ-₪2,072 אחרי השינוי (היה ₪4,029)",
    "freeCancel": "ביטול חינם"
   },
   {
@@ -4304,11 +4253,11 @@ window.SHARED_SEED = {
   },
   {
    "dest": "קאו סוק",
-   "dates": "4–5/12",
-   "nights": 1,
+   "dates": "4–6/12",
+   "nights": 2,
    "hotel": "Khao Sok Palmview",
-   "what": "8.9 על 2,187 · כ-₪185.",
-   "perNight": 2059,
+   "what": "8.9 על 2,187 · כ-₪462 לשני הלילות.",
+   "perNight": 2574,
    "choice": "הבחירה",
    "freeCancel": "לבדוק",
    "link": "בוקינג",
@@ -4316,8 +4265,8 @@ window.SHARED_SEED = {
   },
   {
    "dest": "קאו סוק",
-   "dates": "4–5/12",
-   "nights": 1,
+   "dates": "4–6/12",
+   "nights": 2,
    "hotel": "Khao Sok River Lodge",
    "what": "8.9 · על הנהר · כ-₪185.",
    "perNight": 2059,
@@ -4325,30 +4274,6 @@ window.SHARED_SEED = {
    "freeCancel": "לבדוק",
    "link": "בוקינג",
    "linkLink": "https://www.booking.com/hotel/th/khao-sok-river-lodge.html"
-  },
-  {
-   "dest": "פטונג",
-   "dates": "8–9/12",
-   "nights": 1,
-   "hotel": "Patong Beach Hotel by See2Sea",
-   "what": "9.1 · על החוף, ליד Bangla Road · כ-₪478.",
-   "perNight": 5323,
-   "choice": "הבחירה",
-   "freeCancel": "לבדוק",
-   "link": "בוקינג",
-   "linkLink": "https://www.booking.com/hotel/th/patong-beach.html"
-  },
-  {
-   "dest": "פטונג",
-   "dates": "8–9/12",
-   "nights": 1,
-   "hotel": "Thanthip Beach Resort",
-   "what": "8.4 · 4 כוכבים, בריכה · כ-₪309.",
-   "perNight": 3445,
-   "choice": "חלופה",
-   "freeCancel": "לבדוק",
-   "link": "בוקינג",
-   "linkLink": "https://www.booking.com/hotel/th/thanthip-beach-resort.html"
   },
   {
    "dest": "קופנגן",
@@ -4376,7 +4301,7 @@ window.SHARED_SEED = {
   },
   {
    "dest": "קאו לאק",
-   "dates": "5–8/12",
+   "dates": "6–9/12",
    "nights": 3,
    "hotel": "Kalima Resort and Villas Khao Lak",
    "what": "8.8 על 2,576 ביקורות · 5 כוכבים · ספא מלא עם חדר אדים, עיסוי זוגות, טיפולי גוף, בריכת אינפיניטי, בריכת מים מלוחים, בר-בריכה, יוגה וחדר כושר. גם פארק מים ומועדון ילדים.",
@@ -4384,7 +4309,7 @@ window.SHARED_SEED = {
    "choice": "מוזמן",
    "freeCancel": "יש · לשנות את התאריכים מ-2–8/12",
    "link": "בוקינג",
-   "linkLink": "https://www.booking.com/hotel/th/kalima-resort-amp-villas-khao-lak.html?checkin=2026-12-05&checkout=2026-12-08&group_adults=2"
+   "linkLink": "https://www.booking.com/hotel/th/kalima-resort-amp-villas-khao-lak.html?checkin=2026-12-06&checkout=2026-12-09&group_adults=2"
   },
   {
    "dest": "בנגקוק — לילה אחרון",

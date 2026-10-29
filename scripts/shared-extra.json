@@ -50,10 +50,10 @@
   },
   {
    "what": "Kalima Resort and Villas",
-   "when": "5–8/12",
+   "when": "6–9/12",
    "details": "קאו לאק · 3 לילות · 5 כוכבים, ספא מלא · לשנות בבוקינג מ-2–8/12",
    "ref": "—",
-   "payment": "כ-₪2,661 אחרי השינוי (היה ₪4,029)",
+   "payment": "כ-₪2,072 אחרי השינוי (היה ₪4,029)",
    "freeCancel": "ביטול חינם"
   },
   {
@@ -247,11 +247,11 @@
   },
   {
    "dest": "קאו סוק",
-   "dates": "4–5/12",
-   "nights": 1,
+   "dates": "4–6/12",
+   "nights": 2,
    "hotel": "Khao Sok Palmview",
-   "what": "8.9 על 2,187 · כ-₪185.",
-   "perNight": 2059,
+   "what": "8.9 על 2,187 · כ-₪462 לשני הלילות.",
+   "perNight": 2574,
    "choice": "הבחירה",
    "freeCancel": "לבדוק",
    "link": "בוקינג",
@@ -259,8 +259,8 @@
   },
   {
    "dest": "קאו סוק",
-   "dates": "4–5/12",
-   "nights": 1,
+   "dates": "4–6/12",
+   "nights": 2,
    "hotel": "Khao Sok River Lodge",
    "what": "8.9 · על הנהר · כ-₪185.",
    "perNight": 2059,
@@ -268,30 +268,6 @@
    "freeCancel": "לבדוק",
    "link": "בוקינג",
    "linkLink": "https://www.booking.com/hotel/th/khao-sok-river-lodge.html"
-  },
-  {
-   "dest": "פטונג",
-   "dates": "8–9/12",
-   "nights": 1,
-   "hotel": "Patong Beach Hotel by See2Sea",
-   "what": "9.1 · על החוף, ליד Bangla Road · כ-₪478.",
-   "perNight": 5323,
-   "choice": "הבחירה",
-   "freeCancel": "לבדוק",
-   "link": "בוקינג",
-   "linkLink": "https://www.booking.com/hotel/th/patong-beach.html"
-  },
-  {
-   "dest": "פטונג",
-   "dates": "8–9/12",
-   "nights": 1,
-   "hotel": "Thanthip Beach Resort",
-   "what": "8.4 · 4 כוכבים, בריכה · כ-₪309.",
-   "perNight": 3445,
-   "choice": "חלופה",
-   "freeCancel": "לבדוק",
-   "link": "בוקינג",
-   "linkLink": "https://www.booking.com/hotel/th/thanthip-beach-resort.html"
   },
   {
    "dest": "קופנגן",
@@ -319,7 +295,7 @@
   },
   {
    "dest": "קאו לאק",
-   "dates": "5–8/12",
+   "dates": "6–9/12",
    "nights": 3,
    "hotel": "Kalima Resort and Villas Khao Lak",
    "what": "8.8 על 2,576 ביקורות · 5 כוכבים · ספא מלא עם חדר אדים, עיסוי זוגות, טיפולי גוף, בריכת אינפיניטי, בריכת מים מלוחים, בר-בריכה, יוגה וחדר כושר. גם פארק מים ומועדון ילדים.",
@@ -329,7 +305,7 @@
    "choice": "מוזמן",
    "freeCancel": "יש · לשנות את התאריכים מ-2–8/12",
    "link": "בוקינג",
-   "linkLink": "https://www.booking.com/hotel/th/kalima-resort-amp-villas-khao-lak.html?checkin=2026-12-05&checkout=2026-12-08&group_adults=2"
+   "linkLink": "https://www.booking.com/hotel/th/kalima-resort-amp-villas-khao-lak.html?checkin=2026-12-06&checkout=2026-12-09&group_adults=2"
   },
   {
    "dest": "בנגקוק — לילה אחרון",
