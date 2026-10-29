@@ -35,31 +35,31 @@
   {
    "what": "Sarana Bungalows",
    "when": "2–5/12",
-   "details": "קופנגן, באן טאי · 3 לילות · Garden Bungalow",
+   "details": "קופנגן · 3 לילות — לבטל, כבר לא במסלול",
    "ref": "6196805940",
    "payment": "฿3,060 — משלמים בהגעה",
-   "freeCancel": "ביטול חינם עד 28/11"
+   "freeCancel": "ביטול חינם עד 28/11 — לבטל"
   },
   {
    "what": "Our Jungle House",
    "when": "5–6/12",
-   "details": "קאו סוק · לילה · Treehouse",
+   "details": "קאו סוק · 5/12 — לבטל: הלילה בקאו סוק עבר ל-4/12 ושם אין מקום",
    "ref": "6051801812090945732",
    "payment": "שולם $138.89",
-   "freeCancel": "ביטול חינם עד 8/11 · אחר כך $13.89, ומ־19/11 כל הסכום"
+   "freeCancel": "ביטול חינם עד 8/11 — לבטל"
   },
   {
    "what": "Kalima Resort and Villas",
-   "when": "6–9/12",
-   "details": "קאו לאק · 3 לילות · 5 כוכבים, ספא מלא · לשנות בבוקינג מ־2–8/12",
+   "when": "5–8/12",
+   "details": "קאו לאק · 3 לילות · 5 כוכבים, ספא מלא · לשנות בבוקינג מ-2–8/12",
    "ref": "—",
-   "payment": "כ־₪2,103 אחרי השינוי (היה ₪4,029)",
+   "payment": "כ-₪2,661 אחרי השינוי (היה ₪4,029)",
    "freeCancel": "ביטול חינם"
   },
   {
    "what": "Eleven Bangkok Sukhumvit 11",
    "when": "9–10/12",
-   "details": "בנגקוק · לילה · איתי · Grand Deluxe King",
+   "details": "בנגקוק · לילה · Grand Deluxe King · לעדכן לשני אנשים",
    "ref": "5243050600",
    "payment": "฿3,010.10 — בוקינג מחייבת אוטומטית",
    "freeCancel": "ביטול חינם עד 5/12"
@@ -222,13 +222,85 @@
    "linkLink": "https://www.booking.com/hotel/th/at-thara-aonang.html"
   },
   {
+   "dest": "קו פי פי",
+   "dates": "2–4/12",
+   "nights": 2,
+   "hotel": "ChaoKoh Phi Phi",
+   "what": "8.5 על 1,134 · 4 כוכבים, בריכה, על המפרץ ליד הרציף והבארים · כ-₪716 לשני הלילות.",
+   "perNight": 3988,
+   "choice": "הבחירה",
+   "freeCancel": "לבדוק",
+   "link": "בוקינג",
+   "linkLink": "https://www.booking.com/hotel/th/orngaermchaawekaaaphiiphii.html"
+  },
+  {
+   "dest": "קו פי פי",
+   "dates": "2–4/12",
+   "nights": 2,
+   "hotel": "HIP Seaview Resort @ Phi Phi",
+   "what": "8.5 · Long Beach, למבוגרים בלבד, שקט · כ-₪1,022.",
+   "perNight": 5688,
+   "choice": "חלופה",
+   "freeCancel": "לבדוק",
+   "link": "בוקינג",
+   "linkLink": "https://www.booking.com/hotel/th/hip-seaview-resort-phi-phi.html"
+  },
+  {
+   "dest": "קאו סוק",
+   "dates": "4–5/12",
+   "nights": 1,
+   "hotel": "Khao Sok Palmview",
+   "what": "8.9 על 2,187 · כ-₪185.",
+   "perNight": 2059,
+   "choice": "הבחירה",
+   "freeCancel": "לבדוק",
+   "link": "בוקינג",
+   "linkLink": "https://www.booking.com/hotel/th/khao-sok-palmview-resort.html"
+  },
+  {
+   "dest": "קאו סוק",
+   "dates": "4–5/12",
+   "nights": 1,
+   "hotel": "Khao Sok River Lodge",
+   "what": "8.9 · על הנהר · כ-₪185.",
+   "perNight": 2059,
+   "choice": "חלופה",
+   "freeCancel": "לבדוק",
+   "link": "בוקינג",
+   "linkLink": "https://www.booking.com/hotel/th/khao-sok-river-lodge.html"
+  },
+  {
+   "dest": "פטונג",
+   "dates": "8–9/12",
+   "nights": 1,
+   "hotel": "Patong Beach Hotel by See2Sea",
+   "what": "9.1 · על החוף, ליד Bangla Road · כ-₪478.",
+   "perNight": 5323,
+   "choice": "הבחירה",
+   "freeCancel": "לבדוק",
+   "link": "בוקינג",
+   "linkLink": "https://www.booking.com/hotel/th/patong-beach.html"
+  },
+  {
+   "dest": "פטונג",
+   "dates": "8–9/12",
+   "nights": 1,
+   "hotel": "Thanthip Beach Resort",
+   "what": "8.4 · 4 כוכבים, בריכה · כ-₪309.",
+   "perNight": 3445,
+   "choice": "חלופה",
+   "freeCancel": "לבדוק",
+   "link": "בוקינג",
+   "linkLink": "https://www.booking.com/hotel/th/thanthip-beach-resort.html"
+  },
+  {
    "dest": "קופנגן",
    "dates": "2–5/12",
    "nights": 3,
    "hotel": "Sarana Bungalows",
    "what": "8.8 · Garden Bungalow עם מיטת קינג בבאן טאי, ליד ה־Halfmoon · אישור 6196805940 · משלמים בהגעה.",
    "perNight": 1020,
-   "choice": "מוזמן",
+   "choice": "לבטל",
    "freeCancel": "עד 28/11",
    "link": "בוקינג",
    "linkLink": "https://www.booking.com/hotel/th/sarana-bungalows.html"
@@ -240,14 +312,14 @@
    "hotel": "Our Jungle House",
    "what": "8.6 · Treehouse ליד הנהר והצוקים · אישור 6051801812090945732 · שולם $138.89.",
    "perNight": "$138.89",
-   "choice": "מוזמן",
+   "choice": "לבטל",
    "freeCancel": "עד 8/11",
    "link": "בוקינג",
    "linkLink": "https://www.booking.com/"
   },
   {
    "dest": "קאו לאק",
-   "dates": "6–9/12",
+   "dates": "5–8/12",
    "nights": 3,
    "hotel": "Kalima Resort and Villas Khao Lak",
    "what": "8.8 על 2,576 ביקורות · 5 כוכבים · ספא מלא עם חדר אדים, עיסוי זוגות, טיפולי גוף, בריכת אינפיניטי, בריכת מים מלוחים, בר-בריכה, יוגה וחדר כושר. גם פארק מים ומועדון ילדים.",
@@ -255,16 +327,16 @@
    "totalB": "=C15*F15",
    "ils": "=G15*סקירה!$B$5",
    "choice": "מוזמן",
-   "freeCancel": "יש · לשנות את התאריכים מ־2–8/12",
+   "freeCancel": "יש · לשנות את התאריכים מ-2–8/12",
    "link": "בוקינג",
-   "linkLink": "https://www.booking.com/hotel/th/kalima-resort-amp-villas-khao-lak.html?checkin=2026-12-06&checkout=2026-12-09&group_adults=2"
+   "linkLink": "https://www.booking.com/hotel/th/kalima-resort-amp-villas-khao-lak.html?checkin=2026-12-05&checkout=2026-12-08&group_adults=2"
   },
   {
-   "dest": "בנגקוק — איתי",
+   "dest": "בנגקוק — לילה אחרון",
    "dates": "9–10/12",
    "nights": 1,
    "hotel": "Eleven Bangkok Sukhumvit 11",
-   "what": "Grand Deluxe King על סוי 11 · אישור 5243050600 · פיקדון ฿1,000 במזומן.",
+   "what": "Grand Deluxe King על סוי 11 · אישור 5243050600 · לעדכן לשני אנשים · פיקדון ฿1,000 במזומן.",
    "perNight": 3010.1,
    "choice": "מוזמן",
    "freeCancel": "עד 5/12",

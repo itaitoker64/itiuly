@@ -8,24 +8,24 @@ const run=s=>vm.runInContext(s,ctx),near=(a,b)=>assert.ok(Math.abs(a-b)<.00001,`
 run('STATE=seedData();ensureDefaults();');
 const expenses=run('JSON.stringify(wallet())'),countries=run('JSON.stringify(STATE.countries)');
 const f=run('sharedForecast()');
-assert.equal(f.days.length,18); // Itai's 9–10/12 are his, and in his forecast.
+assert.equal(f.days.length,18); // Together until Itai flies on 10/12.
 assert.ok(f.low<=f.base&&f.base<=f.high);
 near(f.itai+f.talia,f.base);
 near(Object.values(f.categories).reduce((a,b)=>a+b,0)+f.reserve,f.base);
 near(run('sharedEstimateDays().reduce((s,d)=>s+dayTotalBaht(d)*rate(),0)')+f.reserve,f.base);
 near(f.categories.flights,3777+1891+777+5390*.08981); // TG203, and the home flight moved to Bangkok on 10/12 with its change fee.
 assert.ok(f.optional>0);
-near(f.categories.accommodation,8169.87*.08981+1839+12150*.08981+3060*.08981+514+2103+3010.10*.08981); // Montraj direct; KYN corrected; Phangan, Khao Sok, Kalima for 3 nights, Itai's last night.
+near(f.categories.accommodation,8169.87*.08981+1839+12150*.08981+2661+3010.10*.08981+(2*3988+2059+5323)*.08981); // Montraj direct; KYN corrected; Kalima 5–8/12; Bangkok booked; Phi Phi, Khao Sok and Patong still estimates.
 near(run('sharedRowPrice(sh().days[0].rows.find(r=>r.id==="s_1_0")).base'),3777);
-near(run('sharedRowPrice(sh().days.find(d=>d.date==="2026-12-10").rows.find(r=>r.id==="s_p10_2")).shares.itai'),1891);
-assert.equal(run('sharedRowPrice(sh().days.find(d=>d.date==="2026-12-10").rows.find(r=>r.id==="s_p10_2")).shares.talia'),0);
-// Itai's last night is his alone.
-assert.equal(run('sharedRowPrice(sh().days.find(d=>d.date==="2026-12-09").rows.find(r=>r.id==="s_p9_stay")).shares.talia'),0);
+near(run('sharedRowPrice(sh().days.find(d=>d.date==="2026-12-10").rows.find(r=>r.id==="s_f10_2")).shares.itai'),1891);
+assert.equal(run('sharedRowPrice(sh().days.find(d=>d.date==="2026-12-10").rows.find(r=>r.id==="s_f10_2")).shares.talia'),0);
+// The last night in Bangkok is shared now — Talia is there too.
+assert.ok(run('sharedRowPrice(sh().days.find(d=>d.date==="2026-12-09").rows.find(r=>r.id==="s_f9_stay")).shares.talia')>0);
 assert.equal(run('sh().days.flatMap(d=>d.rows).find(r=>r.id==="s_8_1").baht'),0);
 assert.equal(run('JSON.stringify(wallet())'),expenses);
 assert.equal(run('JSON.stringify(STATE.countries)'),countries);
 // New onward-trip rows cannot leak into this shared forecast.
-run('sh().days.push({id:"solo",date:"2026-12-09",dest:"Pai",rows:[{baht:999999,cat:"לינה"}]});');
+run('sh().days.push({id:"solo",date:"2026-12-11",owner:"talia",dest:"Pai",rows:[{baht:999999,cat:"לינה"}]});');
 near(run('sharedForecast().base'),f.base);
 // Simulate a v6 saved trip with edits, completion flags, and missing price metadata.
 run(`STATE=seedData();delete STATE.shared.priceEstimateVersion;
