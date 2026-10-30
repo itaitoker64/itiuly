@@ -26,7 +26,7 @@ const day = (run, date) => JSON.parse(run(`JSON.stringify(sh().days.find(d=>d.da
 const acts = d => d.rows.map(r => r.act).join(' | ');
 
 const run = boot();
-assert.equal(run('STATE.schema'), 17);
+assert.equal(run('STATE.schema'), 18);
 
 // --- the plan from 2/12 ---------------------------------------------------------
 const all = JSON.parse(run('JSON.stringify(sh().days.map(d=>[d.day,d.date,d.dow,d.id,d.dest,d.owner||""]))'));
@@ -87,6 +87,15 @@ for (const t of ['להזמין לינה בפי פי, 2–4/12', 'להזמין ל
   assert.ok(run(`STATE.masterChecklist.some(t=>t.title===${JSON.stringify(t)})`), t);
 }
 assert.ok(!run('STATE.masterChecklist.some(t=>/Halfmoon|Lomprayah|ואן משותף|צ׳יאנג מאי|פטונג/.test(t.title))'));
+// Kalima's free cancellation ends on 1/11, and the app says so everywhere.
+assert.equal(run('STATE.masterChecklist.find(t=>t.title==="לשנות את קלימה ל-6–9/12 בבוקינג").deadline'), '2026-11-01');
+assert.equal(run('sh().bookings.find(b=>b.what==="Kalima Resort and Villas").ref'), '5770154448');
+assert.ok(/1\/11/.test(run('sh().hotels.find(h=>h.hotel==="Kalima Resort and Villas Khao Lak").freeCancel')));
+const k17 = boot();
+k17(`STATE=seedData(); STATE.masterChecklist.find(t=>t.title==="לשנות את קלימה ל-6–9/12 בבוקינג").deadline='2026-11-10';
+Object.assign(sh().bookings.find(b=>b.what==="Kalima Resort and Villas"),{ref:'—',freeCancel:'ביטול חינם'}); STATE.schema=17; ensureDefaults();`);
+assert.equal(k17('STATE.masterChecklist.find(t=>t.title==="לשנות את קלימה ל-6–9/12 בבוקינג").deadline'), '2026-11-01');
+assert.equal(k17('sh().bookings.find(b=>b.what==="Kalima Resort and Villas").ref'), '5770154448');
 
 // --- a document saved before any of this (schema 14) ------------------------------
 const old = boot();
@@ -113,7 +122,7 @@ STATE.masterChecklist=STATE.masterChecklist.filter(t=>!WEST_TASKS.some(p=>p.titl
 STATE.masterChecklist.push({id:'m_van',owner:'both',category:'הזמנות',title:'להזמין ואן משותף מאאו נאנג לקאו לק',status:'todo'});
 STATE.schema=14;
 ensureDefaults();`);
-assert.equal(old('STATE.schema'), 17);
+assert.equal(old('STATE.schema'), 18);
 assert.deepEqual(JSON.parse(old('JSON.stringify(sh().days.map(d=>d.date))')).slice(9),
   ['2026-12-02','2026-12-03','2026-12-04','2026-12-05','2026-12-06','2026-12-07','2026-12-08','2026-12-09','2026-12-10']);
 const o3 = day(old, '2026-12-03');
@@ -164,7 +173,7 @@ STATE.masterChecklist.push(
   {id:'m_k',owner:'both',title:'לשנות את קלימה ל-6–9/12 בבוקינג',status:'done'});
 sh().planB={done:{}};
 STATE.schema=15; ensureDefaults();`);
-assert.equal(ph('STATE.schema'), 17);
+assert.equal(ph('STATE.schema'), 18);
 const p2 = day(ph, '2026-12-02');
 assert.ok(!p2.rows.some(r => /Lomprayah/.test(r.act)));
 assert.ok(p2.rows.some(r => r.id === 'custom-earplugs'), 'a hand-added row survives');
@@ -197,7 +206,7 @@ STATE.masterChecklist.push(
   {id:'m_k58',owner:'both',title:'לשנות את קלימה ל-5–8/12 בבוקינג',status:'todo'},
   {id:'m_sim',owner:'both',title:'להזמין סימילן, 6/12',status:'done'});
 STATE.schema=16; ensureDefaults();`);
-assert.equal(pt('STATE.schema'), 17);
+assert.equal(pt('STATE.schema'), 18);
 assert.ok(!pt('STATE.countries.find(c=>c.id==="thailand").destinations.some(d=>d.name==="פטונג")'));
 assert.equal(pt('STATE.countries.find(c=>c.id==="thailand").destinations.find(d=>d.name==="קאו סוק").nights'), 2);
 assert.ok(!pt('sh().hotels.some(h=>h.dest==="פטונג")'));

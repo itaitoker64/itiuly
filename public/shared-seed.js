@@ -3366,7 +3366,7 @@ window.SHARED_SEED = {
      "baht": null,
      "status": "מוזמן",
      "link": "https://www.booking.com/hotel/th/kalima-resort-amp-villas-khao-lak.html?checkin=2026-12-06&checkout=2026-12-09&group_adults=2",
-     "notes": "6–9/12 · 3 לילות (בהזמנה עדיין 2–8/12 — לשנות בבוקינג) · 8.9 על 2,551 ביקורות · ספא, בריכת אינפיניטי, יוגה",
+     "notes": "6–9/12 · 3 לילות · אישור 5770154448 — עדיין 2–8/12, לשנות עד 1/11 (אחר כך לא מוחזר) · 8.9 על 2,551 ביקורות · ספא, בריכת אינפיניטי, יוגה",
      "id": "s_g6_stay",
      "done": false,
      "priceEstimate": {
@@ -3495,7 +3495,7 @@ window.SHARED_SEED = {
      "baht": null,
      "status": "מוזמן",
      "link": "https://www.booking.com/hotel/th/kalima-resort-amp-villas-khao-lak.html?checkin=2026-12-06&checkout=2026-12-09&group_adults=2",
-     "notes": "6–9/12 · 3 לילות (בהזמנה עדיין 2–8/12 — לשנות בבוקינג) · 8.9 על 2,551 ביקורות · ספא, בריכת אינפיניטי, יוגה",
+     "notes": "6–9/12 · 3 לילות · אישור 5770154448 — עדיין 2–8/12, לשנות עד 1/11 (אחר כך לא מוחזר) · 8.9 על 2,551 ביקורות · ספא, בריכת אינפיניטי, יוגה",
      "id": "s_g7_stay",
      "done": false,
      "priceEstimate": {
@@ -3668,7 +3668,7 @@ window.SHARED_SEED = {
      "baht": null,
      "status": "מוזמן",
      "link": "https://www.booking.com/hotel/th/kalima-resort-amp-villas-khao-lak.html?checkin=2026-12-06&checkout=2026-12-09&group_adults=2",
-     "notes": "6–9/12 · 3 לילות (בהזמנה עדיין 2–8/12 — לשנות בבוקינג) · 8.9 על 2,551 ביקורות · ספא, בריכת אינפיניטי, יוגה",
+     "notes": "6–9/12 · 3 לילות · אישור 5770154448 — עדיין 2–8/12, לשנות עד 1/11 (אחר כך לא מוחזר) · 8.9 על 2,551 ביקורות · ספא, בריכת אינפיניטי, יוגה",
      "id": "s_g8_stay",
      "done": false,
      "priceEstimate": {
@@ -4076,9 +4076,9 @@ window.SHARED_SEED = {
    "what": "Kalima Resort and Villas",
    "when": "6–9/12",
    "details": "קאו לאק · 3 לילות · 5 כוכבים, ספא מלא · לשנות בבוקינג מ-2–8/12",
-   "ref": "—",
-   "payment": "כ-₪2,072 אחרי השינוי (היה ₪4,029)",
-   "freeCancel": "ביטול חינם"
+   "ref": "5770154448",
+   "payment": "฿43,875 על 2–8/12 — בוקינג מחייבת ב-30/10 · כ-₪2,072 אחרי השינוי ל-6–9/12",
+   "freeCancel": "ביטול חינם רק עד 1/11 23:59 שעון תאילנד — אחר כך לא מוחזר"
   },
   {
    "what": "Eleven Bangkok Sukhumvit 11",
@@ -4307,7 +4307,7 @@ window.SHARED_SEED = {
    "what": "8.8 על 2,576 ביקורות · 5 כוכבים · ספא מלא עם חדר אדים, עיסוי זוגות, טיפולי גוף, בריכת אינפיניטי, בריכת מים מלוחים, בר-בריכה, יוגה וחדר כושר. גם פארק מים ומועדון ילדים.",
    "perNight": 7476.83,
    "choice": "מוזמן",
-   "freeCancel": "יש · לשנות את התאריכים מ-2–8/12",
+   "freeCancel": "עד 1/11 23:59 שעון תאילנד · לשנות את התאריכים מ-2–8/12",
    "link": "בוקינג",
    "linkLink": "https://www.booking.com/hotel/th/kalima-resort-amp-villas-khao-lak.html?checkin=2026-12-06&checkout=2026-12-09&group_adults=2"
   },
