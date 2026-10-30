@@ -43,18 +43,18 @@
   {
    "what": "Our Jungle House",
    "when": "5–6/12",
-   "details": "קאו סוק · 5/12 — לבטל: הלילה בקאו סוק עבר ל-4/12 ושם אין מקום",
+   "details": "קאו סוק · 5/12 — בוטל 30/10",
    "ref": "6051801812090945732",
-   "payment": "שולם $138.89",
-   "freeCancel": "ביטול חינם עד 8/11 — לבטל"
+   "payment": "הוחזרו $138.89",
+   "freeCancel": "בוטל"
   },
   {
    "what": "Kalima Resort and Villas",
    "when": "6–9/12",
-   "details": "קאו לאק · 3 לילות · 5 כוכבים, ספא מלא · לשנות בבוקינג מ-2–8/12",
-   "ref": "5770154448",
-   "payment": "฿43,875 על 2–8/12 — בוקינג מחייבת ב-30/10 · כ-₪2,072 אחרי השינוי ל-6–9/12",
-   "freeCancel": "ביטול חינם רק עד 1/11 23:59 שעון תאילנד — אחר כך לא מוחזר"
+   "details": "קאו לאק · 3 לילות · Deluxe Double/Twin with Pool Access · בלי ארוחת בוקר",
+   "ref": "7195273990380466772",
+   "payment": "שולם $621.21 (₪1,931)",
+   "freeCancel": "לא מוחזר · הצעת שותף — אי אפשר לשנות פרטים"
   },
   {
    "what": "Eleven Bangkok Sukhumvit 11",
@@ -288,8 +288,8 @@
    "hotel": "Our Jungle House",
    "what": "8.6 · Treehouse ליד הנהר והצוקים · אישור 6051801812090945732 · שולם $138.89.",
    "perNight": "$138.89",
-   "choice": "לבטל",
-   "freeCancel": "עד 8/11",
+   "choice": "בוטל",
+   "freeCancel": "בוטל 30/10 · הוחזרו $138.89",
    "link": "בוקינג",
    "linkLink": "https://www.booking.com/"
   },
@@ -298,12 +298,12 @@
    "dates": "6–9/12",
    "nights": 3,
    "hotel": "Kalima Resort and Villas Khao Lak",
-   "what": "8.8 על 2,576 ביקורות · 5 כוכבים · ספא מלא עם חדר אדים, עיסוי זוגות, טיפולי גוף, בריכת אינפיניטי, בריכת מים מלוחים, בר-בריכה, יוגה וחדר כושר. גם פארק מים ומועדון ילדים.",
-   "perNight": 7476.83,
+   "what": "8.9 · 5 כוכבים · Deluxe Pool Access, יציאה ישירה לבריכה · אישור 7195273990380466772 · בלי ארוחת בוקר ($18 לאדם).",
+   "perNight": 7169,
    "totalB": "=C15*F15",
    "ils": "=G15*סקירה!$B$5",
    "choice": "מוזמן",
-   "freeCancel": "עד 1/11 23:59 שעון תאילנד · לשנות את התאריכים מ-2–8/12",
+   "freeCancel": "לא מוחזר",
    "link": "בוקינג",
    "linkLink": "https://www.booking.com/hotel/th/kalima-resort-amp-villas-khao-lak.html?checkin=2026-12-06&checkout=2026-12-09&group_adults=2"
   },

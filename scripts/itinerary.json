@@ -2920,7 +2920,7 @@
     "baht": null,
     "status": "מוזמן",
     "link": "https://www.booking.com/hotel/th/kalima-resort-amp-villas-khao-lak.html?checkin=2026-12-06&checkout=2026-12-09&group_adults=2",
-    "notes": "6–9/12 · 3 לילות · אישור 5770154448 — עדיין 2–8/12, לשנות עד 1/11 (אחר כך לא מוחזר) · 8.9 על 2,551 ביקורות · ספא, בריכת אינפיניטי, יוגה",
+    "notes": "6–9/12 · 3 לילות · Deluxe Pool Access · אישור 7195273990380466772 (הצעת שותף — אין שינויים) · שולם $621.21 (₪1,931) · לא מוחזר · ארוחת בוקר לא כלולה ($18 לאדם)",
     "priceEstimate": {
      "kind": "booking",
      "basis": "המחיר מההזמנה השמורה; נספר פעם אחת בלבד ומחולק בין לילות הלינה.",
@@ -2934,7 +2934,7 @@
       "key": "khaolak",
       "match": "Kalima",
       "rows": 3,
-      "totalIls": 2072
+      "totalIls": 1931.44
      }
     },
     "managed": true
@@ -2954,17 +2954,17 @@
     "act": "ארוחת בוקר",
     "loc": "קלימה",
     "cat": "אוכל",
-    "baht": null,
+    "baht": 1480,
     "status": "משלמים במקום",
     "link": "",
-    "notes": "",
+    "notes": "לא כלולה במחיר החדר — $18 לאדם בבופה של המלון, או בית קפה בחוץ · לפני האיסוף לסימילן — לבקש מהמלון ארוחה ארוזה, או לקנות משהו ערב לפני",
     "priceEstimate": {
-     "kind": "no-extra",
-     "basis": "לא הוקצה חיוב נפרד לפעולה הזאת; חיובים כלולים מופיעים בחבילה או בהזמנה.",
-     "lowFactor": 1,
+     "kind": "published",
+     "basis": "ארוחת בוקר בקלימה, $18 לאדם לפי אישור ההזמנה.",
+     "lowFactor": 0.5,
      "highFactor": 1,
      "sourceUrl": "",
-     "checked": "2026-10-29"
+     "checked": "2026-10-30"
     },
     "managed": true
    },
@@ -3038,7 +3038,7 @@
     "baht": null,
     "status": "מוזמן",
     "link": "https://www.booking.com/hotel/th/kalima-resort-amp-villas-khao-lak.html?checkin=2026-12-06&checkout=2026-12-09&group_adults=2",
-    "notes": "6–9/12 · 3 לילות · אישור 5770154448 — עדיין 2–8/12, לשנות עד 1/11 (אחר כך לא מוחזר) · 8.9 על 2,551 ביקורות · ספא, בריכת אינפיניטי, יוגה",
+    "notes": "6–9/12 · 3 לילות · Deluxe Pool Access · אישור 7195273990380466772 (הצעת שותף — אין שינויים) · שולם $621.21 (₪1,931) · לא מוחזר · ארוחת בוקר לא כלולה ($18 לאדם)",
     "priceEstimate": {
      "kind": "booking",
      "basis": "המחיר מההזמנה השמורה; נספר פעם אחת בלבד ומחולק בין לילות הלינה.",
@@ -3052,7 +3052,7 @@
       "key": "khaolak",
       "match": "Kalima",
       "rows": 3,
-      "totalIls": 2072
+      "totalIls": 1931.44
      }
     },
     "managed": true
@@ -3072,17 +3072,17 @@
     "act": "ארוחת בוקר",
     "loc": "קלימה",
     "cat": "אוכל",
-    "baht": 400,
+    "baht": 1480,
     "status": "משלמים במקום",
     "link": "",
-    "notes": "",
+    "notes": "לא כלולה במחיר החדר — $18 לאדם בבופה של המלון, או בית קפה בחוץ",
     "priceEstimate": {
-     "kind": "estimate",
-     "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
-     "lowFactor": 0.8,
-     "highFactor": 1.3,
+     "kind": "published",
+     "basis": "ארוחת בוקר בקלימה, $18 לאדם לפי אישור ההזמנה.",
+     "lowFactor": 0.5,
+     "highFactor": 1,
      "sourceUrl": "",
-     "checked": "2026-10-29"
+     "checked": "2026-10-30"
     },
     "managed": true
    },
@@ -3196,7 +3196,7 @@
     "baht": null,
     "status": "מוזמן",
     "link": "https://www.booking.com/hotel/th/kalima-resort-amp-villas-khao-lak.html?checkin=2026-12-06&checkout=2026-12-09&group_adults=2",
-    "notes": "6–9/12 · 3 לילות · אישור 5770154448 — עדיין 2–8/12, לשנות עד 1/11 (אחר כך לא מוחזר) · 8.9 על 2,551 ביקורות · ספא, בריכת אינפיניטי, יוגה",
+    "notes": "6–9/12 · 3 לילות · Deluxe Pool Access · אישור 7195273990380466772 (הצעת שותף — אין שינויים) · שולם $621.21 (₪1,931) · לא מוחזר · ארוחת בוקר לא כלולה ($18 לאדם)",
     "priceEstimate": {
      "kind": "booking",
      "basis": "המחיר מההזמנה השמורה; נספר פעם אחת בלבד ומחולק בין לילות הלינה.",
@@ -3210,7 +3210,7 @@
       "key": "khaolak",
       "match": "Kalima",
       "rows": 3,
-      "totalIls": 2072
+      "totalIls": 1931.44
      }
     },
     "managed": true
@@ -3227,20 +3227,20 @@
    {
     "time": "08:30",
     "dur": "1:00",
-    "act": "ארוחת בוקר אחרונה בקלימה",
+    "act": "ארוחת בוקר אחרונה",
     "loc": "קלימה",
     "cat": "אוכל",
-    "baht": null,
+    "baht": 1480,
     "status": "משלמים במקום",
     "link": "",
-    "notes": "",
+    "notes": "לא כלולה במחיר החדר — $18 לאדם בבופה של המלון, או בית קפה בחוץ",
     "priceEstimate": {
-     "kind": "no-extra",
-     "basis": "לא הוקצה חיוב נפרד לפעולה הזאת; חיובים כלולים מופיעים בחבילה או בהזמנה.",
-     "lowFactor": 1,
+     "kind": "published",
+     "basis": "ארוחת בוקר בקלימה, $18 לאדם לפי אישור ההזמנה.",
+     "lowFactor": 0.5,
      "highFactor": 1,
      "sourceUrl": "",
-     "checked": "2026-10-29"
+     "checked": "2026-10-30"
     },
     "managed": true
    },

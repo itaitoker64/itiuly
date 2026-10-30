@@ -3366,7 +3366,7 @@ window.SHARED_SEED = {
      "baht": null,
      "status": "מוזמן",
      "link": "https://www.booking.com/hotel/th/kalima-resort-amp-villas-khao-lak.html?checkin=2026-12-06&checkout=2026-12-09&group_adults=2",
-     "notes": "6–9/12 · 3 לילות · אישור 5770154448 — עדיין 2–8/12, לשנות עד 1/11 (אחר כך לא מוחזר) · 8.9 על 2,551 ביקורות · ספא, בריכת אינפיניטי, יוגה",
+     "notes": "6–9/12 · 3 לילות · Deluxe Pool Access · אישור 7195273990380466772 (הצעת שותף — אין שינויים) · שולם $621.21 (₪1,931) · לא מוחזר · ארוחת בוקר לא כלולה ($18 לאדם)",
      "id": "s_g6_stay",
      "done": false,
      "priceEstimate": {
@@ -3382,7 +3382,7 @@ window.SHARED_SEED = {
        "key": "khaolak",
        "match": "Kalima",
        "rows": 3,
-       "totalIls": 2072
+       "totalIls": 1931.44
       }
      },
      "managed": true
@@ -3403,19 +3403,19 @@ window.SHARED_SEED = {
      "act": "ארוחת בוקר",
      "loc": "קלימה",
      "cat": "אוכל",
-     "baht": null,
+     "baht": 1480,
      "status": "משלמים במקום",
      "link": "",
-     "notes": "",
+     "notes": "לא כלולה במחיר החדר — $18 לאדם בבופה של המלון, או בית קפה בחוץ · לפני האיסוף לסימילן — לבקש מהמלון ארוחה ארוזה, או לקנות משהו ערב לפני",
      "id": "s_g7_0",
      "done": false,
      "priceEstimate": {
-      "kind": "no-extra",
-      "basis": "לא הוקצה חיוב נפרד לפעולה הזאת; חיובים כלולים מופיעים בחבילה או בהזמנה.",
-      "lowFactor": 1,
+      "kind": "published",
+      "basis": "ארוחת בוקר בקלימה, $18 לאדם לפי אישור ההזמנה.",
+      "lowFactor": 0.5,
       "highFactor": 1,
       "sourceUrl": "",
-      "checked": "2026-10-29"
+      "checked": "2026-10-30"
      },
      "managed": true
     },
@@ -3495,7 +3495,7 @@ window.SHARED_SEED = {
      "baht": null,
      "status": "מוזמן",
      "link": "https://www.booking.com/hotel/th/kalima-resort-amp-villas-khao-lak.html?checkin=2026-12-06&checkout=2026-12-09&group_adults=2",
-     "notes": "6–9/12 · 3 לילות · אישור 5770154448 — עדיין 2–8/12, לשנות עד 1/11 (אחר כך לא מוחזר) · 8.9 על 2,551 ביקורות · ספא, בריכת אינפיניטי, יוגה",
+     "notes": "6–9/12 · 3 לילות · Deluxe Pool Access · אישור 7195273990380466772 (הצעת שותף — אין שינויים) · שולם $621.21 (₪1,931) · לא מוחזר · ארוחת בוקר לא כלולה ($18 לאדם)",
      "id": "s_g7_stay",
      "done": false,
      "priceEstimate": {
@@ -3511,7 +3511,7 @@ window.SHARED_SEED = {
        "key": "khaolak",
        "match": "Kalima",
        "rows": 3,
-       "totalIls": 2072
+       "totalIls": 1931.44
       }
      },
      "managed": true
@@ -3532,19 +3532,19 @@ window.SHARED_SEED = {
      "act": "ארוחת בוקר",
      "loc": "קלימה",
      "cat": "אוכל",
-     "baht": 400,
+     "baht": 1480,
      "status": "משלמים במקום",
      "link": "",
-     "notes": "",
+     "notes": "לא כלולה במחיר החדר — $18 לאדם בבופה של המלון, או בית קפה בחוץ",
      "id": "s_g8_0",
      "done": false,
      "priceEstimate": {
-      "kind": "estimate",
-      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
-      "lowFactor": 0.8,
-      "highFactor": 1.3,
+      "kind": "published",
+      "basis": "ארוחת בוקר בקלימה, $18 לאדם לפי אישור ההזמנה.",
+      "lowFactor": 0.5,
+      "highFactor": 1,
       "sourceUrl": "",
-      "checked": "2026-10-29"
+      "checked": "2026-10-30"
      },
      "managed": true
     },
@@ -3668,7 +3668,7 @@ window.SHARED_SEED = {
      "baht": null,
      "status": "מוזמן",
      "link": "https://www.booking.com/hotel/th/kalima-resort-amp-villas-khao-lak.html?checkin=2026-12-06&checkout=2026-12-09&group_adults=2",
-     "notes": "6–9/12 · 3 לילות · אישור 5770154448 — עדיין 2–8/12, לשנות עד 1/11 (אחר כך לא מוחזר) · 8.9 על 2,551 ביקורות · ספא, בריכת אינפיניטי, יוגה",
+     "notes": "6–9/12 · 3 לילות · Deluxe Pool Access · אישור 7195273990380466772 (הצעת שותף — אין שינויים) · שולם $621.21 (₪1,931) · לא מוחזר · ארוחת בוקר לא כלולה ($18 לאדם)",
      "id": "s_g8_stay",
      "done": false,
      "priceEstimate": {
@@ -3684,7 +3684,7 @@ window.SHARED_SEED = {
        "key": "khaolak",
        "match": "Kalima",
        "rows": 3,
-       "totalIls": 2072
+       "totalIls": 1931.44
       }
      },
      "managed": true
@@ -3702,22 +3702,22 @@ window.SHARED_SEED = {
     {
      "time": "08:30",
      "dur": "1:00",
-     "act": "ארוחת בוקר אחרונה בקלימה",
+     "act": "ארוחת בוקר אחרונה",
      "loc": "קלימה",
      "cat": "אוכל",
-     "baht": null,
+     "baht": 1480,
      "status": "משלמים במקום",
      "link": "",
-     "notes": "",
+     "notes": "לא כלולה במחיר החדר — $18 לאדם בבופה של המלון, או בית קפה בחוץ",
      "id": "s_g9_0",
      "done": false,
      "priceEstimate": {
-      "kind": "no-extra",
-      "basis": "לא הוקצה חיוב נפרד לפעולה הזאת; חיובים כלולים מופיעים בחבילה או בהזמנה.",
-      "lowFactor": 1,
+      "kind": "published",
+      "basis": "ארוחת בוקר בקלימה, $18 לאדם לפי אישור ההזמנה.",
+      "lowFactor": 0.5,
       "highFactor": 1,
       "sourceUrl": "",
-      "checked": "2026-10-29"
+      "checked": "2026-10-30"
      },
      "managed": true
     },
@@ -4067,18 +4067,18 @@ window.SHARED_SEED = {
   {
    "what": "Our Jungle House",
    "when": "5–6/12",
-   "details": "קאו סוק · 5/12 — לבטל: הלילה בקאו סוק עבר ל-4/12 ושם אין מקום",
+   "details": "קאו סוק · 5/12 — בוטל 30/10",
    "ref": "6051801812090945732",
-   "payment": "שולם $138.89",
-   "freeCancel": "ביטול חינם עד 8/11 — לבטל"
+   "payment": "הוחזרו $138.89",
+   "freeCancel": "בוטל"
   },
   {
    "what": "Kalima Resort and Villas",
    "when": "6–9/12",
-   "details": "קאו לאק · 3 לילות · 5 כוכבים, ספא מלא · לשנות בבוקינג מ-2–8/12",
-   "ref": "5770154448",
-   "payment": "฿43,875 על 2–8/12 — בוקינג מחייבת ב-30/10 · כ-₪2,072 אחרי השינוי ל-6–9/12",
-   "freeCancel": "ביטול חינם רק עד 1/11 23:59 שעון תאילנד — אחר כך לא מוחזר"
+   "details": "קאו לאק · 3 לילות · Deluxe Double/Twin with Pool Access · בלי ארוחת בוקר",
+   "ref": "7195273990380466772",
+   "payment": "שולם $621.21 (₪1,931)",
+   "freeCancel": "לא מוחזר · הצעת שותף — אי אפשר לשנות פרטים"
   },
   {
    "what": "Eleven Bangkok Sukhumvit 11",
@@ -4294,8 +4294,8 @@ window.SHARED_SEED = {
    "hotel": "Our Jungle House",
    "what": "8.6 · Treehouse ליד הנהר והצוקים · אישור 6051801812090945732 · שולם $138.89.",
    "perNight": "$138.89",
-   "choice": "לבטל",
-   "freeCancel": "עד 8/11",
+   "choice": "בוטל",
+   "freeCancel": "בוטל 30/10 · הוחזרו $138.89",
    "link": "בוקינג",
    "linkLink": "https://www.booking.com/"
   },
@@ -4304,10 +4304,10 @@ window.SHARED_SEED = {
    "dates": "6–9/12",
    "nights": 3,
    "hotel": "Kalima Resort and Villas Khao Lak",
-   "what": "8.8 על 2,576 ביקורות · 5 כוכבים · ספא מלא עם חדר אדים, עיסוי זוגות, טיפולי גוף, בריכת אינפיניטי, בריכת מים מלוחים, בר-בריכה, יוגה וחדר כושר. גם פארק מים ומועדון ילדים.",
-   "perNight": 7476.83,
+   "what": "8.9 · 5 כוכבים · Deluxe Pool Access, יציאה ישירה לבריכה · אישור 7195273990380466772 · בלי ארוחת בוקר ($18 לאדם).",
+   "perNight": 7169,
    "choice": "מוזמן",
-   "freeCancel": "עד 1/11 23:59 שעון תאילנד · לשנות את התאריכים מ-2–8/12",
+   "freeCancel": "לא מוחזר",
    "link": "בוקינג",
    "linkLink": "https://www.booking.com/hotel/th/kalima-resort-amp-villas-khao-lak.html?checkin=2026-12-06&checkout=2026-12-09&group_adults=2"
   },

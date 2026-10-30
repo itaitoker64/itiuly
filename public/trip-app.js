@@ -384,11 +384,6 @@ function migrateKynBooking(){
  * המשימות של המסלול מ-2/12: פי פי, שני לילות בקאו סוק וקאו לאק — ביחד עד 10/12.
  */
 const WEST_TASKS = [
-  {owner:"itai", title:"לבטל את Our Jungle House — חינם עד 8/11", deadline:"2026-11-08", priority:"גבוהה", order:13,
-   notes:"אישור 6051801812090945732 · הלילה בקאו סוק עבר ל-4/12, ושם אין מקום · אחרי 8/11 הביטול עולה $13.89, ומ-19/11 כל הסכום", link:"https://secure.booking.com/myreservations.html"},
-  {owner:"both", title:"לשנות את קלימה ל-6–9/12 בבוקינג", deadline:"2026-11-01", priority:"גבוהה", order:12.9,
-   notes:"אישור 5770154448 · הביטול החינמי נגמר ב-1/11 23:59 שעון תאילנד (19:59 בארץ) — אחר כך כל ההזמנה (฿43,875 על 2–8/12) לא מוחזרת · כ-₪2,072 ל-6–9/12 · הכי בטוח: להזמין 6–9/12 עם ביטול חינם, ורק אחר כך לבטל את הישנה",
-   link:"https://www.booking.com/hotel/th/kalima-resort-amp-villas-khao-lak.html?checkin=2026-12-06&checkout=2026-12-09&group_adults=2"},
   {owner:"both", title:"להזמין לינה בפי פי, 2–4/12", deadline:"2026-11-10", priority:"גבוהה", order:13.2,
    notes:"הבחירה: ChaoKoh, כ-₪716 · חלופות: Phi Phi Indigo ₪793, HIP Seaview ₪1,022",
    link:"https://www.booking.com/hotel/th/orngaermchaawekaaaphiiphii.html?checkin=2026-12-02&checkout=2026-12-04&group_adults=2"},
@@ -419,6 +414,8 @@ const OLD_PLAN_TASKS = ['להזמין Lomprayah מאאו נאנג לקופנגן
   'להזמין טיסה מפוקט לצ׳יאנג מאי ב-8/12', 'להזמין טיסה מפוקט לבנגקוק ב-9/12', 'להזמין ואן משותף מאאו נאנג לקאו לק',
   'להזמין לינה בפטונג, 8/12'];
 /* משימות שהוחלפו בגרסה מעודכנת שלהן — כאן אין מה לבטל */
+/* מה שכבר בוצע ויצא מהרשימה של מסמך חדש; במסמך שמור הוא מסומן כבוצע */
+const DONE_TASKS = ['לבטל את Our Jungle House — חינם עד 8/11', 'לשנות את קלימה ל-6–9/12 בבוקינג'];
 const SUPERSEDED_TASKS = ['Our Jungle House — ביטול חינם רק עד 8/11', 'לשנות את קלימה ל-5–8/12 בבוקינג',
   'להזמין סיור אגם צ׳או לאן עם הסעה לקאו לאק', 'להזמין סימילן, 6/12'];
 
@@ -430,7 +427,7 @@ function seedData(){
   const hanoiId = uid('d'), manilaId = uid('d');
 
   return {
-    schema:18,
+    schema:19,
     tripName:"My Big Trip 🌏",
     startDate:"2026-11-22",
     endDate:null,
@@ -467,7 +464,7 @@ function seedData(){
          amount:8169.87, currency:"THB", paidBy:"itai", split:"ratio", status:"due",
          note:"אישור 3051425 · הזמנה ישירה באתר המלון עם קוד Member · Historic Cabin Family · משלמים בצ׳ק-אין · ביטול חינם עד 21/11 · פיקדון ฿1,000 מזומן, מוחזר בצ׳ק-אאוט · החליפה את הזמנת בוקינג 5123136373 ב-₪1,128"},
         {id:uid('x'), date:"2026-09-10", title:"Kalima Resort · 3 לילות בקאו לאק", category:"accommodation",
-         amount:2072, currency:"ILS", paidBy:"itai", split:"ratio", status:"paid", note:"6–9/12 · כ-₪2,072 אחרי שינוי התאריכים בבוקינג · ההזמנה הקיימת (5770154448) היא 2–8/12 ב-฿43,875, ובוקינג מחייבת אותה ב-30/10 · ביטול חינם רק עד 1/11 23:59 שעון תאילנד"},
+         amount:1931.44, currency:"ILS", paidBy:"itai", split:"ratio", status:"paid", note:"6–9/12 · Deluxe Pool Access · אישור 7195273990380466772 · שולם $621.21 · לא מוחזר · בלי ארוחת בוקר ($18 לאדם) · ההזמנה הקודמת (5770154448, 2–8/12) בוטלה בחינם"},
         {id:uid('x'), date:"2026-12-09", title:"Eleven Bangkok Sukhumvit 11 · לילה אחרון", category:"accommodation",
          amount:3010.10, currency:"THB", paidBy:"itai", split:"ratio", status:"due", note:"אישור 5243050600 · לשניים — לעדכן בבוקינג (הוזמן לאדם אחד) · בוקינג מחייבת אוטומטית · ביטול חינם עד 5/12 · פיקדון ฿1,000 במזומן"}
       ],
@@ -1369,8 +1366,8 @@ function ensureDefaults(){
    */
   if(STATE.schema < 18){
     const freshTask = fresh.masterChecklist.find(t=>t.title==='לשנות את קלימה ל-6–9/12 בבוקינג');
-    const task = STATE.masterChecklist.find(t=>t.title===freshTask.title);
-    if(task) Object.assign(task, {deadline:freshTask.deadline, notes:freshTask.notes, priority:freshTask.priority, order:freshTask.order});
+    const task = freshTask && STATE.masterChecklist.find(t=>t.title===freshTask.title);
+    if(task && freshTask) Object.assign(task, {deadline:freshTask.deadline, notes:freshTask.notes, priority:freshTask.priority, order:freshTask.order});
     const seedShared = window.SHARED_SEED;
     const meta = STATE.shared || {};
     const seedBooking = seedShared && seedShared.bookings.find(b=>b.what==='Kalima Resort and Villas');
@@ -1383,6 +1380,41 @@ function ensureDefaults(){
     const freshExpense = fresh.money.expenses.find(x=>/Kalima/.test(x.title));
     if(expense && expense.amount===freshExpense.amount) expense.note = freshExpense.note;
     STATE.schema = 18;
+  }
+
+  /*
+   * 30/10: קלימה הוזמנה מחדש ל-6–9/12 (7195273990380466772, $621.21, לא מוחזר,
+   * בלי ארוחת בוקר), ההזמנה הישנה בוטלה בחינם, ו-Our Jungle House בוטל והוחזר.
+   */
+  if(STATE.schema < 19){
+    const seedShared = window.SHARED_SEED;
+    const copy = x => JSON.parse(JSON.stringify(x));
+    STATE.masterChecklist.forEach(t=>{ if(DONE_TASKS.includes(t.title)) t.status = 'done'; });
+    const meta = STATE.shared || {};
+    if(seedShared){
+      [['bookings','what',['Kalima Resort and Villas','Our Jungle House']], ['hotels','hotel',['Kalima Resort and Villas Khao Lak','Our Jungle House']]].forEach(([list, key, names])=>{
+        names.forEach(name=>{
+          const item = (meta[list]||[]).find(x=>x[key]===name);
+          const fresh19 = seedShared[list].find(x=>x[key]===name);
+          if(item && fresh19) Object.assign(item, copy(fresh19));
+        });
+      });
+      const seedRows = seedShared.days.flatMap(d=>d.rows);
+      (meta.days||[]).forEach(d=>d.rows.forEach(r=>{
+        const fresh19 = seedRows.find(x=>x.id===r.id);
+        if(!fresh19) return;
+        if(r.act==='לינה — Kalima Resort and Villas' || ['s_g7_0','s_g8_0','s_g9_0'].includes(r.id)){
+          ['act','baht','loc','notes'].forEach(k=>{ r[k] = fresh19[k]; });
+          r.priceEstimate = copy(fresh19.priceEstimate);
+        }
+      }));
+    }
+    const kalima = STATE.money.expenses.find(x=>/Kalima/.test(x.title||''));
+    const freshKalima = fresh.money.expenses.find(x=>/Kalima/.test(x.title));
+    if(kalima && kalima.currency==='ILS' && [4029, 2103, 2661, 2072].includes(kalima.amount)){
+      Object.assign(kalima, {title:freshKalima.title, amount:freshKalima.amount, status:'paid', note:freshKalima.note});
+    }
+    STATE.schema = 19;
   }
 
   /* משימות חדשות מתווספות בכל גרסה, לפי כותרת */
