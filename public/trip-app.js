@@ -404,8 +404,6 @@ const WEST_TASKS = [
    notes:"הליכה מודרכת או קאנו על נהר סוק ב-07:00, ואן לקלימה ב-13:00 · דרך המלון", link:""},
   {owner:"both", title:"להזמין סימילן, 7/12", deadline:"2026-11-30", priority:"בינונית", order:13.95,
    notes:"฿3,900 לאדם כולל אגרת פארק · איסוף מקלימה · 8/12 יום הגיבוי", link:"https://www.khaolaklanddiscovery.com/khao-lak-tours/similan-islands-tour/"},
-  {owner:"talia", title:"להחליט מה עושים אחרי 10/12", deadline:"2026-11-20", priority:"בינונית", order:13.96,
-   notes:"באפליקציה כרגע: לילה בצ׳יאנג מאי ב-10/12 והקורס בפאי מ-11/12 — הנחה בלבד. לבדוק מתי הקורס מתחיל ולעדכן", link:""},
   {owner:"itai", title:"לבטל את Sarana Bungalows — חינם עד 28/11", deadline:"2026-11-28", priority:"בינונית", order:13.97,
    notes:"אישור 6196805940 · קופנגן כבר לא במסלול · לא שולם מראש", link:"https://secure.booking.com/myreservations.html?bn=6196805940"}
 ];
@@ -415,19 +413,99 @@ const OLD_PLAN_TASKS = ['להזמין Lomprayah מאאו נאנג לקופנגן
   'להזמין לינה בפטונג, 8/12'];
 /* משימות שהוחלפו בגרסה מעודכנת שלהן — כאן אין מה לבטל */
 /* מה שכבר בוצע ויצא מהרשימה של מסמך חדש; במסמך שמור הוא מסומן כבוצע */
-const DONE_TASKS = ['לבטל את Our Jungle House — חינם עד 8/11', 'לשנות את קלימה ל-6–9/12 בבוקינג'];
+const DONE_TASKS = ['לבטל את Our Jungle House — חינם עד 8/11', 'לשנות את קלימה ל-6–9/12 בבוקינג', 'להחליט מה עושים אחרי 10/12'];
 const SUPERSEDED_TASKS = ['Our Jungle House — ביטול חינם רק עד 8/11', 'לשנות את קלימה ל-5–8/12 בבוקינג',
   'להזמין סיור אגם צ׳או לאן עם הסעה לקאו לאק', 'להזמין סימילן, 6/12'];
+
+/*
+ * המסלול של טליה אחרי 10/12: מחכה למלח בבנגקוק, הצפון של תאילנד עד שהפטור
+ * נגמר, סרי לנקה בשלושה שבועות (גלישה בוולגמה ואז פנימה בכיוון אחד), הודו
+ * כטיוטה, וקופנגן באמצע פברואר.
+ */
+const TALIA_THAILAND = [
+  {name:"בנגקוק — מחכה למלח", wiki:"Bangkok", hue:"#C97B5A", lat:13.7440, lng:100.5560, arrival:"2026-12-10", departure:"2026-12-11", nights:1,
+   accommodation:"להאריך את Eleven בלילה, או מלון אחר", transport:"",
+   notes:"איתי טס בבוקר. מלח נוחתת ב-11/12 ב-13:00 בסוברנבומי, ובערב טסות יחד לצפון.", budget:500, order:9},
+  {name:"צ'יאנג מאי", wiki:"Chiang Mai", hue:"#8C6FA0", lat:18.7883, lng:98.9853, arrival:"2026-12-11", departure:"2026-12-15", nights:4,
+   accommodation:"", transport:"טיסת ערב מבנגקוק, כשעה ורבע",
+   notes:"העיר העתיקה, דוי סוטפ, סדנת בישול ומקלט פילים אתי. בשבת 12/12 שוק וואלאי, ובראשון 13/12 Sunday Walking Street. דצמבר: יבש ונעים, קר בלילה.",
+   budget:1200, order:10},
+  {name:"פאי", wiki:"Pai, Thailand", hue:"#4E8B8B", lat:19.3583, lng:98.4383, arrival:"2026-12-15", departure:"2026-12-18", nights:3,
+   accommodation:"", transport:"ואן מצ'יאנג מאי, כשלוש שעות מפותלות",
+   notes:"קניון, מעיינות חמים, מפלים, קטנוע, יוגה ושקיעות. בלילה כ-10 מעלות — פליז.",
+   scooter:{ok:true, perDay:180, bikes:1, days:3, soloRider:"talia", headline:"בפאי זה כמעט חובה",
+     note:"฿150–200 ליום. הקניון, המעיינות החמים והכפרים מסביב הם מרחק קטנוע — צריך רישיון A על השם שלך."},
+   budget:900, order:11},
+  {name:"צ'יאנג ראי", wiki:"Chiang Rai", hue:"#B97A85", lat:19.9105, lng:99.8406, arrival:"2026-12-18", departure:"2026-12-20", nights:2,
+   accommodation:"", transport:"אוטובוס דרך צ'יאנג מאי",
+   notes:"המקדש הלבן, המקדש הכחול, הבית השחור ומשולש הזהב. אם בא פחות נסיעות: לוותר, ולהוסיף לילה בפאי ולילה בצ'יאנג דאו.",
+   budget:700, order:12},
+  {name:"בנגקוק — לפני סרי לנקה", wiki:"Bangkok", hue:"#C97B5A", lat:13.7440, lng:100.5560, arrival:"2026-12-20", departure:"2026-12-21", nights:1,
+   accommodation:"", transport:"טיסה מצ'יאנג ראי",
+   notes:"21/12 טיסה ישירה לקולומבו, כשלוש שעות וחצי. הפטור התאילנדי (30 יום מ-23/11) נגמר ב-22/12.", budget:400, order:13},
+  {name:"קופנגן — פברואר", wiki:"Ko Pha-ngan", hue:"#3E8E9B", lat:9.7120, lng:100.0330, arrival:"2027-02-14", departure:"", nights:null,
+   accommodation:"", transport:"טיסה לבנגקוק או לסמוי, ומעבורת",
+   notes:"באמצע פברואר. מסיבת הירח המלא צפויה בסביבות 20/2 — לבדוק את התאריך. סריטאנו: יוגה וקהילה.", budget:null, order:14}
+];
+const TALIA_SRILANKA = [
+  {name:"נגומבו", wiki:"Negombo", hue:"#6F8F6A", lat:7.2090, lng:79.8350, arrival:"2026-12-21", departure:"2026-12-22", nights:1,
+   accommodation:"", transport:"טיסה מבנגקוק", notes:"לילה ליד השדה אחרי הנחיתה. ETA אונליין לפני הטיסה.", budget:300, order:1},
+  {name:"ולגמה", wiki:"Weligama", hue:"#1C6B74", lat:5.9740, lng:80.4290, arrival:"2026-12-22", departure:"2027-01-01", nights:10,
+   accommodation:"להזמין מוקדם — חגים", transport:"נהג, כשלוש שעות בכביש המהיר",
+   notes:"הבסיס: מפרץ חול רחב עם גלים רכים למתחילים, חג המולד וסילבסטר. לגור בין כביש A2 לחוף, באמצע המפרץ. טיולי יום: גאלה, מיריסה (לווייתנים), אהנגמה, היריקטיה. מתניידים ברגל וב-PickMe.",
+   budget:4000, order:2},
+  {name:"טיסמהרמה · יאלה", wiki:"Yala National Park", hue:"#D3911A", lat:6.2840, lng:81.2870, arrival:"2027-01-01", departure:"2027-01-02", nights:1,
+   accommodation:"", transport:"נהג, כשעתיים וחצי. אפשר לעצור באודאוואלאווה",
+   notes:"ספארי ב-4:30 בבוקר: נמרים, פילים, תנינים. ג׳יפ כ-10,000–15,000 ₨ ועוד כ-$30–40 כניסה לאדם.", budget:700, order:3},
+  {name:"אלה", wiki:"Ella, Sri Lanka", hue:"#477A44", lat:6.8667, lng:81.0466, arrival:"2027-01-02", departure:"2027-01-05", nights:3,
+   accommodation:"", transport:"נהג, כשעתיים וחצי",
+   notes:"כפר הררי בין מטעי תה, 15–25 מעלות. Little Adam's Peak, Ella Rock, גשר תשע הקשתות, וביקור במטע תה.", budget:900, order:4},
+  {name:"קנדי", wiki:"Kandy", hue:"#B2512C", lat:7.2906, lng:80.6337, arrival:"2027-01-05", departure:"2027-01-07", nights:2,
+   accommodation:"", transport:"רכבת מאלה, 6–7 שעות — להזמין כחודש מראש",
+   notes:"מקדש השן, הגן הבוטני ומופע ריקודים בערב. עירונית ועמוסה יותר.", budget:600, order:5},
+  {name:"סיגיריה · דמבולה", wiki:"Sigiriya", hue:"#8A5A2B", lat:7.9570, lng:80.7600, arrival:"2027-01-07", departure:"2027-01-10", nights:3,
+   accommodation:"", transport:"נהג, כשעתיים וחצי",
+   notes:"זריחה על פידורנגלה מול סיגיריה, מערות דמבולה, ספארי פילים בקאודולה או ב-Hurulu. סיגיריה כ-$35 לאדם.", budget:900, order:6},
+  {name:"נגומבו — לילה לפני הטיסה", wiki:"Negombo", hue:"#6F8F6A", lat:7.2090, lng:79.8350, arrival:"2027-01-10", departure:"2027-01-11", nights:1,
+   accommodation:"", transport:"נהג, 3.5–4 שעות", notes:"11/1 טיסה החוצה.", budget:300, order:7}
+];
+function TALIA_INDIA(){
+  return {id:"india", owner:"talia", name:"הודו — טיוטה", flag:"🇮🇳", color:"#D9822B", order:2.5, currency:"INR",
+    notes:"עוד לא הוחלט. מתאים לשתיכן: חוף, ג׳ונגל, ספארי ותרבות, ויוגה בבקרים. החלופה: קמבודיה, ואז לחבר אותה לווייטנאם.",
+    destinations:[
+      {id:uid('d'), owner:"talia", name:"וארקלה", wiki:"Varkala", hue:"#D9822B", lat:8.7379, lng:76.7163, arrival:"2027-01-11", departure:"2027-01-17", nights:6,
+       accommodation:"", transport:"טיסה מקולומבו לטריבנדרם, כשעה", notes:"צוקים מעל הים, יוגה ואיורוודה לטליה, שיעורי גלישה למלח.", budget:1500, status:"optional", companions:["טליה ומלח"], order:1},
+      {id:uid('d'), owner:"talia", name:"קוצ'י", wiki:"Kochi", hue:"#D9822B", lat:9.9658, lng:76.2421, arrival:"2027-01-17", departure:"2027-01-20", nights:3,
+       accommodation:"", transport:"רכבת או נהג", notes:"קטקאלי, רשתות הדיג הסיניות, שוק התבלינים והרובע היהודי.", budget:800, status:"optional", companions:["טליה ומלח"], order:2},
+      {id:uid('d'), owner:"talia", name:"אלפי", wiki:"Alappuzha", hue:"#D9822B", lat:9.4981, lng:76.3388, arrival:"2027-01-20", departure:"2027-01-21", nights:1,
+       accommodation:"סירת בית", transport:"נהג, כשעה וחצי", notes:"לילה בסירת בית על הבק-ווטרס.", budget:600, status:"optional", companions:["טליה ומלח"], order:3},
+      {id:uid('d'), owner:"talia", name:"תקדי", wiki:"Thekkady", hue:"#D9822B", lat:9.6031, lng:77.1615, arrival:"2027-01-21", departure:"2027-01-24", nights:3,
+       accommodation:"", transport:"נהג, כ-4 שעות", notes:"שמורת פריאר, מטעי תה ותבלינים.", budget:700, status:"optional", companions:["טליה ומלח"], order:4},
+      {id:uid('d'), owner:"talia", name:"מייסור · קביני", wiki:"Mysore", hue:"#D9822B", lat:12.2958, lng:76.6394, arrival:"2027-01-24", departure:"2027-01-29", nights:5,
+       accommodation:"", transport:"יום נסיעה מקרלה", notes:"הארמון והשוק, וספארי טיגריסים בקביני. משם טיסה מבנגלור לבנגקוק.", budget:1500, status:"optional", companions:["טליה ומלח"], order:5}
+    ],
+    prepChecklist:[{id:uid('t'), title:"ויזה אלקטרונית להודו", status:"todo", deadline:"2026-12-31", notes:"רק אם הולכות על הודו", link:"", priority:"בינונית", order:1}],
+    transport:[], accommodations:[], budget:defaultBudget()};
+}
+const TALIA_TASKS = [
+  {title:"לינה בבנגקוק ללילה של 10/12", deadline:"2026-11-30", priority:"בינונית", order:20,
+   notes:"אפשר להאריך את Eleven בלילה (אישור 5243050600). מלח נוחתת ב-11/12 ב-13:00", link:"https://secure.booking.com/myreservations.html"},
+  {title:"טיסה בנגקוק → צ׳יאנג מאי, 11/12 בערב — עם מלח", deadline:"2026-11-30", priority:"בינונית", order:21, notes:"מ-DMK או BKK, כשעה ורבע", link:""},
+  {title:"טיסה צ׳יאנג ראי → בנגקוק, 20/12", deadline:"2026-11-30", priority:"בינונית", order:22, notes:"", link:""},
+  {title:"לינה בוולגמה 22/12–1/1 — חגים, להזמין מוקדם", deadline:"2026-11-15", priority:"גבוהה", order:23,
+   notes:"בין כביש A2 לחוף, באמצע המפרץ · beachfront או עד 100 מ׳ · לבדוק בביקורות אם יש רעש מהכביש", link:"https://www.booking.com/searchresults.html?ss=Weligama&checkin=2026-12-22&checkout=2027-01-01&group_adults=2"},
+  {title:"כרטיסי רכבת אלה → קנדי, 5/1", deadline:"2026-12-06", priority:"גבוהה", order:24, notes:"נפתחים כ-30 יום מראש ונגמרים מהר", link:""},
+  {title:"להחליט על אחרי סרי לנקה: הודו או קמבודיה", deadline:"2026-12-15", priority:"בינונית", order:25, notes:"באפליקציה כרגע: הודו, 11–29/1, כטיוטה", link:""}
+];
 
 function seedData(){
   const bangkokId = uid('d'), koyaoId = uid('d'), aonangId = uid('d'), khaolakId = uid('d');
   const phiphiId = uid('d'), khaosokId = uid('d'), bangkokLastId = uid('d');
-  const chiangmaiId = uid('d'), paiId = uid('d');
-  const colomboId = uid('d'), mirissaId = uid('d'), ellaId = uid('d'), arugamId = uid('d');
+  const paiId = uid('d'), weligamaId = uid('d');
   const hanoiId = uid('d'), manilaId = uid('d');
 
   return {
-    schema:19,
+    schema:20,
     tripName:"My Big Trip 🌏",
     startDate:"2026-11-22",
     endDate:null,
@@ -440,8 +518,8 @@ function seedData(){
       together:{title:"תאילנד · מבנגקוק לאנדמן", subtitle:"22 בנובמבר – 10 בדצמבר 2026 · 17 לילות", nights:17},
       itai:{title:"שבועיים וחצי", subtitle:"22/11 – 10/12 · ואז הביתה מבנגקוק", homeDate:"2026-12-10",
             homeFlight:"ארקיע IZ592 · בנגקוק → תל אביב · 10/12, 11:15"},
-      talia:{title:"הטיול הגדול", subtitle:"מ-22/11/2026 והלאה · תאילנד, סרי לנקה, וייטנאם, פיליפינים",
-             onwardFlight:"ממשיכה מבנגקוק אחרי 10/12 — לעדכן", onwardDate:"2026-12-10"}
+      talia:{title:"הטיול הגדול", subtitle:"מ-22/11/2026 והלאה · תאילנד, סרי לנקה, הודו, פיליפינים, וייטנאם",
+             onwardFlight:"עם מלח לצפון · בנגקוק → צ׳יאנג מאי, 11/12 בערב", onwardDate:"2026-12-10"}
     },
 
     /* חלוקת הוצאות בסגנון Splitwise */
@@ -518,20 +596,7 @@ function seedData(){
            accommodation:"Eleven Bangkok Sukhumvit 11", transport:"רכב לשדה בפוקט, וטיסה",
            notes:"לילה אחרון ביחד על סוי 11. בבוקר איתי טס (IZ592, 11:15 מסוברנבומי), וטליה ממשיכה.",
            budget:800, status:"booked", companions:["ביחד"], order:8},
-          {id:chiangmaiId, owner:"talia", name:"צ'יאנג מאי", wiki:"Chiang Mai", hue:"#8C6FA0",
-           lat:18.7883, lng:98.9853, arrival:"2026-12-10", departure:"2026-12-11", nights:1,
-           accommodation:"", transport:"טיסה מבנגקוק אחרי שאיתי טס",
-           notes:"לילה אחד בדרך לפאי. מבנגקוק לצ׳יאנג מאי יש טיסות כמעט כל שעה. התאריכים — לעדכן לפי הקורס.",
-           scooter:{ok:true, perDay:250, bikes:1, days:1, soloRider:"talia", headline:"רק אם את רוכבת בעצמך",
-             note:"איתי כבר בדרך הביתה, אז אין מי שירכיב. לילה אחד בלבד — כנראה פשוט לוותר."},
-           budget:600, status:"planned", companions:["לבד"], order:5},
-          {id:paiId, owner:"talia", name:"פאי — קורס מורים ליוגה", wiki:"Pai, Thailand", hue:"#4E8B8B",
-           lat:19.3583, lng:98.4383, arrival:"2026-12-11", departure:"2027-01-08", nights:28,
-           accommodation:"", transport:"מיניבאן מצ'יאנג מאי",
-           notes:"קורס טיטשריניג חודשי. לבדוק מתי הוא מתחיל — עד 10/12 טליה בדרום עם איתי.",
-           scooter:{ok:true, perDay:180, bikes:1, days:30, soloRider:"talia", headline:"בפאי זה כמעט חובה",
-             note:"฿150–200 ליום, וזול יותר בחודש. הקניון, המעיינות החמים והכפרים מסביב הם מרחק קטנוע — אבל כאן את רוכבת לבד, וצריך רישיון A על השם שלך. הכביש מצ׳יאנג מאי הוא 762 עיקולים — לא בלילה ולא בגשם."},
-           budget:3000, status:"booked", companions:["לבד"], order:6}
+          ...TALIA_THAILAND.map(d=>({id:d.name==='פאי'?paiId:uid('d'), owner:"talia", status:"planned", companions:["טליה ומלח"], ...d}))
         ],
         prepChecklist:[
           {id:uid('t'), title:"ויזה לתאילנד", status:"todo", deadline:"2026-11-01", notes:"לבדוק אם צריך ויזה מראש או ויזה בכניסה (Visa Exemption)", link:"", priority:"גבוהה", order:1},
@@ -547,10 +612,7 @@ function seedData(){
       },
       {id:"srilanka", owner:"talia", name:"סרי לנקה", flag:"🇱🇰", color:"var(--srilanka)", order:2, currency:"LKR", notes:"",
         destinations:[
-          {id:colomboId, owner:"talia", name:"קולומבו", lat:6.9271, lng:79.8612, arrival:"2027-01-08", departure:"2027-01-09", nights:1, accommodation:"", transport:"טיסה מתאילנד", notes:"תחנת כניסה", budget:600, status:"planned", companions:["Solo"], order:1},
-          {id:mirissaId, owner:"talia", name:"מיריסה", lat:5.9483, lng:80.4589, arrival:"2027-01-09", departure:"2027-01-15", nights:6, accommodation:"", transport:"רכבת/אוטובוס", notes:"חופים, גלישה, יוגה", budget:2400, status:"planned", companions:["Solo"], order:2},
-          {id:ellaId, owner:"talia", name:"אלה", lat:6.8667, lng:81.0466, arrival:"2027-01-15", departure:"2027-01-19", nights:4, accommodation:"", transport:"רכבת ההרים המפורסמת", notes:"טבע, טיולים, נופים", budget:1400, status:"optional", companions:["Solo"], order:3},
-          {id:arugamId, owner:"talia", name:"ארוגם ביי", lat:6.8400, lng:81.8360, arrival:"2027-01-19", departure:"2027-01-25", nights:6, accommodation:"", transport:"אוטובוס", notes:"גלישה נוספת, חוף רגוע", budget:2000, status:"optional", companions:["Solo"], order:4}
+          ...TALIA_SRILANKA.map(d=>({id:d.name==='ולגמה'?weligamaId:uid('d'), owner:"talia", status:"planned", companions:["טליה ומלח"], ...d}))
         ],
         prepChecklist:[
           {id:uid('t'), title:"ETA / ויזה אלקטרונית לסרי לנקה", status:"todo", deadline:"2026-12-20", notes:"", link:"", priority:"גבוהה", order:1},
@@ -558,6 +620,7 @@ function seedData(){
         ],
         transport:[], accommodations:[], budget:defaultBudget()
       },
+      TALIA_INDIA(),
       {id:"vietnam", owner:"talia", name:"וייטנאם", flag:"🇻🇳", color:"var(--vietnam)", order:3, currency:"VND", notes:"המסלול עדיין גמיש",
         destinations:[
           {id:hanoiId, owner:"talia", name:"האנוי (רעיון ראשוני)", lat:21.0278, lng:105.8342, arrival:"", departure:"", nights:null, accommodation:"", transport:"", notes:"המסלול עדיין גמיש — לא סופי", budget:null, status:"optional", companions:[], order:1}
@@ -597,8 +660,9 @@ function seedData(){
       {id:uid('m'), owner:"itai", category:"ISB", title:"לתאם ביקור בוגרים ב-ISB", status:"todo", deadline:"2026-11-20", notes:"isbalum@isb.ac.th, לפחות יומיים מראש, תעודה מזהה בשער", priority:"בינונית", link:"", countryId:"thailand", order:15},
 
       {id:uid('m'), owner:"talia", category:"קורס יוגה", title:"לשלם את היתרה על הקורס בפאי", status:"todo", deadline:"2026-11-01", notes:"", priority:"גבוהה", link:"", countryId:"thailand", order:16},
-      {id:uid('m'), owner:"talia", category:"ויזה", title:"הארכת שהייה — הפטור קוצר ל-30 יום", status:"todo", deadline:"2026-12-15", notes:"הארכה של 30 יום במשרד ההגירה ฿1,900. רלוונטי כי את נשארת אחרי 8/12", priority:"גבוהה", link:"", countryId:"thailand", order:17},
-      {id:uid('m'), owner:"talia", category:"טיסות המשך", title:"טיסה מתאילנד לסרי לנקה", status:"todo", deadline:"2026-12-01", notes:"", priority:"בינונית", link:"", countryId:null, order:18}
+      {id:uid('m'), owner:"talia", category:"ויזה", title:"הארכת שהייה — הפטור קוצר ל-30 יום", status:"done", deadline:"2026-12-15", notes:"לא צריך: הטיסה לסרי לנקה ב-21/12, לפני שהפטור נגמר ב-22/12. אם התוכנית משתנה — הארכה של 30 יום ฿1,900", priority:"גבוהה", link:"", countryId:"thailand", order:17},
+      {id:uid('m'), owner:"talia", category:"טיסות המשך", title:"טיסה מתאילנד לסרי לנקה", status:"todo", deadline:"2026-11-30", notes:"21/12 מבנגקוק לקולומבו, ישירה, כשלוש שעות וחצי", priority:"גבוהה", link:"", countryId:null, order:18},
+      ...TALIA_TASKS.map(t=>({id:uid('m'), owner:"talia", status:"todo", category:"המסלול של טליה", countryId:null, ...t}))
     ],
     packingBreakdown:"Osprey Renn 65L לכל הציוד → Osprey Daylite Plus 20L למטוס, נסיעות וטיולי יום → קרוסבודי קטן לטלפון, כסף ודרכון ביום־יום.",
     packingCarryOn:["דרכון","ארנק","טלפון","Power Bank","תרופות למיגרנה","תרופה לבחילות","משקפי שמש","אטמי אוזניים","מסכת עיניים","אוזניות","מגבונים קטנים","טישו","AirTag מחובר למוצ'ילה הגדולה","חולצה + תחתונים להחלפה"],
@@ -709,7 +773,7 @@ function seedData(){
     savedPlaces:[
       {id:uid('sp'), countryId:"thailand", destinationId:paiId, name:"Coffee in Love", category:"cafe", mapsLink:"", note:"נשמע כמו מקום שקט לעבוד ממנו", status:"want", priority:"בינונית", lat:19.3611, lng:98.4394},
       {id:uid('sp'), countryId:"thailand", destinationId:paiId, name:"Yoga Garden Pai", category:"yoga", mapsLink:"", note:"", status:"must", priority:"גבוהה", lat:null, lng:null},
-      {id:uid('sp'), countryId:"srilanka", destinationId:mirissaId, name:"Coconut Tree Hill", category:"view", mapsLink:"", note:"נקודת צילום מפורסמת של מיריסה", status:"want", priority:"בינונית", lat:5.9270, lng:80.4457}
+      {id:uid('sp'), countryId:"srilanka", destinationId:weligamaId, name:"Coconut Tree Hill", category:"view", mapsLink:"", note:"מיריסה, 15 דקות מוולגמה — נקודת צילום מפורסמת", status:"want", priority:"בינונית", lat:5.9270, lng:80.4457}
     ],
     documents:[
       {id:uid('doc'), name:"דרכון — צילום", category:"דרכון", sensitive:true, notes:""},
@@ -1415,6 +1479,42 @@ function ensureDefaults(){
       Object.assign(kalima, {title:freshKalima.title, amount:freshKalima.amount, status:'paid', note:freshKalima.note});
     }
     STATE.schema = 19;
+  }
+
+  /*
+   * המסלול של טליה אחרי 10/12: הצפון עם מלח, סרי לנקה בשלושה שבועות, הודו
+   * כטיוטה וקופנגן בפברואר — במקום צ'יאנג מאי בדרך לקורס בפאי, וסרי לנקה
+   * של ינואר עם ארוגם ביי שלא בעונה.
+   */
+  if(STATE.schema < 20){
+    const copy = x => JSON.parse(JSON.stringify(x));
+    const country = id => (STATE.countries||[]).find(c=>c.id===id);
+    const freshCountry = id => fresh.countries.find(c=>c.id===id);
+    const swap = (id, oldNames, fromId) => {
+      const c = country(id), f = freshCountry(fromId || id);
+      if(!c || !f) return;
+      c.destinations = c.destinations.filter(d=>!(d.owner==='talia' && oldNames.includes(d.name)));
+      f.destinations.filter(d=>d.owner==='talia').forEach(d=>{
+        if(!c.destinations.some(x=>x.name===d.name)) c.destinations.push(copy(d));
+      });
+      c.destinations.sort((a,b)=>(a.arrival||'9999').localeCompare(b.arrival||'9999') || (a.order||0)-(b.order||0));
+    };
+    swap('thailand', ["צ'יאנג מאי", 'פאי — קורס מורים ליוגה']);
+    swap('srilanka', ['קולומבו', 'מיריסה', 'אלה', 'ארוגם ביי']);
+    if(!country('india')){
+      const at = STATE.countries.findIndex(c=>c.id==='srilanka');
+      STATE.countries.splice(at>=0 ? at+1 : STATE.countries.length, 0, copy(freshCountry('india')));
+    }
+    if(STATE.trip.talia) Object.assign(STATE.trip.talia, {subtitle:fresh.trip.talia.subtitle, onwardFlight:fresh.trip.talia.onwardFlight});
+    const byTitle = t => STATE.masterChecklist.find(x=>x.title===t);
+    const flight = byTitle('טיסה מתאילנד לסרי לנקה');
+    const freshFlight = fresh.masterChecklist.find(x=>x.title==='טיסה מתאילנד לסרי לנקה');
+    if(flight && flight.status!=='done') Object.assign(flight, {deadline:freshFlight.deadline, notes:freshFlight.notes, priority:freshFlight.priority});
+    const visa = byTitle('הארכת שהייה — הפטור קוצר ל-30 יום');
+    const freshVisa = fresh.masterChecklist.find(x=>x.title==='הארכת שהייה — הפטור קוצר ל-30 יום');
+    if(visa) Object.assign(visa, {status:'done', notes:freshVisa.notes});
+    STATE.masterChecklist.forEach(t=>{ if(DONE_TASKS.includes(t.title)) t.status = 'done'; });
+    STATE.schema = 20;
   }
 
   /* משימות חדשות מתווספות בכל גרסה, לפי כותרת */
