@@ -487,6 +487,8 @@ function TALIA_INDIA(){
     prepChecklist:[{id:uid('t'), title:"ויזה אלקטרונית להודו", status:"todo", deadline:"2026-12-31", notes:"רק אם הולכות על הודו", link:"", priority:"בינונית", order:1}],
     transport:[], accommodations:[], budget:defaultBudget()};
 }
+/* לטליה אין כרטיס חזור: הכרטיס לקולומבו הוא ההוכחה שהיא יוצאת בתוך 30 הימים */
+const ONWARD_NOTE = "טליה: הפטור הוא 30 יום מהכניסה ב-23/11, כלומר יציאה עד 22/12. ארקיע ובביקורת הגבולות יבקשו לראות כרטיס יציאה מתאילנד בתוך החלון — אין לה כרטיס חזור, אז הכרטיס בנגקוק → קולומבו ב-21/12 צריך להיות מוזמן לפני הטיסה ב-22/11. עדיף כרטיס שאפשר לשנות. לאיתי: IZ592 ב-10/12.";
 const TALIA_TASKS = [
   {title:"לינה בבנגקוק ללילה של 10/12", deadline:"2026-11-30", priority:"בינונית", order:20,
    notes:"אפשר להאריך את Eleven בלילה (אישור 5243050600). מלח נוחתת ב-11/12 ב-13:00", link:"https://secure.booking.com/myreservations.html"},
@@ -505,7 +507,7 @@ function seedData(){
   const hanoiId = uid('d'), manilaId = uid('d');
 
   return {
-    schema:20,
+    schema:21,
     tripName:"My Big Trip 🌏",
     startDate:"2026-11-22",
     endDate:null,
@@ -600,7 +602,7 @@ function seedData(){
         ],
         prepChecklist:[
           {id:uid('t'), title:"ויזה לתאילנד", status:"todo", deadline:"2026-11-01", notes:"לבדוק אם צריך ויזה מראש או ויזה בכניסה (Visa Exemption)", link:"", priority:"גבוהה", order:1},
-          {id:uid('t'), title:"הוכחת יציאה / onward ticket", status:"todo", deadline:"2026-11-15", notes:"", link:"", priority:"בינונית", order:2},
+          {id:uid('t'), title:"הוכחת יציאה / onward ticket", status:"todo", deadline:"2026-11-20", notes:ONWARD_NOTE, link:"", priority:"גבוהה", order:2},
           {id:uid('t'), title:"ביטוח נסיעות", status:"todo", deadline:"2026-11-10", notes:"לוודא כיסוי לקורס יוגה ולשהייה ארוכה", link:"", priority:"גבוהה", order:3},
           {id:uid('t'), title:"SIM / eSIM תאילנד", status:"todo", deadline:"", notes:"", link:"", priority:"נמוכה", order:4},
           {id:uid('t'), title:"מטבע ועמלות ATM", status:"todo", deadline:"", notes:"", link:"", priority:"נמוכה", order:5}
@@ -661,7 +663,8 @@ function seedData(){
 
       {id:uid('m'), owner:"talia", category:"קורס יוגה", title:"לשלם את היתרה על הקורס בפאי", status:"todo", deadline:"2026-11-01", notes:"", priority:"גבוהה", link:"", countryId:"thailand", order:16},
       {id:uid('m'), owner:"talia", category:"ויזה", title:"הארכת שהייה — הפטור קוצר ל-30 יום", status:"done", deadline:"2026-12-15", notes:"לא צריך: הטיסה לסרי לנקה ב-21/12, לפני שהפטור נגמר ב-22/12. אם התוכנית משתנה — הארכה של 30 יום ฿1,900", priority:"גבוהה", link:"", countryId:"thailand", order:17},
-      {id:uid('m'), owner:"talia", category:"טיסות המשך", title:"טיסה מתאילנד לסרי לנקה", status:"todo", deadline:"2026-11-30", notes:"21/12 מבנגקוק לקולומבו, ישירה, כשלוש שעות וחצי", priority:"גבוהה", link:"", countryId:null, order:18},
+      {id:uid('m'), owner:"talia", category:"טיסות המשך", title:"טיסה מתאילנד לסרי לנקה", status:"todo", deadline:"2026-11-20", notes:ONWARD_NOTE, priority:"גבוהה", link:"", countryId:null, order:18},
+      {id:uid('m'), owner:"talia", category:"טיסות המשך", title:"כרטיס יציאה מתאילנד לפני הכניסה בפברואר", status:"todo", deadline:"2027-02-01", notes:"בכניסה לקופנגן באמצע פברואר הפטור מתחיל מחדש (30 יום), ושוב צריך להראות כרטיס יציאה — למשל לפיליפינים", priority:"בינונית", link:"", countryId:null, order:19},
       ...TALIA_TASKS.map(t=>({id:uid('m'), owner:"talia", status:"todo", category:"המסלול של טליה", countryId:null, ...t}))
     ],
     packingBreakdown:"Osprey Renn 65L לכל הציוד → Osprey Daylite Plus 20L למטוס, נסיעות וטיולי יום → קרוסבודי קטן לטלפון, כסף ודרכון ביום־יום.",
@@ -1515,6 +1518,20 @@ function ensureDefaults(){
     if(visa) Object.assign(visa, {status:'done', notes:freshVisa.notes});
     STATE.masterChecklist.forEach(t=>{ if(DONE_TASKS.includes(t.title)) t.status = 'done'; });
     STATE.schema = 20;
+  }
+
+  /*
+   * לטליה פטור של 30 יום ואין לה כרטיס חזור, אז הטיסה לקולומבו היא כרטיס
+   * היציאה שיבקשו בצ׳ק-אין ב-22/11 ובכניסה — היא צריכה להיות מוזמנת לפני כן.
+   */
+  if(STATE.schema < 21){
+    const freshFlight = fresh.masterChecklist.find(t=>t.title==='טיסה מתאילנד לסרי לנקה');
+    const flight = STATE.masterChecklist.find(t=>t.title===freshFlight.title);
+    if(flight && flight.status!=='done') Object.assign(flight, {deadline:freshFlight.deadline, notes:freshFlight.notes, priority:freshFlight.priority});
+    const thai = (STATE.countries||[]).find(c=>c.id==='thailand');
+    const proof = thai && (thai.prepChecklist||[]).find(t=>t.title==='הוכחת יציאה / onward ticket');
+    if(proof && proof.status!=='done') Object.assign(proof, {deadline:'2026-11-20', notes:ONWARD_NOTE, priority:'גבוהה'});
+    STATE.schema = 21;
   }
 
   /* משימות חדשות מתווספות בכל גרסה, לפי כותרת */
