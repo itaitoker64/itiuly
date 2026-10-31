@@ -28,27 +28,21 @@ window.SHARED_SEED = {
   },
   {
    "name": "אאו נאנג",
-   "dates": "א׳ 29/11 – ג׳ 1/12",
-   "nights": 3,
-   "what": "ריילאי, קורס טיפוס, קיאקים באאו תלאנה"
-  },
-  {
-   "name": "קו פי פי",
-   "dates": "ד׳ 2/12 – ה׳ 3/12",
-   "nights": 2,
-   "what": "מסיבות חוף, תצפית, מאיה ביי"
+   "dates": "א׳ 29/11 – ד׳ 2/12",
+   "nights": 4,
+   "what": "ריילאי, קורס טיפוס, קיאקים באאו תלאנה · פי פי ביום אחד"
   },
   {
    "name": "קאו סוק",
-   "dates": "ו׳ 4/12 – ש׳ 5/12",
+   "dates": "ה׳ 3/12 – ו׳ 4/12",
    "nights": 2,
    "what": "ג׳ונגל, נהר, ואגם צ׳או לאן"
   },
   {
    "name": "קאו לאק",
-   "dates": "א׳ 6/12 – ג׳ 8/12",
-   "nights": 3,
-   "what": "קלימה · סימילן ויום גיבוי"
+   "dates": "ש׳ 5/12 – ג׳ 8/12",
+   "nights": 4,
+   "what": "קלימה · יום חופשי, סימילן ויום גיבוי"
   },
   {
    "name": "בנגקוק",
@@ -2701,8 +2695,8 @@ window.SHARED_SEED = {
    "day": 10,
    "date": "2026-12-02",
    "dow": "ד׳",
-   "dest": "קו פי פי",
-   "summary": "מאאו נאנג לפי פי",
+   "dest": "אאו נאנג",
+   "summary": "יום רביעי באאו נאנג — פי פי ביום אחד, או כלום",
    "id": "day_10",
    "rows": [
     {
@@ -2715,140 +2709,74 @@ window.SHARED_SEED = {
      "status": "משלמים במקום",
      "link": "",
      "notes": "",
-     "id": "s_f2_0",
+     "id": "s_h2_0",
      "done": false,
      "priceEstimate": {
-      "kind": "no-extra",
-      "basis": "לא הוקצה חיוב נפרד לפעולה הזאת; חיובים כלולים מופיעים בחבילה או בהזמנה.",
+      "kind": "included",
+      "basis": "כלול במחיר ההזמנה או החבילה; אין חיוב נוסף באומדן.",
       "lowFactor": 1,
       "highFactor": 1,
       "sourceUrl": "",
-      "checked": "2026-10-29"
+      "checked": "2026-10-31"
      },
      "managed": true
     },
     {
-     "time": "09:30",
-     "dur": "0:30",
-     "act": "צ׳ק-אאוט · איסוף לרציף",
-     "loc": "צ׳רמנטרה",
-     "cat": "אחר",
-     "baht": null,
-     "status": "משלמים במקום",
-     "link": "",
-     "notes": "האיסוף בדרך כלל כלול בכרטיס המעבורת",
-     "id": "s_f2_1",
-     "done": false,
-     "priceEstimate": {
-      "kind": "no-extra",
-      "basis": "לא הוקצה חיוב נפרד לפעולה הזאת; חיובים כלולים מופיעים בחבילה או בהזמנה.",
-      "lowFactor": 1,
-      "highFactor": 1,
-      "sourceUrl": "",
-      "checked": "2026-10-29"
-     },
-     "managed": true
-    },
-    {
-     "time": "10:30",
-     "dur": "2:00",
-     "act": "מעבורת · אאו נאנג → קו פי פי",
-     "loc": "אאו נאנג → טונסאי",
-     "cat": "תחבורה",
-     "baht": 1200,
-     "status": "להזמין",
-     "link": "",
-     "notes": "כשעה וחצי–שעתיים · כ-฿450–600 לאדם עם איסוף · לבדוק בלוח את השעות — יש יציאות בבוקר ואחר הצהריים · אגרת כניסה לאי ฿20 לאדם ברציף",
-     "id": "s_f2_2",
-     "done": false,
-     "priceEstimate": {
-      "kind": "estimate",
-      "basis": "אומדן מעבורת אאו נאנג–פי פי לשניים, עם איסוף.",
-      "lowFactor": 0.8,
-      "highFactor": 1.2,
-      "sourceUrl": "",
-      "checked": "2026-10-29"
-     },
-     "managed": true
-    },
-    {
-     "time": "13:00",
-     "dur": "0:30",
-     "act": "צ׳ק-אין — ChaoKoh",
-     "loc": "טונסאי",
-     "cat": "אחר",
-     "baht": null,
-     "status": "להזמין",
-     "link": "",
-     "notes": "הליכה מהרציף · אין מכוניות באי",
-     "id": "s_f2_3",
-     "done": false,
-     "priceEstimate": {
-      "kind": "no-extra",
-      "basis": "לא הוקצה חיוב נפרד לפעולה הזאת; חיובים כלולים מופיעים בחבילה או בהזמנה.",
-      "lowFactor": 1,
-      "highFactor": 1,
-      "sourceUrl": "",
-      "checked": "2026-10-29"
-     },
-     "managed": true
-    },
-    {
-     "time": "13:30",
-     "dur": "1:00",
-     "act": "צהריים בטונסאי",
-     "loc": "טונסאי",
-     "cat": "אוכל",
-     "baht": 400,
-     "status": "משלמים במקום",
-     "link": "",
-     "notes": "",
-     "id": "s_f2_4",
-     "done": false,
-     "priceEstimate": {
-      "kind": "estimate",
-      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
-      "lowFactor": 0.8,
-      "highFactor": 1.3,
-      "sourceUrl": "",
-      "checked": "2026-10-29"
-     },
-     "managed": true
-    },
-    {
-     "time": "16:30",
-     "dur": "1:30",
-     "act": "תצפית פי פי — שקיעה",
-     "loc": "קו פי פי",
+     "time": "08:30",
+     "dur": "8:00",
+     "act": "טיול יום לפי פי — מאיה ביי, פילה לגון, שנורקלינג",
+     "loc": "אאו נאנג → פי פי",
      "cat": "אטרקציות",
-     "baht": 120,
-     "status": "משלמים במקום",
+     "baht": 4800,
+     "status": "אופציונלי",
      "link": "",
-     "notes": "כ-30 דקות עלייה במדרגות · ฿60 לאדם",
-     "id": "s_f2_5",
+     "notes": "ספידבוט מאאו נאנג עם איסוף מהמלון וצהריים · כ-฿1,800–2,500 לאדם + אגרת פארק ฿400 לאדם · חוזרים בערך ב-16:30 · במאיה ביי אסור לשחות · אם לא בא לכם — בוקר בבריכה וחוף נופארט תארה",
+     "id": "s_h2_1",
      "done": false,
-     "wiki": "Phi Phi Islands",
      "priceEstimate": {
       "kind": "estimate",
-      "basis": "דמי כניסה לתצפית לשניים.",
-      "lowFactor": 1,
-      "highFactor": 1.2,
+      "basis": "ספידבוט יום לפי פי לשניים מאאו נאנג, כולל אגרת פארק.",
+      "lowFactor": 0.75,
+      "highFactor": 1.25,
       "sourceUrl": "",
-      "checked": "2026-10-29"
+      "checked": "2026-10-31"
+     },
+     "managed": true,
+     "wiki": "Maya Bay"
+    },
+    {
+     "time": "17:30",
+     "dur": "1:30",
+     "act": "שקיעה בחוף נופארט תארה",
+     "loc": "אאו נאנג",
+     "cat": "אטרקציות",
+     "baht": null,
+     "status": "משלמים במקום",
+     "link": "",
+     "notes": "ברגל מהרצועה · השקט שבקצה המפרץ",
+     "id": "s_h2_2",
+     "done": false,
+     "priceEstimate": {
+      "kind": "no-extra",
+      "basis": "לא הוקצה חיוב נפרד לפעולה הזאת; חיובים כלולים מופיעים בחבילה או בהזמנה.",
+      "lowFactor": 1,
+      "highFactor": 1,
+      "sourceUrl": "",
+      "checked": "2026-10-31"
      },
      "managed": true
     },
     {
      "time": "19:30",
-     "dur": "1:00",
+     "dur": "1:30",
      "act": "ארוחת ערב",
-     "loc": "טונסאי",
+     "loc": "אאו נאנג",
      "cat": "אוכל",
      "baht": 700,
      "status": "משלמים במקום",
      "link": "",
      "notes": "",
-     "id": "s_f2_6",
+     "id": "s_h2_3",
      "done": false,
      "priceEstimate": {
       "kind": "estimate",
@@ -2856,52 +2784,51 @@ window.SHARED_SEED = {
       "lowFactor": 0.8,
       "highFactor": 1.3,
       "sourceUrl": "",
-      "checked": "2026-10-29"
+      "checked": "2026-10-31"
      },
      "managed": true
     },
     {
      "time": "21:30",
-     "dur": "3:00",
-     "act": "מסיבת חוף ומופעי אש — Loh Dalum",
-     "loc": "קו פי פי",
+     "dur": "2:00",
+     "act": "ברים על רצועת אאו נאנג",
+     "loc": "אאו נאנג",
      "cat": "אטרקציות",
-     "baht": 800,
+     "baht": 600,
      "status": "משלמים במקום",
      "link": "",
-     "notes": "הבארים על החוף, מופעי אש מ-21:00 · בלי כרטיס · לא לקחת דליים מזרים",
-     "id": "s_f2_night",
+     "notes": "לא עד מאוחר — מחר נוסעים לג׳ונגל",
+     "id": "s_h2_night",
      "done": false,
      "priceEstimate": {
       "kind": "estimate",
-      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
-      "lowFactor": 0.8,
-      "highFactor": 1.3,
+      "basis": "אומדן ערב בבר לשניים — כניסה, שתייה ותחבורה.",
+      "lowFactor": 0.7,
+      "highFactor": 1.6,
       "sourceUrl": "",
-      "checked": "2026-10-29"
+      "checked": "2026-10-31"
      },
      "managed": true
     },
     {
      "time": "",
      "dur": "",
-     "act": "לינה — ChaoKoh Phi Phi",
-     "loc": "טונסאי, קו פי פי",
+     "act": "לינה — Chermantra Aonang · לילה נוסף",
+     "loc": "אאו נאנג",
      "cat": "לינה",
-     "baht": 3988,
+     "baht": 6826,
      "status": "להזמין",
-     "link": "https://www.booking.com/hotel/th/orngaermchaawekaaaphiiphii.html?checkin=2026-12-02&checkout=2026-12-04&group_adults=2",
-     "notes": "הבחירה — 4 כוכבים, 8.5 על 1,134 ביקורות, בריכה, על המפרץ ליד הרציף והבארים · כ-₪716 לשני הלילות · חלופות: Phi Phi Indigo ₪793, HIP Seaview (שקט, Long Beach) ₪1,022",
-     "id": "s_f2_stay",
+     "link": "https://secure.booking.com/myreservations.html",
+     "notes": "להאריך את ההזמנה (5553772333) בלילה — ולבקש את אותה וילה · כ-₪613, לפי מחיר הלילה בהזמנה הקיימת",
+     "id": "s_h2_stay",
      "done": false,
-     "wiki": "Phi Phi Islands",
      "priceEstimate": {
-      "kind": "published",
-      "basis": "מחיר בבוקינג לשני לילות, 2–4/12, נבדק 29/10.",
+      "kind": "estimate",
+      "basis": "לפי מחיר הלילה בהזמנה הקיימת של צ׳רמנטרה.",
       "lowFactor": 0.9,
       "highFactor": 1.25,
-      "sourceUrl": "https://www.booking.com/hotel/th/orngaermchaawekaaaphiiphii.html",
-      "checked": "2026-10-29"
+      "sourceUrl": "",
+      "checked": "2026-10-31"
      },
      "managed": true
     }
@@ -2911,222 +2838,56 @@ window.SHARED_SEED = {
    "day": 11,
    "date": "2026-12-03",
    "dow": "ה׳",
-   "dest": "קו פי פי",
-   "summary": "מאיה ביי ושנורקלינג",
+   "dest": "קאו סוק",
+   "summary": "מאאו נאנג לג׳ונגל",
    "id": "day_11",
    "rows": [
     {
-     "time": "08:30",
+     "time": "08:00",
      "dur": "1:00",
-     "act": "ארוחת בוקר",
-     "loc": "טונסאי",
+     "act": "ארוחת בוקר — כלולה · צ׳ק-אאוט",
+     "loc": "צ׳רמנטרה",
      "cat": "אוכל",
-     "baht": 300,
-     "status": "משלמים במקום",
-     "link": "",
-     "notes": "",
-     "id": "s_f3_0",
-     "done": false,
-     "priceEstimate": {
-      "kind": "estimate",
-      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
-      "lowFactor": 0.8,
-      "highFactor": 1.3,
-      "sourceUrl": "",
-      "checked": "2026-10-29"
-     },
-     "managed": true
-    },
-    {
-     "time": "09:30",
-     "dur": "4:00",
-     "act": "לונג-טייל — מאיה ביי, פילה לגון, שנורקלינג",
-     "loc": "פי פי לה",
-     "cat": "אטרקציות",
-     "baht": 2400,
-     "status": "להזמין",
-     "link": "",
-     "notes": "סירה פרטית או בקבוצה קטנה מהרציף · ฿1,500–2,000 לסירה + אגרת פארק ฿400 לאדם · במאיה ביי אסור לשחות, רק להסתכל",
-     "id": "s_f3_1",
-     "done": false,
-     "wiki": "Maya Bay",
-     "priceEstimate": {
-      "kind": "estimate",
-      "basis": "אומדן לונג-טייל לשניים כולל אגרת פארק.",
-      "lowFactor": 0.8,
-      "highFactor": 1.3,
-      "sourceUrl": "",
-      "checked": "2026-10-29"
-     },
-     "managed": true
-    },
-    {
-     "time": "13:30",
-     "dur": "1:00",
-     "act": "צהריים",
-     "loc": "טונסאי",
-     "cat": "אוכל",
-     "baht": 400,
-     "status": "משלמים במקום",
-     "link": "",
-     "notes": "",
-     "id": "s_f3_2",
-     "done": false,
-     "priceEstimate": {
-      "kind": "estimate",
-      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
-      "lowFactor": 0.8,
-      "highFactor": 1.3,
-      "sourceUrl": "",
-      "checked": "2026-10-29"
-     },
-     "managed": true
-    },
-    {
-     "time": "15:30",
-     "dur": "2:30",
-     "act": "חוף ובריכה",
-     "loc": "ChaoKoh",
-     "cat": "אחר",
      "baht": null,
-     "status": "משלמים במקום",
-     "link": "",
-     "notes": "",
-     "id": "s_f3_3",
-     "done": false,
-     "priceEstimate": {
-      "kind": "no-extra",
-      "basis": "לא הוקצה חיוב נפרד לפעולה הזאת; חיובים כלולים מופיעים בחבילה או בהזמנה.",
-      "lowFactor": 1,
-      "highFactor": 1,
-      "sourceUrl": "",
-      "checked": "2026-10-29"
-     },
-     "managed": true
-    },
-    {
-     "time": "19:30",
-     "dur": "1:00",
-     "act": "ארוחת ערב",
-     "loc": "טונסאי",
-     "cat": "אוכל",
-     "baht": 700,
-     "status": "משלמים במקום",
-     "link": "",
-     "notes": "",
-     "id": "s_f3_4",
-     "done": false,
-     "priceEstimate": {
-      "kind": "estimate",
-      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
-      "lowFactor": 0.8,
-      "highFactor": 1.3,
-      "sourceUrl": "",
-      "checked": "2026-10-29"
-     },
-     "managed": true
-    },
-    {
-     "time": "21:30",
-     "dur": "2:00",
-     "act": "בארים בטונסאי — לא עד מאוחר",
-     "loc": "קו פי פי",
-     "cat": "אטרקציות",
-     "baht": 600,
-     "status": "משלמים במקום",
-     "link": "",
-     "notes": "מחר המעבורת ב-09:00",
-     "id": "s_f3_night",
-     "done": false,
-     "priceEstimate": {
-      "kind": "estimate",
-      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
-      "lowFactor": 0.8,
-      "highFactor": 1.3,
-      "sourceUrl": "",
-      "checked": "2026-10-29"
-     },
-     "managed": true
-    },
-    {
-     "time": "",
-     "dur": "",
-     "act": "לינה — ChaoKoh Phi Phi",
-     "loc": "טונסאי, קו פי פי",
-     "cat": "לינה",
-     "baht": 3988,
-     "status": "להזמין",
-     "link": "https://www.booking.com/hotel/th/orngaermchaawekaaaphiiphii.html?checkin=2026-12-02&checkout=2026-12-04&group_adults=2",
-     "notes": "הבחירה — 4 כוכבים, 8.5 על 1,134 ביקורות, בריכה, על המפרץ ליד הרציף והבארים · כ-₪716 לשני הלילות · חלופות: Phi Phi Indigo ₪793, HIP Seaview (שקט, Long Beach) ₪1,022",
-     "id": "s_f3_stay",
-     "done": false,
-     "wiki": "Phi Phi Islands",
-     "priceEstimate": {
-      "kind": "published",
-      "basis": "מחיר בבוקינג לשני לילות, 2–4/12, נבדק 29/10.",
-      "lowFactor": 0.9,
-      "highFactor": 1.25,
-      "sourceUrl": "https://www.booking.com/hotel/th/orngaermchaawekaaaphiiphii.html",
-      "checked": "2026-10-29"
-     },
-     "managed": true
-    }
-   ]
-  },
-  {
-   "day": 12,
-   "date": "2026-12-04",
-   "dow": "ו׳",
-   "dest": "קאו סוק",
-   "summary": "מפי פי לג׳ונגל",
-   "id": "day_12",
-   "rows": [
-    {
-     "time": "07:30",
-     "dur": "1:00",
-     "act": "ארוחת בוקר · צ׳ק-אאוט",
-     "loc": "טונסאי",
-     "cat": "אוכל",
-     "baht": 300,
      "status": "משלמים במקום",
      "link": "",
      "notes": "",
      "id": "s_g4_0",
      "done": false,
      "priceEstimate": {
-      "kind": "estimate",
-      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
-      "lowFactor": 0.8,
-      "highFactor": 1.3,
+      "kind": "included",
+      "basis": "כלול במחיר ההזמנה או החבילה; אין חיוב נוסף באומדן.",
+      "lowFactor": 1,
+      "highFactor": 1,
       "sourceUrl": "",
-      "checked": "2026-10-29"
+      "checked": "2026-10-31"
      },
      "managed": true
     },
     {
-     "time": "09:00",
-     "dur": "6:30",
-     "act": "מעבורת + ואן לקאו סוק",
-     "loc": "פי פי → קאו סוק",
+     "time": "10:00",
+     "dur": "3:00",
+     "act": "ואן · אאו נאנג → קאו סוק",
+     "loc": "אאו נאנג → קאו סוק",
      "cat": "תחבורה",
-     "baht": 1500,
+     "baht": 900,
      "status": "להזמין",
-     "link": "https://12go.com/en/travel/koh-phi-phi/khao-sok",
-     "notes": "כרטיס משולב, כ-18–23$ לאדם · יציאה סביב 09:00, הגעה בערך 15:00–15:30 · לפי ביקורות הנסיעה מתארכת — לא לתכנן משהו קשיח לאחר הצהריים",
+     "link": "https://12go.com/en/travel/ao-nang/khao-sok",
+     "notes": "כ-165 ק״מ, כשעתיים וחצי–שלוש · ואן משותף עם איסוף מהמלון, כ-฿350–450 לאדם · רכב פרטי כ-฿2,500–3,000 · דרך 12Go או הקבלה במלון",
      "id": "s_g4_1",
      "done": false,
      "priceEstimate": {
       "kind": "estimate",
-      "basis": "מחיר כרטיס משולב פי פי–קאו סוק לשניים לפי 12go ו-Bookaway.",
-      "lowFactor": 0.9,
-      "highFactor": 1.3,
-      "sourceUrl": "https://12go.com/en/travel/koh-phi-phi/khao-sok",
-      "checked": "2026-10-29"
+      "basis": "ואן משותף אאו נאנג–קאו סוק לשניים; רכב פרטי יקר פי שלושה.",
+      "lowFactor": 0.8,
+      "highFactor": 3.3,
+      "sourceUrl": "",
+      "checked": "2026-10-31"
      },
      "managed": true
     },
     {
-     "time": "15:30",
+     "time": "13:30",
      "dur": "0:30",
      "act": "צ׳ק-אין — Khao Sok Palmview",
      "loc": "קאו סוק",
@@ -3148,7 +2909,7 @@ window.SHARED_SEED = {
      "managed": true
     },
     {
-     "time": "16:30",
+     "time": "15:30",
      "dur": "1:30",
      "act": "טיובינג או שחייה בנהר סוק",
      "loc": "קאו סוק",
@@ -3200,14 +2961,14 @@ window.SHARED_SEED = {
      "cat": "לינה",
      "baht": 2574,
      "status": "להזמין",
-     "link": "https://www.booking.com/hotel/th/khao-sok-palmview-resort.html?checkin=2026-12-04&checkout=2026-12-06&group_adults=2",
-     "notes": "הבחירה — 8.9 על 2,187 ביקורות · כ-₪462 לשני הלילות · חלופות: River Lodge (על הנהר), River & Jungle · Our Jungle House לא פנוי ב-4/12",
+     "link": "https://www.booking.com/hotel/th/khao-sok-palmview-resort.html?checkin=2026-12-03&checkout=2026-12-05&group_adults=2",
+     "notes": "הבחירה — 8.9 על 2,187 ביקורות · כ-₪462 לשני לילות (נבדק ל-4–6/12 — לבדוק שוב ל-3–5/12) · חלופות: River Lodge (על הנהר), River & Jungle",
      "id": "s_g4_stay",
      "done": false,
      "wiki": "Khao Sok National Park",
      "priceEstimate": {
       "kind": "published",
-      "basis": "מחיר בבוקינג לשני לילות, 4–6/12, נבדק 29/10.",
+      "basis": "מחיר בבוקינג לשני לילות, נבדק 29/10 לתאריכים 4–6/12.",
       "lowFactor": 0.9,
       "highFactor": 1.25,
       "sourceUrl": "https://www.booking.com/hotel/th/khao-sok-palmview-resort.html",
@@ -3218,12 +2979,12 @@ window.SHARED_SEED = {
    ]
   },
   {
-   "day": 13,
-   "date": "2026-12-05",
-   "dow": "ש׳",
+   "day": 12,
+   "date": "2026-12-04",
+   "dow": "ו׳",
    "dest": "קאו סוק",
    "summary": "אגם צ׳או לאן",
-   "id": "day_13",
+   "id": "day_12",
    "rows": [
     {
      "time": "06:45",
@@ -3322,14 +3083,14 @@ window.SHARED_SEED = {
      "cat": "לינה",
      "baht": 2574,
      "status": "להזמין",
-     "link": "https://www.booking.com/hotel/th/khao-sok-palmview-resort.html?checkin=2026-12-04&checkout=2026-12-06&group_adults=2",
-     "notes": "הבחירה — 8.9 על 2,187 ביקורות · כ-₪462 לשני הלילות · חלופות: River Lodge (על הנהר), River & Jungle · Our Jungle House לא פנוי ב-4/12",
+     "link": "https://www.booking.com/hotel/th/khao-sok-palmview-resort.html?checkin=2026-12-03&checkout=2026-12-05&group_adults=2",
+     "notes": "",
      "id": "s_g5_stay",
      "done": false,
      "wiki": "Khao Sok National Park",
      "priceEstimate": {
       "kind": "published",
-      "basis": "מחיר בבוקינג לשני לילות, 4–6/12, נבדק 29/10.",
+      "basis": "מחיר בבוקינג לשני לילות, נבדק 29/10 לתאריכים 4–6/12.",
       "lowFactor": 0.9,
       "highFactor": 1.25,
       "sourceUrl": "https://www.booking.com/hotel/th/khao-sok-palmview-resort.html",
@@ -3340,12 +3101,12 @@ window.SHARED_SEED = {
    ]
   },
   {
-   "day": 14,
-   "date": "2026-12-06",
-   "dow": "א׳",
+   "day": 13,
+   "date": "2026-12-05",
+   "dow": "ש׳",
    "dest": "קאו לאק",
    "summary": "בוקר בג׳ונגל, ואז קאו לאק",
-   "id": "day_14",
+   "id": "day_13",
    "rows": [
     {
      "time": "07:00",
@@ -3421,9 +3182,9 @@ window.SHARED_SEED = {
      "loc": "קאו לאק",
      "cat": "אחר",
      "baht": null,
-     "status": "מוזמן",
+     "status": "להזמין",
      "link": "",
-     "notes": "",
+     "notes": "הלילה הזה בהזמנה נפרדת — לבקש מהמלון את אותו חדר לכל ארבעת הלילות",
      "id": "s_g6_3",
      "done": false,
      "priceEstimate": {
@@ -3483,6 +3244,104 @@ window.SHARED_SEED = {
     {
      "time": "",
      "dur": "",
+     "act": "לינה — Kalima Resort and Villas · לילה נוסף",
+     "loc": "קאו לאק",
+     "cat": "לינה",
+     "baht": 7740,
+     "status": "להזמין",
+     "link": "https://www.booking.com/hotel/th/kalima-resort-amp-villas-khao-lak.html?checkin=2026-12-05&checkout=2026-12-06&group_adults=2",
+     "notes": "ההזמנה הקיימת (7195273990380466772) היא הצעת שותף ואי אפשר להאריך אותה — הזמנה נפרדת ל-5–6/12 באותו סוג חדר (Deluxe Pool Access), ולכתוב למלון לחבר ביניהן · כ-₪700",
+     "id": "s_g6_stay",
+     "done": false,
+     "priceEstimate": {
+      "kind": "published",
+      "basis": "מחיר בבוקינג ללילה ב-Deluxe Pool Access, נבדק 30/10 (₪1,391 ל-4–6/12).",
+      "lowFactor": 0.9,
+      "highFactor": 1.25,
+      "sourceUrl": "https://www.booking.com/hotel/th/kalima-resort-amp-villas-khao-lak.html",
+      "checked": "2026-10-30"
+     },
+     "managed": true
+    }
+   ]
+  },
+  {
+   "day": 14,
+   "date": "2026-12-06",
+   "dow": "א׳",
+   "dest": "קאו לאק",
+   "summary": "יום בלי תוכנית — ובערב שוק יום ראשון בטקואה פא",
+   "id": "day_14",
+   "rows": [
+    {
+     "time": "08:30",
+     "dur": "1:00",
+     "act": "ארוחת בוקר",
+     "loc": "קלימה",
+     "cat": "אוכל",
+     "baht": 1480,
+     "status": "משלמים במקום",
+     "link": "",
+     "notes": "לא כלולה במחיר החדר — $18 לאדם בבופה של המלון, או בית קפה בחוץ",
+     "id": "s_h6_0",
+     "done": false,
+     "priceEstimate": {
+      "kind": "published",
+      "basis": "ארוחת בוקר בקלימה, $18 לאדם לפי אישור ההזמנה.",
+      "lowFactor": 0.5,
+      "highFactor": 1,
+      "sourceUrl": "",
+      "checked": "2026-10-30"
+     },
+     "managed": true
+    },
+    {
+     "time": "10:00",
+     "dur": "5:00",
+     "act": "בריכה וחוף",
+     "loc": "קלימה",
+     "cat": "אחר",
+     "baht": null,
+     "status": "משלמים במקום",
+     "link": "",
+     "notes": "היום הראשון בלי מעבר מאז 29/11",
+     "id": "s_h6_1",
+     "done": false,
+     "priceEstimate": {
+      "kind": "no-extra",
+      "basis": "לא הוקצה חיוב נפרד לפעולה הזאת; חיובים כלולים מופיעים בחבילה או בהזמנה.",
+      "lowFactor": 1,
+      "highFactor": 1,
+      "sourceUrl": "",
+      "checked": "2026-10-31"
+     },
+     "managed": true
+    },
+    {
+     "time": "16:30",
+     "dur": "4:00",
+     "act": "שוק הרחוב בעיר העתיקה של טקואה פא",
+     "loc": "טקואה פא",
+     "cat": "אטרקציות",
+     "baht": 1500,
+     "status": "אופציונלי",
+     "link": "",
+     "notes": "בימי ראשון אחר הצהריים · בתי סחר סינו־פורטוגזיים, אוכל רחוב ומוזיקה · כ-40 דק׳ נסיעה — מונית הלוך וחזור כ-฿1,000 · לוודא בקבלה שמתקיים",
+     "id": "s_h6_2",
+     "done": false,
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "מונית הלוך־חזור ואוכל בשוק לשניים.",
+      "lowFactor": 0.7,
+      "highFactor": 1.4,
+      "sourceUrl": "",
+      "checked": "2026-10-31"
+     },
+     "managed": true
+    },
+    {
+     "time": "",
+     "dur": "",
      "act": "לינה — Kalima Resort and Villas",
      "loc": "קאו לאק",
      "cat": "לינה",
@@ -3490,7 +3349,7 @@ window.SHARED_SEED = {
      "status": "מוזמן",
      "link": "https://www.booking.com/hotel/th/kalima-resort-amp-villas-khao-lak.html?checkin=2026-12-06&checkout=2026-12-09&group_adults=2",
      "notes": "6–9/12 · 3 לילות · Deluxe Pool Access · אישור 7195273990380466772 (הצעת שותף — אין שינויים) · שולם $621.21 (₪1,931) · לא מוחזר · ארוחת בוקר לא כלולה ($18 לאדם)",
-     "id": "s_g6_stay",
+     "id": "s_h6_stay",
      "done": false,
      "priceEstimate": {
       "kind": "booking",
@@ -4174,7 +4033,7 @@ window.SHARED_SEED = {
   {
    "what": "Chermantra Aonang Resort",
    "when": "29/11–2/12",
-   "details": "אאו נאנג · 3 לילות · Mountain Pool Villa · ארוחת בוקר",
+   "details": "אאו נאנג · 3 לילות · Mountain Pool Villa · ארוחת בוקר · להאריך בלילה של 2/12",
    "ref": "5553772333",
    "payment": "₪1,839",
    "freeCancel": "ביטול חינם עד 14/11 23:59"
@@ -4198,7 +4057,7 @@ window.SHARED_SEED = {
   {
    "what": "Kalima Resort and Villas",
    "when": "6–9/12",
-   "details": "קאו לאק · 3 לילות · Deluxe Double/Twin with Pool Access · בלי ארוחת בוקר",
+   "details": "קאו לאק · 3 לילות · Deluxe Double/Twin with Pool Access · בלי ארוחת בוקר · הלילה של 5/12 — בהזמנה נפרדת",
    "ref": "7195273990380466772",
    "payment": "שולם $621.21 (₪1,931)",
    "freeCancel": "לא מוחזר · הצעת שותף — אי אפשר לשנות פרטים"
@@ -4328,10 +4187,10 @@ window.SHARED_SEED = {
   },
   {
    "dest": "אאו נאנג",
-   "dates": "29/11–2/12",
-   "nights": 3,
+   "dates": "29/11–3/12",
+   "nights": 4,
    "hotel": "Chermantra Aonang Resort & Pool Suite",
-   "what": "Mountain Pool Villa עם אמבטיה ובריכה פרטית · ארוחת בוקר כלולה · אישור 5553772333 · בוקינג מחייבת את הכרטיס.",
+   "what": "Mountain Pool Villa עם אמבטיה ובריכה פרטית · ארוחת בוקר כלולה · אישור 5553772333 · בוקינג מחייבת את הכרטיס. · להאריך בלילה של 2/12 ולבקש את אותה וילה.",
    "perNight": 6825.67,
    "choice": "מוזמן",
    "freeCancel": "עד 14/11 — הדדליין הקרוב",
@@ -4351,32 +4210,8 @@ window.SHARED_SEED = {
    "linkLink": "https://www.booking.com/hotel/th/at-thara-aonang.html"
   },
   {
-   "dest": "קו פי פי",
-   "dates": "2–4/12",
-   "nights": 2,
-   "hotel": "ChaoKoh Phi Phi",
-   "what": "8.5 על 1,134 · 4 כוכבים, בריכה, על המפרץ ליד הרציף והבארים · כ-₪716 לשני הלילות.",
-   "perNight": 3988,
-   "choice": "הבחירה",
-   "freeCancel": "לבדוק",
-   "link": "בוקינג",
-   "linkLink": "https://www.booking.com/hotel/th/orngaermchaawekaaaphiiphii.html"
-  },
-  {
-   "dest": "קו פי פי",
-   "dates": "2–4/12",
-   "nights": 2,
-   "hotel": "HIP Seaview Resort @ Phi Phi",
-   "what": "8.5 · Long Beach, למבוגרים בלבד, שקט · כ-₪1,022.",
-   "perNight": 5688,
-   "choice": "חלופה",
-   "freeCancel": "לבדוק",
-   "link": "בוקינג",
-   "linkLink": "https://www.booking.com/hotel/th/hip-seaview-resort-phi-phi.html"
-  },
-  {
    "dest": "קאו סוק",
-   "dates": "4–6/12",
+   "dates": "3–5/12",
    "nights": 2,
    "hotel": "Khao Sok Palmview",
    "what": "8.9 על 2,187 · כ-₪462 לשני הלילות.",
@@ -4388,7 +4223,7 @@ window.SHARED_SEED = {
   },
   {
    "dest": "קאו סוק",
-   "dates": "4–6/12",
+   "dates": "3–5/12",
    "nights": 2,
    "hotel": "Khao Sok River Lodge",
    "what": "8.9 · על הנהר · כ-₪185.",
@@ -4421,6 +4256,18 @@ window.SHARED_SEED = {
    "freeCancel": "בוטל 30/10 · הוחזרו $138.89",
    "link": "בוקינג",
    "linkLink": "https://www.booking.com/"
+  },
+  {
+   "dest": "קאו לאק",
+   "dates": "5–6/12",
+   "nights": 1,
+   "hotel": "Kalima Resort and Villas · לילה נוסף",
+   "what": "הזמנה נפרדת לפני ההזמנה הקיימת — Deluxe Pool Access, ולכתוב למלון לחבר את ההזמנות כדי לא לעבור חדר.",
+   "perNight": 7740,
+   "choice": "להזמין",
+   "freeCancel": "לבדוק",
+   "link": "בוקינג",
+   "linkLink": "https://www.booking.com/hotel/th/kalima-resort-amp-villas-khao-lak.html?checkin=2026-12-05&checkout=2026-12-06&group_adults=2"
   },
   {
    "dest": "קאו לאק",
@@ -4514,7 +4361,7 @@ window.SHARED_SEED = {
   },
   {
    "topic": "",
-   "detail": "מוזמן: שתי טיסות ארקיע, מונטראג׳, צ׳רמנטרה, קלימה. כל השאר פתוח."
+   "detail": "מוזמן: שתי טיסות ארקיע, מונטראג׳, צ׳רמנטרה (עד 2/12), קלימה (6–9/12). כל השאר פתוח — כולל הלילה הנוסף בכל אחד מהשניים."
   },
   {
    "topic": "KYN · פרטי המחנה",
