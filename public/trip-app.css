@@ -450,6 +450,8 @@ button{font-family:inherit;}
 .progress-track>span{display:block;height:100%;background:var(--accent,var(--sage-dark));border-radius:inherit;}
 .deck-body{padding:8px 0 0;}
 .deck-summary{font-family:inherit;font-size:24px;font-weight:700;line-height:1.4;margin:0 0 24px;letter-spacing:-.4px;}
+.deck-sun{margin:-16px 0 20px;font-size:13px;color:var(--muted);}
+.deck-sun b{font-weight:600;color:var(--ink,inherit);}
 .activity-timeline,.day-rows{position:relative;padding-inline-start:16px;}
 .activity-timeline::before,.day-rows::before{content:"";position:absolute;inset-inline-start:3px;top:24px;bottom:24px;width:1px;background:#dbe3df;}
 .tcard,.irow{position:relative;display:grid;grid-template-columns:minmax(0,1fr) 24px;gap:12px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px;margin:0 0 12px;align-items:start;box-shadow:0 2px 4px rgba(30,50,42,.015);}

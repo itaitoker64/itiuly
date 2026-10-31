@@ -524,7 +524,7 @@ function seedData(){
   const hanoiId = uid('d'), manilaId = uid('d');
 
   return {
-    schema:25,
+    schema:26,
     tripName:"My Big Trip 🌏",
     startDate:"2026-11-22",
     endDate:null,
@@ -1859,6 +1859,42 @@ function ensureDefaults(){
     STATE.schema = 25;
   }
 
+  /*
+   * זריחה ושקיעה לכל יום (לפי המקום), והיום מותאם אליהן: הריצה הארוכה ב-4/12
+   * אחרי האגם ולא לפני הזריחה, חזרה מריילאי אחרי השקיעה, שקיעה על החוף בקאו
+   * לאק, והר הזהב בשקיעה ב-9/12. ובקו יאו נוי — הסירה האחרונה ב-17:00.
+   * רק שדות של שורות שהתוכנית מנהלת משתנים; שורה זזה למקום שלה לפי השעה.
+   */
+  if(STATE.schema < 26){
+    const seedShared = window.SHARED_SEED;
+    const meta = STATE.shared;
+    if(seedShared && meta && meta.days){
+      const ord = t => t ? String(t).padStart(5,'0') : '99:99';
+      const place = (day, row)=>{
+        day.rows = day.rows.filter(r=>r!==row);
+        const at = day.rows.findIndex(x=>!x.time || ord(x.time) > ord(row.time));
+        day.rows.splice(at>=0 ? at : day.rows.length, 0, row);
+      };
+      const changes = {s_w_1124:['notes'], s_w_1127:['time','notes'], s_4_7:['notes'], s_8_6:['time','notes'], s_w_1130:['time','dur'],
+        s_w_1204:['time','dur','notes'], s_g5_2:['time'], s_g6_4:['act','notes'], s_2_saket:['time','dur','notes'], s_3_8:['time','dur','notes']};
+      meta.days.filter(d=>d.owner!=='talia').forEach(day=>{
+        const seedDay = seedShared.days.find(d=>d.date===day.date);
+        if(!seedDay) return;
+        if(seedDay.sun) day.sun = {...seedDay.sun};
+        seedDay.rows.forEach(seedRow=>{
+          const keys = changes[seedRow.id];
+          const row = day.rows.find(r=>r.id===seedRow.id);
+          if(keys && row){
+            keys.forEach(k=>{ row[k] = seedRow[k]; });
+            if(keys.includes('time')) place(day, row);
+          }
+          if(seedRow.id==='s_h7_sun' && !day.rows.some(r=>r.id==='s_h7_sun')) place(day, JSON.parse(JSON.stringify(seedRow)));
+        });
+      });
+    }
+    STATE.schema = 26;
+  }
+
   /* משימות חדשות מתווספות בכל גרסה, לפי כותרת */
   fresh.masterChecklist.forEach(seedTask=>{
     if(!STATE.masterChecklist.some(t=>t.title===seedTask.title)){
@@ -2911,7 +2947,7 @@ function renderDayCard(day){
       <div class="dnum-photo">${(()=>{ const r=day.rows.find(x=>x.time&&rowWiki(x)); return r?imageBox(rowWiki(r),'#8C8272','dnum-img'):''; })()}<span class="dnum">${day.day}</span></div>
       <div class="dmain">
         <div class="dtitle">${day.summary || day.dest}</div>
-        <div class="dsub">${day.dow} ${fmtDateShort(day.date)} · ${day.rows.length} שורות</div>
+        <div class="dsub">${day.dow} ${fmtDateShort(day.date)} · ${day.rows.length} שורות${day.sun?` · <span dir="ltr">🌅 ${day.sun.rise} · 🌇 ${day.sun.set}</span>`:''}</div>
       </div>
       <div class="dcost">${ils(toIls(total))}<br><span style="font-weight:400;color:var(--muted)">אומדן</span></div>
     </div>
@@ -3039,6 +3075,7 @@ function renderToday(){
 
         <div class="deck-body">
           ${day.summary?`<h1 class="deck-summary">${itineraryText(day.summary)}</h1>`:''}
+          ${day.sun?`<div class="deck-sun">זריחה <b dir="ltr">${day.sun.rise}</b> · שקיעה <b dir="ltr">${day.sun.set}</b></div>`:''}
           ${renderDayShape(day)}
           <div class="day-map-wrap"><div id="day-map" class="day-map"></div><div class="day-map-cap">המסלול של היום · המספרים לפי סדר השעות</div></div>
           ${renderDayPhotos(day)}

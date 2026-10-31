@@ -418,7 +418,11 @@ window.SHARED_SEED = {
     }
    ],
    "summary": "נוחתים, וממשיכים צפונה",
-   "id": "day_1"
+   "id": "day_1",
+   "sun": {
+    "rise": "06:36",
+    "set": "17:45"
+   }
   },
   {
    "day": 2,
@@ -435,7 +439,7 @@ window.SHARED_SEED = {
      "baht": null,
      "status": "משלמים במקום",
      "link": "",
-     "notes": "קצב 15 דק׳ · לפי מאמץ, לא לפי השעון · מים ומלחים לפני ואחרי",
+     "notes": "קצב 15 דק׳ · הזריחה ב-06:36 · לפי מאמץ, לא לפי השעון · מים ומלחים לפני ואחרי",
      "id": "s_w_1124",
      "done": false,
      "priceEstimate": {
@@ -628,7 +632,11 @@ window.SHARED_SEED = {
     }
    ],
    "summary": "העיר העתיקה, ובלילה לוי קראתונג על נהר הפינג",
-   "id": "day_2"
+   "id": "day_2",
+   "sun": {
+    "rise": "06:36",
+    "set": "17:45"
+   }
   },
   {
    "day": 3,
@@ -815,7 +823,11 @@ window.SHARED_SEED = {
     }
    ],
    "summary": "מקלט פילים, דוי סותפ בשקיעה, ותהלוכת יי פנג",
-   "id": "day_3"
+   "id": "day_3",
+   "sun": {
+    "rise": "06:37",
+    "set": "17:45"
+   }
   },
   {
    "day": 4,
@@ -987,7 +999,7 @@ window.SHARED_SEED = {
      "baht": 1100,
      "status": "משלמים במקום",
      "link": "https://www.google.com/maps/search/?api=1&query=Manoh+Pier+Koh+Yao+Noi",
-     "notes": "฿550 לאדם",
+     "notes": "฿550 לאדם · הסירה האחרונה מבאנג רונג ב-17:00 — אם הטיסה מתעכבת, זה הגבול",
      "id": "s_4_7",
      "done": false,
      "priceEstimate": {
@@ -1163,7 +1175,11 @@ window.SHARED_SEED = {
     }
    ],
    "summary": "מהצפון לאנדמן",
-   "id": "day_4"
+   "id": "day_4",
+   "sun": {
+    "rise": "06:22",
+    "set": "18:04"
+   }
   },
   {
    "day": 5,
@@ -1172,7 +1188,7 @@ window.SHARED_SEED = {
    "dest": "קו יאו נוי",
    "rows": [
     {
-     "time": "06:00",
+     "time": "06:05",
      "dur": "0:50",
      "act": "ריצה ארוכה קלה",
      "loc": "",
@@ -1180,7 +1196,7 @@ window.SHARED_SEED = {
      "baht": null,
      "status": "משלמים במקום",
      "link": "",
-     "notes": "8 ק״מ · באימון של 08:00 ללכת קל · קלה, לפי מאמץ · מים ומלחים לפני ואחרי",
+     "notes": "8 ק״מ · הזריחה ב-06:22, אור ראשון מ-06:00 · באימון של 08:00 ללכת קל · קלה, לפי מאמץ · מים ומלחים לפני ואחרי",
      "id": "s_w_1127",
      "done": false,
      "priceEstimate": {
@@ -1461,7 +1477,11 @@ window.SHARED_SEED = {
     }
    ],
    "summary": "שני אימונים ומזרן",
-   "id": "day_5"
+   "id": "day_5",
+   "sun": {
+    "rise": "06:22",
+    "set": "18:04"
+   }
   },
   {
    "day": 6,
@@ -1692,7 +1712,11 @@ window.SHARED_SEED = {
     }
    ],
    "summary": "אימון בוקר, ואז המפרץ",
-   "id": "day_6"
+   "id": "day_6",
+   "sun": {
+    "rise": "06:23",
+    "set": "18:05"
+   }
   },
   {
    "day": 7,
@@ -1994,7 +2018,11 @@ window.SHARED_SEED = {
     }
    ],
    "summary": "יוצאים מהאי — בלי אימון, יום ראשון",
-   "id": "day_7"
+   "id": "day_7",
+   "sun": {
+    "rise": "06:22",
+    "set": "18:04"
+   }
   },
   {
    "day": 8,
@@ -2131,7 +2159,7 @@ window.SHARED_SEED = {
      }
     },
     {
-     "time": "17:45",
+     "time": "18:15",
      "dur": "0:20",
      "act": "לונגטייל חזרה",
      "loc": "ריילאי → אאו נאנג",
@@ -2139,7 +2167,7 @@ window.SHARED_SEED = {
      "baht": 0,
      "status": "משלמים במקום",
      "link": "",
-     "notes": "לסכם שעת חזרה עם הסירן מראש",
+     "notes": "אחרי השקיעה בריילאי מערב (18:04) · ฿200 לאדם אחרי החשכה · לסכם שעת חזרה עם הסירן מראש",
      "id": "s_8_6",
      "done": false,
      "priceEstimate": {
@@ -2152,7 +2180,7 @@ window.SHARED_SEED = {
      }
     },
     {
-     "time": "18:15",
+     "time": "18:45",
      "dur": "0:45",
      "act": "אימון כוח — עליון",
      "loc": "",
@@ -2247,7 +2275,11 @@ window.SHARED_SEED = {
     }
    ],
    "summary": "יום ריילאי — לטפס על משהו",
-   "id": "day_8"
+   "id": "day_8",
+   "sun": {
+    "rise": "06:23",
+    "set": "18:04"
+   }
   },
   {
    "day": 9,
@@ -2435,7 +2467,11 @@ window.SHARED_SEED = {
     }
    ],
    "summary": "קיאקים במנגרובים",
-   "id": "day_9"
+   "id": "day_9",
+   "sun": {
+    "rise": "06:23",
+    "set": "18:05"
+   }
   },
   {
    "day": 10,
@@ -2600,7 +2636,11 @@ window.SHARED_SEED = {
      },
      "managed": true
     }
-   ]
+   ],
+   "sun": {
+    "rise": "06:24",
+    "set": "18:05"
+   }
   },
   {
    "day": 11,
@@ -2766,7 +2806,11 @@ window.SHARED_SEED = {
      },
      "managed": true
     }
-   ]
+   ],
+   "sun": {
+    "rise": "06:27",
+    "set": "18:05"
+   }
   },
   {
    "day": 12,
@@ -2776,28 +2820,6 @@ window.SHARED_SEED = {
    "summary": "אגם צ׳או לאן",
    "id": "day_12",
    "rows": [
-    {
-     "time": "05:45",
-     "dur": "0:55",
-     "act": "ריצה ארוכה קלה",
-     "loc": "",
-     "cat": "אחר",
-     "baht": null,
-     "status": "משלמים במקום",
-     "link": "",
-     "notes": "9–10 ק״מ · מוקדם — הסיור לאגם יוצא ב-07:30. אם חשוך מדי, להחליף עם המנוחה של 5/12 · קלה, לפי מאמץ · מים ומלחים לפני ואחרי",
-     "id": "s_w_1204",
-     "done": false,
-     "priceEstimate": {
-      "kind": "no-extra",
-      "basis": "לא הוקצה חיוב נפרד לפעולה הזאת; חיובים כלולים מופיעים בחבילה או בהזמנה.",
-      "lowFactor": 1,
-      "highFactor": 1,
-      "sourceUrl": "",
-      "checked": "2026-10-31"
-     },
-     "managed": true
-    },
     {
      "time": "06:45",
      "dur": "1:00",
@@ -2844,7 +2866,7 @@ window.SHARED_SEED = {
      "managed": true
     },
     {
-     "time": "16:30",
+     "time": "15:00",
      "dur": "1:00",
      "act": "מסאז׳ בכפר",
      "loc": "קאו סוק",
@@ -2862,6 +2884,28 @@ window.SHARED_SEED = {
       "highFactor": 1.3,
       "sourceUrl": "",
       "checked": "2026-10-29"
+     },
+     "managed": true
+    },
+    {
+     "time": "16:30",
+     "dur": "1:00",
+     "act": "ריצה ארוכה קלה",
+     "loc": "",
+     "cat": "אחר",
+     "baht": null,
+     "status": "משלמים במקום",
+     "link": "",
+     "notes": "9–10 ק״מ · אחרי שחוזרים מהאגם, כשמתקרר — לסיים לפני השקיעה ב-18:05 · קלה, לפי מאמץ · מים ומלחים לפני ואחרי",
+     "id": "s_w_1204",
+     "done": false,
+     "priceEstimate": {
+      "kind": "no-extra",
+      "basis": "לא הוקצה חיוב נפרד לפעולה הזאת; חיובים כלולים מופיעים בחבילה או בהזמנה.",
+      "lowFactor": 1,
+      "highFactor": 1,
+      "sourceUrl": "",
+      "checked": "2026-10-31"
      },
      "managed": true
     },
@@ -2910,7 +2954,11 @@ window.SHARED_SEED = {
      },
      "managed": true
     }
-   ]
+   ],
+   "sun": {
+    "rise": "06:27",
+    "set": "18:05"
+   }
   },
   {
    "day": 13,
@@ -3012,13 +3060,13 @@ window.SHARED_SEED = {
     {
      "time": "15:30",
      "dur": "1:30",
-     "act": "בריכה וחוף",
+     "act": "בריכה, ושקיעה על החוף",
      "loc": "קלימה",
      "cat": "אחר",
      "baht": null,
      "status": "משלמים במקום",
      "link": "",
-     "notes": "",
+     "notes": "השקיעה ב-18:07",
      "id": "s_g6_4",
      "done": false,
      "priceEstimate": {
@@ -3075,7 +3123,11 @@ window.SHARED_SEED = {
      },
      "managed": true
     }
-   ]
+   ],
+   "sun": {
+    "rise": "06:28",
+    "set": "18:07"
+   }
   },
   {
    "day": 14,
@@ -3226,7 +3278,11 @@ window.SHARED_SEED = {
      },
      "managed": true
     }
-   ]
+   ],
+   "sun": {
+    "rise": "06:29",
+    "set": "18:08"
+   }
   },
   {
    "day": 15,
@@ -3348,6 +3404,28 @@ window.SHARED_SEED = {
      "managed": true
     },
     {
+     "time": "17:45",
+     "dur": "0:45",
+     "act": "שקיעה על החוף",
+     "loc": "קאו לאק",
+     "cat": "אטרקציות",
+     "baht": null,
+     "status": "משלמים במקום",
+     "link": "",
+     "notes": "השקיעה ב-18:08 · היום האחרון בדרום",
+     "id": "s_h7_sun",
+     "done": false,
+     "priceEstimate": {
+      "kind": "no-extra",
+      "basis": "לא הוקצה חיוב נפרד לפעולה הזאת; חיובים כלולים מופיעים בחבילה או בהזמנה.",
+      "lowFactor": 1,
+      "highFactor": 1,
+      "sourceUrl": "",
+      "checked": "2026-10-31"
+     },
+     "managed": true
+    },
+    {
      "time": "19:30",
      "dur": "1:00",
      "act": "ארוחת ערב אחרונה בדרום",
@@ -3421,7 +3499,11 @@ window.SHARED_SEED = {
      },
      "managed": true
     }
-   ]
+   ],
+   "sun": {
+    "rise": "06:29",
+    "set": "18:08"
+   }
   },
   {
    "day": 16,
@@ -3659,7 +3741,11 @@ window.SHARED_SEED = {
      },
      "managed": true
     }
-   ]
+   ],
+   "sun": {
+    "rise": "06:30",
+    "set": "17:50"
+   }
   },
   {
    "day": 17,
@@ -3916,15 +4002,15 @@ window.SHARED_SEED = {
      "managed": true
     },
     {
-     "time": "16:15",
-     "dur": "0:50",
+     "time": "16:30",
+     "dur": "1:20",
      "act": "ואט סאקט — הר הזהב ותצפית על העיר",
      "loc": "ואט סאקט",
      "cat": "אטרקציות",
      "baht": 200,
      "status": "משלמים במקום",
      "link": "",
-     "notes": "฿100 לאדם · 344 מדרגות בספירלה סביב הגבעה · תצפית על כל העיר העתיקה, ממש לפני השקיעה",
+     "notes": "השקיעה מלמעלה ב-17:50 · ฿100 לאדם · 344 מדרגות · פתוח עד 19:00",
      "id": "s_2_saket",
      "done": false,
      "wiki": "Wat Saket",
@@ -3939,15 +4025,15 @@ window.SHARED_SEED = {
      "managed": true
     },
     {
-     "time": "17:40",
-     "dur": "0:30",
+     "time": "17:55",
+     "dur": "0:15",
      "act": "גראב לרג׳אדמנרן",
      "loc": "סוכומוויט → רג׳אדמנרן",
      "cat": "תחבורה",
      "baht": 200,
      "status": "משלמים במקום",
      "link": "",
-     "notes": "",
+     "notes": "קרוב — כ-10 דק׳ מהר הזהב",
      "id": "s_3_8",
      "done": false,
      "priceEstimate": {
@@ -4053,7 +4139,11 @@ window.SHARED_SEED = {
      },
      "managed": true
     }
-   ]
+   ],
+   "sun": {
+    "rise": "06:30",
+    "set": "17:50"
+   }
   },
   {
    "day": 18,
@@ -4234,7 +4324,11 @@ window.SHARED_SEED = {
      },
      "managed": true
     }
-   ]
+   ],
+   "sun": {
+    "rise": "06:31",
+    "set": "17:51"
+   }
   }
  ],
  "bookings": [
