@@ -507,7 +507,7 @@ function seedData(){
   const hanoiId = uid('d'), manilaId = uid('d');
 
   return {
-    schema:21,
+    schema:22,
     tripName:"My Big Trip 🌏",
     startDate:"2026-11-22",
     endDate:null,
@@ -1532,6 +1532,36 @@ function ensureDefaults(){
     const proof = thai && (thai.prepChecklist||[]).find(t=>t.title==='הוכחת יציאה / onward ticket');
     if(proof && proof.status!=='done') Object.assign(proof, {deadline:'2026-11-20', notes:ONWARD_NOTE, priority:'גבוהה'});
     STATE.schema = 21;
+  }
+
+  /*
+   * 24/11 נבנה מחדש לפי הבקשה: שיט בתעלות שנגמר בוואט ארון, מעבורת לוואט פו,
+   * טוק־טוק לארמון, הנדנדה הענקית והר הזהב לפני ארוחת לוי קראתונג. ב-25/11,
+   * אחרי ISB, סנטרל צ׳אנגוואטנה. סימונים ושיחות על שורות קיימות נשמרים, ושורות
+   * שנוספו ידנית נשארות בסוף היום.
+   */
+  if(STATE.schema < 22){
+    const seedShared = window.SHARED_SEED;
+    const days22 = (STATE.shared && STATE.shared.days) || [];
+    ['2026-11-24','2026-11-25'].forEach(date=>{
+      const seedDay = seedShared && seedShared.days.find(d=>d.date===date);
+      const day = days22.find(d=>d.date===date);
+      if(!seedDay || !day) return;
+      const old = new Map(day.rows.map(r=>[r.id, r]));
+      const custom = day.rows.filter(r=>!/^s_/.test(String(r.id||'')));
+      day.rows = seedDay.rows.map(seedRow=>{
+        const row = JSON.parse(JSON.stringify(seedRow));
+        const before = old.get(seedRow.id);
+        if(before){
+          if(before.done) row.done = true;
+          if(before.talk) row.talk = before.talk;
+          if(!seedRow.managed && before.notes) row.notes = before.notes;
+        }
+        return row;
+      }).concat(custom);
+      day.summary = seedDay.summary;
+    });
+    STATE.schema = 22;
   }
 
   /* משימות חדשות מתווספות בכל גרסה, לפי כותרת */
@@ -2773,6 +2803,10 @@ function centerDayStrip(){
  * מותאם לפי הפעילות והמיקום של השורה; הראשון שמתאים מנצח, אז הספציפי לפני הכללי.
  */
 const PLACES = [
+  {m:/תעלות תונבורי|תא צ׳אנג/,          wiki:'Khlong',                     ll:[13.7520,100.4890]},
+  {m:/הנדנדה הענקית|סוטאט/,             wiki:'Giant Swing',                ll:[13.7515,100.5013]},
+  {m:/ואט סאקט|הר הזהב/,                wiki:'Wat Saket',                  ll:[13.7539,100.5066]},
+  {m:/צ׳אנגוואטנה/,                     wiki:'CentralPlaza Chaengwattana', ll:[13.9036,100.5286]},
   {m:/Loh Dalum|טונסאי|ChaoKoh|פי פי/,   wiki:'Phi Phi Islands',         ll:[7.7407,98.7740]},
   {m:/מאיה ביי|פילה לגון/,               wiki:'Maya Bay',                   ll:[7.6780,98.7660]},
   {m:/Bangla|פטונג|See2Sea/,             wiki:'Patong',                     ll:[7.8930,98.2970]},

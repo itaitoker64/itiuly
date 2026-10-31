@@ -499,13 +499,13 @@ window.SHARED_SEED = {
     {
      "time": "07:50",
      "dur": "0:50",
-     "act": "BTS לסאפאן טקסין + סירת נהר לתא טיין",
-     "loc": "אסוק → תא טיין",
+     "act": "BTS לסאפאן טקסין + סירת נהר לתא צ׳אנג",
+     "loc": "אסוק → תא צ׳אנג",
      "cat": "תחבורה",
      "baht": 130,
      "status": "משלמים במקום",
      "link": "https://www.google.com/maps/search/?api=1&query=Tha+Tien+Pier+Bangkok",
-     "notes": "BTS עד סאפאן טקסין, ואז Chao Phraya Express קו כתום",
+     "notes": "BTS עד סאפאן טקסין, ואז Chao Phraya Express קו כתום עד תא צ׳אנג (N9). משם יוצאות סירות התעלות",
      "id": "s_2_1",
      "done": false,
      "priceEstimate": {
@@ -515,40 +515,87 @@ window.SHARED_SEED = {
       "highFactor": 1.3,
       "sourceUrl": "",
       "checked": "2026-09-14"
-     }
+     },
+     "managed": true
     },
     {
-     "time": "08:40",
-     "dur": "2:00",
-     "act": "הארמון המלכותי",
-     "loc": "Grand Palace",
+     "time": "08:45",
+     "dur": "1:30",
+     "act": "שיט בתעלות תונבורי — מסתיים בוואט ארון",
+     "loc": "תא צ׳אנג → תעלות תונבורי",
      "cat": "אטרקציות",
-     "baht": 1000,
+     "baht": 1800,
      "status": "משלמים במקום",
-     "link": "https://www.google.com/maps/search/?api=1&query=Grand+Palace+Bangkok",
-     "notes": "฿500 לאדם · פתיחה 08:30, כניסה אחרונה 15:30 · כתפיים וברכיים מכוסות, נאכף",
-     "id": "s_2_2",
+     "link": "",
+     "notes": "לונג־טייל פרטי מהרציף, כ-฿1,500–2,000 לסירה לשעה וחצי · בתים על כלונסאות, מקדשים קטנים ושוק צף קטן · לסגור מחיר לפני שעולים, ולבקש שהסיור ייגמר ברציף של ואט ארון",
+     "id": "s_2_canal",
      "done": false,
-     "wiki": "Grand Palace",
+     "wiki": "Khlong",
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "מחיר מקובל ללונג־טייל פרטי לשעה וחצי בתעלות.",
+      "lowFactor": 0.8,
+      "highFactor": 1.2,
+      "sourceUrl": "",
+      "checked": "2026-10-31"
+     },
+     "managed": true
+    },
+    {
+     "time": "10:20",
+     "dur": "0:50",
+     "act": "ואט ארון — מקדש השחר",
+     "loc": "גדת תונבורי",
+     "cat": "אטרקציות",
+     "baht": 400,
+     "status": "משלמים במקום",
+     "link": "",
+     "notes": "฿200 לאדם · מדרגות תלולות למגדל · כתפיים וברכיים מכוסות",
+     "id": "s_2_arun",
+     "done": false,
+     "wiki": "Wat Arun",
      "priceEstimate": {
       "kind": "published",
-      "basis": "מחירון הארמון: שני מבוגרים. לבדוק מחיר סמוך לביקור.",
+      "basis": "דמי כניסה לוואט ארון לשניים.",
       "lowFactor": 1,
-      "highFactor": 1,
-      "sourceUrl": "https://www.royalgrandpalace.th/en/buy-ticket",
-      "checked": "2026-09-14"
-     }
+      "highFactor": 1.2,
+      "sourceUrl": "",
+      "checked": "2026-10-31"
+     },
+     "managed": true
     },
     {
-     "time": "10:50",
-     "dur": "1:30",
+     "time": "11:10",
+     "dur": "0:10",
+     "act": "סירה חוצה לתא טיין",
+     "loc": "ואט ארון → תא טיין",
+     "cat": "תחבורה",
+     "baht": 10,
+     "status": "משלמים במקום",
+     "link": "",
+     "notes": "מעבורת קצרה, ฿5 לאדם · יוצאת כל כמה דקות מהרציף ליד ואט ארון",
+     "id": "s_2_ferry",
+     "done": false,
+     "priceEstimate": {
+      "kind": "published",
+      "basis": "מחיר מעבורת חוצה לשניים.",
+      "lowFactor": 1,
+      "highFactor": 1,
+      "sourceUrl": "",
+      "checked": "2026-10-31"
+     },
+     "managed": true
+    },
+    {
+     "time": "11:25",
+     "dur": "1:15",
      "act": "ואט פו — הבודהה השוכב",
      "loc": "Wat Pho",
      "cat": "אטרקציות",
      "baht": 600,
      "status": "משלמים במקום",
      "link": "https://www.google.com/maps/search/?api=1&query=Wat+Pho+Bangkok",
-     "notes": "฿300 לאדם · 46 מטר · אותו קוד לבוש",
+     "notes": "฿300 לאדם · 46 מטר · אותו קוד לבוש · כמה דקות הליכה מהרציף",
      "id": "s_2_3",
      "done": false,
      "wiki": "Wat Pho",
@@ -559,11 +606,12 @@ window.SHARED_SEED = {
       "highFactor": 1,
       "sourceUrl": "https://watpho.org/en/contact/plan",
       "checked": "2026-09-14"
-     }
+     },
+     "managed": true
     },
     {
-     "time": "12:30",
-     "dur": "1:00",
+     "time": "12:40",
+     "dur": "0:50",
      "act": "צהריים ליד ואט פו",
      "loc": "ראטנקוסין",
      "cat": "אוכל",
@@ -580,39 +628,110 @@ window.SHARED_SEED = {
       "highFactor": 1.3,
       "sourceUrl": "",
       "checked": "2026-09-14"
-     }
+     },
+     "managed": true
     },
     {
-     "time": "14:00",
-     "dur": "2:30",
-     "act": "חזרה למלון ומנוחה",
-     "loc": "סוכומוויט",
+     "time": "13:30",
+     "dur": "0:10",
+     "act": "טוק־טוק לארמון המלכותי",
+     "loc": "ואט פו → הארמון",
      "cat": "תחבורה",
-     "baht": 130,
+     "baht": 100,
      "status": "משלמים במקום",
      "link": "",
-     "notes": "סירה ו-BTS חזרה · הערב ארוך",
-     "id": "s_2_5",
+     "notes": "לסגור מחיר לפני (฿60–100). להתעלם ממי שאומר שהארמון סגור היום — זו עקיצה מוכרת",
+     "id": "s_2_tuk",
      "done": false,
      "priceEstimate": {
       "kind": "estimate",
-      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
-      "lowFactor": 0.8,
-      "highFactor": 1.3,
+      "basis": "טוק־טוק קצר.",
+      "lowFactor": 0.6,
+      "highFactor": 1.5,
       "sourceUrl": "",
-      "checked": "2026-09-14"
-     }
+      "checked": "2026-10-31"
+     },
+     "managed": true
     },
     {
-     "time": "17:00",
-     "dur": "0:20",
+     "time": "13:40",
+     "dur": "1:40",
+     "act": "הארמון המלכותי",
+     "loc": "Grand Palace",
+     "cat": "אטרקציות",
+     "baht": 1000,
+     "status": "משלמים במקום",
+     "link": "https://www.google.com/maps/search/?api=1&query=Grand+Palace+Bangkok",
+     "notes": "฿500 לאדם · כניסה אחרונה 15:30 · כתפיים וברכיים מכוסות, נאכף · בצהריים חם — מים וכובע",
+     "id": "s_2_2",
+     "done": false,
+     "wiki": "Grand Palace",
+     "priceEstimate": {
+      "kind": "published",
+      "basis": "מחירון הארמון: שני מבוגרים. לבדוק מחיר סמוך לביקור.",
+      "lowFactor": 1,
+      "highFactor": 1,
+      "sourceUrl": "https://www.royalgrandpalace.th/en/buy-ticket",
+      "checked": "2026-09-14"
+     },
+     "managed": true
+    },
+    {
+     "time": "15:35",
+     "dur": "0:35",
+     "act": "הנדנדה הענקית וואט סוטאט",
+     "loc": "סאו צ׳ינג צ׳ה",
+     "cat": "אטרקציות",
+     "baht": 200,
+     "status": "משלמים במקום",
+     "link": "",
+     "notes": "טוק־טוק של 10 דקות מהארמון · הנדנדה האדומה בכיכר חינם, ואט סוטאט ฿100 לאדם",
+     "id": "s_2_swing",
+     "done": false,
+     "wiki": "Giant Swing",
+     "priceEstimate": {
+      "kind": "published",
+      "basis": "דמי כניסה לוואט סוטאט לשניים.",
+      "lowFactor": 1,
+      "highFactor": 1.2,
+      "sourceUrl": "",
+      "checked": "2026-10-31"
+     },
+     "managed": true
+    },
+    {
+     "time": "16:15",
+     "dur": "0:50",
+     "act": "ואט סאקט — הר הזהב ותצפית על העיר",
+     "loc": "ואט סאקט",
+     "cat": "אטרקציות",
+     "baht": 200,
+     "status": "משלמים במקום",
+     "link": "",
+     "notes": "฿100 לאדם · 344 מדרגות בספירלה סביב הגבעה · תצפית על כל העיר העתיקה, ממש לפני השקיעה",
+     "id": "s_2_saket",
+     "done": false,
+     "wiki": "Wat Saket",
+     "priceEstimate": {
+      "kind": "published",
+      "basis": "דמי כניסה להר הזהב לשניים.",
+      "lowFactor": 1,
+      "highFactor": 1.2,
+      "sourceUrl": "",
+      "checked": "2026-10-31"
+     },
+     "managed": true
+    },
+    {
+     "time": "17:10",
+     "dur": "0:15",
      "act": "קניית קראתונגים ברחוב",
-     "loc": "ליד הנהר",
+     "loc": "בדרך לסאלה",
      "cat": "אטרקציות",
      "baht": 150,
      "status": "משלמים במקום",
      "link": "",
-     "notes": "฿50–100 · מעלה בננה, לא קלקר",
+     "notes": "฿50–100 · מעלה בננה, לא קלקר · טוק־טוק מהר הזהב לסאלה כ-15 דקות",
      "id": "s_2_6",
      "done": false,
      "priceEstimate": {
@@ -622,7 +741,8 @@ window.SHARED_SEED = {
       "highFactor": 1.3,
       "sourceUrl": "",
       "checked": "2026-09-14"
-     }
+     },
+     "managed": true
     },
     {
      "time": "17:30",
@@ -721,7 +841,7 @@ window.SHARED_SEED = {
      "managed": true
     }
    ],
-   "summary": "העיר העתיקה ביום, הנהר בלילה — לוי קראתונג",
+   "summary": "תעלות, ואט ארון, ואט פו, הארמון והר הזהב — ובלילה לוי קראתונג",
    "id": "day_2"
   },
   {
@@ -839,14 +959,14 @@ window.SHARED_SEED = {
     },
     {
      "time": "13:10",
-     "dur": "0:50",
-     "act": "צהריים באזור",
-     "loc": "פאקרט",
+     "dur": "2:00",
+     "act": "צהריים וקניון סנטרל צ׳אנגוואטנה",
+     "loc": "Central Chaengwattana",
      "cat": "אוכל",
-     "baht": 400,
+     "baht": 500,
      "status": "משלמים במקום",
      "link": "",
-     "notes": "",
+     "notes": "כ-15 דקות מ-ISB · קניון ענק עם פודקורט · אפשר להתקרר אחרי הבוקר",
      "id": "s_3_5",
      "done": false,
      "priceEstimate": {
@@ -856,18 +976,19 @@ window.SHARED_SEED = {
       "highFactor": 1.3,
       "sourceUrl": "",
       "checked": "2026-09-14"
-     }
+     },
+     "managed": true
     },
     {
-     "time": "14:10",
+     "time": "15:15",
      "dur": "1:00",
      "act": "גראב חזרה למרכז",
-     "loc": "פאקרט → סוכומוויט",
+     "loc": "צ׳אנגוואטנה → סוכומוויט",
      "cat": "תחבורה",
      "baht": 500,
      "status": "משלמים במקום",
      "link": "",
-     "notes": "",
+     "notes": "40–60 דקות, תלוי בפקקים",
      "id": "s_3_6",
      "done": false,
      "priceEstimate": {
@@ -877,18 +998,19 @@ window.SHARED_SEED = {
       "highFactor": 1.3,
       "sourceUrl": "",
       "checked": "2026-09-14"
-     }
+     },
+     "managed": true
     },
     {
-     "time": "15:45",
-     "dur": "1:15",
+     "time": "16:25",
+     "dur": "1:00",
      "act": "מסאז׳ תאילנדי",
      "loc": "סוכומוויט",
      "cat": "אטרקציות",
      "baht": 700,
      "status": "משלמים במקום",
      "link": "",
-     "notes": "",
+     "notes": "שעה לפני היציאה לרג׳אדמנרן",
      "id": "s_3_7",
      "done": false,
      "priceEstimate": {
@@ -898,7 +1020,8 @@ window.SHARED_SEED = {
       "highFactor": 1.3,
       "sourceUrl": "",
       "checked": "2026-09-14"
-     }
+     },
+     "managed": true
     },
     {
      "time": "17:40",
@@ -1039,7 +1162,7 @@ window.SHARED_SEED = {
      }
     }
    ],
-   "summary": "לומפיני, ISB, ושוק לילה",
+   "summary": "לומפיני, ISB, סנטרל צ׳אנגוואטנה, ומואיי תאי",
    "id": "day_3"
   },
   {
