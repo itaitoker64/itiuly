@@ -15,7 +15,7 @@ near(Object.values(f.categories).reduce((a,b)=>a+b,0)+f.reserve,f.base);
 near(run('sharedEstimateDays().reduce((s,d)=>s+dayTotalBaht(d)*rate(),0)')+f.reserve,f.base);
 near(f.categories.flights,3777+1891+777+5390*.08981); // TG203, and the home flight moved to Bangkok on 10/12 with its change fee.
 assert.ok(f.optional>0);
-near(f.categories.accommodation,8169.87*.08981+1839+12150*.08981+1931.44+3010.10*.08981+(6826+2*2574+7740)*.08981); // Montraj direct; KYN corrected; Kalima 6–9/12 booked at 1,931.44; Bangkok booked; Phi Phi and two Khao Sok nights still estimates.
+near(f.categories.accommodation,8169.87*.08981+1839+12150*.08981+1931.44+3010.10*.08981+(6826+3*2574)*.08981); // Montraj direct; KYN corrected; Kalima 6–9/12 booked at 1,931.44; Bangkok booked; Phi Phi and two Khao Sok nights still estimates.
 near(run('sharedRowPrice(sh().days[0].rows.find(r=>r.id==="s_1_0")).base'),3777);
 near(run('sharedRowPrice(sh().days.find(d=>d.date==="2026-12-10").rows.find(r=>r.id==="s_f10_2")).shares.itai'),1891);
 assert.equal(run('sharedRowPrice(sh().days.find(d=>d.date==="2026-12-10").rows.find(r=>r.id==="s_f10_2")).shares.talia'),0);
