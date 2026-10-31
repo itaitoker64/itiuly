@@ -18,8 +18,8 @@
   },
   {
    "what": "Montraj Coach Sukhumvit",
-   "when": "23–26/11",
-   "details": "בנגקוק · 3 לילות · Historic Cabin Family · הזמנה ישירה",
+   "when": "8–10/12",
+   "details": "בנגקוק · להזיז מ-23–26/11 ל-8–10/12 · Historic Cabin Family · הזמנה ישירה",
    "ref": "3051425",
    "payment": "฿8,169.87 (כ-₪734) — משלמים במלון",
    "freeCancel": "ביטול חינם עד 21/11 · בכתב, ל-rsvns.coach@montraj.com"
@@ -27,7 +27,7 @@
   {
    "what": "Chermantra Aonang Resort",
    "when": "29/11–2/12",
-   "details": "אאו נאנג · 3 לילות · Mountain Pool Villa · ארוחת בוקר",
+   "details": "אאו נאנג · 3 לילות · Mountain Pool Villa · ארוחת בוקר · להאריך בלילה של 2/12",
    "ref": "5553772333",
    "payment": "₪1,839",
    "freeCancel": "ביטול חינם עד 14/11 23:59"
@@ -51,7 +51,7 @@
   {
    "what": "Kalima Resort and Villas",
    "when": "6–9/12",
-   "details": "קאו לאק · 3 לילות · Deluxe Double/Twin with Pool Access · בלי ארוחת בוקר",
+   "details": "קאו לאק · 3 לילות · Deluxe Double/Twin with Pool Access · בלי ארוחת בוקר · הלילה של 8/12 לא מנוצל — 5/12 בהזמנה נפרדת",
    "ref": "7195273990380466772",
    "payment": "שולם $621.21 (₪1,931)",
    "freeCancel": "לא מוחזר · הצעת שותף — אי אפשר לשנות פרטים"
@@ -59,10 +59,10 @@
   {
    "what": "Eleven Bangkok Sukhumvit 11",
    "when": "9–10/12",
-   "details": "בנגקוק · לילה · Grand Deluxe King · לעדכן לשני אנשים",
+   "details": "בנגקוק · 9/12 — לבטל, הלינה עוברת למונטראג׳",
    "ref": "5243050600",
    "payment": "฿3,010.10 — בוקינג מחייבת אוטומטית",
-   "freeCancel": "ביטול חינם עד 5/12"
+   "freeCancel": "ביטול חינם עד 5/12 — לבטל"
   },
   {
    "what": "Phor Liang Meun, צ׳יאנג מאי",
@@ -84,46 +84,40 @@
  ],
  "hotels": [
   {
-   "dest": "בנגקוק",
+   "dest": "צ׳יאנג מאי",
    "dates": "23–26/11",
    "nights": 3,
+   "hotel": "Centara Riverside Hotel Chiang Mai",
+   "what": "8.5 על 804 · 4 כוכבים, בריכה, על נהר הפינג — חגיגת לוי קראתונג מתחת למלון · ₪4,693 לשלושה לילות, מחירי חג.",
+   "perNight": 17418,
+   "choice": "הבחירה",
+   "freeCancel": "לבדוק",
+   "link": "בוקינג",
+   "linkLink": "https://www.booking.com/hotel/th/centara-riverside-hotel-chiang-mai.html?checkin=2026-11-23&checkout=2026-11-26&group_adults=2"
+  },
+  {
+   "dest": "בנגקוק",
+   "dates": "8–10/12",
+   "nights": 2,
    "hotel": "Montraj Coach Sukhumvit",
-   "what": "Historic Cabin Family, מיטת קינג, 27 מ״ר · בריכה על הגג · אישור 3051425 — הזמנה ישירה באתר המלון עם קוד Member · ฿8,169.87 לשלושת הלילות, כולל מסים ושירות · פיקדון ฿1,000 מזומן · משלמים במלון · החליפה הזמנה בבוקינג ב-₪1,128.",
+   "what": "Historic Cabin Family, מיטת קינג, 27 מ״ר · בריכה על הגג · אישור 3051425 — הזמנה ישירה באתר המלון עם קוד Member · ฿8,169.87 לשלושה לילות בהזמנה המקורית, כולל מסים ושירות · פיקדון ฿1,000 מזומן · משלמים במלון · החליפה הזמנה בבוקינג ב-₪1,128. · להזיז ל-8–10/12.",
    "perNight": 2723.29,
-   "totalB": "=C5*F5",
-   "ils": "=G5*סקירה!$B$5",
-   "choice": "מוזמן",
+   "choice": "להזיז",
    "freeCancel": "עד 21/11 — בכתב, ל-rsvns.coach@montraj.com",
    "link": "אתר המלון",
    "linkLink": "https://reservation.thecoachbangkok.com/propertyibe2/booking-management?propertyId=890&onlineId=4&mobileredirect=false&accesscode=Member&lang=en"
   },
   {
    "dest": "בנגקוק",
-   "dates": "23–26/11",
-   "nights": 3,
+   "dates": "8–10/12",
+   "nights": 2,
    "hotel": "Maison Hotel Bangkok",
    "what": "8.8 · סאונה, ספא, בריכה, עיסוי זוגי. סוכומוויט, ליד נאנה. מה שהתקציב המקורי הניח.",
    "perNight": 2852,
-   "totalB": "=C6*F6",
-   "ils": "=G6*סקירה!$B$5",
    "choice": "חלופה",
    "freeCancel": "לבדוק",
    "link": "בוקינג",
    "linkLink": "https://www.booking.com/hotel/th/maisonbangkok.html"
-  },
-  {
-   "dest": "בנגקוק — ליל לוי קראתונג",
-   "dates": "24/11",
-   "nights": 1,
-   "hotel": "Sala Rattanakosin",
-   "what": "8.8 · מול ואט ארון מהחדר ומהגג, בלי להילחם על שולחן. תוספת כ-฿7,110 מול המלון הרגיל.",
-   "perNight": 9962,
-   "totalB": "=C7*F7",
-   "ils": "=G7*סקירה!$B$5",
-   "choice": "מחוץ לתקציב",
-   "freeCancel": "לבדוק",
-   "link": "בוקינג",
-   "linkLink": "https://www.booking.com/hotel/th/sala-rattanakosin-bangkok.html"
   },
   {
    "dest": "קו יאו נוי",
@@ -144,8 +138,6 @@
    "hotel": "Deluxe A/C Room · KYN Phoenix",
    "what": "חדר מזגן במחנה בלי הנוף. חוסך ฿3,900 על שלושת הלילות.",
    "perNight": 2500,
-   "totalB": "=C9*F9",
-   "ils": "=G9*סקירה!$B$5",
    "choice": "חלופה",
    "freeCancel": "אין — מקדמה 50%",
    "link": "בוקינג",
@@ -158,8 +150,6 @@
    "hotel": "Holiday Resort",
    "what": "8.1 על 1,178 ביקורות · למבוגרים בלבד, חוף פרטי, בריכה, בריכת טבילה, ספא. הזול והמאובזר מבין הגיבויים.",
    "perNight": 1710,
-   "totalB": "=C10*F10",
-   "ils": "=G10*סקירה!$B$5",
    "choice": "גיבוי",
    "freeCancel": "יש",
    "link": "בוקינג",
@@ -172,8 +162,6 @@
    "hotel": "Sunrise House",
    "what": "8.9 על 490 ביקורות · מול הים בתא קאו, בריכה, מרחצאות באוויר הפתוח, חוף פרטי, עיסויים.",
    "perNight": 2033,
-   "totalB": "=C11*F11",
-   "ils": "=G11*סקירה!$B$5",
    "choice": "גיבוי",
    "freeCancel": "יש",
    "link": "בוקינג",
@@ -186,8 +174,6 @@
    "hotel": "Rongna Villas",
    "what": "8.8 על 241 ביקורות · וילות, עיסוי זוגות, מסעדה. בלי בריכה. הכי זול באי.",
    "perNight": 1249,
-   "totalB": "=C12*F12",
-   "ils": "=G12*סקירה!$B$5",
    "choice": "גיבוי",
    "freeCancel": "יש",
    "link": "בוקינג",
@@ -195,13 +181,11 @@
   },
   {
    "dest": "אאו נאנג",
-   "dates": "29/11–2/12",
-   "nights": 3,
+   "dates": "29/11–3/12",
+   "nights": 4,
    "hotel": "Chermantra Aonang Resort & Pool Suite",
-   "what": "Mountain Pool Villa עם אמבטיה ובריכה פרטית · ארוחת בוקר כלולה · אישור 5553772333 · בוקינג מחייבת את הכרטיס.",
+   "what": "Mountain Pool Villa עם אמבטיה ובריכה פרטית · ארוחת בוקר כלולה · אישור 5553772333 · בוקינג מחייבת את הכרטיס. · להאריך בלילה של 2/12 ולבקש את אותה וילה.",
    "perNight": 6825.67,
-   "totalB": "=C13*F13",
-   "ils": "=G13*סקירה!$B$5",
    "choice": "מוזמן",
    "freeCancel": "עד 14/11 — הדדליין הקרוב",
    "link": "בוקינג",
@@ -214,43 +198,17 @@
    "hotel": "At Thara Aonang",
    "what": "8.4 · בריכה, ספא, עיסוי זוגי. הליכה לסירות של ריילאי. מה שהתקציב המקורי הניח.",
    "perNight": 1843,
-   "totalB": "=C14*F14",
-   "ils": "=G14*סקירה!$B$5",
    "choice": "חלופה",
    "freeCancel": "לבדוק",
    "link": "בוקינג",
    "linkLink": "https://www.booking.com/hotel/th/at-thara-aonang.html"
   },
   {
-   "dest": "קו פי פי",
-   "dates": "2–4/12",
-   "nights": 2,
-   "hotel": "ChaoKoh Phi Phi",
-   "what": "8.5 על 1,134 · 4 כוכבים, בריכה, על המפרץ ליד הרציף והבארים · כ-₪716 לשני הלילות.",
-   "perNight": 3988,
-   "choice": "הבחירה",
-   "freeCancel": "לבדוק",
-   "link": "בוקינג",
-   "linkLink": "https://www.booking.com/hotel/th/orngaermchaawekaaaphiiphii.html"
-  },
-  {
-   "dest": "קו פי פי",
-   "dates": "2–4/12",
-   "nights": 2,
-   "hotel": "HIP Seaview Resort @ Phi Phi",
-   "what": "8.5 · Long Beach, למבוגרים בלבד, שקט · כ-₪1,022.",
-   "perNight": 5688,
-   "choice": "חלופה",
-   "freeCancel": "לבדוק",
-   "link": "בוקינג",
-   "linkLink": "https://www.booking.com/hotel/th/hip-seaview-resort-phi-phi.html"
-  },
-  {
    "dest": "קאו סוק",
-   "dates": "4–6/12",
+   "dates": "3–5/12",
    "nights": 2,
    "hotel": "Khao Sok Palmview",
-   "what": "8.9 על 2,187 · כ-₪462 לשני הלילות.",
+   "what": "8.9 על 2,187 · כ-₪462 לשני לילות.",
    "perNight": 2574,
    "choice": "הבחירה",
    "freeCancel": "לבדוק",
@@ -259,7 +217,7 @@
   },
   {
    "dest": "קאו סוק",
-   "dates": "4–6/12",
+   "dates": "3–5/12",
    "nights": 2,
    "hotel": "Khao Sok River Lodge",
    "what": "8.9 · על הנהר · כ-₪185.",
@@ -295,29 +253,27 @@
   },
   {
    "dest": "קאו לאק",
+   "dates": "5–6/12",
+   "nights": 1,
+   "hotel": "Kalima Resort and Villas · לילה נוסף",
+   "what": "הזמנה נפרדת לפני ההזמנה הקיימת — Deluxe Pool Access, ₪695 · לכתוב למלון לחבר את ההזמנות.",
+   "perNight": 7742,
+   "choice": "להזמין",
+   "freeCancel": "לבדוק",
+   "link": "בוקינג",
+   "linkLink": "https://www.booking.com/hotel/th/kalima-resort-amp-villas-khao-lak.html?checkin=2026-12-05&checkout=2026-12-06&group_adults=2"
+  },
+  {
+   "dest": "קאו לאק",
    "dates": "6–9/12",
    "nights": 3,
    "hotel": "Kalima Resort and Villas Khao Lak",
-   "what": "8.9 · 5 כוכבים · Deluxe Pool Access, יציאה ישירה לבריכה · אישור 7195273990380466772 · בלי ארוחת בוקר ($18 לאדם).",
+   "what": "8.9 · 5 כוכבים · Deluxe Pool Access, יציאה ישירה לבריכה · אישור 7195273990380466772 · בלי ארוחת בוקר ($18 לאדם). · הלילה של 8/12 לא מנוצל.",
    "perNight": 7169,
-   "totalB": "=C15*F15",
-   "ils": "=G15*סקירה!$B$5",
    "choice": "מוזמן",
    "freeCancel": "לא מוחזר",
    "link": "בוקינג",
    "linkLink": "https://www.booking.com/hotel/th/kalima-resort-amp-villas-khao-lak.html?checkin=2026-12-06&checkout=2026-12-09&group_adults=2"
-  },
-  {
-   "dest": "בנגקוק — לילה אחרון",
-   "dates": "9–10/12",
-   "nights": 1,
-   "hotel": "Eleven Bangkok Sukhumvit 11",
-   "what": "Grand Deluxe King על סוי 11 · אישור 5243050600 · לעדכן לשני אנשים · פיקדון ฿1,000 במזומן.",
-   "perNight": 3010.1,
-   "choice": "מוזמן",
-   "freeCancel": "עד 5/12",
-   "link": "בוקינג",
-   "linkLink": "https://www.booking.com/"
   },
   {
    "dest": "קאו סוק — הגרסה שנזנחה",
@@ -326,8 +282,6 @@
    "hotel": "בונגלו צף על אגם צ׳או לאן",
    "what": "לילה בבונגלו צף, כלול בסיור של ฿8,500 לאדם. נשאר להשוואה — בחרנו בטיול יום (5/12, ฿3,900 לאדם): חוסך כ-฿9,200 לזוג, ולא משלמים על לילה ריק בקלימה.",
    "perNight": "כלול",
-   "totalB": "",
-   "ils": "",
    "choice": "לא נבחר",
    "freeCancel": "לבדוק מול המפעיל",
    "link": "בוקינג",
@@ -340,26 +294,10 @@
    "hotel": "Tropicana Lanta Resort",
    "what": "9.0 על 829 ביקורות · ג׳קוזי, מרחצאות פתוחים, בריכת טבילה. נשאר כאן להשוואה — דורש להחזיר את לילת המעבר בפוקט.",
    "perNight": 2925,
-   "totalB": "=C17*F17",
-   "ils": "=G17*סקירה!$B$5",
    "choice": "חלופה",
    "freeCancel": "יש",
    "link": "בוקינג",
    "linkLink": "https://www.booking.com/hotel/th/chaw-ka-cher-tropicana-lanta-resort.html"
-  },
-  {
-   "dest": "קו יאו נוי",
-   "dates": "26–29/11",
-   "nights": 3,
-   "hotel": "Panoramic Sunset View · KYN Phoenix",
-   "what": "฿3,800 לדירה ללילה כולל לינה, ארוחות ואימון לאדם אחד; לאדם השני ฿660 אימון + ฿400 ארוחות ליום. אומדן לשלושה לילות ושלושה ימי תוספת: ฿14,580; מקדמה 50%: ฿7,290. נשלחה בקשה להתקדם; טרם שולם. הסכום הסופי וכיסוי יום העזיבה טעונים אישור.",
-   "perNight": 4860,
-   "totalB": "=C8*F8",
-   "ils": "=G8*סקירה!$B$5",
-   "choice": "ממתינים לפרטי בנק ולתשלום מקדמה",
-   "freeCancel": "לברר תנאי ביטול והחזר מקדמה",
-   "link": "אתר המחנה",
-   "linkLink": "https://www.phuket-krabi-muaythai.com/prices-accomodation/"
   }
  ],
  "info": [
@@ -405,11 +343,15 @@
   },
   {
    "topic": "",
-   "detail": "מוזמן: שתי טיסות ארקיע, מונטראג׳, צ׳רמנטרה, קלימה. כל השאר פתוח."
+   "detail": "מוזמן: שתי טיסות ארקיע, מונטראג׳ (להזיז ל-8–10/12), צ׳רמנטרה (עד 2/12), קלימה (6–9/12). כל השאר פתוח."
   },
   {
    "topic": "KYN · פרטי המחנה",
    "detail": "המחנה אישר אימוני קבוצה ב-08:00 וב-17:00. איתי: התאמת עמידה ובעיטות למואיי תאי, טיפים, מרפקים וקלינץ׳; טליה: יסודות למתחילה. ניתן להזמין אימון פרטי משותף; מחיר ומועד טרם נקבעו. ביום ההגעה אושר אימון טכניקה ב-16:00. להביא תחבושות ידיים ומגני שיניים; כפפות זמינות להשאלה או לרכישה. העברות עצמאיות בלבד."
+  },
+  {
+   "topic": "אימונים",
+   "detail": "אותם ימים ואותו מבנה כמו בבית: ראשון ורביעי תחתון + כתפיים, שני וחמישי עליון, שלישי ריצה קצרה, שישי ריצה ארוכה קלה, שבת מנוחה. כוח עם משקל גוף או חדר הכושר של המלון; ריצות מוקדם בבוקר. מואיי תאי במחנה מחליף את אימון הכוח של אותו יום. רצים לפי מאמץ — בלחות הקצב איטי ב-20–40 שנ׳ לק״מ. מים ומלחים לפני ואחרי כל ריצה. ביום טיסה או מעבר מדלגים קודם על ריצת שלישי. חלבון קודם בכל ארוחה; ארוחה עיקרית אחת בלי תוספת."
   }
  ]
 }

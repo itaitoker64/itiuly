@@ -1,6 +1,6 @@
 /* התוכנית המשותפת לשבועיים הראשונים — נוצר מתוך הקובץ של טליה */
 window.SHARED_SEED = {
- "title": "תאילנד · מבנגקוק לאנדמן",
+ "title": "תאילנד · מהצפון לאנדמן",
  "subtitle": "איתי וטליה · 22 בנובמבר – 10 בדצמבר 2026 · 17 לילות",
  "startDate": "2026-11-22",
  "endDate": "2026-12-10",
@@ -15,10 +15,10 @@ window.SHARED_SEED = {
  "reserveBaht": 10000,
  "bases": [
   {
-   "name": "בנגקוק",
+   "name": "צ׳יאנג מאי",
    "dates": "ב׳ 23/11 – ד׳ 25/11",
    "nights": 3,
-   "what": "לוי קראתונג, הארמון, ISB, רג׳אדמנרן"
+   "what": "לוי קראתונג ויי פנג, העיר העתיקה, פילים, דוי סותפ"
   },
   {
    "name": "קו יאו נוי",
@@ -34,21 +34,21 @@ window.SHARED_SEED = {
   },
   {
    "name": "קאו סוק",
-   "dates": "ה׳ 3/12 – ש׳ 5/12",
-   "nights": 3,
-   "what": "ג׳ונגל, נהר, אגם צ׳או לאן ומערת נאם טאלו"
+   "dates": "ה׳ 3/12 – ו׳ 4/12",
+   "nights": 2,
+   "what": "ג׳ונגל, נהר, ואגם צ׳או לאן"
   },
   {
    "name": "קאו לאק",
-   "dates": "א׳ 6/12 – ג׳ 8/12",
+   "dates": "ש׳ 5/12 – ב׳ 7/12",
    "nights": 3,
    "what": "קלימה · סימילן ויום גיבוי"
   },
   {
    "name": "בנגקוק",
-   "dates": "ד׳ 9/12",
-   "nights": 1,
-   "what": "לילה אחרון ביחד · איתי טס ב-10/12"
+   "dates": "ג׳ 8/12 – ד׳ 9/12",
+   "nights": 2,
+   "what": "ISB, התעלות, הארמון, רג׳אדמנרן · איתי טס ב-10/12"
   }
  ],
  "flights": [
@@ -60,18 +60,25 @@ window.SHARED_SEED = {
    "cost": "₪3,777 לשניים · שולם"
   },
   {
-   "when": "ה׳ 26/11",
-   "what": "Thai Airways TG203 · בנגקוק → פוקט",
-   "time": "08:00 → 09:25, ישירה",
+   "when": "ב׳ 23/11",
+   "what": "סובארנבומי → צ׳יאנג מאי · שניכם",
+   "time": "אחרי 16:30 — לבחור",
    "status": "להזמין",
-   "cost": "฿5,390 לשניים · 23 ק״ג לכל אחד"
+   "cost": "Thai Vietjet 20:35: €376.92 לשניים"
   },
   {
-   "when": "ד׳ 9/12",
-   "what": "פוקט → בנגקוק · שניכם",
-   "time": "לבחור",
+   "when": "ה׳ 26/11",
+   "what": "צ׳יאנג מאי → פוקט · שניכם",
+   "time": "בבוקר, לנחות עד 13:00",
    "status": "להזמין",
-   "cost": "מ-£47 לאדם"
+   "cost": "לבדוק ב-Thai AirAsia"
+  },
+  {
+   "when": "ג׳ 8/12",
+   "what": "פוקט → דון מואנג · שניכם",
+   "time": "11:45 → 13:10",
+   "status": "להזמין",
+   "cost": "Thai AirAsia: €102.84 לשניים"
   },
   {
    "when": "ה׳ 10/12",
@@ -86,7 +93,7 @@ window.SHARED_SEED = {
    "day": 1,
    "date": "2026-11-23",
    "dow": "ב׳",
-   "dest": "בנגקוק",
+   "dest": "צ׳יאנג מאי",
    "rows": [
     {
      "time": "13:15",
@@ -160,16 +167,16 @@ window.SHARED_SEED = {
      }
     },
     {
-     "time": "14:20",
-     "dur": "0:30",
-     "act": "רכבת שדה התעופה לפאיה תאי",
-     "loc": "ARL · סובארנבומי → פאיה תאי",
-     "cat": "תחבורה",
-     "baht": 90,
+     "time": "14:30",
+     "dur": "3:00",
+     "act": "צהריים ומנוחה בשדה — צ׳ק-אין לטיסה הפנימית",
+     "loc": "סובארנבומי",
+     "cat": "אוכל",
+     "baht": 600,
      "status": "משלמים במקום",
-     "link": "https://www.google.com/maps/search/?api=1&query=Airport+Rail+Link+Phaya+Thai+Station+Bangkok",
-     "notes": "฿45 לאדם · מנצחת מונית בשעה הזאת",
-     "id": "s_1_3",
+     "link": "",
+     "notes": "שני כרטיסים נפרדים: ביקורת גבולות, מזוודות וצ׳ק-אין מחדש. להשאיר לפחות שלוש שעות מהנחיתה",
+     "id": "s_1_wait",
      "done": false,
      "priceEstimate": {
       "kind": "estimate",
@@ -177,41 +184,21 @@ window.SHARED_SEED = {
       "lowFactor": 0.8,
       "highFactor": 1.3,
       "sourceUrl": "",
-      "checked": "2026-09-14"
-     }
+      "checked": "2026-10-31"
+     },
+     "managed": true
     },
     {
-     "time": "14:55",
-     "dur": "0:25",
-     "act": "BTS מפאיה תאי לאסוק",
-     "loc": "BTS · סיאם → אסוק",
-     "cat": "תחבורה",
-     "baht": 90,
-     "status": "משלמים במקום",
-     "link": "https://www.google.com/maps/search/?api=1&query=Asok+BTS+Station+Bangkok",
-     "notes": "החלפה בסיאם · המלון 5 דק׳ הליכה מאסוק",
-     "id": "s_1_4",
-     "done": false,
-     "priceEstimate": {
-      "kind": "estimate",
-      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
-      "lowFactor": 0.8,
-      "highFactor": 1.3,
-      "sourceUrl": "",
-      "checked": "2026-09-14"
-     }
-    },
-    {
-     "time": "15:30",
-     "dur": "",
-     "act": "צ׳ק-אין — מונטראג׳",
-     "loc": "סוי סוכומוויט 14",
+     "time": "15:00",
+     "dur": "0:45",
+     "act": "אימון כוח — עליון",
+     "loc": "",
      "cat": "אחר",
      "baht": null,
-     "status": "מוזמן",
+     "status": "אופציונלי",
      "link": "",
-     "notes": "צ׳ק-אין מ-14:00, צ׳ק-אאוט עד 12:00 · פיקדון ฿1,000 מזומן, מוחזר בצ׳ק-אאוט",
-     "id": "s_1_5",
+     "notes": "יום טיסה — אם אין כוח, מוותרים · 1. שכיבות סמיכה + מתח / חתירה הפוכה מתחת לשולחן · 2. שכיבות סמיכה בשיפוע (רגליים על מיטה) + חתירה עם תיק · 3. מקבילים על כיסא או ספסל + פולאובר עם תיק · 4. כפיפת מרפקים עם תיק + Bench Dips · 5. פוש-אפ יהלום + Superman Pulls",
+     "id": "s_w_1123",
      "done": false,
      "priceEstimate": {
       "kind": "no-extra",
@@ -219,88 +206,44 @@ window.SHARED_SEED = {
       "lowFactor": 1,
       "highFactor": 1,
       "sourceUrl": "",
-      "checked": "2026-09-14"
+      "checked": "2026-10-31"
      },
      "managed": true
     },
     {
-     "time": "16:30",
-     "dur": "2:00",
-     "act": "MBK וסנטרל וורלד",
-     "loc": "סיאם",
-     "cat": "אחר",
-     "baht": 2000,
-     "status": "משלמים במקום",
-     "link": "https://www.google.com/maps/search/?api=1&query=MBK+Center+Bangkok",
-     "notes": "עושים את הקניונים היום כדי לא לדחוס אותם ליום החופשי",
-     "id": "s_1_6",
-     "done": false,
-     "wiki": "MBK Center",
-     "priceEstimate": {
-      "kind": "estimate",
-      "basis": "תקציב קניות אישי לבחירה, מעבר לכניסה החופשית לקניונים.",
-      "lowFactor": 0.5,
-      "highFactor": 2,
-      "sourceUrl": "",
-      "checked": "2026-09-14",
-      "optional": true
-     }
-    },
-    {
-     "time": "19:30",
-     "dur": "2:30",
-     "act": "ארוחת ערב ביאווארט",
-     "loc": "צ׳יינטאון",
-     "cat": "אוכל",
-     "baht": 700,
-     "status": "משלמים במקום",
-     "link": "https://www.google.com/maps/search/?api=1&query=Yaowarat+Road+Chinatown+Bangkok",
-     "notes": "שרימפס נהר צלויים, חביתת צדפות, גוואי ג׳אב, מנגו סטיקי רייס",
-     "id": "s_1_7",
-     "done": false,
-     "wiki": "Yaowarat Road",
-     "priceEstimate": {
-      "kind": "estimate",
-      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
-      "lowFactor": 0.8,
-      "highFactor": 1.3,
-      "sourceUrl": "",
-      "checked": "2026-09-14"
-     }
-    },
-    {
-     "time": "21:45",
-     "dur": "2:30",
-     "act": "חאו סן ורחוב רמבוטרי — הלילה הראשון",
-     "loc": "חאו סן רואד",
-     "cat": "אטרקציות",
-     "baht": 700,
-     "notes": "ברים, מוזיקה חיה, דליים ותרמילאים מכל העולם · רמבוטרי שקט יותר ומקומי · מחר 07:15 — לחזור עד 00:30",
-     "status": "משלמים במקום",
-     "link": "",
-     "priceEstimate": {
-      "kind": "estimate",
-      "basis": "אומדן ערב בבר לשניים — כניסה, שתייה ותחבורה.",
-      "lowFactor": 0.7,
-      "highFactor": 1.6,
-      "sourceUrl": "",
-      "checked": "2026-10-13"
-     },
-     "managed": true,
-     "id": "s_1_night",
-     "done": false
-    },
-    {
-     "time": "00:30",
-     "dur": "0:25",
-     "act": "גראב חזרה למלון",
-     "loc": "יאווארט → סוכומוויט",
+     "time": "17:30",
+     "dur": "1:20",
+     "act": "טיסה · סובארנבומי → צ׳יאנג מאי",
+     "loc": "BKK → CNX",
      "cat": "תחבורה",
-     "baht": 180,
+     "baht": 14300,
+     "status": "להזמין",
+     "link": "",
+     "notes": "מסובארנבומי, לא מדון מואנג · בחיפוש: Thai Vietjet ב-20:35 → 22:05, €376.92 לשניים · לבדוק ישירות גם Thai Airways ו-Bangkok Airways — לטיסה בין 16:30 ל-18:30 · Nok Air זולה יותר אבל רק מדון מואנג, וזה מעבר שדה",
+     "id": "s_1_cnx",
+     "done": false,
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "לפי מחיר Thai Vietjet לשניים ב-lastminute, 31/10.",
+      "lowFactor": 0.6,
+      "highFactor": 1.2,
+      "sourceUrl": "",
+      "checked": "2026-10-31",
+      "category": "flights"
+     },
+     "managed": true
+    },
+    {
+     "time": "19:15",
+     "dur": "0:25",
+     "act": "מונית מהשדה למלון",
+     "loc": "CNX → העיר",
+     "cat": "תחבורה",
+     "baht": 250,
      "status": "משלמים במקום",
      "link": "",
-     "notes": "מחאו סן · ฿250–300 בלילה",
-     "id": "s_1_8",
+     "notes": "השדה 15–20 דק׳ מהעיר העתיקה · גראב או מונית רשמית",
+     "id": "s_1_taxi",
      "done": false,
      "priceEstimate": {
       "kind": "estimate",
@@ -308,37 +251,51 @@ window.SHARED_SEED = {
       "lowFactor": 0.8,
       "highFactor": 1.3,
       "sourceUrl": "",
-      "checked": "2026-09-14"
+      "checked": "2026-10-31"
+     },
+     "managed": true
+    },
+    {
+     "time": "20:00",
+     "dur": "1:00",
+     "act": "קאו סוי ראשון",
+     "loc": "צ׳יאנג מאי",
+     "cat": "אוכל",
+     "baht": 300,
+     "status": "משלמים במקום",
+     "link": "",
+     "notes": "מרק הקארי של הצפון — לאכול ולישון",
+     "id": "s_1_dinner",
+     "done": false,
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
+      "lowFactor": 0.8,
+      "highFactor": 1.3,
+      "sourceUrl": "",
+      "checked": "2026-10-31"
      },
      "managed": true
     },
     {
      "time": "",
      "dur": "",
-     "act": "לינה — Montraj Coach Sukhumvit",
-     "loc": "סוי סוכומוויט 14",
+     "act": "לינה — צ׳יאנג מאי, ליד הנהר או שער תא פאה",
+     "loc": "צ׳יאנג מאי",
      "cat": "לינה",
-     "baht": 2723.29,
-     "status": "מוזמן",
-     "link": "https://reservation.thecoachbangkok.com/propertyibe2/booking-management?propertyId=890&onlineId=4&mobileredirect=false&accesscode=Member&lang=en",
-     "notes": "אישור 3051425 · הזמנה ישירה באתר המלון עם קוד Member · Historic Cabin Family, מיטת קינג, 27 מ״ר · ฿8,169.87 לשלושת הלילות, כולל מסים ושירות · משלמים במלון · ביטול חינם עד 21/11, בכתב",
-     "id": "s_1_9",
+     "baht": 17418,
+     "status": "להזמין",
+     "link": "https://www.booking.com/hotel/th/centara-riverside-hotel-chiang-mai.html?checkin=2026-11-23&checkout=2026-11-26&group_adults=2",
+     "notes": "מחירי החג: Centara Riverside (8.5 על 804, על נהר הפינג — החגיגה מתחת למלון) ₪4,693 לשלושה לילות · מלונות בעיר העתיקה ב-₪6,000–9,500 · להזמין מוקדם, ולחפש גם גסטהאוסים בעיר העתיקה",
+     "id": "s_1_9cm",
      "done": false,
      "priceEstimate": {
-      "kind": "booking",
-      "basis": "המחיר מההזמנה השמורה; נספר פעם אחת בלבד ומחולק בין לילות הלינה.",
-      "lowFactor": 1,
-      "highFactor": 1,
-      "sourceUrl": "",
-      "checked": "2026-09-28",
-      "booking": {
-       "category": "accommodation",
-       "split": "ratio",
-       "key": "bangkok",
-       "match": "Montraj Coach",
-       "rows": 3,
-       "totalThb": 8169.87
-      }
+      "kind": "published",
+      "basis": "מחיר בבוקינג ל-Centara Riverside, 23–26/11, נבדק 31/10. מחירי חג — יש גם זול יותר.",
+      "lowFactor": 0.45,
+      "highFactor": 1.1,
+      "sourceUrl": "https://www.booking.com/hotel/th/centara-riverside-hotel-chiang-mai.html",
+      "checked": "2026-10-31"
      },
      "managed": true
     },
@@ -460,340 +417,48 @@ window.SHARED_SEED = {
      }
     }
    ],
-   "summary": "לנחות, ולאכול",
+   "summary": "נוחתים, וממשיכים צפונה",
    "id": "day_1"
   },
   {
    "day": 2,
    "date": "2026-11-24",
    "dow": "ג׳",
-   "dest": "בנגקוק",
+   "dest": "צ׳יאנג מאי",
    "rows": [
     {
-     "time": "07:15",
+     "time": "06:30",
      "dur": "0:30",
-     "act": "ארוחת בוקר",
-     "loc": "ליד המלון",
-     "cat": "אוכל",
-     "baht": 250,
-     "status": "משלמים במקום",
-     "link": "",
-     "notes": "המלון לא כולל ארוחת בוקר",
-     "id": "s_2_0",
-     "done": false,
-     "priceEstimate": {
-      "kind": "estimate",
-      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
-      "lowFactor": 0.8,
-      "highFactor": 1.3,
-      "sourceUrl": "",
-      "checked": "2026-09-14"
-     }
-    },
-    {
-     "time": "07:50",
-     "dur": "0:50",
-     "act": "BTS לסאפאן טקסין + סירת נהר לתא צ׳אנג",
-     "loc": "אסוק → תא צ׳אנג",
-     "cat": "תחבורה",
-     "baht": 130,
-     "status": "משלמים במקום",
-     "link": "https://www.google.com/maps/search/?api=1&query=Tha+Tien+Pier+Bangkok",
-     "notes": "BTS עד סאפאן טקסין, ואז Chao Phraya Express קו כתום עד תא צ׳אנג (N9). משם יוצאות סירות התעלות",
-     "id": "s_2_1",
-     "done": false,
-     "priceEstimate": {
-      "kind": "estimate",
-      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
-      "lowFactor": 0.8,
-      "highFactor": 1.3,
-      "sourceUrl": "",
-      "checked": "2026-09-14"
-     },
-     "managed": true
-    },
-    {
-     "time": "08:45",
-     "dur": "1:30",
-     "act": "שיט בתעלות תונבורי — מסתיים בוואט ארון",
-     "loc": "תא צ׳אנג → תעלות תונבורי",
-     "cat": "אטרקציות",
-     "baht": 1800,
-     "status": "משלמים במקום",
-     "link": "",
-     "notes": "לונג־טייל פרטי מהרציף, כ-฿1,500–2,000 לסירה לשעה וחצי · בתים על כלונסאות, מקדשים קטנים ושוק צף קטן · לסגור מחיר לפני שעולים, ולבקש שהסיור ייגמר ברציף של ואט ארון",
-     "id": "s_2_canal",
-     "done": false,
-     "wiki": "Khlong",
-     "priceEstimate": {
-      "kind": "estimate",
-      "basis": "מחיר מקובל ללונג־טייל פרטי לשעה וחצי בתעלות.",
-      "lowFactor": 0.8,
-      "highFactor": 1.2,
-      "sourceUrl": "",
-      "checked": "2026-10-31"
-     },
-     "managed": true
-    },
-    {
-     "time": "10:20",
-     "dur": "0:50",
-     "act": "ואט ארון — מקדש השחר",
-     "loc": "גדת תונבורי",
-     "cat": "אטרקציות",
-     "baht": 400,
-     "status": "משלמים במקום",
-     "link": "",
-     "notes": "฿200 לאדם · מדרגות תלולות למגדל · כתפיים וברכיים מכוסות",
-     "id": "s_2_arun",
-     "done": false,
-     "wiki": "Wat Arun",
-     "priceEstimate": {
-      "kind": "published",
-      "basis": "דמי כניסה לוואט ארון לשניים.",
-      "lowFactor": 1,
-      "highFactor": 1.2,
-      "sourceUrl": "",
-      "checked": "2026-10-31"
-     },
-     "managed": true
-    },
-    {
-     "time": "11:10",
-     "dur": "0:10",
-     "act": "סירה חוצה לתא טיין",
-     "loc": "ואט ארון → תא טיין",
-     "cat": "תחבורה",
-     "baht": 10,
-     "status": "משלמים במקום",
-     "link": "",
-     "notes": "מעבורת קצרה, ฿5 לאדם · יוצאת כל כמה דקות מהרציף ליד ואט ארון",
-     "id": "s_2_ferry",
-     "done": false,
-     "priceEstimate": {
-      "kind": "published",
-      "basis": "מחיר מעבורת חוצה לשניים.",
-      "lowFactor": 1,
-      "highFactor": 1,
-      "sourceUrl": "",
-      "checked": "2026-10-31"
-     },
-     "managed": true
-    },
-    {
-     "time": "11:25",
-     "dur": "1:15",
-     "act": "ואט פו — הבודהה השוכב",
-     "loc": "Wat Pho",
-     "cat": "אטרקציות",
-     "baht": 600,
-     "status": "משלמים במקום",
-     "link": "https://www.google.com/maps/search/?api=1&query=Wat+Pho+Bangkok",
-     "notes": "฿300 לאדם · 46 מטר · אותו קוד לבוש · כמה דקות הליכה מהרציף",
-     "id": "s_2_3",
-     "done": false,
-     "wiki": "Wat Pho",
-     "priceEstimate": {
-      "kind": "published",
-      "basis": "מחירון ואט פו: שני מבוגרים.",
-      "lowFactor": 1,
-      "highFactor": 1,
-      "sourceUrl": "https://watpho.org/en/contact/plan",
-      "checked": "2026-09-14"
-     },
-     "managed": true
-    },
-    {
-     "time": "12:40",
-     "dur": "0:50",
-     "act": "צהריים ליד ואט פו",
-     "loc": "ראטנקוסין",
-     "cat": "אוכל",
-     "baht": 400,
-     "status": "משלמים במקום",
-     "link": "",
-     "notes": "",
-     "id": "s_2_4",
-     "done": false,
-     "priceEstimate": {
-      "kind": "estimate",
-      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
-      "lowFactor": 0.8,
-      "highFactor": 1.3,
-      "sourceUrl": "",
-      "checked": "2026-09-14"
-     },
-     "managed": true
-    },
-    {
-     "time": "13:30",
-     "dur": "0:10",
-     "act": "טוק־טוק לארמון המלכותי",
-     "loc": "ואט פו → הארמון",
-     "cat": "תחבורה",
-     "baht": 100,
-     "status": "משלמים במקום",
-     "link": "",
-     "notes": "לסגור מחיר לפני (฿60–100). להתעלם ממי שאומר שהארמון סגור היום — זו עקיצה מוכרת",
-     "id": "s_2_tuk",
-     "done": false,
-     "priceEstimate": {
-      "kind": "estimate",
-      "basis": "טוק־טוק קצר.",
-      "lowFactor": 0.6,
-      "highFactor": 1.5,
-      "sourceUrl": "",
-      "checked": "2026-10-31"
-     },
-     "managed": true
-    },
-    {
-     "time": "13:40",
-     "dur": "1:40",
-     "act": "הארמון המלכותי",
-     "loc": "Grand Palace",
-     "cat": "אטרקציות",
-     "baht": 1000,
-     "status": "משלמים במקום",
-     "link": "https://www.google.com/maps/search/?api=1&query=Grand+Palace+Bangkok",
-     "notes": "฿500 לאדם · כניסה אחרונה 15:30 · כתפיים וברכיים מכוסות, נאכף · בצהריים חם — מים וכובע",
-     "id": "s_2_2",
-     "done": false,
-     "wiki": "Grand Palace",
-     "priceEstimate": {
-      "kind": "published",
-      "basis": "מחירון הארמון: שני מבוגרים. לבדוק מחיר סמוך לביקור.",
-      "lowFactor": 1,
-      "highFactor": 1,
-      "sourceUrl": "https://www.royalgrandpalace.th/en/buy-ticket",
-      "checked": "2026-09-14"
-     },
-     "managed": true
-    },
-    {
-     "time": "15:35",
-     "dur": "0:35",
-     "act": "הנדנדה הענקית וואט סוטאט",
-     "loc": "סאו צ׳ינג צ׳ה",
-     "cat": "אטרקציות",
-     "baht": 200,
-     "status": "משלמים במקום",
-     "link": "",
-     "notes": "טוק־טוק של 10 דקות מהארמון · הנדנדה האדומה בכיכר חינם, ואט סוטאט ฿100 לאדם",
-     "id": "s_2_swing",
-     "done": false,
-     "wiki": "Giant Swing",
-     "priceEstimate": {
-      "kind": "published",
-      "basis": "דמי כניסה לוואט סוטאט לשניים.",
-      "lowFactor": 1,
-      "highFactor": 1.2,
-      "sourceUrl": "",
-      "checked": "2026-10-31"
-     },
-     "managed": true
-    },
-    {
-     "time": "16:15",
-     "dur": "0:50",
-     "act": "ואט סאקט — הר הזהב ותצפית על העיר",
-     "loc": "ואט סאקט",
-     "cat": "אטרקציות",
-     "baht": 200,
-     "status": "משלמים במקום",
-     "link": "",
-     "notes": "฿100 לאדם · 344 מדרגות בספירלה סביב הגבעה · תצפית על כל העיר העתיקה, ממש לפני השקיעה",
-     "id": "s_2_saket",
-     "done": false,
-     "wiki": "Wat Saket",
-     "priceEstimate": {
-      "kind": "published",
-      "basis": "דמי כניסה להר הזהב לשניים.",
-      "lowFactor": 1,
-      "highFactor": 1.2,
-      "sourceUrl": "",
-      "checked": "2026-10-31"
-     },
-     "managed": true
-    },
-    {
-     "time": "17:10",
-     "dur": "0:15",
-     "act": "קניית קראתונגים ברחוב",
-     "loc": "בדרך לסאלה",
-     "cat": "אטרקציות",
-     "baht": 150,
-     "status": "משלמים במקום",
-     "link": "",
-     "notes": "฿50–100 · מעלה בננה, לא קלקר · טוק־טוק מהר הזהב לסאלה כ-15 דקות",
-     "id": "s_2_6",
-     "done": false,
-     "priceEstimate": {
-      "kind": "estimate",
-      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
-      "lowFactor": 0.8,
-      "highFactor": 1.3,
-      "sourceUrl": "",
-      "checked": "2026-09-14"
-     },
-     "managed": true
-    },
-    {
-     "time": "17:30",
-     "dur": "3:00",
-     "act": "ארוחת לוי קראתונג — סאלה ראטנקוסין",
-     "loc": "39 Maharat Road, מול ואט ארון",
-     "cat": "אוכל",
-     "baht": 2800,
-     "status": "להזמין",
-     "link": "https://www.tablecheck.com/en/salarattanokosin-eateryandbar/reserve/message",
-     "notes": "הלילה הכי מבוקש בשנה · תפריט סט מראש · wineanddine@salarattanakosin.com · גיבוי: פרה נאקהון או איקון סיאם",
-     "id": "s_2_7",
-     "done": false,
-     "wiki": "Wat Arun",
-     "priceEstimate": {
-      "kind": "estimate",
-      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
-      "lowFactor": 0.8,
-      "highFactor": 1.3,
-      "sourceUrl": "",
-      "checked": "2026-09-14"
-     }
-    },
-    {
-     "time": "20:30",
-     "dur": "1:30",
-     "act": "השקת הקראתונגים וזיקוקים",
-     "loc": "גדת ואט ארון",
-     "cat": "אטרקציות",
+     "act": "ריצה קצרה",
+     "loc": "",
+     "cat": "אחר",
      "baht": null,
      "status": "משלמים במקום",
-     "link": "https://www.google.com/maps/search/?api=1&query=Wat+Arun+Bangkok",
-     "notes": "ליל הירח המלא של החודש הירחי ה-12 · לפי לוח השנה התאילנדי יום שלישי 24/11 (ขึ้น 15 ค่ำ เดือน 12). אתרים באנגלית כותבים 25/11 — זו טעות",
-     "id": "s_2_8",
+     "link": "",
+     "notes": "קצב 15 דק׳ · לפי מאמץ, לא לפי השעון · מים ומלחים לפני ואחרי",
+     "id": "s_w_1124",
      "done": false,
-     "wiki": "Loy Krathong",
      "priceEstimate": {
       "kind": "no-extra",
       "basis": "לא הוקצה חיוב נפרד לפעולה הזאת; חיובים כלולים מופיעים בחבילה או בהזמנה.",
       "lowFactor": 1,
       "highFactor": 1,
       "sourceUrl": "",
-      "checked": "2026-09-14"
+      "checked": "2026-10-31"
      },
      "managed": true
     },
     {
-     "time": "22:30",
-     "dur": "0:40",
-     "act": "גראב חזרה",
-     "loc": "ראטנקוסין → סוכומוויט",
-     "cat": "תחבורה",
+     "time": "08:30",
+     "dur": "0:45",
+     "act": "ארוחת בוקר",
+     "loc": "צ׳יאנג מאי",
+     "cat": "אוכל",
      "baht": 300,
      "status": "משלמים במקום",
      "link": "",
-     "notes": "תעריף מוגבר בליל החג",
-     "id": "s_2_9",
+     "notes": "",
+     "id": "s_c2_0",
      "done": false,
      "priceEstimate": {
       "kind": "estimate",
@@ -801,103 +466,209 @@ window.SHARED_SEED = {
       "lowFactor": 0.8,
       "highFactor": 1.3,
       "sourceUrl": "",
-      "checked": "2026-09-14"
-     }
+      "checked": "2026-10-31"
+     },
+     "managed": true
+    },
+    {
+     "time": "09:30",
+     "dur": "3:00",
+     "act": "העיר העתיקה — ואט פרה סינג וואט צ׳די לואנג",
+     "loc": "העיר העתיקה",
+     "cat": "אטרקציות",
+     "baht": 200,
+     "status": "משלמים במקום",
+     "link": "",
+     "notes": "בהליכה · כתפיים וברכיים מכוסות · ואט צ׳די לואנג ฿100 לאדם",
+     "id": "s_c2_1",
+     "done": false,
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "דמי כניסה למקדשים לשניים.",
+      "lowFactor": 1,
+      "highFactor": 1.5,
+      "sourceUrl": "",
+      "checked": "2026-10-31"
+     },
+     "managed": true,
+     "wiki": "Wat Chedi Luang"
+    },
+    {
+     "time": "12:45",
+     "dur": "1:00",
+     "act": "צהריים — קאו סוי",
+     "loc": "העיר העתיקה",
+     "cat": "אוכל",
+     "baht": 300,
+     "status": "משלמים במקום",
+     "link": "",
+     "notes": "",
+     "id": "s_c2_2",
+     "done": false,
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
+      "lowFactor": 0.8,
+      "highFactor": 1.3,
+      "sourceUrl": "",
+      "checked": "2026-10-31"
+     },
+     "managed": true
+    },
+    {
+     "time": "14:00",
+     "dur": "2:30",
+     "act": "מנוחה ומסאז׳",
+     "loc": "צ׳יאנג מאי",
+     "cat": "אטרקציות",
+     "baht": 800,
+     "status": "משלמים במקום",
+     "link": "",
+     "notes": "לפני ערב ארוך",
+     "id": "s_c2_3",
+     "done": false,
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
+      "lowFactor": 0.8,
+      "highFactor": 1.3,
+      "sourceUrl": "",
+      "checked": "2026-10-31"
+     },
+     "managed": true
+    },
+    {
+     "time": "17:00",
+     "dur": "0:30",
+     "act": "קניית קראתונגים ופנסים",
+     "loc": "צ׳יאנג מאי",
+     "cat": "אטרקציות",
+     "baht": 200,
+     "status": "משלמים במקום",
+     "link": "",
+     "notes": "קראתונג מבננה ופרחים, לא קלקר",
+     "id": "s_c2_4",
+     "done": false,
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
+      "lowFactor": 0.8,
+      "highFactor": 1.3,
+      "sourceUrl": "",
+      "checked": "2026-10-31"
+     },
+     "managed": true
+    },
+    {
+     "time": "17:30",
+     "dur": "2:00",
+     "act": "ארוחת ערב — אוכל רחוב ליד הנהר",
+     "loc": "נהר הפינג",
+     "cat": "אוכל",
+     "baht": 600,
+     "status": "משלמים במקום",
+     "link": "",
+     "notes": "",
+     "id": "s_c2_5",
+     "done": false,
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
+      "lowFactor": 0.8,
+      "highFactor": 1.3,
+      "sourceUrl": "",
+      "checked": "2026-10-31"
+     },
+     "managed": true
+    },
+    {
+     "time": "19:30",
+     "dur": "3:00",
+     "act": "לוי קראתונג ויי פנג — נהר הפינג, גשר נאוורט ושער תא פאה",
+     "loc": "נהר הפינג",
+     "cat": "אטרקציות",
+     "baht": null,
+     "status": "משלמים במקום",
+     "link": "",
+     "notes": "בחגיגה החינמית בעיר: קראתונגים בנהר, תהלוכות ואלפי פנסים · 24/11 הוא הלילה של לוי קראתונג השנה; חלק מהאתרים כותבים 25/11 — זה ערב החג השני · שחרור הפנסים ההמוני הוא באירועים מחוץ לעיר בכרטיסים — יקרים ונגמרים מוקדם · עמוס מאוד: ללכת ברגל",
+     "id": "s_c2_6",
+     "done": false,
+     "priceEstimate": {
+      "kind": "no-extra",
+      "basis": "לא הוקצה חיוב נפרד לפעולה הזאת; חיובים כלולים מופיעים בחבילה או בהזמנה.",
+      "lowFactor": 1,
+      "highFactor": 1,
+      "sourceUrl": "",
+      "checked": "2026-10-31"
+     },
+     "managed": true,
+     "wiki": "Yi Peng"
     },
     {
      "time": "",
      "dur": "",
-     "act": "לינה — Montraj Coach Sukhumvit",
-     "loc": "סוכומוויט",
+     "act": "לינה — צ׳יאנג מאי, ליד הנהר או שער תא פאה",
+     "loc": "צ׳יאנג מאי",
      "cat": "לינה",
-     "baht": 2723.29,
-     "status": "מוזמן",
-     "link": "https://reservation.thecoachbangkok.com/propertyibe2/booking-management?propertyId=890&onlineId=4&mobileredirect=false&accesscode=Member&lang=en",
-     "notes": "",
-     "id": "s_2_10",
+     "baht": 17418,
+     "status": "להזמין",
+     "link": "https://www.booking.com/hotel/th/centara-riverside-hotel-chiang-mai.html?checkin=2026-11-23&checkout=2026-11-26&group_adults=2",
+     "notes": "מחירי החג: Centara Riverside (8.5 על 804, על נהר הפינג — החגיגה מתחת למלון) ₪4,693 לשלושה לילות · מלונות בעיר העתיקה ב-₪6,000–9,500 · להזמין מוקדם, ולחפש גם גסטהאוסים בעיר העתיקה",
+     "id": "s_c2_stay",
      "done": false,
      "priceEstimate": {
-      "kind": "booking",
-      "basis": "המחיר מההזמנה השמורה; נספר פעם אחת בלבד ומחולק בין לילות הלינה.",
-      "lowFactor": 1,
-      "highFactor": 1,
-      "sourceUrl": "",
-      "checked": "2026-09-28",
-      "booking": {
-       "category": "accommodation",
-       "split": "ratio",
-       "key": "bangkok",
-       "match": "Montraj Coach",
-       "rows": 3,
-       "totalThb": 8169.87
-      }
+      "kind": "published",
+      "basis": "מחיר בבוקינג ל-Centara Riverside, 23–26/11, נבדק 31/10. מחירי חג — יש גם זול יותר.",
+      "lowFactor": 0.45,
+      "highFactor": 1.1,
+      "sourceUrl": "https://www.booking.com/hotel/th/centara-riverside-hotel-chiang-mai.html",
+      "checked": "2026-10-31"
      },
      "managed": true
     }
    ],
-   "summary": "תעלות, ואט ארון, ואט פו, הארמון והר הזהב — ובלילה לוי קראתונג",
+   "summary": "העיר העתיקה, ובלילה לוי קראתונג על נהר הפינג",
    "id": "day_2"
   },
   {
    "day": 3,
    "date": "2026-11-25",
    "dow": "ד׳",
-   "dest": "בנגקוק",
+   "dest": "צ׳יאנג מאי",
    "rows": [
     {
-     "time": "06:40",
-     "dur": "0:20",
-     "act": "גראב לפארק לומפיני",
-     "loc": "סוכומוויט → לומפיני",
-     "cat": "תחבורה",
-     "baht": 120,
-     "status": "משלמים במקום",
-     "link": "https://www.google.com/maps/search/?api=1&query=Lumphini+Park+Bangkok",
-     "notes": "",
-     "id": "s_3_0",
-     "done": false,
-     "priceEstimate": {
-      "kind": "estimate",
-      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
-      "lowFactor": 0.8,
-      "highFactor": 1.3,
-      "sourceUrl": "",
-      "checked": "2026-09-14"
-     }
-    },
-    {
-     "time": "07:00",
-     "dur": "1:30",
-     "act": "פארק לומפיני — התעמלות בוקר",
-     "loc": "Lumphini Park",
-     "cat": "אטרקציות",
+     "time": "06:15",
+     "dur": "0:50",
+     "act": "אימון כוח — תחתון + כתפיים",
+     "loc": "",
+     "cat": "אחר",
      "baht": null,
      "status": "משלמים במקום",
-     "link": "https://www.google.com/maps/search/?api=1&query=Lumphini+Park+Bangkok",
-     "notes": "חינם · טאי צ׳י עם הזקנים, וורנים באגם",
-     "id": "s_3_1",
+     "link": "",
+     "notes": "1. סקוואט (תיק על הגב / משקל גוף) + הרמות עקב על רגל אחת · 2. דדליפט רומני על רגל אחת + Y-T-W בשכיבה על הבטן · 3. בולגרי (רגל על מיטה או ספסל) + לאנג׳ים בהליכה + פייק פוש-אפ · 4. סיום: הרחקות לצדדים עם בקבוקי מים או תיק + בטן (P4P)",
+     "id": "s_w_1125",
      "done": false,
-     "wiki": "Lumphini Park",
      "priceEstimate": {
       "kind": "no-extra",
       "basis": "לא הוקצה חיוב נפרד לפעולה הזאת; חיובים כלולים מופיעים בחבילה או בהזמנה.",
       "lowFactor": 1,
       "highFactor": 1,
       "sourceUrl": "",
-      "checked": "2026-09-14"
-     }
+      "checked": "2026-10-31"
+     },
+     "managed": true
     },
     {
-     "time": "08:40",
-     "dur": "0:35",
+     "time": "07:15",
+     "dur": "0:30",
      "act": "ארוחת בוקר",
-     "loc": "ליד הפארק",
+     "loc": "צ׳יאנג מאי",
      "cat": "אוכל",
      "baht": 300,
      "status": "משלמים במקום",
      "link": "",
      "notes": "",
-     "id": "s_3_2",
+     "id": "s_c3_0",
      "done": false,
      "priceEstimate": {
       "kind": "estimate",
@@ -905,20 +676,43 @@ window.SHARED_SEED = {
       "lowFactor": 0.8,
       "highFactor": 1.3,
       "sourceUrl": "",
-      "checked": "2026-09-14"
-     }
+      "checked": "2026-10-31"
+     },
+     "managed": true
     },
     {
-     "time": "09:20",
+     "time": "08:00",
+     "dur": "5:00",
+     "act": "מקלט פילים — חצי יום, בלי רכיבה",
+     "loc": "מחוץ לעיר",
+     "cat": "אטרקציות",
+     "baht": 3600,
+     "status": "להזמין",
+     "link": "",
+     "notes": "כ-฿1,500–2,000 לאדם עם איסוף · לבחור מקום שלא מציע רכיבה ולא מופעים",
+     "id": "s_c3_1",
+     "done": false,
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "חצי יום במקלט פילים לשניים.",
+      "lowFactor": 0.8,
+      "highFactor": 1.4,
+      "sourceUrl": "",
+      "checked": "2026-10-31"
+     },
+     "managed": true
+    },
+    {
+     "time": "13:30",
      "dur": "1:00",
-     "act": "גראב ל-ISB בפאקרט",
-     "loc": "בנגקוק → פאקרט",
-     "cat": "תחבורה",
-     "baht": 500,
+     "act": "צהריים",
+     "loc": "צ׳יאנג מאי",
+     "cat": "אוכל",
+     "baht": 300,
      "status": "משלמים במקום",
-     "link": "https://www.google.com/maps/search/?api=1&query=International+School+Bangkok+Pakkret",
-     "notes": "40–60 דקות, תלוי בפקקים",
-     "id": "s_3_3",
+     "link": "",
+     "notes": "",
+     "id": "s_c3_2",
      "done": false,
      "priceEstimate": {
       "kind": "estimate",
@@ -926,151 +720,44 @@ window.SHARED_SEED = {
       "lowFactor": 0.8,
       "highFactor": 1.3,
       "sourceUrl": "",
-      "checked": "2026-09-14"
-     }
+      "checked": "2026-10-31"
+     },
+     "managed": true
     },
     {
-     "time": "10:30",
+     "time": "16:00",
      "dur": "2:30",
-     "act": "ISB — ביקור בוגרים",
-     "loc": "פאקרט",
+     "act": "דוי סותפ — המקדש על ההר בשקיעה",
+     "loc": "דוי סותפ",
      "cat": "אטרקציות",
-     "baht": null,
-     "status": "להזמין",
-     "link": "https://www.isb.ac.th/community/alumni",
-     "notes": "isbalum@isb.ac.th לפחות יומיים מראש · נסגר 14:25 · תעודה מזהה בשער · לבדוק חופשת חג ההודיה ב-26/11",
-     "id": "s_3_4",
-     "done": false,
-     "wiki": "International School Bangkok",
-     "priceEstimate": {
-      "kind": "no-extra",
-      "basis": "לא הוקצה חיוב נפרד לפעולה הזאת; חיובים כלולים מופיעים בחבילה או בהזמנה.",
-      "lowFactor": 1,
-      "highFactor": 1,
-      "sourceUrl": "",
-      "checked": "2026-09-14"
-     }
-    },
-    {
-     "time": "13:10",
-     "dur": "2:00",
-     "act": "צהריים וקניון סנטרל צ׳אנגוואטנה",
-     "loc": "Central Chaengwattana",
-     "cat": "אוכל",
-     "baht": 500,
+     "baht": 600,
      "status": "משלמים במקום",
      "link": "",
-     "notes": "כ-15 דקות מ-ISB · קניון ענק עם פודקורט · אפשר להתקרר אחרי הבוקר",
-     "id": "s_3_5",
+     "notes": "סונגתאו אדום או גראב, כ-40 דק׳ · ฿30 לאדם · 300 מדרגות או רכבל",
+     "id": "s_c3_3",
      "done": false,
      "priceEstimate": {
       "kind": "estimate",
-      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
+      "basis": "נסיעה וכניסה לשניים.",
       "lowFactor": 0.8,
-      "highFactor": 1.3,
+      "highFactor": 1.5,
       "sourceUrl": "",
-      "checked": "2026-09-14"
+      "checked": "2026-10-31"
      },
-     "managed": true
+     "managed": true,
+     "wiki": "Wat Phra That Doi Suthep"
     },
     {
-     "time": "15:15",
-     "dur": "1:00",
-     "act": "גראב חזרה למרכז",
-     "loc": "צ׳אנגוואטנה → סוכומוויט",
-     "cat": "תחבורה",
-     "baht": 500,
-     "status": "משלמים במקום",
-     "link": "",
-     "notes": "40–60 דקות, תלוי בפקקים",
-     "id": "s_3_6",
-     "done": false,
-     "priceEstimate": {
-      "kind": "estimate",
-      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
-      "lowFactor": 0.8,
-      "highFactor": 1.3,
-      "sourceUrl": "",
-      "checked": "2026-09-14"
-     },
-     "managed": true
-    },
-    {
-     "time": "16:25",
-     "dur": "1:00",
-     "act": "מסאז׳ תאילנדי",
-     "loc": "סוכומוויט",
-     "cat": "אטרקציות",
-     "baht": 700,
-     "status": "משלמים במקום",
-     "link": "",
-     "notes": "שעה לפני היציאה לרג׳אדמנרן",
-     "id": "s_3_7",
-     "done": false,
-     "priceEstimate": {
-      "kind": "estimate",
-      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
-      "lowFactor": 0.8,
-      "highFactor": 1.3,
-      "sourceUrl": "",
-      "checked": "2026-09-14"
-     },
-     "managed": true
-    },
-    {
-     "time": "17:40",
-     "dur": "0:30",
-     "act": "גראב לרג׳אדמנרן",
-     "loc": "סוכומוויט → רג׳אדמנרן",
-     "cat": "תחבורה",
-     "baht": 200,
-     "status": "אופציונלי",
-     "link": "",
-     "notes": "",
-     "id": "s_3_8",
-     "done": false,
-     "priceEstimate": {
-      "kind": "estimate",
-      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
-      "lowFactor": 0.8,
-      "highFactor": 1.3,
-      "sourceUrl": "",
-      "checked": "2026-09-14"
-     }
-    },
-    {
-     "time": "18:15",
-     "dur": "3:00",
-     "act": "מואיי תאי באצטדיון רג׳אדמנרן",
-     "loc": "Rajadamnern Stadium",
-     "cat": "אטרקציות",
-     "baht": 3000,
-     "status": "להזמין",
-     "link": "https://rajadamnern.com/tickets/",
-     "notes": "קרבות יום רביעי מ-18:00 · מחלקה שלישית ฿1,000 לאדם · הכנה למחנה שמתחיל מחר",
-     "id": "s_3_9",
-     "done": false,
-     "wiki": "Rajadamnern Stadium",
-     "priceEstimate": {
-      "kind": "estimate",
-      "basis": "תקציב לשני כרטיסים; המחיר משתנה לפי אירוע ומושב. אינו מחיר מאושר ל-25/11.",
-      "lowFactor": 0.6666666666666666,
-      "highFactor": 1.3333333333333333,
-      "sourceUrl": "https://rajadamnern.com/tickets/",
-      "checked": "2026-09-14"
-     }
-    },
-    {
-     "time": "21:30",
+     "time": "19:00",
      "dur": "1:15",
-     "act": "שוק לילה וארוחת ערב",
-     "loc": "בנגקוק",
+     "act": "ארוחת ערב",
+     "loc": "צ׳יאנג מאי",
      "cat": "אוכל",
-     "baht": 800,
+     "baht": 600,
      "status": "משלמים במקום",
      "link": "",
      "notes": "",
-     "id": "s_3_10",
+     "id": "s_c3_4",
      "done": false,
      "priceEstimate": {
       "kind": "estimate",
@@ -1078,20 +765,21 @@ window.SHARED_SEED = {
       "lowFactor": 0.8,
       "highFactor": 1.3,
       "sourceUrl": "",
-      "checked": "2026-09-14"
-     }
+      "checked": "2026-10-31"
+     },
+     "managed": true
     },
     {
-     "time": "22:50",
-     "dur": "0:25",
-     "act": "גראב חזרה",
-     "loc": "→ סוכומוויט",
-     "cat": "תחבורה",
-     "baht": 180,
+     "time": "20:30",
+     "dur": "2:00",
+     "act": "שוק הלילה ותהלוכת יי פנג",
+     "loc": "שער תא פאה",
+     "cat": "אטרקציות",
+     "baht": 500,
      "status": "משלמים במקום",
      "link": "",
-     "notes": "",
-     "id": "s_3_11",
+     "notes": "התהלוכה הגדולה בדרך כלל באחד מערבי החג — לבדוק בתוכנית העירונית · מחר טסים, לא מאוחר",
+     "id": "s_c3_night",
      "done": false,
      "priceEstimate": {
       "kind": "estimate",
@@ -1099,64 +787,34 @@ window.SHARED_SEED = {
       "lowFactor": 0.8,
       "highFactor": 1.3,
       "sourceUrl": "",
-      "checked": "2026-09-14"
-     }
+      "checked": "2026-10-31"
+     },
+     "managed": true
     },
     {
      "time": "",
      "dur": "",
-     "act": "לינה — Montraj Coach Sukhumvit",
-     "loc": "סוכומוויט",
+     "act": "לינה — צ׳יאנג מאי, ליד הנהר או שער תא פאה",
+     "loc": "צ׳יאנג מאי",
      "cat": "לינה",
-     "baht": 2723.29,
-     "status": "מוזמן",
-     "link": "https://reservation.thecoachbangkok.com/propertyibe2/booking-management?propertyId=890&onlineId=4&mobileredirect=false&accesscode=Member&lang=en",
-     "notes": "",
-     "id": "s_3_12",
+     "baht": 17418,
+     "status": "להזמין",
+     "link": "https://www.booking.com/hotel/th/centara-riverside-hotel-chiang-mai.html?checkin=2026-11-23&checkout=2026-11-26&group_adults=2",
+     "notes": "מחירי החג: Centara Riverside (8.5 על 804, על נהר הפינג — החגיגה מתחת למלון) ₪4,693 לשלושה לילות · מלונות בעיר העתיקה ב-₪6,000–9,500 · להזמין מוקדם, ולחפש גם גסטהאוסים בעיר העתיקה",
+     "id": "s_c3_stay",
      "done": false,
      "priceEstimate": {
-      "kind": "booking",
-      "basis": "המחיר מההזמנה השמורה; נספר פעם אחת בלבד ומחולק בין לילות הלינה.",
-      "lowFactor": 1,
-      "highFactor": 1,
-      "sourceUrl": "",
-      "checked": "2026-09-28",
-      "booking": {
-       "category": "accommodation",
-       "split": "ratio",
-       "key": "bangkok",
-       "match": "Montraj Coach",
-       "rows": 3,
-       "totalThb": 8169.87
-      }
+      "kind": "published",
+      "basis": "מחיר בבוקינג ל-Centara Riverside, 23–26/11, נבדק 31/10. מחירי חג — יש גם זול יותר.",
+      "lowFactor": 0.45,
+      "highFactor": 1.1,
+      "sourceUrl": "https://www.booking.com/hotel/th/centara-riverside-hotel-chiang-mai.html",
+      "checked": "2026-10-31"
      },
      "managed": true
-    },
-    {
-     "id": "s_3_dream",
-     "time": "",
-     "dur": "7:00",
-     "act": "רעיון: יום בדרים וורלד",
-     "loc": "רנגסיט, צפונית לבנגקוק",
-     "cat": "אטרקציות",
-     "baht": 2400,
-     "status": "אופציונלי",
-     "link": "https://www.google.com/maps/search/?api=1&query=Dream+World+Bangkok",
-     "wiki": "Dream World (amusement park)",
-     "done": false,
-     "notes": "฿1,200 לאדם · יום שלם, ועוד שעה נסיעה לכל כיוון · לא נכנס בשלושת ימי בנגקוק בלי לוותר על ISB או על רג׳אדמנרן — להחליט מראש, לא באותו בוקר",
-     "managed": true,
-     "priceEstimate": {
-      "kind": "estimate",
-      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
-      "lowFactor": 0.8,
-      "highFactor": 1.3,
-      "sourceUrl": "",
-      "checked": "2026-09-14"
-     }
     }
    ],
-   "summary": "לומפיני, ISB, סנטרל צ׳אנגוואטנה, ומואיי תאי",
+   "summary": "מקלט פילים, דוי סותפ בשקיעה, ותהלוכת יי פנג",
    "id": "day_3"
   },
   {
@@ -1166,7 +824,7 @@ window.SHARED_SEED = {
    "dest": "קו יאו נוי",
    "rows": [
     {
-     "time": "05:30",
+     "time": "07:15",
      "dur": "0:30",
      "act": "השכמה ואריזה",
      "loc": "המלון",
@@ -1174,7 +832,7 @@ window.SHARED_SEED = {
      "baht": null,
      "status": "משלמים במקום",
      "link": "",
-     "notes": "שעה שלמה יותר של שינה מהתכנון הישן · הטיסה הוזזה ל-08:00 כדי לתפוס את סירת 11:00 ולהגיע לאימון ב-16:00",
+     "notes": "",
      "id": "s_4_0",
      "done": false,
      "priceEstimate": {
@@ -1188,15 +846,15 @@ window.SHARED_SEED = {
      "managed": true
     },
     {
-     "time": "06:00",
-     "dur": "0:45",
-     "act": "גראב לסובארנבומי",
-     "loc": "סוכומוויט → BKK",
+     "time": "08:00",
+     "dur": "0:20",
+     "act": "גראב לשדה בצ׳יאנג מאי",
+     "loc": "העיר → CNX",
      "cat": "תחבורה",
-     "baht": 400,
+     "baht": 200,
      "status": "משלמים במקום",
      "link": "",
-     "notes": "לפני שהפקקים מתחילים",
+     "notes": "",
      "id": "s_4_1",
      "done": false,
      "priceEstimate": {
@@ -1210,7 +868,7 @@ window.SHARED_SEED = {
      "managed": true
     },
     {
-     "time": "06:50",
+     "time": "08:30",
      "dur": "1:00",
      "act": "צ׳ק-אין, כבודה ובידוק",
      "loc": "טרמינל יוצאים",
@@ -1232,30 +890,30 @@ window.SHARED_SEED = {
      "managed": true
     },
     {
-     "time": "08:00",
-     "dur": "1:25",
-     "act": "Thai Airways TG203 · בנגקוק → פוקט",
-     "loc": "סובארנבומי → HKT",
+     "time": "09:30",
+     "dur": "2:00",
+     "act": "טיסה · צ׳יאנג מאי → פוקט",
+     "loc": "CNX → HKT",
      "cat": "תחבורה",
-     "baht": 5390,
+     "baht": 7000,
      "status": "להזמין",
      "link": "https://www.thaiairways.com/",
-     "notes": "Thai Airways · ישירה · 23 ק״ג לכל אחד, ארוחה ובחירת מושב · נבדק 21/09/2026 ב-Kiwi",
+     "notes": "בחיפוש לא מצאתי טיסה ישירה לתאריך — לבדוק באתר של Thai AirAsia, שטסה בקו הזה. אחרת עם החלפה בבנגקוק, כארבע שעות · צריך לנחות עד 13:00 כדי להספיק את האימון של 16:00",
      "id": "s_4_3",
      "done": false,
      "priceEstimate": {
       "kind": "estimate",
-      "basis": "מחיר שנבדק לשני כרטיסים עם כבודה לתאריך הנסיעה.",
-      "lowFactor": 0.95,
-      "highFactor": 1.25,
-      "sourceUrl": "https://www.kiwi.com/",
-      "checked": "2026-09-21",
+      "basis": "אומדן לשניים, ישירה או עם החלפה.",
+      "lowFactor": 0.6,
+      "highFactor": 1.6,
+      "sourceUrl": "",
+      "checked": "2026-10-31",
       "category": "flights"
      },
      "managed": true
     },
     {
-     "time": "09:25",
+     "time": "11:30",
      "dur": "0:35",
      "act": "נחיתה וכבודה",
      "loc": "פוקט",
@@ -1277,7 +935,7 @@ window.SHARED_SEED = {
      "managed": true
     },
     {
-     "time": "10:00",
+     "time": "12:00",
      "dur": "0:30",
      "act": "מונית לרציף באנג רונג",
      "loc": "HKT → Bang Rong Pier",
@@ -1299,7 +957,7 @@ window.SHARED_SEED = {
      "managed": true
     },
     {
-     "time": "10:30",
+     "time": "12:30",
      "dur": "0:30",
      "act": "המתנה ברציף וכרטיסים",
      "loc": "באנג רונג",
@@ -1321,7 +979,7 @@ window.SHARED_SEED = {
      "managed": true
     },
     {
-     "time": "11:00",
+     "time": "13:00",
      "dur": "0:35",
      "act": "ספידבוט לקו יאו נוי",
      "loc": "באנג רונג → רציף מאנו",
@@ -1343,7 +1001,7 @@ window.SHARED_SEED = {
      "managed": true
     },
     {
-     "time": "11:40",
+     "time": "13:40",
      "dur": "0:20",
      "act": "מונית עצמאית מרציף מאנו למחנה",
      "loc": "קו יאו נוי",
@@ -1365,7 +1023,7 @@ window.SHARED_SEED = {
      "managed": true
     },
     {
-     "time": "12:00",
+     "time": "14:00",
      "dur": "0:30",
      "act": "צ׳ק-אין במחנה",
      "loc": "KYN Phoenix",
@@ -1387,31 +1045,31 @@ window.SHARED_SEED = {
      "managed": true
     },
     {
-     "time": "12:45",
-     "dur": "1:00",
-     "act": "צהריים במחנה",
+     "time": "14:30",
+     "dur": "0:45",
+     "act": "צהריים מאוחרות",
      "loc": "KYN Phoenix",
      "cat": "אוכל",
-     "baht": 0,
-     "status": "כלול בחבילה",
+     "baht": 300,
+     "status": "משלמים במקום",
      "link": "",
      "notes": "ארוחות במחנה כלולות בחבילת הלינה והאימונים; שעות וסוגי הארוחות לתיאום עם המחנה.",
      "id": "s_4_10",
      "done": false,
      "priceEstimate": {
-      "kind": "included",
-      "basis": "כלול במחיר ההזמנה או החבילה; אין חיוב נוסף באומדן.",
-      "lowFactor": 1,
-      "highFactor": 1,
+      "kind": "estimate",
+      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
+      "lowFactor": 0.8,
+      "highFactor": 1.3,
       "sourceUrl": "",
-      "checked": "2026-09-14"
+      "checked": "2026-10-31"
      },
      "managed": true
     },
     {
-     "time": "14:00",
-     "dur": "2:00",
-     "act": "שינה אמיתית",
+     "time": "15:15",
+     "dur": "0:45",
+     "act": "מנוחה",
      "loc": "המחנה",
      "cat": "אחר",
      "baht": null,
@@ -1439,7 +1097,7 @@ window.SHARED_SEED = {
      "baht": 0,
      "status": "כלול בחבילה",
      "link": "",
-     "notes": "אושר ליום ההגעה ב-16:00: דגש על טכניקה ללא כושר עצים; אימון מלא ראשון למחרת בבוקר. המחנה אישר אימוני קבוצה ב-08:00 וב-17:00. איתי: התאמת עמידה ובעיטות למואיי תאי, טיפים, מרפקים וקלינץ׳; טליה: יסודות למתחילה. ניתן להזמין אימון פרטי משותף; מחיר ומועד טרם נקבעו.",
+     "notes": "מחליף את אימון העליון של חמישי",
      "id": "s_4_12",
      "done": false,
      "wiki": "Muay Thai",
@@ -1504,7 +1162,7 @@ window.SHARED_SEED = {
      "managed": true
     }
    ],
-   "summary": "דרומה, ואז מחוץ למפה",
+   "summary": "מהצפון לאנדמן",
    "id": "day_4"
   },
   {
@@ -1513,6 +1171,28 @@ window.SHARED_SEED = {
    "dow": "ו׳",
    "dest": "קו יאו נוי",
    "rows": [
+    {
+     "time": "06:00",
+     "dur": "0:50",
+     "act": "ריצה ארוכה קלה",
+     "loc": "",
+     "cat": "אחר",
+     "baht": null,
+     "status": "משלמים במקום",
+     "link": "",
+     "notes": "8 ק״מ · באימון של 08:00 ללכת קל · קלה, לפי מאמץ · מים ומלחים לפני ואחרי",
+     "id": "s_w_1127",
+     "done": false,
+     "priceEstimate": {
+      "kind": "no-extra",
+      "basis": "לא הוקצה חיוב נפרד לפעולה הזאת; חיובים כלולים מופיעים בחבילה או בהזמנה.",
+      "lowFactor": 1,
+      "highFactor": 1,
+      "sourceUrl": "",
+      "checked": "2026-10-31"
+     },
+     "managed": true
+    },
     {
      "time": "06:45",
      "dur": "0:30",
@@ -1572,6 +1252,28 @@ window.SHARED_SEED = {
       "basis": "כלול במחיר ההזמנה או החבילה; אין חיוב נוסף באומדן.",
       "lowFactor": 1,
       "highFactor": 1,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
+    },
+    {
+     "id": "s_5_moto",
+     "time": "10:45",
+     "dur": "0:30",
+     "act": "השכרת קטנוע — ליומיים",
+     "loc": "קו יאו נוי, ליד הרציף",
+     "cat": "תחבורה",
+     "baht": 500,
+     "status": "משלמים במקום",
+     "link": "",
+     "done": false,
+     "notes": "฿250 ליום · שתי קסדות — גם למי שמאחור, זה חוק ונאכף · לבקש 125cc ומעלה, 110 מתקשה בשניים בעלייה · פיקדון במזומן ฿2,000–3,000, לא להשאיר דרכון · לצלם את הקטנוע לפני שיוצאים",
+     "managed": true,
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
+      "lowFactor": 0.8,
+      "highFactor": 1.3,
       "sourceUrl": "",
       "checked": "2026-09-14"
      }
@@ -1710,28 +1412,6 @@ window.SHARED_SEED = {
       }
      },
      "managed": true
-    },
-    {
-     "id": "s_5_moto",
-     "time": "10:45",
-     "dur": "0:30",
-     "act": "השכרת קטנוע — ליומיים",
-     "loc": "קו יאו נוי, ליד הרציף",
-     "cat": "תחבורה",
-     "baht": 500,
-     "status": "משלמים במקום",
-     "link": "",
-     "done": false,
-     "notes": "฿250 ליום · שתי קסדות — גם למי שמאחור, זה חוק ונאכף · לבקש 125cc ומעלה, 110 מתקשה בשניים בעלייה · פיקדון במזומן ฿2,000–3,000, לא להשאיר דרכון · לצלם את הקטנוע לפני שיוצאים",
-     "managed": true,
-     "priceEstimate": {
-      "kind": "estimate",
-      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
-      "lowFactor": 0.8,
-      "highFactor": 1.3,
-      "sourceUrl": "",
-      "checked": "2026-09-14"
-     }
     },
     {
      "id": "s_5_fuel",
@@ -2049,6 +1729,28 @@ window.SHARED_SEED = {
      "managed": true
     },
     {
+     "time": "08:15",
+     "dur": "1:00",
+     "act": "אימון כוח — תחתון + כתפיים",
+     "loc": "",
+     "cat": "אחר",
+     "baht": null,
+     "status": "משלמים במקום",
+     "link": "",
+     "notes": "אין אימון במחנה ביום ראשון · 1. סקוואט (תיק על הגב / משקל גוף) + הרמות עקב על רגל אחת · 2. דדליפט רומני על רגל אחת + Y-T-W בשכיבה על הבטן · 3. בולגרי (רגל על מיטה או ספסל) + לאנג׳ים בהליכה + פייק פוש-אפ · 4. סיום: הרחקות לצדדים עם בקבוקי מים או תיק + בטן (P4P)",
+     "id": "s_w_1129",
+     "done": false,
+     "priceEstimate": {
+      "kind": "no-extra",
+      "basis": "לא הוקצה חיוב נפרד לפעולה הזאת; חיובים כלולים מופיעים בחבילה או בהזמנה.",
+      "lowFactor": 1,
+      "highFactor": 1,
+      "sourceUrl": "",
+      "checked": "2026-10-31"
+     },
+     "managed": true
+    },
+    {
      "time": "10:00",
      "dur": "0:30",
      "act": "מקלחת, אריזה וצ׳ק-אאוט",
@@ -2149,6 +1851,28 @@ window.SHARED_SEED = {
       "basis": "לא הוקצה חיוב נפרד לפעולה הזאת; חיובים כלולים מופיעים בחבילה או בהזמנה.",
       "lowFactor": 1,
       "highFactor": 1,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
+    },
+    {
+     "id": "s_7_moto",
+     "time": "14:45",
+     "dur": "0:30",
+     "act": "השכרת קטנוע באאו נאנג — ליומיים",
+     "loc": "אאו נאנג",
+     "cat": "תחבורה",
+     "baht": 500,
+     "status": "משלמים במקום",
+     "link": "",
+     "done": false,
+     "notes": "฿250–300 ליום · מחר ריילאי (סירה בלבד, הקטנוע חונה) · הכביש לקראבי מהיר — בשניים מרחק הבלימה ארוך יותר, להשאיר פער",
+     "managed": true,
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
+      "lowFactor": 0.8,
+      "highFactor": 1.3,
       "sourceUrl": "",
       "checked": "2026-09-14"
      }
@@ -2266,28 +1990,6 @@ window.SHARED_SEED = {
        "totalIls": 1839,
        "rows": 3
       }
-     }
-    },
-    {
-     "id": "s_7_moto",
-     "time": "14:45",
-     "dur": "0:30",
-     "act": "השכרת קטנוע באאו נאנג — ליומיים",
-     "loc": "אאו נאנג",
-     "cat": "תחבורה",
-     "baht": 500,
-     "status": "משלמים במקום",
-     "link": "",
-     "done": false,
-     "notes": "฿250–300 ליום · מחר ריילאי (סירה בלבד, הקטנוע חונה) · הכביש לקראבי מהיר — בשניים מרחק הבלימה ארוך יותר, להשאיר פער",
-     "managed": true,
-     "priceEstimate": {
-      "kind": "estimate",
-      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
-      "lowFactor": 0.8,
-      "highFactor": 1.3,
-      "sourceUrl": "",
-      "checked": "2026-09-14"
      }
     }
    ],
@@ -2448,6 +2150,28 @@ window.SHARED_SEED = {
       "sourceUrl": "https://www.realrocksclimbing.com/group-course/",
       "checked": "2026-09-14"
      }
+    },
+    {
+     "time": "18:15",
+     "dur": "0:45",
+     "act": "אימון כוח — עליון",
+     "loc": "",
+     "cat": "אחר",
+     "baht": null,
+     "status": "אופציונלי",
+     "link": "",
+     "notes": "אחרי הטיפוס ולפני ארוחת הערב — אם הידיים גמורות, מוותרים · 1. שכיבות סמיכה + מתח / חתירה הפוכה מתחת לשולחן · 2. שכיבות סמיכה בשיפוע (רגליים על מיטה) + חתירה עם תיק · 3. מקבילים על כיסא או ספסל + פולאובר עם תיק · 4. כפיפת מרפקים עם תיק + Bench Dips · 5. פוש-אפ יהלום + Superman Pulls",
+     "id": "s_w_1130",
+     "done": false,
+     "priceEstimate": {
+      "kind": "no-extra",
+      "basis": "לא הוקצה חיוב נפרד לפעולה הזאת; חיובים כלולים מופיעים בחבילה או בהזמנה.",
+      "lowFactor": 1,
+      "highFactor": 1,
+      "sourceUrl": "",
+      "checked": "2026-10-31"
+     },
+     "managed": true
     },
     {
      "time": "19:45",
@@ -2638,6 +2362,28 @@ window.SHARED_SEED = {
      }
     },
     {
+     "time": "17:00",
+     "dur": "0:40",
+     "act": "ריצה — אינטרוולים 6×400 מ׳",
+     "loc": "",
+     "cat": "אחר",
+     "baht": null,
+     "status": "משלמים במקום",
+     "link": "",
+     "notes": "אחרי הלילה הגדול — אחר הצהריים, כשמתקרר; אם אין כוח, זו הריצה שמוותרים עליה · לפי מאמץ — בלחות הקצב איטי ב-20–40 שנ׳ לק״מ, וזה בסדר · מים ומלחים לפני ואחרי",
+     "id": "s_w_1201",
+     "done": false,
+     "priceEstimate": {
+      "kind": "no-extra",
+      "basis": "לא הוקצה חיוב נפרד לפעולה הזאת; חיובים כלולים מופיעים בחבילה או בהזמנה.",
+      "lowFactor": 1,
+      "highFactor": 1,
+      "sourceUrl": "",
+      "checked": "2026-10-31"
+     },
+     "managed": true
+    },
+    {
      "time": "19:30",
      "dur": "1:45",
      "act": "ארוחת ערב ושתייה על הרצועה",
@@ -2699,6 +2445,28 @@ window.SHARED_SEED = {
    "summary": "יום רביעי באאו נאנג — פי פי ביום אחד, או כלום",
    "id": "day_10",
    "rows": [
+    {
+     "time": "06:45",
+     "dur": "0:50",
+     "act": "אימון כוח — תחתון + כתפיים",
+     "loc": "",
+     "cat": "אחר",
+     "baht": null,
+     "status": "משלמים במקום",
+     "link": "",
+     "notes": "1. סקוואט (תיק על הגב / משקל גוף) + הרמות עקב על רגל אחת · 2. דדליפט רומני על רגל אחת + Y-T-W בשכיבה על הבטן · 3. בולגרי (רגל על מיטה או ספסל) + לאנג׳ים בהליכה + פייק פוש-אפ · 4. סיום: הרחקות לצדדים עם בקבוקי מים או תיק + בטן (P4P)",
+     "id": "s_w_1202",
+     "done": false,
+     "priceEstimate": {
+      "kind": "no-extra",
+      "basis": "לא הוקצה חיוב נפרד לפעולה הזאת; חיובים כלולים מופיעים בחבילה או בהזמנה.",
+      "lowFactor": 1,
+      "highFactor": 1,
+      "sourceUrl": "",
+      "checked": "2026-10-31"
+     },
+     "managed": true
+    },
     {
      "time": "08:00",
      "dur": "1:00",
@@ -2843,6 +2611,28 @@ window.SHARED_SEED = {
    "id": "day_11",
    "rows": [
     {
+     "time": "07:15",
+     "dur": "0:40",
+     "act": "אימון כוח — עליון",
+     "loc": "",
+     "cat": "אחר",
+     "baht": null,
+     "status": "משלמים במקום",
+     "link": "",
+     "notes": "יום מעבר — הכוח חשוב יותר מהריצה · 1. שכיבות סמיכה + מתח / חתירה הפוכה מתחת לשולחן · 2. שכיבות סמיכה בשיפוע (רגליים על מיטה) + חתירה עם תיק · 3. מקבילים על כיסא או ספסל + פולאובר עם תיק · 4. כפיפת מרפקים עם תיק + Bench Dips · 5. פוש-אפ יהלום + Superman Pulls",
+     "id": "s_w_1203",
+     "done": false,
+     "priceEstimate": {
+      "kind": "no-extra",
+      "basis": "לא הוקצה חיוב נפרד לפעולה הזאת; חיובים כלולים מופיעים בחבילה או בהזמנה.",
+      "lowFactor": 1,
+      "highFactor": 1,
+      "sourceUrl": "",
+      "checked": "2026-10-31"
+     },
+     "managed": true
+    },
+    {
      "time": "08:00",
      "dur": "1:00",
      "act": "ארוחת בוקר — כלולה · צ׳ק-אאוט",
@@ -2961,8 +2751,8 @@ window.SHARED_SEED = {
      "cat": "לינה",
      "baht": 2574,
      "status": "להזמין",
-     "link": "https://www.booking.com/hotel/th/khao-sok-palmview-resort.html?checkin=2026-12-03&checkout=2026-12-06&group_adults=2",
-     "notes": "הבחירה — 8.9 על 2,187 ביקורות · כ-₪693 לשלושה לילות (נבדק ל-4–6/12 — לבדוק שוב ל-3–6/12) · חלופות: River Lodge (על הנהר), River & Jungle",
+     "link": "https://www.booking.com/hotel/th/khao-sok-palmview-resort.html?checkin=2026-12-03&checkout=2026-12-05&group_adults=2",
+     "notes": "הבחירה — 8.9 על 2,187 ביקורות · כ-₪462 לשני לילות (נבדק ל-4–6/12 — לבדוק שוב ל-3–5/12) · חלופות: River Lodge (על הנהר), River & Jungle",
      "id": "s_g4_stay",
      "done": false,
      "wiki": "Khao Sok National Park",
@@ -2986,6 +2776,28 @@ window.SHARED_SEED = {
    "summary": "אגם צ׳או לאן",
    "id": "day_12",
    "rows": [
+    {
+     "time": "05:45",
+     "dur": "0:55",
+     "act": "ריצה ארוכה קלה",
+     "loc": "",
+     "cat": "אחר",
+     "baht": null,
+     "status": "משלמים במקום",
+     "link": "",
+     "notes": "9–10 ק״מ · מוקדם — הסיור לאגם יוצא ב-07:30. אם חשוך מדי, להחליף עם המנוחה של 5/12 · קלה, לפי מאמץ · מים ומלחים לפני ואחרי",
+     "id": "s_w_1204",
+     "done": false,
+     "priceEstimate": {
+      "kind": "no-extra",
+      "basis": "לא הוקצה חיוב נפרד לפעולה הזאת; חיובים כלולים מופיעים בחבילה או בהזמנה.",
+      "lowFactor": 1,
+      "highFactor": 1,
+      "sourceUrl": "",
+      "checked": "2026-10-31"
+     },
+     "managed": true
+    },
     {
      "time": "06:45",
      "dur": "1:00",
@@ -3083,7 +2895,7 @@ window.SHARED_SEED = {
      "cat": "לינה",
      "baht": 2574,
      "status": "להזמין",
-     "link": "https://www.booking.com/hotel/th/khao-sok-palmview-resort.html?checkin=2026-12-03&checkout=2026-12-06&group_adults=2",
+     "link": "https://www.booking.com/hotel/th/khao-sok-palmview-resort.html?checkin=2026-12-03&checkout=2026-12-05&group_adults=2",
      "notes": "",
      "id": "s_g5_stay",
      "done": false,
@@ -3104,153 +2916,9 @@ window.SHARED_SEED = {
    "day": 13,
    "date": "2026-12-05",
    "dow": "ש׳",
-   "dest": "קאו סוק",
-   "summary": "מערת נאם טאלו, ובלילה ספארי בג׳ונגל",
-   "id": "day_13",
-   "rows": [
-    {
-     "time": "07:30",
-     "dur": "1:00",
-     "act": "ארוחת בוקר",
-     "loc": "קאו סוק",
-     "cat": "אוכל",
-     "baht": 300,
-     "status": "משלמים במקום",
-     "link": "",
-     "notes": "",
-     "id": "s_k5_0",
-     "done": false,
-     "priceEstimate": {
-      "kind": "estimate",
-      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
-      "lowFactor": 0.8,
-      "highFactor": 1.3,
-      "sourceUrl": "",
-      "checked": "2026-10-31"
-     },
-     "managed": true
-    },
-    {
-     "time": "08:30",
-     "dur": "6:00",
-     "act": "מערת נאם טאלו — הליכה בג׳ונגל ומעבר במים בתוך המערה",
-     "loc": "פארק לאומי קאו סוק",
-     "cat": "אטרקציות",
-     "baht": 3400,
-     "status": "להזמין",
-     "link": "",
-     "notes": "רק עם מדריך · כ-฿1,400–1,800 לאדם כולל אגרת פארק והסעה · שחייה קצרה והליכה במים עד המותניים בחושך — פנס ראש, נעלי מים, תיק אטום · סוגרים אותה אחרי גשם כבד — אז הליכה למפלים במקום · דרך המלון או סוכנות בכפר",
-     "id": "s_k5_1",
-     "done": false,
-     "priceEstimate": {
-      "kind": "estimate",
-      "basis": "סיור מודרך לנאם טאלו לשניים, כולל אגרת פארק.",
-      "lowFactor": 0.8,
-      "highFactor": 1.3,
-      "sourceUrl": "",
-      "checked": "2026-10-31"
-     },
-     "managed": true,
-     "wiki": "Khao Sok National Park"
-    },
-    {
-     "time": "15:00",
-     "dur": "1:00",
-     "act": "מסאז׳ בכפר",
-     "loc": "קאו סוק",
-     "cat": "אטרקציות",
-     "baht": 800,
-     "status": "משלמים במקום",
-     "link": "",
-     "notes": "",
-     "id": "s_k5_2",
-     "done": false,
-     "priceEstimate": {
-      "kind": "estimate",
-      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
-      "lowFactor": 0.8,
-      "highFactor": 1.3,
-      "sourceUrl": "",
-      "checked": "2026-10-31"
-     },
-     "managed": true
-    },
-    {
-     "time": "17:30",
-     "dur": "1:00",
-     "act": "ארוחת ערב מוקדמת בכפר",
-     "loc": "קאו סוק",
-     "cat": "אוכל",
-     "baht": 600,
-     "status": "משלמים במקום",
-     "link": "",
-     "notes": "",
-     "id": "s_k5_3",
-     "done": false,
-     "priceEstimate": {
-      "kind": "estimate",
-      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
-      "lowFactor": 0.8,
-      "highFactor": 1.3,
-      "sourceUrl": "",
-      "checked": "2026-10-31"
-     },
-     "managed": true
-    },
-    {
-     "time": "19:00",
-     "dur": "2:00",
-     "act": "ספארי לילה בג׳ונגל",
-     "loc": "פארק לאומי קאו סוק",
-     "cat": "אטרקציות",
-     "baht": 1400,
-     "status": "אופציונלי",
-     "link": "",
-     "notes": "הליכה עם פנסים ומדריך — צפרדעים, עכבישים, נחשים ולפעמים עצלנים · כ-฿600–800 לאדם · דרך המלון",
-     "id": "s_k5_4",
-     "done": false,
-     "priceEstimate": {
-      "kind": "estimate",
-      "basis": "ספארי לילה מודרך לשניים.",
-      "lowFactor": 0.8,
-      "highFactor": 1.3,
-      "sourceUrl": "",
-      "checked": "2026-10-31"
-     },
-     "managed": true
-    },
-    {
-     "time": "",
-     "dur": "",
-     "act": "לינה — Khao Sok Palmview",
-     "loc": "קאו סוק",
-     "cat": "לינה",
-     "baht": 2574,
-     "status": "להזמין",
-     "link": "https://www.booking.com/hotel/th/khao-sok-palmview-resort.html?checkin=2026-12-03&checkout=2026-12-06&group_adults=2",
-     "notes": "",
-     "id": "s_k5_stay",
-     "done": false,
-     "wiki": "Khao Sok National Park",
-     "priceEstimate": {
-      "kind": "published",
-      "basis": "מחיר בבוקינג ללילה, נבדק 29/10 לתאריכים 4–6/12.",
-      "lowFactor": 0.9,
-      "highFactor": 1.25,
-      "sourceUrl": "https://www.booking.com/hotel/th/khao-sok-palmview-resort.html",
-      "checked": "2026-10-29"
-     },
-     "managed": true
-    }
-   ]
-  },
-  {
-   "day": 14,
-   "date": "2026-12-06",
-   "dow": "א׳",
    "dest": "קאו לאק",
-   "summary": "קאנו בבוקר, ואז קאו לאק — ובערב שוק יום ראשון",
-   "id": "day_14",
+   "summary": "בוקר בג׳ונגל, ואז קאו לאק",
+   "id": "day_13",
    "rows": [
     {
      "time": "07:00",
@@ -3326,9 +2994,9 @@ window.SHARED_SEED = {
      "loc": "קאו לאק",
      "cat": "אחר",
      "baht": null,
-     "status": "מוזמן",
+     "status": "להזמין",
      "link": "",
-     "notes": "",
+     "notes": "הלילה הזה בהזמנה נפרדת — לבקש את אותו חדר לכל שלושת הלילות",
      "id": "s_g6_3",
      "done": false,
      "priceEstimate": {
@@ -3364,28 +3032,6 @@ window.SHARED_SEED = {
      "managed": true
     },
     {
-     "time": "17:30",
-     "dur": "3:00",
-     "act": "שוק הרחוב בעיר העתיקה של טקואה פא",
-     "loc": "טקואה פא",
-     "cat": "אטרקציות",
-     "baht": 1500,
-     "status": "אופציונלי",
-     "link": "",
-     "notes": "בימי ראשון אחר הצהריים · בתי סחר סינו־פורטוגזיים, אוכל רחוב ומוזיקה — אפשר לאכול שם ערב · כ-40 דק׳ נסיעה — מונית הלוך וחזור כ-฿1,000 · לוודא בקבלה שמתקיים",
-     "id": "s_h6_2",
-     "done": false,
-     "priceEstimate": {
-      "kind": "estimate",
-      "basis": "מונית הלוך־חזור ואוכל בשוק לשניים.",
-      "lowFactor": 0.7,
-      "highFactor": 1.4,
-      "sourceUrl": "",
-      "checked": "2026-10-31"
-     },
-     "managed": true
-    },
-    {
      "time": "19:30",
      "dur": "1:00",
      "act": "ארוחת ערב",
@@ -3410,42 +3056,34 @@ window.SHARED_SEED = {
     {
      "time": "",
      "dur": "",
-     "act": "לינה — Kalima Resort and Villas",
+     "act": "לינה — Kalima Resort and Villas · לילה נוסף",
      "loc": "קאו לאק",
      "cat": "לינה",
-     "baht": null,
-     "status": "מוזמן",
-     "link": "https://www.booking.com/hotel/th/kalima-resort-amp-villas-khao-lak.html?checkin=2026-12-06&checkout=2026-12-09&group_adults=2",
-     "notes": "6–9/12 · 3 לילות · Deluxe Pool Access · אישור 7195273990380466772 (הצעת שותף — אין שינויים) · שולם $621.21 (₪1,931) · לא מוחזר · ארוחת בוקר לא כלולה ($18 לאדם)",
+     "baht": 7742,
+     "status": "להזמין",
+     "link": "https://www.booking.com/hotel/th/kalima-resort-amp-villas-khao-lak.html?checkin=2026-12-05&checkout=2026-12-06&group_adults=2",
+     "notes": "ההזמנה הקיימת (6–9/12) היא הצעת שותף ואי אפשר להזיז אותה · הזמנה נפרדת ל-5–6/12, Deluxe Pool Access, ₪695 · לכתוב למלון לחבר את שתי ההזמנות לאותו חדר",
      "id": "s_g6_stay",
      "done": false,
      "priceEstimate": {
-      "kind": "booking",
-      "basis": "המחיר מההזמנה השמורה; נספר פעם אחת בלבד ומחולק בין לילות הלינה.",
-      "lowFactor": 1,
-      "highFactor": 1,
-      "sourceUrl": "",
-      "checked": "2026-10-29",
-      "booking": {
-       "category": "accommodation",
-       "split": "ratio",
-       "key": "khaolak",
-       "match": "Kalima",
-       "rows": 3,
-       "totalIls": 1931.44
-      }
+      "kind": "published",
+      "basis": "מחיר בבוקינג ל-5–6/12, נבדק 31/10.",
+      "lowFactor": 0.95,
+      "highFactor": 1.2,
+      "sourceUrl": "https://www.booking.com/hotel/th/kalima-resort-amp-villas-khao-lak.html",
+      "checked": "2026-10-31"
      },
      "managed": true
     }
    ]
   },
   {
-   "day": 15,
-   "date": "2026-12-07",
-   "dow": "ב׳",
+   "day": 14,
+   "date": "2026-12-06",
+   "dow": "א׳",
    "dest": "קאו לאק",
    "summary": "סימילן — היום הגדול של האנדמן",
-   "id": "day_15",
+   "id": "day_14",
    "rows": [
     {
      "time": "06:00",
@@ -3478,7 +3116,7 @@ window.SHARED_SEED = {
      "baht": 7800,
      "status": "להזמין",
      "link": "https://www.khaolaklanddiscovery.com/khao-lak-tours/",
-     "notes": "฿3,900 לאדם כולל אגרת פארק · איסוף מקלימה · שמורת האלמוגים הכי טובה באנדמן · אם השייט מבוטל בגלל הים, המפעילים מזיזים תאריך בלי עלות — 8/12 הוא יום הגיבוי",
+     "notes": "฿3,900 לאדם כולל אגרת פארק · איסוף מקלימה · שמורת האלמוגים הכי טובה באנדמן · אם השייט מבוטל בגלל הים, המפעילים מזיזים תאריך בלי עלות — 7/12 הוא יום הגיבוי",
      "id": "s_g7_1",
      "done": false,
      "wiki": "Similan Islands",
@@ -3515,6 +3153,28 @@ window.SHARED_SEED = {
      "managed": true
     },
     {
+     "time": "17:45",
+     "dur": "0:50",
+     "act": "אימון כוח — תחתון + כתפיים",
+     "loc": "",
+     "cat": "אחר",
+     "baht": null,
+     "status": "משלמים במקום",
+     "link": "",
+     "notes": "אחרי סימילן — אם אין כוח, מחר בבוקר · 1. סקוואט (תיק על הגב / משקל גוף) + הרמות עקב על רגל אחת · 2. דדליפט רומני על רגל אחת + Y-T-W בשכיבה על הבטן · 3. בולגרי (רגל על מיטה או ספסל) + לאנג׳ים בהליכה + פייק פוש-אפ · 4. סיום: הרחקות לצדדים עם בקבוקי מים או תיק + בטן (P4P)",
+     "id": "s_w_1206",
+     "done": false,
+     "priceEstimate": {
+      "kind": "no-extra",
+      "basis": "לא הוקצה חיוב נפרד לפעולה הזאת; חיובים כלולים מופיעים בחבילה או בהזמנה.",
+      "lowFactor": 1,
+      "highFactor": 1,
+      "sourceUrl": "",
+      "checked": "2026-10-31"
+     },
+     "managed": true
+    },
+    {
      "time": "19:30",
      "dur": "1:00",
      "act": "ארוחת ערב",
@@ -3545,7 +3205,7 @@ window.SHARED_SEED = {
      "baht": null,
      "status": "מוזמן",
      "link": "https://www.booking.com/hotel/th/kalima-resort-amp-villas-khao-lak.html?checkin=2026-12-06&checkout=2026-12-09&group_adults=2",
-     "notes": "6–9/12 · 3 לילות · Deluxe Pool Access · אישור 7195273990380466772 (הצעת שותף — אין שינויים) · שולם $621.21 (₪1,931) · לא מוחזר · ארוחת בוקר לא כלולה ($18 לאדם)",
+     "notes": "6–9/12 · Deluxe Pool Access · אישור 7195273990380466772 · שולם $621.21 (₪1,931) · לא מוחזר · הלילה של 8/12 לא מנוצל — בבנגקוק",
      "id": "s_g7_stay",
      "done": false,
      "priceEstimate": {
@@ -3560,7 +3220,7 @@ window.SHARED_SEED = {
        "split": "ratio",
        "key": "khaolak",
        "match": "Kalima",
-       "rows": 3,
+       "rows": 2,
        "totalIls": 1931.44
       }
      },
@@ -3569,13 +3229,35 @@ window.SHARED_SEED = {
    ]
   },
   {
-   "day": 16,
-   "date": "2026-12-08",
-   "dow": "ג׳",
+   "day": 15,
+   "date": "2026-12-07",
+   "dow": "ב׳",
    "dest": "קאו לאק",
    "summary": "יום גיבוי לסימילן — או ספא",
-   "id": "day_16",
+   "id": "day_15",
    "rows": [
+    {
+     "time": "07:30",
+     "dur": "0:50",
+     "act": "אימון כוח — עליון",
+     "loc": "",
+     "cat": "אחר",
+     "baht": null,
+     "status": "משלמים במקום",
+     "link": "",
+     "notes": "אם סימילן זז להיום — בערב · 1. שכיבות סמיכה + מתח / חתירה הפוכה מתחת לשולחן · 2. שכיבות סמיכה בשיפוע (רגליים על מיטה) + חתירה עם תיק · 3. מקבילים על כיסא או ספסל + פולאובר עם תיק · 4. כפיפת מרפקים עם תיק + Bench Dips · 5. פוש-אפ יהלום + Superman Pulls",
+     "id": "s_w_1207",
+     "done": false,
+     "priceEstimate": {
+      "kind": "no-extra",
+      "basis": "לא הוקצה חיוב נפרד לפעולה הזאת; חיובים כלולים מופיעים בחבילה או בהזמנה.",
+      "lowFactor": 1,
+      "highFactor": 1,
+      "sourceUrl": "",
+      "checked": "2026-10-31"
+     },
+     "managed": true
+    },
     {
      "time": "08:30",
      "dur": "1:00",
@@ -3632,7 +3314,7 @@ window.SHARED_SEED = {
      "link": "https://www.google.com/maps/search/?api=1&query=Tree+Top+Adventure+Park+Khao+Lak",
      "wiki": "Zip line",
      "done": false,
-     "notes": "אם סימילן יצא ב-7/12 · ฿2,200–2,600 לאדם · איסוף מהמלון כלול · נעליים סגורות",
+     "notes": "אם סימילן יצא ב-6/12 · ฿2,200–2,600 לאדם · איסוף מהמלון כלול · נעליים סגורות",
      "managed": true,
      "priceEstimate": {
       "kind": "estimate",
@@ -3696,7 +3378,7 @@ window.SHARED_SEED = {
      "baht": 600,
      "status": "משלמים במקום",
      "link": "",
-     "notes": "",
+     "notes": "מחר בבוקר לשדה — לא מאוחר",
      "id": "s_g8_night",
      "done": false,
      "priceEstimate": {
@@ -3718,7 +3400,7 @@ window.SHARED_SEED = {
      "baht": null,
      "status": "מוזמן",
      "link": "https://www.booking.com/hotel/th/kalima-resort-amp-villas-khao-lak.html?checkin=2026-12-06&checkout=2026-12-09&group_adults=2",
-     "notes": "6–9/12 · 3 לילות · Deluxe Pool Access · אישור 7195273990380466772 (הצעת שותף — אין שינויים) · שולם $621.21 (₪1,931) · לא מוחזר · ארוחת בוקר לא כלולה ($18 לאדם)",
+     "notes": "6–9/12 · Deluxe Pool Access · אישור 7195273990380466772 · שולם $621.21 (₪1,931) · לא מוחזר · הלילה של 8/12 לא מנוצל — בבנגקוק",
      "id": "s_g8_stay",
      "done": false,
      "priceEstimate": {
@@ -3733,7 +3415,7 @@ window.SHARED_SEED = {
        "split": "ratio",
        "key": "khaolak",
        "match": "Kalima",
-       "rows": 3,
+       "rows": 2,
        "totalIls": 1931.44
       }
      },
@@ -3742,17 +3424,17 @@ window.SHARED_SEED = {
    ]
   },
   {
-   "day": 17,
-   "date": "2026-12-09",
-   "dow": "ד׳",
+   "day": 16,
+   "date": "2026-12-08",
+   "dow": "ג׳",
    "dest": "בנגקוק",
-   "summary": "הלילה האחרון ביחד",
-   "id": "day_17",
+   "summary": "מקאו לאק לבנגקוק — ISB וסנטרל צ׳אנגוואטנה",
+   "id": "day_16",
    "rows": [
     {
-     "time": "08:30",
+     "time": "07:30",
      "dur": "1:00",
-     "act": "ארוחת בוקר אחרונה",
+     "act": "ארוחת בוקר אחרונה בדרום",
      "loc": "קלימה",
      "cat": "אוכל",
      "baht": 1480,
@@ -3772,7 +3454,7 @@ window.SHARED_SEED = {
      "managed": true
     },
     {
-     "time": "10:30",
+     "time": "09:00",
      "dur": "1:30",
      "act": "צ׳ק-אאוט · רכב לשדה התעופה בפוקט",
      "loc": "קאו לאק → HKT",
@@ -3794,38 +3476,126 @@ window.SHARED_SEED = {
      "managed": true
     },
     {
-     "time": "",
-     "dur": "",
-     "act": "HKT → בנגקוק",
-     "loc": "פוקט → DMK / BKK",
+     "time": "11:45",
+     "dur": "1:25",
+     "act": "Thai AirAsia · פוקט → דון מואנג",
+     "loc": "HKT → DMK",
      "cat": "תחבורה",
-     "baht": 4000,
+     "baht": 3900,
      "status": "להזמין",
      "link": "",
-     "notes": "לשניכם, באותה טיסה · מ-£47 לאדם · עדיף אחרי 14:00, כדי לא למהר מקאו לאק · DMK או BKK — הטיסה הביתה רק מחר, מסוברנבומי",
+     "notes": "לשניכם · בחיפוש: 11:45 → 13:10, €102.84 לשניים · Thai Lion Air ב-09:45 זולה יותר אבל צפופה מקלימה · DMK קרוב ל-ISB",
      "id": "s_g9_2",
      "done": false,
      "priceEstimate": {
       "kind": "estimate",
-      "basis": "מחיר טיסה פוקט–בנגקוק לשניים.",
+      "basis": "מחיר Thai AirAsia לשניים ב-lastminute, 31/10.",
       "lowFactor": 0.8,
       "highFactor": 1.4,
       "sourceUrl": "",
-      "checked": "2026-10-29"
+      "checked": "2026-10-31",
+      "category": "flights"
      },
      "managed": true
     },
     {
-     "time": "17:30",
+     "time": "13:45",
      "dur": "0:30",
-     "act": "צ׳ק-אין — Eleven Bangkok",
-     "loc": "סוקומווית 11",
+     "act": "גראב מדון מואנג ל-ISB",
+     "loc": "DMK → פאקרט",
+     "cat": "תחבורה",
+     "baht": 250,
+     "status": "משלמים במקום",
+     "link": "https://www.google.com/maps/search/?api=1&query=International+School+Bangkok+Pakkret",
+     "notes": "כ-20–30 דק׳ · המזוודות איתנו — לשאול את ISB אם אפשר להשאיר בשער",
+     "id": "s_3_3",
+     "done": false,
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
+      "lowFactor": 0.8,
+      "highFactor": 1.3,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
+    },
+    {
+     "time": "14:30",
+     "dur": "2:00",
+     "act": "ISB — ביקור בוגרים",
+     "loc": "פאקרט",
+     "cat": "אטרקציות",
+     "baht": null,
+     "status": "להזמין",
+     "link": "https://www.isb.ac.th/community/alumni",
+     "notes": "isbalum@isb.ac.th לפחות יומיים מראש · נסגר 14:25 · תעודה מזהה בשער · לבדוק חופשת חג ההודיה ב-26/11",
+     "id": "s_3_4",
+     "done": false,
+     "wiki": "International School Bangkok",
+     "priceEstimate": {
+      "kind": "no-extra",
+      "basis": "לא הוקצה חיוב נפרד לפעולה הזאת; חיובים כלולים מופיעים בחבילה או בהזמנה.",
+      "lowFactor": 1,
+      "highFactor": 1,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
+    },
+    {
+     "time": "16:45",
+     "dur": "1:30",
+     "act": "סנטרל צ׳אנגוואטנה",
+     "loc": "Central Chaengwattana",
+     "cat": "אוכל",
+     "baht": 500,
+     "status": "משלמים במקום",
+     "link": "",
+     "notes": "ליד ISB",
+     "id": "s_3_5",
+     "done": false,
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
+      "lowFactor": 0.8,
+      "highFactor": 1.3,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     },
+     "managed": true
+    },
+    {
+     "time": "18:15",
+     "dur": "1:00",
+     "act": "גראב לסוקומווית",
+     "loc": "צ׳אנגוואטנה → סוכומוויט",
+     "cat": "תחבורה",
+     "baht": 500,
+     "status": "משלמים במקום",
+     "link": "",
+     "notes": "40–60 דקות, תלוי בפקקים",
+     "id": "s_3_6",
+     "done": false,
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
+      "lowFactor": 0.8,
+      "highFactor": 1.3,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     },
+     "managed": true
+    },
+    {
+     "time": "19:15",
+     "dur": "",
+     "act": "צ׳ק-אין — מונטראג׳",
+     "loc": "סוי סוכומוויט 14",
      "cat": "אחר",
      "baht": null,
      "status": "מוזמן",
      "link": "",
-     "notes": "פיקדון ฿1,000 במזומן, מוחזר בצ׳ק-אאוט",
-     "id": "s_g9_3",
+     "notes": "צ׳ק-אאוט 12:00",
+     "id": "s_1_5",
      "done": false,
      "priceEstimate": {
       "kind": "no-extra",
@@ -3833,12 +3603,12 @@ window.SHARED_SEED = {
       "lowFactor": 1,
       "highFactor": 1,
       "sourceUrl": "",
-      "checked": "2026-10-29"
+      "checked": "2026-09-14"
      },
      "managed": true
     },
     {
-     "time": "19:30",
+     "time": "20:00",
      "dur": "1:00",
      "act": "ארוחת ערב בסוקומווית",
      "loc": "בנגקוק",
@@ -3860,38 +3630,16 @@ window.SHARED_SEED = {
      "managed": true
     },
     {
-     "time": "21:30",
-     "dur": "3:00",
-     "act": "לילה אחרון — סוקומווית 11",
-     "loc": "בנגקוק",
-     "cat": "אטרקציות",
-     "baht": 1200,
-     "status": "משלמים במקום",
-     "link": "",
-     "notes": "ברים על סוי 11 · לא מאוחר מדי — איתי יוצא ב-07:45",
-     "id": "s_g9_night",
-     "done": false,
-     "priceEstimate": {
-      "kind": "estimate",
-      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
-      "lowFactor": 0.8,
-      "highFactor": 1.3,
-      "sourceUrl": "",
-      "checked": "2026-10-29"
-     },
-     "managed": true
-    },
-    {
      "time": "",
      "dur": "",
-     "act": "לינה — Eleven Bangkok Sukhumvit 11",
-     "loc": "בנגקוק",
+     "act": "לינה — Montraj Coach Sukhumvit",
+     "loc": "סוי סוכומוויט 14",
      "cat": "לינה",
-     "baht": null,
-     "status": "מוזמן",
-     "link": "https://www.booking.com/",
-     "notes": "Grand Deluxe King · אישור 5243050600 · ההזמנה לאדם אחד — לעדכן לשניים · ביטול חינם עד 5/12 · ‎+66 2 080 3111",
-     "id": "s_g9_stay",
+     "baht": 2723.29,
+     "status": "להזמין",
+     "link": "https://reservation.thecoachbangkok.com/propertyibe2/booking-management?propertyId=890&onlineId=4&mobileredirect=false&accesscode=Member&lang=en",
+     "notes": "להזיז את אישור 3051425 ל-8–10/12 · Historic Cabin Family · משלמים בצ׳ק-אין · פיקדון ฿1,000 מזומן",
+     "id": "s_1_9",
      "done": false,
      "priceEstimate": {
       "kind": "booking",
@@ -3899,14 +3647,408 @@ window.SHARED_SEED = {
       "lowFactor": 1,
       "highFactor": 1,
       "sourceUrl": "",
-      "checked": "2026-10-29",
+      "checked": "2026-09-28",
       "booking": {
        "category": "accommodation",
        "split": "ratio",
-       "key": "bangkok_last",
-       "match": "Eleven Bangkok",
-       "rows": 1,
-       "totalThb": 3010.1
+       "key": "bangkok",
+       "match": "Montraj Coach",
+       "rows": 2,
+       "totalThb": 8169.87
+      }
+     },
+     "managed": true
+    }
+   ]
+  },
+  {
+   "day": 17,
+   "date": "2026-12-09",
+   "dow": "ד׳",
+   "dest": "בנגקוק",
+   "summary": "תעלות, וואט ארון, וואט פו, הארמון והר הזהב — ובערב רג׳אדמנרן",
+   "id": "day_17",
+   "rows": [
+    {
+     "time": "06:15",
+     "dur": "0:50",
+     "act": "אימון כוח — תחתון + כתפיים",
+     "loc": "",
+     "cat": "אחר",
+     "baht": null,
+     "status": "משלמים במקום",
+     "link": "",
+     "notes": "לפני ארוחת הבוקר · 1. סקוואט (תיק על הגב / משקל גוף) + הרמות עקב על רגל אחת · 2. דדליפט רומני על רגל אחת + Y-T-W בשכיבה על הבטן · 3. בולגרי (רגל על מיטה או ספסל) + לאנג׳ים בהליכה + פייק פוש-אפ · 4. סיום: הרחקות לצדדים עם בקבוקי מים או תיק + בטן (P4P)",
+     "id": "s_w_1209",
+     "done": false,
+     "priceEstimate": {
+      "kind": "no-extra",
+      "basis": "לא הוקצה חיוב נפרד לפעולה הזאת; חיובים כלולים מופיעים בחבילה או בהזמנה.",
+      "lowFactor": 1,
+      "highFactor": 1,
+      "sourceUrl": "",
+      "checked": "2026-10-31"
+     },
+     "managed": true
+    },
+    {
+     "time": "07:15",
+     "dur": "0:30",
+     "act": "ארוחת בוקר",
+     "loc": "ליד המלון",
+     "cat": "אוכל",
+     "baht": 250,
+     "status": "משלמים במקום",
+     "link": "",
+     "notes": "המלון לא כולל ארוחת בוקר",
+     "id": "s_2_0",
+     "done": false,
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
+      "lowFactor": 0.8,
+      "highFactor": 1.3,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
+    },
+    {
+     "time": "07:50",
+     "dur": "0:50",
+     "act": "BTS לסאפאן טקסין + סירת נהר לתא צ׳אנג",
+     "loc": "אסוק → תא צ׳אנג",
+     "cat": "תחבורה",
+     "baht": 130,
+     "status": "משלמים במקום",
+     "link": "https://www.google.com/maps/search/?api=1&query=Tha+Tien+Pier+Bangkok",
+     "notes": "BTS עד סאפאן טקסין, ואז Chao Phraya Express קו כתום עד תא צ׳אנג (N9). משם יוצאות סירות התעלות",
+     "id": "s_2_1",
+     "done": false,
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
+      "lowFactor": 0.8,
+      "highFactor": 1.3,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     },
+     "managed": true
+    },
+    {
+     "time": "08:45",
+     "dur": "1:30",
+     "act": "שיט בתעלות תונבורי — מסתיים בוואט ארון",
+     "loc": "תא צ׳אנג → תעלות תונבורי",
+     "cat": "אטרקציות",
+     "baht": 1800,
+     "status": "משלמים במקום",
+     "link": "",
+     "notes": "לונג־טייל פרטי מהרציף, כ-฿1,500–2,000 לסירה לשעה וחצי · בתים על כלונסאות, מקדשים קטנים ושוק צף קטן · לסגור מחיר לפני שעולים, ולבקש שהסיור ייגמר ברציף של ואט ארון",
+     "id": "s_2_canal",
+     "done": false,
+     "wiki": "Khlong",
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "מחיר מקובל ללונג־טייל פרטי לשעה וחצי בתעלות.",
+      "lowFactor": 0.8,
+      "highFactor": 1.2,
+      "sourceUrl": "",
+      "checked": "2026-10-31"
+     },
+     "managed": true
+    },
+    {
+     "time": "10:20",
+     "dur": "0:50",
+     "act": "ואט ארון — מקדש השחר",
+     "loc": "גדת תונבורי",
+     "cat": "אטרקציות",
+     "baht": 400,
+     "status": "משלמים במקום",
+     "link": "",
+     "notes": "฿200 לאדם · מדרגות תלולות למגדל · כתפיים וברכיים מכוסות",
+     "id": "s_2_arun",
+     "done": false,
+     "wiki": "Wat Arun",
+     "priceEstimate": {
+      "kind": "published",
+      "basis": "דמי כניסה לוואט ארון לשניים.",
+      "lowFactor": 1,
+      "highFactor": 1.2,
+      "sourceUrl": "",
+      "checked": "2026-10-31"
+     },
+     "managed": true
+    },
+    {
+     "time": "11:10",
+     "dur": "0:10",
+     "act": "סירה חוצה לתא טיין",
+     "loc": "ואט ארון → תא טיין",
+     "cat": "תחבורה",
+     "baht": 10,
+     "status": "משלמים במקום",
+     "link": "",
+     "notes": "מעבורת קצרה, ฿5 לאדם · יוצאת כל כמה דקות מהרציף ליד ואט ארון",
+     "id": "s_2_ferry",
+     "done": false,
+     "priceEstimate": {
+      "kind": "published",
+      "basis": "מחיר מעבורת חוצה לשניים.",
+      "lowFactor": 1,
+      "highFactor": 1,
+      "sourceUrl": "",
+      "checked": "2026-10-31"
+     },
+     "managed": true
+    },
+    {
+     "time": "11:25",
+     "dur": "1:15",
+     "act": "ואט פו — הבודהה השוכב",
+     "loc": "Wat Pho",
+     "cat": "אטרקציות",
+     "baht": 600,
+     "status": "משלמים במקום",
+     "link": "https://www.google.com/maps/search/?api=1&query=Wat+Pho+Bangkok",
+     "notes": "฿300 לאדם · 46 מטר · אותו קוד לבוש · כמה דקות הליכה מהרציף",
+     "id": "s_2_3",
+     "done": false,
+     "wiki": "Wat Pho",
+     "priceEstimate": {
+      "kind": "published",
+      "basis": "מחירון ואט פו: שני מבוגרים.",
+      "lowFactor": 1,
+      "highFactor": 1,
+      "sourceUrl": "https://watpho.org/en/contact/plan",
+      "checked": "2026-09-14"
+     },
+     "managed": true
+    },
+    {
+     "time": "12:40",
+     "dur": "0:50",
+     "act": "צהריים ליד ואט פו",
+     "loc": "ראטנקוסין",
+     "cat": "אוכל",
+     "baht": 400,
+     "status": "משלמים במקום",
+     "link": "",
+     "notes": "",
+     "id": "s_2_4",
+     "done": false,
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
+      "lowFactor": 0.8,
+      "highFactor": 1.3,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     },
+     "managed": true
+    },
+    {
+     "time": "13:30",
+     "dur": "0:10",
+     "act": "טוק־טוק לארמון המלכותי",
+     "loc": "ואט פו → הארמון",
+     "cat": "תחבורה",
+     "baht": 100,
+     "status": "משלמים במקום",
+     "link": "",
+     "notes": "לסגור מחיר לפני (฿60–100). להתעלם ממי שאומר שהארמון סגור היום — זו עקיצה מוכרת",
+     "id": "s_2_tuk",
+     "done": false,
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "טוק־טוק קצר.",
+      "lowFactor": 0.6,
+      "highFactor": 1.5,
+      "sourceUrl": "",
+      "checked": "2026-10-31"
+     },
+     "managed": true
+    },
+    {
+     "time": "13:40",
+     "dur": "1:40",
+     "act": "הארמון המלכותי",
+     "loc": "Grand Palace",
+     "cat": "אטרקציות",
+     "baht": 1000,
+     "status": "משלמים במקום",
+     "link": "https://www.google.com/maps/search/?api=1&query=Grand+Palace+Bangkok",
+     "notes": "฿500 לאדם · כניסה אחרונה 15:30 · כתפיים וברכיים מכוסות, נאכף · בצהריים חם — מים וכובע",
+     "id": "s_2_2",
+     "done": false,
+     "wiki": "Grand Palace",
+     "priceEstimate": {
+      "kind": "published",
+      "basis": "מחירון הארמון: שני מבוגרים. לבדוק מחיר סמוך לביקור.",
+      "lowFactor": 1,
+      "highFactor": 1,
+      "sourceUrl": "https://www.royalgrandpalace.th/en/buy-ticket",
+      "checked": "2026-09-14"
+     },
+     "managed": true
+    },
+    {
+     "time": "15:35",
+     "dur": "0:35",
+     "act": "הנדנדה הענקית וואט סוטאט",
+     "loc": "סאו צ׳ינג צ׳ה",
+     "cat": "אטרקציות",
+     "baht": 200,
+     "status": "משלמים במקום",
+     "link": "",
+     "notes": "טוק־טוק של 10 דקות מהארמון · הנדנדה האדומה בכיכר חינם, ואט סוטאט ฿100 לאדם",
+     "id": "s_2_swing",
+     "done": false,
+     "wiki": "Giant Swing",
+     "priceEstimate": {
+      "kind": "published",
+      "basis": "דמי כניסה לוואט סוטאט לשניים.",
+      "lowFactor": 1,
+      "highFactor": 1.2,
+      "sourceUrl": "",
+      "checked": "2026-10-31"
+     },
+     "managed": true
+    },
+    {
+     "time": "16:15",
+     "dur": "0:50",
+     "act": "ואט סאקט — הר הזהב ותצפית על העיר",
+     "loc": "ואט סאקט",
+     "cat": "אטרקציות",
+     "baht": 200,
+     "status": "משלמים במקום",
+     "link": "",
+     "notes": "฿100 לאדם · 344 מדרגות בספירלה סביב הגבעה · תצפית על כל העיר העתיקה, ממש לפני השקיעה",
+     "id": "s_2_saket",
+     "done": false,
+     "wiki": "Wat Saket",
+     "priceEstimate": {
+      "kind": "published",
+      "basis": "דמי כניסה להר הזהב לשניים.",
+      "lowFactor": 1,
+      "highFactor": 1.2,
+      "sourceUrl": "",
+      "checked": "2026-10-31"
+     },
+     "managed": true
+    },
+    {
+     "time": "17:40",
+     "dur": "0:30",
+     "act": "גראב לרג׳אדמנרן",
+     "loc": "סוכומוויט → רג׳אדמנרן",
+     "cat": "תחבורה",
+     "baht": 200,
+     "status": "משלמים במקום",
+     "link": "",
+     "notes": "",
+     "id": "s_3_8",
+     "done": false,
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
+      "lowFactor": 0.8,
+      "highFactor": 1.3,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
+    },
+    {
+     "time": "18:15",
+     "dur": "3:00",
+     "act": "מואיי תאי באצטדיון רג׳אדמנרן",
+     "loc": "Rajadamnern Stadium",
+     "cat": "אטרקציות",
+     "baht": 3000,
+     "status": "להזמין",
+     "link": "https://rajadamnern.com/tickets/",
+     "notes": "קרבות יום רביעי מ-18:00 · מחלקה שלישית ฿1,000 לאדם · הכנה למחנה שמתחיל מחר",
+     "id": "s_3_9",
+     "done": false,
+     "wiki": "Rajadamnern Stadium",
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "תקציב לשני כרטיסים; המחיר משתנה לפי אירוע ומושב. אינו מחיר מאושר ל-25/11.",
+      "lowFactor": 0.6666666666666666,
+      "highFactor": 1.3333333333333333,
+      "sourceUrl": "https://rajadamnern.com/tickets/",
+      "checked": "2026-09-14"
+     }
+    },
+    {
+     "time": "21:30",
+     "dur": "1:15",
+     "act": "שוק לילה וארוחת ערב",
+     "loc": "בנגקוק",
+     "cat": "אוכל",
+     "baht": 800,
+     "status": "משלמים במקום",
+     "link": "",
+     "notes": "",
+     "id": "s_3_10",
+     "done": false,
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
+      "lowFactor": 0.8,
+      "highFactor": 1.3,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
+    },
+    {
+     "time": "22:50",
+     "dur": "0:25",
+     "act": "גראב חזרה",
+     "loc": "→ סוכומוויט",
+     "cat": "תחבורה",
+     "baht": 180,
+     "status": "משלמים במקום",
+     "link": "",
+     "notes": "",
+     "id": "s_3_11",
+     "done": false,
+     "priceEstimate": {
+      "kind": "estimate",
+      "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
+      "lowFactor": 0.8,
+      "highFactor": 1.3,
+      "sourceUrl": "",
+      "checked": "2026-09-14"
+     }
+    },
+    {
+     "time": "",
+     "dur": "",
+     "act": "לינה — Montraj Coach Sukhumvit",
+     "loc": "סוי סוכומוויט 14",
+     "cat": "לינה",
+     "baht": 2723.29,
+     "status": "להזמין",
+     "link": "https://reservation.thecoachbangkok.com/propertyibe2/booking-management?propertyId=890&onlineId=4&mobileredirect=false&accesscode=Member&lang=en",
+     "notes": "להזיז את אישור 3051425 ל-8–10/12 · Historic Cabin Family · משלמים בצ׳ק-אין · פיקדון ฿1,000 מזומן",
+     "id": "s_2_10",
+     "done": false,
+     "priceEstimate": {
+      "kind": "booking",
+      "basis": "המחיר מההזמנה השמורה; נספר פעם אחת בלבד ומחולק בין לילות הלינה.",
+      "lowFactor": 1,
+      "highFactor": 1,
+      "sourceUrl": "",
+      "checked": "2026-09-28",
+      "booking": {
+       "category": "accommodation",
+       "split": "ratio",
+       "key": "bangkok",
+       "match": "Montraj Coach",
+       "rows": 2,
+       "totalThb": 8169.87
       }
      },
      "managed": true
@@ -3921,6 +4063,28 @@ window.SHARED_SEED = {
    "summary": "איתי טס הביתה, טליה ממשיכה",
    "id": "day_18",
    "rows": [
+    {
+     "time": "06:45",
+     "dur": "0:40",
+     "act": "אימון כוח — עליון",
+     "loc": "",
+     "cat": "אחר",
+     "baht": null,
+     "status": "אופציונלי",
+     "link": "",
+     "notes": "לפני המונית לשדה — קצר · 1. שכיבות סמיכה + מתח / חתירה הפוכה מתחת לשולחן · 2. שכיבות סמיכה בשיפוע (רגליים על מיטה) + חתירה עם תיק · 3. מקבילים על כיסא או ספסל + פולאובר עם תיק · 4. כפיפת מרפקים עם תיק + Bench Dips · 5. פוש-אפ יהלום + Superman Pulls",
+     "id": "s_w_1210",
+     "done": false,
+     "priceEstimate": {
+      "kind": "no-extra",
+      "basis": "לא הוקצה חיוב נפרד לפעולה הזאת; חיובים כלולים מופיעים בחבילה או בהזמנה.",
+      "lowFactor": 1,
+      "highFactor": 1,
+      "sourceUrl": "",
+      "checked": "2026-10-31"
+     },
+     "managed": true
+    },
     {
      "time": "07:45",
      "dur": "0:45",
@@ -3997,6 +4161,28 @@ window.SHARED_SEED = {
      "managed": true
     },
     {
+     "time": "17:05",
+     "dur": "0:30",
+     "act": "נחיתה בנתב״ג",
+     "loc": "TLV",
+     "cat": "אחר",
+     "baht": null,
+     "status": "מוזמן",
+     "link": "",
+     "notes": "",
+     "id": "s_f10_3",
+     "done": false,
+     "priceEstimate": {
+      "kind": "no-extra",
+      "basis": "לא הוקצה חיוב נפרד לפעולה הזאת; חיובים כלולים מופיעים בחבילה או בהזמנה.",
+      "lowFactor": 1,
+      "highFactor": 1,
+      "sourceUrl": "",
+      "checked": "2026-10-29"
+     },
+     "managed": true
+    },
+    {
      "time": "",
      "dur": "",
      "act": "שינוי הטיסה הביתה — 210$",
@@ -4023,28 +4209,6 @@ window.SHARED_SEED = {
        "category": "flights",
        "split": "full-itai"
       }
-     },
-     "managed": true
-    },
-    {
-     "time": "17:05",
-     "dur": "0:30",
-     "act": "נחיתה בנתב״ג",
-     "loc": "TLV",
-     "cat": "אחר",
-     "baht": null,
-     "status": "מוזמן",
-     "link": "",
-     "notes": "",
-     "id": "s_f10_3",
-     "done": false,
-     "priceEstimate": {
-      "kind": "no-extra",
-      "basis": "לא הוקצה חיוב נפרד לפעולה הזאת; חיובים כלולים מופיעים בחבילה או בהזמנה.",
-      "lowFactor": 1,
-      "highFactor": 1,
-      "sourceUrl": "",
-      "checked": "2026-10-29"
      },
      "managed": true
     },
@@ -4092,8 +4256,8 @@ window.SHARED_SEED = {
   },
   {
    "what": "Montraj Coach Sukhumvit",
-   "when": "23–26/11",
-   "details": "בנגקוק · 3 לילות · Historic Cabin Family · הזמנה ישירה",
+   "when": "8–10/12",
+   "details": "בנגקוק · להזיז מ-23–26/11 ל-8–10/12 · Historic Cabin Family · הזמנה ישירה",
    "ref": "3051425",
    "payment": "฿8,169.87 (כ-₪734) — משלמים במלון",
    "freeCancel": "ביטול חינם עד 21/11 · בכתב, ל-rsvns.coach@montraj.com"
@@ -4125,7 +4289,7 @@ window.SHARED_SEED = {
   {
    "what": "Kalima Resort and Villas",
    "when": "6–9/12",
-   "details": "קאו לאק · 3 לילות · Deluxe Double/Twin with Pool Access · בלי ארוחת בוקר",
+   "details": "קאו לאק · 3 לילות · Deluxe Double/Twin with Pool Access · בלי ארוחת בוקר · הלילה של 8/12 לא מנוצל — 5/12 בהזמנה נפרדת",
    "ref": "7195273990380466772",
    "payment": "שולם $621.21 (₪1,931)",
    "freeCancel": "לא מוחזר · הצעת שותף — אי אפשר לשנות פרטים"
@@ -4133,10 +4297,10 @@ window.SHARED_SEED = {
   {
    "what": "Eleven Bangkok Sukhumvit 11",
    "when": "9–10/12",
-   "details": "בנגקוק · לילה · Grand Deluxe King · לעדכן לשני אנשים",
+   "details": "בנגקוק · 9/12 — לבטל, הלינה עוברת למונטראג׳",
    "ref": "5243050600",
    "payment": "฿3,010.10 — בוקינג מחייבת אוטומטית",
-   "freeCancel": "ביטול חינם עד 5/12"
+   "freeCancel": "ביטול חינם עד 5/12 — לבטל"
   },
   {
    "what": "Phor Liang Meun, צ׳יאנג מאי",
@@ -4158,21 +4322,33 @@ window.SHARED_SEED = {
  ],
  "hotels": [
   {
-   "dest": "בנגקוק",
+   "dest": "צ׳יאנג מאי",
    "dates": "23–26/11",
    "nights": 3,
+   "hotel": "Centara Riverside Hotel Chiang Mai",
+   "what": "8.5 על 804 · 4 כוכבים, בריכה, על נהר הפינג — חגיגת לוי קראתונג מתחת למלון · ₪4,693 לשלושה לילות, מחירי חג.",
+   "perNight": 17418,
+   "choice": "הבחירה",
+   "freeCancel": "לבדוק",
+   "link": "בוקינג",
+   "linkLink": "https://www.booking.com/hotel/th/centara-riverside-hotel-chiang-mai.html?checkin=2026-11-23&checkout=2026-11-26&group_adults=2"
+  },
+  {
+   "dest": "בנגקוק",
+   "dates": "8–10/12",
+   "nights": 2,
    "hotel": "Montraj Coach Sukhumvit",
-   "what": "Historic Cabin Family, מיטת קינג, 27 מ״ר · בריכה על הגג · אישור 3051425 — הזמנה ישירה באתר המלון עם קוד Member · ฿8,169.87 לשלושת הלילות, כולל מסים ושירות · פיקדון ฿1,000 מזומן · משלמים במלון · החליפה הזמנה בבוקינג ב-₪1,128.",
+   "what": "Historic Cabin Family, מיטת קינג, 27 מ״ר · בריכה על הגג · אישור 3051425 — הזמנה ישירה באתר המלון עם קוד Member · ฿8,169.87 לשלושה לילות בהזמנה המקורית, כולל מסים ושירות · פיקדון ฿1,000 מזומן · משלמים במלון · החליפה הזמנה בבוקינג ב-₪1,128. · להזיז ל-8–10/12.",
    "perNight": 2723.29,
-   "choice": "מוזמן",
+   "choice": "להזיז",
    "freeCancel": "עד 21/11 — בכתב, ל-rsvns.coach@montraj.com",
    "link": "אתר המלון",
    "linkLink": "https://reservation.thecoachbangkok.com/propertyibe2/booking-management?propertyId=890&onlineId=4&mobileredirect=false&accesscode=Member&lang=en"
   },
   {
    "dest": "בנגקוק",
-   "dates": "23–26/11",
-   "nights": 3,
+   "dates": "8–10/12",
+   "nights": 2,
    "hotel": "Maison Hotel Bangkok",
    "what": "8.8 · סאונה, ספא, בריכה, עיסוי זוגי. סוכומוויט, ליד נאנה. מה שהתקציב המקורי הניח.",
    "perNight": 2852,
@@ -4180,18 +4356,6 @@ window.SHARED_SEED = {
    "freeCancel": "לבדוק",
    "link": "בוקינג",
    "linkLink": "https://www.booking.com/hotel/th/maisonbangkok.html"
-  },
-  {
-   "dest": "בנגקוק — ליל לוי קראתונג",
-   "dates": "24/11",
-   "nights": 1,
-   "hotel": "Sala Rattanakosin",
-   "what": "8.8 · מול ואט ארון מהחדר ומהגג, בלי להילחם על שולחן. תוספת כ-฿7,110 מול המלון הרגיל.",
-   "perNight": 9962,
-   "choice": "מחוץ לתקציב",
-   "freeCancel": "לבדוק",
-   "link": "בוקינג",
-   "linkLink": "https://www.booking.com/hotel/th/sala-rattanakosin-bangkok.html"
   },
   {
    "dest": "קו יאו נוי",
@@ -4279,10 +4443,10 @@ window.SHARED_SEED = {
   },
   {
    "dest": "קאו סוק",
-   "dates": "3–6/12",
-   "nights": 3,
+   "dates": "3–5/12",
+   "nights": 2,
    "hotel": "Khao Sok Palmview",
-   "what": "8.9 על 2,187 · כ-₪693 לשלושה לילות.",
+   "what": "8.9 על 2,187 · כ-₪462 לשני לילות.",
    "perNight": 2574,
    "choice": "הבחירה",
    "freeCancel": "לבדוק",
@@ -4291,8 +4455,8 @@ window.SHARED_SEED = {
   },
   {
    "dest": "קאו סוק",
-   "dates": "3–6/12",
-   "nights": 3,
+   "dates": "3–5/12",
+   "nights": 2,
    "hotel": "Khao Sok River Lodge",
    "what": "8.9 · על הנהר · כ-₪185.",
    "perNight": 2059,
@@ -4327,27 +4491,27 @@ window.SHARED_SEED = {
   },
   {
    "dest": "קאו לאק",
+   "dates": "5–6/12",
+   "nights": 1,
+   "hotel": "Kalima Resort and Villas · לילה נוסף",
+   "what": "הזמנה נפרדת לפני ההזמנה הקיימת — Deluxe Pool Access, ₪695 · לכתוב למלון לחבר את ההזמנות.",
+   "perNight": 7742,
+   "choice": "להזמין",
+   "freeCancel": "לבדוק",
+   "link": "בוקינג",
+   "linkLink": "https://www.booking.com/hotel/th/kalima-resort-amp-villas-khao-lak.html?checkin=2026-12-05&checkout=2026-12-06&group_adults=2"
+  },
+  {
+   "dest": "קאו לאק",
    "dates": "6–9/12",
    "nights": 3,
    "hotel": "Kalima Resort and Villas Khao Lak",
-   "what": "8.9 · 5 כוכבים · Deluxe Pool Access, יציאה ישירה לבריכה · אישור 7195273990380466772 · בלי ארוחת בוקר ($18 לאדם).",
+   "what": "8.9 · 5 כוכבים · Deluxe Pool Access, יציאה ישירה לבריכה · אישור 7195273990380466772 · בלי ארוחת בוקר ($18 לאדם). · הלילה של 8/12 לא מנוצל.",
    "perNight": 7169,
    "choice": "מוזמן",
    "freeCancel": "לא מוחזר",
    "link": "בוקינג",
    "linkLink": "https://www.booking.com/hotel/th/kalima-resort-amp-villas-khao-lak.html?checkin=2026-12-06&checkout=2026-12-09&group_adults=2"
-  },
-  {
-   "dest": "בנגקוק — לילה אחרון",
-   "dates": "9–10/12",
-   "nights": 1,
-   "hotel": "Eleven Bangkok Sukhumvit 11",
-   "what": "Grand Deluxe King על סוי 11 · אישור 5243050600 · לעדכן לשני אנשים · פיקדון ฿1,000 במזומן.",
-   "perNight": 3010.1,
-   "choice": "מוזמן",
-   "freeCancel": "עד 5/12",
-   "link": "בוקינג",
-   "linkLink": "https://www.booking.com/"
   },
   {
    "dest": "קאו סוק — הגרסה שנזנחה",
@@ -4417,11 +4581,15 @@ window.SHARED_SEED = {
   },
   {
    "topic": "",
-   "detail": "מוזמן: שתי טיסות ארקיע, מונטראג׳, צ׳רמנטרה (עד 2/12), קלימה (6–9/12). כל השאר פתוח — כולל הלילה הנוסף בצ׳רמנטרה."
+   "detail": "מוזמן: שתי טיסות ארקיע, מונטראג׳ (להזיז ל-8–10/12), צ׳רמנטרה (עד 2/12), קלימה (6–9/12). כל השאר פתוח."
   },
   {
    "topic": "KYN · פרטי המחנה",
    "detail": "המחנה אישר אימוני קבוצה ב-08:00 וב-17:00. איתי: התאמת עמידה ובעיטות למואיי תאי, טיפים, מרפקים וקלינץ׳; טליה: יסודות למתחילה. ניתן להזמין אימון פרטי משותף; מחיר ומועד טרם נקבעו. ביום ההגעה אושר אימון טכניקה ב-16:00. להביא תחבושות ידיים ומגני שיניים; כפפות זמינות להשאלה או לרכישה. העברות עצמאיות בלבד."
+  },
+  {
+   "topic": "אימונים",
+   "detail": "אותם ימים ואותו מבנה כמו בבית: ראשון ורביעי תחתון + כתפיים, שני וחמישי עליון, שלישי ריצה קצרה, שישי ריצה ארוכה קלה, שבת מנוחה. כוח עם משקל גוף או חדר הכושר של המלון; ריצות מוקדם בבוקר. מואיי תאי במחנה מחליף את אימון הכוח של אותו יום. רצים לפי מאמץ — בלחות הקצב איטי ב-20–40 שנ׳ לק״מ. מים ומלחים לפני ואחרי כל ריצה. ביום טיסה או מעבר מדלגים קודם על ריצת שלישי. חלבון קודם בכל ארוחה; ארוחה עיקרית אחת בלי תוספת."
   }
  ],
  "cuts": [
@@ -4434,11 +4602,6 @@ window.SHARED_SEED = {
    "what": "לוותר על מואיי תאי ברג׳אדמנרן",
    "save": "כ-₪90",
    "lose": "אצטדיון בן שבעים שנה, ערב לפני שאתם עולים לרינג."
-  },
-  {
-   "what": "ארוחת חג פשוטה במקום סאלה",
-   "save": "כ-₪63",
-   "lose": "הנוף מול ואט ארון בלילה שבשבילו באתם."
   }
  ],
  "deadline": {

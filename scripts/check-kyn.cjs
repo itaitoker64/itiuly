@@ -9,7 +9,7 @@ vm.runInContext(read('public/shared-seed.js'),ctx);
 vm.runInContext(read('public/trip-app.js').replace(/loadState\(\);\s*$/,''),ctx);
 const run = s=>vm.runInContext(s,ctx);
 run('STATE=seedData(); ensureDefaults();');
-assert.equal(run('STATE.schema'), 24);
+assert.equal(run('STATE.schema'), 25);
 // Talia has not paid for anything on this trip yet — every booking so far is Itai's.
 assert.equal(run('wallet().expenses.filter(x=>x.paidBy==="talia").length'),0);
 assert.equal(run('balance().taliaPaid'),0);
@@ -62,11 +62,11 @@ wallet().expenses.find(x=>/IZ598/.test(x.title)).paidBy='talia';
 ensureDefaults();`);
 assert.equal(run('wallet().expenses.find(x=>/IZ598/.test(x.title)).paidBy'),'itai');
 assert.equal(run('balance().taliaPaid'),0);
-// Day 4 now hangs off the 08:00 flight, and the 16:00 technique session survives it.
-assert.equal(run('sh().days[3].rows.find(r=>r.id==="s_4_0").time'),'05:30');
-assert.ok(run('sh().days[3].rows.find(r=>r.id==="s_4_3").act').includes('TG203'));
-assert.equal(run('sh().days[3].rows.find(r=>r.id==="s_4_3").time'),'08:00');
-assert.equal(run('sh().days[3].rows.find(r=>r.id==="s_4_7").time'),'11:00');
+// Day 4 now hangs off the morning flight from Chiang Mai, and the 16:00 technique session survives it.
+assert.equal(run('sh().days[3].rows.find(r=>r.id==="s_4_0").time'),'07:15');
+assert.ok(run('sh().days[3].rows.find(r=>r.id==="s_4_3").act').includes('צ׳יאנג מאי → פוקט'));
+assert.equal(run('sh().days[3].rows.find(r=>r.id==="s_4_3").time'),'09:30');
+assert.equal(run('sh().days[3].rows.find(r=>r.id==="s_4_7").time'),'13:00');
 assert.equal(run('sh().days[3].rows.find(r=>r.id==="s_4_12").time'),'16:00');
 // The same move reaches a document saved before it.
 run(`STATE=seedData(); STATE.schema=8;
@@ -75,10 +75,10 @@ Object.assign(d.rows.find(r=>r.id==='s_4_0'),{time:'04:30'});
 Object.assign(d.rows.find(r=>r.id==='s_4_3'),{time:'06:50',act:'Thai Vietjet VZ314 · בנגקוק → פוקט',baht:4720});
 Object.assign(d.rows.find(r=>r.id==='s_4_7'),{time:'10:00'});
 ensureDefaults();`);
-assert.equal(run('sh().days[3].rows.find(r=>r.id==="s_4_0").time'),'05:30');
-assert.equal(run('sh().days[3].rows.find(r=>r.id==="s_4_3").time'),'08:00');
-assert.equal(run('sh().days[3].rows.find(r=>r.id==="s_4_3").baht'),5390);
-assert.equal(run('sh().days[3].rows.find(r=>r.id==="s_4_7").time'),'11:00');
+assert.equal(run('sh().days[3].rows.find(r=>r.id==="s_4_0").time'),'07:15');
+assert.equal(run('sh().days[3].rows.find(r=>r.id==="s_4_3").time'),'09:30');
+assert.equal(run('sh().days[3].rows.find(r=>r.id==="s_4_3").baht'),7000);
+assert.equal(run('sh().days[3].rows.find(r=>r.id==="s_4_7").time'),'13:00');
 run(`STATE=seedData(); STATE.money.rate=0.1;
 STATE.money.expenses=[
 {id:'a',title:'Hotel',category:'accommodation',amount:1000,currency:'THB',paidBy:'itai',split:'equal',status:'due'},
