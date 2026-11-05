@@ -3044,7 +3044,7 @@ window.SHARED_SEED = {
      "baht": null,
      "status": "להזמין",
      "link": "",
-     "notes": "הלילה הזה בהזמנה נפרדת — לבקש את אותו חדר לכל שלושת הלילות",
+     "notes": "הלילה הזה בהזמנה ישירה מול המלון, וביקשנו לחבר אותה להזמנת בוקינג — אותו חדר עד 9/12",
      "id": "s_g6_3",
      "done": false,
      "priceEstimate": {
@@ -3107,19 +3107,19 @@ window.SHARED_SEED = {
      "act": "לינה — Kalima Resort and Villas · לילה נוסף",
      "loc": "קאו לאק",
      "cat": "לינה",
-     "baht": 7742,
+     "baht": 8800,
      "status": "להזמין",
      "link": "https://www.booking.com/hotel/th/kalima-resort-amp-villas-khao-lak.html?checkin=2026-12-05&checkout=2026-12-06&group_adults=2",
-     "notes": "ההזמנה הקיימת (6–9/12) היא הצעת שותף ואי אפשר להזיז אותה · הזמנה נפרדת ל-5–6/12, Deluxe Pool Access, ₪695 · לכתוב למלון לחבר את שתי ההזמנות לאותו חדר",
+     "notes": "אושר מול המלון במייל, 5/11 (Lyla, rsvn.khaolak@kalimaresort.com) · ฿8,800 כולל ארוחת בוקר לשניים · לא מוחזר · לשלם בלינק ששלחו ולשלוח להם אסמכתא · ביקשנו אותו חדר לכל 5–9/12 — בכפוף לזמינות",
      "id": "s_g6_stay",
      "done": false,
      "priceEstimate": {
       "kind": "published",
-      "basis": "מחיר בבוקינג ל-5–6/12, נבדק 31/10.",
-      "lowFactor": 0.95,
-      "highFactor": 1.2,
-      "sourceUrl": "https://www.booking.com/hotel/th/kalima-resort-amp-villas-khao-lak.html",
-      "checked": "2026-10-31"
+      "basis": "הצעת המלון במייל, 5/11 — ฿8,800 נטו, כולל ארוחת בוקר.",
+      "lowFactor": 1,
+      "highFactor": 1,
+      "sourceUrl": "",
+      "checked": "2026-11-05"
      },
      "managed": true
     }
@@ -3143,19 +3143,19 @@ window.SHARED_SEED = {
      "act": "ארוחת בוקר",
      "loc": "קלימה",
      "cat": "אוכל",
-     "baht": 1480,
+     "baht": null,
      "status": "משלמים במקום",
      "link": "",
-     "notes": "לא כלולה במחיר החדר — $18 לאדם בבופה של המלון, או בית קפה בחוץ · לפני האיסוף לסימילן — לבקש מהמלון ארוחה ארוזה, או לקנות משהו ערב לפני",
+     "notes": "כלולה בלילה של 5/12 · האיסוף לסימילן ב-06:30 — לבקש מהמלון ארוחה ארוזה ערב לפני",
      "id": "s_g7_0",
      "done": false,
      "priceEstimate": {
-      "kind": "published",
-      "basis": "ארוחת בוקר בקלימה, $18 לאדם לפי אישור ההזמנה.",
-      "lowFactor": 0.5,
+      "kind": "included",
+      "basis": "כלול בהזמנה הישירה ללילה של 5/12.",
+      "lowFactor": 1,
       "highFactor": 1,
       "sourceUrl": "",
-      "checked": "2026-10-30"
+      "checked": "2026-11-05"
      },
      "managed": true
     },
@@ -3320,19 +3320,19 @@ window.SHARED_SEED = {
      "act": "ארוחת בוקר",
      "loc": "קלימה",
      "cat": "אוכל",
-     "baht": 1480,
+     "baht": 1200,
      "status": "משלמים במקום",
      "link": "",
-     "notes": "לא כלולה במחיר החדר — $18 לאדם בבופה של המלון, או בית קפה בחוץ",
+     "notes": "לא כלולה בהזמנת בוקינג — ฿600 לאדם בבופה של המלון (לפי המלון, 5/11), או בית קפה בחוץ",
      "id": "s_g8_0",
      "done": false,
      "priceEstimate": {
       "kind": "published",
-      "basis": "ארוחת בוקר בקלימה, $18 לאדם לפי אישור ההזמנה.",
+      "basis": "מחיר ארוחת הבוקר לפי המלון, 5/11: ฿600 לאדם.",
       "lowFactor": 0.5,
       "highFactor": 1,
       "sourceUrl": "",
-      "checked": "2026-10-30"
+      "checked": "2026-11-05"
      },
      "managed": true
     },
@@ -3519,19 +3519,19 @@ window.SHARED_SEED = {
      "act": "ארוחת בוקר אחרונה בדרום",
      "loc": "קלימה",
      "cat": "אוכל",
-     "baht": 1480,
+     "baht": 1200,
      "status": "משלמים במקום",
      "link": "",
-     "notes": "לא כלולה במחיר החדר — $18 לאדם בבופה של המלון, או בית קפה בחוץ",
+     "notes": "לא כלולה בהזמנת בוקינג — ฿600 לאדם בבופה של המלון (לפי המלון, 5/11), או בית קפה בחוץ",
      "id": "s_g9_0",
      "done": false,
      "priceEstimate": {
       "kind": "published",
-      "basis": "ארוחת בוקר בקלימה, $18 לאדם לפי אישור ההזמנה.",
+      "basis": "מחיר ארוחת הבוקר לפי המלון, 5/11: ฿600 לאדם.",
       "lowFactor": 0.5,
       "highFactor": 1,
       "sourceUrl": "",
-      "checked": "2026-10-30"
+      "checked": "2026-11-05"
      },
      "managed": true
     },
@@ -4588,10 +4588,10 @@ window.SHARED_SEED = {
    "dates": "5–6/12",
    "nights": 1,
    "hotel": "Kalima Resort and Villas · לילה נוסף",
-   "what": "הזמנה נפרדת לפני ההזמנה הקיימת — Deluxe Pool Access, ₪695 · לכתוב למלון לחבר את ההזמנות.",
-   "perNight": 7742,
-   "choice": "להזמין",
-   "freeCancel": "לבדוק",
+   "what": "הזמנה ישירה מול המלון, 5/11 — Deluxe Pool Access, ฿8,800 כולל ארוחת בוקר, לא מוחזר · ביקשנו לחבר להזמנת בוקינג, אותו חדר עד 9/12.",
+   "perNight": 8800,
+   "choice": "לשלם",
+   "freeCancel": "לא מוחזר",
    "link": "בוקינג",
    "linkLink": "https://www.booking.com/hotel/th/kalima-resort-amp-villas-khao-lak.html?checkin=2026-12-05&checkout=2026-12-06&group_adults=2"
   },

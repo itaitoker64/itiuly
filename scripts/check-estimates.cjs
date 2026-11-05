@@ -15,7 +15,7 @@ near(Object.values(f.categories).reduce((a,b)=>a+b,0)+f.reserve,f.base);
 near(run('sharedEstimateDays().reduce((s,d)=>s+dayTotalBaht(d)*rate(),0)')+f.reserve,f.base);
 near(f.categories.flights,3777+1891+777+(14300+7000+3900)*.08981); // To Chiang Mai, on to Phuket, Phuket to Bangkok; the home flight on 10/12 with its change fee.
 assert.ok(f.optional>0);
-near(f.categories.accommodation,5446.58*.08981+1839+12150*.08981+1931.44+(3*17418+6826+2*2574+7742)*.08981); // Montraj moved to 8–10/12; KYN; Kalima paid in full though 8/12 goes unused; Chiang Mai, the Chermantra night, Khao Sok and the extra Kalima night still estimates.
+near(f.categories.accommodation,5446.58*.08981+1839+12150*.08981+1931.44+(3*17418+6826+2*2574+8800)*.08981); // Montraj moved to 8–10/12; KYN; Kalima paid in full though 8/12 goes unused; Chiang Mai, the Chermantra night, Khao Sok and the extra Kalima night still estimates.
 near(run('sharedRowPrice(sh().days[0].rows.find(r=>r.id==="s_1_0")).base'),3777);
 near(run('sharedRowPrice(sh().days.find(d=>d.date==="2026-12-10").rows.find(r=>r.id==="s_f10_2")).shares.itai'),1891);
 assert.equal(run('sharedRowPrice(sh().days.find(d=>d.date==="2026-12-10").rows.find(r=>r.id==="s_f10_2")).shares.talia'),0);

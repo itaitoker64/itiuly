@@ -386,6 +386,7 @@ function migrateKynBooking(){
  */
 const MONTRAJ_NOTE = "אישור 3051425 · הזמנה ישירה באתר המלון עם קוד Member · Historic Cabin Family · להזיז מ-23–26/11 ל-8–10/12 — הסכום לפי מחיר הלילה בהזמנה, לעדכן אחרי שהמלון מאשר · משלמים בצ׳ק-אין · ביטול חינם עד 21/11 · פיקדון ฿1,000 מזומן, מוחזר בצ׳ק-אאוט · החליפה את הזמנת בוקינג 5123136373";
 const KALIMA_NOTE = "6–9/12 · Deluxe Pool Access · אישור 7195273990380466772 · שולם $621.21 · לא מוחזר · בלי ארוחת בוקר ($18 לאדם) · מ-8/12 בבנגקוק, אז הלילה של 8/12 לא מנוצל · ההזמנה הקודמת (5770154448, 2–8/12) בוטלה בחינם";
+const KALIMA_EXTRA_NOTE = "אושר מול המלון במייל, 5/11 · ฿8,800 כולל ארוחת בוקר · לא מוחזר · נשאר: לשלם בלינק של KBank ששלחו, ולשלוח אסמכתא ל-rsvn.khaolak@kalimaresort.com · ביקשנו אותו חדר לכל 5–9/12, בכפוף לזמינות";
 const ISB_NOTE = "8/12 אחר הצהריים, בדרך מדון מואנג · isbalum@isb.ac.th, לפחות יומיים מראש, תעודה מזהה בשער · לשאול אם אפשר להשאיר מזוודות בשער";
 /* ההוצאה על Eleven כפי שהייתה לפני גרסה 25 — מסמכים ישנים עוברים דרכה בדרך */
 const ELEVEN_EXPENSE_16 = {date:"2026-12-09", title:"Eleven Bangkok Sukhumvit 11 · לילה אחרון", category:"accommodation",
@@ -401,7 +402,7 @@ const WEST_TASKS = [
    notes:"הבחירה: Khao Sok Palmview, כ-₪462 לשני לילות · חלופה: River Lodge, על הנהר",
    link:"https://www.booking.com/hotel/th/khao-sok-palmview-resort.html?checkin=2026-12-03&checkout=2026-12-05&group_adults=2"},
   {owner:"both", title:"להזמין לילה נוסף בקלימה — 5/12", deadline:"2026-11-10", priority:"גבוהה", order:13.4,
-   notes:"ההזמנה הקיימת (6–9/12) היא הצעת שותף ואי אפשר להזיז אותה · הזמנה נפרדת ל-5–6/12, Deluxe Pool Access, ₪695 · לכתוב למלון לחבר את ההזמנות לאותו חדר · כדאי קודם לבקש מהמלון להזיז את כל ההזמנה ל-5–8/12",
+   notes:KALIMA_EXTRA_NOTE,
    link:"https://www.booking.com/hotel/th/kalima-resort-amp-villas-khao-lak.html?checkin=2026-12-05&checkout=2026-12-06&group_adults=2"},
   {owner:"both", title:"להזיז את מונטראג׳ ל-8–10/12", deadline:"2026-11-15", priority:"גבוהה", order:13.5,
    notes:"אישור 3051425 · במייל ל-rsvns.coach@montraj.com · ביטול חינם עד 21/11, אז אם לא מאשרים — לבטל ולהזמין מחדש", link:"mailto:rsvns.coach@montraj.com"},
@@ -524,7 +525,7 @@ function seedData(){
   const hanoiId = uid('d'), manilaId = uid('d');
 
   return {
-    schema:26,
+    schema:27,
     tripName:"My Big Trip 🌏",
     startDate:"2026-11-22",
     endDate:null,
@@ -660,8 +661,8 @@ function seedData(){
       ...WEST_TASKS.map(t=>({id:uid('m'), status:"todo", category:"הזמנות", countryId:"thailand", ...t})),
       {id:uid('m'), owner:"both", category:"הזמנות", title:"להזמין טיסה סובארנבומי → צ׳יאנג מאי, 23/11", status:"todo", deadline:"2026-11-05", notes:"מסובארנבומי, אחרי 16:30 — שני כרטיסים נפרדים, צריך זמן לביקורת גבולות ולמזוודות · Thai Vietjet 20:35: €376.92 לשניים · לבדוק Thai Airways ו-Bangkok Airways", priority:"גבוהה", link:"", countryId:"thailand", order:9},
       {id:uid('m'), owner:"both", category:"הזמנות", title:"להזמין טיסה צ׳יאנג מאי → פוקט, 26/11 בבוקר", status:"todo", deadline:"2026-11-05", notes:"לנחות עד 13:00 כדי להגיע לאימון של 16:00 · לא מצאתי ישירה בחיפוש — לבדוק ב-Thai AirAsia; אחרת עם החלפה בבנגקוק", priority:"גבוהה", link:"https://www.airasia.com/", countryId:"thailand", order:9.1},
-      {id:uid('m'), owner:"both", category:"הזמנות", title:"לאשר טלפונית את פרטי החשבון של המחנה", status:"todo", deadline:"2026-10-05", notes:"לפני שמעבירים ฿6,075 — פרטי בנק במייל הם הדבר הכי מזויף בהזמנות. החשבון על שם פרטי ובכתובת בחון קאן, לא באי", priority:"גבוהה", link:"", countryId:"thailand", order:10},
-      {id:uid('m'), owner:"both", category:"הזמנות", title:"להעביר מקדמה ฿6,075 ב-Wise למחנה", status:"todo", deadline:"2026-10-10", notes:"זה מה שסוגר את ההזמנה. ฿12,150 סה״כ, היתרה במזומן בהגעה", priority:"גבוהה", link:"", countryId:"thailand", order:11},
+      {id:uid('m'), owner:"both", category:"הזמנות", title:"לאשר טלפונית את פרטי החשבון של המחנה", status:"done", deadline:"2026-10-05", notes:"לפני שמעבירים ฿6,075 — פרטי בנק במייל הם הדבר הכי מזויף בהזמנות. החשבון על שם פרטי ובכתובת בחון קאן, לא באי", priority:"גבוהה", link:"", countryId:"thailand", order:10},
+      {id:uid('m'), owner:"both", category:"הזמנות", title:"להעביר מקדמה ฿6,075 ב-Wise למחנה", status:"done", deadline:"2026-10-10", notes:"זה מה שסוגר את ההזמנה. ฿12,150 סה״כ, היתרה במזומן בהגעה", priority:"גבוהה", link:"", countryId:"thailand", order:11},
       {id:uid('m'), owner:"both", category:"הזמנות", title:"למשוך ฿6,075 מזומן ליתרה במחנה", status:"todo", deadline:"2026-11-25", notes:"אין כרטיסים ואין העברות במקום. כספומט גובה ฿220 לכל משיכה — למשוך בבת אחת", priority:"בינונית", link:"", countryId:"thailand", order:12},
       {id:uid('m'), owner:"both", category:"כניסה לתאילנד", title:"להגיש TDAC — 72 שעות לפני הנחיתה", status:"todo", deadline:"2026-11-19", notes:"חובה, חינם, אונליין. כל אתר שגובה כסף הוא לא הרשמי", priority:"גבוהה", link:"", countryId:"thailand", order:11},
 
@@ -1893,6 +1894,34 @@ function ensureDefaults(){
       });
     }
     STATE.schema = 26;
+  }
+
+  /*
+   * 5/11: קלימה אישרה במייל את הלילה של 5/12 בהזמנה ישירה — ฿8,800 כולל ארוחת
+   * בוקר, לא מוחזר, מחכה לתשלום בלינק — וארוחת הבוקר בשאר הימים ฿600 לאדם.
+   * והמקדמה למחנה כבר התקבלה (27/9), אז שתי משימות התשלום סגורות.
+   */
+  if(STATE.schema < 27){
+    const seedShared = window.SHARED_SEED;
+    const copy = x => JSON.parse(JSON.stringify(x));
+    const meta = STATE.shared;
+    if(seedShared && meta && meta.days){
+      const seedRows = seedShared.days.flatMap(d=>d.rows);
+      const fields = {s_g6_stay:['baht','notes','priceEstimate'], s_g6_3:['notes'], s_g7_0:['baht','notes','priceEstimate'], s_g8_0:['baht','notes','priceEstimate'], s_g9_0:['baht','notes','priceEstimate']};
+      meta.days.filter(d=>d.owner!=='talia').forEach(d=>d.rows.forEach(r=>{
+        const keys = fields[r.id]; const fresh27 = keys && seedRows.find(x=>x.id===r.id);
+        if(fresh27) keys.forEach(k=>{ r[k] = copy(fresh27[k]); });
+      }));
+      const hotel = (meta.hotels||[]).find(h=>h.hotel==='Kalima Resort and Villas · לילה נוסף');
+      const freshHotel = seedShared.hotels.find(h=>h.hotel==='Kalima Resort and Villas · לילה נוסף');
+      if(hotel && freshHotel) Object.assign(hotel, copy(freshHotel));
+    }
+    const extra = STATE.masterChecklist.find(t=>t.title==='להזמין לילה נוסף בקלימה — 5/12');
+    if(extra && extra.status!=='done') extra.notes = KALIMA_EXTRA_NOTE;
+    STATE.masterChecklist.forEach(t=>{
+      if(t.title==='לאשר טלפונית את פרטי החשבון של המחנה' || t.title==='להעביר מקדמה ฿6,075 ב-Wise למחנה') t.status = 'done';
+    });
+    STATE.schema = 27;
   }
 
   /* משימות חדשות מתווספות בכל גרסה, לפי כותרת */
