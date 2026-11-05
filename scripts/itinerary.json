@@ -2688,7 +2688,7 @@
     "loc": "קאו לאק",
     "cat": "אחר",
     "baht": null,
-    "status": "להזמין",
+    "status": "מוזמן",
     "link": "",
     "notes": "הלילה הזה בהזמנה ישירה מול המלון, וביקשנו לחבר אותה להזמנת בוקינג — אותו חדר עד 9/12",
     "priceEstimate": {
@@ -2748,16 +2748,24 @@
     "loc": "קאו לאק",
     "cat": "לינה",
     "baht": 8800,
-    "status": "להזמין",
+    "status": "מוזמן",
     "link": "https://www.booking.com/hotel/th/kalima-resort-amp-villas-khao-lak.html?checkin=2026-12-05&checkout=2026-12-06&group_adults=2",
-    "notes": "אושר מול המלון במייל, 5/11 (Lyla, rsvn.khaolak@kalimaresort.com) · ฿8,800 כולל ארוחת בוקר לשניים · לא מוחזר · לשלם בלינק ששלחו ולשלוח להם אסמכתא · ביקשנו אותו חדר לכל 5–9/12 — בכפוף לזמינות",
+    "notes": "הזמנה ישירה מול המלון · שולם 5/11, ฿8,800 כולל ארוחת בוקר · לא מוחזר · ביקשנו אותו חדר לכל 5–8/12, בכפוף לזמינות",
     "priceEstimate": {
-     "kind": "published",
-     "basis": "הצעת המלון במייל, 5/11 — ฿8,800 נטו, כולל ארוחת בוקר.",
+     "kind": "booking",
+     "basis": "המחיר מההזמנה הישירה, ששולמה; נספר פעם אחת.",
      "lowFactor": 1,
      "highFactor": 1,
      "sourceUrl": "",
-     "checked": "2026-11-05"
+     "checked": "2026-11-05",
+     "booking": {
+      "category": "accommodation",
+      "split": "ratio",
+      "key": "khaolak_extra",
+      "match": "קלימה · לילה נוסף",
+      "rows": 1,
+      "totalThb": 8800
+     }
     },
     "managed": true
    }

@@ -387,6 +387,8 @@ function migrateKynBooking(){
 const MONTRAJ_NOTE = "אישור 3051425 · הזמנה ישירה באתר המלון עם קוד Member · Historic Cabin Family · להזיז מ-23–26/11 ל-8–10/12 — הסכום לפי מחיר הלילה בהזמנה, לעדכן אחרי שהמלון מאשר · משלמים בצ׳ק-אין · ביטול חינם עד 21/11 · פיקדון ฿1,000 מזומן, מוחזר בצ׳ק-אאוט · החליפה את הזמנת בוקינג 5123136373";
 const KALIMA_NOTE = "6–9/12 · Deluxe Pool Access · אישור 7195273990380466772 · שולם $621.21 · לא מוחזר · בלי ארוחת בוקר ($18 לאדם) · מ-8/12 בבנגקוק, אז הלילה של 8/12 לא מנוצל · ההזמנה הקודמת (5770154448, 2–8/12) בוטלה בחינם";
 const KALIMA_EXTRA_NOTE = "אושר מול המלון במייל, 5/11 · ฿8,800 כולל ארוחת בוקר · לא מוחזר · נשאר: לשלם בלינק של KBank ששלחו, ולשלוח אסמכתא ל-rsvn.khaolak@kalimaresort.com · ביקשנו אותו חדר לכל 5–9/12, בכפוף לזמינות";
+const KALIMA_EXTRA_EXPENSE = () => ({id:uid('x'), date:"2026-11-05", title:"קלימה · לילה נוסף 5/12", category:"accommodation",
+  amount:8800, currency:"THB", paidBy:"itai", split:"ratio", status:"paid", note:"הזמנה ישירה מול המלון (Lyla) · Deluxe Pool Access, כולל ארוחת בוקר · שולם בלינק של KBank · לא מוחזר"});
 const ISB_NOTE = "8/12 אחר הצהריים, בדרך מדון מואנג · isbalum@isb.ac.th, לפחות יומיים מראש, תעודה מזהה בשער · לשאול אם אפשר להשאיר מזוודות בשער";
 /* ההוצאה על Eleven כפי שהייתה לפני גרסה 25 — מסמכים ישנים עוברים דרכה בדרך */
 const ELEVEN_EXPENSE_16 = {date:"2026-12-09", title:"Eleven Bangkok Sukhumvit 11 · לילה אחרון", category:"accommodation",
@@ -401,7 +403,7 @@ const WEST_TASKS = [
   {owner:"both", title:"להזמין לינה בקאו סוק, 3–5/12", deadline:"2026-11-10", priority:"גבוהה", order:13.3,
    notes:"הבחירה: Khao Sok Palmview, כ-₪462 לשני לילות · חלופה: River Lodge, על הנהר",
    link:"https://www.booking.com/hotel/th/khao-sok-palmview-resort.html?checkin=2026-12-03&checkout=2026-12-05&group_adults=2"},
-  {owner:"both", title:"להזמין לילה נוסף בקלימה — 5/12", deadline:"2026-11-10", priority:"גבוהה", order:13.4,
+  {owner:"both", title:"להזמין לילה נוסף בקלימה — 5/12", deadline:"2026-11-10", priority:"גבוהה", order:13.4, status:"done",
    notes:KALIMA_EXTRA_NOTE,
    link:"https://www.booking.com/hotel/th/kalima-resort-amp-villas-khao-lak.html?checkin=2026-12-05&checkout=2026-12-06&group_adults=2"},
   {owner:"both", title:"להזיז את מונטראג׳ ל-8–10/12", deadline:"2026-11-15", priority:"גבוהה", order:13.5,
@@ -525,7 +527,7 @@ function seedData(){
   const hanoiId = uid('d'), manilaId = uid('d');
 
   return {
-    schema:27,
+    schema:28,
     tripName:"My Big Trip 🌏",
     startDate:"2026-11-22",
     endDate:null,
@@ -562,7 +564,8 @@ function seedData(){
          amount:5446.58, currency:"THB", paidBy:"itai", split:"ratio", status:"due",
          note:MONTRAJ_NOTE},
         {id:uid('x'), date:"2026-09-10", title:"Kalima Resort · 3 לילות בקאו לאק", category:"accommodation",
-         amount:1931.44, currency:"ILS", paidBy:"itai", split:"ratio", status:"paid", note:KALIMA_NOTE}
+         amount:1931.44, currency:"ILS", paidBy:"itai", split:"ratio", status:"paid", note:KALIMA_NOTE},
+        KALIMA_EXTRA_EXPENSE()
       ],
       settlements:[]
     },
@@ -1922,6 +1925,32 @@ function ensureDefaults(){
       if(t.title==='לאשר טלפונית את פרטי החשבון של המחנה' || t.title==='להעביר מקדמה ฿6,075 ב-Wise למחנה') t.status = 'done';
     });
     STATE.schema = 27;
+  }
+
+  /* 5/11: הלילה של 5/12 בקלימה שולם — לפנקס, ומסומן כמוזמן */
+  if(STATE.schema < 28){
+    const seedShared = window.SHARED_SEED;
+    const copy = x => JSON.parse(JSON.stringify(x));
+    const meta = STATE.shared;
+    if(seedShared && meta && meta.days){
+      const seedRows = seedShared.days.flatMap(d=>d.rows);
+      meta.days.filter(d=>d.owner!=='talia').forEach(d=>d.rows.forEach(r=>{
+        if(r.id!=='s_g6_stay' && r.id!=='s_g6_3') return;
+        const fresh28 = seedRows.find(x=>x.id===r.id);
+        ['status','notes','priceEstimate','baht'].forEach(k=>{ if(fresh28[k]!==undefined) r[k] = copy(fresh28[k]); });
+      }));
+      const hotel = (meta.hotels||[]).find(h=>h.hotel==='Kalima Resort and Villas · לילה נוסף');
+      const freshHotel = seedShared.hotels.find(h=>h.hotel==='Kalima Resort and Villas · לילה נוסף');
+      if(hotel && freshHotel) Object.assign(hotel, copy(freshHotel));
+      if(meta.bookings && !meta.bookings.some(b=>b.what==='Kalima · לילה נוסף')){
+        const at = meta.bookings.findIndex(b=>b.what==='Kalima Resort and Villas');
+        meta.bookings.splice(at>=0 ? at : meta.bookings.length, 0, copy(seedShared.bookings.find(b=>b.what==='Kalima · לילה נוסף')));
+      }
+    }
+    if(!STATE.money.expenses.some(x=>/^קלימה · לילה נוסף/.test(x.title||''))) STATE.money.expenses.push(KALIMA_EXTRA_EXPENSE());
+    const extra = STATE.masterChecklist.find(t=>t.title==='להזמין לילה נוסף בקלימה — 5/12');
+    if(extra) Object.assign(extra, {status:'done', notes:'שולם 5/11 · ฿8,800 כולל ארוחת בוקר'});
+    STATE.schema = 28;
   }
 
   /* משימות חדשות מתווספות בכל גרסה, לפי כותרת */

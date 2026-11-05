@@ -49,6 +49,14 @@
    "freeCancel": "בוטל"
   },
   {
+   "what": "Kalima · לילה נוסף",
+   "when": "5–6/12",
+   "details": "קאו לאק · לילה · Deluxe Pool Access · ארוחת בוקר · הזמנה ישירה מול המלון (Lyla, rsvn.khaolak@kalimaresort.com)",
+   "ref": "123228",
+   "payment": "שולם ฿8,800",
+   "freeCancel": "לא מוחזר"
+  },
+  {
    "what": "Kalima Resort and Villas",
    "when": "6–9/12",
    "details": "קאו לאק · 3 לילות · Deluxe Double/Twin with Pool Access · בלי ארוחת בוקר · הלילה של 8/12 לא מנוצל — 5/12 בהזמנה נפרדת",
@@ -256,9 +264,9 @@
    "dates": "5–6/12",
    "nights": 1,
    "hotel": "Kalima Resort and Villas · לילה נוסף",
-   "what": "הזמנה ישירה מול המלון, 5/11 — Deluxe Pool Access, ฿8,800 כולל ארוחת בוקר, לא מוחזר · ביקשנו לחבר להזמנת בוקינג, אותו חדר עד 9/12.",
+   "what": "הזמנה ישירה מול המלון — Deluxe Pool Access, ฿8,800 כולל ארוחת בוקר · שולם 5/11 · לא מוחזר · ביקשנו אותו חדר עד 8/12.",
    "perNight": 8800,
-   "choice": "לשלם",
+   "choice": "מוזמן",
    "freeCancel": "לא מוחזר",
    "link": "בוקינג",
    "linkLink": "https://www.booking.com/hotel/th/kalima-resort-amp-villas-khao-lak.html?checkin=2026-12-05&checkout=2026-12-06&group_adults=2"
