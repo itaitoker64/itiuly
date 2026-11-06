@@ -406,6 +406,10 @@ const WEST_TASKS = [
   {owner:"both", title:"להזמין לילה נוסף בקלימה — 5/12", deadline:"2026-11-10", priority:"גבוהה", order:13.4, status:"done",
    notes:KALIMA_EXTRA_NOTE,
    link:"https://www.booking.com/hotel/th/kalima-resort-amp-villas-khao-lak.html?checkin=2026-12-05&checkout=2026-12-06&group_adults=2"},
+  {owner:"both", title:"להחליט על KYN: להישאר ב-26–29/11, או דירת שני חדרים ל-30/11–3/12", deadline:"2026-11-10", priority:"גבוהה", order:13.05,
+   notes:"6/11: Sea House מלא ב-30/11–3/12. הצעה יחידה: Two-Bedroom Apartment, בלי מחיר עדיין · לשאול מחיר לפני החלטה · אם לא מתאים — להישאר ב-26–29/11 כמו שהוזמן", link:"mailto:info@phuket-krabi-muaythai.com"},
+  {owner:"both", title:"לקבל תשובה מקלימה על הלילה של 8/12 ועל מונית לשדה", deadline:"2026-11-10", priority:"בינונית", order:13.51,
+   notes:"נשלחה בקשה ב-5/11: החזר חלקי או זיכוי על הלילה של 8–9/12, ארוחה ארוזה ל-6/12, מונית לשדה ב-8/12 בסביבות 09:00 · עוד לא ענו (Lyla)", link:"mailto:rsvn.khaolak@kalimaresort.com"},
   {owner:"both", title:"להזיז את מונטראג׳ ל-8–10/12", deadline:"2026-11-15", priority:"גבוהה", order:13.5,
    notes:"אישור 3051425 · במייל ל-rsvns.coach@montraj.com · ביטול חינם עד 21/11, אז אם לא מאשרים — לבטל ולהזמין מחדש", link:"mailto:rsvns.coach@montraj.com"},
   {owner:"both", title:"לבטל את Eleven Bangkok — חינם עד 5/12", deadline:"2026-12-05", priority:"בינונית", order:13.55,
@@ -527,7 +531,7 @@ function seedData(){
   const hanoiId = uid('d'), manilaId = uid('d');
 
   return {
-    schema:28,
+    schema:29,
     tripName:"My Big Trip 🌏",
     startDate:"2026-11-22",
     endDate:null,
@@ -1951,6 +1955,18 @@ function ensureDefaults(){
     const extra = STATE.masterChecklist.find(t=>t.title==='להזמין לילה נוסף בקלימה — 5/12');
     if(extra) Object.assign(extra, {status:'done', notes:'שולם 5/11 · ฿8,800 כולל ארוחת בוקר'});
     STATE.schema = 28;
+  }
+
+  /* 6/11: KYN ענו — Sea House מלא ב-30/11–3/12, והצעה יחידה היא דירת שני חדרים בלי מחיר; קלימה עוד לא ענתה על הלילה של 8/12 */
+  if(STATE.schema < 29){
+    const fresh29 = (title)=>fresh.masterChecklist.find(t=>t.title===title);
+    ['להחליט על KYN: להישאר ב-26–29/11, או דירת שני חדרים ל-30/11–3/12','לקבל תשובה מקלימה על הלילה של 8/12 ועל מונית לשדה'].forEach(title=>{
+      if(!STATE.masterChecklist.some(t=>t.title===title)){
+        const f = fresh29(title);
+        if(f) STATE.masterChecklist.push(JSON.parse(JSON.stringify(f)));
+      }
+    });
+    STATE.schema = 29;
   }
 
   /* משימות חדשות מתווספות בכל גרסה, לפי כותרת */
