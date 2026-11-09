@@ -384,12 +384,11 @@ function migrateKynBooking(){
  * המשימות של המסלול: צ׳יאנג מאי בהתחלה, לילה רביעי באאו נאנג, שני לילות בקאו
  * סוק, שלושה בקאו לאק ושניים בבנגקוק בסוף — ביחד עד 10/12.
  */
-const MONTRAJ_NOTE = "אישור 3051425 · הזמנה ישירה באתר המלון עם קוד Member · Historic Cabin Family · להזיז מ-23–26/11 ל-8–10/12 — הסכום לפי מחיר הלילה בהזמנה, לעדכן אחרי שהמלון מאשר · משלמים בצ׳ק-אין · ביטול חינם עד 21/11 · פיקדון ฿1,000 מזומן, מוחזר בצ׳ק-אאוט · החליפה את הזמנת בוקינג 5123136373";
-const KALIMA_NOTE = "6–9/12 · Deluxe Pool Access · אישור 7195273990380466772 · שולם $621.21 · לא מוחזר · בלי ארוחת בוקר ($18 לאדם) · מ-8/12 בבנגקוק, אז הלילה של 8/12 לא מנוצל · ההזמנה הקודמת (5770154448, 2–8/12) בוטלה בחינם";
+const KALIMA_NOTE = "6–9/12 · Deluxe Pool Access · אישור 7195273990380466772 · שולם $621.21 · לא מוחזר · בלי ארוחת בוקר (฿600 לאדם במלון) · 5/12 בהזמנה ישירה נפרדת · ההזמנה הקודמת (5770154448, 2–8/12) בוטלה בחינם";
 const KALIMA_EXTRA_NOTE = "אושר מול המלון במייל, 5/11 · ฿8,800 כולל ארוחת בוקר · לא מוחזר · נשאר: לשלם בלינק של KBank ששלחו, ולשלוח אסמכתא ל-rsvn.khaolak@kalimaresort.com · ביקשנו אותו חדר לכל 5–9/12, בכפוף לזמינות";
 const KALIMA_EXTRA_EXPENSE = () => ({id:uid('x'), date:"2026-11-05", title:"קלימה · לילה נוסף 5/12", category:"accommodation",
   amount:8800, currency:"THB", paidBy:"itai", split:"ratio", status:"paid", note:"הזמנה ישירה מול המלון (Lyla) · Deluxe Pool Access, כולל ארוחת בוקר · שולם בלינק של KBank · לא מוחזר"});
-const ISB_NOTE = "8/12 אחר הצהריים, בדרך מדון מואנג · isbalum@isb.ac.th, לפחות יומיים מראש, תעודה מזהה בשער · לשאול אם אפשר להשאיר מזוודות בשער";
+const ISB_NOTE = "25/11, 10:30 · isbalum@isb.ac.th, לפחות יומיים מראש, תעודה מזהה בשער";
 /* ההוצאה על Eleven כפי שהייתה לפני גרסה 25 — מסמכים ישנים עוברים דרכה בדרך */
 const ELEVEN_EXPENSE_16 = {date:"2026-12-09", title:"Eleven Bangkok Sukhumvit 11 · לילה אחרון", category:"accommodation",
   amount:3010.10, currency:"THB", paidBy:"itai", split:"ratio", status:"due", note:"אישור 5243050600 · לשניים — לעדכן בבוקינג (הוזמן לאדם אחד) · בוקינג מחייבת אוטומטית · ביטול חינם עד 5/12 · פיקדון ฿1,000 במזומן"};
@@ -397,27 +396,20 @@ const WEST_TASKS = [
   {owner:"both", title:"להאריך את צ׳רמנטרה בלילה — 2/12", deadline:"2026-11-10", priority:"גבוהה", order:13.2,
    notes:"אישור 5553772333 · לבקש את אותה וילה, כדי לא לארוז באמצע · כ-₪613 · אם בוקינג לא מאפשרת — הזמנה נפרדת ללילה ומייל למלון לחבר",
    link:"https://secure.booking.com/myreservations.html"},
-  {owner:"both", title:"להזמין מלון בצ׳יאנג מאי, 23–26/11", deadline:"2026-11-03", priority:"גבוהה", order:13.1,
-   notes:"לוי קראתונג — המחירים עולים ונגמרים · Centara Riverside (על הנהר, 8.5) ₪4,693 לשלושה לילות · לחפש גם גסטהאוס בעיר העתיקה ליד שער תא פאה",
-   link:"https://www.booking.com/hotel/th/centara-riverside-hotel-chiang-mai.html?checkin=2026-11-23&checkout=2026-11-26&group_adults=2"},
   {owner:"both", title:"להזמין לינה בקאו סוק, 3–5/12", deadline:"2026-11-10", priority:"גבוהה", order:13.3,
    notes:"הבחירה: Khao Sok Palmview, כ-₪462 לשני לילות · חלופה: River Lodge, על הנהר",
    link:"https://www.booking.com/hotel/th/khao-sok-palmview-resort.html?checkin=2026-12-03&checkout=2026-12-05&group_adults=2"},
   {owner:"both", title:"להזמין לילה נוסף בקלימה — 5/12", deadline:"2026-11-10", priority:"גבוהה", order:13.4, status:"done",
    notes:KALIMA_EXTRA_NOTE,
    link:"https://www.booking.com/hotel/th/kalima-resort-amp-villas-khao-lak.html?checkin=2026-12-05&checkout=2026-12-06&group_adults=2"},
-  {owner:"both", title:"להחליט על KYN: להישאר ב-26–29/11, או דירת שני חדרים ל-30/11–3/12", deadline:"2026-11-10", priority:"גבוהה", order:13.05,
-   notes:"6/11: Sea House מלא ב-30/11–3/12. הצעה יחידה: Two-Bedroom Apartment, בלי מחיר עדיין · לשאול מחיר לפני החלטה · אם לא מתאים — להישאר ב-26–29/11 כמו שהוזמן", link:"mailto:info@phuket-krabi-muaythai.com"},
-  {owner:"both", title:"להחליט על מונית מקלימה לשדה ב-8/12 — 1,800 ฿ לרכב", deadline:"2026-11-10", priority:"בינונית", order:13.51,
-   notes:"תשובת קלימה 6/11: לא מחזירים ולא נותנים זיכוי על הלילה של 8–9/12 (לא מוחזר; Kalima טוענים שהוא דרך Agoda וצריך לשנות שם). מונית פרטית ל-4 נוסעים: 1,800 ฿ לכיוון, 3,500 ฿ הלוך־חזור, 100% מראש ולא מוחזר. ארוחה ארוזה ל-6/12: 600 ฿ לאדם — אבל ארוחת הבוקר של הלילה 5–6/12 כלולה, לשאול אם אפשר לארוז אותה", link:"mailto:rsvn.khaolak@kalimaresort.com"},
-  {owner:"both", title:"להזיז את מונטראג׳ ל-8–10/12", deadline:"2026-11-15", priority:"גבוהה", order:13.5,
-   notes:"אישור 3051425 · במייל ל-rsvns.coach@montraj.com · ביטול חינם עד 21/11, אז אם לא מאשרים — לבטל ולהזמין מחדש", link:"mailto:rsvns.coach@montraj.com"},
-  {owner:"both", title:"לבטל את Eleven Bangkok — חינם עד 5/12", deadline:"2026-12-05", priority:"בינונית", order:13.55,
-   notes:"אישור 5243050600 · הלינה בבנגקוק עוברת למונטראג׳", link:"https://secure.booking.com/myreservations.html?bn=5243050600"},
-  {owner:"both", title:"להזמין טיסה מפוקט לבנגקוק ב-8/12 — לשניכם", deadline:"2026-11-15", priority:"גבוהה", order:13.6,
-   notes:"Thai AirAsia 11:45 → 13:10 לדון מואנג, €102.84 לשניים · DMK קרוב ל-ISB", link:""},
-  {owner:"both", title:"להזמין מקלט פילים, 25/11", deadline:"2026-11-15", priority:"בינונית", order:13.65,
-   notes:"חצי יום, בלי רכיבה ובלי מופעים · כ-฿1,500–2,000 לאדם עם איסוף", link:""},
+  {owner:"both", title:"לתקן מול קלימה: נשארים עד 9/12", deadline:"2026-11-12", priority:"בינונית", order:13.45,
+   notes:"במייל מ-5/11 כתבנו שנעזוב ב-8/12 וביקשנו לשחרר את הלילה של 8–9/12. נשארים עד 9/12 — לכתוב ל-Lyla שזה מבוטל, ושהחדר נשאר 5–9/12", link:"mailto:rsvn.khaolak@kalimaresort.com"},
+  {owner:"both", title:"להחליט על מונית מקלימה לשדה ב-9/12 — 1,800 ฿ לרכב", deadline:"2026-11-30", priority:"בינונית", order:13.51,
+   notes:"רכב פרטי של קלימה לשדה בפוקט: ฿1,800 לכיוון, עד 4 נוסעים, 100% מראש ולא מוחזר · לתאם לפי שעת הטיסה לבנגקוק", link:"mailto:rsvn.khaolak@kalimaresort.com"},
+  {owner:"both", title:"לעדכן את Eleven Bangkok לשני אנשים", deadline:"2026-11-15", priority:"בינונית", order:13.5,
+   notes:"אישור 5243050600 · ההזמנה לאדם אחד · החדר עם מיטת קינג, אבל המחיר עלול להשתנות", link:"https://secure.booking.com/myreservations.html"},
+  {owner:"both", title:"להזמין טיסה מפוקט לבנגקוק ב-9/12 — לשניכם", deadline:"2026-11-15", priority:"גבוהה", order:13.6,
+   notes:"עדיף אחרי 14:00 — מקלימה לשדה כשעה וחצי · DMK או BKK — הטיסה הביתה רק ב-10/12, 11:15 מסוברנבומי", link:""},
   {owner:"both", title:"טיול יום לפי פי מאאו נאנג, 2/12 — אם בא לכם", deadline:"2026-11-28", priority:"נמוכה", order:13.7,
    notes:"ספידבוט עם איסוף מצ׳רמנטרה וצהריים, כ-฿1,800–2,500 לאדם + אגרת פארק ฿400 · אפשר גם להחליט שם, יום קודם", link:""},
   {owner:"both", title:"להזמין ואן מאאו נאנג לקאו סוק, 3/12", deadline:"2026-11-28", priority:"בינונית", order:13.8,
@@ -448,7 +440,7 @@ const SUPERSEDED_TASKS = ['Our Jungle House — ביטול חינם רק עד 8/
  */
 const TALIA_THAILAND = [
   {name:"בנגקוק — מחכה למלח", wiki:"Bangkok", hue:"#C97B5A", lat:13.7440, lng:100.5560, arrival:"2026-12-10", departure:"2026-12-11", nights:1,
-   accommodation:"להאריך את מונטראג׳ בלילה, או מלון אחר", transport:"",
+   accommodation:"להאריך את Eleven בלילה, או מלון אחר", transport:"",
    notes:"איתי טס בבוקר. מלח נוחתת ב-11/12 ב-13:00 בסוברנבומי, ובערב טסות יחד לצפון.", budget:500, order:9},
   {name:"צ'יאנג מאי", wiki:"Chiang Mai", hue:"#8C6FA0", lat:18.7883, lng:98.9853, arrival:"2026-12-11", departure:"2026-12-15", nights:4,
    accommodation:"", transport:"טיסת ערב מבנגקוק, כשעה ורבע",
@@ -515,7 +507,7 @@ function TALIA_INDIA(){
 const ONWARD_NOTE = "טליה: הפטור הוא 30 יום מהכניסה ב-23/11, כלומר יציאה עד 22/12. ארקיע ובביקורת הגבולות יבקשו לראות כרטיס יציאה מתאילנד בתוך החלון — אין לה כרטיס חזור, אז הכרטיס בנגקוק → קולומבו ב-21/12 צריך להיות מוזמן לפני הטיסה ב-22/11. עדיף כרטיס שאפשר לשנות. לאיתי: IZ592 ב-10/12.";
 const TALIA_TASKS = [
   {title:"לינה בבנגקוק ללילה של 10/12", deadline:"2026-11-30", priority:"בינונית", order:20,
-   notes:"אפשר להאריך את מונטראג׳ בלילה (אישור 3051425). מלח נוחתת ב-11/12 ב-13:00", link:"https://secure.booking.com/myreservations.html"},
+   notes:"אפשר להאריך את Eleven בלילה (אישור 5243050600). מלח נוחתת ב-11/12 ב-13:00", link:"https://secure.booking.com/myreservations.html"},
   {title:"טיסה בנגקוק → צ׳יאנג מאי, 11/12 בערב — עם מלח", deadline:"2026-11-30", priority:"בינונית", order:21, notes:"מ-DMK או BKK, כשעה ורבע", link:""},
   {title:"טיסה צ׳יאנג ראי → בנגקוק, 20/12", deadline:"2026-11-30", priority:"בינונית", order:22, notes:"", link:""},
   {title:"לינה בוולגמה 22/12–1/1 — חגים, להזמין מוקדם", deadline:"2026-11-15", priority:"גבוהה", order:23,
@@ -531,7 +523,7 @@ function seedData(){
   const hanoiId = uid('d'), manilaId = uid('d');
 
   return {
-    schema:30,
+    schema:31,
     tripName:"My Big Trip 🌏",
     startDate:"2026-11-22",
     endDate:null,
@@ -541,7 +533,7 @@ function seedData(){
     /* מה שמשותף לשניים, ומה שממשיך אחרי שאיתי טס הביתה */
     trip:{
       splitDate:"2026-12-10",
-      together:{title:"תאילנד · מהצפון לאנדמן", subtitle:"22 בנובמבר – 10 בדצמבר 2026 · 17 לילות", nights:17},
+      together:{title:"תאילנד · מבנגקוק לאנדמן", subtitle:"22 בנובמבר – 10 בדצמבר 2026 · 17 לילות", nights:17},
       itai:{title:"שבועיים וחצי", subtitle:"22/11 – 10/12 · ואז הביתה מבנגקוק", homeDate:"2026-12-10",
             homeFlight:"ארקיע IZ592 · בנגקוק → תל אביב · 10/12, 11:15"},
       talia:{title:"הטיול הגדול", subtitle:"מ-22/11/2026 והלאה · תאילנד, סרי לנקה, הודו, פיליפינים, וייטנאם",
@@ -564,12 +556,14 @@ function seedData(){
          amount:777, currency:"ILS", paidBy:"itai", split:"full-itai", status:"paid", note:"210$ ל-lastminute · בערך, לפי 3.7 ₪ לדולר — לעדכן לפי החיוב בכרטיס"},
         {id:uid('x'), date:"2026-09-10", title:"Chermantra Aonang · 3 לילות", category:"accommodation",
          amount:1839, currency:"ILS", paidBy:"itai", split:"ratio", status:"paid", note:"אישור 5553772333 · ביטול חינם עד 14/11"},
-        {id:uid('x'), date:"2026-12-08", title:"Montraj Coach Sukhumvit · 2 לילות בבנגקוק", category:"accommodation",
-         amount:5446.58, currency:"THB", paidBy:"itai", split:"ratio", status:"due",
-         note:MONTRAJ_NOTE},
+        {id:uid('x'), date:"2026-11-23", title:"Montraj Coach Sukhumvit · 3 לילות בבנגקוק", category:"accommodation",
+         amount:8169.87, currency:"THB", paidBy:"itai", split:"ratio", status:"due",
+         note:"אישור 3051425 · הזמנה ישירה באתר המלון עם קוד Member · Historic Cabin Family · משלמים בצ׳ק-אין · ביטול חינם עד 21/11 · פיקדון ฿1,000 מזומן, מוחזר בצ׳ק-אאוט · החליפה את הזמנת בוקינג 5123136373 ב-₪1,128"},
         {id:uid('x'), date:"2026-09-10", title:"Kalima Resort · 3 לילות בקאו לאק", category:"accommodation",
          amount:1931.44, currency:"ILS", paidBy:"itai", split:"ratio", status:"paid", note:KALIMA_NOTE},
-        KALIMA_EXTRA_EXPENSE()
+        KALIMA_EXTRA_EXPENSE(),
+        {id:uid('x'), date:"2026-12-09", title:"Eleven Bangkok Sukhumvit 11 · לילה אחרון", category:"accommodation",
+         amount:3010.10, currency:"THB", paidBy:"itai", split:"ratio", status:"due", note:"אישור 5243050600 · לשניים — לעדכן בבוקינג (הוזמן לאדם אחד) · בוקינג מחייבת אוטומטית · ביטול חינם עד 5/12 · פיקדון ฿1,000 במזומן"}
       ],
       settlements:[]
     },
@@ -577,15 +571,16 @@ function seedData(){
     countries:[
       {id:"thailand", owner:"both", name:"תאילנד", flag:"🇹🇭", color:"var(--thailand)", order:1, currency:"THB", notes:"",
         destinations:[
-          {id:bangkokId, owner:"both", name:"צ׳יאנג מאי — לוי קראתונג", wiki:"Chiang Mai", hue:"#8C6FA0",
-           lat:18.7883, lng:98.9853, arrival:"2026-11-23", departure:"2026-11-26", nights:3,
-           accommodation:"להזמין — על הנהר או ליד שער תא פאה", transport:"ארקיע IZ591 לבנגקוק, ומשם ישר לטיסה צפונה",
-           notes:"לוי קראתונג ויי פנג ב-24/11 על נהר הפינג, העיר העתיקה, מקלט פילים ודוי סותפ בשקיעה",
-           scooter:{ok:false, headline:"לא הפעם", note:"שלושה ימים בעיר, ובחג הכבישים סגורים ועמוסים. גראב וסונגתאו אדום."},
-           budget:2500, status:"planned", companions:["ביחד"], order:1},
+          {id:bangkokId, owner:"both", name:"בנגקוק", wiki:"Bangkok", hue:"#C97B5A",
+           lat:13.7563, lng:100.5018, arrival:"2026-11-23", departure:"2026-11-26", nights:3,
+           accommodation:"Montraj Coach Sukhumvit", transport:"ארקיע IZ591 מתל אביב",
+           notes:"לוי קראתונג בליל הירח המלא, הארמון המלכותי, ISB, ומואיי תאי ברג׳אדמנרן",
+           scooter:{ok:false, headline:"לא בבנגקוק",
+             note:"תנועה, מתחלפי נתיבים ואוטובוסים — מקום גרוע ללמוד בו. ה-BTS והסירה על הנהר מהירים יותר, וגראב עולה ฿120–300 לנסיעה."},
+           budget:2500, status:"booked", companions:["ביחד"], order:1},
           {id:koyaoId, owner:"both", name:"קו יאו נוי — מחנה מואיי תאי", wiki:"Ko Yao Noi", hue:"#6F8F6A",
            lat:8.1099, lng:98.5892, arrival:"2026-11-26", departure:"2026-11-29", nights:3,
-           accommodation:"Sea House Room · KYN Phoenix", transport:"טיסה מצ׳יאנג מאי לפוקט, ואז ספידבוט",
+           accommodation:"Sea House Room · KYN Phoenix", transport:"Thai Airways TG203 לפוקט ואז ספידבוט",
            notes:"אושר מול המחנה · Sea House Room לשניים · ฿12,150 לכל השהייה, כולל חדר, ארוחות ואימוני קבוצה. ביום ראשון אין אימונים ואין הגשת אוכל. מקדמה 50% (฿6,075) ב-Wise, היתרה במזומן בהגעה. המחיר תוקן מ-฿14,580 שהיה תעריף הדירה הפנורמית. המחנה אישר אימוני קבוצה ב-08:00 וב-17:00; ביום ההגעה אימון טכניקה ב-16:00. להביא תחבושות ידיים ומגני שיניים; כפפות זמינות להשאלה.",
            scooter:{ok:true, perDay:250, bikes:1, days:2, rider:"itai", pillion:"talia", headline:"המקום הכי טוב באי לקטנוע",
              note:"כביש אחד לאורך החוף המזרחי, כמעט בלי תנועה. שדות אורז, המסגד, התצפית, והחופים שאין אליהם סונגתאו."},
@@ -604,17 +599,16 @@ function seedData(){
            scooter:{ok:false, headline:"לא צריך", note:"הכל בהליכה מהכפר, ולאגם נוסעים עם הסיור."},
            budget:1500, status:"planned", companions:["ביחד"], order:5},
           {id:khaolakId, owner:"both", name:"קאו לאק", wiki:"Khao Lak", hue:"#C9A24C",
-           lat:8.6392, lng:98.2450, arrival:"2026-12-05", departure:"2026-12-08", nights:3,
+           lat:8.6392, lng:98.2450, arrival:"2026-12-05", departure:"2026-12-09", nights:4,
            accommodation:"Kalima Resort and Villas", transport:"ואן מקאו סוק",
-           notes:"סימילן ב-6/12, ו-7/12 יום גיבוי — או ספא וזיפליין אם השייט יצא. ב-8/12 לשדה בפוקט וטיסה לבנגקוק. הלילה של 5/12 בהזמנה נפרדת, והלילה של 8/12 בהזמנה הקיימת לא מנוצל.",
-           scooter:{ok:false, headline:"לא הפעם", note:"שלושה ימים, ואחד מהם בים. מוניות מהריזורט."},
+           notes:"סימילן ב-6/12, 7/12 יום גיבוי — או ספא וזיפליין אם השייט יצא — ו-8/12 יום חופשי: פארק קאו לאק–לאם רו ואנדרטת הצונאמי. ב-9/12 לשדה בפוקט וטיסה לבנגקוק. הלילה של 5/12 בהזמנה ישירה נפרדת.",
+           scooter:{ok:false, headline:"לא הפעם", note:"ארבעה ימים, ואחד מהם בים. מוניות מהריזורט."},
            budget:2500, status:"booked", companions:["ביחד"], order:6},
-          {id:bangkokLastId, owner:"both", name:"בנגקוק — סוף הטיול", wiki:"Bangkok", hue:"#C97B5A",
-           lat:13.7440, lng:100.5560, arrival:"2026-12-08", departure:"2026-12-10", nights:2,
-           accommodation:"Montraj Coach Sukhumvit", transport:"טיסה מפוקט לדון מואנג",
-           notes:"8/12: ISB וסנטרל צ׳אנגוואטנה בדרך מהשדה. 9/12: התעלות, וואט ארון, וואט פו, הארמון והר הזהב, ובערב רג׳אדמנרן. ב-10/12 איתי טס (IZ592, 11:15 מסוברנבומי), וטליה ממשיכה.",
-           scooter:{ok:false, headline:"לא בבנגקוק", note:"ה-BTS והסירה על הנהר מהירים יותר, וגראב עולה ฿120–300 לנסיעה."},
-           budget:1600, status:"planned", companions:["ביחד"], order:8},
+          {id:bangkokLastId, owner:"both", name:"בנגקוק — לילה אחרון", wiki:"Bangkok", hue:"#C97B5A",
+           lat:13.7440, lng:100.5560, arrival:"2026-12-09", departure:"2026-12-10", nights:1,
+           accommodation:"Eleven Bangkok Sukhumvit 11", transport:"רכב לשדה בפוקט, וטיסה",
+           notes:"לילה אחרון ביחד על סוי 11. בבוקר איתי טס (IZ592, 11:15 מסוברנבומי), וטליה ממשיכה.",
+           budget:800, status:"booked", companions:["ביחד"], order:8},
           ...TALIA_THAILAND.map(d=>({id:d.name==='פאי'?paiId:uid('d'), owner:"talia", status:"planned", companions:["טליה ומלח"], ...d}))
         ],
         prepChecklist:[
@@ -666,8 +660,7 @@ function seedData(){
       {id:uid('m'), owner:"both", category:"הזמנות", title:"לסגור את צ׳רמנטרה לפני הדדליין", status:"todo", deadline:"2026-11-14", notes:"אחרי 14/11 הכרטיס מחויב במלוא הסכום", priority:"גבוהה", link:"", countryId:"thailand", order:8},
       {id:uid('m'), owner:"itai", category:"הזמנות", title:"לבטל את הזמנת בוקינג של Montraj (5123136373)", status:"todo", deadline:"2026-11-20", notes:"ההזמנה הישירה (3051425, ฿8,169.87) כבר מאושרת. לבטל עכשיו — אחרת נשארות שתי הזמנות, ואי-הגעה לאחת מהן עלולה לעלות לילה. ביטול חינם עד 20/11", priority:"גבוהה", link:"https://secure.booking.com/myreservations.html", countryId:"thailand", order:14},
       ...WEST_TASKS.map(t=>({id:uid('m'), status:"todo", category:"הזמנות", countryId:"thailand", ...t})),
-      {id:uid('m'), owner:"both", category:"הזמנות", title:"להזמין טיסה סובארנבומי → צ׳יאנג מאי, 23/11", status:"todo", deadline:"2026-11-05", notes:"מסובארנבומי, אחרי 16:30 — שני כרטיסים נפרדים, צריך זמן לביקורת גבולות ולמזוודות · Thai Vietjet 20:35: €376.92 לשניים · לבדוק Thai Airways ו-Bangkok Airways", priority:"גבוהה", link:"", countryId:"thailand", order:9},
-      {id:uid('m'), owner:"both", category:"הזמנות", title:"להזמין טיסה צ׳יאנג מאי → פוקט, 26/11 בבוקר", status:"todo", deadline:"2026-11-05", notes:"לנחות עד 13:00 כדי להגיע לאימון של 16:00 · לא מצאתי ישירה בחיפוש — לבדוק ב-Thai AirAsia; אחרת עם החלפה בבנגקוק", priority:"גבוהה", link:"https://www.airasia.com/", countryId:"thailand", order:9.1},
+      {id:uid('m'), owner:"both", category:"הזמנות", title:"להזמין את טיסת TG203 לפוקט", status:"todo", deadline:"2026-11-01", notes:"08:00 → 09:25 · ฿5,390 לשניים, 23 ק״ג לכל אחד. הוזזה מ-06:50 כדי לישון עוד שעה ועדיין לתפוס את סירת 11:00", priority:"גבוהה", link:"https://www.thaiairways.com/", countryId:"thailand", order:9},
       {id:uid('m'), owner:"both", category:"הזמנות", title:"לאשר טלפונית את פרטי החשבון של המחנה", status:"done", deadline:"2026-10-05", notes:"לפני שמעבירים ฿6,075 — פרטי בנק במייל הם הדבר הכי מזויף בהזמנות. החשבון על שם פרטי ובכתובת בחון קאן, לא באי", priority:"גבוהה", link:"", countryId:"thailand", order:10},
       {id:uid('m'), owner:"both", category:"הזמנות", title:"להעביר מקדמה ฿6,075 ב-Wise למחנה", status:"done", deadline:"2026-10-10", notes:"זה מה שסוגר את ההזמנה. ฿12,150 סה״כ, היתרה במזומן בהגעה", priority:"גבוהה", link:"", countryId:"thailand", order:11},
       {id:uid('m'), owner:"both", category:"הזמנות", title:"למשוך ฿6,075 מזומן ליתרה במחנה", status:"todo", deadline:"2026-11-25", notes:"אין כרטיסים ואין העברות במקום. כספומט גובה ฿220 לכל משיכה — למשוך בבת אחת", priority:"בינונית", link:"", countryId:"thailand", order:12},
@@ -1976,6 +1969,117 @@ function ensureDefaults(){
     if(t && f) Object.assign(t, {title:f.title, notes:f.notes, status:'todo', deadline:f.deadline, priority:f.priority});
     else if(!STATE.masterChecklist.some(x=>x.title===(f&&f.title)) && f) STATE.masterChecklist.push(JSON.parse(JSON.stringify(f)));
     STATE.schema = 30;
+  }
+
+  /*
+   * 9/11: בלי צפון — חוזרים לתוכנית המקורית. בנגקוק 23–26/11 (מונטראג׳), המחנה
+   * 26–29/11 כמו שהוזמן (TG203 לפוקט), אאו נאנג 29/11–3/12, קאו סוק 3–5/12,
+   * קלימה 5–9/12 — ארבעה לילות, כולם מוזמנים — ולילה אחרון ב-Eleven ב-9/12.
+   * הימים שהשתנו נבנים מחדש; סימונים ושיחות עוברים עם השורה, שורות ידניות
+   * נשארות. מה שכבר הוזמן לצפון הופך לתזכורת לבטל.
+   */
+  if(STATE.schema < 31){
+    const seedShared = window.SHARED_SEED;
+    const copy = x => JSON.parse(JSON.stringify(x));
+    const meta = STATE.shared;
+    if(seedShared && meta && meta.days){
+      const shared = meta.days.filter(d=>d.owner!=='talia');
+      const old = new Map();
+      shared.flatMap(d=>d.rows).forEach(r=>{ const seen = old.get(r.id); if(!seen || (!seen.done && !seen.talk)) old.set(r.id, r); });
+      const carry = seedRow=>{
+        const row = copy(seedRow);
+        const before = old.get(seedRow.id);
+        if(before){
+          if(before.done) row.done = true;
+          if(before.talk) row.talk = before.talk;
+          if(!seedRow.managed && before.notes) row.notes = before.notes;
+        }
+        return row;
+      };
+      ['2026-11-23','2026-11-24','2026-11-25','2026-11-26','2026-12-05','2026-12-06','2026-12-07','2026-12-08','2026-12-09'].forEach(date=>{
+        const seedDay = seedShared.days.find(d=>d.date===date);
+        const day = shared.find(d=>d.date===date);
+        if(!seedDay || !day) return;
+        const custom = day.rows.filter(r=>!/^s_/.test(String(r.id||'')));
+        Object.assign(day, {dest:seedDay.dest, summary:seedDay.summary, rows:seedDay.rows.map(carry).concat(custom)});
+        if(seedDay.sun) day.sun = {...seedDay.sun};
+      });
+      ['title','bases','cuts'].forEach(k=>{ if(seedShared[k]) meta[k] = copy(seedShared[k]); });
+      if(meta.flights){
+        meta.flights = meta.flights.filter(f=>!/צ׳יאנג מאי|דון מואנג/.test(f.what||''));
+        seedShared.flights.forEach((f, i)=>{
+          if(meta.flights.some(x=>x.what===f.what)) return;
+          const prev = seedShared.flights[i-1];
+          const at = prev ? meta.flights.findIndex(x=>x.what===prev.what) : -1;
+          meta.flights.splice(at>=0 ? at+1 : meta.flights.length, 0, copy(f));
+        });
+      }
+      if(meta.hotels){
+        meta.hotels = meta.hotels.filter(h=>!/Centara Riverside/.test(h.hotel||''));
+        seedShared.hotels.forEach((h, i)=>{
+          if(!/Montraj|Maison|Sala Rattanakosin|Eleven|Kalima/.test(h.hotel)) return;
+          const found = meta.hotels.find(x=>x.hotel===h.hotel);
+          if(found){ Object.assign(found, copy(h)); return; }
+          const next = seedShared.hotels[i+1];
+          const at = next ? meta.hotels.findIndex(x=>x.hotel===next.hotel) : -1;
+          meta.hotels.splice(at>=0 ? at : meta.hotels.length, 0, copy(h));
+        });
+      }
+      (meta.bookings||[]).forEach(b=>{
+        if(!/^Montraj|^Eleven|^Kalima/.test(b.what||'')) return;
+        const fresh31 = seedShared.bookings.find(x=>x.what===b.what);
+        if(fresh31) Object.assign(b, copy(fresh31));
+      });
+      const booked = (meta.info||[]).find(i=>/^מוזמן: שתי טיסות ארקיע/.test(i.detail||''));
+      if(booked) booked.detail = seedShared.info.find(i=>/^מוזמן/.test(i.detail)).detail;
+    }
+    if(STATE.trip && STATE.trip.together) STATE.trip.together.title = fresh.trip.together.title;
+    const thai = (STATE.countries||[]).find(c=>c.id==='thailand');
+    const freshThai = fresh.countries.find(c=>c.id==='thailand');
+    if(thai && freshThai){
+      const assign = (found, name)=>{
+        const freshDest = freshThai.destinations.find(d=>d.name===name);
+        if(!found || !freshDest) return;
+        const {id, order, ...rest} = freshDest;
+        Object.assign(found, copy(rest));
+      };
+      assign(thai.destinations.find(d=>d.owner==='both' && d.name==='צ׳יאנג מאי — לוי קראתונג'), 'בנגקוק');
+      assign(thai.destinations.find(d=>d.owner==='both' && d.name==='בנגקוק — סוף הטיול'), 'בנגקוק — לילה אחרון');
+      assign(thai.destinations.find(d=>d.name==='קאו לאק'), 'קאו לאק');
+      const kyn = thai.destinations.find(d=>/^קו יאו נוי/.test(d.name||''));
+      if(kyn && /צ׳יאנג מאי/.test(kyn.transport||'')) kyn.transport = freshThai.destinations.find(d=>/^קו יאו נוי/.test(d.name)).transport;
+      const wait = thai.destinations.find(d=>d.name==='בנגקוק — מחכה למלח');
+      if(wait && /מונטראג׳/.test(wait.accommodation||'')) wait.accommodation = 'להאריך את Eleven בלילה, או מלון אחר';
+      thai.destinations.sort((a,b)=>(a.arrival||'9999').localeCompare(b.arrival||'9999') || (a.order||0)-(b.order||0));
+    }
+    const expenses = STATE.money.expenses;
+    const montraj = expenses.find(x=>/Montraj Coach/.test(x.title||''));
+    const freshMontraj = fresh.money.expenses.find(x=>/Montraj Coach/.test(x.title));
+    if(montraj && montraj.amount===5446.58) Object.assign(montraj, {title:freshMontraj.title, date:freshMontraj.date, amount:freshMontraj.amount, note:freshMontraj.note});
+    if(!expenses.some(x=>/^Eleven Bangkok/.test(x.title||''))) expenses.push(copy(fresh.money.expenses.find(x=>/^Eleven Bangkok/.test(x.title))));
+    const kalima = expenses.find(x=>/Kalima/.test(x.title||''));
+    if(kalima && kalima.amount===1931.44) kalima.note = KALIMA_NOTE;
+    // המשימות: מה שהוזמן לצפון — לבטל; מה שבוטל מהמקורי — חוזר
+    const moved = {
+      'להזמין מלון בצ׳יאנג מאי, 23–26/11':'לבטל: מלון בצ׳יאנג מאי, 23–26/11',
+      'להזמין טיסה סובארנבומי → צ׳יאנג מאי, 23/11':'לבטל: טיסה לצ׳יאנג מאי, 23/11',
+      'להזמין טיסה צ׳יאנג מאי → פוקט, 26/11 בבוקר':'לבטל: טיסה מצ׳יאנג מאי לפוקט, 26/11',
+      'להזמין מקלט פילים, 25/11':'לבטל: מקלט פילים, 25/11',
+      'להזיז את מונטראג׳ ל-8–10/12':'להחזיר את מונטראג׳ ל-23–26/11',
+      'לבטל את Eleven Bangkok — חינם עד 5/12':'Eleven בוטל — להזמין לינה ל-9/12',
+      'להזמין טיסה מפוקט לבנגקוק ב-8/12 — לשניכם':'להזיז את הטיסה מפוקט ל-9/12',
+      'להחליט על מונית מקלימה לשדה ב-8/12 — 1,800 ฿ לרכב':'להזיז את המונית מקלימה ל-9/12'
+    };
+    STATE.masterChecklist = STATE.masterChecklist.filter(t=>!(moved[t.title] && t.status!=='done'));
+    STATE.masterChecklist.forEach(t=>{
+      if(moved[t.title]) Object.assign(t, {title:moved[t.title], status:'todo', notes:'הוזמן או סומן בזמן תוכנית הצפון'});
+      if(t.title==='להחליט על KYN: להישאר ב-26–29/11, או דירת שני חדרים ל-30/11–3/12') Object.assign(t, {status:'done', notes:'נשארים 26–29/11, כמו שהוזמן'});
+      if(t.title==='לבטל: TG203 לפוקט, 26/11') Object.assign(t, {title:'להזמין את טיסת TG203 לפוקט', status:'done', notes:''});
+      if(t.title==='להזיז את הטיסה מפוקט ל-8/12') Object.assign(t, {title:'להזמין טיסה מפוקט לבנגקוק ב-9/12 — לשניכם', status:'done', notes:''});
+      if(t.title==='לתאם ביקור בוגרים ב-ISB' && t.status!=='done') t.notes = ISB_NOTE;
+      if(t.title==='לינה בבנגקוק ללילה של 10/12' && /מונטראג׳/.test(t.notes||'')) t.notes = TALIA_TASKS.find(x=>x.title===t.title).notes;
+    });
+    STATE.schema = 31;
   }
 
   /* משימות חדשות מתווספות בכל גרסה, לפי כותרת */
@@ -3950,7 +4054,7 @@ function renderHome(){
       <div class="card soft">
         <b>שבועיים וחצי</b>
         <div class="small" style="margin-top:6px">
-          נוחתים ב-23/11 בבנגקוק וממשיכים ישר לצ׳יאנג מאי, ומשם קו יאו נוי, אאו נאנג, קאו סוק וקאו לאק — ושני לילות אחרונים ביחד בבנגקוק.
+          נוחתים ב-23/11 בבנגקוק, ומשם קו יאו נוי, אאו נאנג, קאו סוק וקאו לאק — ולילה אחרון ביחד בבנגקוק.
           הטיסה הביתה: ${STATE.trip.itai.homeFlight}.
         </div>
       </div>` : `
@@ -5509,7 +5613,7 @@ function renderSharedForecast(){
   const f=sharedForecast();
   return `<div class="forecast-hero">
     <b>אומדן כל הטיול · בשקלים</b>
-    <div class="forecast-meta">22/11–10/12/2026 · צ׳יאנג מאי, קו יאו נוי, אאו נאנג, קאו סוק, קאו לאק ובנגקוק · כולל הטיסה של איתי הביתה</div>
+    <div class="forecast-meta">22/11–10/12/2026 · בנגקוק, קו יאו נוי, אאו נאנג, קאו סוק וקאו לאק · כולל הטיסה של איתי הביתה</div>
     <div class="forecast-amount">${ils(f.base)}</div>
     <div class="small">טווח תכנון: ${ils(f.low)}–${ils(f.high)} · החלק של איתי: <b>${ils(f.itai)}</b></div>
     <div class="forecast-meta">כולל הזמנות קיימות ורזרבה של ${ils(f.reserve)}. אופציות לבחירה: עוד ${ils(f.optional)} — אינן נכללות בסכום הראשי, וחלקן חלופות זו לזו.</div>

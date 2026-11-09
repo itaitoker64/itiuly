@@ -27,66 +27,59 @@ const acts = d => d.rows.map(r => r.act).join(' | ');
 const allRowsOf = run => JSON.parse(run('JSON.stringify(sh().days.flatMap(d=>d.rows))'));
 
 const run = boot();
-assert.equal(run('STATE.schema'), 30);
+assert.equal(run('STATE.schema'), 31);
 
-// --- the plan: north first, then the Andaman, and Bangkok at the end -------------
+// --- the plan: Bangkok, the camp, the Andaman, and a last night in Bangkok -------
 const all = JSON.parse(run('JSON.stringify(sh().days.map(d=>[d.day,d.date,d.dow,d.id,d.dest,d.owner||""]))'));
 assert.equal(all.length, 18);
-assert.deepEqual(all.map(d => d[4]), ['צ׳יאנג מאי','צ׳יאנג מאי','צ׳יאנג מאי','קו יאו נוי','קו יאו נוי','קו יאו נוי',
-  'אאו נאנג','אאו נאנג','אאו נאנג','אאו נאנג','קאו סוק','קאו סוק','קאו לאק','קאו לאק','קאו לאק','בנגקוק','בנגקוק','בנגקוק → הביתה']);
+assert.deepEqual(all.map(d => d[4]), ['בנגקוק','בנגקוק','בנגקוק','קו יאו נוי','קו יאו נוי','קו יאו נוי',
+  'אאו נאנג','אאו נאנג','אאו נאנג','אאו נאנג','קאו סוק','קאו סוק','קאו לאק','קאו לאק','קאו לאק','קאו לאק','בנגקוק','בנגקוק → הביתה']);
 assert.deepEqual(all.slice(9).map(d => [d[1], d[2], d[3]]), [
   ['2026-12-02','ד׳','day_10'], ['2026-12-03','ה׳','day_11'], ['2026-12-04','ו׳','day_12'], ['2026-12-05','ש׳','day_13'], ['2026-12-06','א׳','day_14'],
   ['2026-12-07','ב׳','day_15'], ['2026-12-08','ג׳','day_16'], ['2026-12-09','ד׳','day_17'], ['2026-12-10','ה׳','day_18']]);
-// 23/11: off the overnight flight and straight on to Chiang Mai — no night in Bangkok.
-const d23 = day(run, '2026-11-23');
-assert.ok(d23.rows.some(r => r.id === 's_1_cnx' && /צ׳יאנג מאי/.test(r.act) && r.status === 'להזמין' && r.time >= '16:30'), 'a flight north, with time for immigration and bags');
-assert.ok(!d23.rows.some(r => /Montraj|מונטראג׳|חאו סן/.test(r.act)), 'no Bangkok on the first night');
-assert.ok(d23.rows.some(r => r.cat === 'לינה' && /צ׳יאנג מאי/.test(r.act)));
-assert.ok(/לוי קראתונג/.test(acts(day(run, '2026-11-24'))), 'Loy Krathong on 24/11, in Chiang Mai');
-assert.ok(/24\/11/.test(day(run, '2026-11-24').rows.find(r => r.id === 's_c2_6').notes));
-assert.ok(/פילים/.test(acts(day(run, '2026-11-25'))) && /דוי סותפ/.test(acts(day(run, '2026-11-25'))));
-// 26/11: the camp is unchanged — a morning flight from Chiang Mai, and the 16:00 session.
+// No north: three nights in Bangkok at the start, Loy Krathong on 24/11, ISB on 25/11.
+assert.ok(!allRowsOf(run).some(r => /צ׳יאנג מאי|CNX|יי פנג|Centara/.test(r.act + ' ' + r.loc)), 'nothing left of Chiang Mai');
+assert.ok(day(run, '2026-11-23').rows.some(r => /Montraj/.test(r.act) && r.cat === 'לינה'));
+const seq = ['s_2_canal','s_2_arun','s_2_ferry','s_2_3','s_2_tuk','s_2_2','s_2_swing','s_2_saket','s_2_7'];
+assert.deepEqual(day(run, '2026-11-24').rows.filter(r => seq.includes(r.id)).map(r => r.id), seq, 'canals to Wat Arun, Wat Pho, the palace, the Golden Mount, then the Loy Krathong dinner');
+assert.ok(/ISB/.test(acts(day(run, '2026-11-25'))) && /צ׳אנגוואטנה/.test(acts(day(run, '2026-11-25'))) && /רג׳אדמנרן/.test(acts(day(run, '2026-11-25'))));
+// 26/11: TG203 to Phuket, the camp as booked, and the 16:00 session.
 const d26 = day(run, '2026-11-26');
-assert.ok(/צ׳יאנג מאי → פוקט/.test(d26.rows.find(r => r.id === 's_4_3').act));
+assert.ok(/TG203/.test(d26.rows.find(r => r.id === 's_4_3').act));
 assert.equal(d26.rows.find(r => r.id === 's_4_12').time, '16:00');
-assert.ok(!allRowsOf(run).some(r => /TG203/.test(r.act)), 'no flight from Bangkok to Phuket');
-// Phi Phi is a day trip from Ao Nang — a fourth night at Chermantra.
+// Ao Nang four nights, Phi Phi as a day trip.
 const d2 = day(run, '2026-12-02');
 assert.ok(d2.rows.some(r => /מאיה ביי/.test(r.act) && r.status === 'אופציונלי'));
 assert.ok(d2.rows.some(r => /Chermantra/.test(r.act) && r.cat === 'לינה' && r.status === 'להזמין'));
-assert.ok(!allRowsOf(run).some(r => /מעבורת|ChaoKoh|Loh Dalum|טונסאי|נאם טאלו/.test(r.act + ' ' + r.loc)));
-// Khao Sok for two nights, Khao Lak 5–8/12.
+// Khao Sok 3–5/12, Kalima 5–9/12.
 assert.equal(day(run, '2026-12-03').rows.find(r => r.id === 's_g4_1').act, 'ואן · אאו נאנג → קאו סוק');
-const d4 = day(run, '2026-12-04');
-assert.ok(/צ׳או לאן/.test(acts(d4)) && /Palmview/.test(acts(d4)));
+assert.ok(/צ׳או לאן/.test(acts(day(run, '2026-12-04'))) && /Palmview/.test(acts(day(run, '2026-12-04'))));
 const d5 = day(run, '2026-12-05');
-assert.ok(/ג׳ונגל/.test(acts(d5)) && /קלימה/.test(acts(d5)), 'a morning in the jungle, then Khao Lak');
+assert.ok(/ג׳ונגל/.test(acts(d5)) && /קלימה/.test(acts(d5)));
 assert.ok(d5.rows.some(r => /Kalima.*לילה נוסף/.test(r.act) && r.status === 'מוזמן'), 'the extra Kalima night, booked and paid directly');
-assert.equal(run('wallet().expenses.find(x=>/^קלימה · לילה נוסף/.test(x.title)).amount'), 8800);
 assert.ok(/סימילן/.test(acts(day(run, '2026-12-06'))));
 assert.ok(/גיבוי/.test(day(run, '2026-12-07').summary), '7/12 is the Similan backup');
-// The Kalima booking is counted in full on the two nights it is used.
+assert.ok(/לאם רו/.test(acts(day(run, '2026-12-08'))) && /813/.test(acts(day(run, '2026-12-08'))), 'a free last day in Khao Lak');
+// The Kalima booking counts in full across the three nights it covers, and the 5/12 night once.
 const kal = allRowsOf(run).filter(r => r.priceEstimate && r.priceEstimate.booking && r.priceEstimate.booking.match === 'Kalima');
-assert.deepEqual(kal.map(r => r.id), ['s_g7_stay', 's_g8_stay']);
-assert.ok(kal.every(r => r.priceEstimate.booking.rows === 2));
+assert.deepEqual(kal.map(r => r.id), ['s_g7_stay', 's_g8_stay', 's_k8_stay']);
+assert.ok(kal.every(r => r.priceEstimate.booking.rows === 3));
 assert.equal(allRowsOf(run).filter(r => r.priceEstimate && r.priceEstimate.booking && r.priceEstimate.booking.match === 'Chermantra').length, 3);
-// Two nights in Bangkok at the end, at Montraj: ISB on the way in, the river day on 9/12.
-const d8 = day(run, '2026-12-08');
-assert.ok(/HKT → DMK/.test(d8.rows.find(r => r.id === 's_g9_2').loc));
-assert.ok(/ISB/.test(acts(d8)) && /צ׳אנגוואטנה/.test(acts(d8)));
+assert.equal(allRowsOf(run).filter(r => r.priceEstimate && r.priceEstimate.booking && r.priceEstimate.booking.match === 'Montraj Coach').length, 3);
+// 9/12: Kalima to Phuket, the flight to Bangkok, the last night at Eleven.
 const d9 = day(run, '2026-12-09');
-const seq = ['s_2_canal','s_2_arun','s_2_ferry','s_2_3','s_2_tuk','s_2_2','s_2_swing','s_2_saket','s_3_9'];
-assert.deepEqual(d9.rows.filter(r => seq.includes(r.id)).map(r => r.id), seq, 'canals to Wat Arun, Wat Pho, the palace, the Golden Mount, then Rajadamnern');
-assert.deepEqual(allRowsOf(run).filter(r => r.priceEstimate && r.priceEstimate.booking && r.priceEstimate.booking.match === 'Montraj Coach').map(r => r.id), ['s_1_9','s_2_10']);
-assert.ok(!allRowsOf(run).some(r => /Eleven/.test(r.act)));
+assert.ok(/HKT → בנגקוק/.test(acts(d9)) && /Eleven/.test(acts(d9)));
+assert.ok(/1,800/.test(d9.rows.find(r => r.id === 's_g9_1').notes), "Kalima's transfer price");
 const home = day(run, '2026-12-10').rows.find(r => r.id === 's_f10_2');
 assert.equal(home.time, '11:15');
 assert.ok(/IZ592/.test(home.act));
 const allDays = JSON.parse(run('JSON.stringify(sh().days)'));
-assert.ok(!allDays.some(d => d.rows.some(r => /Halfmoon|Lomprayah|Sarana|ואן משותף לקאו לק|IZ598|Bangla|פטונג/.test(r.act))), 'no Phangan, no Patong');
+assert.ok(!allDays.some(d => d.rows.some(r => /Halfmoon|Lomprayah|Sarana|ואן משותף לקאו לק|IZ598|Bangla|פטונג|ChaoKoh|Loh Dalum/.test(r.act))), 'no Phangan, Patong or Phi Phi base');
+const late = t => t < '05:00' ? String(Number(t.slice(0,2))+24)+t.slice(2) : t.padStart(5,'0');   // 00:30 is after Khao San, not before breakfast
 for (const d of allDays) {
-  const t = d.rows.filter(r => r.time).map(r => r.time);
+  const t = d.rows.filter(r => r.time).map(r => late(r.time));
   assert.deepEqual(t, [...t].sort(), d.date + ' is in time order');
+  assert.ok(d.sun && d.sun.rise && d.sun.set, d.date + ' has sunrise and sunset');
 }
 // The workouts, by date: strength Sun/Wed lower, Mon/Thu upper, runs Tue and Fri, rest on Saturday; Muay Thai at the camp stands in for strength.
 const w = JSON.parse(run('JSON.stringify(sh().days.flatMap(d=>d.rows.filter(r=>/^s_w_/.test(r.id)).map(r=>[d.date,d.dow,r.act,r.loc])))'));
@@ -97,8 +90,7 @@ for (const [date, dow, act, loc] of w) {
 }
 assert.ok(!w.some(x => x[1] === 'ש׳'), 'Saturday is rest');
 assert.ok(!w.some(x => x[0] === '2026-11-26'), 'the camp session replaces strength on 26/11');
-assert.ok(!w.some(x => x[0] === '2026-12-08'), 'a travel day: the Tuesday run goes first');
-assert.deepEqual(w.filter(x => /ריצה/.test(x[2])).map(x => x[0]), ['2026-11-24','2026-11-27','2026-12-01','2026-12-04']);
+assert.deepEqual(w.filter(x => /ריצה/.test(x[2])).map(x => x[0]), ['2026-11-24','2026-11-27','2026-12-01','2026-12-04','2026-12-08']);
 assert.ok(run('sh().info.some(i=>i.topic==="אימונים")'));
 
 // Together until 10/12: both see the same days, and part in Bangkok.
@@ -110,12 +102,12 @@ assert.equal(run('homeDate()'), '2026-12-10');
 const destDays = (r, name) => JSON.parse(r(`JSON.stringify(daysForDest(myDestinations().find(d=>d.name==="${name}")).map(d=>d.date))`));
 assert.ok(!run('myDestinations().some(d=>d.name==="קו פי פי")'));
 assert.deepEqual(destDays(run, 'אאו נאנג וריילאי'), ['2026-11-29','2026-11-30','2026-12-01','2026-12-02']);
-assert.deepEqual(destDays(run, 'צ׳יאנג מאי — לוי קראתונג'), ['2026-11-23','2026-11-24','2026-11-25']);
+assert.deepEqual(destDays(run, 'בנגקוק'), ['2026-11-23','2026-11-24','2026-11-25']);
 assert.deepEqual(destDays(run, 'קאו סוק'), ['2026-12-03','2026-12-04']);
-assert.deepEqual(destDays(run, 'קאו לאק'), ['2026-12-05','2026-12-06','2026-12-07']);
-assert.ok(!run('myDestinations().some(d=>d.name==="פטונג"||d.name==="בנגקוק")'));
-assert.deepEqual(destDays(run, 'בנגקוק — סוף הטיול'), ['2026-12-08','2026-12-09','2026-12-10']);
-assert.deepEqual(destDays(talia, 'בנגקוק — סוף הטיול'), ['2026-12-08','2026-12-09','2026-12-10']);
+assert.deepEqual(destDays(run, 'קאו לאק'), ['2026-12-05','2026-12-06','2026-12-07','2026-12-08']);
+assert.ok(!run('myDestinations().some(d=>d.name==="פטונג"||/צ׳יאנג מאי —/.test(d.name))'));
+assert.deepEqual(destDays(run, 'בנגקוק — לילה אחרון'), ['2026-12-09','2026-12-10']);
+assert.deepEqual(destDays(talia, 'בנגקוק — לילה אחרון'), ['2026-12-09','2026-12-10']);
 // After 10/12 Talia waits for Melach in Bangkok, then the north, Sri Lanka, India as a draft, and Phangan in February.
 const tRoute = JSON.parse(talia('JSON.stringify(myDestinations().filter(d=>d.owner==="talia").map(d=>d.name+" "+d.arrival))'));
 assert.deepEqual(tRoute.slice(0, 13), ['בנגקוק — מחכה למלח 2026-12-10',"צ'יאנג מאי 2026-12-11",'פאי 2026-12-15',"צ'יאנג ראי 2026-12-18",
@@ -136,18 +128,17 @@ assert.ok(talia('renderRouteTab()').includes('נפרדים בבנגקוק'));
 
 // The ledger: Kalima for 6–9/12, the Bangkok night shared, nothing for Phangan.
 assert.equal(run('wallet().expenses.find(x=>/Kalima/.test(x.title)).amount'), 1931.44);
-assert.equal(run('wallet().expenses.filter(x=>/Eleven Bangkok/.test(x.title)).length'), 0, 'Bangkok moved to Montraj');
-assert.equal(run('wallet().expenses.find(x=>/Montraj Coach/.test(x.title)).amount'), 5446.58);
+assert.equal(run('wallet().expenses.find(x=>/Eleven Bangkok/.test(x.title)).split'), 'ratio');
+assert.equal(run('wallet().expenses.find(x=>/Montraj Coach/.test(x.title)).amount'), 8169.87);
 assert.equal(run('wallet().expenses.filter(x=>/Sarana|Our Jungle/.test(x.title)).length'), 0);
 assert.equal(run('wallet().expenses.filter(x=>x.paidBy==="talia").length'), 0);
 // The tasks: what to book and what to cancel.
 for (const t of ['להאריך את צ׳רמנטרה בלילה — 2/12', 'להזמין לינה בקאו סוק, 3–5/12', 'להזמין לילה נוסף בקלימה — 5/12', 'להזמין ואן מאאו נאנג לקאו סוק, 3/12',
-                 'להזמין מלון בצ׳יאנג מאי, 23–26/11', 'להזמין טיסה סובארנבומי → צ׳יאנג מאי, 23/11', 'להזמין טיסה צ׳יאנג מאי → פוקט, 26/11 בבוקר',
-                 'להזיז את מונטראג׳ ל-8–10/12', 'לבטל את Eleven Bangkok — חינם עד 5/12',
-                 'להזמין טיסה מפוקט לבנגקוק ב-8/12 — לשניכם', 'לבטל את Sarana Bungalows — חינם עד 28/11']) {
+                 'להזמין את טיסת TG203 לפוקט', 'לעדכן את Eleven Bangkok לשני אנשים', 'לתקן מול קלימה: נשארים עד 9/12',
+                 'להזמין טיסה מפוקט לבנגקוק ב-9/12 — לשניכם', 'לבטל את Sarana Bungalows — חינם עד 28/11']) {
   assert.ok(run(`STATE.masterChecklist.some(t=>t.title===${JSON.stringify(t)})`), t);
 }
-assert.ok(!run('STATE.masterChecklist.some(t=>/Halfmoon|Lomprayah|ואן משותף|לצ׳יאנג מאי ב-8|פטונג|TG203|נאם טאלו|Eleven Bangkok לשני/.test(t.title))'));
+assert.ok(!run('STATE.masterChecklist.some(t=>/Halfmoon|Lomprayah|ואן משותף|לצ׳יאנג מאי ב-8|פטונג|נאם טאלו|צ׳יאנג מאי, 23|מקלט פילים|ל-8–10\\/12/.test(t.title))'));
 // Kalima rebooked for 6–9/12 (non-refundable, no breakfast); the old booking and Our Jungle House are cancelled.
 assert.equal(run('sh().bookings.find(b=>b.what==="Kalima Resort and Villas").ref'), '7195273990380466772');
 assert.ok(/לא מוחזר/.test(run('sh().hotels.find(h=>h.hotel==="Kalima Resort and Villas Khao Lak").freeCancel')));
@@ -198,7 +189,7 @@ STATE.masterChecklist=STATE.masterChecklist.filter(t=>!WEST_TASKS.some(p=>p.titl
 STATE.masterChecklist.push({id:'m_van',owner:'both',category:'הזמנות',title:'להזמין ואן משותף מאאו נאנג לקאו לק',status:'todo'});
 STATE.schema=14;
 ensureDefaults();`);
-assert.equal(old('STATE.schema'), 30);
+assert.equal(old('STATE.schema'), 31);
 assert.deepEqual(JSON.parse(old('JSON.stringify(sh().days.map(d=>d.date))')).slice(9),
   ['2026-12-02','2026-12-03','2026-12-04','2026-12-05','2026-12-06','2026-12-07','2026-12-08','2026-12-09','2026-12-10']);
 const o3 = day(old, '2026-12-03');
@@ -210,12 +201,12 @@ assert.ok(/IZ592/.test(old('STATE.trip.itai.homeFlight')));
 assert.equal(old('STATE.trip.talia.onwardDate'), '2026-12-10');
 assert.ok(/IZ592/.test(old('wallet().expenses.find(x=>x.amount===1891).title')));
 assert.equal(old('wallet().expenses.find(x=>/Kalima/.test(x.title)).amount'), 1931.44);
-assert.equal(old('wallet().expenses.filter(x=>/Eleven|שינוי טיסה/.test(x.title)).length'), 1, 'the change fee; Eleven is cancelled');
+assert.equal(old('wallet().expenses.filter(x=>/Eleven|שינוי טיסה/.test(x.title)).length'), 2, 'the change fee and the last night at Eleven');
 const names = JSON.parse(old('JSON.stringify(STATE.countries.find(c=>c.id==="thailand").destinations.map(d=>d.name+" "+d.arrival))'));
-assert.deepEqual(names.slice(0, 8), ['צ׳יאנג מאי — לוי קראתונג 2026-11-23','קו יאו נוי — מחנה מואיי תאי 2026-11-26','אאו נאנג וריילאי 2026-11-29','קאו סוק 2026-12-03','קאו לאק 2026-12-05',
-  'בנגקוק — סוף הטיול 2026-12-08','בנגקוק — מחכה למלח 2026-12-10',"צ'יאנג מאי 2026-12-11"]);
+assert.deepEqual(names.slice(0, 8), ['בנגקוק 2026-11-23','קו יאו נוי — מחנה מואיי תאי 2026-11-26','אאו נאנג וריילאי 2026-11-29','קאו סוק 2026-12-03','קאו לאק 2026-12-05',
+  'בנגקוק — לילה אחרון 2026-12-09','בנגקוק — מחכה למלח 2026-12-10',"צ'יאנג מאי 2026-12-11"]);
 assert.ok(!names.some(n => /קורס מורים|ארוגם|קולומבו/.test(n)), 'the old onward plan is gone');
-assert.equal(names.filter(n => /^בנגקוק — סוף הטיול/.test(n)).length, 1);
+assert.equal(names.filter(n => /^בנגקוק — לילה אחרון/.test(n)).length, 1);
 assert.ok(old('STATE.countries.some(c=>c.id==="india")'));
 assert.equal(old('STATE.masterChecklist.find(t=>t.title==="הארכת שהייה — הפטור קוצר ל-30 יום").status'), 'done');
 assert.ok(!old('STATE.masterChecklist.some(t=>/ואן משותף/.test(t.title))'), 'the van task is dropped');
@@ -253,7 +244,7 @@ STATE.masterChecklist.push(
   {id:'m_k',owner:'both',title:'לשנות את קלימה ל-6–9/12 בבוקינג',status:'done'});
 sh().planB={done:{}};
 STATE.schema=15; ensureDefaults();`);
-assert.equal(ph('STATE.schema'), 30);
+assert.equal(ph('STATE.schema'), 31);
 const p2 = day(ph, '2026-12-02');
 assert.ok(!p2.rows.some(r => /Lomprayah/.test(r.act)));
 assert.ok(p2.rows.some(r => r.id === 'custom-earplugs'), 'a hand-added row survives');
@@ -261,7 +252,8 @@ assert.ok(!ph('STATE.countries.find(c=>c.id==="thailand").destinations.some(d=>d
 assert.ok(!ph('STATE.countries.find(c=>c.id==="thailand").destinations.some(d=>/^קופנגן$|עוד לילה/.test(d.name))'));
 assert.equal(ph('wallet().expenses.filter(x=>/Sarana|Our Jungle/.test(x.title)).length'), 0);
 assert.equal(ph('wallet().expenses.find(x=>/Kalima/.test(x.title)).amount'), 1931.44);
-assert.equal(ph('wallet().expenses.filter(x=>/Eleven/.test(x.title)).length'), 0, 'not paid yet, and no longer on the route');
+assert.equal(ph('wallet().expenses.filter(x=>/Eleven/.test(x.title)).length'), 1, 'one last night at Eleven');
+assert.equal(ph('wallet().expenses.find(x=>/Eleven/.test(x.title)).split'), 'ratio');
 // Tickets already bought become a reminder to cancel; what was never booked just goes.
 assert.equal(ph('STATE.masterChecklist.find(t=>t.id==="m_hm").title'), 'לבטל: כרטיסים ל-Halfmoon, 2–3/12');
 assert.equal(ph('STATE.masterChecklist.find(t=>t.id==="m_hm").status'), 'todo');
@@ -285,7 +277,7 @@ STATE.masterChecklist.push(
   {id:'m_k58',owner:'both',title:'לשנות את קלימה ל-5–8/12 בבוקינג',status:'todo'},
   {id:'m_sim',owner:'both',title:'להזמין סימילן, 6/12',status:'done'});
 STATE.schema=16; ensureDefaults();`);
-assert.equal(pt('STATE.schema'), 30);
+assert.equal(pt('STATE.schema'), 31);
 assert.ok(!pt('STATE.countries.find(c=>c.id==="thailand").destinations.some(d=>d.name==="פטונג")'));
 assert.equal(pt('STATE.countries.find(c=>c.id==="thailand").destinations.find(d=>d.name==="קאו סוק").nights'), 2);
 assert.ok(!pt('sh().hotels.some(h=>h.dest==="פטונג")'));
@@ -323,7 +315,7 @@ STATE.masterChecklist.push(
   {id:'m_ks4',owner:'both',title:'להזמין לינה בקאו סוק, 4–6/12',status:'done'},
   {id:'m_lk5',owner:'both',title:'להזמין סיור אגם צ׳או לאן, 5/12',status:'todo'});
 STATE.schema=22; ensureDefaults();`);
-assert.equal(pp('STATE.schema'), 30);
+assert.equal(pp('STATE.schema'), 31);
 assert.equal(day(pp, '2026-12-02').dest, 'אאו נאנג');
 assert.ok(!JSON.parse(pp('JSON.stringify(sh().days.flatMap(d=>d.rows))')).some(r => /ChaoKoh|מעבורת/.test(r.act)));
 assert.equal(day(pp, '2026-12-03').rows.at(-1).id, 'custom-hat', 'a hand-added row stays on its date');
@@ -334,7 +326,7 @@ const ppDest = JSON.parse(pp('JSON.stringify(STATE.countries.find(c=>c.id==="tha
 assert.ok(!ppDest.some(d => d[0] === 'קו פי פי'));
 assert.deepEqual(ppDest.find(d => d[0] === 'אאו נאנג וריילאי'), ['אאו נאנג וריילאי','2026-11-29',4]);
 assert.deepEqual(ppDest.find(d => d[0] === 'קאו סוק'), ['קאו סוק','2026-12-03',2]);
-assert.deepEqual(ppDest.find(d => d[0] === 'קאו לאק'), ['קאו לאק','2026-12-05',3]);
+assert.deepEqual(ppDest.find(d => d[0] === 'קאו לאק'), ['קאו לאק','2026-12-05',4]);
 assert.ok(!pp('sh().hotels.some(h=>h.dest==="קו פי פי")'));
 assert.equal(pp('sh().hotels.filter(h=>h.hotel==="Kalima Resort and Villas · לילה נוסף").length'), 1);
 assert.equal(pp('STATE.masterChecklist.find(t=>t.id==="m_pp").title'), 'לבטל: לינה בפי פי, 2–4/12');
@@ -354,7 +346,7 @@ STATE.masterChecklist.push(
   {id:'m_k5',owner:'both',title:'להזמין לילה נוסף בקלימה — 5/12',status:'done'},
   {id:'m_ks35',owner:'both',title:'להזמין לינה בקאו סוק, 3–5/12',status:'todo'});
 STATE.schema=23; ensureDefaults();`);
-assert.equal(k23('STATE.schema'), 30);
+assert.equal(k23('STATE.schema'), 31);
 // Through 24 (a third Khao Sok night) and back in 25 (Khao Lak from 5/12): what was booked for 5/12 fits again.
 assert.equal(day(k23, '2026-12-05').dest, 'קאו לאק');
 assert.equal(day(k23, '2026-12-05').rows.at(-1).id, 'custom-bag');
@@ -374,63 +366,99 @@ const ppSettled = pp('JSON.stringify(STATE)');
 pp('ensureDefaults();');
 assert.equal(pp('JSON.stringify(STATE)'), ppSettled);
 
-// --- a document saved just before the north (schema 24) ---------------------------
+// --- a document saved just before the north (schema 24) — through the north and back ---
 const n24 = boot();
 n24(`STATE=seedData();
-sh().days.forEach(d=>{ d.rows=d.rows.filter(r=>!/^s_w_/.test(r.id)); });
+sh().days.forEach(d=>{ d.rows=d.rows.filter(r=>!/^s_w_/.test(r.id)); delete d.sun; });
 sh().days.find(d=>d.date==='2026-12-01').rows.push({id:'custom-sun',act:'קרם הגנה'});
-Object.assign(wallet().expenses.find(x=>/Montraj/.test(x.title)),{title:'Montraj Coach Sukhumvit · 3 לילות בבנגקוק',amount:8169.87,date:'2026-11-23'});
-wallet().expenses.push(Object.assign({id:'x_el'},ELEVEN_EXPENSE_16));
-const thai=STATE.countries.find(c=>c.id==='thailand');
-Object.assign(thai.destinations.find(d=>d.name==='צ׳יאנג מאי — לוי קראתונג'),{name:'בנגקוק'});
-Object.assign(thai.destinations.find(d=>d.name==='בנגקוק — סוף הטיול'),{name:'בנגקוק — לילה אחרון',arrival:'2026-12-09',nights:1});
-STATE.masterChecklist.push({id:'m_tg',owner:'both',title:'להזמין את טיסת TG203 לפוקט',status:'todo'},{id:'m_el',owner:'both',title:'לעדכן את Eleven Bangkok לשני אנשים',status:'done'});
+sh().days.find(d=>d.date==='2026-11-24').rows.find(r=>r.id==='s_2_canal').done=true;
 STATE.schema=24; ensureDefaults();`);
-assert.equal(n24('STATE.schema'), 30);
+assert.equal(n24('STATE.schema'), 31);
 const w24 = JSON.parse(n24('JSON.stringify(sh().days.flatMap(d=>d.rows.filter(r=>/^s_w_/.test(r.id)).map(r=>d.date)))'));
 assert.equal(w24.length, JSON.parse(run('JSON.stringify(sh().days.flatMap(d=>d.rows.filter(r=>/^s_w_/.test(r.id))))')).length, 'every workout, once');
 for (const d of JSON.parse(n24('JSON.stringify(sh().days)'))) {
-  const t = d.rows.filter(r => r.time).map(r => r.time);
-  assert.deepEqual(t, [...t].sort(), d.date + ' is in time order after the workouts go in');
+  const t = d.rows.filter(r => r.time).map(r => late(r.time));
+  assert.deepEqual(t, [...t].sort(), d.date + ' is in time order');
+  assert.ok(d.sun, d.date + ' has the sun');
 }
 assert.equal(day(n24, '2026-12-01').rows.at(-1).id, 'custom-sun');
-assert.equal(n24('wallet().expenses.find(x=>/Montraj/.test(x.title)).amount'), 5446.58);
-assert.equal(n24('wallet().expenses.filter(x=>/Eleven/.test(x.title)).length'), 0);
-assert.ok(n24('STATE.countries.find(c=>c.id==="thailand").destinations.some(d=>d.name==="צ׳יאנג מאי — לוי קראתונג" && d.arrival==="2026-11-23")'));
-assert.ok(n24('STATE.countries.find(c=>c.id==="thailand").destinations.some(d=>d.name==="בנגקוק — סוף הטיול" && d.nights===2)'));
-assert.ok(!n24('STATE.masterChecklist.some(t=>t.id==="m_tg"||t.id==="m_el")'), 'not booked, or no longer needed');
+assert.equal(day(n24, '2026-11-24').rows.find(r => r.id === 's_2_canal').done, true, 'the tick survives the north and back');
+assert.equal(n24('wallet().expenses.find(x=>/Montraj/.test(x.title)).amount'), 8169.87);
+assert.equal(n24('wallet().expenses.filter(x=>/^Eleven/.test(x.title)).length'), 1);
+const n24d = JSON.parse(n24('JSON.stringify(STATE.countries.find(c=>c.id==="thailand").destinations.filter(d=>d.owner==="both").map(d=>[d.name,d.arrival,d.nights]))'));
+assert.deepEqual(n24d.find(d => d[0] === 'בנגקוק'), ['בנגקוק','2026-11-23',3]);
+assert.deepEqual(n24d.find(d => d[0] === 'בנגקוק — לילה אחרון'), ['בנגקוק — לילה אחרון','2026-12-09',1]);
+assert.ok(!n24d.some(d => /צ׳יאנג מאי|סוף הטיול/.test(d[0])));
+assert.ok(n24('STATE.masterChecklist.some(t=>t.title==="להזמין את טיסת TG203 לפוקט")'));
+assert.ok(!n24('STATE.masterChecklist.some(t=>/צ׳יאנג מאי, 23|ל-8–10\\/12/.test(t.title))'));
+assert.ok(!n24('sh().hotels.some(h=>/Centara/.test(h.hotel))'));
+assert.ok(n24('sh().hotels.some(h=>/Eleven/.test(h.hotel)) && sh().hotels.some(h=>/Sala Rattanakosin/.test(h.hotel))'));
 const n24Settled = n24('JSON.stringify(STATE)');
 n24('ensureDefaults();');
 assert.equal(n24('JSON.stringify(STATE)'), n24Settled);
+
+// --- a document saved with the north (schema 30), and what was booked for it ----------------
+{
+  const n30 = boot();
+  n30(`STATE=seedData();
+  const thai=STATE.countries.find(c=>c.id==='thailand');
+  Object.assign(thai.destinations.find(d=>d.owner==='both'&&d.name==='בנגקוק'),{name:'צ׳יאנג מאי — לוי קראתונג'});
+  Object.assign(thai.destinations.find(d=>d.name==='בנגקוק — לילה אחרון'),{name:'בנגקוק — סוף הטיול',arrival:'2026-12-08',nights:2});
+  Object.assign(wallet().expenses.find(x=>/Montraj/.test(x.title)),{title:'Montraj Coach Sukhumvit · 2 לילות בבנגקוק',amount:5446.58});
+  wallet().expenses=wallet().expenses.filter(x=>!/^Eleven/.test(x.title));
+  sh().hotels.push({dest:'צ׳יאנג מאי',hotel:'Centara Riverside Hotel Chiang Mai',choice:'הבחירה'});
+  sh().days.find(d=>d.date==='2026-11-24').rows.push({id:'custom-lantern',act:'פנס'});
+  STATE.masterChecklist=STATE.masterChecklist.filter(t=>!/TG203|Eleven Bangkok לשני|מפוקט לבנגקוק ב-9/.test(t.title));
+  STATE.masterChecklist.push(
+    {id:'m_cm',owner:'both',title:'להזמין מלון בצ׳יאנג מאי, 23–26/11',status:'done'},
+    {id:'m_cnx',owner:'both',title:'להזמין טיסה סובארנבומי → צ׳יאנג מאי, 23/11',status:'todo'},
+    {id:'m_kyn',owner:'both',title:'להחליט על KYN: להישאר ב-26–29/11, או דירת שני חדרים ל-30/11–3/12',status:'todo'},
+    {id:'m_el',owner:'both',title:'לבטל את Eleven Bangkok — חינם עד 5/12',status:'todo'});
+  STATE.schema=30; ensureDefaults();`);
+  assert.equal(n30('STATE.schema'), 31);
+  assert.ok(n30('STATE.countries.find(c=>c.id==="thailand").destinations.some(d=>d.name==="בנגקוק" && d.owner==="both" && d.nights===3)'));
+  assert.ok(n30('STATE.countries.find(c=>c.id==="thailand").destinations.some(d=>d.name==="בנגקוק — לילה אחרון" && d.arrival==="2026-12-09")'));
+  assert.equal(n30('wallet().expenses.find(x=>/Montraj/.test(x.title)).amount'), 8169.87);
+  assert.equal(n30('wallet().expenses.filter(x=>/^Eleven/.test(x.title)).length'), 1, 'the last night is back in the ledger');
+  assert.ok(!n30('sh().hotels.some(h=>/Centara/.test(h.hotel))'));
+  assert.equal(day(n30, '2026-11-24').rows.at(-1).id, 'custom-lantern', 'a hand-added row stays on its date');
+  assert.equal(n30('STATE.masterChecklist.find(t=>t.id==="m_cm").title'), 'לבטל: מלון בצ׳יאנג מאי, 23–26/11', 'booked for the north, so a reminder to cancel');
+  assert.ok(!n30('STATE.masterChecklist.some(t=>t.id==="m_cnx"||t.id==="m_el")'), 'never booked, so just gone');
+  assert.equal(n30('STATE.masterChecklist.find(t=>t.id==="m_kyn").status'), 'done');
+  for (const t of ['להזמין את טיסת TG203 לפוקט','לעדכן את Eleven Bangkok לשני אנשים','להזמין טיסה מפוקט לבנגקוק ב-9/12 — לשניכם','לתקן מול קלימה: נשארים עד 9/12'])
+    assert.equal(n30(`STATE.masterChecklist.filter(t=>t.title===${JSON.stringify(t)}).length`), 1, t);
+  const settled = n30('JSON.stringify(STATE)'); n30('ensureDefaults();');
+  assert.equal(n30('JSON.stringify(STATE)'), settled);
+}
 
 // --- sunrise and sunset, and the day fitted to them (schema 26) ----------------------
 {
   const sun = JSON.parse(run('JSON.stringify(sh().days.map(d=>[d.date,d.sun]))'));
   assert.ok(sun.every(([, x]) => x && /^\d\d:\d\d$/.test(x.rise) && /^\d\d:\d\d$/.test(x.set)), 'every day has both');
-  assert.deepEqual(sun.find(x => x[0] === '2026-11-24')[1], {rise:'06:36', set:'17:45'}, 'Chiang Mai');
+  assert.deepEqual(sun.find(x => x[0] === '2026-11-24')[1], {rise:'06:22', set:'17:47'}, 'Bangkok');
   assert.deepEqual(sun.find(x => x[0] === '2026-12-09')[1], {rise:'06:30', set:'17:50'}, 'Bangkok');
   // no run before first light, and the evening plans wait for the sunset
   const runs = allRowsOf(run).filter(r => /^s_w_/.test(r.id) && /ריצה/.test(r.act));
   for (const r of runs) assert.ok(r.time >= '06:00', r.id + ' at ' + r.time);
   assert.equal(day(run, '2026-12-04').rows.find(r => r.id === 's_w_1204').time, '16:30');
   assert.ok(day(run, '2026-11-30').rows.find(r => r.id === 's_8_6').time > '18:04', 'back from Railay after the sunset');
-  const saket = day(run, '2026-12-09').rows.find(r => r.id === 's_2_saket');
-  assert.ok(saket.time < '17:50' && /17:50/.test(saket.notes));
+  const saket = day(run, '2026-11-24').rows.find(r => r.id === 's_2_saket');
+  assert.ok(saket.time < '17:47', 'the Golden Mount before sunset');
   assert.ok(/17:00/.test(day(run, '2026-11-26').rows.find(r => r.id === 's_4_7').notes), 'the last boat to the island');
-  assert.ok(run('renderDayCard(sh().days[0])').includes('🌅 06:36'));
+  assert.ok(run('renderDayCard(sh().days[0])').includes('🌅 06:21'));
   // a document saved before gets the same, once, in time order
   const s25 = boot();
   s25(`STATE=seedData(); sh().days.forEach(d=>{ delete d.sun; d.rows=d.rows.filter(r=>r.id!=='s_h7_sun'); });
   const d4=sh().days.find(d=>d.date==='2026-12-04'); const w=d4.rows.find(r=>r.id==='s_w_1204'); Object.assign(w,{time:'05:45'}); d4.rows=[w,...d4.rows.filter(r=>r!==w)];
   w.done=true; d4.rows.push({id:'custom-lamp',act:'פנס ראש'});
   STATE.schema=25; ensureDefaults();`);
-  assert.equal(s25('STATE.schema'), 30);
+  assert.equal(s25('STATE.schema'), 31);
   const s4 = day(s25, '2026-12-04');
   assert.equal(s4.rows.find(r => r.id === 's_w_1204').time, '16:30');
   assert.equal(s4.rows.find(r => r.id === 's_w_1204').done, true);
   assert.equal(s4.rows.at(-1).id, 'custom-lamp');
   for (const d of JSON.parse(s25('JSON.stringify(sh().days)'))) {
-    const t = d.rows.filter(r => r.time).map(r => r.time);
+    const t = d.rows.filter(r => r.time).map(r => late(r.time));
     assert.deepEqual(t, [...t].sort(), d.date + ' in time order');
     assert.ok(d.sun, d.date + ' has the sun');
   }
@@ -447,7 +475,7 @@ assert.equal(n24('JSON.stringify(STATE)'), n24Settled);
   sh().days.flatMap(d=>d.rows).find(r=>r.id==='s_g8_0').baht=1480;
   STATE.masterChecklist.forEach(t=>{ if(/מקדמה|פרטי החשבון של המחנה/.test(t.title)) t.status='todo'; });
   STATE.schema=26; ensureDefaults();`);
-  assert.equal(k26('STATE.schema'), 30);
+  assert.equal(k26('STATE.schema'), 31);
   const kr = JSON.parse(k26('JSON.stringify(sh().days.flatMap(d=>d.rows).find(r=>r.id==="s_g6_stay"))'));
   assert.equal(kr.baht, 8800);
   assert.equal(kr.done, true, 'a tick survives');
@@ -462,25 +490,25 @@ assert.equal(n24('JSON.stringify(STATE)'), n24Settled);
 // --- the Bangkok hotel, booked direct ---------------------------------------
 const bkk = boot();
 const mx = JSON.parse(bkk('JSON.stringify(wallet().expenses.find(x=>/Montraj Coach/.test(x.title)))'));
-assert.equal(mx.amount, 5446.58, 'two nights at the end now');
+assert.equal(mx.amount, 8169.87);
 assert.equal(mx.currency, 'THB');
 assert.equal(mx.status, 'due', 'paid at the hotel, so still due');
 assert.ok(/3051425/.test(mx.note));
-// The forecast takes the price from the ledger, once, split across the two nights.
-const nightIls = bkk('sharedRowPrice(sh().days.flatMap(d=>d.rows).find(r=>r.id==="s_1_9")).base');
-assert.ok(Math.abs(nightIls - 5446.58 * bkk('rate()') / 2) < 0.001);
+// The forecast takes the price from the ledger, once, split across the three nights.
+const nightIls = bkk('sharedRowPrice(sh().days[0].rows.find(r=>r.id==="s_1_9")).base');
+assert.ok(Math.abs(nightIls - 8169.87 * bkk('rate()') / 3) < 0.001);
 const mb = JSON.parse(bkk('JSON.stringify(sh().bookings.find(b=>b.what==="Montraj Coach Sukhumvit"))'));
 assert.equal(mb.ref, '3051425');
 assert.ok(/21\/11/.test(mb.freeCancel));
 const mh = JSON.parse(bkk('JSON.stringify(sh().hotels.find(h=>h.hotel==="Montraj Coach Sukhumvit"))'));
 assert.equal(mh.perNight, 2723.29);
 assert.ok(!/booking\.com/.test(mh.linkLink), 'links to the hotel, not Booking');
-for (const id of ['s_1_9', 's_2_10']) {
+for (const id of ['s_1_9', 's_2_10', 's_3_12']) {
   const r = JSON.parse(bkk(`JSON.stringify(sh().days.flatMap(d=>d.rows).find(r=>r.id==="${id}"))`));
   assert.equal(r.baht, 2723.29, id);
   assert.ok(!/5123136373/.test(r.notes || ''), 'no Booking reference left on ' + id);
 }
-assert.ok(/12:00/.test(bkk('sh().days.flatMap(d=>d.rows).find(r=>r.id==="s_1_5").notes')), 'check-out time from the confirmation');
+assert.ok(/12:00/.test(bkk('sh().days[0].rows.find(r=>r.id==="s_1_5").notes')), 'check-out time from the confirmation');
 // A reminder to cancel the Booking reservation, so there are not two.
 assert.ok(bkk('STATE.masterChecklist.some(t=>/לבטל את הזמנת בוקינג של Montraj/.test(t.title) && t.owner==="itai")'));
 
@@ -489,11 +517,11 @@ const oldBkk = boot();
 oldBkk(`STATE=seedData();
 const x=wallet().expenses.find(e=>/Montraj Coach/.test(e.title));
 Object.assign(x,{amount:1128,currency:'ILS',note:'אישור 5123136373'});
-const d8=sh().days.find(d=>d.date==='2026-12-08'); const n=d8.rows.find(r=>r.id==='s_1_9'); d8.rows=d8.rows.filter(r=>r!==n); n.done=true; sh().days[0].rows.push(n); // where it sat before 25
+sh().days[0].rows.find(r=>r.id==='s_1_9').done=true;
 STATE.schema=12;
 ensureDefaults();`);
-assert.equal(oldBkk('wallet().expenses.find(e=>/Montraj Coach/.test(e.title)).amount'), 5446.58);
-assert.equal(oldBkk('sh().days.flatMap(d=>d.rows).find(r=>r.id==="s_1_9").done'), true, 'keeping the tick, on 8/12 now');
+assert.equal(oldBkk('wallet().expenses.find(e=>/Montraj Coach/.test(e.title)).amount'), 8169.87);
+assert.equal(oldBkk('sh().days[0].rows.find(r=>r.id==="s_1_9").done'), true, 'keeping the tick');
 assert.equal(oldBkk('sh().bookings.find(b=>b.what==="Montraj Coach Sukhumvit").ref'), '3051425');
 // ...but an amount someone corrected by hand is left alone.
 const edited = boot();
@@ -503,46 +531,57 @@ STATE.schema=12; ensureDefaults();`);
 assert.equal(edited('wallet().expenses.find(e=>/Montraj Coach/.test(e.title)).amount'), 9000);
 
 
-// 9/12: canals ending at Wat Arun, the ferry to Wat Pho, the palace by tuk-tuk, the Giant Swing and the Golden Mount, then Rajadamnern.
+// 24/11: canals ending at Wat Arun, the ferry to Wat Pho, the palace by tuk-tuk, the Giant Swing and the Golden Mount before the Loy Krathong dinner.
 {
   const b = boot();
-  const d9 = day(b, '2026-12-09');
-  assert.ok(d9.rows.find(r => r.id === 's_2_2').time <= '15:30', 'the palace before its last entry');
-  // A saved document keeps its ticks and its own rows: the tick moves to 9/12, the hand-added row stays on 24/11.
+  const d24 = day(b, '2026-11-24');
+  const at = id => d24.rows.findIndex(r => r.id === id);
+  const seq = ['s_2_canal','s_2_arun','s_2_ferry','s_2_3','s_2_tuk','s_2_2','s_2_swing','s_2_saket','s_2_7'];
+  assert.deepEqual(seq.map(at), [...seq.map(at)].sort((x,y)=>x-y), 'in the order asked');
+  assert.ok(seq.every(id => at(id) >= 0));
+  const t = d24.rows.filter(r => r.time).map(r => r.time);
+  assert.deepEqual(t, [...t].sort(), '24/11 is in time order');
+  assert.ok(d24.rows.find(r => r.id === 's_2_2').time <= '15:30', 'the palace before its last entry');
+  assert.ok(/צ׳אנגוואטנה/.test(acts(day(b, '2026-11-25'))));
+  const t25 = day(b, '2026-11-25').rows.filter(r => r.time).map(r => r.time);
+  assert.deepEqual(t25, [...t25].sort(), '25/11 is in time order');
+  // A saved document keeps its ticks and its own rows.
   const o = boot();
   o(`STATE=seedData(); const d=sh().days.find(x=>x.date==='2026-11-24');
-  d.rows=d.rows.filter(r=>!/^s_c2_/.test(r.id)).concat([{id:'s_2_3',act:'ואט פו — הבודהה השוכב',time:'11:25',done:true},{id:'custom-x',act:'קרם הגנה'}]);
-  const n9=sh().days.find(x=>x.date==='2026-12-09'); n9.rows=n9.rows.filter(r=>r.id!=='s_2_3');
+  d.rows=d.rows.filter(r=>!['s_2_canal','s_2_arun','s_2_ferry','s_2_tuk','s_2_swing','s_2_saket'].includes(r.id));
+  d.rows.find(r=>r.id==='s_2_3').done=true; d.rows.push({id:'custom-x',act:'קרם הגנה'});
   STATE.schema=21; ensureDefaults();`);
-  assert.equal(day(o, '2026-12-09').rows.find(r => r.id === 's_2_3').done, true);
   const o24 = day(o, '2026-11-24');
+  assert.ok(o24.rows.some(r => r.id === 's_2_saket'));
+  assert.equal(o24.rows.find(r => r.id === 's_2_3').done, true);
   assert.equal(o24.rows[o24.rows.length-1].id, 'custom-x');
-  assert.ok(!o24.rows.some(r => r.id === 's_2_3'));
 }
 
 // Loy Krathong: the Thai calendar date, and a warning about the wrong one.
-const lanterns = day(run, '2026-11-24').rows.find(r => r.id === 's_c2_6');
+const lanterns = day(run, '2026-11-24').rows.find(r => r.id === 's_2_8');
 assert.ok(/24\/11/.test(lanterns.notes) && /25\/11/.test(lanterns.notes));
 
 
-console.log('PASS: Chiang Mai first with Loy Krathong, the camp as booked, four nights in Ao Nang, two in Khao Sok, three in Khao Lak and two in Bangkok, together until 10/12; workouts by date; sunrise and sunset; moves from schema 14, 15, 16, 22, 23, 24, 25 and 26 without losing hand-added rows, once; Bangkok hotel booked direct; Loy Krathong date.');
+console.log('PASS: Bangkok first with Loy Krathong, the camp as booked, four nights in Ao Nang, two in Khao Sok, four at Kalima and a last night in Bangkok, together until 10/12; workouts by date; sunrise and sunset; moves from schema 14, 15, 16, 22, 23, 24, 25, 26 and 30 without losing hand-added rows, once; Bangkok hotel booked direct; Loy Krathong date.');
 
 // --- nightlife --------------------------------------------------------------
 {
   const n = boot();
   const nights = JSON.parse(n('JSON.stringify(sh().days.flatMap(d=>d.rows.filter(r=>/_night$/.test(r.id)).map(r=>d.date)))'));
-  assert.deepEqual(nights, ['2026-11-25','2026-11-29','2026-11-30','2026-12-02','2026-12-07']);
+  assert.deepEqual(nights, ['2026-11-23','2026-11-29','2026-11-30','2026-12-02','2026-12-07','2026-12-09']);
   // never the night before an early start
   for (const date of nights) {
     const i = JSON.parse(n('JSON.stringify(sh().days.map(d=>d.date))')).indexOf(date);
-    const next = JSON.parse(n(`JSON.stringify(sh().days[${i+1}].rows.find(r=>r.time))`));
+    const next = JSON.parse(n(`JSON.stringify(sh().days[${i+1}].rows.find(r=>r.time && !/^s_w_/.test(r.id)))`)); // a workout the morning after is optional
     assert.ok(next.time >= '07:15', date + ' is followed by ' + next.time);
   }
+  const d1 = JSON.parse(n('JSON.stringify(sh().days[0].rows.map(r=>r.act))'));
+  assert.ok(d1.indexOf('גראב חזרה למלון') > d1.findIndex(a=>a.startsWith('חאו סן')), 'the ride home comes after Khao San');
   // a saved document gets the nights once
   const o = boot();
   o(`STATE=seedData(); sh().days.forEach(d=>d.rows=d.rows.filter(r=>!/_night$/.test(r.id))); STATE.schema=13; ensureDefaults();`);
-  assert.equal(o('sh().days.flatMap(d=>d.rows).filter(r=>/_night$/.test(r.id)).length'), 5);
+  assert.equal(o('sh().days.flatMap(d=>d.rows).filter(r=>/_night$/.test(r.id)).length'), 6);
   o('STATE.schema=13; ensureDefaults();');
-  assert.equal(o('sh().days.flatMap(d=>d.rows).filter(r=>/_night$/.test(r.id)).length'), 5);
-  console.log('PASS: nightlife on five evenings, none before an early start, migration once.');
+  assert.equal(o('sh().days.flatMap(d=>d.rows).filter(r=>/_night$/.test(r.id)).length'), 6);
+  console.log('PASS: nightlife on six evenings, none before an early start, migration once.');
 }
