@@ -462,6 +462,21 @@ const TASKS_33 = [
    notes:'12/11: Greenery מלא אצל Siam Tour · שאלנו את Siam Tour על Laguna Seaview, Panvaree, Issara ו-Phuphawaree, ואת Greenery ישירות · אם אין: Thai National Parks (טופס באתר), או טיול יום ולילה שני ב-River Lodge'},
   {from:'להזמין סימילן ל-6/12', notes:'Asian Trails (Patty, הדלפק בקלימה) · ביקשנו Late Departure, איסוף 07:30–07:45 · מחכים למחיר ולתנאי ביטול · Early Bird: ฿4,100 לאדם'}
 ];
+const KHAOLAK_NOTE_35 = '6/12 יום מנוחה אחרי קאו סוק — חוף, זיפליין וספא. סימילן ב-7/12, ו-8/12 יום חופשי וגיבוי לסימילן: פארק קאו לאק–לאם רו ואנדרטת הצונאמי.';
+const TASKS_35 = [
+  {from:'להזמין סימילן ל-6/12', to:'להזמין סימילן ל-7/12', notes:'12/11: ביקשנו מ-Asian Trails (Patty) להעביר ל-7/12, Late Departure · מחכים לאישור, למחיר ולתנאי ביטול · 8/12 יום הגיבוי'}
+];
+function applyTasks35(list){
+  TASKS_35.forEach(spec=>{
+    const same = list.filter(x=>x.title===spec.from || x.title===spec.to);
+    if(!same.length) return;
+    const t = same.find(x=>x.status==='done') || same[0];
+    list = list.filter(x=>x===t || !same.includes(x));
+    t.title = spec.to;
+    if(t.status!=='done') t.notes = spec.notes;
+  });
+  return list;
+}
 const TASKS_34 = [
   {from:'לאשר שולחן לארוחת לוי קראתונג בסאלה ראטנקוסין, 24/11', status:'done', notes:'12/11: הוזמן ב-TableCheck · 19:30 · 1 Fl Terrace, מול ואט ארון'}
 ];
@@ -634,7 +649,7 @@ function seedData(){
   const hanoiId = uid('d'), manilaId = uid('d');
 
   return {
-    schema:34,
+    schema:35,
     tripName:"My Big Trip 🌏",
     startDate:"2026-11-22",
     endDate:null,
@@ -708,7 +723,7 @@ function seedData(){
           {id:khaolakId, owner:"both", name:"קאו לאק", wiki:"Khao Lak", hue:"#C9A24C",
            lat:8.6392, lng:98.2450, arrival:"2026-12-05", departure:"2026-12-09", nights:4,
            accommodation:"Kalima Resort and Villas", transport:"ואן מקאו סוק",
-           notes:"סימילן ב-6/12, 7/12 יום גיבוי — או ספא וזיפליין אם השייט יצא — ו-8/12 יום חופשי: פארק קאו לאק–לאם רו ואנדרטת הצונאמי. ב-9/12 לשדה בפוקט וטיסה לבנגקוק. הלילה של 5/12 בהזמנה ישירה נפרדת.",
+           notes:"6/12 יום מנוחה אחרי קאו סוק — חוף, זיפליין וספא. סימילן ב-7/12, ו-8/12 יום חופשי וגיבוי לסימילן: פארק קאו לאק–לאם רו ואנדרטת הצונאמי. ב-9/12 לשדה בפוקט וטיסה לבנגקוק. הלילה של 5/12 בהזמנה ישירה נפרדת.",
            scooter:{ok:false, headline:"לא הפעם", note:"ארבעה ימים, ואחד מהם בים. מוניות מהריזורט."},
            budget:2500, status:"booked", companions:["ביחד"], order:6},
           {id:bangkokLastId, owner:"both", name:"בנגקוק — לילה אחרון", wiki:"Bangkok", hue:"#C97B5A",
@@ -756,7 +771,7 @@ function seedData(){
         transport:[], accommodations:[], budget:defaultBudget()
       }
     ],
-    masterChecklist: applyTasks34(applyTasks33(applyTasks32([
+    masterChecklist: applyTasks35(applyTasks34(applyTasks33(applyTasks32([
       {id:uid('m'), category:"דרכון", title:"לבדוק תוקף דרכון (6+ חודשים)", status:"todo", deadline:"2026-10-15", notes:"", priority:"גבוהה", link:"", countryId:null, order:1},
       {id:uid('m'), category:"ביטוח נסיעות", title:"לרכוש ביטוח נסיעות ארוך טווח", status:"todo", deadline:"2026-11-05", notes:"לוודא כיסוי לענפי ספורט/גלישה ויוגה", priority:"גבוהה", link:"", countryId:null, order:2},
       {id:uid('m'), category:"כרטיסי אשראי", title:"לעדכן בנק על נסיעה ממושכת", status:"todo", deadline:"", notes:"", priority:"בינונית", link:"", countryId:null, order:3},
@@ -784,7 +799,7 @@ function seedData(){
       {id:uid('m'), owner:"talia", category:"טיסות המשך", title:"טיסה מתאילנד לסרי לנקה", status:"todo", deadline:"2026-11-20", notes:ONWARD_NOTE, priority:"גבוהה", link:"", countryId:null, order:18},
       {id:uid('m'), owner:"talia", category:"טיסות המשך", title:"כרטיס יציאה מתאילנד לפני הכניסה בפברואר", status:"todo", deadline:"2027-02-01", notes:"בכניסה לקופנגן באמצע פברואר הפטור מתחיל מחדש (30 יום), ושוב צריך להראות כרטיס יציאה — למשל לפיליפינים", priority:"בינונית", link:"", countryId:null, order:19},
       ...TALIA_TASKS.map(t=>({id:uid('m'), owner:"talia", status:"todo", category:"המסלול של טליה", countryId:null, ...t}))
-    ]))),
+    ])))),
     packingBreakdown:"Osprey Renn 65L לכל הציוד → Osprey Daylite Plus 20L למטוס, נסיעות וטיולי יום → קרוסבודי קטן לטלפון, כסף ודרכון ביום־יום.",
     packingCarryOn:["דרכון","ארנק","טלפון","Power Bank","תרופות למיגרנה","תרופה לבחילות","משקפי שמש","אטמי אוזניים","מסכת עיניים","אוזניות","מגבונים קטנים","טישו","AirTag מחובר למוצ'ילה הגדולה","חולצה + תחתונים להחלפה"],
     packingList: applyShopping([
@@ -2338,6 +2353,40 @@ function ensureDefaults(){
     }
     STATE.masterChecklist = applyTasks34(STATE.masterChecklist);
     STATE.schema = 34;
+  }
+
+  if(STATE.schema < 35){
+    // סימילן עובר ל-7/12: 6/12 יום מנוחה אחרי קאו סוק, 8/12 יום הגיבוי
+    const seedShared = window.SHARED_SEED;
+    const copy = x => JSON.parse(JSON.stringify(x));
+    const meta = STATE.shared;
+    if(seedShared && meta && meta.days){
+      const shared = meta.days.filter(d=>d.owner!=='talia');
+      const dates = ['2026-12-06','2026-12-07'];
+      const days = dates.map(date=>shared.find(d=>d.date===date));
+      if(days.every(Boolean)){
+        const old = new Map(days.flatMap(d=>d.rows).map(r=>[r.id, r]));
+        dates.forEach((date, i)=>{
+          const seedDay = seedShared.days.find(d=>d.date===date);
+          const custom = days[i].rows.filter(r=>!/^s_/.test(String(r.id||'')));
+          const rows = seedDay.rows.map(sr=>{
+            const row = copy(sr), before = old.get(sr.id);
+            if(before){ if(before.done) row.done = true; if(before.talk) row.talk = before.talk; }
+            return row;
+          });
+          Object.assign(days[i], {summary:seedDay.summary, rows:rows.concat(custom)});
+        });
+      }
+      const d8 = shared.find(d=>d.date==='2026-12-08');
+      const s8 = seedShared.days.find(d=>d.date==='2026-12-08');
+      if(d8 && s8) d8.summary = s8.summary;
+      if(meta.bases) meta.bases.forEach(b=>{ if(/סימילן, יום גיבוי/.test(b.what||'')) b.what = 'קלימה · יום מנוחה, סימילן ויום חופשי (גיבוי)'; });
+    }
+    (STATE.countries||[]).forEach(t=>(t.destinations||[]).forEach(d=>{
+      if(d.name==='קאו לאק' && /^סימילן ב-6\/12/.test(d.notes||'')) d.notes = d.notes.replace(/^סימילן ב-6\/12[^:]*: פארק קאו לאק–לאם רו ואנדרטת הצונאמי\./, KHAOLAK_NOTE_35);
+    }));
+    STATE.masterChecklist = applyTasks35(STATE.masterChecklist);
+    STATE.schema = 35;
   }
 
   /* משימות חדשות מתווספות בכל גרסה, לפי כותרת */
