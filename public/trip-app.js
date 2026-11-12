@@ -424,6 +424,7 @@ const TASKS_32 = [
   {from:'להזמין סימילן ל-6/12', notes:'12/11: ביקשנו הצעה מדואנג׳אן (duangjan@asiantrails.org), דרך קלימה · להשוות: Similan One Day Tour from Khao Lak בבוקינג, כ-฿3,548 לאדם · 7/12 יום הגיבוי'},
   {from:'לבטל את Sarana Bungalows — חינם עד 28/11', status:'done', notes:'בוטל'},
   {from:'לתאם ביקור בוגרים ב-ISB', notes:'25/11, 10:30 · בקשה 10/9 ותזכורת 12/11 ל-isbalum@isb.ac.th — מחכים לאישור · שניכם, דרכונים בשער'},
+  {from:'לעדכן בנק על נסיעה ממושכת', notes:'להודיע לחברת האשראי (כאל) על הנסיעה, ולבדוק את עמלת המט״ח — תשלומים בבאט'},
   {from:'למשוך ฿6,075 מזומן ליתרה במחנה', notes:'בכספומט בבנגקוק, 23–25/11, במשיכה אחת — ฿220 עמלה לכל משיכה. אין כרטיסים ואין העברות במחנה'},
   {from:'לרכוש ביטוח נסיעות ארוך טווח', status:'done'},
   {from:'לוודא שהביטוח מכסה ספורט מגע', status:'done'},
@@ -440,7 +441,17 @@ const NEW_TASKS_32 = () => [
   {id:uid('m'), owner:"both", status:"todo", category:"הזמנות", countryId:"thailand", order:13.12, priority:"בינונית", deadline:"2026-11-25",
    title:"מונית ל-BKK ב-26/11, 06:45 — לבקש בקבלה של ASAI", notes:"VZ300 ב-09:40 · או גראב בבוקר", link:""},
   {id:uid('m'), owner:"itai", status:"todo", category:"הזמנות", countryId:"thailand", order:13.53, priority:"בינונית", deadline:"2026-12-09",
-   title:"מונית לסוברנבומי ב-10/12, 07:45 — בקבלה של Eleven", notes:"IZ592 ב-11:15 · להזמין יום לפני, משלמים לנהג", link:""}
+   title:"מונית לסוברנבומי ב-10/12, 07:45 — בקבלה של Eleven", notes:"IZ592 ב-11:15 · להזמין יום לפני, משלמים לנהג", link:""},
+  {id:uid('m'), owner:"both", status:"todo", category:"הזמנות", countryId:"thailand", order:13.11, priority:"גבוהה", deadline:"2026-11-18",
+   title:"לאשר שולחן לארוחת לוי קראתונג בסאלה ראטנקוסין, 24/11",
+   notes:"12/11: נשלח מייל ל-info@salahospitality.com (עותק stay@salarattanakosin.com) — שולחן לשניים 17:30–18:00 ליד הנהר · בימים רגילים שולחן לשעתיים בלבד · אם אין תשובה: +66 2 622 1388 או TableCheck",
+   link:"https://www.tablecheck.com/en/salarattanokosin-eateryandbar/reserve"},
+  {id:uid('m'), owner:"both", status:"todo", category:"הזמנות", countryId:"thailand", order:13.25, priority:"בינונית", deadline:"2026-11-25",
+   title:"להזמין קורס טיפוס למתחילים בריילאי, 30/11",
+   notes:"Real Rocks — חצי יום בבוקר, קבוצות קטנות, ציון 9.6–9.8, כ-฿1,550 לאדם · חלופה: King Climbers · הקיאקים (1/12), הוואן לקאו סוק (3/12) ופי פי (2/12) — דרך הקבלה של COSI, במקום",
+   link:"https://www.expedia.com.my/things-to-do/krabi-half-day-rock-climbing-at-railay-beach.a4528313.activity-details"},
+  {id:uid('m'), owner:"both", status:"todo", category:"לפני הטיסה", countryId:null, order:5.5, priority:"בינונית", deadline:"2026-11-21",
+   title:"Grab ו-Bolt בשני הטלפונים, עם כרטיס אשראי", notes:"כל המוניות בטיול מוזמנות במקום · SIM קונים בשדה, בדוכן של AIS או True", link:""}
 ];
 function applyTasks32(list){
   list = list.filter(t=>!(TASKS_32_REMOVED.includes(t.title) && t.status!=='done'));
