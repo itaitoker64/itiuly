@@ -2380,6 +2380,7 @@ async function loadState(){
   render();
   startSyncLoop();
   registerServiceWorker();
+  setupInstallButton();
   startPresence();
 }
 
@@ -2574,6 +2575,34 @@ function initPullToRefresh(){
   };
   content.addEventListener('touchend', finish);
   content.addEventListener('touchcancel', finish);
+}
+
+/* התקנה למסך הבית: באנדרואיד ובכרום — כפתור שפותח את חלון ההתקנה; באייפון — הסבר קצר */
+let installPrompt = null;
+function isStandalone(){
+  return window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+}
+function setupInstallButton(){
+  const btn = document.getElementById('install-pill');
+  if(!btn || isStandalone()) return;
+  const ios = /iphone|ipad|ipod/i.test(navigator.userAgent) && !window.MSStream;
+  window.addEventListener('beforeinstallprompt', e=>{
+    e.preventDefault();
+    installPrompt = e;
+    btn.classList.remove('hidden');
+  });
+  window.addEventListener('appinstalled', ()=>{ installPrompt = null; btn.classList.add('hidden'); toast('האפליקציה הותקנה 🎉'); });
+  if(ios) btn.classList.remove('hidden');
+  btn.addEventListener('click', async ()=>{
+    if(installPrompt){
+      installPrompt.prompt();
+      const choice = await installPrompt.userChoice.catch(()=>null);
+      if(choice && choice.outcome==='accepted') btn.classList.add('hidden');
+      installPrompt = null;
+      return;
+    }
+    if(ios) toast('בספארי: כפתור השיתוף ⬆️ ← "הוספה למסך הבית"');
+  });
 }
 
 function registerServiceWorker(){
