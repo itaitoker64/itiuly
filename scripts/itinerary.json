@@ -2826,13 +2826,13 @@
    {
     "time": "09:00",
     "dur": "3:00",
-    "act": "אגם צ׳או לאן — איסוף, שוק ולונגטייל לבונגלו הצף",
+    "act": "אגם צ׳או לאן — לילה בבונגלו צף (מחכים לתשובה)",
     "loc": "קאו סוק → רציף ראצ׳אפראפה → Panvaree The Greenery",
     "cat": "אטרקציות",
     "baht": 13600,
     "status": "להזמין",
     "link": "https://www.siamtourandrealty.com/trip/cheow-lan-2-days-floating-bungalow-from-khao-sok/",
-    "notes": "Siam Tour · ฿6,800 לאדם, לשניים ฿13,600 · כולל איסוף מ-River Lodge, לונגטייל, צהריים, ערב, שייט שקיעה וארוחת בוקר · לא מוחזר · נשלחה בקשה 12/11 ל-contact@siamtourandrealty.com — מחכים לזמינות, להורדה בקלימה ולשמירת המזוודות",
+    "notes": "12/11: Panvaree The Greenery מלא ב-4/12 אצל Siam Tour · שאלנו את Siam Tour על Laguna Seaview, Panvaree, Issara או Phuphawaree, ואת Greenery ישירות (tonraktours@thegreenerypanvaree.com) · כ-฿10,000–14,000 לשניים, לא מוחזר",
     "wiki": "Cheow Lan Lake",
     "priceEstimate": {
      "kind": "estimate",
@@ -2960,13 +2960,13 @@
    {
     "time": "",
     "dur": "",
-    "act": "לינה — בונגלו צף, Panvaree The Greenery",
+    "act": "לינה — בונגלו צף על אגם צ׳או לאן (לבחור)",
     "loc": "אגם צ׳או לאן",
     "cat": "לינה",
     "baht": 0,
     "status": "להזמין",
     "link": "https://www.siamtourandrealty.com/trip/cheow-lan-2-days-floating-bungalow-from-khao-sok/",
-    "notes": "כלול בחבילה של Siam Tour · חשמל בערך 17:00–09:00 · מזגן ומקלחת פרטית",
+    "notes": "כלול בחבילה · מחכים לתשובות מ-Siam Tour ומ-Greenery",
     "wiki": "Khao Sok National Park",
     "priceEstimate": {
      "kind": "included",
@@ -3172,8 +3172,8 @@
     "cat": "אטרקציות",
     "baht": 7800,
     "status": "להזמין",
-    "link": "https://www.khaolaklanddiscovery.com/khao-lak-tours/",
-    "notes": "฿3,900 לאדם כולל אגרת פארק · איסוף מקלימה · שמורת האלמוגים הכי טובה באנדמן · אם השייט מבוטל בגלל הים, המפעילים מזיזים תאריך בלי עלות — 7/12 הוא יום הגיבוי",
+    "link": "mailto:duangjan@asiantrails.org",
+    "notes": "Asian Trails (הדלפק בקלימה, Patty) · Late Departure, איסוף 07:30–07:45 מקלימה · ביקשנו 12/11 מחיר ותנאי ביטול · Early Bird: ฿4,100 לאדם, איסוף 05:15 · 7/12 גיבוי",
     "wiki": "Similan Islands",
     "priceEstimate": {
      "kind": "published",
@@ -3711,17 +3711,19 @@
     "act": "צ׳ק-אאוט · מונית לשדה התעופה בפוקט",
     "loc": "קאו לאק → HKT",
     "cat": "תחבורה",
-    "baht": 1800,
-    "status": "משלמים במקום",
+    "baht": 1707,
+    "status": "מוזמן",
     "link": "",
-    "notes": "מזמינים במקום, יום לפני — גראב או דרך הקבלה · קלימה מציעה ฿1,800 לוואן, מראש ולא מוחזר · לצאת לא אחרי 11:00",
+    "notes": "מונית של Booking · אישור 997065466 · ₪153.27 · איסוף מקלימה ב-10:45, הנהג שולח פרטים כשעתיים לפני",
     "priceEstimate": {
-     "kind": "estimate",
-     "basis": "מונית או רכב פרטי מקאו לאק לשדה בפוקט.",
-     "lowFactor": 0.7,
-     "highFactor": 1.1,
+     "kind": "booking",
+     "basis": "מחיר ההזמנה בבוקינג.",
+     "lowFactor": 1,
+     "highFactor": 1,
      "sourceUrl": "",
-     "checked": "2026-11-12"
+     "checked": "2026-11-12",
+     "fixedIls": 153.27,
+     "category": "transport"
     }
    },
    {

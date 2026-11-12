@@ -405,7 +405,9 @@ const EXPENSES_32 = () => [
   {id:uid('x'), date:"2026-11-29", title:"COSI Krabi Ao Nang Beach · 4 לילות", category:"accommodation",
    amount:22669.04, currency:"THB", paidBy:"itai", split:"ratio", status:"due", note:"אישור 5907714174 · זיכוי יומי לאוכל ושתייה · בוקינג מחייבת אוטומטית · ביטול חינם עד 21/11, אחר כך 50%"},
   {id:uid('x'), date:"2026-12-03", title:"Khao Sok River Lodge · 3/12", category:"accommodation",
-   amount:2000, currency:"THB", paidBy:"itai", split:"ratio", status:"due", note:"אישור 5114181390 · כולל ארוחת בוקר · העברה בנקאית לפני ההגעה · ביטול חינם עד 29/11"}
+   amount:2000, currency:"THB", paidBy:"itai", split:"ratio", status:"due", note:"אישור 5114181390 · כולל ארוחת בוקר · העברה בנקאית לפני ההגעה · ביטול חינם עד 29/11"},
+  {id:uid('x'), date:"2026-12-09", title:"מונית Booking · קלימה → HKT", category:"transport",
+   amount:153.27, currency:"ILS", paidBy:"itai", split:"ratio", status:"paid", note:"אישור 997065466 · 9/12, 10:45"}
 ];
 /* משימות: מה שהוזמן היום נסגר, מה שהשתנה מקבל שם חדש, ומה שירד מהמסלול יוצא */
 const TASKS_32_REMOVED = ['להאריך את צ׳רמנטרה בלילה — 2/12', 'להזמין סיור בוקר בג׳ונגל וואן לקאו לאק, 5/12'];
@@ -453,6 +455,23 @@ const NEW_TASKS_32 = () => [
   {id:uid('m'), owner:"both", status:"todo", category:"לפני הטיסה", countryId:null, order:5.5, priority:"בינונית", deadline:"2026-11-21",
    title:"Grab ו-Bolt בשני הטלפונים, עם כרטיס אשראי", notes:"כל המוניות בטיול מוזמנות במקום · SIM קונים בשדה, בדוכן של AIS או True", link:""}
 ];
+const TASKS_33 = [
+  {from:'להוסיף את טליה כאורחת ב-Eleven (5601126099)', status:'done', notes:'12/11: טליה ונועה מלח נוספו בבוקינג'},
+  {from:'מונית מקלימה לשדה ב-9/12 — להזמין במקום', to:'מונית מקלימה לשדה ב-9/12', status:'done', notes:'מונית של Booking · אישור 997065466 · ₪153.27 · 10:45'},
+  {from:'להזמין לילה על אגם צ׳או לאן — Panvaree The Greenery, 4–5/12', to:'להזמין לילה על אגם צ׳או לאן, 4–5/12',
+   notes:'12/11: Greenery מלא אצל Siam Tour · שאלנו את Siam Tour על Laguna Seaview, Panvaree, Issara ו-Phuphawaree, ואת Greenery ישירות · אם אין: Thai National Parks (טופס באתר), או טיול יום ולילה שני ב-River Lodge'},
+  {from:'להזמין סימילן ל-6/12', notes:'Asian Trails (Patty, הדלפק בקלימה) · ביקשנו Late Departure, איסוף 07:30–07:45 · מחכים למחיר ולתנאי ביטול · Early Bird: ฿4,100 לאדם'}
+];
+function applyTasks33(list){
+  TASKS_33.forEach(spec=>{
+    const t = list.find(x=>x.title===spec.from) || (spec.to && list.find(x=>x.title===spec.to));
+    if(!t) return;
+    if(spec.to) t.title = spec.to;
+    if(spec.notes!==undefined) t.notes = spec.notes;
+    if(spec.status==='done') t.status = 'done';
+  });
+  return list;
+}
 function applyTasks32(list){
   list = list.filter(t=>!(TASKS_32_REMOVED.includes(t.title) && t.status!=='done'));
   TASKS_32.forEach(spec=>{
@@ -603,7 +622,7 @@ function seedData(){
   const hanoiId = uid('d'), manilaId = uid('d');
 
   return {
-    schema:32,
+    schema:33,
     tripName:"My Big Trip 🌏",
     startDate:"2026-11-22",
     endDate:null,
@@ -725,7 +744,7 @@ function seedData(){
         transport:[], accommodations:[], budget:defaultBudget()
       }
     ],
-    masterChecklist: applyTasks32([
+    masterChecklist: applyTasks33(applyTasks32([
       {id:uid('m'), category:"דרכון", title:"לבדוק תוקף דרכון (6+ חודשים)", status:"todo", deadline:"2026-10-15", notes:"", priority:"גבוהה", link:"", countryId:null, order:1},
       {id:uid('m'), category:"ביטוח נסיעות", title:"לרכוש ביטוח נסיעות ארוך טווח", status:"todo", deadline:"2026-11-05", notes:"לוודא כיסוי לענפי ספורט/גלישה ויוגה", priority:"גבוהה", link:"", countryId:null, order:2},
       {id:uid('m'), category:"כרטיסי אשראי", title:"לעדכן בנק על נסיעה ממושכת", status:"todo", deadline:"", notes:"", priority:"בינונית", link:"", countryId:null, order:3},
@@ -753,7 +772,7 @@ function seedData(){
       {id:uid('m'), owner:"talia", category:"טיסות המשך", title:"טיסה מתאילנד לסרי לנקה", status:"todo", deadline:"2026-11-20", notes:ONWARD_NOTE, priority:"גבוהה", link:"", countryId:null, order:18},
       {id:uid('m'), owner:"talia", category:"טיסות המשך", title:"כרטיס יציאה מתאילנד לפני הכניסה בפברואר", status:"todo", deadline:"2027-02-01", notes:"בכניסה לקופנגן באמצע פברואר הפטור מתחיל מחדש (30 יום), ושוב צריך להראות כרטיס יציאה — למשל לפיליפינים", priority:"בינונית", link:"", countryId:null, order:19},
       ...TALIA_TASKS.map(t=>({id:uid('m'), owner:"talia", status:"todo", category:"המסלול של טליה", countryId:null, ...t}))
-    ]),
+    ])),
     packingBreakdown:"Osprey Renn 65L לכל הציוד → Osprey Daylite Plus 20L למטוס, נסיעות וטיולי יום → קרוסבודי קטן לטלפון, כסף ודרכון ביום־יום.",
     packingCarryOn:["דרכון","ארנק","טלפון","Power Bank","תרופות למיגרנה","תרופה לבחילות","משקפי שמש","אטמי אוזניים","מסכת עיניים","אוזניות","מגבונים קטנים","טישו","AirTag מחובר למוצ'ילה הגדולה","חולצה + תחתונים להחלפה"],
     packingList: applyShopping([
@@ -2239,6 +2258,42 @@ function ensureDefaults(){
     EXPENSES_32().forEach(x=>{ if(!STATE.money.expenses.some(e=>e.title===x.title)) STATE.money.expenses.push(x); });
     STATE.masterChecklist = applyTasks32(STATE.masterChecklist);
     STATE.schema = 32;
+  }
+
+  /*
+   * 12/11, אחר הצהריים: המונית מקלימה לשדה הוזמנה בבוקינג (₪153.27), Greenery
+   * מלא ב-4/12 — שאלנו על חלופות — סימילן עם Asian Trails, וטליה ונועה נוספו ב-Eleven.
+   */
+  if(STATE.schema < 33){
+    const seedShared = window.SHARED_SEED;
+    const copy = x => JSON.parse(JSON.stringify(x));
+    const meta = STATE.shared;
+    if(seedShared && meta && meta.days){
+      const seedRows = seedShared.days.flatMap(d=>d.rows);
+      meta.days.filter(d=>d.owner!=='talia').forEach(d=>d.rows.forEach(r=>{
+        if(!['s_g9_1','s_g5_1','s_g5_stay','s_g7_1'].includes(r.id)) return;
+        const fresh33 = seedRows.find(x=>x.id===r.id);
+        ['act','status','baht','notes','link','priceEstimate'].forEach(k=>{ if(fresh33[k]!==undefined) r[k] = copy(fresh33[k]); });
+      }));
+      if(meta.hotels){
+        const h = meta.hotels.find(x=>x.hotel==='Panvaree The Greenery');
+        const fh = seedShared.hotels.find(x=>x.hotel==='Panvaree The Greenery');
+        if(h && fh) Object.assign(h, copy(fh));
+      }
+      if(meta.bookings){
+        meta.bookings = meta.bookings.filter(b=>!/^Panvaree The Greenery/.test(b.what||''));
+        seedShared.bookings.forEach((b, i)=>{
+          const found = meta.bookings.find(x=>x.what===b.what);
+          if(found){ Object.assign(found, copy(b)); return; }
+          const prev = seedShared.bookings[i-1];
+          const at = prev ? meta.bookings.findIndex(x=>x.what===prev.what) : -1;
+          meta.bookings.splice(at>=0 ? at+1 : meta.bookings.length, 0, copy(b));
+        });
+      }
+    }
+    EXPENSES_32().filter(x=>/^מונית Booking/.test(x.title)).forEach(x=>{ if(!STATE.money.expenses.some(e=>e.title===x.title)) STATE.money.expenses.push(x); });
+    STATE.masterChecklist = applyTasks33(STATE.masterChecklist);
+    STATE.schema = 33;
   }
 
   /* משימות חדשות מתווספות בכל גרסה, לפי כותרת */
