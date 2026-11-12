@@ -17,28 +17,68 @@
    "freeCancel": "—"
   },
   {
+   "what": "Thai Vietjet · MSR6JW",
+   "when": "26/11 + 9/12",
+   "details": "VZ300 בנגקוק → פוקט 09:40 · VZ303 פוקט → בנגקוק 14:00 · Deluxe, 20 ק״ג לכל אחד",
+   "ref": "MSR6JW",
+   "payment": "שולם ฿12,515.52",
+   "freeCancel": "שינוי בהפרש מחיר בלבד"
+  },
+  {
    "what": "Montraj Coach Sukhumvit",
    "when": "23–26/11",
-   "details": "בנגקוק · 3 לילות · Historic Cabin Family · הזמנה ישירה",
+   "details": "בנגקוק · 23–26/11 — בוטל, הלינה עברה ל-ASAI",
    "ref": "3051425",
-   "payment": "฿8,169.87 (כ-₪734) — משלמים במלון",
-   "freeCancel": "ביטול חינם עד 21/11 · בכתב, ל-rsvns.coach@montraj.com"
+   "payment": "฿0",
+   "freeCancel": "בוטל 12/11 — הישירה ובוקינג 5123136373"
+  },
+  {
+   "what": "ASAI Bangkok Chinatown",
+   "when": "23–26/11",
+   "details": "בנגקוק · 3 לילות · Roomy King City · צ׳ק-אין מוקדם לפי זמינות",
+   "ref": "5547616403",
+   "payment": "฿10,398.09 — בוקינג מחייבת אוטומטית",
+   "freeCancel": "ביטול חינם עד 21/11"
   },
   {
    "what": "Chermantra Aonang Resort",
    "when": "29/11–2/12",
-   "details": "אאו נאנג · 3 לילות · Mountain Pool Villa · ארוחת בוקר · להאריך בלילה של 2/12",
+   "details": "אאו נאנג — בוטל, הלינה עברה ל-COSI",
    "ref": "5553772333",
-   "payment": "₪1,839",
-   "freeCancel": "ביטול חינם עד 14/11 23:59"
+   "payment": "₪0",
+   "freeCancel": "בוטל"
+  },
+  {
+   "what": "COSI Krabi Ao Nang Beach",
+   "when": "29/11–3/12",
+   "details": "אאו נאנג · 4 לילות · COSI Room King עם זיכוי יומי לאוכל ושתייה",
+   "ref": "5907714174",
+   "payment": "฿22,669.04 — בוקינג מחייבת אוטומטית",
+   "freeCancel": "ביטול חינם עד 21/11, אחר כך 50%"
   },
   {
    "what": "Sarana Bungalows",
    "when": "2–5/12",
-   "details": "קופנגן · 3 לילות — לבטל, כבר לא במסלול",
+   "details": "קופנגן — בוטל",
    "ref": "6196805940",
-   "payment": "฿3,060 — משלמים בהגעה",
-   "freeCancel": "ביטול חינם עד 28/11 — לבטל"
+   "payment": "฿0",
+   "freeCancel": "בוטל"
+  },
+  {
+   "what": "Khao Sok River Lodge",
+   "when": "3–4/12",
+   "details": "קאו סוק · לילה · Standard Double · כולל ארוחת בוקר · העברה בנקאית לפני ההגעה",
+   "ref": "5114181390",
+   "payment": "฿2,000",
+   "freeCancel": "ביטול חינם עד 29/11"
+  },
+  {
+   "what": "Panvaree The Greenery · Siam Tour",
+   "when": "4–5/12",
+   "details": "אגם צ׳או לאן · לילה בבונגלו צף, סירות וארוחות · נשלחה בקשה 12/11",
+   "ref": "—",
+   "payment": "כ-฿13,600 לשניים — עוד לא הוזמן",
+   "freeCancel": "לא מוחזר"
   },
   {
    "what": "Our Jungle House",
@@ -66,11 +106,19 @@
   },
   {
    "what": "Eleven Bangkok Sukhumvit 11",
-   "when": "9–10/12",
-   "details": "בנגקוק · לילה · Grand Deluxe King · לעדכן לשני אנשים",
-   "ref": "5243050600",
-   "payment": "฿3,010.10 — בוקינג מחייבת אוטומטית",
+   "when": "9–12/12",
+   "details": "בנגקוק · 3 לילות · Deluxe King · לשניים · טליה נשארת עד 12/12 · ההזמנה הקודמת (5243050600) בוטלה",
+   "ref": "5601126099",
+   "payment": "฿8,411.85 — בוקינג מחייבת אוטומטית",
    "freeCancel": "ביטול חינם עד 5/12"
+  },
+  {
+   "what": "מוניות חינם של בוקינג",
+   "when": "23/11 + 9/12",
+   "details": "BKK → ASAI ב-23/11 (13:15) · BKK → Eleven ב-9/12 (VZ303, 15:30)",
+   "ref": "418673284 · 497437615",
+   "payment": "חינם",
+   "freeCancel": "—"
   },
   {
    "what": "Phor Liang Meun, צ׳יאנג מאי",
@@ -95,11 +143,23 @@
    "dest": "בנגקוק",
    "dates": "23–26/11",
    "nights": 3,
+   "hotel": "ASAI Bangkok Chinatown",
+   "what": "Roomy King City · צ׳יינטאון, בהליכה ליאווארט ולרציף ראצ׳אוונג · אישור 5547616403 · ฿10,398.09 לשלושה לילות · ארוחת בוקר ฿470 לאדם",
+   "perNight": 3466.03,
+   "choice": "מוזמן",
+   "freeCancel": "עד 21/11",
+   "link": "בוקינג",
+   "linkLink": "https://secure.booking.com/myreservations.html?bn=5547616403"
+  },
+  {
+   "dest": "בנגקוק",
+   "dates": "23–26/11",
+   "nights": 3,
    "hotel": "Montraj Coach Sukhumvit",
    "what": "Historic Cabin Family, מיטת קינג, 27 מ״ר · בריכה על הגג · אישור 3051425 — הזמנה ישירה באתר המלון עם קוד Member · ฿8,169.87 לשלושת הלילות, כולל מסים ושירות · פיקדון ฿1,000 מזומן · משלמים במלון · החליפה הזמנה בבוקינג ב-₪1,128.",
    "perNight": 2723.29,
-   "choice": "מוזמן",
-   "freeCancel": "עד 21/11 — בכתב, ל-rsvns.coach@montraj.com",
+   "choice": "בוטל",
+   "freeCancel": "בוטל 12/11",
    "link": "אתר המלון",
    "linkLink": "https://reservation.thecoachbangkok.com/propertyibe2/booking-management?propertyId=890&onlineId=4&mobileredirect=false&accesscode=Member&lang=en"
   },
@@ -191,11 +251,23 @@
    "dest": "אאו נאנג",
    "dates": "29/11–3/12",
    "nights": 4,
+   "hotel": "COSI Krabi Ao Nang Beach",
+   "what": "COSI Room King עם זיכוי יומי לאוכל ושתייה · Soi Ao Nang 15 · אישור 5907714174 · ฿22,669.04 לארבעה לילות",
+   "perNight": 5667.26,
+   "choice": "מוזמן",
+   "freeCancel": "עד 21/11, אחר כך 50%",
+   "link": "בוקינג",
+   "linkLink": "https://secure.booking.com/myreservations.html?bn=5907714174"
+  },
+  {
+   "dest": "אאו נאנג",
+   "dates": "29/11–3/12",
+   "nights": 4,
    "hotel": "Chermantra Aonang Resort & Pool Suite",
    "what": "Mountain Pool Villa עם אמבטיה ובריכה פרטית · ארוחת בוקר כלולה · אישור 5553772333 · בוקינג מחייבת את הכרטיס. · להאריך בלילה של 2/12 ולבקש את אותה וילה.",
    "perNight": 6825.67,
-   "choice": "מוזמן",
-   "freeCancel": "עד 14/11 — הדדליין הקרוב",
+   "choice": "בוטל",
+   "freeCancel": "בוטל",
    "link": "בוקינג",
    "linkLink": "https://secure.booking.com/"
   },
@@ -218,22 +290,22 @@
    "hotel": "Khao Sok Palmview",
    "what": "8.9 על 2,187 · כ-₪462 לשני לילות.",
    "perNight": 2574,
-   "choice": "הבחירה",
+   "choice": "לא נבחר",
    "freeCancel": "לבדוק",
    "link": "בוקינג",
    "linkLink": "https://www.booking.com/hotel/th/khao-sok-palmview-resort.html"
   },
   {
    "dest": "קאו סוק",
-   "dates": "3–5/12",
-   "nights": 2,
+   "dates": "3–4/12",
+   "nights": 1,
    "hotel": "Khao Sok River Lodge",
-   "what": "8.9 · על הנהר · כ-₪185.",
-   "perNight": 2059,
-   "choice": "חלופה",
-   "freeCancel": "לבדוק",
+   "what": "8.9 · על הנהר · אישור 5114181390 · ฿2,000 כולל ארוחת בוקר · העברה בנקאית לפני ההגעה",
+   "perNight": 2000,
+   "choice": "מוזמן",
+   "freeCancel": "עד 29/11",
    "link": "בוקינג",
-   "linkLink": "https://www.booking.com/hotel/th/khao-sok-river-lodge.html"
+   "linkLink": "https://secure.booking.com/myreservations.html?bn=5114181390"
   },
   {
    "dest": "קופנגן",
@@ -242,8 +314,8 @@
    "hotel": "Sarana Bungalows",
    "what": "8.8 · Garden Bungalow עם מיטת קינג בבאן טאי, ליד ה־Halfmoon · אישור 6196805940 · משלמים בהגעה.",
    "perNight": 1020,
-   "choice": "לבטל",
-   "freeCancel": "עד 28/11",
+   "choice": "בוטל",
+   "freeCancel": "בוטל",
    "link": "בוקינג",
    "linkLink": "https://www.booking.com/hotel/th/sarana-bungalows.html"
   },
@@ -258,6 +330,18 @@
    "freeCancel": "בוטל 30/10 · הוחזרו $138.89",
    "link": "בוקינג",
    "linkLink": "https://www.booking.com/"
+  },
+  {
+   "dest": "קאו סוק — אגם צ׳או לאן",
+   "dates": "4–5/12",
+   "nights": 1,
+   "hotel": "Panvaree The Greenery",
+   "what": "בונגלו צף, כ-10 חדרים בלבד, שקט ונוף לאגם · בחבילה של Siam Tour: ฿6,800 לאדם, כולל סירות וארוחות · נשלחה בקשה 12/11",
+   "perNight": 13600,
+   "choice": "להזמין",
+   "freeCancel": "לא מוחזר",
+   "link": "Siam Tour",
+   "linkLink": "https://www.siamtourandrealty.com/trip/cheow-lan-2-days-floating-bungalow-from-khao-sok/"
   },
   {
    "dest": "קאו לאק",
@@ -285,15 +369,15 @@
   },
   {
    "dest": "בנגקוק — לילה אחרון",
-   "dates": "9–10/12",
-   "nights": 1,
+   "dates": "9–12/12",
+   "nights": 3,
    "hotel": "Eleven Bangkok Sukhumvit 11",
-   "what": "Grand Deluxe King על סוי 11 · אישור 5243050600 · לעדכן לשני אנשים · פיקדון ฿1,000 במזומן.",
-   "perNight": 3010.1,
+   "what": "Deluxe King · לשניים · אישור 5601126099 · ฿8,411.85 לשלושה לילות · טליה נשארת עד 12/12 · פיקדון ฿1,000 במזומן",
+   "perNight": 2803.95,
    "choice": "מוזמן",
    "freeCancel": "עד 5/12",
    "link": "בוקינג",
-   "linkLink": "https://www.booking.com/"
+   "linkLink": "https://secure.booking.com/myreservations.html?bn=5601126099"
   },
   {
    "dest": "קאו סוק — הגרסה שנזנחה",
@@ -363,7 +447,7 @@
   },
   {
    "topic": "",
-   "detail": "מוזמן: שתי טיסות ארקיע, מונטראג׳, צ׳רמנטרה (עד 2/12), קלימה (5–9/12), Eleven (9/12). כל השאר פתוח."
+   "detail": "מוזמן: שתי טיסות ארקיע, VietJet לפוקט וחזרה (MSR6JW), ASAI (23–26/11), המחנה, COSI (29/11–3/12), River Lodge (3/12), קלימה (5–9/12), Eleven (9–12/12). פתוח: הלילה על האגם, סימילן, הסעות במקום."
   },
   {
    "topic": "KYN · פרטי המחנה",
