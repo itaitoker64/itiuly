@@ -7,7 +7,7 @@
  * cached as they are seen. The plan itself is not cached here: the page keeps
  * its own copy in localStorage, which it can also write to while offline.
  */
-const VERSION = 'trip-v3';
+const VERSION = 'trip-v4';
 const SHELL = `${VERSION}-shell`;
 const PHOTOS = `${VERSION}-photos`;
 

@@ -462,6 +462,18 @@ const TASKS_33 = [
    notes:'12/11: Greenery מלא אצל Siam Tour · שאלנו את Siam Tour על Laguna Seaview, Panvaree, Issara ו-Phuphawaree, ואת Greenery ישירות · אם אין: Thai National Parks (טופס באתר), או טיול יום ולילה שני ב-River Lodge'},
   {from:'להזמין סימילן ל-6/12', notes:'Asian Trails (Patty, הדלפק בקלימה) · ביקשנו Late Departure, איסוף 07:30–07:45 · מחכים למחיר ולתנאי ביטול · Early Bird: ฿4,100 לאדם'}
 ];
+const TASKS_34 = [
+  {from:'לאשר שולחן לארוחת לוי קראתונג בסאלה ראטנקוסין, 24/11', status:'done', notes:'12/11: הוזמן ב-TableCheck · 19:30 · 1 Fl Terrace, מול ואט ארון'}
+];
+function applyTasks34(list){
+  TASKS_34.forEach(spec=>{
+    const t = list.find(x=>x.title===spec.from);
+    if(!t) return;
+    t.notes = spec.notes;
+    t.status = spec.status;
+  });
+  return list;
+}
 function applyTasks33(list){
   TASKS_33.forEach(spec=>{
     const t = list.find(x=>x.title===spec.from) || (spec.to && list.find(x=>x.title===spec.to));
@@ -622,7 +634,7 @@ function seedData(){
   const hanoiId = uid('d'), manilaId = uid('d');
 
   return {
-    schema:33,
+    schema:34,
     tripName:"My Big Trip 🌏",
     startDate:"2026-11-22",
     endDate:null,
@@ -744,7 +756,7 @@ function seedData(){
         transport:[], accommodations:[], budget:defaultBudget()
       }
     ],
-    masterChecklist: applyTasks33(applyTasks32([
+    masterChecklist: applyTasks34(applyTasks33(applyTasks32([
       {id:uid('m'), category:"דרכון", title:"לבדוק תוקף דרכון (6+ חודשים)", status:"todo", deadline:"2026-10-15", notes:"", priority:"גבוהה", link:"", countryId:null, order:1},
       {id:uid('m'), category:"ביטוח נסיעות", title:"לרכוש ביטוח נסיעות ארוך טווח", status:"todo", deadline:"2026-11-05", notes:"לוודא כיסוי לענפי ספורט/גלישה ויוגה", priority:"גבוהה", link:"", countryId:null, order:2},
       {id:uid('m'), category:"כרטיסי אשראי", title:"לעדכן בנק על נסיעה ממושכת", status:"todo", deadline:"", notes:"", priority:"בינונית", link:"", countryId:null, order:3},
@@ -772,7 +784,7 @@ function seedData(){
       {id:uid('m'), owner:"talia", category:"טיסות המשך", title:"טיסה מתאילנד לסרי לנקה", status:"todo", deadline:"2026-11-20", notes:ONWARD_NOTE, priority:"גבוהה", link:"", countryId:null, order:18},
       {id:uid('m'), owner:"talia", category:"טיסות המשך", title:"כרטיס יציאה מתאילנד לפני הכניסה בפברואר", status:"todo", deadline:"2027-02-01", notes:"בכניסה לקופנגן באמצע פברואר הפטור מתחיל מחדש (30 יום), ושוב צריך להראות כרטיס יציאה — למשל לפיליפינים", priority:"בינונית", link:"", countryId:null, order:19},
       ...TALIA_TASKS.map(t=>({id:uid('m'), owner:"talia", status:"todo", category:"המסלול של טליה", countryId:null, ...t}))
-    ])),
+    ]))),
     packingBreakdown:"Osprey Renn 65L לכל הציוד → Osprey Daylite Plus 20L למטוס, נסיעות וטיולי יום → קרוסבודי קטן לטלפון, כסף ודרכון ביום־יום.",
     packingCarryOn:["דרכון","ארנק","טלפון","Power Bank","תרופות למיגרנה","תרופה לבחילות","משקפי שמש","אטמי אוזניים","מסכת עיניים","אוזניות","מגבונים קטנים","טישו","AirTag מחובר למוצ'ילה הגדולה","חולצה + תחתונים להחלפה"],
     packingList: applyShopping([
@@ -2294,6 +2306,38 @@ function ensureDefaults(){
     EXPENSES_32().filter(x=>/^מונית Booking/.test(x.title)).forEach(x=>{ if(!STATE.money.expenses.some(e=>e.title===x.title)) STATE.money.expenses.push(x); });
     STATE.masterChecklist = applyTasks33(STATE.masterChecklist);
     STATE.schema = 33;
+  }
+
+  if(STATE.schema < 34){
+    // 24/11: the Sala table is booked for 19:30 on the terrace; the krathong goes in the river before dinner
+    const seedShared = window.SHARED_SEED;
+    const copy = x => JSON.parse(JSON.stringify(x));
+    const meta = STATE.shared;
+    const ids34 = ['s_2_swing','s_2_saket','s_2_6','s_2_8','s_2_7','s_2_9'];
+    if(seedShared && meta && meta.days){
+      const seedDay = seedShared.days.find(d=>d.date==='2026-11-24');
+      const d = meta.days.find(x=>x.owner!=='talia' && x.date==='2026-11-24');
+      if(seedDay && d){
+        d.rows.forEach(r=>{
+          if(!ids34.includes(r.id)) return;
+          const f = seedDay.rows.find(x=>x.id===r.id);
+          ['time','dur','act','loc','status','baht','notes','link'].forEach(k=>{ if(f[k]!==undefined) r[k] = copy(f[k]); });
+        });
+        const timed = d.rows.filter(r=>ids34.includes(r.id)).sort((a,b)=>a.time<b.time?-1:1);
+        let k = 0;
+        d.rows = d.rows.map(r=>ids34.includes(r.id) ? timed[k++] : r);
+      }
+      if(meta.cuts) meta.cuts = meta.cuts.filter(c=>!/סאלה/.test(c.what||''));
+      if(meta.bookings){
+        const b = seedShared.bookings.find(x=>/^סאלה ראטנקוסין/.test(x.what));
+        if(b && !meta.bookings.some(x=>x.what===b.what)){
+          const at = meta.bookings.findIndex(x=>/^ASAI/.test(x.what||''));
+          meta.bookings.splice(at>=0 ? at+1 : meta.bookings.length, 0, copy(b));
+        }
+      }
+    }
+    STATE.masterChecklist = applyTasks34(STATE.masterChecklist);
+    STATE.schema = 34;
   }
 
   /* משימות חדשות מתווספות בכל גרסה, לפי כותרת */
