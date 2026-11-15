@@ -58,7 +58,7 @@ run(`JOURNAL = {steps:[
 const st = JSON.parse(run('JSON.stringify(JV.stats(JOURNAL.steps, JOURNAL.track))'));
 assert.equal(st.steps, 2); assert.equal(st.days, 2); assert.equal(st.photos, 1); assert.equal(st.km, 0, 'one point per person draws no line yet');
 const html = run('renderJournal()');
-assert.ok(/צ׳יינטאון/.test(html) && /קו יאו נוי/.test(html) && /jrnEdit/.test(html) && /קישור למשפחה/.test(html) && /קיצורים/.test(html));
+assert.ok(/צ׳יינטאון/.test(html) && /קו יאו נוי/.test(html) && /jrnEdit/.test(html) && /קישור למשפחה/.test(html) && /OwnTracks/.test(html));
 assert.ok(/<svg/.test(run('JV.svgRoute(JOURNAL.steps, [], 300, 200)')));
 
 // Offline: a step goes to the queue and stays there until there is a connection.

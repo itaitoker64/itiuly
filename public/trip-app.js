@@ -6729,19 +6729,27 @@ function renderJournalSettings(){
     <div class="small" style="margin-top:6px;color:var(--muted)">כשהאפליקציה פתוחה — נקודה כל 200 מ׳. כדי לעקוב גם כשהיא סגורה — הקיצור למטה.</div>
   </div>
   <div class="card">
-    <b>📲 מעקב גם כשהאפליקציה סגורה (קיצורים באייפון)</b>
-    <div class="small" style="margin-top:6px">אפליקציית ״קיצורים״ באייפון שולחת את המיקום פעם בשעה, גם כשהאפליקציה סגורה ובלי לפתוח כלום:</div>
+    <b>📲 מעקב גם כשהאפליקציה סגורה — OwnTracks</b>
+    <div class="small" style="margin-top:6px">אפליקציה חינמית (אנדרואיד ואייפון) ששולחת את המיקום ברקע, כל הזמן, גם כשהאפליקציה שלנו סגורה. מגדירים פעם אחת:</div>
     ${ping?`
     <ol class="small jrn-steps">
-      <li>קיצורים ← אוטומציה ← <b>+</b> ← <b>שעה ביום</b>, למשל 09:00, ולהפעיל <b>מיד</b> (בלי אישור).</li>
-      <li>פעולה: <b>קבלת מיקום נוכחי</b>.</li>
-      <li>פעולה: <b>קבלת תוכן של URL</b>, עם הכתובת למטה, שיטה <b>POST</b>, גוף <b>JSON</b>: <code>lat</code> = קו רוחב, <code>lng</code> = קו אורך (מהמיקום הנוכחי).</li>
-      <li>לשכפל את האוטומציה לכמה שעות ביום (09:00, 12:00, 15:00, 18:00, 21:00).</li>
+      <li>להתקין <b>OwnTracks</b> מ-Google Play / App Store, ולאשר מיקום <b>״כל הזמן״</b>.</li>
+      <li>⚙️ ← <b>Connection</b> (חיבור) ← <b>Mode</b>: לבחור <b>HTTP</b>.</li>
+      <li><b>Host / URL</b>: להדביק את הכתובת למטה (כפתור ״להעתיק״).</li>
+      <li>במסך הראשי של OwnTracks, למעלה: מצב <b>Significant</b> (חוסך סוללה) או <b>Move</b> (מדויק יותר).</li>
+      <li>באנדרואיד: הגדרות ← סוללה ← OwnTracks ← <b>ללא הגבלה</b>, כדי שהטלפון לא יעצור אותה.</li>
     </ol>
     <div class="jrn-url" dir="ltr">${escapeHtml(ping)}</div>
     <div class="chip-row tight"><button class="chip mini" data-action="jrnCopy" data-id="ping">📋 להעתיק</button>
+      <a class="chip mini" href="https://owntracks.org/booklet/guide/apps/" target="_blank" rel="noopener">⬇️ איפה מורידים</a>
       <button class="chip mini" data-action="jrnPingNew">🔄 קוד חדש (מבטל את הישן)</button></div>
-    <div class="small" style="margin-top:6px;color:var(--muted)">הכתובת אישית — כל מי שיש לו אותה יכול להוסיף נקודות למסלול שלך. לא לשתף.</div>`
+    <div class="small" style="margin-top:6px;color:var(--muted)">הכתובת אישית — לכל אחד משניכם יש קוד משלו (טליה יוצרת אותו מהטלפון שלה). כל מי שיש לו את הכתובת יכול להוסיף נקודות למסלול שלך, אז לא לשתף. אחרי ההגדרה, הנקודות מופיעות במפה של היומן.</div>
+    <details class="fld-more"><summary>באייפון בלי OwnTracks — אוטומציה ב״קיצורים״</summary>
+      <ol class="small jrn-steps">
+        <li>קיצורים ← אוטומציה ← <b>+</b> ← <b>שעה ביום</b>, ולהפעיל <b>מיד</b>.</li>
+        <li>פעולה: <b>קבלת מיקום נוכחי</b>, ואז <b>קבלת תוכן של URL</b> עם הכתובת למעלה, שיטה <b>POST</b>, גוף <b>JSON</b>: <code>lat</code>, <code>lng</code>.</li>
+        <li>לשכפל לכמה שעות ביום.</li>
+      </ol></details>`
     :`<button class="btn small" style="margin-top:8px" data-action="jrnPingNew">ליצור קוד אישי</button>`}
   </div>
   <div class="card">
