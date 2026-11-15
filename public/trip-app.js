@@ -2480,6 +2480,11 @@ function ensureDefaults(){
   /* בשטח: קבצים שצורפו להזמנות, ופרטי הביטוח לחירום */
   if(STATE.shared && !STATE.shared.bookingFiles) STATE.shared.bookingFiles = {};
   if(STATE.shared && !STATE.shared.emergency) STATE.shared.emergency = {insurer:'', policy:'', phone:'', notes:''};
+  // הביטוח מופיע עם האישורים, והפוליסה נמצאת בקבצים
+  if(STATE.shared && STATE.shared.bookings && !STATE.shared.bookings.some(b=>b.fileTag==='PassportCard')){
+    STATE.shared.bookings.push({what:'ביטוח נסיעות · PassportCard', when:'כל הטיול', details:'פוליסה לשניים · הקובץ "אישור פוליסה" נפתח עם מספר תעודת הזהות של איתי', ref:'בקובץ הפוליסה', payment:'שולם', freeCancel:'—', fileTag:'PassportCard'});
+  }
+  if(STATE.shared && STATE.shared.emergency && !STATE.shared.emergency.insurer) STATE.shared.emergency.insurer = 'PassportCard';
 
   /* משימות חדשות מתווספות בכל גרסה, לפי כותרת */
   fresh.masterChecklist.forEach(seedTask=>{
@@ -6192,9 +6197,22 @@ const BOOKING_CONTACTS = [
   {m:/סימילן|Similan|Asian Trails/, label:'Patty · Asian Trails', wa:'+66935795676', phone:'+66950409339'}
 ];
 function bookingContact(b){ return BOOKING_CONTACTS.find(c=>c.m.test((b.what||'')+' '+(b.details||''))); }
+/** קבצים שצורפו ידנית, ועוד אישורים שהשם שלהם כולל את מספר ההזמנה (או את ה-fileTag) */
+function bookingFileTokens(b){
+  const refs = String(b.ref||'').split(/[^A-Za-z0-9-]+/).filter(t=>/\d{4,}|^[A-Za-z][A-Za-z0-9]{4,}$/.test(t));
+  return refs.concat(b.fileTag ? [b.fileTag] : []);
+}
 function bookingFiles(b){
   const map = sh().bookingFiles || {};
-  return (map[b.what]||[]);
+  const ids = (map[b.what]||[]).map(String);
+  const tokens = bookingFileTokens(b);
+  if(tokens.length){
+    (uploadedFiles || cachedFileList()).forEach(f=>{
+      const name = String(f.name||'');
+      if(tokens.some(t=>name.includes(t)) && !ids.includes(String(f.id))) ids.push(String(f.id));
+    });
+  }
+  return ids;
 }
 /** "3–4/12", "26/11 + 9/12", "5–6/12" — האם ההזמנה נוגעת ליום הזה */
 function bookingCovers(b, date){

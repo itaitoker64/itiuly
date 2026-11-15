@@ -47,5 +47,11 @@ assert.ok(ics.split('\r\n').every(l => l.length <= 75), 'folded lines');
 // Defaults survive a second pass.
 const settled = run('JSON.stringify(STATE)'); run('ensureDefaults();');
 assert.equal(run('JSON.stringify(STATE)'), settled);
-assert.deepEqual(JSON.parse(run('JSON.stringify(sh().emergency)')), {insurer:'', policy:'', phone:'', notes:''});
+assert.deepEqual(JSON.parse(run('JSON.stringify(sh().emergency)')), {insurer:'PassportCard', policy:'', phone:'', notes:''});
 console.log('PASS: taxi cards by day, bookings by day with contacts and files, the field bar, quick expenses per day, the calendar file, defaults once.');
+
+// הביטוח מופיע ברשימת האישורים, וקבצים מתחברים להזמנה לפי מספר האישור שבשם
+assert.ok(run("sh().bookings.some(b=>b.fileTag==='PassportCard')"));
+assert.equal(run("(uploadedFiles=[{id:'f1',name:'ASAI · 5547616403'},{id:'f2',name:'PassportCard · פוליסה'},{id:'f3',name:'אחר'}], bookingFiles(sh().bookings.find(b=>/ASAI/.test(b.what))).join(','))"), 'f1');
+assert.equal(run("bookingFiles(sh().bookings.find(b=>b.fileTag==='PassportCard')).join(',')"), 'f2');
+console.log('booking files: ok');
