@@ -2477,6 +2477,10 @@ function ensureDefaults(){
     STATE.schema = 36;
   }
 
+  /* בשטח: קבצים שצורפו להזמנות, ופרטי הביטוח לחירום */
+  if(STATE.shared && !STATE.shared.bookingFiles) STATE.shared.bookingFiles = {};
+  if(STATE.shared && !STATE.shared.emergency) STATE.shared.emergency = {insurer:'', policy:'', phone:'', notes:''};
+
   /* משימות חדשות מתווספות בכל גרסה, לפי כותרת */
   fresh.masterChecklist.forEach(seedTask=>{
     if(!STATE.masterChecklist.some(t=>t.title===seedTask.title)){
@@ -3685,6 +3689,7 @@ function renderToday(){
         </div>
 
         <div class="deck-body">
+          ${renderFieldBar(day)}
           ${day.summary?`<h1 class="deck-summary">${itineraryText(day.summary)}</h1>`:''}
           ${day.sun?`<div class="deck-sun">זריחה <b dir="ltr">${day.sun.rise}</b> · שקיעה <b dir="ltr">${day.sun.set}</b></div>`:''}
           ${renderDayShape(day)}
@@ -3711,7 +3716,7 @@ function renderToday(){
             <div class="trow-list">${day.rows.filter(r=>!r.time).map(r=>renderTodayRow(day, r, focus)).join('')}</div>
           </details>`:''}
 
-          <div class="deck-total">אומדן היום · ${ils(toIls(dayTotalBaht(day)))}</div>
+          ${renderDaySpend(day)}
 
           ${next?`
           <button class="tomorrow" data-action="dayStep" data-id="1">
@@ -4337,6 +4342,7 @@ function renderBookingsSection(){
       <div class="small" style="margin-top:4px">${[b.when,b.details].filter(Boolean).join(' · ')}</div>
       <div class="small" style="margin-top:6px">${b.payment||''}</div>
       <div class="small" style="margin-top:4px;color:var(--muted)">אישור: ${b.ref||'—'} · ביטול חינם: ${b.freeCancel||'—'}</div>
+      ${renderBookingExtras(b)}
     </div>`).join('')}
 
   <h3 class="section-title" style="margin-top:18px">מלונות שנבדקו</h3>
@@ -4829,7 +4835,7 @@ function renderTimeline(){
 /* ===== MORE ===== */
 function renderMore(){
   const tabs = [
-    ['master','רשימת הכנה'], ['packing','ציוד'], ['shopping','קניות'], ['bookings','מה סגור'],
+    ['field','בשטח'], ['master','רשימת הכנה'], ['packing','ציוד'], ['shopping','קניות'], ['bookings','מה סגור'],
     ['info','מידע שימושי'], ['saved','מקומות שמורים'], ['timeline','ציר זמן'],
     ['docs','מסמכים']
   ];
@@ -4843,6 +4849,7 @@ function renderMore(){
     <div class="subnav">${tabs.map(t=>`<button class="${moreSection===t[0]?'active':''}" data-action="setMore" data-id="${t[0]}">${t[1]}</button>`).join('')}</div>
   </div>
   <div class="section" style="padding-top:0;">
+    ${moreSection==='field'?renderFieldSection():''}
     ${moreSection==='master'?renderMasterChecklist():''}
     ${moreSection==='packing'?renderPacking():''}
     ${moreSection==='shopping'?renderShopping():''}
@@ -5195,14 +5202,16 @@ async function loadFiles(force){
     const res = await fetch('/api/files', {cache:'no-store'});
     if(!res.ok) throw new Error('files');
     uploadedFiles = (await res.json()).files || [];
+    rememberFileList(uploadedFiles);
+    prefetchFiles(uploadedFiles.map(f=>f.id));
   }catch(e){
-    uploadedFiles = [];
+    uploadedFiles = cachedFileList();
   }
   const box = document.getElementById('file-list');
   if(box) box.innerHTML = renderFileList();
 }
 
-function pickAndUploadFile(){
+function pickAndUploadFile(after){
   const input = document.createElement('input');
   input.type = 'file';
   input.accept = 'image/*,application/pdf';
@@ -5219,6 +5228,7 @@ function pickAndUploadFile(){
       if(!res.ok) throw new Error(payload.error || 'ההעלאה נכשלה');
       await loadFiles(true);
       toast('הועלה');
+      if(after) after();
     }catch(e){
       toast(e.message || 'ההעלאה נכשלה');
     }
@@ -6062,4 +6072,419 @@ function renderSharedForecast(){
 
 
 /* INIT */
+
+/* =========================================================
+   בשטח — מה שצריך כשעומדים מול נהג, ברציף בלי קליטה, או במצב חירום
+========================================================= */
+
+/*
+ * כרטיסים לנהג: השם והכתובת בתאית, כמו שנהג מונית או גראב קורא.
+ * הכתובות מאישורי ההזמנה ומדפי המלונות; תמיד יש גם טלפון לתת לנהג ומפה.
+ */
+const TAXI_PLACES = [
+  {id:'asai', from:'2026-11-23', to:'2026-11-26', emoji:'🏨', name:'ASAI Bangkok Chinatown',
+   th:'โรงแรมอาศัย กรุงเทพ ไชน่าทาวน์', addr:'531 ถนนเจริญกรุง แขวงป้อมปราบ เขตป้อมปราบศัตรูพ่าย กรุงเทพฯ 10100',
+   near:'เยาวราช · ใกล้ MRT วัดมังกร', maps:'ASAI Bangkok Chinatown'},
+  {id:'sala', from:'2026-11-24', to:'2026-11-24', emoji:'🏮', name:'Sala Rattanakosin',
+   th:'ศาลา รัตนโกสินทร์', addr:'39 ถนนมหาราช แขวงพระบรมมหาราชวัง เขตพระนคร กรุงเทพฯ 10200',
+   near:'ท่าเตียน · ใกล้วัดโพธิ์', phone:'+6626221388', maps:'Sala Rattanakosin Bangkok'},
+  {id:'isb', from:'2026-11-25', to:'2026-11-25', emoji:'🏫', name:'International School Bangkok (ISB)',
+   th:'โรงเรียนนานาชาติกรุงเทพ (ISB)', addr:'หมู่บ้านนิชดาธานี อำเภอปากเกร็ด จังหวัดนนทบุรี',
+   near:'นิชดาธานี ปากเกร็ด', maps:'International School Bangkok'},
+  {id:'rajadamnern', from:'2026-11-25', to:'2026-11-25', emoji:'🥊', name:'Rajadamnern Stadium',
+   th:'สนามมวยเวทีราชดำเนิน', addr:'ถนนราชดำเนินนอก เขตป้อมปราบศัตรูพ่าย กรุงเทพฯ',
+   near:'', maps:'Rajadamnern Stadium'},
+  {id:'bkk-dom', from:'2026-11-26', to:'2026-11-26', emoji:'✈️', name:'Suvarnabhumi Airport (BKK) — domestic departures',
+   th:'สนามบินสุวรรณภูมิ', addr:'ผู้โดยสารขาออก ภายในประเทศ (Thai Vietjet)',
+   near:'', maps:'Suvarnabhumi Airport'},
+  {id:'bangrong', from:'2026-11-26', to:'2026-11-26', emoji:'⛴️', name:'Bang Rong Pier, Phuket',
+   th:'ท่าเรือบางโรง', addr:'ตำบลป่าคลอก อำเภอถลาง จังหวัดภูเก็ต',
+   near:'เรือไปเกาะยาวน้อย', maps:'Bang Rong Pier Phuket'},
+  {id:'kyn', from:'2026-11-26', to:'2026-11-29', emoji:'🥊', name:'KYN Phoenix Muay Thai, Koh Yao Noi',
+   th:'ค่ายมวยไทย KYN Phoenix เกาะยาวน้อย', addr:'เกาะยาวน้อย อำเภอเกาะยาว จังหวัดพังงา',
+   near:'', maps:'KYN Phoenix Koh Yao Noi'},
+  {id:'cosi', from:'2026-11-29', to:'2026-12-03', emoji:'🏨', name:'COSI Krabi Ao Nang Beach',
+   th:'โรงแรมโคซี่ กระบี่ อ่าวนาง', addr:'1125 หมู่ 2 ซอยอ่าวนาง 15 ตำบลอ่าวนาง อำเภอเมืองกระบี่ จังหวัดกระบี่ 81180',
+   near:'', phone:'+6675819999', maps:'COSI Krabi Ao Nang Beach'},
+  {id:'pier', from:'2026-12-03', to:'2026-12-04', emoji:'⛴️', name:'Ratchaprapha Dam Pier (Cheow Lan Lake)',
+   th:'ท่าเรือเขื่อนรัชชประภา', addr:'ตำบลเขาพัง อำเภอบ้านตาขุน จังหวัดสุราษฎร์ธานี',
+   near:'เขื่อนเชี่ยวหลาน', maps:'Ratchaprapha Dam Pier'},
+  {id:'riverlodge', from:'2026-12-04', to:'2026-12-05', emoji:'🏨', name:'Khao Sok River Lodge',
+   th:'เขาสก ริเวอร์ ลอดจ์', addr:'6/2 หมู่ 6 ตำบลคลองศก อำเภอพนม จังหวัดสุราษฎร์ธานี 84250',
+   near:'ใกล้อุทยานแห่งชาติเขาสก', phone:'+66897252277', maps:'8.9127,98.5253'},
+  {id:'kalima', from:'2026-12-05', to:'2026-12-09', emoji:'🏨', name:'Kalima Resort & Villas Khao Lak',
+   th:'กาลิมา รีสอร์ท แอนด์ วิลล่า เขาหลัก', addr:'3/88 หมู่ 2 ถนนเพชรเกษม ตำบลลำแก่น อำเภอท้ายเหมือง จังหวัดพังงา 82210',
+   near:'เขาหลัก', phone:'+6676427999', maps:'Kalima Resort and Villas Khao Lak'},
+  {id:'hkt', from:'2026-12-09', to:'2026-12-09', emoji:'✈️', name:'Phuket Airport (HKT) — domestic departures',
+   th:'สนามบินภูเก็ต', addr:'ผู้โดยสารขาออก ภายในประเทศ (Thai Vietjet)',
+   near:'', maps:'Phuket International Airport'},
+  {id:'eleven', from:'2026-12-09', to:'2026-12-12', emoji:'🏨', name:'Eleven Bangkok Sukhumvit 11',
+   th:'โรงแรมอีเลฟเว่น กรุงเทพ สุขุมวิท 11', addr:'11 ซอยสุขุมวิท 11 แขวงคลองเตยเหนือ เขตวัฒนา กรุงเทพฯ 10110',
+   near:'ใกล้ BTS นานา', maps:'Eleven Bangkok Sukhumvit 11'},
+  {id:'bkk-int', from:'2026-12-10', to:'2026-12-10', emoji:'✈️', name:'Suvarnabhumi Airport (BKK) — international departures',
+   th:'สนามบินสุวรรณภูมิ', addr:'ผู้โดยสารขาออก ระหว่างประเทศ (Arkia)',
+   near:'', maps:'Suvarnabhumi Airport'}
+];
+// מילת הנימוס בסוף: ครับ לגבר, ค่ะ לאישה
+const TAXI_PHRASES = [
+  ['ไปที่นี่', 'לכאן, בבקשה'],
+  ['เปิดมิเตอร์ด้วย', 'בבקשה להפעיל מונה'],
+  ['เท่าไหร่', 'כמה זה עולה?'],
+  ['จอดตรงนี้', 'לעצור כאן'],
+  ['ขอบคุณ', 'תודה']
+];
+function politeTh(){ return meId()==='talia' ? 'ค่ะ' : 'ครับ'; }
+function taxiPlacesFor(date){
+  const here = TAXI_PLACES.filter(p=>p.from<=date && date<=p.to);
+  return here.length ? here : TAXI_PLACES;
+}
+function mapsUrl(q){ return 'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(q); }
+function telHref(n){ return 'tel:'+String(n).replace(/[^+\d]/g,''); }
+function waHref(n){ return 'https://wa.me/'+String(n).replace(/\D/g,''); }
+
+function renderTaxiList(places){
+  return places.map(p=>`
+    <button class="fld-place" data-action="fldTaxi" data-id="${p.id}">
+      <span class="fld-emoji">${p.emoji}</span>
+      <span class="fld-place-txt"><b dir="ltr">${escapeHtml(p.name)}</b><small lang="th" dir="ltr">${escapeHtml(p.th)}</small></span>
+      <span class="fld-go">←</span>
+    </button>`).join('');
+}
+function openTaxiPicker(date){
+  const here = TAXI_PLACES.filter(p=>p.from<=date && date<=p.to);
+  const rest = TAXI_PLACES.filter(p=>!here.includes(p));
+  openModal(`
+    <h3 style="margin-bottom:6px;">🚕 להראות לנהג</h3>
+    <div class="small" style="margin-bottom:12px;color:var(--muted)">בוחרים לאן נוסעים, והכתובת נפתחת בתאית בגדול</div>
+    ${here.length?`<div class="fld-label">היום</div>${renderTaxiList(here)}`:''}
+    <details class="fld-more" ${here.length?'':'open'}><summary>כל המקומות בטיול</summary>${renderTaxiList(rest)}</details>
+    <div class="modal-actions"><button class="btn secondary full" data-action="fldClose">סגירה</button></div>`);
+}
+function openTaxiCard(id){
+  const p = TAXI_PLACES.find(x=>x.id===id); if(!p) return;
+  openModal(`
+    <div class="taxi-card">
+      <div class="taxi-th" lang="th" dir="ltr">${escapeHtml(p.th)}</div>
+      <div class="taxi-addr" lang="th" dir="ltr">${escapeHtml(p.addr)}</div>
+      ${p.near?`<div class="taxi-near" lang="th" dir="ltr">${escapeHtml(p.near)}</div>`:''}
+      <div class="taxi-en" dir="ltr">${escapeHtml(p.name)}</div>
+    </div>
+    <div class="fld-actions">
+      ${p.phone?`<a class="btn" href="${telHref(p.phone)}">📞 להתקשר למקום ולתת לנהג</a>`:''}
+      <a class="btn secondary" href="${mapsUrl(p.maps||p.name)}" target="_blank" rel="noopener">🗺️ מפה וניווט</a>
+      <button class="btn secondary" data-action="fldCopy" data-id="${p.id}">📋 להעתיק את הכתובת בתאית (לגראב)</button>
+    </div>
+    <div class="fld-label" style="margin-top:14px">משפטים לנהג</div>
+    <div class="taxi-phrases">${TAXI_PHRASES.map(([th,he])=>`<div><b lang="th" dir="ltr">${th}${politeTh()}</b><span>${he}</span></div>`).join('')}</div>
+    <div class="modal-actions"><button class="btn secondary full" data-action="fldClose">סגירה</button></div>`);
+}
+
+/* אנשי קשר להזמנות — טלפון ווטסאפ במקום חיפוש במייל */
+const BOOKING_CONTACTS = [
+  {m:/Siam Tour/, label:'Lukas · Siam Tour', wa:'+66825796015'},
+  {m:/River Lodge/, label:'River Lodge', phone:'+66897252277'},
+  {m:/COSI/, label:'COSI', phone:'+6675819999'},
+  {m:/סאלה|Sala/, label:'Sala', phone:'+6626221388'},
+  {m:/Kalima|קלימה/, label:'Kalima', phone:'+6676427999'},
+  {m:/סימילן|Similan|Asian Trails/, label:'Patty · Asian Trails', wa:'+66935795676', phone:'+66950409339'}
+];
+function bookingContact(b){ return BOOKING_CONTACTS.find(c=>c.m.test((b.what||'')+' '+(b.details||''))); }
+function bookingFiles(b){
+  const map = sh().bookingFiles || {};
+  return (map[b.what]||[]);
+}
+/** "3–4/12", "26/11 + 9/12", "5–6/12" — האם ההזמנה נוגעת ליום הזה */
+function bookingCovers(b, date){
+  const when = String(b.when||'');
+  const m = Number(date.slice(5,7)), d = Number(date.slice(8,10));
+  const re = /(\d{1,2})(?:\s*[–-]\s*(\d{1,2}))?\/(\d{1,2})/g;
+  let hit;
+  while((hit = re.exec(when))){
+    const from = Number(hit[1]), to = Number(hit[2]||hit[1]), month = Number(hit[3]);
+    if(month===m && d>=from && d<=to) return true;
+  }
+  return false;
+}
+function renderBookingExtras(b){
+  const c = bookingContact(b);
+  const files = bookingFiles(b);
+  const known = uploadedFiles || cachedFileList();
+  const chips = files.map(fid=>{
+    const f = known.find(x=>String(x.id)===String(fid));
+    return `<a class="chip mini" href="/api/files/${encodeURIComponent(fid)}" target="_blank" rel="noopener">${f&&f.mime==='application/pdf'?'📄':'🖼️'} ${escapeHtml(f?f.name:'קובץ')}</a>`;
+  }).join('');
+  return `<div class="chip-row tight" style="margin-top:8px">
+    ${c&&c.phone?`<a class="chip mini" href="${telHref(c.phone)}">📞 ${escapeHtml(c.label)}</a>`:''}
+    ${c&&c.wa?`<a class="chip mini" href="${waHref(c.wa)}" target="_blank" rel="noopener">💬 WhatsApp</a>`:''}
+    ${chips}
+    <button class="chip mini" data-action="fldAttach" data-id="${escapeAttr(b.what)}">📎 ${files.length?'קבצים':'לצרף אישור'}</button>
+  </div>`;
+}
+function openWalletModal(date){
+  const all = sh().bookings || [];
+  const cancelled = b=>/בוטל|בוטלה|cancel/i.test([b.what,b.details,b.payment,b.freeCancel].join(' '));
+  const here = all.filter(b=>!cancelled(b) && bookingCovers(b, date));
+  const card = b=>`
+    <div class="card" style="margin-bottom:8px">
+      <div style="font-weight:600;font-size:13.5px">${escapeHtml(b.what)}</div>
+      <div class="small" style="margin-top:4px">${escapeHtml([b.when,b.details].filter(Boolean).join(' · '))}</div>
+      <div class="small" style="margin-top:4px"><b>אישור:</b> <bdi dir="ltr">${escapeHtml(b.ref||'—')}</bdi> · ${escapeHtml(b.payment||'')}</div>
+      ${renderBookingExtras(b)}
+    </div>`;
+  openModal(`
+    <h3 style="margin-bottom:6px;">🎫 אישורים</h3>
+    <div class="small" style="margin-bottom:12px;color:var(--muted)">מספרי אישור, טלפונים וקבצים — הקבצים נשמרים בטלפון ונפתחים גם בלי קליטה</div>
+    ${here.length?`<div class="fld-label">היום · ${fmtDateShort(date)}</div>${here.map(card).join('')}`:`<div class="small" style="margin-bottom:10px">אין הזמנה שנוגעת ליום הזה</div>`}
+    <details class="fld-more"><summary>כל ההזמנות · ${all.length}</summary>${all.filter(b=>!here.includes(b)).map(card).join('')}</details>
+    <div class="modal-actions"><button class="btn secondary full" data-action="fldClose">סגירה</button></div>`);
+}
+async function openAttachModal(what){
+  if(uploadedFiles===null) await loadFiles();
+  const files = uploadedFiles && uploadedFiles.length ? uploadedFiles : cachedFileList();
+  const map = sh().bookingFiles || (sh().bookingFiles = {});
+  const chosen = new Set((map[what]||[]).map(String));
+  openModal(`
+    <h3 style="margin-bottom:6px;">📎 קבצים · ${escapeHtml(what)}</h3>
+    <div class="small" style="margin-bottom:12px;color:var(--muted)">בוחרים מהקבצים שהועלו, או מעלים צילום חדש של השובר</div>
+    <div id="att-list">${files.length?files.map(f=>`
+      <label class="att-row"><input type="checkbox" value="${escapeAttr(String(f.id))}" ${chosen.has(String(f.id))?'checked':''}>
+        <span>${f.mime==='application/pdf'?'📄':'🖼️'} ${escapeHtml(f.name)}</span></label>`).join(''):'<div class="small">עוד לא הועלו קבצים</div>'}</div>
+    <div class="modal-actions">
+      <button class="btn full" id="att-save">שמירה</button>
+      <button class="btn secondary" id="att-upload">+ העלאה חדשה</button>
+      <button class="btn secondary" data-action="fldClose">ביטול</button>
+    </div>`, ()=>{
+    document.getElementById('att-save').onclick = ()=>{
+      map[what] = [...document.querySelectorAll('#att-list input:checked')].map(i=>i.value);
+      persist(); closeModal(); render();
+      prefetchFiles(map[what]);
+    };
+    document.getElementById('att-upload').onclick = ()=>{ closeModal(); pickAndUploadFile(()=>openAttachModal(what)); };
+  });
+}
+
+/* רשימת הקבצים נשמרת בטלפון, והקבצים עצמם נטענים מראש כדי שייפתחו בלי קליטה */
+const FILES_LIST_KEY = 'trip-files-list';
+function cachedFileList(){
+  try{ return JSON.parse(localStorage.getItem(FILES_LIST_KEY)||'[]') || []; }catch(e){ return []; }
+}
+function rememberFileList(list){
+  try{ localStorage.setItem(FILES_LIST_KEY, JSON.stringify(list||[])); }catch(e){}
+}
+function prefetchFiles(ids){
+  if(!('serviceWorker' in navigator) || !navigator.onLine) return;
+  (ids||[]).forEach(id=>{ fetch('/api/files/'+encodeURIComponent(id), {credentials:'same-origin'}).catch(()=>{}); });
+}
+
+/* הוצאה מהירה — סכום בבאט ושתי לחיצות */
+const QUICK_EXPENSES = [
+  {label:'🍜 אוכל', title:'אוכל', category:'food'},
+  {label:'🚕 מונית', title:'מונית', category:'transport'},
+  {label:'🎟️ כניסה', title:'כניסה', category:'activities'},
+  {label:'💆 עיסוי', title:'עיסוי', category:'other'},
+  {label:'🛍️ קניות', title:'קניות', category:'shopping'},
+  {label:'🍺 שתייה', title:'שתייה', category:'food'}
+];
+function dayExpensesIls(date){
+  return wallet().expenses.filter(x=>x.date===date && x.status!=='due' && !x.bookingKey)
+    .reduce((s,x)=>s+expenseIls(x),0);
+}
+function openQuickExpense(date){
+  let pick = QUICK_EXPENSES[0];
+  openModal(`
+    <h3 style="margin-bottom:12px;">฿ הוצאה מהירה · ${fmtDateShort(date)}</h3>
+    <div class="quick-amount"><span>฿</span><input id="qx-amount" type="number" inputmode="decimal" placeholder="0" autofocus></div>
+    <div id="qx-ils" class="small" style="text-align:center;margin:6px 0 12px;color:var(--muted)">&nbsp;</div>
+    <div class="chip-row" id="qx-cats">${QUICK_EXPENSES.map((q,i)=>`<button type="button" class="chip ${i===0?'active':''}" data-i="${i}">${q.label}</button>`).join('')}</div>
+    <div class="field" style="margin-top:10px"><label>פירוט (לא חובה)</label><input id="qx-title" placeholder="למשל: פאד תאי בשוק"></div>
+    <div class="small" style="color:var(--muted)">משולם על ידי ${personName(meId())}, מתחלק לפי היחס הקבוע · לשינויים — במסך הכסף</div>
+    <div class="modal-actions"><button class="btn full" id="qx-save">שמירה</button><button class="btn secondary" data-action="fldClose">ביטול</button></div>`, ()=>{
+    const amount = document.getElementById('qx-amount');
+    const show = ()=>{ const v=Number(amount.value)||0; document.getElementById('qx-ils').textContent = v ? '≈ '+ils(toIls(v)) : '\u00a0'; };
+    amount.oninput = show; setTimeout(()=>amount.focus(), 50);
+    document.querySelectorAll('#qx-cats .chip').forEach(b=>b.onclick=()=>{
+      document.querySelectorAll('#qx-cats .chip').forEach(x=>x.classList.remove('active'));
+      b.classList.add('active'); pick = QUICK_EXPENSES[Number(b.dataset.i)];
+    });
+    document.getElementById('qx-save').onclick = ()=>{
+      const v = Number(amount.value)||0;
+      if(!v){ amount.focus(); return; }
+      const extra = document.getElementById('qx-title').value.trim();
+      wallet().expenses.push({id:uid('x'), title: extra ? pick.title+' · '+extra : pick.title, amount:v, currency:'THB',
+        date, category:pick.category, note:'', paidBy:meId(), split:'ratio', status:'paid'});
+      persist(); closeModal(); toast('נשמר · '+baht(v)); render();
+    };
+  });
+}
+
+/* חירום — נשמר במסמך המשותף, זמין גם בלי קליטה */
+const EMERGENCY_NUMBERS = [
+  ['1155','משטרת התיירות — באנגלית, 24 שעות'],
+  ['1669','אמבולנס'],
+  ['191','משטרה'],
+  ['199','כיבוי אש']
+];
+const EMERGENCY_HOSPITALS = [
+  {from:'2026-11-23', to:'2026-11-26', area:'בנגקוק', name:'Bumrungrad International — חדר מיון', phone:'+6620115222'},
+  {from:'2026-12-09', to:'2026-12-12', area:'בנגקוק', name:'Bumrungrad International — חדר מיון (5 דקות מ-Eleven)', phone:'+6620115222'},
+  {from:'2026-11-26', to:'2026-11-29', area:'קו יאו נוי / פוקט', name:'Bangkok Hospital Phuket', phone:'+6676254425'},
+  {from:'2026-11-29', to:'2026-12-03', area:'קראבי', name:'Krabi Nakharin International (קראבי טאון, כחצי שעה מאאו נאנג)', phone:'+6675626555'},
+  {from:'2026-12-03', to:'2026-12-05', area:'קאו סוק', name:'אין בית חולים קרוב — 1669, או Bangkok Hospital Phuket', phone:'+6676254425'},
+  {from:'2026-12-05', to:'2026-12-09', area:'קאו לאק', name:'Bangkok Phuket Clinic Khao Lak (08:00–20:00) · בית חולים: Bangkok Hospital Phuket, כשעה וחצי', phone:'+66610019659'}
+];
+function emergencyData(){
+  if(!sh().emergency) sh().emergency = {insurer:'', policy:'', phone:'', notes:''};
+  return sh().emergency;
+}
+function renderEmergency(date){
+  const e = emergencyData();
+  const hosp = EMERGENCY_HOSPITALS.filter(h=>h.from<=date && date<=h.to);
+  const hospList = hosp.length ? hosp : EMERGENCY_HOSPITALS;
+  return `
+    <div class="card warn">
+      <b>🛡️ ביטוח</b>
+      ${e.insurer||e.policy||e.phone?`
+        <div class="small" style="margin-top:6px">${escapeHtml(e.insurer||'')}${e.policy?` · פוליסה <bdi dir="ltr">${escapeHtml(e.policy)}</bdi>`:''}</div>
+        ${e.phone?`<a class="btn" style="margin-top:8px" href="${telHref(e.phone)}">📞 מוקד החירום של הביטוח</a>`:''}
+        ${e.notes?`<div class="small" style="margin-top:6px">${escapeHtml(e.notes)}</div>`:''}`
+      :`<div class="small" style="margin-top:6px">עוד לא מילאתם — חברה, מספר פוליסה וטלפון חירום</div>`}
+      <button class="btn small secondary" style="margin-top:8px" data-action="fldEditInsurance">✎ עריכה</button>
+    </div>
+    <div class="card">
+      <b>מספרי חירום בתאילנד</b>
+      <div class="emg-grid">${EMERGENCY_NUMBERS.map(([n,l])=>`<a class="emg-num" href="tel:${n}"><b dir="ltr">${n}</b><span>${l}</span></a>`).join('')}</div>
+    </div>
+    <div class="card">
+      <b>🏥 בית חולים קרוב${hosp.length?' · '+escapeHtml(hosp[0].area):''}</b>
+      ${hospList.map(h=>`<div class="emg-row"><span>${hosp.length?'':escapeHtml(h.area)+' · '}${escapeHtml(h.name)}</span><a class="chip mini" href="${telHref(h.phone)}" dir="ltr">${h.phone}</a></div>`).join('')}
+    </div>
+    <div class="card">
+      <b>🇮🇱 שגרירות ישראל בבנגקוק</b>
+      <div class="small" style="margin-top:4px">Ocean Tower 2, קומה 25, 75 Sukhumvit Soi 19</div>
+      <div class="chip-row tight" style="margin-top:8px">
+        <a class="chip mini" href="tel:+6622049200" dir="ltr">+66 2 204 9200</a>
+        <span class="small" style="align-self:center">קונסוליה:</span><a class="chip mini" href="tel:+6622049226" dir="ltr">+66 2 204 9226</a>
+      </div>
+    </div>`;
+}
+function openEmergency(date){
+  openModal(`<h3 style="margin-bottom:12px;">🆘 חירום</h3>${renderEmergency(date)}
+    <div class="modal-actions"><button class="btn secondary full" data-action="fldClose">סגירה</button></div>`);
+}
+function openInsuranceEdit(){
+  const e = emergencyData();
+  openModal(`
+    <h3 style="margin-bottom:14px;">ביטוח נסיעות</h3>
+    <div class="field"><label>חברה</label><input id="in-insurer" value="${escapeAttr(e.insurer)}" placeholder="הראל / פספורטכארד…"></div>
+    <div class="field"><label>מספר פוליסה</label><input id="in-policy" value="${escapeAttr(e.policy)}"></div>
+    <div class="field"><label>טלפון חירום (מחו״ל)</label><input id="in-phone" type="tel" dir="ltr" value="${escapeAttr(e.phone)}" placeholder="+972…"></div>
+    <div class="field"><label>הערות</label><input id="in-notes" value="${escapeAttr(e.notes)}" placeholder="למשל: אפליקציה, ספורט אתגרי מכוסה"></div>
+    <div class="modal-actions"><button class="btn full" id="in-save">שמירה</button><button class="btn secondary" data-action="fldClose">ביטול</button></div>`, ()=>{
+    document.getElementById('in-save').onclick = ()=>{
+      Object.assign(e, {insurer:document.getElementById('in-insurer').value.trim(), policy:document.getElementById('in-policy').value.trim(),
+        phone:document.getElementById('in-phone').value.trim(), notes:document.getElementById('in-notes').value.trim()});
+      persist(); closeModal(); render();
+    };
+  });
+}
+
+/* יומן — קובץ ICS עם התראות, כי התראות מהדפדפן לא אמינות באייפון */
+function icsRows(onlyFixed){
+  const fixed = /טיסה|VZ\d|IZ\d|איסוף|ספידבוט|מונית|ואן|הסעה|צ׳ק-אאוט|צ׳ק-אין|סירה/;
+  return myDays().flatMap(day=>day.rows.filter(r=>r.time && /^\d{1,2}:\d{2}$/.test(r.time))
+    .filter(r=>!onlyFixed || r.status==='מוזמן' || fixed.test(r.act||''))
+    .map(r=>({day, r})));
+}
+function icsEscape(s){ return String(s||'').replace(/\\/g,'\\\\').replace(/\n/g,'\\n').replace(/([,;])/g,'\\$1'); }
+function buildIcs(onlyFixed){
+  const pad = n=>String(n).padStart(2,'0');
+  const utc = (date, hm)=>{ // שעות המסלול הן שעון תאילנד, UTC+7
+    const [h,m] = hm.split(':').map(Number);
+    const t = Date.UTC(Number(date.slice(0,4)), Number(date.slice(5,7))-1, Number(date.slice(8,10)), h-7, m);
+    const d = new Date(t);
+    return `${d.getUTCFullYear()}${pad(d.getUTCMonth()+1)}${pad(d.getUTCDate())}T${pad(d.getUTCHours())}${pad(d.getUTCMinutes())}00Z`;
+  };
+  const durMin = s=>{ const m=/^(\d+):(\d{2})$/.exec(s||''); return m ? Number(m[1])*60+Number(m[2]) : 30; };
+  const stamp = utc(localToday(), '12:00');
+  const lines = ['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//itiuly//trip//HE','CALSCALE:GREGORIAN','X-WR-CALNAME:תאילנד 2026'];
+  icsRows(onlyFixed).forEach(({day, r})=>{
+    const start = utc(day.date, r.time);
+    const endT = new Date(Date.parse(start.replace(/(\d{4})(\d{2})(\d{2})T(\d{2})(\d{2})(\d{2})Z/,'$1-$2-$3T$4:$5:$6Z')) + Math.max(15, durMin(r.dur))*60000);
+    const end = `${endT.getUTCFullYear()}${pad(endT.getUTCMonth()+1)}${pad(endT.getUTCDate())}T${pad(endT.getUTCHours())}${pad(endT.getUTCMinutes())}00Z`;
+    lines.push('BEGIN:VEVENT', `UID:${r.id}-${day.date}@itiuly-trip`, `DTSTAMP:${stamp}`, `DTSTART:${start}`, `DTEND:${end}`,
+      `SUMMARY:${icsEscape(r.act)}`, `LOCATION:${icsEscape(r.loc)}`, `DESCRIPTION:${icsEscape(r.notes)}`,
+      'BEGIN:VALARM','ACTION:DISPLAY',`DESCRIPTION:${icsEscape(r.act)}`,'TRIGGER:-PT1H','END:VALARM');
+    if(r.time < '10:00') lines.push('BEGIN:VALARM','ACTION:DISPLAY',`DESCRIPTION:מחר ב-${r.time}: ${icsEscape(r.act)}`,'TRIGGER:-PT12H','END:VALARM');
+    lines.push('END:VEVENT');
+  });
+  lines.push('END:VCALENDAR');
+  return lines.map(l=>l.length>74 ? l.match(/.{1,74}/g).join('\r\n ') : l).join('\r\n');
+}
+async function exportCalendar(onlyFixed){
+  const text = buildIcs(onlyFixed);
+  const name = onlyFixed ? 'thailand-booked.ics' : 'thailand-all.ics';
+  const file = new File([text], name, {type:'text/calendar'});
+  try{
+    if(navigator.canShare && navigator.canShare({files:[file]})){ await navigator.share({files:[file], title:'תאילנד 2026'}); return; }
+  }catch(e){ if(e && e.name==='AbortError') return; }
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(file); a.download = name; document.body.appendChild(a); a.click();
+  setTimeout(()=>{ URL.revokeObjectURL(a.href); a.remove(); }, 1000);
+}
+
+/* פס הכלים במסך היום, והלשונית ״בשטח״ */
+function renderFieldBar(day){
+  return `<div class="fld-bar">
+    <button data-action="fldTaxiPick" data-id="${day.date}"><span>🚕</span>לנהג</button>
+    <button data-action="fldWallet" data-id="${day.date}"><span>🎫</span>אישורים</button>
+    <button data-action="fldExpense" data-id="${day.date}"><span>฿</span>הוצאה</button>
+    <button data-action="fldEmergency" data-id="${day.date}" class="sos"><span>🆘</span>חירום</button>
+  </div>`;
+}
+function renderDaySpend(day){
+  const spent = dayExpensesIls(day.date);
+  const est = toIls(dayTotalBaht(day));
+  return `<div class="deck-total">אומדן היום · ${ils(est)}${spent?` · הוצאתם <b>${ils(spent)}</b>`:''}</div>`;
+}
+function renderFieldSection(){
+  const days = myDays();
+  const day = days[currentDayIndex()] || days[0];
+  const date = day ? day.date : tripToday();
+  return `
+    <div class="card">
+      <b>🚕 כרטיסים לנהג</b>
+      <div class="small" style="margin:4px 0 8px;color:var(--muted)">שם וכתובת בתאית, טלפון למקום, ומפה</div>
+      ${renderTaxiList(TAXI_PLACES)}
+    </div>
+    <div class="card">
+      <b>📅 הלו״ז ביומן של הטלפון</b>
+      <div class="small" style="margin:4px 0 8px;color:var(--muted)">התראה שעה לפני, ולפעילות של הבוקר גם ערב לפני. עובד בלי אינטרנט. מייבאים פעם אחת — אם המסלול משתנה, מייבאים שוב.</div>
+      <div class="chip-row">
+        <button class="btn small" data-action="fldIcs" data-id="fixed">טיסות, הסעות ומה שהוזמן</button>
+        <button class="btn small secondary" data-action="fldIcs" data-id="all">כל הפעילויות</button>
+      </div>
+    </div>
+    <h3 class="section-title" style="margin-top:18px">🆘 חירום</h3>
+    ${renderEmergency(date)}`;
+}
+
+document.addEventListener('click', (e)=>{
+  const t = e.target.closest('[data-action^="fld"]');
+  if(!t) return;
+  const a = t.dataset.action, id = t.dataset.id;
+  if(a==='fldClose') closeModal();
+  else if(a==='fldTaxiPick') openTaxiPicker(id);
+  else if(a==='fldTaxi') openTaxiCard(id);
+  else if(a==='fldCopy'){
+    const p = TAXI_PLACES.find(x=>x.id===id);
+    if(p && navigator.clipboard) navigator.clipboard.writeText(p.th+' '+p.addr).then(()=>toast('הועתק'), ()=>toast('לא הצלחתי להעתיק'));
+  }
+  else if(a==='fldWallet') openWalletModal(id);
+  else if(a==='fldAttach') openAttachModal(id);
+  else if(a==='fldExpense') openQuickExpense(id);
+  else if(a==='fldEmergency') openEmergency(id);
+  else if(a==='fldEditInsurance') openInsuranceEdit();
+  else if(a==='fldIcs') exportCalendar(id==='fixed');
+});
+
 loadState();

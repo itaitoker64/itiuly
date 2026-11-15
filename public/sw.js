@@ -7,9 +7,11 @@
  * cached as they are seen. The plan itself is not cached here: the page keeps
  * its own copy in localStorage, which it can also write to while offline.
  */
-const VERSION = 'trip-v6';
+const VERSION = 'trip-v7';
 const SHELL = `${VERSION}-shell`;
 const PHOTOS = `${VERSION}-photos`;
+// Uploaded files (vouchers, passports) outlive app versions: a ferry pier is no place to re-download them.
+const FILES = 'trip-files';
 
 const SHELL_FILES = ['/trip', '/trip-app.js', '/trip-app.css', '/shared-seed.js'];
 
@@ -29,7 +31,7 @@ self.addEventListener('activate', (event) => {
       .keys()
       .then((keys) =>
         Promise.all(
-          keys.filter((key) => !key.startsWith(VERSION)).map((key) => caches.delete(key))
+          keys.filter((key) => !key.startsWith(VERSION) && key !== FILES).map((key) => caches.delete(key))
         )
       )
       .then(() => self.clients.claim())
@@ -48,6 +50,23 @@ self.addEventListener('fetch', (event) => {
   try {
     url = new URL(request.url);
   } catch {
+    return;
+  }
+
+  // An uploaded file never changes: the network copy when there is one, the saved copy without signal.
+  if (url.origin === self.location.origin && /^\/api\/files\/[^/]+$/.test(url.pathname)) {
+    event.respondWith(
+      caches.open(FILES).then(async (cache) => {
+        try {
+          const response = await fetch(request);
+          if (response.ok) cache.put(request, response.clone());
+          return response;
+        } catch {
+          const hit = await cache.match(request);
+          return hit || Response.error();
+        }
+      })
+    );
     return;
   }
 

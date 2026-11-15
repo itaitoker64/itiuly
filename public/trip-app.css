@@ -736,3 +736,42 @@ button:focus-visible,a:focus-visible,input:focus-visible{outline:2px solid var(-
 .moment-cap{position:absolute;bottom:9px;right:10px;left:10px;z-index:2;color:#fff;font-size:12.5px;font-weight:600;line-height:1.3;text-align:start;
   display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;}
 .moment.done{filter:grayscale(.7);}
+
+/* בשטח — לנהג, אישורים, הוצאה מהירה, חירום */
+.fld-bar{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:2px 0 14px;}
+.fld-bar button{display:flex;flex-direction:column;align-items:center;gap:3px;background:var(--white);border:1px solid var(--line);border-radius:14px;padding:9px 4px;font-size:12px;font-weight:600;color:var(--ink);cursor:pointer;}
+.fld-bar button span{font-size:19px;line-height:1;}
+.fld-bar button.sos{border-color:var(--danger);color:var(--danger);}
+.fld-label{font-size:12px;color:var(--muted);font-weight:600;margin:4px 0 6px;}
+.fld-more{margin-top:10px;}
+.fld-more summary{cursor:pointer;font-size:13px;color:var(--muted);padding:6px 0;}
+.fld-place{display:flex;align-items:center;gap:10px;width:100%;background:var(--white);border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin-bottom:7px;text-align:right;cursor:pointer;color:var(--ink);}
+.fld-emoji{font-size:20px;}
+.fld-place-txt{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px;}
+.fld-place-txt b{font-size:13px;font-weight:600;}
+.fld-place-txt small{font-size:12.5px;color:var(--muted);}
+.fld-go{color:var(--muted);}
+.taxi-card{background:var(--white);border:2px solid var(--ink);border-radius:16px;padding:18px 16px;text-align:center;margin-bottom:12px;}
+.taxi-th{font-size:30px;font-weight:700;line-height:1.3;}
+.taxi-addr{font-size:19px;line-height:1.5;margin-top:10px;}
+.taxi-near{font-size:17px;margin-top:6px;color:var(--terracotta-dark);font-weight:600;}
+.taxi-en{font-size:12.5px;color:var(--muted);margin-top:10px;}
+.fld-actions{display:flex;flex-direction:column;gap:8px;}
+.fld-actions .btn{text-align:center;text-decoration:none;display:block;}
+.taxi-phrases div{display:flex;justify-content:space-between;gap:10px;padding:8px 0;border-bottom:1px solid var(--line);}
+.taxi-phrases b{font-size:18px;}
+.taxi-phrases span{font-size:12.5px;color:var(--muted);align-self:center;}
+.att-row{display:flex;align-items:center;gap:10px;padding:9px 2px;border-bottom:1px solid var(--line);font-size:13.5px;}
+.att-row input{width:18px;height:18px;}
+.quick-amount{display:flex;align-items:center;justify-content:center;gap:6px;font-size:34px;font-weight:700;}
+.quick-amount input{width:60%;font-size:34px;font-weight:700;text-align:center;border:none;border-bottom:2px solid var(--line);background:transparent;color:var(--ink);padding:4px;font-family:inherit;}
+.quick-amount input:focus{outline:none;border-color:var(--terracotta);}
+.chip.active{background:var(--terracotta);border-color:var(--terracotta);color:#fff;}
+.emg-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px;}
+.emg-num{display:flex;flex-direction:column;gap:2px;background:var(--cream);border:1px solid var(--line);border-radius:12px;padding:10px;text-decoration:none;color:var(--ink);}
+.emg-num b{font-size:22px;color:var(--danger);}
+.emg-num span{font-size:11.5px;color:var(--muted);}
+.emg-row{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid var(--line);font-size:12.5px;}
+.quick-amount input::-webkit-outer-spin-button,.quick-amount input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0;}
+.quick-amount input{-moz-appearance:textfield;}
+.fld-place-txt small{text-align:right;}
