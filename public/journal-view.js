@@ -51,7 +51,7 @@
     return {km:Math.round(km), days:days.size, steps:steps.length, photos:steps.reduce((n,s)=>n+(s.photos||[]).length,0), places:places.size};
   }
 
-  /** Steps grouped by day, newest day first, on a line like a travel diary. */
+  /** Steps grouped by day, in the order they happened, on a line like a travel diary. */
   function timeline(steps, opts){
     const o = opts || {};
     const people = o.people || {};
@@ -60,7 +60,7 @@
     const keys = Object.keys(byDay).sort();
     if(!keys.length) return `<div class="jv-empty"><div class="jv-empty-icon">🧭</div>${esc(o.empty || 'עוד אין צעדים')}</div>`;
     const first = Date.parse((o.startDate || keys[0]) + 'T12:00:00Z');
-    return `<div class="jv-line">` + keys.slice().reverse().map(k=>{
+    return `<div class="jv-line">` + keys.map(k=>{
       const list = byDay[k].sort((a,b)=>a.at<b.at?-1:1);
       const n = Math.round((Date.parse(k+'T12:00:00Z') - first)/86400000) + 1;
       const places = [...new Set(list.map(s=>(s.place||'').trim()).filter(Boolean))];

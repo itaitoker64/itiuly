@@ -6824,8 +6824,10 @@ async function openStepModal(step, opts){
     document.getElementById('st-add-ph').onclick = ()=>{
       const input = document.createElement('input'); input.type='file'; input.accept='image/*'; input.multiple = true;
       input.onchange = async ()=>{
-        for(const f of [...input.files]){
-          const c = await compressPhoto(f);
+        const batch = [];
+        for(const f of [...input.files]) batch.push(await compressPhoto(f));
+        batch.sort((x,y)=>x.at<y.at?-1:1); // התמונות לפי סדר הצילום
+        for(const c of batch){
           const key = uid('ph');
           await idbPut(key, c.blob);
           localPhotoUrls[key] = URL.createObjectURL(c.blob);
