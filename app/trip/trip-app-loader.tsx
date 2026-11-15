@@ -38,7 +38,7 @@ function loadScript(src: string): Promise<void> {
  */
 let booting: Promise<void> | null = null;
 
-export default function TripAppLoader({ user }: { user: TripUser }) {
+export default function TripAppLoader({ user, version }: { user: TripUser; version: string }) {
   // The identity must be in place before the app script runs.
   (globalThis as unknown as { TRIP_USER?: TripUser }).TRIP_USER = user;
 
@@ -48,9 +48,10 @@ export default function TripAppLoader({ user }: { user: TripUser }) {
     if (booting) return;
     // The app's own scripts first, and never behind the CDN: a blocked or slow
     // Leaflet must not stop the trip from loading.
-    booting = loadScript(SHARED_SEED_SRC)
-      .then(() => loadScript(JOURNAL_SRC))
-      .then(() => loadScript(APP_SRC))
+    const v = '?v=' + encodeURIComponent(version);
+    booting = loadScript(SHARED_SEED_SRC + v)
+      .then(() => loadScript(JOURNAL_SRC + v))
+      .then(() => loadScript(APP_SRC + v))
       .catch(() => undefined);
 
     // The map library arrives on its own; the map tab re-initialises when it does.
@@ -62,7 +63,7 @@ export default function TripAppLoader({ user }: { user: TripUser }) {
         }
       })
       .catch(() => undefined);
-  }, []);
+  }, [version]);
 
   return null;
 }

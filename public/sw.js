@@ -7,7 +7,7 @@
  * cached as they are seen. The plan itself is not cached here: the page keeps
  * its own copy in localStorage, which it can also write to while offline.
  */
-const VERSION = 'trip-v12';
+const VERSION = 'trip-v13';
 const SHELL = `${VERSION}-shell`;
 const PHOTOS = `${VERSION}-photos`;
 // Uploaded files (vouchers, passports) outlive app versions: a ferry pier is no place to re-download them.
@@ -133,15 +133,27 @@ self.addEventListener('fetch', (event) => {
 
   event.respondWith(
     caches.open(SHELL).then(async (cache) => {
-      const hit = await cache.match(request, { ignoreSearch: true });
-      const live = fetch(request, { cache: 'no-store' }).then((response) => {
-        if (response.ok) cache.put(request, response.clone());
+      const live = fetch(request, { cache: 'no-store' }).then(async (response) => {
+        if (response.ok) {
+          // keep one copy per file: the newest version replaces older ?v= copies
+          const old = await cache.keys();
+          await Promise.all(old.filter((k) => new URL(k.url).pathname === url.pathname && k.url !== request.url).map((k) => cache.delete(k)));
+          await cache.put(request, response.clone());
+        }
         return response;
       });
-      if (!hit) return live.catch(() => Response.error());
-      // Fresh when the network answers; the cached copy on a slow or dead connection.
-      const timeout = new Promise((resolve) => setTimeout(() => resolve(hit), 4000));
-      return Promise.race([live.catch(() => hit), timeout]);
+      // A versioned file (?v=) that is already saved is exactly this version: serve it at once.
+      const exact = url.search ? await cache.match(request) : null;
+      if (exact) { live.catch(() => undefined); return exact; }
+      const any = await cache.match(request, { ignoreSearch: true });
+      if (!any) return live.catch(() => Response.error());
+      if (url.search) {
+        // A new version: wait for it, falling back to the saved one only with no connection.
+        return live.catch(() => any);
+      }
+      // The page itself: fresh when the network answers; the cached copy on a slow or dead connection.
+      const timeout = new Promise((resolve) => setTimeout(() => resolve(any), 4000));
+      return Promise.race([live.catch(() => any), timeout]);
     })
   );
 });

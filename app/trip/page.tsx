@@ -15,6 +15,9 @@ export default async function TripPage() {
   const user = getUser(session.username);
   if (!user) redirect('/login');
 
+  // Each deploy gets its own script and style URLs, so a phone never mixes an old cached file with a new page.
+  const v = (process.env.VERCEL_GIT_COMMIT_SHA || process.env.VERCEL_DEPLOYMENT_ID || 'dev').slice(0, 12);
+
   const shell = await readFile(
     path.join(process.cwd(), 'lib', 'shell.html'),
     'utf8'
@@ -30,10 +33,10 @@ export default async function TripPage() {
         rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@500;700;900&family=Heebo:wght@300;400;500;600;700&display=swap"
       />
-      <link rel="stylesheet" href="/trip-app.css" />
-      <link rel="stylesheet" href="/journal.css" />
+      <link rel="stylesheet" href={`/trip-app.css?v=${v}`} />
+      <link rel="stylesheet" href={`/journal.css?v=${v}`} />
       <div dangerouslySetInnerHTML={{ __html: shell }} />
-      <TripAppLoader user={user} />
+      <TripAppLoader user={user} version={v} />
     </>
   );
 }
