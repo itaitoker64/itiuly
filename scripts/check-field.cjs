@@ -55,3 +55,6 @@ assert.ok(run("sh().bookings.some(b=>b.fileTag==='PassportCard')"));
 assert.equal(run("(uploadedFiles=[{id:'f1',name:'ASAI · 5547616403'},{id:'f2',name:'PassportCard · פוליסה'},{id:'f3',name:'אחר'}], bookingFiles(sh().bookings.find(b=>/ASAI/.test(b.what))).join(','))"), 'f1');
 assert.equal(run("bookingFiles(sh().bookings.find(b=>b.fileTag==='PassportCard')).join(',')"), 'f2');
 console.log('booking files: ok');
+assert.ok(run("sh().bookings.some(b=>b.fileTag==='Asian Trails' && b.when==='7/12')"));
+assert.equal(run("(uploadedFiles=[{id:'k',name:'KYN Phoenix · Sea House'}], bookingFiles(sh().bookings.find(b=>b.id==='kyn-2026-11')).join(','))"), 'k');
+console.log('kyn + similan files: ok');

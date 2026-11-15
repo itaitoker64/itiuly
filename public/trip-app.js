@@ -2485,6 +2485,14 @@ function ensureDefaults(){
     STATE.shared.bookings.push({what:'ביטוח נסיעות · PassportCard', when:'כל הטיול', details:'פוליסה לשניים · הקובץ "אישור פוליסה" נפתח עם מספר תעודת הזהות של איתי', ref:'בקובץ הפוליסה', payment:'שולם', freeCancel:'—', fileTag:'PassportCard'});
   }
   if(STATE.shared && STATE.shared.emergency && !STATE.shared.emergency.insurer) STATE.shared.emergency.insurer = 'PassportCard';
+  if(STATE.shared && STATE.shared.bookings){
+    const kyn = STATE.shared.bookings.find(b=>b.id==='kyn-2026-11');
+    if(kyn && !kyn.fileTag) kyn.fileTag = 'KYN';
+    if(!STATE.shared.bookings.some(b=>b.fileTag==='Asian Trails')){
+      const at = STATE.shared.bookings.findIndex(b=>b.what==='Kalima Resort and Villas');
+      STATE.shared.bookings.splice(at>=0 ? at+1 : STATE.shared.bookings.length, 0, {what:'סימילן · Asian Trails', when:'7/12', details:'Late Departure · איסוף מקלימה 07:30–07:45 · חזרה ~17:00 · כולל הסעות, ציוד, ארוחות ודמי פארק', ref:'Patty · בדלפק בקלימה', payment:'฿8,000 במזומן בדלפק', freeCancel:'עד 24 שעות לפני', fileTag:'Asian Trails'});
+    }
+  }
 
   /* משימות חדשות מתווספות בכל גרסה, לפי כותרת */
   fresh.masterChecklist.forEach(seedTask=>{
