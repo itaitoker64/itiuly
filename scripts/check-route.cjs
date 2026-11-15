@@ -145,7 +145,7 @@ assert.equal(run('wallet().expenses.filter(x=>/Sarana|Our Jungle/.test(x.title))
 assert.equal(run('wallet().expenses.filter(x=>x.paidBy==="talia").length'), 0);
 // The tasks: what to book and what to cancel.
 for (const t of ['להזמין לינה בקאו סוק, 3/12', 'להזמין לילה נוסף בקלימה — 5/12', 'להזמין ואן מאאו נאנג לקאו סוק, 3/12',
-                 'להזמין טיסות VietJet בנגקוק ↔ פוקט', 'להזמין לילה על אגם צ׳או לאן, 3/12', 'לשלם ל-River Lodge בהעברה בנקאית', 'לעדכן את Eleven Bangkok לשני אנשים', 'לתקן מול קלימה: נשארים עד 9/12',
+                 'להזמין טיסות VietJet בנגקוק ↔ פוקט', 'להזמין לילה על אגם צ׳או לאן, 3/12', 'River Lodge — בוקינג מחייב את הכרטיס ב-28/11', 'לעדכן את Eleven Bangkok לשני אנשים', 'לתקן מול קלימה: נשארים עד 9/12',
                  'להזמין טיסה מפוקט לבנגקוק ב-9/12 — לשניכם', 'לבטל את Sarana Bungalows — חינם עד 28/11']) {
   assert.ok(run(`STATE.masterChecklist.some(t=>t.title===${JSON.stringify(t)})`), t);
 }
@@ -541,7 +541,7 @@ assert.equal(bkk('STATE.masterChecklist.find(t=>t.title==="לסגור את צ׳�
   assert.ok(day(o31, '2026-12-03').rows.some(r => r.id === 's_g5_sunset'));
   assert.equal(o31('STATE.masterChecklist.filter(t=>t.title==="להזמין טיסות VietJet בנגקוק ↔ פוקט" && t.status==="done").length'), 1);
   assert.ok(!o31('STATE.masterChecklist.some(t=>/צ׳רמנטרה בלילה|TG203/.test(t.title))'));
-  assert.ok(o31('STATE.masterChecklist.some(t=>/River Lodge בהעברה/.test(t.title))'));
+  assert.ok(o31('STATE.masterChecklist.some(t=>/River Lodge — בוקינג מחייב/.test(t.title))'));
   const settled = o31('JSON.stringify(STATE)'); o31('ensureDefaults();');
   assert.equal(o31('JSON.stringify(STATE)'), settled, 'once');
 }

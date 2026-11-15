@@ -3341,7 +3341,7 @@ window.SHARED_SEED = {
      "baht": null,
      "status": "מוזמן",
      "link": "https://secure.booking.com/myreservations.html?bn=5114181390",
-     "notes": "4–5/12 · צ׳ק-אין 13:00–18:00 · לשלם ฿2,000 לפני ההגעה בהעברה בנקאית — או לשאול בצ׳אט של בוקינג אם אפשר במזומן (כתוב cash only) · ביטול חינם עד 30/11",
+     "notes": "4–5/12 · צ׳ק-אין 13:00–18:00 · ฿2,000 — בוקינג מחייב את הכרטיס ב-28/11 · ביטול חינם עד 30/11",
      "id": "s_g4_2",
      "done": false,
      "priceEstimate": {
@@ -3430,7 +3430,7 @@ window.SHARED_SEED = {
      "baht": 2000,
      "status": "מוזמן",
      "link": "https://secure.booking.com/myreservations.html?bn=5114181390",
-     "notes": "אישור 5114181390 · 4–5/12 · Standard Double · כולל ארוחת בוקר · ฿2,000 · לשלם לפני ההגעה · ביטול חינם עד 30/11",
+     "notes": "אישור 5114181390 · 4–5/12 · Standard Double · כולל ארוחת בוקר · ฿2,000 · בוקינג מחייב ב-28/11 · ביטול חינם עד 30/11",
      "id": "s_g4_stay",
      "done": false,
      "wiki": "Khao Sok National Park",
@@ -4709,9 +4709,9 @@ window.SHARED_SEED = {
   {
    "what": "Khao Sok River Lodge",
    "when": "4–5/12",
-   "details": "קאו סוק · לילה · Standard Double · כולל ארוחת בוקר · לשלם לפני ההגעה (העברה או מזומן)",
+   "details": "קאו סוק · לילה · Standard Double · כולל ארוחת בוקר",
    "ref": "5114181390",
-   "payment": "฿2,000",
+   "payment": "฿2,000 · בוקינג מחייב ב-28/11",
    "freeCancel": "ביטול חינם עד 30/11"
   },
   {
@@ -4942,7 +4942,7 @@ window.SHARED_SEED = {
    "dates": "4–5/12",
    "nights": 1,
    "hotel": "Khao Sok River Lodge",
-   "what": "8.9 · על הנהר · אישור 5114181390 · ฿2,000 כולל ארוחת בוקר · העברה בנקאית לפני ההגעה",
+   "what": "8.9 · על הנהר · אישור 5114181390 · ฿2,000 כולל ארוחת בוקר · בוקינג מחייב ב-28/11",
    "perNight": 2000,
    "choice": "מוזמן",
    "freeCancel": "עד 30/11",

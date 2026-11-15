@@ -405,7 +405,7 @@ const EXPENSES_32 = () => [
   {id:uid('x'), date:"2026-11-29", title:"COSI Krabi Ao Nang Beach · 4 לילות", category:"accommodation",
    amount:22669.04, currency:"THB", paidBy:"itai", split:"ratio", status:"due", note:"אישור 5907714174 · זיכוי יומי לאוכל ושתייה · בוקינג מחייבת אוטומטית · ביטול חינם עד 21/11, אחר כך 50%"},
   {id:uid('x'), date:"2026-12-04", title:"Khao Sok River Lodge · 4/12", category:"accommodation",
-   amount:2000, currency:"THB", paidBy:"itai", split:"ratio", status:"due", note:"אישור 5114181390 · כולל ארוחת בוקר · לשלם לפני ההגעה · ביטול חינם עד 30/11"},
+   amount:2000, currency:"THB", paidBy:"itai", split:"ratio", status:"due", note:"אישור 5114181390 · כולל ארוחת בוקר · בוקינג מחייב ב-28/11 · ביטול חינם עד 30/11"},
   {id:uid('x'), date:"2026-12-09", title:"מונית Booking · קלימה → HKT", category:"transport",
    amount:153.27, currency:"ILS", paidBy:"itai", split:"ratio", status:"paid", note:"אישור 997065466 · 9/12, 10:45"}
 ];
@@ -468,15 +468,18 @@ const NEW_TASKS_36 = () => [
   {id:uid('m'), owner:"itai", status:"todo", category:"הזמנות", countryId:"thailand", order:13.32, priority:"גבוהה", deadline:"2026-11-26",
    title:"לשלם ל-Siam Tour את היתרה, ฿7,500", notes:"הזמנה 5946 · voucher 8044 · בכרטיס דרך הקישור של לוקאס או ב-Wise · לשלוח צילום מסך בוואטסאפ", link:""},
   {id:uid('m'), owner:"itai", status:"todo", category:"הזמנות", countryId:"thailand", order:13.33, priority:"בינונית", deadline:"2026-11-26",
-   title:"לוודא עם Siam Tour: לילה אחד, והורדה ב-River Lodge ב-4/12", notes:"WhatsApp ‎+66 82 579 6015 (Lukas) · אחרת מונית מהרציף, כ-฿1,200", link:""}
+   title:"לוודא עם Siam Tour: לילה אחד, והורדה ב-River Lodge ב-4/12", notes:"15/11: נשלחה שאלה בוואטסאפ ל-Lukas ‎+66 82 579 6015 · מחכים לתשובה · אחרת מונית מהרציף, כ-฿1,200", link:""}
 ];
 const TASKS_36 = [
   {from:'להזמין לילה על אגם צ׳או לאן, 4–5/12', to:'להזמין לילה על אגם צ׳או לאן, 3/12', status:'done', notes:'15/11: Siam Tour · The Laguna Chiew Larn, Seaview · voucher 8044 · ฿15,000 · מקדמה ฿7,500 שולמה'},
-  {from:'לשלם ל-River Lodge בהעברה בנקאית', notes:'הלילה עבר ל-4–5/12 · ฿2,000 · אם לא הגיעו פרטים עד 25/11 — לשאול בצ׳אט של בוקינג אם אפשר במזומן · ביטול חינם עד 30/11'},
+  {from:'לשלם ל-River Lodge בהעברה בנקאית', to:'River Lodge — בוקינג מחייב את הכרטיס ב-28/11', notes:'הלילה עבר ל-4–5/12 · ฿2,000 · לפי בוקינג התשלום יורד לבד ב-28/11 · ביטול חינם עד 30/11'},
+  {from:'Grab ו-Bolt בשני הטלפונים, עם כרטיס אשראי', status:'done', notes:'15/11: בוצע'},
+  {from:'לעדכן בנק על נסיעה ממושכת', status:'done', notes:'15/11: כאל עודכנו'},
   {from:'להזמין סימילן ל-7/12', status:'done', notes:'15/11: אישרנו ל-Patty · ฿8,000 לשניים כולל דמי פארק · מזומן בדלפק בקלימה · ביטול חינם עד 24 שעות לפני'}
 ];
 function applyTasks36(list){
   TASKS_36.forEach(spec=>{
+    if(spec.to && list.some(x=>x.title===spec.to)) list = list.filter(x=>x.title!==spec.from);
     const t = list.find(x=>x.title===spec.from) || (spec.to && list.find(x=>x.title===spec.to));
     if(!t) return;
     if(spec.to) t.title = spec.to;
@@ -2454,7 +2457,8 @@ function ensureDefaults(){
       }
       if(meta.hotels){
         const hr = meta.hotels.find(h=>h.hotel==='Khao Sok River Lodge');
-        if(hr) Object.assign(hr, {dates:'4–5/12', freeCancel:'עד 30/11'});
+        const shr = seedShared.hotels.find(h=>h.hotel==='Khao Sok River Lodge');
+        if(hr && shr) Object.assign(hr, copy(shr));
         const laguna = seedShared.hotels.find(h=>/^The Laguna Chiew Larn/.test(h.hotel));
         if(laguna && !meta.hotels.some(h=>h.hotel===laguna.hotel)){
           const at = meta.hotels.findIndex(h=>h.hotel==='Panvaree The Greenery');
@@ -2466,7 +2470,7 @@ function ensureDefaults(){
       if(d.name==='קאו סוק' && /Panvaree The Greenery/.test(d.accommodation||'')) Object.assign(d, {accommodation:'The Laguna Chiew Larn (Seaview) על האגם, ואז Khao Sok River Lodge', transport:'Siam Tour מאאו נאנג', notes:"3/12 ישר מאאו נאנג לאגם — לילה ב-Laguna Seaview עם סירה פרטית, דרך Siam Tour. 4/12 בוקר על האגם וערב בכפר, ב-River Lodge על הנהר. 5/12 בוקר בג׳ונגל, ומשם לקלימה."});
     }));
     const rlx = STATE.money.expenses.find(e=>e.title==='Khao Sok River Lodge · 3/12');
-    if(rlx) Object.assign(rlx, {title:'Khao Sok River Lodge · 4/12', date:'2026-12-04', note:'אישור 5114181390 · כולל ארוחת בוקר · לשלם לפני ההגעה · ביטול חינם עד 30/11'});
+    if(rlx) Object.assign(rlx, {title:'Khao Sok River Lodge · 4/12', date:'2026-12-04', note:'אישור 5114181390 · כולל ארוחת בוקר · בוקינג מחייב ב-28/11 · ביטול חינם עד 30/11'});
     const lx = EXPENSE_36();
     if(!STATE.money.expenses.some(e=>e.title===lx.title)) STATE.money.expenses.push(lx);
     STATE.masterChecklist = applyTasks36(STATE.masterChecklist);
