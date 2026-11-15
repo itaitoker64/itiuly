@@ -11,7 +11,7 @@
     JV.initMap(document.getElementById('fw-map'), data.steps, data.track, {photoUrl});
     const all = [...data.steps.map(s=>s.at), ...data.track.map(t=>t.at)].sort();
     const last = all[all.length-1];
-    document.getElementById('fw-last').textContent = last ? 'עדכון אחרון: ' + new Date(last).toLocaleString('he-IL',{timeZone:'Asia/Bangkok',day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'}) + ' (שעון תאילנד)' : '';
+    document.getElementById('fw-last').textContent = last ? 'עדכון אחרון: ' + new Date(last).toLocaleString('he-IL',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'}) : '';
   }
   JV.bindPhotos(document.getElementById('fw-timeline'), ()=>data.steps, photoUrl);
   draw();
