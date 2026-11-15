@@ -22,12 +22,14 @@ export const config = {
     /*
      * Guard every path except:
      *  - /login and the auth endpoints
+     *  - the family follow page and its API (/follow/<token>, /api/follow/<token>),
+     *    and /api/ping for the phone's location shortcut — each checks its own token
      *  - Next.js internals, the favicon, the app icons, the web app manifest and
      *    the service worker — the browser fetches the manifest and icons without
      *    the session cookie, and without them the app cannot be installed
      * The app's own JS/CSS stay guarded too, so nothing of the plan is served
      * to someone who is not signed in.
      */
-    '/((?!login|api/auth|_next/static|_next/image|favicon.ico|icons/|manifest.webmanifest|sw.js).*)',
+    '/((?!login|api/auth|api/ping|api/follow|follow/|follow-app.js|journal-view.js|journal.css|_next/static|_next/image|favicon.ico|icons/|manifest.webmanifest|sw.js).*)',
   ],
 };

@@ -136,6 +136,39 @@ export async function ensureSchema(): Promise<void> {
       uploaded_at TIMESTAMPTZ NOT NULL DEFAULT now()
     )
   `;
+  // The travel journal: steps with photos, and the track between them.
+  await sql`
+    CREATE TABLE IF NOT EXISTS trip_steps (
+      id         TEXT PRIMARY KEY,
+      author     TEXT NOT NULL,
+      at         TIMESTAMPTZ NOT NULL,
+      lat        DOUBLE PRECISION,
+      lng        DOUBLE PRECISION,
+      place      TEXT NOT NULL DEFAULT '',
+      text       TEXT NOT NULL DEFAULT '',
+      photos     JSONB NOT NULL DEFAULT '[]'::jsonb,
+      updated_at TIMESTAMPTZ NOT NULL DEFAULT now()
+    )
+  `;
+  await sql`CREATE INDEX IF NOT EXISTS trip_steps_at ON trip_steps (at)`;
+  await sql`
+    CREATE TABLE IF NOT EXISTS trip_track (
+      id     BIGSERIAL PRIMARY KEY,
+      author TEXT NOT NULL,
+      at     TIMESTAMPTZ NOT NULL,
+      lat    DOUBLE PRECISION NOT NULL,
+      lng    DOUBLE PRECISION NOT NULL,
+      acc    REAL,
+      source TEXT NOT NULL DEFAULT 'app',
+      UNIQUE (author, at)
+    )
+  `;
+  await sql`
+    CREATE TABLE IF NOT EXISTS trip_settings (
+      key   TEXT PRIMARY KEY,
+      value TEXT NOT NULL
+    )
+  `;
   await sql`
     CREATE TABLE IF NOT EXISTS presence (
       username TEXT PRIMARY KEY,
