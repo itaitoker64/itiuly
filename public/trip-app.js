@@ -3148,6 +3148,7 @@ function render(){
   const c = document.getElementById('content');
   if(activeTab==='home') c.innerHTML = renderHome();
   else if(activeTab==='today'){ c.innerHTML = renderToday(); initSwipe(); centerDayStrip(); initDayMap(myDays()[currentDayIndex()]); }
+  else if(activeTab==='journal'){ c.innerHTML = renderJournal(); initJournalMap(); }
   else if(activeTab==='route'){ c.innerHTML = renderRouteTab(); initRouteMap(); }
   else if(activeTab==='money') c.innerHTML = renderMoney();
   else if(activeTab==='map') { c.innerHTML = renderMapShell(); initMapIfNeeded(); }
@@ -3172,6 +3173,7 @@ function uiIcon(name){
   const paths = {
     home:'<path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1Z"/>',
     today:'<rect x="3" y="5" width="18" height="16" rx="3"/><path d="M7 3v4m10-4v4M3 11h18m-13 5h3"/>',
+    journal:'<path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11Z"/><path d="M9 10h6"/>',
     route:'<circle cx="12" cy="12" r="9"/><path d="m16 8-3 5-5 3 3-5Z"/>',
     money:'<rect x="3" y="5" width="18" height="15" rx="3"/><path d="M3 9h18m-5 5h2"/>',
     more:'<circle cx="5" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/>',
@@ -3191,6 +3193,7 @@ function navItems(){
   const common = [
     {tab:'home',  icon:'🏠', label:'בית'},
     {tab:'today', icon:'📆', label:'היום'},
+    {tab:'journal', icon:'📍', label:'יומן'},
     {tab:'route', icon:'🧭', label:'המסלול'},
     {tab:'money', icon:'💸', label:'כסף'}
   ];
@@ -6486,5 +6489,463 @@ document.addEventListener('click', (e)=>{
   else if(a==='fldEditInsurance') openInsuranceEdit();
   else if(a==='fldIcs') exportCalendar(id==='fixed');
 });
+/* =========================================================
+   יומן בדרכים — צעדים, תמונות והמסלול שעשיתם בפועל (כמו Polarsteps)
+   הכל עובד בלי קליטה: צעדים ותמונות נשמרים בטלפון ועולים כשיש חיבור.
+========================================================= */
+const JRN_CACHE = 'trip-journal-cache';
+const JRN_QUEUE = 'trip-journal-queue';
+const JRN_TRACKING = 'trip-journal-tracking';
+let JOURNAL = (()=>{ try{ return JSON.parse(localStorage.getItem(JRN_CACHE)||'null') || {steps:[], track:[], follow:null, ping:null}; }catch(e){ return {steps:[], track:[], follow:null, ping:null}; } })();
+let journalLoaded = false, journalFlushing = false, journalMap = null;
+const localPhotoUrls = {};
+
+function jrnSave(){ try{ localStorage.setItem(JRN_CACHE, JSON.stringify(JOURNAL)); }catch(e){} }
+function jrnQueue(){ try{ return JSON.parse(localStorage.getItem(JRN_QUEUE)||'[]'); }catch(e){ return []; } }
+function jrnSetQueue(q){ try{ localStorage.setItem(JRN_QUEUE, JSON.stringify(q)); }catch(e){} }
+function jrnEnqueue(op){ const q = jrnQueue(); q.push(op); jrnSetQueue(q); flushJournal(); }
+
+/* תמונות שעוד לא עלו — IndexedDB, כי localStorage קטן מדי לתמונות */
+function jrnDb(){
+  return new Promise((res, rej)=>{
+    try{
+      const r = indexedDB.open('trip-journal', 1);
+      r.onupgradeneeded = ()=> r.result.createObjectStore('photos');
+      r.onsuccess = ()=> res(r.result);
+      r.onerror = ()=> rej(r.error);
+    }catch(e){ rej(e); }
+  });
+}
+async function idbPut(key, blob){ const db = await jrnDb(); return new Promise((res,rej)=>{ const t=db.transaction('photos','readwrite'); t.objectStore('photos').put(blob,key); t.oncomplete=()=>res(); t.onerror=()=>rej(t.error); }); }
+async function idbGet(key){ const db = await jrnDb(); return new Promise((res,rej)=>{ const t=db.transaction('photos'); const r=t.objectStore('photos').get(key); r.onsuccess=()=>res(r.result); r.onerror=()=>rej(r.error); }); }
+async function idbDel(key){ const db = await jrnDb(); return new Promise((res)=>{ const t=db.transaction('photos','readwrite'); t.objectStore('photos').delete(key); t.oncomplete=()=>res(); t.onerror=()=>res(); }); }
+
+function jrnPhotoUrl(id){
+  if(String(id).startsWith('local:')){
+    const key = id.slice(6);
+    if(localPhotoUrls[key]) return localPhotoUrls[key];
+    idbGet(key).then(b=>{ if(b){ localPhotoUrls[key] = URL.createObjectURL(b); if(activeTab==='journal') render(); } }).catch(()=>{});
+    return 'data:image/gif;base64,R0lGODlhAQABAAAAACw=';
+  }
+  return '/api/files/'+encodeURIComponent(id);
+}
+
+/** EXIF: מיקום ושעת צילום מתוך JPEG — כך תמונה מהגלריה יודעת איפה ומתי צולמה */
+function readExif(buf){
+  try{
+    const v = new DataView(buf);
+    if(v.getUint16(0) !== 0xFFD8) return {};
+    let off = 2;
+    while(off < v.byteLength - 4){
+      const marker = v.getUint16(off), size = v.getUint16(off+2);
+      if(marker === 0xFFE1 && v.getUint32(off+4) === 0x45786966){
+        const t = off + 10, le = v.getUint16(t) === 0x4949;
+        const u16 = p=>v.getUint16(p, le), u32 = p=>v.getUint32(p, le);
+        const ifd = start=>{ const n = u16(start), out = {}; for(let i=0;i<n;i++){ const e = start+2+i*12; out[u16(e)] = {type:u16(e+2), count:u32(e+4), at:e+8}; } return out; };
+        const valOff = ent=> (ent.count*({2:1,5:8,10:8,3:2,4:4}[ent.type]||1) > 4) ? t + u32(ent.at) : ent.at;
+        const ascii = ent=>{ let s='', p = valOff(ent); for(let i=0;i<ent.count-1;i++) s += String.fromCharCode(v.getUint8(p+i)); return s; };
+        const rat = (p,i)=> u32(p+i*8) / (u32(p+i*8+4)||1);
+        const ifd0 = ifd(t + u32(t+4));
+        const res = {};
+        if(ifd0[0x8769]){
+          const ex = ifd(t + u32(ifd0[0x8769].at));
+          if(ex[0x9003]) res.taken = ascii(ex[0x9003]);
+          if(ex[0x9011]) res.offset = ascii(ex[0x9011]);
+        }
+        if(ifd0[0x8825]){
+          const g = ifd(t + u32(ifd0[0x8825].at));
+          if(g[2] && g[4]){
+            const dms = ent=>{ const p = valOff(ent); return rat(p,0) + rat(p,1)/60 + rat(p,2)/3600; };
+            let lat = dms(g[2]), lng = dms(g[4]);
+            if(g[1] && ascii(g[1]) === 'S') lat = -lat;
+            if(g[3] && ascii(g[3]) === 'W') lng = -lng;
+            if(Number.isFinite(lat) && Number.isFinite(lng) && (lat || lng)) Object.assign(res, {lat, lng});
+          }
+        }
+        return res;
+      }
+      if((marker & 0xFF00) !== 0xFF00) break;
+      off += 2 + size;
+    }
+  }catch(e){}
+  return {};
+}
+function exifTime(ex, fallbackMs){
+  const m = /^(\d{4}):(\d{2}):(\d{2}) (\d{2}):(\d{2}):(\d{2})/.exec(ex.taken||'');
+  if(!m) return new Date(fallbackMs || Date.now()).toISOString();
+  const off = /^[+-]\d{2}:\d{2}$/.test(ex.offset||'') ? ex.offset : '+07:00'; // טלפון בתאילנד — שעון תאילנד
+  return new Date(`${m[1]}-${m[2]}-${m[3]}T${m[4]}:${m[5]}:${m[6]}${off}`).toISOString();
+}
+
+/** מכווץ תמונה ל-2048 פיקסלים — עשרות תמונות נכנסות בלי לחשוב על נפח */
+async function compressPhoto(file){
+  const buf = await file.arrayBuffer();
+  const ex = /jpe?g/i.test(file.type) || !file.type ? readExif(buf) : {};
+  let blob = file;
+  try{
+    const bmp = await createImageBitmap(new Blob([buf], {type:file.type||'image/jpeg'}));
+    const scale = Math.min(1, 2048/Math.max(bmp.width, bmp.height));
+    const c = document.createElement('canvas');
+    c.width = Math.round(bmp.width*scale); c.height = Math.round(bmp.height*scale);
+    c.getContext('2d').drawImage(bmp, 0, 0, c.width, c.height);
+    blob = await new Promise(r=>c.toBlob(r, 'image/jpeg', 0.82)) || file;
+  }catch(e){}
+  return {blob, at: exifTime(ex, file.lastModified), lat: ex.lat ?? null, lng: ex.lng ?? null};
+}
+
+/* מיקום — מה-GPS, ואם אין, מנקודת המסלול הקרובה בזמן, ואם אין, מהיעד המתוכנן של אותו יום */
+function getFix(timeout){
+  return new Promise(res=>{
+    if(!navigator.geolocation) return res(null);
+    navigator.geolocation.getCurrentPosition(p=>res({lat:p.coords.latitude, lng:p.coords.longitude, acc:p.coords.accuracy}), ()=>res(null),
+      {enableHighAccuracy:true, timeout:timeout||10000, maximumAge:120000});
+  });
+}
+function plannedPlace(iso){
+  const date = JV.dayKey(iso);
+  const day = (sh().days||[]).find(d=>d.date===date && dayIsMine(d));
+  const dest = myDestinations().find(d=>d.lat && d.arrival <= date && date <= (d.departure||d.arrival));
+  return {name: day ? String(day.dest).split(/\s*[→—]\s*/)[0] : (dest ? dest.name : ''), lat: dest ? dest.lat : null, lng: dest ? dest.lng : null};
+}
+function nearestTrackPoint(iso, maxHours){
+  const t = Date.parse(iso); let best = null, bd = Infinity;
+  JOURNAL.track.forEach(p=>{ const d = Math.abs(Date.parse(p.at)-t); if(d < bd){ bd = d; best = p; } });
+  return best && bd <= (maxHours||3)*3600000 ? best : null;
+}
+
+/* GPS כל עוד האפליקציה פתוחה — נקודה כל 200 מ׳ או כל 10 דקות */
+let trackWatch = null, lastPoint = null, pendingPoints = [];
+function trackingOn(){ try{ return localStorage.getItem(JRN_TRACKING) === 'on'; }catch(e){ return false; } }
+function startTracking(){
+  if(!navigator.geolocation || trackWatch !== null || !trackingOn() || document.hidden) return;
+  trackWatch = navigator.geolocation.watchPosition(p=>{
+    const pt = {lat:p.coords.latitude, lng:p.coords.longitude, acc:Math.round(p.coords.accuracy), at:new Date().toISOString()};
+    if(pt.acc > 300) return;
+    if(lastPoint && JV.haversine(lastPoint, pt) < 0.2 && Date.parse(pt.at) - Date.parse(lastPoint.at) < 600000) return;
+    lastPoint = pt; pendingPoints.push(pt);
+    JOURNAL.track.push({...pt, author:meId(), source:'app'}); jrnSave();
+    if(pendingPoints.length >= 5) flushPoints();
+  }, ()=>{}, {enableHighAccuracy:false, maximumAge:60000, timeout:30000});
+}
+function stopTracking(){ if(trackWatch !== null){ navigator.geolocation.clearWatch(trackWatch); trackWatch = null; } flushPoints(); }
+function flushPoints(){ if(!pendingPoints.length) return; jrnEnqueue({op:'points', points:pendingPoints.splice(0)}); }
+document.addEventListener('visibilitychange', ()=>{ if(document.hidden) stopTracking(); else { startTracking(); flushJournal(); } });
+if(window.addEventListener) window.addEventListener('online', ()=>flushJournal());
+
+/* סנכרון — התור נשלח לפי הסדר, ונעצר בשגיאה הראשונה עד החיבור הבא */
+async function flushJournal(){
+  if(journalFlushing || !navigator.onLine) return;
+  journalFlushing = true;
+  try{
+    let q = jrnQueue();
+    while(q.length){
+      const op = q[0];
+      if(op.op === 'step'){
+        const step = {...op.step};
+        for(let i=0;i<step.photos.length;i++){
+          const id = step.photos[i];
+          if(!String(id).startsWith('local:')) continue;
+          const key = id.slice(6), blob = await idbGet(key);
+          if(!blob){ step.photos.splice(i--,1); continue; }
+          const form = new FormData();
+          form.append('file', new File([blob], 'journal.jpg', {type:'image/jpeg'}));
+          form.append('name', 'יומן · '+JV.dayKey(step.at)+' · '+(step.place||'צעד'));
+          const r = await fetch('/api/files', {method:'POST', body:form});
+          if(!r.ok) throw new Error('upload');
+          const fid = (await r.json()).file.id;
+          step.photos[i] = fid;
+          await idbDel(key);
+          const mine = JOURNAL.steps.find(s=>s.id===step.id); if(mine) mine.photos = mine.photos.map(p=>p===id?fid:p);
+          q = jrnQueue(); q.forEach(o=>{ if(o.op==='step' && o.step.id===step.id) o.step.photos = o.step.photos.map(p=>p===id?fid:p); }); jrnSetQueue(q);
+        }
+        const r = await fetch('/api/journal', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({step})});
+        if(!r.ok && r.status !== 400) throw new Error('step');
+      }else if(op.op === 'delete'){
+        const r = await fetch('/api/journal/'+encodeURIComponent(op.id), {method:'DELETE'});
+        if(!r.ok) throw new Error('delete');
+      }else if(op.op === 'points'){
+        const r = await fetch('/api/journal/track', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({points:op.points, source:op.source})});
+        if(!r.ok) throw new Error('points');
+      }
+      q = jrnQueue(); q.shift(); jrnSetQueue(q);
+    }
+    jrnSave();
+  }catch(e){}
+  journalFlushing = false;
+  if(activeTab==='journal') render();
+}
+
+async function loadJournal(){
+  try{
+    const r = await fetch('/api/journal', {cache:'no-store'});
+    if(!r.ok) return;
+    const data = await r.json();
+    // מה שעוד בתור מקומי גובר על מה שבשרת
+    const q = jrnQueue();
+    const pendingSteps = q.filter(o=>o.op==='step').map(o=>o.step);
+    const deleted = new Set(q.filter(o=>o.op==='delete').map(o=>o.id));
+    const steps = data.steps.filter(s=>!deleted.has(s.id) && !pendingSteps.some(p=>p.id===s.id)).concat(pendingSteps);
+    const pendingPts = q.filter(o=>o.op==='points').flatMap(o=>o.points.map(p=>({...p, author:meId(), source:'app'})));
+    JOURNAL = {steps, track:data.track.concat(pendingPts), follow:data.follow, ping:data.ping};
+    journalLoaded = true; jrnSave();
+    if(activeTab==='journal') render();
+  }catch(e){}
+}
+
+/* ---------- המסך ---------- */
+function plannedRoute(){
+  return myDestinations().filter(d=>d.lat && d.lng).map(d=>[d.lat, d.lng]);
+}
+function renderJournal(){
+  const st = JV.stats(JOURNAL.steps, JOURNAL.track);
+  const q = jrnQueue().length;
+  const people = {itai:{name:PEOPLE.itai.name, emoji:PEOPLE.itai.emoji}, talia:{name:PEOPLE.talia.name, emoji:PEOPLE.talia.emoji}};
+  return `<div class="section">
+    <div class="row" style="align-items:center"><div class="section-title" style="margin:0">היומן בדרכים</div>
+      ${q?`<span class="small" style="color:var(--muted)">⏳ ${q} ממתינים לחיבור</span>`:''}</div>
+    ${JV.statsHtml(st)}
+    <div id="jrn-map" class="jv-map"></div>
+    <div class="jrn-actions">
+      <button class="btn" data-action="jrnAdd">📍 צעד חדש — כאן ועכשיו</button>
+      <button class="btn secondary" data-action="jrnGallery">🖼️ מהגלריה</button>
+    </div>
+    <div id="jrn-timeline">${JV.timeline(JOURNAL.steps, {photoUrl:jrnPhotoUrl, people, editable:true, empty:'הצעד הראשון: כשנוחתים, לוחצים על ״צעד חדש״'})}</div>
+    <h3 class="section-title" style="margin-top:22px">הגדרות</h3>
+    ${renderJournalSettings()}
+  </div>`;
+}
+function renderJournalSettings(){
+  const tracking = trackingOn();
+  const follow = JOURNAL.follow ? location.origin+'/follow/'+JOURNAL.follow : '';
+  const ping = JOURNAL.ping ? location.origin+'/api/ping?k='+JOURNAL.ping : '';
+  return `
+  <div class="card">
+    <div class="row"><b>🛰️ מעקב מסלול</b>
+      <button class="btn small ${tracking?'':'secondary'}" data-action="jrnTrack">${tracking?'פועל':'כבוי'}</button></div>
+    <div class="small" style="margin-top:6px;color:var(--muted)">כשהאפליקציה פתוחה — נקודה כל 200 מ׳. כדי לעקוב גם כשהיא סגורה — הקיצור למטה.</div>
+  </div>
+  <div class="card">
+    <b>📲 מעקב גם כשהאפליקציה סגורה (קיצורים באייפון)</b>
+    <div class="small" style="margin-top:6px">אפליקציית ״קיצורים״ באייפון שולחת את המיקום פעם בשעה, גם כשהאפליקציה סגורה ובלי לפתוח כלום:</div>
+    ${ping?`
+    <ol class="small jrn-steps">
+      <li>קיצורים ← אוטומציה ← <b>+</b> ← <b>שעה ביום</b>, למשל 09:00, ולהפעיל <b>מיד</b> (בלי אישור).</li>
+      <li>פעולה: <b>קבלת מיקום נוכחי</b>.</li>
+      <li>פעולה: <b>קבלת תוכן של URL</b>, עם הכתובת למטה, שיטה <b>POST</b>, גוף <b>JSON</b>: <code>lat</code> = קו רוחב, <code>lng</code> = קו אורך (מהמיקום הנוכחי).</li>
+      <li>לשכפל את האוטומציה לכמה שעות ביום (09:00, 12:00, 15:00, 18:00, 21:00).</li>
+    </ol>
+    <div class="jrn-url" dir="ltr">${escapeHtml(ping)}</div>
+    <div class="chip-row tight"><button class="chip mini" data-action="jrnCopy" data-id="ping">📋 להעתיק</button>
+      <button class="chip mini" data-action="jrnPingNew">🔄 קוד חדש (מבטל את הישן)</button></div>
+    <div class="small" style="margin-top:6px;color:var(--muted)">הכתובת אישית — כל מי שיש לו אותה יכול להוסיף נקודות למסלול שלך. לא לשתף.</div>`
+    :`<button class="btn small" style="margin-top:8px" data-action="jrnPingNew">ליצור קוד אישי</button>`}
+  </div>
+  <div class="card">
+    <b>👨‍👩‍👧 קישור למשפחה</b>
+    <div class="small" style="margin-top:6px;color:var(--muted)">עמוד לקריאה בלבד: המפה, הצעדים והתמונות. בלי תקציב, הזמנות או מסמכים.</div>
+    ${follow?`<div class="jrn-url" dir="ltr">${escapeHtml(follow)}</div>
+      <div class="chip-row tight"><button class="chip mini" data-action="jrnShare">📤 לשתף</button><button class="chip mini" data-action="jrnCopy" data-id="follow">📋 להעתיק</button>
+      <button class="chip mini" data-action="jrnFollowOff">⛔ לבטל את הקישור</button></div>`
+    :`<button class="btn small" style="margin-top:8px" data-action="jrnFollowOn">ליצור קישור</button>`}
+  </div>
+  <div class="card">
+    <b>📖 ספר הטיול</b>
+    <div class="small" style="margin-top:6px;color:var(--muted)">כל הימים, הצעדים והתמונות, מעוצב להדפסה. בחלון ההדפסה: ״שמירה כ-PDF״ — ואת ה-PDF אפשר להדפיס כספר בכל חנות צילום או אתר אלבומים.</div>
+    <button class="btn small" style="margin-top:8px" data-action="jrnBook">ליצור את הספר</button>
+  </div>`;
+}
+function initJournalMap(){
+  const el = document.getElementById('jrn-map');
+  journalMap = JV.initMap(el, JOURNAL.steps, JOURNAL.track, {photoUrl:jrnPhotoUrl, planned:plannedRoute()});
+  JV.bindPhotos(document.getElementById('jrn-timeline'), ()=>JOURNAL.steps, jrnPhotoUrl);
+  if(!journalLoaded) loadJournal();
+  startTracking();
+}
+
+/* ---------- הוספה ועריכה ---------- */
+function jrnLocalIso(iso){ // datetime-local בשעון תאילנד
+  const d = new Date(Date.parse(iso) + 7*3600000);
+  return d.toISOString().slice(0,16);
+}
+function jrnFromLocal(v){ return new Date(v+':00+07:00').toISOString(); }
+
+async function openStepModal(step){
+  const isNew = !step;
+  const s = step ? JSON.parse(JSON.stringify(step)) : {id:uid('st'), author:meId(), at:new Date().toISOString(), lat:null, lng:null, place:'', text:'', photos:[]};
+  if(isNew){ const pl = plannedPlace(s.at); s.place = pl.name; }
+  let photoMeta = [];
+  openModal(`
+    <h3 style="margin-bottom:12px;">${isNew?'📍 צעד חדש':'עריכת צעד'}</h3>
+    <div class="field"><label>איפה</label><input id="st-place" value="${escapeAttr(s.place)}" placeholder="למשל: ואט ארון"></div>
+    <div id="st-loc" class="small" style="margin:-4px 0 10px;color:var(--muted)">${s.lat!=null?'📍 המיקום נשמר':(isNew?'מאתר מיקום…':'בלי מיקום')}</div>
+    <div class="field"><label>מה היה</label><textarea id="st-text" rows="4" placeholder="כמה מילים — מה ראיתם, מה אכלתם, מה הצחיק">${escapeHtml(s.text)}</textarea></div>
+    <div class="field"><label>מתי</label><input id="st-at" type="datetime-local" value="${jrnLocalIso(s.at)}"></div>
+    <div class="field"><label>תמונות</label>
+      <div id="st-photos" class="st-photos">${s.photos.map((p,i)=>`<div class="st-ph"><img src="${jrnPhotoUrl(p)}"><button data-i="${i}">✕</button></div>`).join('')}</div>
+      <button class="btn small secondary" id="st-add-ph" type="button">+ תמונות</button>
+    </div>
+    <div class="modal-actions">
+      <button class="btn full" id="st-save">שמירה</button>
+      ${isNew?'':'<button class="btn ghost" id="st-del">מחיקה</button>'}
+      <button class="btn secondary" id="st-cancel">ביטול</button>
+    </div>`, ()=>{
+    const drawPhotos = ()=>{
+      const box = document.getElementById('st-photos');
+      box.innerHTML = s.photos.map((p,i)=>`<div class="st-ph"><img src="${jrnPhotoUrl(p)}"><button data-i="${i}" type="button">✕</button></div>`).join('');
+      box.querySelectorAll('button').forEach(b=>b.onclick=()=>{ s.photos.splice(Number(b.dataset.i),1); drawPhotos(); });
+    };
+    drawPhotos();
+    if(isNew) getFix(10000).then(fix=>{
+      if(fix){ s.lat = fix.lat; s.lng = fix.lng; }
+      else { const tp = nearestTrackPoint(s.at, 2); const pl = plannedPlace(s.at); s.lat = tp ? tp.lat : pl.lat; s.lng = tp ? tp.lng : pl.lng; }
+      const el = document.getElementById('st-loc'); if(el) el.textContent = fix ? '📍 המיקום נשמר' : (s.lat!=null ? '📍 מיקום משוער (בלי GPS)' : 'בלי מיקום');
+    });
+    document.getElementById('st-add-ph').onclick = ()=>{
+      const input = document.createElement('input'); input.type='file'; input.accept='image/*'; input.multiple = true;
+      input.onchange = async ()=>{
+        for(const f of [...input.files]){
+          const c = await compressPhoto(f);
+          const key = uid('ph');
+          await idbPut(key, c.blob);
+          localPhotoUrls[key] = URL.createObjectURL(c.blob);
+          s.photos.push('local:'+key); photoMeta.push(c);
+          if(s.lat==null && c.lat!=null){ s.lat = c.lat; s.lng = c.lng; const el=document.getElementById('st-loc'); if(el) el.textContent='📍 המיקום מהתמונה'; }
+        }
+        drawPhotos();
+      };
+      input.click();
+    };
+    document.getElementById('st-cancel').onclick = closeModal;
+    if(!isNew) document.getElementById('st-del').onclick = ()=> confirmThenDelete(s.place||'הצעד', ()=>{
+      JOURNAL.steps = JOURNAL.steps.filter(x=>x.id!==s.id); jrnSave();
+      jrnEnqueue({op:'delete', id:s.id});
+    });
+    document.getElementById('st-save').onclick = ()=>{
+      s.place = document.getElementById('st-place').value.trim();
+      s.text = document.getElementById('st-text').value.trim();
+      const v = document.getElementById('st-at').value; if(v) s.at = jrnFromLocal(v);
+      const i = JOURNAL.steps.findIndex(x=>x.id===s.id);
+      if(i>=0) JOURNAL.steps[i] = s; else JOURNAL.steps.push(s);
+      jrnSave(); jrnEnqueue({op:'step', step:s});
+      // תמונות עם GPS מוסיפות נקודות למסלול
+      const pts = photoMeta.filter(c=>c.lat!=null).map(c=>({lat:c.lat, lng:c.lng, at:c.at}));
+      if(pts.length){ JOURNAL.track.push(...pts.map(p=>({...p, author:meId(), source:'photo'}))); jrnEnqueue({op:'points', points:pts, source:'photo'}); }
+      closeModal(); render(); toast(navigator.onLine?'נשמר':'נשמר בטלפון — יעלה כשיהיה חיבור');
+    };
+  });
+}
+
+/** מהגלריה: תמונות מתקבצות לצעדים לפי זמן ומקום, ומקבלות מיקום מה-EXIF או מהמסלול */
+async function importFromGallery(){
+  const input = document.createElement('input'); input.type='file'; input.accept='image/*'; input.multiple = true;
+  input.onchange = async ()=>{
+    const files = [...input.files]; if(!files.length) return;
+    toast('מעבד '+files.length+' תמונות…');
+    const items = [];
+    for(const f of files){
+      const c = await compressPhoto(f);
+      if(c.lat==null){ const tp = nearestTrackPoint(c.at, 3); if(tp){ c.lat = tp.lat; c.lng = tp.lng; c.guess = true; } }
+      items.push(c);
+    }
+    items.sort((a,b)=>a.at<b.at?-1:1);
+    const groups = [];
+    for(const it of items){
+      const g = groups[groups.length-1];
+      const near = g && JV.dayKey(g.items[0].at)===JV.dayKey(it.at) && Date.parse(it.at)-Date.parse(g.items[g.items.length-1].at) < 3*3600000
+        && (it.lat==null || g.lat==null || JV.haversine(g, it) < 2);
+      if(near){ g.items.push(it); if(g.lat==null && it.lat!=null){ g.lat=it.lat; g.lng=it.lng; } }
+      else groups.push({items:[it], lat:it.lat, lng:it.lng});
+    }
+    const withGps = items.filter(i=>i.lat!=null && !i.guess).length;
+    openModal(`
+      <h3 style="margin-bottom:8px;">🖼️ ${groups.length} צעדים מ-${items.length} תמונות</h3>
+      <div class="small" style="margin-bottom:10px;color:var(--muted)">${withGps} תמונות עם מיקום מהמצלמה · השאר לפי המסלול או לפי התוכנית של אותו יום. אפשר לערוך כל צעד אחר כך.</div>
+      ${groups.map((g,i)=>{ const pl = plannedPlace(g.items[0].at); return `<div class="imp-row"><b>${escapeHtml(pl.name||'צעד')}</b><span class="small">${JV.dayKey(g.items[0].at)} · <bdi dir="ltr">${JV.timeOf(g.items[0].at)}</bdi> · ${g.items.length} תמונות</span></div>`; }).join('')}
+      <div class="modal-actions"><button class="btn full" id="imp-save">להוסיף ליומן</button><button class="btn secondary" id="imp-cancel">ביטול</button></div>`, ()=>{
+      document.getElementById('imp-cancel').onclick = closeModal;
+      document.getElementById('imp-save').onclick = async ()=>{
+        for(const g of groups){
+          const pl = plannedPlace(g.items[0].at);
+          const step = {id:uid('st'), author:meId(), at:g.items[0].at, lat:g.lat ?? pl.lat, lng:g.lng ?? pl.lng, place:pl.name, text:'', photos:[]};
+          for(const it of g.items){ const key = uid('ph'); await idbPut(key, it.blob); localPhotoUrls[key] = URL.createObjectURL(it.blob); step.photos.push('local:'+key); }
+          JOURNAL.steps.push(step); jrnEnqueue({op:'step', step});
+          const pts = g.items.filter(i=>i.lat!=null && !i.guess).map(i=>({lat:i.lat, lng:i.lng, at:i.at}));
+          if(pts.length){ JOURNAL.track.push(...pts.map(p=>({...p, author:meId(), source:'photo'}))); jrnEnqueue({op:'points', points:pts, source:'photo'}); }
+        }
+        jrnSave(); closeModal(); render(); toast('נוספו '+groups.length+' צעדים');
+      };
+    });
+  };
+  input.click();
+}
+
+/* ---------- ספר להדפסה ---------- */
+function openJournalBook(){
+  const steps = [...JOURNAL.steps].sort((a,b)=>a.at<b.at?-1:1);
+  const st = JV.stats(steps, JOURNAL.track);
+  const byDay = {};
+  steps.forEach(s=>{ (byDay[JV.dayKey(s.at)] = byDay[JV.dayKey(s.at)] || []).push(s); });
+  const days = Object.keys(byDay).sort();
+  const box = document.createElement('div');
+  box.id = 'jrn-book';
+  box.innerHTML = `
+    <div class="book-bar"><button class="btn" id="book-print">🖨️ הדפסה / PDF</button><button class="btn secondary" id="book-close">סגירה</button></div>
+    <section class="book-page book-cover">
+      <h1>תאילנד 2026</h1><div class="book-sub">איתי וטליה · ${days.length?new Date(days[0]+'T12:00').toLocaleDateString('he-IL',{day:'numeric',month:'long'})+' – '+new Date(days[days.length-1]+'T12:00').toLocaleDateString('he-IL',{day:'numeric',month:'long',year:'numeric'}):''}</div>
+      ${JV.svgRoute(steps, JOURNAL.track, 500, 420)}
+      ${JV.statsHtml(st)}
+    </section>
+    ${days.map((d,i)=>`<section class="book-page">
+      <h2>יום ${i+1} · ${new Date(d+'T12:00').toLocaleDateString('he-IL',{weekday:'long',day:'numeric',month:'long'})}</h2>
+      ${byDay[d].map(s=>`<article class="book-step"><h3>${escapeHtml(s.place||'')}<small> · ${JV.timeOf(s.at)}</small></h3>
+        ${s.text?`<p>${escapeHtml(s.text).replace(/\n/g,'<br>')}</p>`:''}
+        ${s.photos.length?`<div class="book-photos n${Math.min(4,s.photos.length)}">${s.photos.map(p=>`<img src="${jrnPhotoUrl(p)}">`).join('')}</div>`:''}
+      </article>`).join('')}
+    </section>`).join('')}`;
+  document.body.appendChild(box);
+  document.body.classList.add('book-open');
+  document.getElementById('book-close').onclick = ()=>{ box.remove(); document.body.classList.remove('book-open'); };
+  document.getElementById('book-print').onclick = ()=>window.print();
+}
+
+async function jrnSetting(action){
+  try{
+    const r = await fetch('/api/journal/settings', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({action})});
+    if(!r.ok) throw new Error();
+    const d = await r.json();
+    if('follow' in d) JOURNAL.follow = d.follow;
+    if('ping' in d) JOURNAL.ping = d.ping;
+    jrnSave(); render();
+  }catch(e){ toast('צריך חיבור לאינטרנט בשביל זה'); }
+}
+
+document.addEventListener('click', (e)=>{
+  const t = e.target.closest('[data-action^="jrn"]');
+  if(!t) return;
+  const a = t.dataset.action, id = t.dataset.id;
+  if(a==='jrnAdd') openStepModal(null);
+  else if(a==='jrnEdit') openStepModal(JOURNAL.steps.find(s=>s.id===id));
+  else if(a==='jrnGallery') importFromGallery();
+  else if(a==='jrnBook') openJournalBook();
+  else if(a==='jrnTrack'){
+    const on = !trackingOn();
+    try{ localStorage.setItem(JRN_TRACKING, on?'on':'off'); }catch(err){}
+    if(on){ getFix(15000).then(fix=>{ if(!fix) toast('צריך לאשר גישה למיקום'); }); startTracking(); } else stopTracking();
+    render();
+  }
+  else if(a==='jrnFollowOn') jrnSetting('follow-on');
+  else if(a==='jrnFollowOff') confirmThenDelete('הקישור למשפחה', ()=>jrnSetting('follow-off'));
+  else if(a==='jrnPingNew') jrnSetting('ping-new');
+  else if(a==='jrnCopy'){
+    const v = id==='ping' ? location.origin+'/api/ping?k='+JOURNAL.ping : location.origin+'/follow/'+JOURNAL.follow;
+    navigator.clipboard && navigator.clipboard.writeText(v).then(()=>toast('הועתק'), ()=>toast('לא הצלחתי להעתיק'));
+  }
+  else if(a==='jrnShare'){
+    const url = location.origin+'/follow/'+JOURNAL.follow;
+    if(navigator.share) navigator.share({title:'איתי וטליה בתאילנד', text:'המסלול והיומן שלנו, מתעדכן מהטיול:', url}).catch(()=>{});
+    else navigator.clipboard && navigator.clipboard.writeText(url).then(()=>toast('הקישור הועתק'));
+  }
+});
+
 
 loadState();

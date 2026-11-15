@@ -8,6 +8,7 @@ const LEAFLET_SRC =
   'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js';
 const SHARED_SEED_SRC = '/shared-seed.js';
 const APP_SRC = '/trip-app.js';
+const JOURNAL_SRC = '/journal-view.js';
 
 function loadScript(src: string): Promise<void> {
   return new Promise((resolve, reject) => {
@@ -48,6 +49,7 @@ export default function TripAppLoader({ user }: { user: TripUser }) {
     // The app's own scripts first, and never behind the CDN: a blocked or slow
     // Leaflet must not stop the trip from loading.
     booting = loadScript(SHARED_SEED_SRC)
+      .then(() => loadScript(JOURNAL_SRC))
       .then(() => loadScript(APP_SRC))
       .catch(() => undefined);
 
