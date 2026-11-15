@@ -69,3 +69,9 @@ assert.ok(/ממתינים לחיבור/.test(run('renderJournal()')));
 // Planned place for a moment comes from the itinerary of that day.
 assert.ok(/קאו סוק/.test(run(`plannedPlace('2026-12-04T05:00:00Z').name`)));
 console.log('PASS: EXIF location and Thai time, stats, timeline, offline queue, planned place by date.');
+
+// A step shows in the time of its place: Mitzpe Ramon at 23:06 Israel time, Bangkok at 10:00 Thai time.
+assert.equal(run(`JV.timeOf('2026-11-16T21:06:00Z', 30.61, 34.80)`), '23:06');
+assert.equal(run(`JV.timeOf('2026-11-24T03:00:00Z', 13.74, 100.51)`), '10:00');
+assert.equal(run(`JV.stepDay({at:'2026-11-16T23:30:00Z', lat:30.61, lng:34.80})`), '2026-11-17');
+console.log('PASS: local time by place.');

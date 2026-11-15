@@ -4,10 +4,20 @@
  * Nothing private here — it only draws what it is given.
  */
 (function(){
+  // A step is shown in the time of the place it was added: Thailand, Sri Lanka, home, or the phone's own zone.
+  const DEVICE_TZ = (()=>{ try{ return Intl.DateTimeFormat().resolvedOptions().timeZone || 'Asia/Bangkok'; }catch(e){ return 'Asia/Bangkok'; } })();
+  function tzAt(lat, lng){
+    if(lat==null || lng==null) return DEVICE_TZ;
+    if(lat > 5 && lat < 21 && lng > 97 && lng < 106) return 'Asia/Bangkok';
+    if(lat > 5 && lat < 10.5 && lng > 79 && lng < 82.5) return 'Asia/Colombo';
+    if(lat > 29 && lat < 34 && lng > 34 && lng < 36) return 'Asia/Jerusalem';
+    return DEVICE_TZ;
+  }
   const TZ = 'Asia/Bangkok';
   const esc = s => String(s==null?'':s).replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-  const dayKey = iso => new Intl.DateTimeFormat('en-CA',{timeZone:TZ,year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date(iso));
-  const timeOf = iso => new Intl.DateTimeFormat('en-GB',{timeZone:TZ,hour:'2-digit',minute:'2-digit',hour12:false}).format(new Date(iso));
+  const dayKey = (iso, lat, lng) => new Intl.DateTimeFormat('en-CA',{timeZone:lat===undefined?TZ:tzAt(lat,lng),year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date(iso));
+  const timeOf = (iso, lat, lng) => new Intl.DateTimeFormat('en-GB',{timeZone:lat===undefined?TZ:tzAt(lat,lng),hour:'2-digit',minute:'2-digit',hour12:false}).format(new Date(iso));
+  const stepDay = s => dayKey(s.at, s.lat, s.lng);
   const dayTitle = key => new Date(key+'T12:00:00').toLocaleDateString('he-IL',{weekday:'long',day:'numeric',month:'long'});
 
   function haversine(a, b){
@@ -36,7 +46,7 @@
       const pts = routePoints(steps, track, a);
       for(let i=1;i<pts.length;i++) km += haversine(pts[i-1], pts[i]);
     }
-    const days = new Set(steps.map(s=>dayKey(s.at)));
+    const days = new Set(steps.map(stepDay));
     const places = new Set(steps.map(s=>(s.place||'').trim()).filter(Boolean));
     return {km:Math.round(km), days:days.size, steps:steps.length, photos:steps.reduce((n,s)=>n+(s.photos||[]).length,0), places:places.size};
   }
@@ -55,7 +65,7 @@
     const o = opts || {};
     const people = o.people || {};
     const byDay = {};
-    steps.forEach(s=>{ (byDay[dayKey(s.at)] = byDay[dayKey(s.at)] || []).push(s); });
+    steps.forEach(s=>{ (byDay[stepDay(s)] = byDay[stepDay(s)] || []).push(s); });
     const keys = Object.keys(byDay).sort().reverse();
     if(!keys.length) return `<div class="jv-empty">${esc(o.empty || 'עוד אין צעדים')}</div>`;
     return keys.map(k=>{
@@ -68,7 +78,7 @@
           return `<article class="jv-step" id="step-${esc(s.id)}">
             <div class="jv-step-head">
               <span class="jv-who">${esc(p.emoji||'📍')}</span>
-              <div class="jv-step-meta"><b>${esc(s.place||'צעד')}</b><small><bdi dir="ltr">${timeOf(s.at)}</bdi>${p.name?' · '+esc(p.name):''}</small></div>
+              <div class="jv-step-meta"><b>${esc(s.place||'צעד')}</b><small><bdi dir="ltr">${timeOf(s.at, s.lat, s.lng)}</bdi>${p.name?' · '+esc(p.name):''}</small></div>
               ${o.editable?`<button class="jv-edit" data-action="jrnEdit" data-id="${esc(s.id)}" aria-label="עריכה">✎</button>`:''}
             </div>
             ${s.text?`<p class="jv-text">${esc(s.text).replace(/\n/g,'<br>')}</p>`:''}
@@ -106,9 +116,9 @@
     const pts = routePoints(steps, track);
     if(!window.L || !navigator.onLine){ el.innerHTML = svgRoute(steps, track, 600, 380) || '<div class="jv-empty">המפה תופיע אחרי הצעד הראשון</div>'; return null; }
     if(el._jvMap){ el._jvMap.remove(); el._jvMap = null; }
-    const map = L.map(el, {zoomControl:false, attributionControl:false});
+    const map = L.map(el, {zoomControl:false});
     el._jvMap = map;
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {maxZoom:18}).addTo(map);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {maxZoom:18, attribution:'© OpenStreetMap'}).addTo(map);
     if(o.planned && o.planned.length > 1) L.polyline(o.planned, {color:'#8C8272', weight:2, dashArray:'4 6', opacity:.6}).addTo(map);
     const authors = [...new Set([...steps.map(s=>s.author), ...track.map(t=>t.author)])];
     authors.forEach((a,i)=>{
@@ -153,5 +163,5 @@
     });
   }
 
-  window.JV = {haversine, routePoints, stats, statsHtml, timeline, svgRoute, initMap, lightbox, bindPhotos, dayKey, timeOf, esc};
+  window.JV = {tzAt, stepDay, haversine, routePoints, stats, statsHtml, timeline, svgRoute, initMap, lightbox, bindPhotos, dayKey, timeOf, esc};
 })();

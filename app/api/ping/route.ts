@@ -16,6 +16,12 @@ export const dynamic = 'force-dynamic';
 async function handle(k: unknown, lat: unknown, lng: unknown, acc: unknown) {
   const user = typeof k === 'string' && k.length >= 20 ? await userForPingToken(k) : null;
   if (!user) return NextResponse.json({ error: 'קוד לא תקין' }, { status: 401 });
+  if ((lat === null || lat === undefined || lat === '') && (lng === null || lng === undefined || lng === '')) {
+    return NextResponse.json({
+      ok: true,
+      message: 'הקוד תקין. את הכתובת הזאת לא פותחים בדפדפן — האוטומציה בקיצורים שולחת אליה את המיקום (lat, lng).',
+    });
+  }
   const points = cleanPoints([{ lat, lng, acc, at: new Date().toISOString() }], user, 'shortcut');
   if (!points.length) return NextResponse.json({ error: 'מיקום לא תקין' }, { status: 400 });
   await addPoints(points);

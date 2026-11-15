@@ -6763,11 +6763,11 @@ function initJournalMap(){
 }
 
 /* ---------- הוספה ועריכה ---------- */
-function jrnLocalIso(iso){ // datetime-local בשעון תאילנד
-  const d = new Date(Date.parse(iso) + 7*3600000);
-  return d.toISOString().slice(0,16);
+function jrnLocalIso(iso){ // datetime-local בשעון של הטלפון
+  const d = new Date(iso), pad = n=>String(n).padStart(2,'0');
+  return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`;
 }
-function jrnFromLocal(v){ return new Date(v+':00+07:00').toISOString(); }
+function jrnFromLocal(v){ return new Date(v).toISOString(); }
 
 async function openStepModal(step){
   const isNew = !step;
@@ -6884,7 +6884,7 @@ function openJournalBook(){
   const steps = [...JOURNAL.steps].sort((a,b)=>a.at<b.at?-1:1);
   const st = JV.stats(steps, JOURNAL.track);
   const byDay = {};
-  steps.forEach(s=>{ (byDay[JV.dayKey(s.at)] = byDay[JV.dayKey(s.at)] || []).push(s); });
+  steps.forEach(s=>{ (byDay[JV.stepDay(s)] = byDay[JV.stepDay(s)] || []).push(s); });
   const days = Object.keys(byDay).sort();
   const box = document.createElement('div');
   box.id = 'jrn-book';
@@ -6897,7 +6897,7 @@ function openJournalBook(){
     </section>
     ${days.map((d,i)=>`<section class="book-page">
       <h2>יום ${i+1} · ${new Date(d+'T12:00').toLocaleDateString('he-IL',{weekday:'long',day:'numeric',month:'long'})}</h2>
-      ${byDay[d].map(s=>`<article class="book-step"><h3>${escapeHtml(s.place||'')}<small> · ${JV.timeOf(s.at)}</small></h3>
+      ${byDay[d].map(s=>`<article class="book-step"><h3>${escapeHtml(s.place||'')}<small> · ${JV.timeOf(s.at, s.lat, s.lng)}</small></h3>
         ${s.text?`<p>${escapeHtml(s.text).replace(/\n/g,'<br>')}</p>`:''}
         ${s.photos.length?`<div class="book-photos n${Math.min(4,s.photos.length)}">${s.photos.map(p=>`<img src="${jrnPhotoUrl(p)}">`).join('')}</div>`:''}
       </article>`).join('')}
