@@ -10,7 +10,7 @@
 .jv-stats b{display:block;font-size:22px;font-weight:700;line-height:1.1;}
 .jv-stats span{font-size:11px;opacity:.85;}
 /* stats outside the hero (follow page, book) */
-.jv-stats.plain div,.fw .jv-stats div,.book-page .jv-stats div{background:#FFFCF6;border:1px solid #D9CDAE;border-radius:12px;padding:8px 4px;color:#3A332C;}
+.book-page .jv-stats div{background:#FFFCF6;border:1px solid #D9CDAE;border-radius:12px;padding:8px 4px;color:#3A332C;}
 
 .jv-map{height:280px;border-radius:20px;overflow:hidden;border:1px solid #D9CDAE;background:#EAE0C8;box-shadow:0 2px 10px rgba(58,51,44,.08);}
 .jv-svg{display:block;background:#F6F1E7;}

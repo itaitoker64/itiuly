@@ -5,6 +5,7 @@
   const photoUrl = id => '/api/follow/'+encodeURIComponent(F.token)+'/photo/'+encodeURIComponent(id);
   let data = {steps:F.steps, track:F.track};
   function draw(){
+    // the stats sit inside the hero: only the inner grid
     document.getElementById('fw-stats').innerHTML = JV.statsHtml(JV.stats(data.steps, data.track));
     document.getElementById('fw-timeline').innerHTML = JV.timeline(data.steps, {photoUrl, people:F.people, empty:'הצעד הראשון יופיע כאן כשהם ינחתו'});
     JV.initMap(document.getElementById('fw-map'), data.steps, data.track, {photoUrl});
