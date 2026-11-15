@@ -51,42 +51,52 @@
     return {km:Math.round(km), days:days.size, steps:steps.length, photos:steps.reduce((n,s)=>n+(s.photos||[]).length,0), places:places.size};
   }
 
-  function statsHtml(st){
-    return `<div class="jv-stats">
-      <div><b>${st.km.toLocaleString('he-IL')}</b><span>ק״מ</span></div>
-      <div><b>${st.days}</b><span>ימים</span></div>
-      <div><b>${st.steps}</b><span>צעדים</span></div>
-      <div><b>${st.photos}</b><span>תמונות</span></div>
-    </div>`;
-  }
-
-  /** Steps grouped by day, newest day first. */
+  /** Steps grouped by day, newest day first, on a line like a travel diary. */
   function timeline(steps, opts){
     const o = opts || {};
     const people = o.people || {};
     const byDay = {};
     steps.forEach(s=>{ (byDay[stepDay(s)] = byDay[stepDay(s)] || []).push(s); });
-    const keys = Object.keys(byDay).sort().reverse();
-    if(!keys.length) return `<div class="jv-empty">${esc(o.empty || 'עוד אין צעדים')}</div>`;
-    return keys.map(k=>{
+    const keys = Object.keys(byDay).sort();
+    if(!keys.length) return `<div class="jv-empty"><div class="jv-empty-icon">🧭</div>${esc(o.empty || 'עוד אין צעדים')}</div>`;
+    const first = Date.parse((o.startDate || keys[0]) + 'T12:00:00Z');
+    return `<div class="jv-line">` + keys.slice().reverse().map(k=>{
       const list = byDay[k].sort((a,b)=>a.at<b.at?-1:1);
+      const n = Math.round((Date.parse(k+'T12:00:00Z') - first)/86400000) + 1;
+      const places = [...new Set(list.map(s=>(s.place||'').trim()).filter(Boolean))];
       return `<section class="jv-day">
-        <h3 class="jv-day-title">${esc(dayTitle(k))}</h3>
+        <div class="jv-day-head"><span class="jv-day-num">${n>0?'יום '+n:''}</span>
+          <h3 class="jv-day-title">${esc(dayTitle(k))}</h3>
+          ${places.length?`<div class="jv-day-places">${places.map(esc).join(' · ')}</div>`:''}</div>
         ${list.map(s=>{
           const p = people[s.author] || {};
-          const photos = (s.photos||[]).map((id,i)=>`<img loading="lazy" src="${esc(o.photoUrl(id))}" data-jv-photo="${esc(s.id)}" data-jv-i="${i}" alt="">`).join('');
-          return `<article class="jv-step" id="step-${esc(s.id)}">
-            <div class="jv-step-head">
-              <span class="jv-who">${esc(p.emoji||'📍')}</span>
-              <div class="jv-step-meta"><b>${esc(s.place||'צעד')}</b><small><bdi dir="ltr">${timeOf(s.at, s.lat, s.lng)}</bdi>${p.name?' · '+esc(p.name):''}</small></div>
-              ${o.editable?`<button class="jv-edit" data-action="jrnEdit" data-id="${esc(s.id)}" aria-label="עריכה">✎</button>`:''}
+          const ph = s.photos||[];
+          const photos = ph.slice(0,5).map((id,i)=>`<img loading="lazy" src="${esc(o.photoUrl(id))}" data-jv-photo="${esc(s.id)}" data-jv-i="${i}" alt="">`).join('');
+          const more = ph.length > 5 ? `<span class="jv-more" data-jv-photo="${esc(s.id)}" data-jv-i="5">+${ph.length-5}</span>` : '';
+          return `<article class="jv-step ${ph.length?'has-photos':''}" id="step-${esc(s.id)}">
+            <span class="jv-dot">${esc(p.emoji||'📍')}</span>
+            ${photos?`<div class="jv-photos n${Math.min(5,ph.length)}">${photos}${more}</div>`:''}
+            <div class="jv-step-body">
+              <div class="jv-step-head">
+                <div class="jv-step-meta"><b>${esc(s.place||'צעד')}</b>
+                  <small><bdi dir="ltr">${timeOf(s.at, s.lat, s.lng)}</bdi>${p.name?' · '+esc(p.name):''}${s.lat==null?' · בלי מיקום':''}</small></div>
+                ${o.editable?`<button class="jv-edit" data-action="jrnEdit" data-id="${esc(s.id)}" aria-label="עריכה">✎</button>`:''}
+              </div>
+              ${s.text?`<p class="jv-text">${esc(s.text).replace(/\n/g,'<br>')}</p>`:''}
             </div>
-            ${s.text?`<p class="jv-text">${esc(s.text).replace(/\n/g,'<br>')}</p>`:''}
-            ${photos?`<div class="jv-photos n${Math.min(4,(s.photos||[]).length)}">${photos}</div>`:''}
           </article>`;
         }).join('')}
       </section>`;
-    }).join('');
+    }).join('') + `</div>`;
+  }
+
+  function statsHtml(st){
+    return `<div class="jv-stats">
+      <div><b>${st.days}</b><span>ימים</span></div>
+      <div><b>${st.km.toLocaleString('he-IL')}</b><span>ק״מ</span></div>
+      <div><b>${st.places || st.steps}</b><span>מקומות</span></div>
+      <div><b>${st.photos}</b><span>תמונות</span></div>
+    </div>`;
   }
 
   /** A drawing of the route that needs no map tiles — for offline and for print. */

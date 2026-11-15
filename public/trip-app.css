@@ -777,8 +777,26 @@ button:focus-visible,a:focus-visible,input:focus-visible{outline:2px solid var(-
 .fld-place-txt small{text-align:right;}
 
 /* היומן בדרכים */
-.jrn-actions{display:grid;grid-template-columns:2fr 1fr;gap:8px;margin:12px 0 4px;}
-.jrn-actions .btn{padding:12px 10px;}
+.jrn-actions{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:8px;margin:12px 0 6px;}
+.jrn-act{display:flex;flex-direction:column;align-items:center;gap:1px;background:var(--white);border:1px solid var(--line);border-radius:16px;padding:10px 4px;color:var(--ink);cursor:pointer;box-shadow:0 2px 8px rgba(58,51,44,.06);}
+.jrn-act span{font-size:20px;line-height:1.2;}
+.jrn-act b{font-size:13px;}
+.jrn-act small{font-size:10.5px;color:var(--muted);}
+.jrn-act.main{background:var(--terracotta);border-color:var(--terracotta);color:#fff;}
+.jrn-act.main small{color:rgba(255,255,255,.85);}
+.loc-btn{display:flex;justify-content:space-between;align-items:center;width:100%;background:var(--cream);border:1px dashed var(--line);border-radius:12px;padding:10px 12px;margin:-4px 0 12px;font-size:13px;color:var(--ink);cursor:pointer;text-align:right;}
+.loc-btn small{color:var(--terracotta-dark);font-weight:600;}
+.loc-picker{position:fixed;inset:0;z-index:9500;background:var(--cream);display:flex;flex-direction:column;padding:10px 12px calc(10px + env(safe-area-inset-bottom));direction:rtl;}
+.lp-head{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:4px 0 10px;}
+.lp-head b{font-size:16px;}
+.lp-x{background:none;border:none;font-size:20px;color:var(--muted);width:36px;}
+.lp-search{display:flex;gap:6px;}
+.lp-search input{flex:1;border:1px solid var(--line);border-radius:12px;padding:10px;font-family:inherit;font-size:14px;background:var(--white);}
+.lp-results{max-height:30vh;overflow:auto;}
+.lp-res{display:block;width:100%;text-align:right;background:var(--white);border:none;border-bottom:1px solid var(--line);padding:9px 6px;font-size:12.5px;color:var(--ink);}
+.lp-quick{max-height:74px;overflow:auto;}
+.lp-map{flex:1;min-height:200px;border-radius:16px;overflow:hidden;margin-top:8px;border:1px solid var(--line);background:var(--sand);}
+.lp-hint{font-size:12.5px;color:var(--muted);text-align:center;padding:8px 0 0;}
 .jrn-url{background:var(--cream);border:1px dashed var(--line);border-radius:10px;padding:8px 10px;font-size:11.5px;word-break:break-all;margin-top:8px;}
 .jrn-steps{margin:8px 0 0;padding-inline-start:18px;line-height:1.6;}
 .jrn-steps code{background:var(--sand);padding:0 4px;border-radius:4px;}
@@ -787,7 +805,9 @@ button:focus-visible,a:focus-visible,input:focus-visible{outline:2px solid var(-
 .st-ph img{width:100%;height:100%;object-fit:cover;}
 .st-ph button{position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;border:none;background:rgba(0,0,0,.55);color:#fff;font-size:11px;}
 .field textarea{width:100%;border:1px solid var(--line);border-radius:12px;padding:10px;font-family:inherit;font-size:14px;background:var(--white);color:var(--ink);resize:vertical;box-sizing:border-box;}
-.imp-row{display:flex;justify-content:space-between;gap:8px;padding:8px 0;border-bottom:1px solid var(--line);font-size:13px;}
+.imp-row{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--line);font-size:13px;}
+.imp-row img{width:46px;height:46px;border-radius:10px;object-fit:cover;flex:none;}
+.imp-row > div{flex:1;min-width:0;display:flex;flex-direction:column;}
 /* ספר הטיול — על המסך ובהדפסה */
 #jrn-book{position:fixed;inset:0;z-index:9000;background:#eee;overflow:auto;padding:12px;direction:rtl;}
 .book-bar{position:sticky;top:0;display:flex;gap:8px;justify-content:center;padding:8px;background:#eee;z-index:2;}

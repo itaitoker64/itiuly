@@ -6700,16 +6700,20 @@ function renderJournal(){
   const st = JV.stats(JOURNAL.steps, JOURNAL.track);
   const q = jrnQueue().length;
   const people = {itai:{name:PEOPLE.itai.name, emoji:PEOPLE.itai.emoji}, talia:{name:PEOPLE.talia.name, emoji:PEOPLE.talia.emoji}};
+  const start = (myDays()[0]||{}).date;
   return `<div class="section">
-    <div class="row" style="align-items:center"><div class="section-title" style="margin:0">היומן בדרכים</div>
-      ${q?`<span class="small" style="color:var(--muted)">⏳ ${q} ממתינים לחיבור</span>`:''}</div>
-    ${JV.statsHtml(st)}
+    <div class="jv-hero">
+      <div class="jv-hero-top"><div><h2>היומן בדרכים</h2><div class="jv-hero-sub">תאילנד 2026 · ${escapeHtml(PEOPLE.itai.name)} ו${escapeHtml(PEOPLE.talia.name)}</div></div>
+        ${q?`<span class="jv-pending">⏳ ${q} ממתינים לחיבור</span>`:''}</div>
+      ${JV.statsHtml(st)}
+    </div>
     <div id="jrn-map" class="jv-map"></div>
     <div class="jrn-actions">
-      <button class="btn" data-action="jrnAdd">📍 צעד חדש — כאן ועכשיו</button>
-      <button class="btn secondary" data-action="jrnGallery">🖼️ מהגלריה</button>
+      <button class="jrn-act main" data-action="jrnAdd"><span>📍</span><b>צעד חדש</b><small>כאן ועכשיו</small></button>
+      <button class="jrn-act" data-action="jrnPast"><span>🕰️</span><b>צעד שהיה</b><small>תאריך ומיקום</small></button>
+      <button class="jrn-act" data-action="jrnGallery"><span>🖼️</span><b>מהגלריה</b><small>כמה תמונות</small></button>
     </div>
-    <div id="jrn-timeline">${JV.timeline(JOURNAL.steps, {photoUrl:jrnPhotoUrl, people, editable:true, empty:'הצעד הראשון: כשנוחתים, לוחצים על ״צעד חדש״'})}</div>
+    <div id="jrn-timeline">${JV.timeline(JOURNAL.steps, {photoUrl:jrnPhotoUrl, people, editable:true, startDate:start, empty:'הצעד הראשון: כשנוחתים, לוחצים על ״צעד חדש״'})}</div>
     <h3 class="section-title" style="margin-top:22px">הגדרות</h3>
     ${renderJournalSettings()}
   </div>`;
@@ -6769,15 +6773,16 @@ function jrnLocalIso(iso){ // datetime-local בשעון של הטלפון
 }
 function jrnFromLocal(v){ return new Date(v).toISOString(); }
 
-async function openStepModal(step){
-  const isNew = !step;
+async function openStepModal(step, opts){
+  const isNew = !step, past = !!(opts && opts.past);
   const s = step ? JSON.parse(JSON.stringify(step)) : {id:uid('st'), author:meId(), at:new Date().toISOString(), lat:null, lng:null, place:'', text:'', photos:[]};
   if(isNew){ const pl = plannedPlace(s.at); s.place = pl.name; }
   let photoMeta = [];
   openModal(`
-    <h3 style="margin-bottom:12px;">${isNew?'📍 צעד חדש':'עריכת צעד'}</h3>
+    <h3 style="margin-bottom:12px;">${isNew?(past?'🕰️ צעד שהיה':'📍 צעד חדש'):'עריכת צעד'}</h3>
+    ${past?'<div class="small" style="margin:-6px 0 12px;color:var(--muted)">בוחרים מתי ואיפה — או מוסיפים תמונה, והמיקום והשעה נלקחים ממנה</div>':''}
     <div class="field"><label>איפה</label><input id="st-place" value="${escapeAttr(s.place)}" placeholder="למשל: ואט ארון"></div>
-    <div id="st-loc" class="small" style="margin:-4px 0 10px;color:var(--muted)">${s.lat!=null?'📍 המיקום נשמר':(isNew?'מאתר מיקום…':'בלי מיקום')}</div>
+    <button type="button" class="loc-btn" id="st-loc">${s.lat!=null?'📍 המיקום נשמר':(isNew&&!past?'📍 מאתר מיקום…':'📍 בחירת מיקום במפה')}<small>שינוי</small></button>
     <div class="field"><label>מה היה</label><textarea id="st-text" rows="4" placeholder="כמה מילים — מה ראיתם, מה אכלתם, מה הצחיק">${escapeHtml(s.text)}</textarea></div>
     <div class="field"><label>מתי</label><input id="st-at" type="datetime-local" value="${jrnLocalIso(s.at)}"></div>
     <div class="field"><label>תמונות</label>
@@ -6795,10 +6800,18 @@ async function openStepModal(step){
       box.querySelectorAll('button').forEach(b=>b.onclick=()=>{ s.photos.splice(Number(b.dataset.i),1); drawPhotos(); });
     };
     drawPhotos();
-    if(isNew) getFix(10000).then(fix=>{
+    const locLabel = txt=>{ const el = document.getElementById('st-loc'); if(el) el.innerHTML = txt+'<small>שינוי</small>'; };
+    if(isNew && !past) getFix(10000).then(fix=>{
+      if(s.locked) return;
       if(fix){ s.lat = fix.lat; s.lng = fix.lng; }
       else { const tp = nearestTrackPoint(s.at, 2); const pl = plannedPlace(s.at); s.lat = tp ? tp.lat : pl.lat; s.lng = tp ? tp.lng : pl.lng; }
-      const el = document.getElementById('st-loc'); if(el) el.textContent = fix ? '📍 המיקום נשמר' : (s.lat!=null ? '📍 מיקום משוער (בלי GPS)' : 'בלי מיקום');
+      locLabel(fix ? '📍 המיקום הנוכחי' : (s.lat!=null ? '📍 מיקום משוער (בלי GPS)' : '📍 בלי מיקום — לבחור במפה'));
+    });
+    document.getElementById('st-loc').onclick = ()=> openLocationPicker({lat:s.lat, lng:s.lng, at:s.at}, pick=>{
+      s.lat = pick.lat; s.lng = pick.lng; s.locked = true;
+      const placeEl = document.getElementById('st-place');
+      if(pick.label && placeEl && !placeEl.value.trim()) placeEl.value = pick.label;
+      locLabel('📍 '+escapeHtml(pick.label || 'נבחר במפה'));
     });
     document.getElementById('st-add-ph').onclick = ()=>{
       const input = document.createElement('input'); input.type='file'; input.accept='image/*'; input.multiple = true;
@@ -6809,7 +6822,8 @@ async function openStepModal(step){
           await idbPut(key, c.blob);
           localPhotoUrls[key] = URL.createObjectURL(c.blob);
           s.photos.push('local:'+key); photoMeta.push(c);
-          if(s.lat==null && c.lat!=null){ s.lat = c.lat; s.lng = c.lng; const el=document.getElementById('st-loc'); if(el) el.textContent='📍 המיקום מהתמונה'; }
+          if((s.lat==null || (!s.locked && past)) && c.lat!=null){ s.lat = c.lat; s.lng = c.lng; s.locked = true; locLabel('📍 המיקום מהתמונה'); }
+          if(past && photoMeta.length===1){ s.at = c.at; const a = document.getElementById('st-at'); if(a) a.value = jrnLocalIso(c.at); }
         }
         drawPhotos();
       };
@@ -6821,6 +6835,7 @@ async function openStepModal(step){
       jrnEnqueue({op:'delete', id:s.id});
     });
     document.getElementById('st-save').onclick = ()=>{
+      delete s.locked;
       s.place = document.getElementById('st-place').value.trim();
       s.text = document.getElementById('st-text').value.trim();
       const v = document.getElementById('st-at').value; if(v) s.at = jrnFromLocal(v);
@@ -6860,13 +6875,24 @@ async function importFromGallery(){
     openModal(`
       <h3 style="margin-bottom:8px;">🖼️ ${groups.length} צעדים מ-${items.length} תמונות</h3>
       <div class="small" style="margin-bottom:10px;color:var(--muted)">${withGps} תמונות עם מיקום מהמצלמה · השאר לפי המסלול או לפי התוכנית של אותו יום. אפשר לערוך כל צעד אחר כך.</div>
-      ${groups.map((g,i)=>{ const pl = plannedPlace(g.items[0].at); return `<div class="imp-row"><b>${escapeHtml(pl.name||'צעד')}</b><span class="small">${JV.dayKey(g.items[0].at)} · <bdi dir="ltr">${JV.timeOf(g.items[0].at)}</bdi> · ${g.items.length} תמונות</span></div>`; }).join('')}
+      <div id="imp-list"></div>
       <div class="modal-actions"><button class="btn full" id="imp-save">להוסיף ליומן</button><button class="btn secondary" id="imp-cancel">ביטול</button></div>`, ()=>{
+      const drawGroups = ()=>{ document.getElementById('imp-list').innerHTML = groups.map((g,i)=>{
+        const pl = plannedPlace(g.items[0].at);
+        const src = g.picked ? '📍 '+escapeHtml(g.label||'נבחר') : g.items.some(x=>x.lat!=null && !x.guess) ? '📍 מהמצלמה' : g.lat!=null ? '📍 לפי המסלול' : '⚠️ בלי מיקום';
+        return `<div class="imp-row">
+          <img src="${URL.createObjectURL(g.items[0].blob)}" alt="">
+          <div><b>${escapeHtml(g.label||pl.name||'צעד')}</b><span class="small">${JV.dayKey(g.items[0].at)} · <bdi dir="ltr">${JV.timeOf(g.items[0].at)}</bdi> · ${g.items.length} תמונות</span></div>
+          <button type="button" class="chip mini" data-g="${i}">${src}</button></div>`; }).join('');
+        document.querySelectorAll('#imp-list [data-g]').forEach(b=>b.onclick=()=>{ const g = groups[Number(b.dataset.g)];
+          openLocationPicker({lat:g.lat, lng:g.lng, at:g.items[0].at}, pick=>{ g.lat = pick.lat; g.lng = pick.lng; g.label = pick.label; g.picked = true; drawGroups(); }); });
+      };
+      drawGroups();
       document.getElementById('imp-cancel').onclick = closeModal;
       document.getElementById('imp-save').onclick = async ()=>{
         for(const g of groups){
           const pl = plannedPlace(g.items[0].at);
-          const step = {id:uid('st'), author:meId(), at:g.items[0].at, lat:g.lat ?? pl.lat, lng:g.lng ?? pl.lng, place:pl.name, text:'', photos:[]};
+          const step = {id:uid('st'), author:meId(), at:g.items[0].at, lat:g.lat ?? pl.lat, lng:g.lng ?? pl.lng, place:g.label || pl.name, text:'', photos:[]};
           for(const it of g.items){ const key = uid('ph'); await idbPut(key, it.blob); localPhotoUrls[key] = URL.createObjectURL(it.blob); step.photos.push('local:'+key); }
           JOURNAL.steps.push(step); jrnEnqueue({op:'step', step});
           const pts = g.items.filter(i=>i.lat!=null && !i.guess).map(i=>({lat:i.lat, lng:i.lng, at:i.at}));
@@ -6877,6 +6903,66 @@ async function importFromGallery(){
     });
   };
   input.click();
+}
+
+
+/* ---------- בחירת מיקום: חיפוש, מקומות מהטיול, נעיצת סיכה במפה ---------- */
+function openLocationPicker(init, onPick){
+  const box = document.createElement('div');
+  box.className = 'loc-picker';
+  const dests = myDestinations().filter(d=>d.lat && d.lng);
+  const day = init.at ? JV.dayKey(init.at) : null;
+  const near = day ? dests.filter(d=>d.arrival <= day && day <= (d.departure||d.arrival)) : [];
+  const quick = [...near, ...dests.filter(d=>!near.includes(d))];
+  let pick = init.lat!=null ? {lat:init.lat, lng:init.lng, label:''} : null;
+  box.innerHTML = `
+    <div class="lp-head"><button class="lp-x" type="button">✕</button><b>איפה זה היה?</b><button class="btn small" id="lp-ok" type="button">אישור</button></div>
+    <div class="lp-search"><input id="lp-q" placeholder="חיפוש מקום — למשל Wat Arun, Railay" autocomplete="off"><button class="btn small secondary" id="lp-go" type="button">חיפוש</button></div>
+    <div id="lp-results" class="lp-results"></div>
+    <div class="chip-row tight lp-quick">
+      <button class="chip mini" type="button" id="lp-me">📡 המיקום שלי</button>
+      ${quick.map((d,i)=>`<button class="chip mini" type="button" data-q="${i}">${escapeHtml(d.name)}</button>`).join('')}
+    </div>
+    <div id="lp-map" class="lp-map"></div>
+    <div class="lp-hint" id="lp-hint">${window.L && navigator.onLine ? 'נוגעים במפה כדי לנעוץ סיכה, או גוררים אותה' : 'בלי חיבור אין מפה — בוחרים מהרשימה או ״המיקום שלי״'}</div>`;
+  document.body.appendChild(box);
+  let map = null, marker = null;
+  const setPick = (lat, lng, label, fly)=>{
+    pick = {lat, lng, label: label || (pick && pick.label) || ''};
+    document.getElementById('lp-hint').textContent = '📍 ' + (pick.label || lat.toFixed(4)+', '+lng.toFixed(4));
+    if(map){
+      if(marker) marker.setLatLng([lat,lng]); else { marker = L.marker([lat,lng], {draggable:true}).addTo(map); marker.on('dragend', ()=>{ const p = marker.getLatLng(); setPick(p.lat, p.lng, ''); }); }
+      if(fly) map.setView([lat,lng], Math.max(map.getZoom(), 13));
+    }
+  };
+  if(window.L && navigator.onLine){
+    map = L.map('lp-map', {zoomControl:true});
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {maxZoom:19, attribution:'© OpenStreetMap'}).addTo(map);
+    const c = pick || (near[0] ? {lat:near[0].lat, lng:near[0].lng} : quick[0] ? {lat:quick[0].lat, lng:quick[0].lng} : {lat:13.75, lng:100.5});
+    map.setView([c.lat, c.lng], pick ? 14 : 11);
+    if(pick) setPick(pick.lat, pick.lng, '');
+    map.on('click', e=>setPick(e.latlng.lat, e.latlng.lng, ''));
+    setTimeout(()=>map.invalidateSize(), 120);
+  }
+  const close = ()=>{ if(map) map.remove(); box.remove(); };
+  box.querySelector('.lp-x').onclick = close;
+  document.getElementById('lp-ok').onclick = ()=>{ if(!pick){ toast('בוחרים מקום קודם'); return; } close(); onPick(pick); };
+  document.getElementById('lp-me').onclick = async ()=>{ const f = await getFix(12000); if(f) setPick(f.lat, f.lng, 'המיקום שלי', true); else toast('אין מיקום — צריך לאשר גישה'); };
+  box.querySelectorAll('[data-q]').forEach(b=>b.onclick=()=>{ const d = quick[Number(b.dataset.q)]; setPick(d.lat, d.lng, d.name, true); });
+  const search = async ()=>{
+    const q = document.getElementById('lp-q').value.trim(); if(!q) return;
+    const res = document.getElementById('lp-results');
+    if(!navigator.onLine){ res.innerHTML = '<div class="small">חיפוש צריך חיבור — אפשר לבחור מהרשימה</div>'; return; }
+    res.innerHTML = '<div class="small">מחפש…</div>';
+    try{
+      const r = await fetch('https://nominatim.openstreetmap.org/search?format=json&limit=6&accept-language=he,en&q='+encodeURIComponent(q));
+      const list = await r.json();
+      res.innerHTML = list.length ? list.map((x,i)=>`<button type="button" class="lp-res" data-r="${i}">${escapeHtml(x.display_name)}</button>`).join('') : '<div class="small">לא נמצא — אפשר לנעוץ סיכה במפה</div>';
+      res.querySelectorAll('[data-r]').forEach(b=>b.onclick=()=>{ const x = list[Number(b.dataset.r)]; setPick(Number(x.lat), Number(x.lon), String(x.display_name).split(',')[0], true); res.innerHTML=''; });
+    }catch(e){ res.innerHTML = '<div class="small">החיפוש לא עבד — אפשר לנעוץ סיכה במפה</div>'; }
+  };
+  document.getElementById('lp-go').onclick = search;
+  document.getElementById('lp-q').onkeydown = e=>{ if(e.key==='Enter'){ e.preventDefault(); search(); } };
 }
 
 /* ---------- ספר להדפסה ---------- */
@@ -6924,6 +7010,7 @@ document.addEventListener('click', (e)=>{
   if(!t) return;
   const a = t.dataset.action, id = t.dataset.id;
   if(a==='jrnAdd') openStepModal(null);
+  else if(a==='jrnPast') openStepModal(null, {past:true});
   else if(a==='jrnEdit') openStepModal(JOURNAL.steps.find(s=>s.id===id));
   else if(a==='jrnGallery') importFromGallery();
   else if(a==='jrnBook') openJournalBook();
