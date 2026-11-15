@@ -73,20 +73,20 @@
    "freeCancel": "בוטל"
   },
   {
-   "what": "Khao Sok River Lodge",
+   "what": "לילה על האגם · Siam Tour",
    "when": "3–4/12",
-   "details": "קאו סוק · לילה · Standard Double · כולל ארוחת בוקר · העברה בנקאית לפני ההגעה",
-   "ref": "5114181390",
-   "payment": "฿2,000",
-   "freeCancel": "ביטול חינם עד 29/11"
+   "details": "The Laguna Chiew Larn · Seaview · איסוף מ-COSI ב-08:00 · voucher 8044",
+   "ref": "5946",
+   "payment": "฿15,000 · שולם ฿7,500 ב-15/11 · יתרה ฿7,500 עד 26/11",
+   "freeCancel": "לא מוחזר"
   },
   {
-   "what": "לילה על האגם · Siam Tour",
+   "what": "Khao Sok River Lodge",
    "when": "4–5/12",
-   "details": "אגם צ׳או לאן · Greenery מלא ב-4/12 — שאלנו על Laguna, Panvaree, Issara ו-Phuphawaree, ואת Greenery ישירות",
-   "ref": "—",
-   "payment": "כ-฿10,000–14,000 לשניים — עוד לא הוזמן",
-   "freeCancel": "לא מוחזר"
+   "details": "קאו סוק · לילה · Standard Double · כולל ארוחת בוקר · לשלם לפני ההגעה (העברה או מזומן)",
+   "ref": "5114181390",
+   "payment": "฿2,000",
+   "freeCancel": "ביטול חינם עד 30/11"
   },
   {
    "what": "Our Jungle House",
@@ -313,13 +313,13 @@
   },
   {
    "dest": "קאו סוק",
-   "dates": "3–4/12",
+   "dates": "4–5/12",
    "nights": 1,
    "hotel": "Khao Sok River Lodge",
    "what": "8.9 · על הנהר · אישור 5114181390 · ฿2,000 כולל ארוחת בוקר · העברה בנקאית לפני ההגעה",
    "perNight": 2000,
    "choice": "מוזמן",
-   "freeCancel": "עד 29/11",
+   "freeCancel": "עד 30/11",
    "link": "בוקינג",
    "linkLink": "https://secure.booking.com/myreservations.html?bn=5114181390"
   },
@@ -346,6 +346,18 @@
    "freeCancel": "בוטל 30/10 · הוחזרו $138.89",
    "link": "בוקינג",
    "linkLink": "https://www.booking.com/"
+  },
+  {
+   "dest": "קאו סוק — אגם צ׳או לאן",
+   "dates": "3–4/12",
+   "nights": 1,
+   "hotel": "The Laguna Chiew Larn · Seaview",
+   "what": "בונגלו צף עם נוף פתוח לאגם · סירה פרטית כלולה · דרך Siam Tour, voucher 8044",
+   "perNight": 15000,
+   "choice": "מוזמן",
+   "freeCancel": "לא מוחזר",
+   "link": "Siam Tour",
+   "linkLink": "https://www.siamtourandrealty.com/"
   },
   {
    "dest": "קאו סוק — אגם צ׳או לאן",

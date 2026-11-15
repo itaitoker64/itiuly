@@ -404,8 +404,8 @@ const EXPENSES_32 = () => [
    amount:10398.09, currency:"THB", paidBy:"itai", split:"ratio", status:"due", note:"אישור 5547616403 · Roomy King City · בוקינג מחייבת אוטומטית · ביטול חינם עד 21/11"},
   {id:uid('x'), date:"2026-11-29", title:"COSI Krabi Ao Nang Beach · 4 לילות", category:"accommodation",
    amount:22669.04, currency:"THB", paidBy:"itai", split:"ratio", status:"due", note:"אישור 5907714174 · זיכוי יומי לאוכל ושתייה · בוקינג מחייבת אוטומטית · ביטול חינם עד 21/11, אחר כך 50%"},
-  {id:uid('x'), date:"2026-12-03", title:"Khao Sok River Lodge · 3/12", category:"accommodation",
-   amount:2000, currency:"THB", paidBy:"itai", split:"ratio", status:"due", note:"אישור 5114181390 · כולל ארוחת בוקר · העברה בנקאית לפני ההגעה · ביטול חינם עד 29/11"},
+  {id:uid('x'), date:"2026-12-04", title:"Khao Sok River Lodge · 4/12", category:"accommodation",
+   amount:2000, currency:"THB", paidBy:"itai", split:"ratio", status:"due", note:"אישור 5114181390 · כולל ארוחת בוקר · לשלם לפני ההגעה · ביטול חינם עד 30/11"},
   {id:uid('x'), date:"2026-12-09", title:"מונית Booking · קלימה → HKT", category:"transport",
    amount:153.27, currency:"ILS", paidBy:"itai", split:"ratio", status:"paid", note:"אישור 997065466 · 9/12, 10:45"}
 ];
@@ -462,6 +462,30 @@ const TASKS_33 = [
    notes:'12/11: Greenery מלא אצל Siam Tour · שאלנו את Siam Tour על Laguna Seaview, Panvaree, Issara ו-Phuphawaree, ואת Greenery ישירות · אם אין: Thai National Parks (טופס באתר), או טיול יום ולילה שני ב-River Lodge'},
   {from:'להזמין סימילן ל-6/12', notes:'Asian Trails (Patty, הדלפק בקלימה) · ביקשנו Late Departure, איסוף 07:30–07:45 · מחכים למחיר ולתנאי ביטול · Early Bird: ฿4,100 לאדם'}
 ];
+const EXPENSE_36 = () => ({id:uid('x'), date:"2026-12-03", title:"Siam Tour · Laguna Seaview · 3/12", category:"activities",
+  amount:15000, currency:"THB", paidBy:"itai", split:"ratio", status:"due", note:"voucher 8044 · הזמנה 5946 · שולמה מקדמה ฿7,500 ב-15/11 · יתרה ฿7,500 עד 26/11 · לא מוחזר"});
+const NEW_TASKS_36 = () => [
+  {id:uid('m'), owner:"itai", status:"todo", category:"הזמנות", countryId:"thailand", order:13.32, priority:"גבוהה", deadline:"2026-11-26",
+   title:"לשלם ל-Siam Tour את היתרה, ฿7,500", notes:"הזמנה 5946 · voucher 8044 · בכרטיס דרך הקישור של לוקאס או ב-Wise · לשלוח צילום מסך בוואטסאפ", link:""},
+  {id:uid('m'), owner:"itai", status:"todo", category:"הזמנות", countryId:"thailand", order:13.33, priority:"בינונית", deadline:"2026-11-26",
+   title:"לוודא עם Siam Tour: לילה אחד, והורדה ב-River Lodge ב-4/12", notes:"WhatsApp ‎+66 82 579 6015 (Lukas) · אחרת מונית מהרציף, כ-฿1,200", link:""}
+];
+const TASKS_36 = [
+  {from:'להזמין לילה על אגם צ׳או לאן, 4–5/12', to:'להזמין לילה על אגם צ׳או לאן, 3/12', status:'done', notes:'15/11: Siam Tour · The Laguna Chiew Larn, Seaview · voucher 8044 · ฿15,000 · מקדמה ฿7,500 שולמה'},
+  {from:'לשלם ל-River Lodge בהעברה בנקאית', notes:'הלילה עבר ל-4–5/12 · ฿2,000 · אם לא הגיעו פרטים עד 25/11 — לשאול בצ׳אט של בוקינג אם אפשר במזומן · ביטול חינם עד 30/11'},
+  {from:'להזמין סימילן ל-7/12', status:'done', notes:'15/11: אישרנו ל-Patty · ฿8,000 לשניים כולל דמי פארק · מזומן בדלפק בקלימה · ביטול חינם עד 24 שעות לפני'}
+];
+function applyTasks36(list){
+  TASKS_36.forEach(spec=>{
+    const t = list.find(x=>x.title===spec.from) || (spec.to && list.find(x=>x.title===spec.to));
+    if(!t) return;
+    if(spec.to) t.title = spec.to;
+    t.notes = spec.notes;
+    if(spec.status==='done') t.status = 'done';
+  });
+  NEW_TASKS_36().forEach(t=>{ if(!list.some(x=>x.title===t.title)) list.push(t); });
+  return list;
+}
 const KHAOLAK_NOTE_35 = '6/12 יום מנוחה אחרי קאו סוק — חוף, זיפליין וספא. סימילן ב-7/12, ו-8/12 יום חופשי וגיבוי לסימילן: פארק קאו לאק–לאם רו ואנדרטת הצונאמי.';
 const TASKS_35 = [
   {from:'להזמין סימילן ל-6/12', to:'להזמין סימילן ל-7/12', notes:'12/11: ביקשנו מ-Asian Trails (Patty) להעביר ל-7/12, Late Departure · מחכים לאישור, למחיר ולתנאי ביטול · 8/12 יום הגיבוי'}
@@ -470,7 +494,7 @@ function applyTasks35(list){
   TASKS_35.forEach(spec=>{
     const same = list.filter(x=>x.title===spec.from || x.title===spec.to);
     if(!same.length) return;
-    const t = same.find(x=>x.status==='done') || same[0];
+    const t = same.find(x=>x.status==='done' && x.title===spec.from) || same.find(x=>x.status==='done') || same[0];
     list = list.filter(x=>x===t || !same.includes(x));
     t.title = spec.to;
     if(t.status!=='done') t.notes = spec.notes;
@@ -649,7 +673,7 @@ function seedData(){
   const hanoiId = uid('d'), manilaId = uid('d');
 
   return {
-    schema:35,
+    schema:36,
     tripName:"My Big Trip 🌏",
     startDate:"2026-11-22",
     endDate:null,
@@ -685,7 +709,7 @@ function seedData(){
         KALIMA_EXTRA_EXPENSE(),
         {id:uid('x'), date:"2026-12-09", title:"Eleven Bangkok Sukhumvit 11 · 9–12/12", category:"accommodation",
          amount:8411.85, currency:"THB", paidBy:"itai", split:"ratio", status:"due", note:ELEVEN_NOTE_32},
-        ...EXPENSES_32()
+        ...EXPENSES_32(), EXPENSE_36()
       ],
       settlements:[]
     },
@@ -716,8 +740,8 @@ function seedData(){
            budget:2600, status:"booked", companions:["ביחד"], order:3},
           {id:khaosokId, owner:"both", name:"קאו סוק", wiki:"Khao Sok National Park", hue:"#4F7A4A",
            lat:8.9130, lng:98.5300, arrival:"2026-12-03", departure:"2026-12-05", nights:2,
-           accommodation:"Khao Sok River Lodge, ואז בונגלו צף ב-Panvaree The Greenery", transport:"ואן מאאו נאנג",
-           notes:"לילה בכפר על הנהר, ולילה על אגם צ׳או לאן בחבילה של Siam Tour — הנוף היחיד בטיול שהוא לא חוף. ב-5/12 זריחה על האגם, ומשם לקלימה.",
+           accommodation:"The Laguna Chiew Larn (Seaview) על האגם, ואז Khao Sok River Lodge", transport:"Siam Tour מאאו נאנג",
+           notes:"3/12 ישר מאאו נאנג לאגם — לילה ב-Laguna Seaview עם סירה פרטית, דרך Siam Tour. 4/12 בוקר על האגם וערב בכפר, ב-River Lodge על הנהר. 5/12 בוקר בג׳ונגל, ומשם לקלימה.",
            scooter:{ok:false, headline:"לא צריך", note:"הכל בהליכה מהכפר, ולאגם נוסעים עם הסיור."},
            budget:1500, status:"planned", companions:["ביחד"], order:5},
           {id:khaolakId, owner:"both", name:"קאו לאק", wiki:"Khao Lak", hue:"#C9A24C",
@@ -771,7 +795,7 @@ function seedData(){
         transport:[], accommodations:[], budget:defaultBudget()
       }
     ],
-    masterChecklist: applyTasks35(applyTasks34(applyTasks33(applyTasks32([
+    masterChecklist: applyTasks36(applyTasks35(applyTasks34(applyTasks33(applyTasks32([
       {id:uid('m'), category:"דרכון", title:"לבדוק תוקף דרכון (6+ חודשים)", status:"todo", deadline:"2026-10-15", notes:"", priority:"גבוהה", link:"", countryId:null, order:1},
       {id:uid('m'), category:"ביטוח נסיעות", title:"לרכוש ביטוח נסיעות ארוך טווח", status:"todo", deadline:"2026-11-05", notes:"לוודא כיסוי לענפי ספורט/גלישה ויוגה", priority:"גבוהה", link:"", countryId:null, order:2},
       {id:uid('m'), category:"כרטיסי אשראי", title:"לעדכן בנק על נסיעה ממושכת", status:"todo", deadline:"", notes:"", priority:"בינונית", link:"", countryId:null, order:3},
@@ -799,7 +823,7 @@ function seedData(){
       {id:uid('m'), owner:"talia", category:"טיסות המשך", title:"טיסה מתאילנד לסרי לנקה", status:"todo", deadline:"2026-11-20", notes:ONWARD_NOTE, priority:"גבוהה", link:"", countryId:null, order:18},
       {id:uid('m'), owner:"talia", category:"טיסות המשך", title:"כרטיס יציאה מתאילנד לפני הכניסה בפברואר", status:"todo", deadline:"2027-02-01", notes:"בכניסה לקופנגן באמצע פברואר הפטור מתחיל מחדש (30 יום), ושוב צריך להראות כרטיס יציאה — למשל לפיליפינים", priority:"בינונית", link:"", countryId:null, order:19},
       ...TALIA_TASKS.map(t=>({id:uid('m'), owner:"talia", status:"todo", category:"המסלול של טליה", countryId:null, ...t}))
-    ])))),
+    ]))))),
     packingBreakdown:"Osprey Renn 65L לכל הציוד → Osprey Daylite Plus 20L למטוס, נסיעות וטיולי יום → קרוסבודי קטן לטלפון, כסף ודרכון ביום־יום.",
     packingCarryOn:["דרכון","ארנק","טלפון","Power Bank","תרופות למיגרנה","תרופה לבחילות","משקפי שמש","אטמי אוזניים","מסכת עיניים","אוזניות","מגבונים קטנים","טישו","AirTag מחובר למוצ'ילה הגדולה","חולצה + תחתונים להחלפה"],
     packingList: applyShopping([
@@ -2387,6 +2411,66 @@ function ensureDefaults(){
     }));
     STATE.masterChecklist = applyTasks35(STATE.masterChecklist);
     STATE.schema = 35;
+  }
+
+  if(STATE.schema < 36){
+    // 15/11: הלילה על האגם הוזמן ל-3/12 (Laguna Seaview), River Lodge עבר ל-4/12, סימילן אושר
+    const seedShared = window.SHARED_SEED;
+    const copy = x => JSON.parse(JSON.stringify(x));
+    const meta = STATE.shared;
+    if(seedShared && meta && meta.days){
+      const shared = meta.days.filter(d=>d.owner!=='talia');
+      const dates = ['2026-12-03','2026-12-04','2026-12-05'];
+      const days = dates.map(date=>shared.find(d=>d.date===date));
+      if(days.every(Boolean)){
+        const old = new Map(days.flatMap(d=>d.rows).map(r=>[r.id, r]));
+        dates.forEach((date, i)=>{
+          const seedDay = seedShared.days.find(d=>d.date===date);
+          const custom = days[i].rows.filter(r=>!/^s_/.test(String(r.id||'')));
+          const rows = seedDay.rows.map(sr=>{
+            const row = copy(sr), before = old.get(sr.id);
+            if(before){ if(before.done) row.done = true; if(before.talk) row.talk = before.talk; }
+            return row;
+          });
+          Object.assign(days[i], {dest:seedDay.dest, summary:seedDay.summary, rows:rows.concat(custom)});
+        });
+      }
+      // האיסוף לאגם ב-08:00 — בלי ברים בלילה שלפני
+      const dec2 = shared.find(d=>d.date==='2026-12-02');
+      if(dec2) dec2.rows = dec2.rows.filter(r=>r.id!=='s_h2_night');
+      const seedRows = seedShared.days.flatMap(d=>d.rows);
+      shared.forEach(d=>d.rows.forEach(r=>{
+        if(r.id!=='s_g7_1') return;
+        const f = seedRows.find(x=>x.id===r.id);
+        ['status','baht','notes'].forEach(k=>{ r[k] = copy(f[k]); });
+      }));
+      if(meta.bookings){
+        ['Khao Sok River Lodge','לילה על האגם · Siam Tour'].forEach(what=>{
+          const b = seedShared.bookings.find(x=>x.what===what), found = meta.bookings.find(x=>x.what===what);
+          if(b && found) Object.assign(found, copy(b));
+        });
+        const rl = meta.bookings.findIndex(x=>x.what==='Khao Sok River Lodge'), lk = meta.bookings.findIndex(x=>x.what==='לילה על האגם · Siam Tour');
+        if(rl>=0 && lk>rl){ const [b] = meta.bookings.splice(lk,1); meta.bookings.splice(rl,0,b); }
+      }
+      if(meta.hotels){
+        const hr = meta.hotels.find(h=>h.hotel==='Khao Sok River Lodge');
+        if(hr) Object.assign(hr, {dates:'4–5/12', freeCancel:'עד 30/11'});
+        const laguna = seedShared.hotels.find(h=>/^The Laguna Chiew Larn/.test(h.hotel));
+        if(laguna && !meta.hotels.some(h=>h.hotel===laguna.hotel)){
+          const at = meta.hotels.findIndex(h=>h.hotel==='Panvaree The Greenery');
+          meta.hotels.splice(at>=0 ? at : meta.hotels.length, 0, copy(laguna));
+        }
+      }
+    }
+    (STATE.countries||[]).forEach(c=>(c.destinations||[]).forEach(d=>{
+      if(d.name==='קאו סוק' && /Panvaree The Greenery/.test(d.accommodation||'')) Object.assign(d, {accommodation:'The Laguna Chiew Larn (Seaview) על האגם, ואז Khao Sok River Lodge', transport:'Siam Tour מאאו נאנג', notes:"3/12 ישר מאאו נאנג לאגם — לילה ב-Laguna Seaview עם סירה פרטית, דרך Siam Tour. 4/12 בוקר על האגם וערב בכפר, ב-River Lodge על הנהר. 5/12 בוקר בג׳ונגל, ומשם לקלימה."});
+    }));
+    const rlx = STATE.money.expenses.find(e=>e.title==='Khao Sok River Lodge · 3/12');
+    if(rlx) Object.assign(rlx, {title:'Khao Sok River Lodge · 4/12', date:'2026-12-04', note:'אישור 5114181390 · כולל ארוחת בוקר · לשלם לפני ההגעה · ביטול חינם עד 30/11'});
+    const lx = EXPENSE_36();
+    if(!STATE.money.expenses.some(e=>e.title===lx.title)) STATE.money.expenses.push(lx);
+    STATE.masterChecklist = applyTasks36(STATE.masterChecklist);
+    STATE.schema = 36;
   }
 
   /* משימות חדשות מתווספות בכל גרסה, לפי כותרת */

@@ -2590,25 +2590,6 @@
     }
    },
    {
-    "time": "21:30",
-    "dur": "2:00",
-    "act": "ברים על רצועת אאו נאנג",
-    "loc": "אאו נאנג",
-    "cat": "אטרקציות",
-    "baht": 600,
-    "status": "משלמים במקום",
-    "link": "",
-    "notes": "לא עד מאוחר — מחר נוסעים לג׳ונגל",
-    "priceEstimate": {
-     "kind": "estimate",
-     "basis": "אומדן ערב בבר לשניים — כניסה, שתייה ותחבורה.",
-     "lowFactor": 0.7,
-     "highFactor": 1.6,
-     "sourceUrl": "",
-     "checked": "2026-10-31"
-    }
-   },
-   {
     "time": "",
     "dur": "",
     "act": "לינה — COSI Krabi Ao Nang Beach",
@@ -2646,37 +2627,18 @@
   "date": "2026-12-03",
   "dow": "ה׳",
   "dest": "קאו סוק",
-  "summary": "מאאו נאנג לג׳ונגל",
+  "summary": "מאאו נאנג ישר לאגם — לילה ב-Laguna Seaview",
   "rows": [
    {
-    "time": "07:15",
-    "dur": "0:40",
-    "act": "אימון כוח — עליון",
-    "loc": "",
-    "cat": "אחר",
-    "baht": null,
-    "status": "משלמים במקום",
-    "link": "",
-    "notes": "יום מעבר — הכוח חשוב יותר מהריצה · 1. שכיבות סמיכה + מתח / חתירה הפוכה מתחת לשולחן · 2. שכיבות סמיכה בשיפוע (רגליים על מיטה) + חתירה עם תיק · 3. מקבילים על כיסא או ספסל + פולאובר עם תיק · 4. כפיפת מרפקים עם תיק + Bench Dips · 5. פוש-אפ יהלום + Superman Pulls",
-    "priceEstimate": {
-     "kind": "no-extra",
-     "basis": "לא הוקצה חיוב נפרד לפעולה הזאת; חיובים כלולים מופיעים בחבילה או בהזמנה.",
-     "lowFactor": 1,
-     "highFactor": 1,
-     "sourceUrl": "",
-     "checked": "2026-10-31"
-    }
-   },
-   {
-    "time": "08:00",
-    "dur": "1:00",
+    "time": "07:00",
+    "dur": "0:45",
     "act": "ארוחת בוקר · צ׳ק-אאוט",
     "loc": "COSI · אאו נאנג",
     "cat": "אוכל",
     "baht": 300,
     "status": "משלמים במקום",
     "link": "",
-    "notes": "צ׳ק-אאוט עד 11:00–12:00 · אפשר לשלם עם הזיכוי של המלון",
+    "notes": "האיסוף ב-08:00 · לסגור חשבון ולעשות צ׳ק-אאוט ערב לפני · אפשר לשלם עם הזיכוי של המלון",
     "priceEstimate": {
      "kind": "estimate",
      "basis": "אומדן לשניים; חלק יכוסה בזיכוי של המלון.",
@@ -2687,164 +2649,34 @@
     }
    },
    {
-    "time": "10:00",
-    "dur": "3:00",
-    "act": "ואן · אאו נאנג → קאו סוק",
-    "loc": "אאו נאנג → קאו סוק",
+    "time": "08:00",
+    "dur": "3:30",
+    "act": "Siam Tour · איסוף מ-COSI לאגם צ׳או לאן",
+    "loc": "אאו נאנג → רציף ראצ׳אפראפה → The Laguna",
     "cat": "תחבורה",
-    "baht": 900,
-    "status": "להזמין",
-    "link": "https://12go.com/en/travel/ao-nang/khao-sok",
-    "notes": "כ-165 ק״מ, כשעתיים וחצי–שלוש · ואן משותף עם איסוף מהמלון, כ-฿350–450 לאדם · רכב פרטי כ-฿2,500–3,000 · דרך 12Go או הקבלה במלון",
-    "priceEstimate": {
-     "kind": "estimate",
-     "basis": "ואן משותף אאו נאנג–קאו סוק לשניים; רכב פרטי יקר פי שלושה.",
-     "lowFactor": 0.8,
-     "highFactor": 3.3,
-     "sourceUrl": "",
-     "checked": "2026-10-31"
-    }
-   },
-   {
-    "time": "13:30",
-    "dur": "0:30",
-    "act": "צ׳ק-אין — Khao Sok River Lodge",
-    "loc": "קאו סוק",
-    "cat": "אחר",
-    "baht": null,
+    "baht": 15000,
     "status": "מוזמן",
-    "link": "https://secure.booking.com/myreservations.html?bn=5114181390",
-    "notes": "צ׳ק-אין 13:00–18:00 · לשלם בהעברה בנקאית לפני ההגעה — המלון ישלח פרטים · ביטול חינם עד 29/11",
-    "priceEstimate": {
-     "kind": "no-extra",
-     "basis": "לא הוקצה חיוב נפרד לפעולה הזאת; חיובים כלולים מופיעים בחבילה או בהזמנה.",
-     "lowFactor": 1,
-     "highFactor": 1,
-     "sourceUrl": "",
-     "checked": "2026-10-29"
-    }
-   },
-   {
-    "time": "15:30",
-    "dur": "1:30",
-    "act": "טיובינג או שחייה בנהר סוק",
-    "loc": "קאו סוק",
-    "cat": "אטרקציות",
-    "baht": 400,
-    "status": "משלמים במקום",
     "link": "",
-    "notes": "",
-    "wiki": "Khao Sok National Park",
-    "priceEstimate": {
-     "kind": "estimate",
-     "basis": "השכרת טיובים לשניים.",
-     "lowFactor": 0.8,
-     "highFactor": 1.3,
-     "sourceUrl": "",
-     "checked": "2026-10-29"
-    }
-   },
-   {
-    "time": "19:00",
-    "dur": "1:00",
-    "act": "ארוחת ערב בכפר",
-    "loc": "קאו סוק",
-    "cat": "אוכל",
-    "baht": 600,
-    "status": "משלמים במקום",
-    "link": "",
-    "notes": "",
-    "priceEstimate": {
-     "kind": "estimate",
-     "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
-     "lowFactor": 0.8,
-     "highFactor": 1.3,
-     "sourceUrl": "",
-     "checked": "2026-10-29"
-    }
-   },
-   {
-    "time": "",
-    "dur": "",
-    "act": "לינה — Khao Sok River Lodge",
-    "loc": "קאו סוק",
-    "cat": "לינה",
-    "baht": 2000,
-    "status": "מוזמן",
-    "link": "https://secure.booking.com/myreservations.html?bn=5114181390",
-    "notes": "אישור 5114181390 · Standard Double · כולל ארוחת בוקר · ฿2,000 · לשלם בהעברה בנקאית לפני ההגעה · ביטול חינם עד 29/11",
-    "wiki": "Khao Sok National Park",
+    "notes": "voucher 8044 · הזמנה 5946 · Laguna Seaview · ฿15,000 לשניים כולל ארוחות וסירה פרטית · שולמה מקדמה ฿7,500 ב-15/11 · יתרה ฿7,500 עד 26/11, בכרטיס או ב-Wise · לא מוחזר · המזוודות הגדולות נשארות ברכב — לאגם תיק קטן · WhatsApp ‎+66 82 579 6015 (Lukas)",
     "priceEstimate": {
      "kind": "booking",
-     "basis": "המחיר מההזמנה השמורה; נספר פעם אחת בלבד ומחולק בין הלילות או הטיסות.",
+     "basis": "המחיר מההזמנה ב-Siam Tour, voucher 8044.",
      "lowFactor": 1,
      "highFactor": 1,
      "sourceUrl": "",
-     "checked": "2026-11-12",
+     "checked": "2026-11-15",
      "booking": {
-      "category": "accommodation",
+      "category": "activities",
       "split": "ratio",
-      "key": "khaosok",
-      "match": "River Lodge",
+      "key": "lake",
+      "match": "Siam Tour · Laguna",
       "rows": 1,
-      "totalThb": 2000
+      "totalThb": 15000
      }
     }
-   }
-  ],
-  "sun": {
-   "rise": "06:27",
-   "set": "18:05"
-  }
- },
- {
-  "day": 12,
-  "date": "2026-12-04",
-  "dow": "ו׳",
-  "dest": "קאו סוק",
-  "summary": "לילה על אגם צ׳או לאן — Panvaree The Greenery",
-  "rows": [
-   {
-    "time": "07:30",
-    "dur": "1:00",
-    "act": "ארוחת בוקר — כלולה",
-    "loc": "River Lodge",
-    "cat": "אוכל",
-    "baht": null,
-    "status": "כלול בחבילה",
-    "link": "",
-    "notes": "המזוודות הגדולות נשארות ברכב של המפעיל — לאגם רק תיק קטן",
-    "priceEstimate": {
-     "kind": "included",
-     "basis": "ארוחת הבוקר כלולה בהזמנת River Lodge.",
-     "lowFactor": 1,
-     "highFactor": 1,
-     "sourceUrl": "",
-     "checked": "2026-11-12"
-    }
    },
    {
-    "time": "09:00",
-    "dur": "3:00",
-    "act": "אגם צ׳או לאן — לילה בבונגלו צף (מחכים לתשובה)",
-    "loc": "קאו סוק → רציף ראצ׳אפראפה → Panvaree The Greenery",
-    "cat": "אטרקציות",
-    "baht": 13600,
-    "status": "להזמין",
-    "link": "https://www.siamtourandrealty.com/trip/cheow-lan-2-days-floating-bungalow-from-khao-sok/",
-    "notes": "12/11: Panvaree The Greenery מלא ב-4/12 אצל Siam Tour · שאלנו את Siam Tour על Laguna Seaview, Panvaree, Issara או Phuphawaree, ואת Greenery ישירות (tonraktours@thegreenerypanvaree.com) · כ-฿10,000–14,000 לשניים, לא מוחזר",
-    "wiki": "Cheow Lan Lake",
-    "priceEstimate": {
-     "kind": "estimate",
-     "basis": "מחיר Siam Tour ל-Panvaree The Greenery, לשני מבוגרים; לינה, ארוחות וסירות כלולים.",
-     "lowFactor": 1,
-     "highFactor": 1.15,
-     "sourceUrl": "",
-     "checked": "2026-11-12"
-    }
-   },
-   {
-    "time": "10:30",
+    "time": "11:00",
     "dur": "0:10",
     "act": "דמי כניסה לפארק",
     "loc": "מחסום הפארק",
@@ -2865,8 +2697,8 @@
    {
     "time": "12:30",
     "dur": "1:00",
-    "act": "צהריים על הרפסודה — כלול",
-    "loc": "Panvaree The Greenery",
+    "act": "צהריים ב-Laguna — כלול",
+    "loc": "The Laguna Chiew Larn",
     "cat": "אוכל",
     "baht": 0,
     "status": "כלול בחבילה",
@@ -2902,14 +2734,14 @@
    },
    {
     "time": "15:45",
-    "dur": "0:45",
-    "act": "ריצה ארוכה קלה — הפעם שחייה באגם",
+    "dur": "0:40",
+    "act": "אימון כוח — עליון",
     "loc": "",
     "cat": "אחר",
     "baht": null,
     "status": "משלמים במקום",
     "link": "",
-    "notes": "ריצה אין איפה — שחייה רגועה ליד הרפסודה, עם אפוד אם צריך",
+    "notes": "על המרפסת של הבונגלו · 1. שכיבות סמיכה + מתח / חתירה הפוכה מתחת לשולחן · 2. שכיבות סמיכה בשיפוע (רגליים על מיטה) + חתירה עם תיק · 3. מקבילים על כיסא או ספסל + פולאובר עם תיק · 4. כפיפת מרפקים עם תיק + Bench Dips · 5. פוש-אפ יהלום + Superman Pulls",
     "priceEstimate": {
      "kind": "no-extra",
      "basis": "לא הוקצה חיוב נפרד לפעולה הזאת; חיובים כלולים מופיעים בחבילה או בהזמנה.",
@@ -2922,13 +2754,13 @@
    {
     "time": "17:30",
     "dur": "1:15",
-    "act": "שייט שקיעה בין הצוקים — כלול",
+    "act": "שייט שקיעה בין הצוקים בסירה הפרטית",
     "loc": "אגם צ׳או לאן",
     "cat": "אטרקציות",
     "baht": 0,
     "status": "כלול בחבילה",
     "link": "",
-    "notes": "",
+    "notes": "הסירה הפרטית כלולה במחיר של Laguna",
     "priceEstimate": {
      "kind": "included",
      "basis": "כלול בחבילה.",
@@ -2942,7 +2774,7 @@
     "time": "19:00",
     "dur": "1:00",
     "act": "ארוחת ערב על האגם — כלולה",
-    "loc": "Panvaree The Greenery",
+    "loc": "The Laguna Chiew Larn",
     "cat": "אוכל",
     "baht": 0,
     "status": "כלול בחבילה",
@@ -2960,13 +2792,13 @@
    {
     "time": "",
     "dur": "",
-    "act": "לינה — בונגלו צף על אגם צ׳או לאן (לבחור)",
+    "act": "לינה — The Laguna Chiew Larn · Seaview",
     "loc": "אגם צ׳או לאן",
     "cat": "לינה",
     "baht": 0,
-    "status": "להזמין",
+    "status": "מוזמן",
     "link": "https://www.siamtourandrealty.com/trip/cheow-lan-2-days-floating-bungalow-from-khao-sok/",
-    "notes": "כלול בחבילה · מחכים לתשובות מ-Siam Tour ומ-Greenery",
+    "notes": "כלול בחבילה של Siam Tour · voucher 8044 · חדר Seaview עם נוף פתוח לאגם",
     "wiki": "Khao Sok National Park",
     "priceEstimate": {
      "kind": "included",
@@ -2984,16 +2816,16 @@
   }
  },
  {
-  "day": 13,
-  "date": "2026-12-05",
-  "dow": "ש׳",
-  "dest": "קאו לאק",
-  "summary": "זריחה על האגם, ואז קלימה",
+  "day": 12,
+  "date": "2026-12-04",
+  "dow": "ו׳",
+  "dest": "קאו סוק",
+  "summary": "בוקר על האגם, ערב בכפר — River Lodge",
   "rows": [
    {
     "time": "06:00",
     "dur": "1:00",
-    "act": "שייט זריחה על האגם — אופציונלי",
+    "act": "ספארי בוקר בסירה — אופציונלי",
     "loc": "אגם צ׳או לאן",
     "cat": "אטרקציות",
     "baht": 0,
@@ -3014,12 +2846,12 @@
     "time": "07:00",
     "dur": "1:00",
     "act": "ארוחת בוקר על האגם — כלולה",
-    "loc": "Panvaree The Greenery",
+    "loc": "The Laguna Chiew Larn",
     "cat": "אוכל",
     "baht": 0,
     "status": "כלול בחבילה",
     "link": "",
-    "notes": "צ׳ק-אאוט ב-08:30, לונגטייל חזרה לרציף",
+    "notes": "צ׳ק-אאוט ב-08:30–09:00, לונגטייל חזרה לרציף",
     "priceEstimate": {
      "kind": "included",
      "basis": "כלול בחבילה.",
@@ -3031,21 +2863,196 @@
    },
    {
     "time": "10:00",
-    "dur": "2:30",
-    "act": "הסעה מהרציף לקלימה",
-    "loc": "רציף ראצ׳אפראפה → קאו לאק",
+    "dur": "1:30",
+    "act": "הסעה מהרציף ל-River Lodge",
+    "loc": "רציף ראצ׳אפראפה → כפר קאו סוק",
+    "cat": "תחבורה",
+    "baht": 1200,
+    "status": "להזמין",
+    "link": "",
+    "notes": "ביקשנו מ-Siam Tour הורדה ב-River Lodge — מחכים לאישור · אחרת מונית מהרציף, כ-฿1,200",
+    "priceEstimate": {
+     "kind": "estimate",
+     "basis": "אומדן תכנון לשניים.",
+     "lowFactor": 0.8,
+     "highFactor": 1.3,
+     "sourceUrl": "",
+     "checked": "2026-11-15"
+    }
+   },
+   {
+    "time": "13:00",
+    "dur": "0:30",
+    "act": "צ׳ק-אין — Khao Sok River Lodge",
+    "loc": "קאו סוק",
+    "cat": "אחר",
+    "baht": null,
+    "status": "מוזמן",
+    "link": "https://secure.booking.com/myreservations.html?bn=5114181390",
+    "notes": "4–5/12 · צ׳ק-אין 13:00–18:00 · לשלם ฿2,000 לפני ההגעה בהעברה בנקאית — או לשאול בצ׳אט של בוקינג אם אפשר במזומן (כתוב cash only) · ביטול חינם עד 30/11",
+    "priceEstimate": {
+     "kind": "no-extra",
+     "basis": "לא הוקצה חיוב נפרד לפעולה הזאת; חיובים כלולים מופיעים בחבילה או בהזמנה.",
+     "lowFactor": 1,
+     "highFactor": 1,
+     "sourceUrl": "",
+     "checked": "2026-10-29"
+    }
+   },
+   {
+    "time": "14:00",
+    "dur": "1:30",
+    "act": "טיובינג או שחייה בנהר סוק",
+    "loc": "קאו סוק",
+    "cat": "אטרקציות",
+    "baht": 400,
+    "status": "משלמים במקום",
+    "link": "",
+    "notes": "",
+    "wiki": "Khao Sok National Park",
+    "priceEstimate": {
+     "kind": "estimate",
+     "basis": "השכרת טיובים לשניים.",
+     "lowFactor": 0.8,
+     "highFactor": 1.3,
+     "sourceUrl": "",
+     "checked": "2026-10-29"
+    }
+   },
+   {
+    "time": "15:45",
+    "dur": "0:45",
+    "act": "ריצה ארוכה קלה — לאורך נהר סוק",
+    "loc": "",
+    "cat": "אחר",
+    "baht": null,
+    "status": "משלמים במקום",
+    "link": "",
+    "notes": "שביל הכפר לאורך הנהר · לפי מאמץ, לא לפי השעון · מים ומלחים",
+    "priceEstimate": {
+     "kind": "no-extra",
+     "basis": "לא הוקצה חיוב נפרד לפעולה הזאת; חיובים כלולים מופיעים בחבילה או בהזמנה.",
+     "lowFactor": 1,
+     "highFactor": 1,
+     "sourceUrl": "",
+     "checked": "2026-10-31"
+    }
+   },
+   {
+    "time": "19:00",
+    "dur": "1:00",
+    "act": "ארוחת ערב בכפר",
+    "loc": "קאו סוק",
+    "cat": "אוכל",
+    "baht": 600,
+    "status": "משלמים במקום",
+    "link": "",
+    "notes": "",
+    "priceEstimate": {
+     "kind": "estimate",
+     "basis": "אומדן תכנון לשניים לפי המסלול הקיים; אוכל, מוניות וטיפולים משתנים לפי הבחירה.",
+     "lowFactor": 0.8,
+     "highFactor": 1.3,
+     "sourceUrl": "",
+     "checked": "2026-10-29"
+    }
+   },
+   {
+    "time": "",
+    "dur": "",
+    "act": "לינה — Khao Sok River Lodge",
+    "loc": "קאו סוק",
+    "cat": "לינה",
+    "baht": 2000,
+    "status": "מוזמן",
+    "link": "https://secure.booking.com/myreservations.html?bn=5114181390",
+    "notes": "אישור 5114181390 · 4–5/12 · Standard Double · כולל ארוחת בוקר · ฿2,000 · לשלם לפני ההגעה · ביטול חינם עד 30/11",
+    "wiki": "Khao Sok National Park",
+    "priceEstimate": {
+     "kind": "booking",
+     "basis": "המחיר מההזמנה השמורה; נספר פעם אחת בלבד ומחולק בין הלילות או הטיסות.",
+     "lowFactor": 1,
+     "highFactor": 1,
+     "sourceUrl": "",
+     "checked": "2026-11-12",
+     "booking": {
+      "category": "accommodation",
+      "split": "ratio",
+      "key": "khaosok",
+      "match": "River Lodge",
+      "rows": 1,
+      "totalThb": 2000
+     }
+    }
+   }
+  ],
+  "sun": {
+   "rise": "06:27",
+   "set": "18:05"
+  }
+ },
+ {
+  "day": 13,
+  "date": "2026-12-05",
+  "dow": "ש׳",
+  "dest": "קאו לאק",
+  "summary": "בוקר בג׳ונגל, ואז קלימה",
+  "rows": [
+   {
+    "time": "07:30",
+    "dur": "0:45",
+    "act": "ארוחת בוקר — כלולה",
+    "loc": "River Lodge",
+    "cat": "אוכל",
+    "baht": null,
+    "status": "כלול בחבילה",
+    "link": "",
+    "notes": "כלולה בהזמנה",
+    "priceEstimate": {
+     "kind": "included",
+     "basis": "כלולה בהזמנה של River Lodge.",
+     "lowFactor": 1,
+     "highFactor": 1,
+     "sourceUrl": "",
+     "checked": "2026-11-15"
+    }
+   },
+   {
+    "time": "08:30",
+    "dur": "2:00",
+    "act": "בוקר בג׳ונגל — הליכה לאורך נהר סוק או טיובינג",
+    "loc": "קאו סוק",
+    "cat": "אטרקציות",
+    "baht": null,
+    "status": "אופציונלי",
+    "link": "",
+    "notes": "צ׳ק-אאוט עד 11:30",
+    "priceEstimate": {
+     "kind": "no-extra",
+     "basis": "לא הוקצה חיוב נפרד לפעולה הזאת.",
+     "lowFactor": 1,
+     "highFactor": 1,
+     "sourceUrl": "",
+     "checked": "2026-11-15"
+    }
+   },
+   {
+    "time": "11:00",
+    "dur": "1:30",
+    "act": "מונית מהכפר לקלימה",
+    "loc": "קאו סוק → קאו לאק",
     "cat": "תחבורה",
     "baht": 1800,
     "status": "להזמין",
     "link": "",
-    "notes": "ביקשנו מ-Siam Tour הורדה בקלימה עם המזוודות — מחכים לתשובה · אחרת מונית מהכפר, כ-฿1,800",
+    "notes": "כשעה וחצי · דרך הקבלה של River Lodge, או Grab",
     "priceEstimate": {
      "kind": "estimate",
-     "basis": "רכב פרטי מקאו סוק לקאו לאק.",
-     "lowFactor": 0.5,
-     "highFactor": 1.1,
+     "basis": "אומדן תכנון לשניים.",
+     "lowFactor": 0.8,
+     "highFactor": 1.3,
      "sourceUrl": "",
-     "checked": "2026-11-12"
+     "checked": "2026-11-15"
     }
    },
    {
@@ -3325,10 +3332,10 @@
     "act": "סימילן — יום שנורקלינג",
     "loc": "איי סימילן",
     "cat": "אטרקציות",
-    "baht": 7800,
-    "status": "להזמין",
+    "baht": 8000,
+    "status": "משלמים במקום",
     "link": "mailto:duangjan@asiantrails.org",
-    "notes": "Asian Trails (הדלפק בקלימה, Patty) · Late Departure, איסוף 07:30–07:45 מקלימה · 12/11 ביקשנו להעביר ל-7/12 — מחכים לאישור, למחיר ולתנאי ביטול · Early Bird: ฿4,100 לאדם · 8/12 יום גיבוי",
+    "notes": "Asian Trails (Patty, הדלפק בקלימה) · Late Departure · Patty אישרה מקום 13/11 · ฿8,000 לשניים כולל הסעות, ציוד, ארוחות ודמי פארק · מזומן בדלפק בקלימה · ביטול חינם עד 24 שעות לפני, ואם הים מבטל — החזר מלא · איסוף 07:30–07:45, חזרה בערך 17:00 · 8/12 יום גיבוי",
     "wiki": "Similan Islands",
     "priceEstimate": {
      "kind": "published",
