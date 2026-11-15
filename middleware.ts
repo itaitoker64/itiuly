@@ -30,6 +30,6 @@ export const config = {
      * The app's own JS/CSS stay guarded too, so nothing of the plan is served
      * to someone who is not signed in.
      */
-    '/((?!login|api/auth|api/files/import|api/ping|api/follow|follow/|follow-app.js|journal-view.js|journal.css|_next/static|_next/image|favicon.ico|icons/|manifest.webmanifest|sw.js).*)',
+    '/((?!login|api/auth|api/ping|api/follow|follow/|follow-app.js|journal-view.js|journal.css|_next/static|_next/image|favicon.ico|icons/|manifest.webmanifest|sw.js).*)',
   ],
 };
