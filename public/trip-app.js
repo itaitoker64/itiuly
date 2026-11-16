@@ -676,7 +676,7 @@ function seedData(){
   const hanoiId = uid('d'), manilaId = uid('d');
 
   return {
-    schema:36,
+    schema:37,
     tripName:"My Big Trip 🌏",
     startDate:"2026-11-22",
     endDate:null,
@@ -2475,6 +2475,33 @@ function ensureDefaults(){
     if(!STATE.money.expenses.some(e=>e.title===lx.title)) STATE.money.expenses.push(lx);
     STATE.masterChecklist = applyTasks36(STATE.masterChecklist);
     STATE.schema = 36;
+  }
+
+  if(STATE.schema < 37){
+    // 16/11: עברנו יום-יום — ימים קלים יותר בבנגקוק, בלי טיפוס ופי פי, רופטופ ב-9/12
+    const seedShared = window.SHARED_SEED;
+    const meta = STATE.shared;
+    const copy = x => JSON.parse(JSON.stringify(x));
+    if(seedShared && meta && meta.days){
+      const shared = meta.days.filter(d=>d.owner!=='talia');
+      ['2026-11-23','2026-11-24','2026-11-25','2026-11-30','2026-12-01','2026-12-02','2026-12-05','2026-12-09','2026-12-10'].forEach(date=>{
+        const day = shared.find(d=>d.date===date);
+        const seedDay = seedShared.days.find(d=>d.date===date && d.owner!=='talia');
+        if(!day || !seedDay) return;
+        const old = new Map(day.rows.map(r=>[r.id, r]));
+        const custom = day.rows.filter(r=>!/^s_/.test(String(r.id||'')));
+        const rows = seedDay.rows.map(sr=>{
+          const row = copy(sr), before = old.get(sr.id);
+          if(before){ if(before.done) row.done = true; if(before.talk) row.talk = before.talk; }
+          return row;
+        });
+        Object.assign(day, {dest:seedDay.dest, summary:seedDay.summary, rows:rows.concat(custom)});
+      });
+      const sala = (meta.bookings||[]).find(b=>/סאלה/.test(b.what||''));
+      const seedSala = seedShared.bookings.find(b=>/סאלה/.test(b.what||''));
+      if(sala && seedSala) sala.details = seedSala.details;
+    }
+    STATE.schema = 37;
   }
 
   /* בשטח: קבצים שצורפו להזמנות, ופרטי הביטוח לחירום */
