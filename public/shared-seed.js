@@ -4568,7 +4568,7 @@ window.SHARED_SEED = {
    "what": "Kalima · לילה נוסף",
    "when": "5–6/12",
    "details": "קאו לאק · לילה · Deluxe Pool Access · ארוחת בוקר · הזמנה ישירה מול המלון (Lyla, rsvn.khaolak@kalimaresort.com)",
-   "ref": "123228",
+   "ref": "123492 · 123228",
    "payment": "שולם ฿8,800",
    "freeCancel": "לא מוחזר"
   },
