@@ -2511,6 +2511,10 @@ function ensureDefaults(){
   if(STATE.shared && STATE.shared.bookings && !STATE.shared.bookings.some(b=>b.fileTag==='PassportCard')){
     STATE.shared.bookings.push({what:'ביטוח נסיעות · PassportCard', when:'כל הטיול', details:'פוליסה לשניים · הקובץ "אישור פוליסה" נפתח עם מספר תעודת הזהות של איתי', ref:'בקובץ הפוליסה', payment:'שולם', freeCancel:'—', fileTag:'PassportCard'});
   }
+  // המפה של טליה ומל בגוגל מפות — המקומות נטענים ממנה בכל פתיחה
+  if(STATE.shared && !(STATE.shared.mapLists||[]).some(m=>m.id==='wHPaAtsYL2pmB4xARWodPA')){
+    (STATE.shared.mapLists = STATE.shared.mapLists||[]).push({id:'wHPaAtsYL2pmB4xARWodPA', title:'טליה ומל כובשות את המזרח 👯🌺✈️', note:'הרשימה של טליה ומל בגוגל מפות · כל מקום שנשמר שם מופיע כאן'});
+  }
   if(STATE.shared && STATE.shared.emergency && !STATE.shared.emergency.insurer) STATE.shared.emergency.insurer = 'PassportCard';
   if(STATE.shared && STATE.shared.bookings){
     const kyn = STATE.shared.bookings.find(b=>b.id==='kyn-2026-11');
@@ -4423,7 +4427,37 @@ function renderInfoSection(){
       <b>🛵 ${moto.title}</b>
       <ul class="moto-list">${moto.lines.map(l=>`<li>${l}</li>`).join('')}</ul>
     </div>` : '';
-  return campBlock + motoBlock + sh().info.map(i=>`<div class="info-row"><b>${i.topic}</b><span>${i.detail}</span></div>`).join('');
+  const maps = (sh().mapLists||[]).map(m=>`
+    <div class="card map-list" data-map-list="${m.id}">
+      <b>🗺️ ${m.title}</b>
+      <div class="map-list-sub">${m.note||''} · <a href="https://www.google.com/maps/placelists/list/${m.id}" target="_blank" rel="noopener">פתיחה בגוגל מפות</a></div>
+      <ul class="map-places">${mapListHtml(m.id)}</ul>
+    </div>`).join('');
+  setTimeout(loadMapLists, 0);
+  return campBlock + motoBlock + maps + sh().info.map(i=>`<div class="info-row"><b>${i.topic}</b><span>${i.detail}</span></div>`).join('');
+}
+
+/* רשימות שמורות בגוגל מפות — נקראות בכל פתיחה, אז כל מקום חדש שנשמר שם מופיע כאן */
+const MAP_LISTS = {};
+function mapListHtml(id){
+  const m = MAP_LISTS[id];
+  if(!m) return '<li class="map-empty">טוען את המקומות…</li>';
+  if(m.error) return `<li class="map-empty">לא הצלחנו לטעון את הרשימה (${escapeHtml(m.error)}). הקישור לגוגל מפות עובד.</li>`;
+  if(!m.places.length) return '<li class="map-empty">עוד לא נשמרו מקומות ברשימה.</li>';
+  return m.places.map(p=>`<li><a href="${escapeAttr(p.url)}" target="_blank" rel="noopener">${escapeHtml(p.name)}</a>${p.address?`<span>${escapeHtml(p.address)}</span>`:''}${p.note?`<em>${escapeHtml(p.note)}</em>`:''}</li>`).join('');
+}
+function loadMapLists(){
+  (sh().mapLists||[]).forEach(m=>{
+    const st = MAP_LISTS[m.id];
+    if(st && (st.loading || Date.now()-st.at < 60000)) return;
+    MAP_LISTS[m.id] = Object.assign(st||{}, {loading:true});
+    fetch(`/api/maplist/${encodeURIComponent(m.id)}`).then(r=>r.json()).then(d=>{
+      MAP_LISTS[m.id] = d.error ? {error:d.error, at:Date.now()} : {places:d.places||[], at:Date.now()};
+    }).catch(e=>{ MAP_LISTS[m.id] = {error:String(e.message||e), at:Date.now()}; }).finally(()=>{
+      const box = document.querySelector(`[data-map-list="${m.id}"] .map-places`);
+      if(box) box.innerHTML = mapListHtml(m.id);
+    });
+  });
 }
 
 function renderWhoPill(){
