@@ -2561,6 +2561,23 @@ function ensureDefaults(){
     SPEND_2411().forEach(x=>{ if(!STATE.money.expenses.some(e=>e.title===x.title)) STATE.money.expenses.push(x); });
     STATE.money.added2411 = true;
   }
+  // 24/11 בערב: ISB אישרו ל-12:00, ו-KYN ענו על הרציף ועל הספידבוט — פעם אחת
+  if(STATE.shared && window.SHARED_SEED && !STATE.shared.applied2411isb){
+    const ids = ["s_3_3", "s_3_4", "s_3_5", "s_3_6", "s_3_7", "s_3_9", "s_3_dream", "s_4_8", "s_7_3", "s_7_4"];
+    (STATE.shared.days||[]).filter(d=>d.owner!=='talia').forEach(day=>{
+      const seedDay = window.SHARED_SEED.days.find(d=>d.date===day.date && d.owner!=='talia');
+      if(!seedDay) return;
+      (day.rows||[]).forEach(r=>{
+        if(!ids.includes(r.id)) return;
+        const sr = seedDay.rows.find(x=>x.id===r.id); if(!sr) return;
+        ['act','time','dur','status','baht','notes'].forEach(k=>{ r[k] = sr[k]; });
+      });
+    });
+    (STATE.masterChecklist||[]).forEach(t=>{
+      if(t.title==='לתאם ביקור בוגרים ב-ISB' && t.status!=='done'){ t.status = 'done'; t.notes = '24/11: אושר ל-25/11 ב-12:00 · Harold Albert ‎+66 81 902 2503 · דרכונים בשער'; }
+    });
+    STATE.shared.applied2411isb = true;
+  }
   // המפה של טליה ומל בגוגל מפות — המקומות נטענים ממנה בכל פתיחה
   if(STATE.shared && !(STATE.shared.mapLists||[]).some(m=>m.id==='wHPaAtsYL2pmB4xARWodPA')){
     (STATE.shared.mapLists = STATE.shared.mapLists||[]).push({id:'wHPaAtsYL2pmB4xARWodPA', title:'טליה ומל כובשות את המזרח 👯🌺✈️', note:'הרשימה של טליה ומל בגוגל מפות · כל מקום שנשמר שם מופיע כאן'});

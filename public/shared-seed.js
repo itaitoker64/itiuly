@@ -829,7 +829,7 @@ window.SHARED_SEED = {
      }
     },
     {
-     "time": "09:20",
+     "time": "10:45",
      "dur": "1:00",
      "act": "גראב ל-ISB בפאקרט",
      "loc": "בנגקוק → פאקרט",
@@ -837,7 +837,7 @@ window.SHARED_SEED = {
      "baht": 500,
      "status": "משלמים במקום",
      "link": "https://www.google.com/maps/search/?api=1&query=International+School+Bangkok+Pakkret",
-     "notes": "מצ׳יינטאון · 50–70 דקות, תלוי בפקקים",
+     "notes": "מצ׳יינטאון · 50–70 דקות, תלוי בפקקים · להזמין Grab ב-10:45, לא אחרי",
      "id": "s_3_3",
      "done": false,
      "priceEstimate": {
@@ -850,15 +850,15 @@ window.SHARED_SEED = {
      }
     },
     {
-     "time": "10:30",
-     "dur": "2:30",
+     "time": "12:00",
+     "dur": "1:30",
      "act": "ISB — ביקור בוגרים",
      "loc": "פאקרט",
      "cat": "אטרקציות",
      "baht": null,
-     "status": "להזמין",
+     "status": "מוזמן",
      "link": "https://www.isb.ac.th/community/alumni",
-     "notes": "בקשה נשלחה 10/9, תזכורות 12/11 ו-16/11 ל-isbalum@isb.ac.th — מחכים לאישור · שניכם, עם דרכונים בשער · אם לא יענו — דרים וורלד במקום",
+     "notes": "אושר ב-24/11 · Harold Albert, מתאם הבוגרים · נייד ‎+66 81 902 2503 · בשער ב-12:00, שניכם עם דרכונים",
      "id": "s_3_4",
      "done": false,
      "wiki": "International School Bangkok",
@@ -873,8 +873,8 @@ window.SHARED_SEED = {
      "managed": true
     },
     {
-     "time": "13:10",
-     "dur": "2:00",
+     "time": "13:40",
+     "dur": "1:20",
      "act": "צהריים וקניון סנטרל צ׳אנגוואטנה",
      "loc": "Central Chaengwattana",
      "cat": "אוכל",
@@ -895,7 +895,7 @@ window.SHARED_SEED = {
      "managed": true
     },
     {
-     "time": "15:15",
+     "time": "15:00",
      "dur": "1:00",
      "act": "גראב חזרה למרכז",
      "loc": "צ׳אנגוואטנה → צ׳יינטאון",
@@ -917,7 +917,7 @@ window.SHARED_SEED = {
      "managed": true
     },
     {
-     "time": "16:25",
+     "time": "16:15",
      "dur": "1:00",
      "act": "מסאז׳ תאילנדי",
      "loc": "צ׳יינטאון",
@@ -969,7 +969,7 @@ window.SHARED_SEED = {
      "baht": 3000,
      "status": "משלמים במקום",
      "link": "https://rajadamnern.com/tickets/",
-     "notes": "קונים כרטיס בקופה כשמגיעים — ביום רביעי כמעט לא מתמלא, ובקופה בלי עמלה · מחלקה שלישית ฿1,000 לאדם · הכנה למחנה שמתחיל מחר",
+     "notes": "באתר נשארה רק מחלקה שלישית — קונים בקופה כשמגיעים, עדיף Club Class ฿1,800 לאדם · אם אין, מחלקה שלישית ฿1,000 · לחזור עד 23:00, המונית לשדה ב-06:45",
      "id": "s_3_9",
      "done": false,
      "wiki": "Rajadamnern Stadium",
@@ -1067,7 +1067,7 @@ window.SHARED_SEED = {
      "link": "https://www.google.com/maps/search/?api=1&query=Dream+World+Bangkok",
      "wiki": "Dream World (amusement park)",
      "done": false,
-     "notes": "฿1,200 לאדם · רנגסיט, כשעה לכל כיוון · במקום ISB וסנטרל צ׳אנגוואטנה · חוזרים עד 16:30 בשביל המסאז׳ והמואיי תאי",
+     "notes": "לא רלוונטי — ISB אישרו ביקור ב-12:00",
      "managed": true,
      "priceEstimate": {
       "kind": "estimate",
@@ -1282,10 +1282,10 @@ window.SHARED_SEED = {
      "act": "מונית עצמאית מרציף מאנו למחנה",
      "loc": "קו יאו נוי",
      "cat": "תחבורה",
-     "baht": 200,
+     "baht": 300,
      "status": "משלמים במקום",
      "link": "",
-     "notes": "המחנה אינו מארגן העברות מבאנג רונג או מאנו. לתאם מונית עצמאית; המחנה יכול לספק הכוונה. ฿200 הוא אומדן קודם, לא הצעת מחיר.",
+     "notes": "KYN: לא צריך להזמין מראש — מוניות מקומיות מחכות ברציף, ฿150 לאדם, מכירים את המחנה ויש מקום למזוודות",
      "id": "s_4_8",
      "done": false,
      "priceEstimate": {
@@ -2062,13 +2062,13 @@ window.SHARED_SEED = {
     {
      "time": "10:35",
      "dur": "0:20",
-     "act": "מונית עצמאית לרציף",
+     "act": "הסעה מהמחנה לרציף",
      "loc": "קו יאו נוי",
      "cat": "תחבורה",
-     "baht": 200,
+     "baht": 0,
      "status": "משלמים במקום",
      "link": "",
-     "notes": "המחנה אינו מארגן העברות. לתאם מונית עצמאית; ฿200 הוא אומדן קודם.",
+     "notes": "KYN מזמינים את כרטיסי הספידבוט, וההסעה לרציף כלולה בחינם · לתאם עם הצוות כשמגיעים",
      "id": "s_7_3",
      "done": false,
      "priceEstimate": {
@@ -2089,7 +2089,7 @@ window.SHARED_SEED = {
      "baht": 1200,
      "status": "משלמים במקום",
      "link": "https://www.google.com/maps/search/?api=1&query=Ao+Nang+Krabi",
-     "notes": "฿500–600 לאדם · עונת שיא בלבד",
+     "notes": "כרטיסים דרך KYN · ฿500–600 לאדם · עונת שיא בלבד",
      "id": "s_7_4",
      "done": false,
      "priceEstimate": {
