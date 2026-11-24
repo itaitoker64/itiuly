@@ -463,7 +463,7 @@ const TASKS_33 = [
   {from:'להזמין סימילן ל-6/12', notes:'Asian Trails (Patty, הדלפק בקלימה) · ביקשנו Late Departure, איסוף 07:30–07:45 · מחכים למחיר ולתנאי ביטול · Early Bird: ฿4,100 לאדם'}
 ];
 const EXPENSE_36 = () => ({id:uid('x'), date:"2026-12-03", title:"Siam Tour · Laguna Seaview · 3/12", category:"activities",
-  amount:15000, currency:"THB", paidBy:"itai", split:"ratio", status:"due", note:"voucher 8044 · הזמנה 5946 · שולמה מקדמה ฿7,500 ב-15/11 · יתרה ฿7,500 עד 26/11 · לא מוחזר"});
+  amount:15000, currency:"THB", paidBy:"itai", split:"ratio", status:"paid", note:"voucher 8044 · הזמנה 5946 · מקדמה ฿7,500 ב-15/11 · יתרה ฿7,500 ב-24/11 · לא מוחזר"});
 const NEW_TASKS_36 = () => [
   {id:uid('m'), owner:"itai", status:"todo", category:"הזמנות", countryId:"thailand", order:13.32, priority:"גבוהה", deadline:"2026-11-26",
    title:"לשלם ל-Siam Tour את היתרה, ฿7,500", notes:"הזמנה 5946 · voucher 8044 · בכרטיס דרך הקישור של לוקאס או ב-Wise · לשלוח צילום מסך בוואטסאפ", link:""},
@@ -2529,6 +2529,26 @@ function ensureDefaults(){
         const sr = seedDay.rows.find(x=>x.id===r.id); if(!sr) return;
         ['time','status','baht','notes'].forEach(k=>{ r[k] = sr[k]; });
       });
+    });
+  }
+  // 24/11: היתרה ל-Siam Tour שולמה, ולוקאס אישר הורדה ב-River Lodge
+  if(STATE.shared && window.SHARED_SEED){
+    const b = (STATE.shared.bookings||[]).find(x=>x.ref==='5946');
+    const sb = window.SHARED_SEED.bookings.find(x=>x.ref==='5946');
+    if(b && sb && !/שולם במלואו/.test(b.payment||'')) b.payment = sb.payment;
+    (STATE.shared.days||[]).filter(d=>d.owner!=='talia').forEach(day=>{
+      const seedDay = window.SHARED_SEED.days.find(d=>d.date===day.date && d.owner!=='talia');
+      (day.rows||[]).forEach(r=>{
+        if(r.id==='s_g6_2' && r.status!=='מוזמן'){ const sr = seedDay && seedDay.rows.find(x=>x.id==='s_g6_2'); if(sr){ r.status = sr.status; r.notes = sr.notes; } }
+        if(/voucher 8044/.test(r.notes||'') && /יתרה ฿7,500 עד 26\/11/.test(r.notes||'')) r.notes = r.notes.replace('שולמה מקדמה ฿7,500 ב-15/11 · יתרה ฿7,500 עד 26/11, בכרטיס או ב-Wise','שולם במלואו — מקדמה ב-15/11, יתרה ב-24/11');
+      });
+    });
+    ((STATE.money&&STATE.money.expenses)||[]).forEach(x=>{
+      if(/voucher 8044/.test(x.note||'') && x.status!=='paid'){ x.status = 'paid'; x.note = 'voucher 8044 · הזמנה 5946 · מקדמה ฿7,500 ב-15/11 · יתרה ฿7,500 ב-24/11 · לא מוחזר'; }
+    });
+    (STATE.masterChecklist||[]).forEach(t=>{
+      if(t.title==='לשלם ל-Siam Tour את היתרה, ฿7,500' && t.status!=='done'){ t.status = 'done'; t.notes = '24/11: שולם · '+(t.notes||''); }
+      if(t.title==='לוודא עם Siam Tour: לילה אחד, והורדה ב-River Lodge ב-4/12' && t.status!=='done'){ t.status = 'done'; t.notes = '17/11: לוקאס אישר במייל · '+(t.notes||''); }
     });
   }
   // המפה של טליה ומל בגוגל מפות — המקומות נטענים ממנה בכל פתיחה
