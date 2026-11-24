@@ -464,6 +464,10 @@ const TASKS_33 = [
 ];
 const EXPENSE_36 = () => ({id:uid('x'), date:"2026-12-03", title:"Siam Tour · Laguna Seaview · 3/12", category:"activities",
   amount:15000, currency:"THB", paidBy:"itai", split:"ratio", status:"paid", note:"voucher 8044 · הזמנה 5946 · מקדמה ฿7,500 ב-15/11 · יתרה ฿7,500 ב-24/11 · לא מוחזר"});
+const SPEND_2411 = () => [
+  {id:uid('x'), date:"2026-11-24", title:"בנגקוק 23–24/11 · מזומן", category:"food", amount:2000, currency:"THB", paidBy:"itai", split:"ratio", status:"paid", note:"הוצאות יומיות במזומן: אוכל, טוקטוקים ושווקים"},
+  {id:uid('x'), date:"2026-11-24", title:"בנגקוק 23–24/11 · אשראי", category:"food", amount:1000, currency:"THB", paidBy:"itai", split:"ratio", status:"paid", note:"הוצאות יומיות בכרטיס"}
+];
 const NEW_TASKS_36 = () => [
   {id:uid('m'), owner:"itai", status:"todo", category:"הזמנות", countryId:"thailand", order:13.32, priority:"גבוהה", deadline:"2026-11-26",
    title:"לשלם ל-Siam Tour את היתרה, ฿7,500", notes:"הזמנה 5946 · voucher 8044 · בכרטיס דרך הקישור של לוקאס או ב-Wise · לשלוח צילום מסך בוואטסאפ", link:""},
@@ -695,6 +699,7 @@ function seedData(){
 
     /* חלוקת הוצאות בסגנון Splitwise */
     money:{
+      added2411:true,
       rate:0.08981,                 // ฿1 בשקלים
       rateChecked:"2026-09-10",      // מתי נבדק — משמש לאזהרה כשהוא מתיישן
       defaultSplit:{itai:0.6667, talia:0.3333},
@@ -712,7 +717,7 @@ function seedData(){
         KALIMA_EXTRA_EXPENSE(),
         {id:uid('x'), date:"2026-12-09", title:"Eleven Bangkok Sukhumvit 11 · 9–12/12", category:"accommodation",
          amount:8411.85, currency:"THB", paidBy:"itai", split:"ratio", status:"due", note:ELEVEN_NOTE_32},
-        ...EXPENSES_32(), EXPENSE_36()
+        ...EXPENSES_32(), EXPENSE_36(), ...SPEND_2411()
       ],
       settlements:[]
     },
@@ -2550,6 +2555,11 @@ function ensureDefaults(){
       if(t.title==='לשלם ל-Siam Tour את היתרה, ฿7,500' && t.status!=='done'){ t.status = 'done'; t.notes = '24/11: שולם · '+(t.notes||''); }
       if(t.title==='לוודא עם Siam Tour: לילה אחד, והורדה ב-River Lodge ב-4/12' && t.status!=='done'){ t.status = 'done'; t.notes = '17/11: לוקאס אישר במייל · '+(t.notes||''); }
     });
+  }
+  // 24/11: הוצאות יומיות ראשונות בבנגקוק
+  if(STATE.money && STATE.money.expenses && !STATE.money.added2411){
+    SPEND_2411().forEach(x=>{ if(!STATE.money.expenses.some(e=>e.title===x.title)) STATE.money.expenses.push(x); });
+    STATE.money.added2411 = true;
   }
   // המפה של טליה ומל בגוגל מפות — המקומות נטענים ממנה בכל פתיחה
   if(STATE.shared && !(STATE.shared.mapLists||[]).some(m=>m.id==='wHPaAtsYL2pmB4xARWodPA')){
