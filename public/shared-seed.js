@@ -1120,10 +1120,10 @@ window.SHARED_SEED = {
      "act": "מונית לסובארנבומי",
      "loc": "צ׳יינטאון → BKK",
      "cat": "תחבורה",
-     "baht": 400,
-     "status": "משלמים במקום",
+     "baht": 525,
+     "status": "מוזמן",
      "link": "",
-     "notes": "לבקש בקבלה של ASAI ערב קודם, או גראב בבוקר",
+     "notes": "מונית של Booking · אישור 274424418 · ₪51.36 שולם · איסוף מ-ASAI ב-06:45",
      "id": "s_4_1",
      "done": false,
      "priceEstimate": {
@@ -1211,15 +1211,15 @@ window.SHARED_SEED = {
      "managed": true
     },
     {
-     "time": "11:45",
+     "time": "12:00",
      "dur": "0:30",
      "act": "מונית לרציף באנג רונג",
      "loc": "HKT → Bang Rong Pier",
      "cat": "תחבורה",
      "baht": 800,
-     "status": "משלמים במקום",
+     "status": "מוזמן",
      "link": "https://www.google.com/maps/search/?api=1&query=Bang+Rong+Pier+Phuket",
-     "notes": "מזמינים בשדה — דוכן המוניות הרשמי או גראב · 25–30 דקות",
+     "notes": "Grab מתוזמן · Booking ID A-A4BW7IPW22UFAV · עוקב אחרי VZ300 · ללחוץ I'm ready to go כשהמזוודות אצלנו · 25–30 דקות",
      "id": "s_4_5",
      "done": false,
      "priceEstimate": {
@@ -3358,10 +3358,10 @@ window.SHARED_SEED = {
      "act": "מונית מהכפר לקלימה",
      "loc": "קאו סוק → קאו לאק",
      "cat": "תחבורה",
-     "baht": 1800,
-     "status": "להזמין",
+     "baht": 849,
+     "status": "מוזמן",
      "link": "",
-     "notes": "מונית Booking — איתי מזמין מראש · Khao Sok River Lodge → Kalima · 5/12 ב-11:00 · 2 נוסעים ומזוודות · כשעתיים",
+     "notes": "Grab מתוזמן ฿849 (A-A4B3K42WXAUFAV) · גיבוי: מונית Booking 161864633 ששולמה ₪481.69 · להחליט ב-3/12 בבוקר ולבטל אחת — ביטול חינם בבוקינג עד 4/12 11:00",
      "id": "s_g6_taxi",
      "done": false,
      "priceEstimate": {
@@ -4317,10 +4317,10 @@ window.SHARED_SEED = {
      "act": "איתי — מונית לסוברנבומי",
      "loc": "סוכומוויט 11 → BKK",
      "cat": "תחבורה",
-     "baht": 400,
-     "status": "משלמים במקום",
+     "baht": 535,
+     "status": "מוזמן",
      "link": "",
-     "notes": "להזמין בקבלה של Eleven יום לפני · 30–45 דקות בבוקר",
+     "notes": "מונית של Booking · אישור 596039126 · ₪52.34 שולם · איסוף מ-Eleven ב-07:45",
      "id": "s_f10_0",
      "done": false,
      "priceEstimate": {
@@ -4603,6 +4603,46 @@ window.SHARED_SEED = {
    "ref": "997065466",
    "payment": "₪153.27",
    "freeCancel": "לפי תנאי Booking"
+  },
+  {
+   "what": "מונית Booking · ASAI → BKK",
+   "when": "26/11, 06:45",
+   "details": "ASAI (531 Charoen Krung) → סוברנבומי, לפני VZ300 ב-09:40 · 2 נוסעים",
+   "ref": "274424418",
+   "payment": "₪51.36",
+   "freeCancel": "עד 24 שעות לפני"
+  },
+  {
+   "what": "Grab · HKT → Bang Rong Pier",
+   "when": "26/11, 12:00",
+   "details": "GrabCar Plus מהשדה בפוקט לרציף באנג רונג · עוקב אחרי VZ300 · ללחוץ I'm ready to go כשהמזוודות אצלנו",
+   "ref": "A-A4BW7IPW22UFAV",
+   "payment": "בכרטיס דרך Grab",
+   "freeCancel": "לפי תנאי Grab"
+  },
+  {
+   "what": "Grab · River Lodge → קלימה",
+   "when": "5/12, 11:00",
+   "details": "Standard Car, 4 מקומות · נסיעה מתוזמנת — לא מובטח שיימצא נהג באזור",
+   "ref": "A-A4B3K42WXAUFAV",
+   "payment": "฿849 בכרטיס",
+   "freeCancel": "לפי תנאי Grab"
+  },
+  {
+   "what": "מונית Booking · River Lodge → קלימה (גיבוי)",
+   "when": "5/12, 11:00",
+   "details": "גיבוי ל-Grab · להחליט ב-3/12 בבוקר לפני האגם ולבטל אחת מהשתיים (תזכורת ביומן)",
+   "ref": "161864633",
+   "payment": "שולם ₪481.69",
+   "freeCancel": "ביטול חינם עד 4/12 11:00"
+  },
+  {
+   "what": "מונית Booking · Eleven → BKK",
+   "when": "10/12, 07:45",
+   "details": "איתי לבד · Eleven → סוברנבומי, לפני IZ592 ב-11:15",
+   "ref": "596039126",
+   "payment": "₪52.34",
+   "freeCancel": "עד 24 שעות לפני"
   },
   {
    "what": "Phor Liang Meun, צ׳יאנג מאי",

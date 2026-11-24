@@ -2511,6 +2511,26 @@ function ensureDefaults(){
   if(STATE.shared && STATE.shared.bookings && !STATE.shared.bookings.some(b=>b.fileTag==='PassportCard')){
     STATE.shared.bookings.push({what:'ביטוח נסיעות · PassportCard', when:'כל הטיול', details:'פוליסה לשניים · הקובץ "אישור פוליסה" נפתח עם מספר תעודת הזהות של איתי', ref:'בקובץ הפוליסה', payment:'שולם', freeCancel:'—', fileTag:'PassportCard'});
   }
+  // 24/11: המוניות והגראבים שהוזמנו — נכנסים לאישורים ולשורות של הימים
+  if(STATE.shared && STATE.shared.bookings && window.SHARED_SEED){
+    const seedB = window.SHARED_SEED.bookings;
+    ['596039126','161864633','A-A4B3K42WXAUFAV','A-A4BW7IPW22UFAV','274424418'].forEach(ref=>{
+      if(STATE.shared.bookings.some(b=>b.ref===ref)) return;
+      const sb = seedB.find(b=>b.ref===ref); if(!sb) return;
+      const at = STATE.shared.bookings.findIndex(b=>b.ref==='997065466');
+      STATE.shared.bookings.splice(at>=0 ? at+1 : STATE.shared.bookings.length, 0, JSON.parse(JSON.stringify(sb)));
+    });
+    const fix = {s_4_1:'274424418', s_4_5:'A-A4BW7IPW22UFAV', s_g6_taxi:'A-A4B3K42WXAUFAV', s_f10_0:'596039126'};
+    (STATE.shared.days||[]).filter(d=>d.owner!=='talia').forEach(day=>{
+      const seedDay = window.SHARED_SEED.days.find(d=>d.date===day.date && d.owner!=='talia');
+      (day.rows||[]).forEach(r=>{
+        const ref = fix[r.id];
+        if(!ref || String(r.notes||'').includes(ref) || !seedDay) return;
+        const sr = seedDay.rows.find(x=>x.id===r.id); if(!sr) return;
+        ['time','status','baht','notes'].forEach(k=>{ r[k] = sr[k]; });
+      });
+    });
+  }
   // המפה של טליה ומל בגוגל מפות — המקומות נטענים ממנה בכל פתיחה
   if(STATE.shared && !(STATE.shared.mapLists||[]).some(m=>m.id==='wHPaAtsYL2pmB4xARWodPA')){
     (STATE.shared.mapLists = STATE.shared.mapLists||[]).push({id:'wHPaAtsYL2pmB4xARWodPA', title:'טליה ומל כובשות את המזרח 👯🌺✈️', note:'הרשימה של טליה ומל בגוגל מפות · כל מקום שנשמר שם מופיע כאן'});
