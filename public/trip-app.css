@@ -846,3 +846,8 @@ button:focus-visible,a:focus-visible,input:focus-visible{outline:2px solid var(-
 .payer-pill.payer-itai.active{background:var(--payer-itai);border-color:var(--payer-itai);}
 .payer-pill.payer-talia.active{background:var(--payer-talia);border-color:var(--payer-talia);}
 .money-payer{margin-top:6px;}
+.settled-tag{display:inline-block;font-size:10.5px;font-weight:600;padding:2px 7px;border-radius:999px;vertical-align:1px;white-space:nowrap;}
+.settled-tag.full{background:rgba(80,140,90,.14);color:#3E7A4B;}
+.settled-tag.part{background:rgba(200,150,60,.16);color:#8A6420;}
+.settled-tag.open{background:transparent;border:1px solid var(--line);color:var(--muted);}
+.settle-note{font-size:12.5px;background:rgba(80,140,90,.10);color:#3E7A4B;border-radius:12px;padding:9px 12px;margin:0 0 10px;line-height:1.5;}

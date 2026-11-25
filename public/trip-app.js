@@ -4397,6 +4397,35 @@ function renderBalance(){
   <button class="btn full" data-action="addExpense" style="margin-top:16px">+ הוצאה חדשה</button>`;
 }
 
+/* מה כבר מקוזז ביניכם: ההעברות של טליה לאיתי, ועוד החלק של איתי במה שטליה שילמה,
+   סוגרים את החלק של טליה בהוצאות שאיתי שילם — מהישנה לחדשה. */
+function settlementCoverage(){
+  const out = {};
+  const exps = wallet().expenses.filter(x=>!isDue(x));
+  const sets = wallet().settlements||[];
+  let pool = sets.reduce((t,s)=>t + (s.from==='talia' ? 1 : -1) * (Number(s.amount)||0), 0);
+  exps.filter(x=>x.paidBy==='talia').forEach(x=>{
+    const other = splitShares(x).itai;
+    if(other > 0){ pool += other; out[x.id] = {owed:other, covered:other}; }
+  });
+  exps.filter(x=>x.paidBy==='itai')
+    .sort((a,b)=>(a.date||'').localeCompare(b.date||'') || String(a.id).localeCompare(String(b.id)))
+    .forEach(x=>{
+      const owed = splitShares(x).talia; if(!(owed > 0)) return;
+      const covered = Math.max(0, Math.min(pool, owed));
+      pool -= covered;
+      out[x.id] = {owed, covered};
+    });
+  out.__left = pool;
+  return out;
+}
+function settledTag(c){
+  if(!c) return '';
+  if(c.covered >= c.owed - 0.5) return '<span class="settled-tag full">✓ מקוזז</span>';
+  if(c.covered > 0.5) return `<span class="settled-tag part">מקוזז חלקית · נותר ${ils(c.owed - c.covered)}</span>`;
+  return '<span class="settled-tag open">פתוח</span>';
+}
+
 function moneyCategoryId(x){
   return EXPENSE_CATEGORIES.some(c=>c.id===x.category) ? x.category : 'other';
 }
@@ -4439,6 +4468,8 @@ function renderExpenseList(){
     <span class="payer-split"><i class="payer-dot payer-itai"></i>איתי ${ils(list.filter(x=>x.paidBy==='itai').reduce((t,x)=>t+(x.currency==='THB'?toIls(x.amount):Number(x.amount)||0),0))} · <i class="payer-dot payer-talia"></i>טליה ${ils(list.filter(x=>x.paidBy==='talia').reduce((t,x)=>t+(x.currency==='THB'?toIls(x.amount):Number(x.amount)||0),0))}</span>
     <small>סיכומים בשקלים · באט מומר לפי השער המוגדר. חבילות לינה כוללות גם את הארוחות והאימונים הכלולים במחירן.</small>
   </div>
+  ${(()=>{ window.__cov = settlementCoverage(); const left = window.__cov.__left;
+    return Math.abs(left) < 1 ? '' : `<div class="settle-note">${left>0 ? `✓ כל מה שכבר שולם מקוזז ביניכם · לטליה נשארה יתרה של ${ils(left)}, שתתקזז מול ההוצאות הבאות` : `נשאר פתוח: טליה חייבת לאיתי ${ils(-left)} על מה שכבר שולם`}</div>`; })()}
   ${list.map(x=>{
     const shares = splitShares(x);
     const myShare = shares[meId()];
@@ -4446,7 +4477,7 @@ function renderExpenseList(){
     return `
     <div class="exp-card payer-${x.paidBy} ${isDue(x)?'due':''}">
       <div class="exp-main" data-action="editExpense" data-id="${x.id}">
-        <div class="exp-title"><span class="payer-badge payer-${x.paidBy}">${(PEOPLE[x.paidBy]||{}).emoji||''} ${personName(x.paidBy)}</span> ${escapeHtml(x.title)}${isDue(x)?' <span class="due-tag">טרם שולם</span>':''}</div>
+        <div class="exp-title"><span class="payer-badge payer-${x.paidBy}">${(PEOPLE[x.paidBy]||{}).emoji||''} ${personName(x.paidBy)}</span> ${escapeHtml(x.title)}${isDue(x)?' <span class="due-tag">טרם שולם</span>':''} ${isDue(x)?'':settledTag(window.__cov[x.id])}</div>
         <div class="exp-meta">
           ${fmtDateShort(x.date)} · ${expCatLabel(x.category)} ·
           ${isDue(x)?'משלם/ת מתוכנן/ת':'שילם/ה'} ${personName(x.paidBy)} · ${splitLabel(x)}
