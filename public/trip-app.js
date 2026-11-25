@@ -722,6 +722,7 @@ function seedData(){
       added2411:true,
       added2511:true,
       cash2511:true,
+      prepay2211:true,
       rate:0.08981,                 // ฿1 בשקלים
       rateChecked:"2026-09-10",      // מתי נבדק — משמש לאזהרה כשהוא מתיישן
       defaultSplit:{itai:0.6667, talia:0.3333},
@@ -741,7 +742,7 @@ function seedData(){
          amount:8411.85, currency:"THB", paidBy:"itai", split:"ratio", status:"due", note:ELEVEN_NOTE_32},
         ...EXPENSES_32(), EXPENSE_36(), ...SPEND_2411(), ...SPEND_2511()
       ],
-      settlements:[]
+      settlements:[{id:'s-talia-prepay', from:'talia', to:'itai', amount:4766, date:'2026-11-22', note:'לפני הטיול, על מה שהוזמן מראש'}]
     },
 
     countries:[
@@ -2626,6 +2627,13 @@ function ensureDefaults(){
       });
     });
     STATE.shared.applied2511bolt = true;
+  }
+  // טליה העבירה לאיתי ₪4,766 לפני הטיול על ההזמנות מראש
+  if(STATE.money && !STATE.money.prepay2211){
+    STATE.money.settlements = STATE.money.settlements || [];
+    if(!STATE.money.settlements.some(x=>x.id==='s-talia-prepay'))
+      STATE.money.settlements.push({id:'s-talia-prepay', from:'talia', to:'itai', amount:4766, date:'2026-11-22', note:'לפני הטיול, על מה שהוזמן מראש'});
+    STATE.money.prepay2211 = true;
   }
   // המפה של טליה ומל בגוגל מפות — המקומות נטענים ממנה בכל פתיחה
   if(STATE.shared && !(STATE.shared.mapLists||[]).some(m=>m.id==='wHPaAtsYL2pmB4xARWodPA')){
