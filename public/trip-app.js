@@ -465,7 +465,7 @@ const TASKS_33 = [
 const EXPENSE_36 = () => ({id:uid('x'), date:"2026-12-03", title:"Siam Tour · Laguna Seaview · 3/12", category:"activities",
   amount:15000, currency:"THB", paidBy:"itai", split:"ratio", status:"paid", note:"voucher 8044 · הזמנה 5946 · מקדמה ฿7,500 ב-15/11 · יתרה ฿7,500 ב-24/11 · לא מוחזר"});
 const SPEND_2411 = () => [
-  {id:uid('x'), date:"2026-11-24", title:"בנגקוק 23–24/11 · מזומן", category:"food", amount:2000, currency:"THB", paidBy:"itai", split:"ratio", status:"paid", note:"הוצאות יומיות במזומן: אוכל, טוקטוקים ושווקים"}
+  {id:uid('x'), date:"2026-11-25", title:"בנגקוק 23–25/11 · מזומן", category:"food", amount:4900, currency:"THB", paidBy:"itai", split:"ratio", status:"paid", note:"הוצאות יומיות במזומן: אוכל, טוקטוקים ושווקים"}
 ];
 const SPEND_2511 = () => [
   {id:uid('x'), date:"2026-11-23", title:"פאד תאי בצ׳יינטאון", category:"food", amount:400, currency:"THB", paidBy:"itai", split:"ratio", status:"paid", note:"באשראי"},
@@ -721,6 +721,7 @@ function seedData(){
     money:{
       added2411:true,
       added2511:true,
+      cash2511:true,
       rate:0.08981,                 // ฿1 בשקלים
       rateChecked:"2026-09-10",      // מתי נבדק — משמש לאזהרה כשהוא מתיישן
       defaultSplit:{itai:0.6667, talia:0.3333},
@@ -2604,6 +2605,12 @@ function ensureDefaults(){
     STATE.money.expenses = STATE.money.expenses.filter(e=>!(e.title==='בנגקוק 23–24/11 · אשראי' && e.amount===1000));
     SPEND_2511().forEach(x=>{ if(!STATE.money.expenses.some(e=>e.title===x.title && e.date===x.date && e.amount===x.amount)) STATE.money.expenses.push(x); });
     STATE.money.added2511 = true;
+  }
+  // 25/11: המזומן עד עכשיו הוא ฿4,900, לא ฿2,000
+  if(STATE.money && STATE.money.expenses && !STATE.money.cash2511){
+    const c = STATE.money.expenses.find(e=>e.title==='בנגקוק 23–24/11 · מזומן' && e.amount===2000);
+    if(c) Object.assign(c, {title:'בנגקוק 23–25/11 · מזומן', amount:4900, date:'2026-11-25'});
+    STATE.money.cash2511 = true;
   }
   // המפה של טליה ומל בגוגל מפות — המקומות נטענים ממנה בכל פתיחה
   if(STATE.shared && !(STATE.shared.mapLists||[]).some(m=>m.id==='wHPaAtsYL2pmB4xARWodPA')){
