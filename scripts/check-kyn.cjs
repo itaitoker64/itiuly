@@ -10,9 +10,10 @@ vm.runInContext(read('public/trip-app.js').replace(/loadState\(\);\s*$/,''),ctx)
 const run = s=>vm.runInContext(s,ctx);
 run('STATE=seedData(); ensureDefaults();');
 assert.equal(run('STATE.schema'), 37);
-// Talia has not paid for anything on this trip yet — every booking so far is Itai's.
-assert.equal(run('wallet().expenses.filter(x=>x.paidBy==="talia").length'),0);
-assert.equal(run('balance().taliaPaid'),0);
+// Every booking is Itai's; Talia's card shows only her own day-to-day spending from 23–25/11.
+assert.equal(run('wallet().expenses.filter(x=>x.paidBy==="talia").length'),9);
+assert.equal(run('wallet().expenses.filter(x=>x.paidBy==="talia" && x.category==="accommodation").length'),0);
+assert.ok(run('balance().taliaPaid')>0);
 assert.equal(run('wallet().expenses.filter(x=>x.bookingKey==="kyn-2026-11").length'),1);
 // Corrected by the camp from 14,580 (the panoramic rate) to 12,150.
 assert.equal(run('kynPackageExpense().amount'),12150);
@@ -61,7 +62,7 @@ run(`STATE=seedData(); STATE.schema=7;
 wallet().expenses.find(x=>/IZ598/.test(x.title)).paidBy='talia';
 ensureDefaults();`);
 assert.equal(run('wallet().expenses.find(x=>/IZ598/.test(x.title)).paidBy'),'itai');
-assert.equal(run('balance().taliaPaid'),0);
+assert.equal(run('wallet().expenses.filter(x=>x.paidBy==="talia" && x.category==="flights").length'),0);
 // Day 4 now hangs off the booked 09:40 VietJet flight, and the 16:00 technique session survives it.
 assert.equal(run('sh().days[3].rows.find(r=>r.id==="s_4_0").time'),'06:00');
 assert.ok(run('sh().days[3].rows.find(r=>r.id==="s_4_3").act').includes('VZ300'));

@@ -142,7 +142,7 @@ assert.equal(run('wallet().expenses.find(x=>/^ASAI/.test(x.title)).amount'), 103
 assert.equal(run('wallet().expenses.find(x=>/MSR6JW/.test(x.title)).status'), 'paid');
 assert.equal(run('wallet().expenses.find(x=>/^Eleven Bangkok/.test(x.title)).amount'), 8411.85);
 assert.equal(run('wallet().expenses.filter(x=>/Sarana|Our Jungle/.test(x.title)).length'), 0);
-assert.equal(run('wallet().expenses.filter(x=>x.paidBy==="talia").length'), 0);
+assert.equal(run('wallet().expenses.filter(x=>x.paidBy==="talia" && x.category==="accommodation").length'), 0);
 // The tasks: what to book and what to cancel.
 for (const t of ['להזמין לינה בקאו סוק, 3/12', 'להזמין לילה נוסף בקלימה — 5/12', 'להזמין ואן מאאו נאנג לקאו סוק, 3/12',
                  'להזמין טיסות VietJet בנגקוק ↔ פוקט', 'להזמין לילה על אגם צ׳או לאן, 3/12', 'River Lodge — בוקינג מחייב את הכרטיס ב-28/11', 'לעדכן את Eleven Bangkok לשני אנשים', 'לתקן מול קלימה: נשארים עד 9/12',

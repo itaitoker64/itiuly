@@ -465,8 +465,28 @@ const TASKS_33 = [
 const EXPENSE_36 = () => ({id:uid('x'), date:"2026-12-03", title:"Siam Tour · Laguna Seaview · 3/12", category:"activities",
   amount:15000, currency:"THB", paidBy:"itai", split:"ratio", status:"paid", note:"voucher 8044 · הזמנה 5946 · מקדמה ฿7,500 ב-15/11 · יתרה ฿7,500 ב-24/11 · לא מוחזר"});
 const SPEND_2411 = () => [
-  {id:uid('x'), date:"2026-11-24", title:"בנגקוק 23–24/11 · מזומן", category:"food", amount:2000, currency:"THB", paidBy:"itai", split:"ratio", status:"paid", note:"הוצאות יומיות במזומן: אוכל, טוקטוקים ושווקים"},
-  {id:uid('x'), date:"2026-11-24", title:"בנגקוק 23–24/11 · אשראי", category:"food", amount:1000, currency:"THB", paidBy:"itai", split:"ratio", status:"paid", note:"הוצאות יומיות בכרטיס"}
+  {id:uid('x'), date:"2026-11-24", title:"בנגקוק 23–24/11 · מזומן", category:"food", amount:2000, currency:"THB", paidBy:"itai", split:"ratio", status:"paid", note:"הוצאות יומיות במזומן: אוכל, טוקטוקים ושווקים"}
+];
+const SPEND_2511 = () => [
+  {id:uid('x'), date:"2026-11-23", title:"פאד תאי בצ׳יינטאון", category:"food", amount:400, currency:"THB", paidBy:"itai", split:"ratio", status:"paid", note:"באשראי"},
+  {id:uid('x'), date:"2026-11-23", title:"נתב״ג", category:"food", amount:125, currency:"ILS", paidBy:"itai", split:"ratio", status:"paid", note:"באשראי"},
+  {id:uid('x'), date:"2026-11-24", title:"Katsu Midori", category:"food", amount:649, currency:"THB", paidBy:"itai", split:"ratio", status:"paid", note:"באשראי"},
+  {id:uid('x'), date:"2026-11-24", title:"7-11", category:"food", amount:205, currency:"THB", paidBy:"itai", split:"ratio", status:"paid", note:"באשראי"},
+  {id:uid('x'), date:"2026-11-24", title:"צ׳טוצ׳אק", category:"food", amount:80, currency:"THB", paidBy:"itai", split:"ratio", status:"paid", note:"באשראי"},
+  {id:uid('x'), date:"2026-11-24", title:"ארוחת לוי קרתונג · Sala Rattanakosin", category:"food", amount:3013.12, currency:"THB", paidBy:"itai", split:"ratio", status:"paid", note:"באשראי"},
+  {id:uid('x'), date:"2026-11-25", title:"Bright Side Brunch Bar", category:"food", amount:1006.5, currency:"THB", paidBy:"itai", split:"ratio", status:"paid", note:"באשראי"},
+  {id:uid('x'), date:"2026-11-25", title:"Scoozi Pizza · Central", category:"food", amount:1105, currency:"THB", paidBy:"itai", split:"ratio", status:"paid", note:"באשראי"},
+  {id:uid('x'), date:"2026-11-25", title:"כרטיסים · Rajadamnern", category:"activities", amount:2000, currency:"THB", paidBy:"itai", split:"ratio", status:"paid", note:"באשראי"},
+  {id:uid('x'), date:"2026-11-25", title:"מקדונלד׳ס פראטונם", category:"food", amount:177, currency:"THB", paidBy:"itai", split:"ratio", status:"paid", note:"באשראי"},
+  {id:uid('x'), date:"2026-11-23", title:"Krispy Kreme", category:"food", amount:308, currency:"THB", paidBy:"talia", split:"ratio", status:"paid", note:"באשראי"},
+  {id:uid('x'), date:"2026-11-23", title:"eSIM · Roamless ($17.95)", category:"other", amount:66, currency:"ILS", paidBy:"talia", split:"ratio", status:"paid", note:"באשראי"},
+  {id:uid('x'), date:"2026-11-24", title:"Sourdough Stars", category:"food", amount:555, currency:"THB", paidBy:"talia", split:"ratio", status:"paid", note:"באשראי"},
+  {id:uid('x'), date:"2026-11-24", title:"I'm Chinatown", category:"food", amount:345, currency:"THB", paidBy:"talia", split:"ratio", status:"paid", note:"באשראי"},
+  {id:uid('x'), date:"2026-11-24", title:"Red Drum", category:"food", amount:250, currency:"THB", paidBy:"talia", split:"ratio", status:"paid", note:"באשראי"},
+  {id:uid('x'), date:"2026-11-25", title:"Central Chaengwattana", category:"food", amount:170, currency:"THB", paidBy:"talia", split:"ratio", status:"paid", note:"באשראי"},
+  {id:uid('x'), date:"2026-11-25", title:"7-11 · Sathit Pim", category:"food", amount:232, currency:"THB", paidBy:"talia", split:"ratio", status:"paid", note:"באשראי"},
+  {id:uid('x'), date:"2026-11-25", title:"Rajadamnern · Global Sport Ventures", category:"activities", amount:440, currency:"THB", paidBy:"talia", split:"ratio", status:"paid", note:"באשראי"},
+  {id:uid('x'), date:"2026-11-25", title:"Shibuya · פראטונם", category:"food", amount:254, currency:"THB", paidBy:"talia", split:"ratio", status:"paid", note:"באשראי"}
 ];
 const NEW_TASKS_36 = () => [
   {id:uid('m'), owner:"itai", status:"todo", category:"הזמנות", countryId:"thailand", order:13.32, priority:"גבוהה", deadline:"2026-11-26",
@@ -700,6 +720,7 @@ function seedData(){
     /* חלוקת הוצאות בסגנון Splitwise */
     money:{
       added2411:true,
+      added2511:true,
       rate:0.08981,                 // ฿1 בשקלים
       rateChecked:"2026-09-10",      // מתי נבדק — משמש לאזהרה כשהוא מתיישן
       defaultSplit:{itai:0.6667, talia:0.3333},
@@ -717,7 +738,7 @@ function seedData(){
         KALIMA_EXTRA_EXPENSE(),
         {id:uid('x'), date:"2026-12-09", title:"Eleven Bangkok Sukhumvit 11 · 9–12/12", category:"accommodation",
          amount:8411.85, currency:"THB", paidBy:"itai", split:"ratio", status:"due", note:ELEVEN_NOTE_32},
-        ...EXPENSES_32(), EXPENSE_36(), ...SPEND_2411()
+        ...EXPENSES_32(), EXPENSE_36(), ...SPEND_2411(), ...SPEND_2511()
       ],
       settlements:[]
     },
@@ -2577,6 +2598,12 @@ function ensureDefaults(){
       if(t.title==='לתאם ביקור בוגרים ב-ISB' && t.status!=='done'){ t.status = 'done'; t.notes = '24/11: אושר ל-25/11 ב-12:00 · Harold Albert ‎+66 81 902 2503 · דרכונים בשער'; }
     });
     STATE.shared.applied2411isb = true;
+  }
+  // 25/11: הוצאות האשראי של שניהם, אחת אחת — במקום סכום הכרטיס הכללי של 24/11
+  if(STATE.money && STATE.money.expenses && !STATE.money.added2511){
+    STATE.money.expenses = STATE.money.expenses.filter(e=>!(e.title==='בנגקוק 23–24/11 · אשראי' && e.amount===1000));
+    SPEND_2511().forEach(x=>{ if(!STATE.money.expenses.some(e=>e.title===x.title && e.date===x.date && e.amount===x.amount)) STATE.money.expenses.push(x); });
+    STATE.money.added2511 = true;
   }
   // המפה של טליה ומל בגוגל מפות — המקומות נטענים ממנה בכל פתיחה
   if(STATE.shared && !(STATE.shared.mapLists||[]).some(m=>m.id==='wHPaAtsYL2pmB4xARWodPA')){
