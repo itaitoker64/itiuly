@@ -145,12 +145,12 @@
    "freeCancel": "עד 24 שעות לפני"
   },
   {
-   "what": "Grab · HKT → Bang Rong Pier",
+   "what": "Bolt · HKT → Bang Rong Pier",
    "when": "26/11, 12:00",
-   "details": "GrabCar Plus מהשדה בפוקט לרציף באנג רונג · עוקב אחרי VZ300 · ללחוץ I'm ready to go כשהמזוודות אצלנו",
-   "ref": "A-A4BW7IPW22UFAV",
-   "payment": "בכרטיס דרך Grab",
-   "freeCancel": "לפי תנאי Grab"
+   "details": "איסוף מ-Domestic Terminal, Gate 1, Arrivals · בלי מעקב טיסה — אם VZ300 מתעכבת, להזיז ב-Edit · Grab A-A4BW7IPW22UFAV בוטל",
+   "ref": "Bolt",
+   "payment": "בכרטיס דרך Bolt",
+   "freeCancel": "לבדוק באפליקציה"
   },
   {
    "what": "Grab · River Lodge → קלימה",

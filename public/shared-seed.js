@@ -966,10 +966,10 @@ window.SHARED_SEED = {
      "act": "מואיי תאי באצטדיון רג׳אדמנרן",
      "loc": "Rajadamnern Stadium",
      "cat": "אטרקציות",
-     "baht": 3000,
-     "status": "משלמים במקום",
+     "baht": 2440,
+     "status": "מוזמן",
      "link": "https://rajadamnern.com/tickets/",
-     "notes": "באתר נשארה רק מחלקה שלישית — קונים בקופה כשמגיעים, עדיף Club Class ฿1,800 לאדם · אם אין, מחלקה שלישית ฿1,000 · לחזור עד 23:00, המונית לשדה ב-06:45",
+     "notes": "כרטיסים נקנו ב-25/11 · ฿2,000 (איתי) ו-฿440 (טליה) · לחזור עד 23:00, המונית לשדה ב-06:45",
      "id": "s_3_9",
      "done": false,
      "wiki": "Rajadamnern Stadium",
@@ -1213,13 +1213,13 @@ window.SHARED_SEED = {
     {
      "time": "12:00",
      "dur": "0:30",
-     "act": "מונית לרציף באנג רונג",
+     "act": "Bolt לרציף באנג רונג",
      "loc": "HKT → Bang Rong Pier",
      "cat": "תחבורה",
      "baht": 800,
      "status": "מוזמן",
      "link": "https://www.google.com/maps/search/?api=1&query=Bang+Rong+Pier+Phuket",
-     "notes": "Grab מתוזמן · Booking ID A-A4BW7IPW22UFAV · עוקב אחרי VZ300 · ללחוץ I'm ready to go כשהמזוודות אצלנו · 25–30 דקות",
+     "notes": "Bolt מתוזמן ל-12:00 · איסוף מ-Domestic Terminal, Gate 1, Arrivals · אין מעקב טיסה — אם יש עיכוב, להזיז ב-Edit או לכתוב לנהג · 25–30 דקות",
      "id": "s_4_5",
      "done": false,
      "priceEstimate": {
@@ -4613,12 +4613,12 @@ window.SHARED_SEED = {
    "freeCancel": "עד 24 שעות לפני"
   },
   {
-   "what": "Grab · HKT → Bang Rong Pier",
+   "what": "Bolt · HKT → Bang Rong Pier",
    "when": "26/11, 12:00",
-   "details": "GrabCar Plus מהשדה בפוקט לרציף באנג רונג · עוקב אחרי VZ300 · ללחוץ I'm ready to go כשהמזוודות אצלנו",
-   "ref": "A-A4BW7IPW22UFAV",
-   "payment": "בכרטיס דרך Grab",
-   "freeCancel": "לפי תנאי Grab"
+   "details": "איסוף מ-Domestic Terminal, Gate 1, Arrivals · בלי מעקב טיסה — אם VZ300 מתעכבת, להזיז ב-Edit · Grab A-A4BW7IPW22UFAV בוטל",
+   "ref": "Bolt",
+   "payment": "בכרטיס דרך Bolt",
+   "freeCancel": "לבדוק באפליקציה"
   },
   {
    "what": "Grab · River Lodge → קלימה",

@@ -2612,6 +2612,21 @@ function ensureDefaults(){
     if(c) Object.assign(c, {title:'בנגקוק 23–25/11 · מזומן', amount:4900, date:'2026-11-25'});
     STATE.money.cash2511 = true;
   }
+  // 25/11 בערב: Grab מפוקט לרציף הוחלף ב-Bolt, וכרטיסי Rajadamnern נקנו
+  if(STATE.shared && window.SHARED_SEED && !STATE.shared.applied2511bolt){
+    const b = (STATE.shared.bookings||[]).find(x=>x.ref==='A-A4BW7IPW22UFAV');
+    const sb = window.SHARED_SEED.bookings.find(x=>x.ref==='Bolt' && /Bang Rong/.test(x.what));
+    if(b && sb) Object.assign(b, JSON.parse(JSON.stringify(sb)));
+    (STATE.shared.days||[]).filter(d=>d.owner!=='talia').forEach(day=>{
+      const seedDay = window.SHARED_SEED.days.find(d=>d.date===day.date && d.owner!=='talia'); if(!seedDay) return;
+      (day.rows||[]).forEach(r=>{
+        if(r.id!=='s_4_5' && r.id!=='s_3_9') return;
+        const sr = seedDay.rows.find(x=>x.id===r.id); if(!sr) return;
+        ['act','status','baht','notes'].forEach(k=>{ r[k] = sr[k]; });
+      });
+    });
+    STATE.shared.applied2511bolt = true;
+  }
   // המפה של טליה ומל בגוגל מפות — המקומות נטענים ממנה בכל פתיחה
   if(STATE.shared && !(STATE.shared.mapLists||[]).some(m=>m.id==='wHPaAtsYL2pmB4xARWodPA')){
     (STATE.shared.mapLists = STATE.shared.mapLists||[]).push({id:'wHPaAtsYL2pmB4xARWodPA', title:'טליה ומל כובשות את המזרח 👯🌺✈️', note:'הרשימה של טליה ומל בגוגל מפות · כל מקום שנשמר שם מופיע כאן'});
