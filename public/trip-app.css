@@ -833,3 +833,16 @@ button:focus-visible,a:focus-visible,input:focus-visible{outline:2px solid var(-
 .map-places li span,.map-places li em{display:block;font-size:11.5px;color:var(--muted);font-style:normal;}
 .map-places li em{font-style:italic;}
 .map-places .map-empty{color:var(--muted);font-size:12px;}
+/* מי שילם: צבע קבוע לכל אחד, בלי קשר למי שמחובר */
+:root{--payer-itai:#2F6F6B;--payer-itai-soft:rgba(47,111,107,.14);--payer-talia:#C9736A;--payer-talia-soft:rgba(201,115,106,.16);}
+.exp-card.payer-itai{border-right:5px solid var(--payer-itai);}
+.exp-card.payer-talia{border-right:5px solid var(--payer-talia);}
+.payer-badge{display:inline-block;font-size:11px;font-weight:700;padding:2px 8px;border-radius:999px;margin-inline-end:4px;vertical-align:1px;}
+.payer-badge.payer-itai{background:var(--payer-itai-soft);color:var(--payer-itai);}
+.payer-badge.payer-talia{background:var(--payer-talia-soft);color:var(--payer-talia);}
+.payer-dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-inline-end:4px;vertical-align:0;}
+.payer-dot.payer-itai{background:var(--payer-itai);}
+.payer-dot.payer-talia{background:var(--payer-talia);}
+.payer-pill.payer-itai.active{background:var(--payer-itai);border-color:var(--payer-itai);}
+.payer-pill.payer-talia.active{background:var(--payer-talia);border-color:var(--payer-talia);}
+.money-payer{margin-top:6px;}

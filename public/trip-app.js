@@ -985,6 +985,7 @@ let activeCountry = "thailand";
 let moneySection = "balance";
 let moneyCategory = "";
 let moneyPayment = "";
+let moneyPayer = "";
 let expandedDest = {};
 let expandedRow = {};
 let todayIndex = null;
@@ -4409,7 +4410,8 @@ function moneyTotals(rows){
 }
 function filteredMoneyExpenses(){
   return wallet().expenses.filter(x=>(!moneyCategory || moneyCategoryId(x)===moneyCategory)
-    && (!moneyPayment || (isDue(x)?'due':'paid')===moneyPayment))
+    && (!moneyPayment || (isDue(x)?'due':'paid')===moneyPayment)
+    && (!moneyPayer || x.paidBy===moneyPayer))
     .sort((a,b)=>(b.date||'').localeCompare(a.date||''));
 }
 function renderExpenseList(){
@@ -4427,10 +4429,14 @@ function renderExpenseList(){
   <div class="pillrow money-payment" role="group" aria-label="סינון לפי מצב תשלום">
     ${[['','הכל'],['paid','שולם'],['due','טרם שולם']].map(([id,label])=>`<button class="pill ${moneyPayment===id?'active':''}" data-action="moneyPayment" data-id="${id}" aria-pressed="${moneyPayment===id}">${label}</button>`).join('')}
   </div>
+  <div class="pillrow money-payer" role="group" aria-label="סינון לפי מי שילם">
+    ${[['','שניכם'],['itai',PEOPLE.itai.emoji+' איתי'],['talia',PEOPLE.talia.emoji+' טליה']].map(([id,label])=>`<button class="pill payer-pill ${id?'payer-'+id:''} ${moneyPayer===id?'active':''}" data-action="moneyPayer" data-id="${id}" aria-pressed="${moneyPayer===id}">${label}</button>`).join('')}
+  </div>
   <div class="money-summary" aria-live="polite">
     <b>${list.length} הוצאות · ${ils(totals.paid+totals.due)}</b>
     <span>שולם ${ils(totals.paid)} · טרם שולם ${ils(totals.due)}</span>
     <span>חלקך, כולל טרם שולם: ${ils(totals.share)}</span>
+    <span class="payer-split"><i class="payer-dot payer-itai"></i>איתי ${ils(list.filter(x=>x.paidBy==='itai').reduce((t,x)=>t+(x.currency==='THB'?toIls(x.amount):Number(x.amount)||0),0))} · <i class="payer-dot payer-talia"></i>טליה ${ils(list.filter(x=>x.paidBy==='talia').reduce((t,x)=>t+(x.currency==='THB'?toIls(x.amount):Number(x.amount)||0),0))}</span>
     <small>סיכומים בשקלים · באט מומר לפי השער המוגדר. חבילות לינה כוללות גם את הארוחות והאימונים הכלולים במחירן.</small>
   </div>
   ${list.map(x=>{
@@ -4438,9 +4444,9 @@ function renderExpenseList(){
     const myShare = shares[meId()];
     const iPaid = x.paidBy===meId();
     return `
-    <div class="exp-card ${isDue(x)?'due':''}">
+    <div class="exp-card payer-${x.paidBy} ${isDue(x)?'due':''}">
       <div class="exp-main" data-action="editExpense" data-id="${x.id}">
-        <div class="exp-title">${escapeHtml(x.title)}${isDue(x)?' <span class="due-tag">טרם שולם</span>':''}</div>
+        <div class="exp-title"><span class="payer-badge payer-${x.paidBy}">${(PEOPLE[x.paidBy]||{}).emoji||''} ${personName(x.paidBy)}</span> ${escapeHtml(x.title)}${isDue(x)?' <span class="due-tag">טרם שולם</span>':''}</div>
         <div class="exp-meta">
           ${fmtDateShort(x.date)} · ${expCatLabel(x.category)} ·
           ${isDue(x)?'משלם/ת מתוכנן/ת':'שילם/ה'} ${personName(x.paidBy)} · ${splitLabel(x)}
@@ -6006,6 +6012,7 @@ document.addEventListener('click', (e)=>{
   else if(action==='editForecastRow'){ openSharedRowModal(t.dataset.day,id); }
   else if(action==='moneyCategory'){ moneyCategory=id; render(); }
   else if(action==='moneyPayment'){ moneyPayment=id; render(); }
+  else if(action==='moneyPayer'){ moneyPayer=id; render(); }
   else if(action==='toggleDest'){
     expandedDest[id] = !expandedDest[id];
     render();
