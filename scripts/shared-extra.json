@@ -81,12 +81,12 @@
    "freeCancel": "לא מוחזר"
   },
   {
-   "what": "Khao Sok River Lodge",
+   "what": "Khaosok Rainforest Resort",
    "when": "4–5/12",
-   "details": "קאו סוק · לילה · Standard Double · כולל ארוחת בוקר",
-   "ref": "5114181390",
-   "payment": "฿2,000 · בוקינג מחייב ב-28/11",
-   "freeCancel": "ביטול חינם עד 30/11"
+   "details": "קאו סוק · לילה · Riverside Double Bungalow · כולל ארוחת בוקר · צ׳ק-אין 14:00–22:00, צ׳ק-אאוט עד 12:00",
+   "ref": "6851274942",
+   "payment": "฿2,600 · שולם ב-26/11",
+   "freeCancel": "לא מוחזר מ-27/11"
   },
   {
    "what": "Our Jungle House",
@@ -153,20 +153,12 @@
    "freeCancel": "לבדוק באפליקציה"
   },
   {
-   "what": "Grab · River Lodge → קלימה",
+   "what": "Grab · Rainforest Resort → קלימה",
    "when": "5/12, 11:00",
-   "details": "Standard Car, 4 מקומות · נסיעה מתוזמנת — לא מובטח שיימצא נהג באזור",
+   "details": "Standard Car, 4 מקומות · נסיעה מתוזמנת — לא מובטח שיימצא נהג באזור · לעדכן את נקודת האיסוף ל-Rainforest Resort",
    "ref": "A-A4B3K42WXAUFAV",
    "payment": "฿849 בכרטיס",
    "freeCancel": "לפי תנאי Grab"
-  },
-  {
-   "what": "מונית Booking · River Lodge → קלימה (גיבוי)",
-   "when": "5/12, 11:00",
-   "details": "גיבוי ל-Grab · להחליט ב-3/12 בבוקר לפני האגם ולבטל אחת מהשתיים (תזכורת ביומן)",
-   "ref": "161864633",
-   "payment": "שולם ₪481.69",
-   "freeCancel": "ביטול חינם עד 4/12 11:00"
   },
   {
    "what": "מונית Booking · Eleven → BKK",
@@ -355,13 +347,13 @@
    "dest": "קאו סוק",
    "dates": "4–5/12",
    "nights": 1,
-   "hotel": "Khao Sok River Lodge",
-   "what": "8.9 · על הנהר · אישור 5114181390 · ฿2,000 כולל ארוחת בוקר · בוקינג מחייב ב-28/11",
-   "perNight": 2000,
+   "hotel": "Khaosok Rainforest Resort",
+   "what": "על הנהר · אישור 6851274942 · Riverside Double Bungalow · ฿2,600 כולל ארוחת בוקר · שולם ב-26/11",
+   "perNight": 2600,
    "choice": "מוזמן",
-   "freeCancel": "עד 30/11",
+   "freeCancel": "לא מוחזר",
    "link": "בוקינג",
-   "linkLink": "https://secure.booking.com/myreservations.html?bn=5114181390"
+   "linkLink": "https://secure.booking.com/myreservations.html?bn=6851274942"
   },
   {
    "dest": "קופנגן",
@@ -515,7 +507,7 @@
   },
   {
    "topic": "",
-   "detail": "מוזמן: שתי טיסות ארקיע, VietJet לפוקט וחזרה (MSR6JW), ASAI (23–26/11), המחנה, COSI (29/11–3/12), River Lodge (3/12), קלימה (5–9/12), Eleven (9–12/12). פתוח: הלילה על האגם, סימילן, הסעות במקום."
+   "detail": "מוזמן: שתי טיסות ארקיע, VietJet לפוקט וחזרה (MSR6JW), ASAI (23–26/11), המחנה, COSI (29/11–3/12), Rainforest Resort (3/12), קלימה (5–9/12), Eleven (9–12/12). פתוח: הלילה על האגם, סימילן, הסעות במקום."
   },
   {
    "topic": "KYN · פרטי המחנה",

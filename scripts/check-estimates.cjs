@@ -15,7 +15,7 @@ near(Object.values(f.categories).reduce((a,b)=>a+b,0)+f.reserve,f.base);
 near(run('sharedEstimateDays().reduce((s,d)=>s+dayTotalBaht(d)*rate(),0)')+f.reserve,f.base);
 near(f.categories.flights,3777+1891+777+12515.52*.08981); // VietJet MSR6JW, both legs; the home flight on 10/12 with its change fee.
 assert.ok(f.optional>0);
-near(f.categories.accommodation,(10398.09+12150+8800+8411.85/3+22669.04+2000)*.08981+1931.44); // ASAI; KYN; the paid 5/12 Kalima night; Eleven's shared night of three; COSI; River Lodge; Kalima 6–9/12. The lake bungalow comes with the tour.
+near(f.categories.accommodation,(10398.09+12150+8800+8411.85/3+22669.04+2600)*.08981+1931.44); // ASAI; KYN; the paid 5/12 Kalima night; Eleven's shared night of three; COSI; Rainforest Resort (replaced River Lodge 26/11); Kalima 6–9/12. The lake bungalow comes with the tour.
 near(run('sharedRowPrice(sh().days[0].rows.find(r=>r.id==="s_1_0")).base'),3777);
 near(run('sharedRowPrice(sh().days.find(d=>d.date==="2026-12-10").rows.find(r=>r.id==="s_f10_2")).shares.itai'),1891);
 assert.equal(run('sharedRowPrice(sh().days.find(d=>d.date==="2026-12-10").rows.find(r=>r.id==="s_f10_2")).shares.talia'),0);

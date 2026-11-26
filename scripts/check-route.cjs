@@ -57,7 +57,7 @@ assert.ok(d2.rows.some(r => /COSI/.test(r.act) && r.cat === 'לינה' && r.stat
 // Khao Sok: the lake on 3/12 (Laguna Seaview, Siam Tour), River Lodge on 4/12; Kalima 5–9/12.
 assert.equal(day(run, '2026-12-03').rows.find(r => r.id === 's_g5_1').status, 'מוזמן');
 assert.ok(day(run, '2026-12-03').rows.some(r => /Laguna/.test(r.act) && r.cat === 'לינה' && r.status === 'מוזמן'), 'a night on the lake, booked');
-assert.ok(day(run, '2026-12-04').rows.some(r => /River Lodge/.test(r.act) && r.cat === 'לינה' && r.status === 'מוזמן'));
+assert.ok(day(run, '2026-12-04').rows.some(r => /Rainforest Resort/.test(r.act) && r.cat === 'לינה' && r.status === 'מוזמן'));
 const d5 = day(run, '2026-12-05');
 assert.ok(/ג׳ונגל/.test(acts(d5)) && /קלימה/.test(acts(d5)));
 assert.ok(d5.rows.some(r => /Kalima.*לילה נוסף/.test(r.act) && r.status === 'מוזמן'), 'the extra Kalima night, booked and paid directly');
@@ -521,7 +521,7 @@ assert.equal(bkk('STATE.masterChecklist.find(t=>t.title==="לסגור את צ׳�
 {
   const o31 = boot();
   o31(`STATE=seedData();
-  wallet().expenses=wallet().expenses.filter(x=>!/^ASAI|^COSI|^Khao Sok River|MSR6JW/.test(x.title));
+  wallet().expenses=wallet().expenses.filter(x=>!/^ASAI|^COSI|^Khao Sok River|^Khaosok Rainforest|MSR6JW/.test(x.title));
   wallet().expenses.push({id:'x_mt',title:'Montraj Coach Sukhumvit · 3 לילות בבנגקוק',amount:8169.87,currency:'THB',paidBy:'itai',split:'ratio',status:'due'},
     {id:'x_ch',title:'Chermantra Aonang · 3 לילות',amount:1839,currency:'ILS',paidBy:'itai',split:'ratio',status:'paid'});
   const el=wallet().expenses.find(x=>/^Eleven/.test(x.title)); Object.assign(el,{title:'Eleven Bangkok Sukhumvit 11 · לילה אחרון',amount:3010.10});
@@ -533,7 +533,7 @@ assert.equal(bkk('STATE.masterChecklist.find(t=>t.title==="לסגור את צ׳�
   STATE.schema=31; ensureDefaults();`);
   assert.equal(o31('STATE.schema'), 37);
   assert.equal(o31('wallet().expenses.filter(x=>/Montraj|Chermantra/.test(x.title)).length'), 0);
-  assert.equal(o31('wallet().expenses.filter(x=>/^ASAI|^COSI|^Khao Sok River|MSR6JW/.test(x.title)).length'), 4);
+  assert.equal(o31('wallet().expenses.filter(x=>/^ASAI|^COSI|^Khao Sok River|^Khaosok Rainforest|MSR6JW/.test(x.title)).length'), 4);
   assert.equal(o31('wallet().expenses.find(x=>/^Eleven/.test(x.title)).amount'), 8411.85);
   assert.equal(day(o31, '2026-11-24').rows.find(r => r.id === 's_2_arun').done, true, 'the tick survives');
   assert.equal(day(o31, '2026-11-24').rows.at(-1).id, 'custom-31', 'a hand-added row stays on its date');

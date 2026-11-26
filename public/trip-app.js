@@ -404,8 +404,8 @@ const EXPENSES_32 = () => [
    amount:10398.09, currency:"THB", paidBy:"itai", split:"ratio", status:"due", note:"אישור 5547616403 · Roomy King City · בוקינג מחייבת אוטומטית · ביטול חינם עד 21/11"},
   {id:uid('x'), date:"2026-11-29", title:"COSI Krabi Ao Nang Beach · 4 לילות", category:"accommodation",
    amount:22669.04, currency:"THB", paidBy:"itai", split:"ratio", status:"due", note:"אישור 5907714174 · זיכוי יומי לאוכל ושתייה · בוקינג מחייבת אוטומטית · ביטול חינם עד 21/11, אחר כך 50%"},
-  {id:uid('x'), date:"2026-12-04", title:"Khao Sok River Lodge · 4/12", category:"accommodation",
-   amount:2000, currency:"THB", paidBy:"itai", split:"ratio", status:"due", note:"אישור 5114181390 · כולל ארוחת בוקר · בוקינג מחייב ב-28/11 · ביטול חינם עד 30/11"},
+  {id:uid('x'), date:"2026-12-04", title:"Khaosok Rainforest Resort · 4/12", category:"accommodation",
+   amount:2600, currency:"THB", paidBy:"itai", split:"ratio", status:"paid", note:"אישור 6851274942 · Riverside Double Bungalow · כולל ארוחת בוקר · שולם ב-26/11 · לא מוחזר"},
   {id:uid('x'), date:"2026-12-09", title:"מונית Booking · קלימה → HKT", category:"transport",
    amount:153.27, currency:"ILS", paidBy:"itai", split:"ratio", status:"paid", note:"אישור 997065466 · 9/12, 10:45"}
 ];
@@ -771,8 +771,8 @@ function seedData(){
            budget:2600, status:"booked", companions:["ביחד"], order:3},
           {id:khaosokId, owner:"both", name:"קאו סוק", wiki:"Khao Sok National Park", hue:"#4F7A4A",
            lat:8.9130, lng:98.5300, arrival:"2026-12-03", departure:"2026-12-05", nights:2,
-           accommodation:"The Laguna Chiew Larn (Seaview) על האגם, ואז Khao Sok River Lodge", transport:"Siam Tour מאאו נאנג",
-           notes:"3/12 ישר מאאו נאנג לאגם — לילה ב-Laguna Seaview עם סירה פרטית, דרך Siam Tour. 4/12 בוקר על האגם וערב בכפר, ב-River Lodge על הנהר. 5/12 בוקר בג׳ונגל, ומשם לקלימה.",
+           accommodation:"The Laguna Chiew Larn (Seaview) על האגם, ואז Khaosok Rainforest Resort", transport:"Siam Tour מאאו נאנג",
+           notes:"3/12 ישר מאאו נאנג לאגם — לילה ב-Laguna Seaview עם סירה פרטית, דרך Siam Tour. 4/12 בוקר על האגם וערב בכפר, ב-Rainforest Resort על הנהר. 5/12 בוקר בג׳ונגל, ומשם לקלימה.",
            scooter:{ok:false, headline:"לא צריך", note:"הכל בהליכה מהכפר, ולאגם נוסעים עם הסיור."},
            budget:1500, status:"planned", companions:["ביחד"], order:5},
           {id:khaolakId, owner:"both", name:"קאו לאק", wiki:"Khao Lak", hue:"#C9A24C",
@@ -1796,7 +1796,7 @@ function ensureDefaults(){
       if(meta.hotels){
         meta.hotels = meta.hotels.filter(h=>h.dest!=='קו פי פי');
         seedShared.hotels.forEach((h, i)=>{
-          if(!/Chermantra Aonang|Palmview|River Lodge|Kalima/.test(h.hotel)) return;
+          if(!/Chermantra Aonang|Palmview|River Lodge|Rainforest Resort|Kalima/.test(h.hotel)) return;
           const found = meta.hotels.find(x=>x.hotel===h.hotel);
           if(found){ Object.assign(found, copy(h)); return; }
           const next = seedShared.hotels[i+1];
@@ -1874,7 +1874,7 @@ function ensureDefaults(){
       if(meta.hotels){
         meta.hotels = meta.hotels.filter(h=>h.hotel!=='Kalima Resort and Villas · לילה נוסף');
         meta.hotels.forEach(h=>{
-          if(!/Palmview|River Lodge/.test(h.hotel)) return;
+          if(!/Palmview|River Lodge|Rainforest Resort/.test(h.hotel)) return;
           const fresh24 = seedShared.hotels.find(x=>x.hotel===h.hotel);
           if(fresh24) Object.assign(h, copy(fresh24));
         });
@@ -1966,7 +1966,7 @@ function ensureDefaults(){
       if(meta.hotels){
         meta.hotels = meta.hotels.filter(h=>!/Sala Rattanakosin|Eleven Bangkok/.test(h.hotel||''));
         seedShared.hotels.forEach((h, i)=>{
-          if(!/Montraj|Maison|Palmview|River Lodge|Kalima|Centara Riverside/.test(h.hotel)) return;
+          if(!/Montraj|Maison|Palmview|River Lodge|Rainforest Resort|Kalima|Centara Riverside/.test(h.hotel)) return;
           const found = meta.hotels.find(x=>x.hotel===h.hotel);
           if(found){ Object.assign(found, copy(h)); return; }
           const next = seedShared.hotels[i+1];
@@ -2544,7 +2544,7 @@ function ensureDefaults(){
   // 24/11: המוניות והגראבים שהוזמנו — נכנסים לאישורים ולשורות של הימים
   if(STATE.shared && STATE.shared.bookings && window.SHARED_SEED){
     const seedB = window.SHARED_SEED.bookings;
-    ['596039126','161864633','A-A4B3K42WXAUFAV','A-A4BW7IPW22UFAV','274424418'].forEach(ref=>{
+    ['596039126','A-A4B3K42WXAUFAV','A-A4BW7IPW22UFAV','274424418'].forEach(ref=>{
       if(STATE.shared.bookings.some(b=>b.ref===ref)) return;
       const sb = seedB.find(b=>b.ref===ref); if(!sb) return;
       const at = STATE.shared.bookings.findIndex(b=>b.ref==='997065466');
@@ -2636,6 +2636,35 @@ function ensureDefaults(){
     if(!STATE.money.settlements.some(x=>x.id==='s-talia-prepay'))
       STATE.money.settlements.push({id:'s-talia-prepay', from:'talia', to:'itai', amount:4766, date:'2026-11-22', note:'לפני הטיול, על מה שהוזמן מראש'});
     STATE.money.prepay2211 = true;
+  }
+  // 26/11: River Lodge הוחלף ב-Khaosok Rainforest Resort, ומונית הגיבוי של Booking בוטלה — פעם אחת
+  if(STATE.shared && window.SHARED_SEED && !STATE.shared.applied2611rainforest){
+    const swap = v => typeof v!=='string' ? v : v.split('Khao Sok River Lodge').join('Khaosok Rainforest Resort').split('5114181390').join('6851274942').split('River Lodge').join('Rainforest Resort');
+    const walk = o => { if(Array.isArray(o)) o.forEach((v,i)=>{ if(typeof v==='string') o[i]=swap(v); else walk(v); });
+      else if(o && typeof o==='object') Object.keys(o).forEach(k=>{ if(typeof o[k]==='string') o[k]=swap(o[k]); else walk(o[k]); }); };
+    const SS = window.SHARED_SEED;
+    STATE.shared.bookings = (STATE.shared.bookings||[]).filter(b=>b.ref!=='161864633');
+    walk(STATE.shared); walk(STATE.money); walk(STATE.countries);
+    (STATE.masterChecklist||[]).forEach(t=>{
+      if(/^River Lodge — בוקינג מחייב/.test(t.title||'') && t.status!=='done'){ t.status='done'; t.notes='26/11: הוחלף ב-Khaosok Rainforest Resort, ฿2,600 שולם · '+(t.notes||''); }
+    });
+    const sb = SS.bookings.find(x=>x.ref==='6851274942'), b = STATE.shared.bookings.find(x=>x.ref==='6851274942');
+    if(sb && b) Object.assign(b, JSON.parse(JSON.stringify(sb)));
+    const sg = SS.bookings.find(x=>x.ref==='A-A4B3K42WXAUFAV'), g = STATE.shared.bookings.find(x=>x.ref==='A-A4B3K42WXAUFAV');
+    if(sg && g) Object.assign(g, JSON.parse(JSON.stringify(sg)));
+    const sh = (SS.hotels||[]).find(h=>h.hotel==='Khaosok Rainforest Resort'), h = (STATE.shared.hotels||[]).find(x=>x.hotel==='Khaosok Rainforest Resort');
+    if(sh && h) Object.assign(h, JSON.parse(JSON.stringify(sh)));
+    (STATE.shared.days||[]).filter(d=>d.owner!=='talia').forEach(day=>{
+      const seedDay = SS.days.find(d=>d.date===day.date && d.owner!=='talia'); if(!seedDay) return;
+      if(/Rainforest Resort/.test(seedDay.summary||'')) day.summary = seedDay.summary;
+      (day.rows||[]).forEach(r=>{
+        const sr = seedDay.rows.find(x=>x.id===r.id); if(!sr) return;
+        if(['s_g4_2','s_g6_taxi'].includes(r.id) || /Rainforest Resort|6851274942/.test(JSON.stringify(sr))) ['act','time','status','baht','link','notes','priceEstimate'].forEach(k=>{ if(k in sr) r[k] = JSON.parse(JSON.stringify(sr[k])); });
+      });
+    });
+    const x = ((STATE.money&&STATE.money.expenses)||[]).find(e=>/Rainforest Resort/.test(e.title||''));
+    if(x) Object.assign(x, {amount:2600, currency:'THB', status:'paid', note:'אישור 6851274942 · Riverside Double Bungalow · כולל ארוחת בוקר · שולם ב-26/11 · לא מוחזר'});
+    STATE.shared.applied2611rainforest = true;
   }
   // המפה של טליה ומל בגוגל מפות — המקומות נטענים ממנה בכל פתיחה
   if(STATE.shared && !(STATE.shared.mapLists||[]).some(m=>m.id==='wHPaAtsYL2pmB4xARWodPA')){
@@ -3942,7 +3971,7 @@ const PLACES = [
   {m:/Zen Beach|Sri Thanu/,             wiki:'Ko Pha-ngan',                ll:[9.7560,99.9680]},
   {m:/Bottle Beach/,                    wiki:'Ko Pha-ngan',                ll:[9.7960,100.0330]},
   {m:/Sarana|באן טאי|קופנגן/,            wiki:'Ko Pha-ngan',                ll:[9.7120,100.0330]},
-  {m:/Our Jungle House|Palmview|River Lodge|נהר סוק|נאם טאלו|ספארי לילה/,     wiki:'Khao Sok National Park',     ll:[8.9130,98.5280]},
+  {m:/Our Jungle House|Palmview|River Lodge|Rainforest Resort|נהר סוק|נאם טאלו|ספארי לילה/,     wiki:'Khao Sok National Park',     ll:[8.9130,98.5280]},
   {m:/Eleven Bangkok|סוקומווית/,          wiki:'Sukhumvit Road',             ll:[13.7440,100.5560]},
   {m:/סובארנבומי|BKK/,                 wiki:'Suvarnabhumi Airport',       ll:[13.6900,100.7501]},
   {m:/IZ598|פוקט → תל אביב|לשדה התעופה/, wiki:'Phuket International Airport', ll:[8.1132,98.3169]},
@@ -6438,9 +6467,9 @@ const TAXI_PLACES = [
   {id:'pier', from:'2026-12-03', to:'2026-12-04', emoji:'⛴️', name:'Ratchaprapha Dam Pier (Cheow Lan Lake)',
    th:'ท่าเรือเขื่อนรัชชประภา', addr:'ตำบลเขาพัง อำเภอบ้านตาขุน จังหวัดสุราษฎร์ธานี',
    near:'เขื่อนเชี่ยวหลาน', maps:'Ratchaprapha Dam Pier'},
-  {id:'riverlodge', from:'2026-12-04', to:'2026-12-05', emoji:'🏨', name:'Khao Sok River Lodge',
-   th:'เขาสก ริเวอร์ ลอดจ์', addr:'6/2 หมู่ 6 ตำบลคลองศก อำเภอพนม จังหวัดสุราษฎร์ธานี 84250',
-   near:'ใกล้อุทยานแห่งชาติเขาสก', phone:'+66897252277', maps:'8.9127,98.5253'},
+  {id:'rainforest', from:'2026-12-04', to:'2026-12-05', emoji:'🏨', name:'Khaosok Rainforest Resort',
+   th:'เขาสก เรนฟอเรสต์ รีสอร์ท', addr:'122 หมู่ 6 ตำบลคลองศก อำเภอพนม จังหวัดสุราษฎร์ธานี 84250',
+   near:'ใกล้อุทยานแห่งชาติเขาสก', phone:'+66642249654', maps:'Khaosok Rainforest Resort'},
   {id:'kalima', from:'2026-12-05', to:'2026-12-09', emoji:'🏨', name:'Kalima Resort & Villas Khao Lak',
    th:'กาลิมา รีสอร์ท แอนด์ วิลล่า เขาหลัก', addr:'3/88 หมู่ 2 ถนนเพชรเกษม ตำบลลำแก่น อำเภอท้ายเหมือง จังหวัดพังงา 82210',
    near:'เขาหลัก', phone:'+6676427999', maps:'Kalima Resort and Villas Khao Lak'},
@@ -6511,7 +6540,7 @@ function openTaxiCard(id){
 /* אנשי קשר להזמנות — טלפון ווטסאפ במקום חיפוש במייל */
 const BOOKING_CONTACTS = [
   {m:/Siam Tour/, label:'Lukas · Siam Tour', wa:'+66825796015'},
-  {m:/River Lodge/, label:'River Lodge', phone:'+66897252277'},
+  {m:/Rainforest Resort/, label:'Rainforest Resort', phone:'+66642249654'},
   {m:/COSI/, label:'COSI', phone:'+6675819999'},
   {m:/סאלה|Sala/, label:'Sala', phone:'+6626221388'},
   {m:/Kalima|קלימה/, label:'Kalima', phone:'+6676427999'},
