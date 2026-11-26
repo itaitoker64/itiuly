@@ -7384,11 +7384,9 @@ document.addEventListener('click', (e)=>{
 });
 
 
-loadState();
-
 // Gentle scroll reveal: cards rise once as they come into view.
 (function(){
-  if(typeof IntersectionObserver==='undefined') return;
+  if(typeof IntersectionObserver==='undefined' || typeof MutationObserver==='undefined') return;
   if(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   const io=new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }),{rootMargin:'0px 0px -6% 0px'});
   const SEL='.section>.card,.section>.place-card,.next-card,.postcard,.pcard,.money-category,.daily-card';
@@ -7398,3 +7396,5 @@ loadState();
   new MutationObserver(()=>scan(host)).observe(host,{childList:true,subtree:true});
   scan(host);
 })();
+
+loadState();
