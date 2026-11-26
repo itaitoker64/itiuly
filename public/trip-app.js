@@ -986,6 +986,7 @@ let moneySection = "balance";
 let moneyCategory = "";
 let moneyPayment = "";
 let moneyPayer = "";
+let dailyAll = false;
 let expandedDest = {};
 let expandedRow = {};
 let todayIndex = null;
@@ -4328,10 +4329,11 @@ function balance(){
 }
 
 function renderMoney(){
-  const sections = [['balance','מי חייב למי'],['list','ההוצאות'],['budget','התקציב']];
+  const sections = [['balance','מי חייב למי'],['list','ההוצאות'],['days','לפי ימים'],['budget','התקציב']];
   let body = '';
   if(moneySection==='balance') body = renderBalance();
   else if(moneySection==='list') body = renderExpenseList();
+  else if(moneySection==='days') body = renderDailySpending();
   else body = renderMoneyBudget();
   return `
   <div class="section">
@@ -4425,6 +4427,93 @@ function settledTag(c){
   if(c.covered > 0.5) return `<span class="settled-tag part">מקוזז חלקית · נותר ${ils(c.owed - c.covered)}</span>`;
   return '<span class="settled-tag open">פתוח</span>';
 }
+
+/* הוצאות לפי ימי הטיול — עמודה לכל יום, מחולקת למי שילם. ברירת המחדל: הוצאות יומיות,
+   בלי לינה וטיסות שהוזמנו מראש (הן היו מנמיכות את כל שאר העמודות). */
+function todayIsoLocal(){ const t=new Date(); return t.getFullYear()+'-'+String(t.getMonth()+1).padStart(2,'0')+'-'+String(t.getDate()).padStart(2,'0'); }
+function dailySpendingData(){
+  const start = new Date('2026-11-22T00:00:00'), end = new Date('2026-12-12T00:00:00');
+  const days = [];
+  for(let d=new Date(start); d<=end; d.setDate(d.getDate()+1)){
+    const iso = d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+    days.push({iso, itai:0, talia:0, items:[]});
+  }
+  const byIso = Object.fromEntries(days.map(d=>[d.iso,d]));
+  wallet().expenses.forEach(x=>{
+    if(isDue(x)) return;
+    if(!dailyAll && (x.category==='accommodation' || x.category==='flights' || x.date > todayIsoLocal())) return;
+    const day = byIso[x.date]; if(!day) return;
+    const v = expenseIls(x);
+    if(x.paidBy==='talia') day.talia += v; else day.itai += v;
+    day.items.push(x);
+  });
+  return days;
+}
+function renderDailySpending(){
+  const days = dailySpendingData();
+  const max = Math.max(1, ...days.map(d=>d.itai+d.talia));
+  const step = max > 4000 ? 2000 : max > 2000 ? 1000 : max > 800 ? 500 : 200;
+  const top = Math.ceil(max/step)*step;
+  const W = 640, H = 230, padL = 44, padR = 22, padT = 14, padB = 30;
+  const cw = (W-padL-padR)/days.length, bw = Math.max(6, Math.min(18, cw*0.62));
+  const y = v => padT + (H-padT-padB) * (1 - v/top);
+  const today = new Date(); const todayIso = today.getFullYear()+'-'+String(today.getMonth()+1).padStart(2,'0')+'-'+String(today.getDate()).padStart(2,'0');
+  const grid = []; for(let v=0; v<=top; v+=step) grid.push(v);
+  const seg = (x0, yTop, yBot, cls, round) => {
+    const h = Math.max(0, yBot - yTop); if(h < 0.5) return '';
+    const r = round ? Math.min(4, h, bw/2) : 0;
+    return r ? `<path class="${cls}" d="M${x0},${yBot} V${yTop+r} Q${x0},${yTop} ${x0+r},${yTop} H${x0+bw-r} Q${x0+bw},${yTop} ${x0+bw},${yTop+r} V${yBot} Z"/>`
+             : `<rect class="${cls}" x="${x0}" y="${yTop}" width="${bw}" height="${h}"/>`;
+  };
+  const bars = days.map((d,i)=>{
+    const x0 = padL + i*cw + (cw-bw)/2, total = d.itai + d.talia;
+    const yBase = y(0), yI = y(d.itai), yT = y(total);
+    const gap = (d.itai>0 && d.talia>0) ? 2 : 0;
+    const dd = d.iso.slice(8)+'/'+String(+d.iso.slice(5,7));
+    const tip = `${dd} · ${ils(total)}${total? ` — איתי ${ils(d.itai)} · טליה ${ils(d.talia)}`:''}`;
+    return `<g class="day-bar ${d.iso===todayIso?'today':''}" tabindex="0" data-tip="${escapeAttr(tip)}">
+      <rect class="hit" x="${padL+i*cw}" y="${padT}" width="${cw}" height="${H-padT-padB}"/>
+      ${seg(x0, yI, yBase, 'm-itai', d.talia<=0)}
+      ${seg(x0, yT, yI-gap, 'm-talia', true)}
+      ${(i%2===0 || d.iso===todayIso)?`<text class="ax-x" x="${x0+bw/2}" y="${H-padB+14}" text-anchor="middle">${dd}</text>`:''}
+    </g>`;
+  }).join('');
+  const totals = days.reduce((t,d)=>({itai:t.itai+d.itai, talia:t.talia+d.talia}),{itai:0,talia:0});
+  const active = days.filter(d=>d.itai+d.talia>0);
+  const avg = active.length ? (totals.itai+totals.talia)/active.length : 0;
+  return `
+  <div class="pillrow" role="group" aria-label="מה נכלל">
+    <button class="pill ${!dailyAll?'active':''}" data-action="dailyAll" aria-pressed="${!dailyAll}">הוצאות יומיות</button>
+    <button class="pill ${dailyAll?'active':''}" data-action="dailyAll" aria-pressed="${dailyAll}">כולל לינה וטיסות</button>
+  </div>
+  <div class="daily-card">
+    <div class="daily-head">
+      <b>${ils(totals.itai+totals.talia)}</b>
+      <span>${active.length} ימים עם הוצאות · ממוצע ${ils(avg)} ליום</span>
+    </div>
+    <div class="daily-legend"><span><i class="payer-dot chart-itai"></i>🧭 איתי ${ils(totals.itai)}</span><span><i class="payer-dot chart-talia"></i>🌏 טליה ${ils(totals.talia)}</span></div>
+    <div class="daily-chart" dir="ltr">
+      <svg viewBox="0 0 ${W} ${H}" role="img" aria-label="הוצאות לפי יום, מחולקות לפי מי שילם">
+        ${grid.map(v=>`<line class="grid" x1="${padL}" x2="${W-padR}" y1="${y(v)}" y2="${y(v)}"/><text class="ax-y" x="${padL-6}" y="${y(v)+3}" text-anchor="end">₪${v>=1000?(v/1000)+'K':v}</text>`).join('')}
+        ${bars}
+      </svg>
+      <div class="daily-tip" hidden></div>
+    </div>
+    <small class="daily-foot">${dailyAll?'כל מה ששולם, כולל לינה, טיסות וטיולים ששולמו מראש לימים שבהמשך':'הוצאות שוטפות עד היום · בלי לינה, טיסות ומה ששולם מראש לימים הבאים'} · נגיעה בעמודה מציגה את היום</small>
+  </div>
+  <div class="daily-table">
+    ${active.slice().reverse().map(d=>`<div class="daily-row"><span>${d.iso.slice(8)}/${+d.iso.slice(5,7)}</span><span><i class="payer-dot chart-itai"></i>${ils(d.itai)}</span><span><i class="payer-dot chart-talia"></i>${ils(d.talia)}</span><b>${ils(d.itai+d.talia)}</b></div>`).join('') || '<div class="empty small">עוד אין הוצאות בימי הטיול</div>'}
+  </div>`;
+}
+document.addEventListener('pointerover', e=>{
+  const g = e.target.closest && e.target.closest('.day-bar'); if(!g) return;
+  const box = g.closest('.daily-chart'); const tip = box && box.querySelector('.daily-tip'); if(!tip) return;
+  tip.textContent = g.dataset.tip; tip.hidden = false;
+  const r = g.getBoundingClientRect(), b = box.getBoundingClientRect();
+  tip.style.left = Math.max(0, Math.min(b.width - 180, r.left - b.left + r.width/2 - 90)) + 'px';
+  box.querySelectorAll('.day-bar.on').forEach(n=>n.classList.remove('on')); g.classList.add('on');
+});
+document.addEventListener('focusin', e=>{ if(e.target.classList && e.target.classList.contains('day-bar')) e.target.dispatchEvent(new Event('pointerover',{bubbles:true})); });
 
 function moneyCategoryId(x){
   return EXPENSE_CATEGORIES.some(c=>c.id===x.category) ? x.category : 'other';
@@ -6044,6 +6133,7 @@ document.addEventListener('click', (e)=>{
   else if(action==='moneyCategory'){ moneyCategory=id; render(); }
   else if(action==='moneyPayment'){ moneyPayment=id; render(); }
   else if(action==='moneyPayer'){ moneyPayer=id; render(); }
+  else if(action==='dailyAll'){ dailyAll=!dailyAll; render(); }
   else if(action==='toggleDest'){
     expandedDest[id] = !expandedDest[id];
     render();
