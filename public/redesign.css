@@ -1,0 +1,115 @@
+/* Redesign layer, loaded last. Warm light base, one strong colour (clay),
+   two fonts (Rubik headings, Heebo text), generous air, soft shapes,
+   finger-sized controls and gentle scroll reveal. Layout and content
+   are untouched: only how things look changes. */
+:root, :root[data-user="itai"], :root[data-user="talia"]{
+  --cream:#FAF6EF; --white:#FFFDF9; --ink:#1F1B17; --muted:#655E55; --line:#E6DDCF;
+  --sand:#F1EADF; --sand-dark:#E6DDCF;
+  --accent:#A2614A; --accent-dark:#8A4F3B; --accent-soft:rgba(162,97,74,.10);
+  --terracotta:#A2614A; --terracotta-dark:#8A4F3B;
+  --sage:#8A8174; --sage-dark:#655E55;
+  --gold:#9C7536; --danger:#A2453A;
+  --card:#FFFDF9;
+  --r-card:24px; --r-ctl:999px;
+  --shadow-1:0 1px 2px rgba(31,27,23,.04),0 8px 24px rgba(31,27,23,.06);
+  --shadow-2:0 2px 4px rgba(31,27,23,.05),0 16px 40px rgba(31,27,23,.09);
+  --f-head:'Rubik',system-ui,sans-serif; --f-body:'Heebo',system-ui,sans-serif;
+}
+html,body,#shell{background:var(--cream);color:var(--ink);font-family:var(--f-body);}
+body{font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased;}
+
+/* Two fonts: everything that used the serif now uses Rubik */
+h1,h2,h3,h4,.section-title,.hero-title,.hero-stat b,.deck-place,.deck-summary,.day-card .dtitle,
+[style*="Frank Ruhl"]{font-family:var(--f-head)!important;letter-spacing:-.01em;}
+.section-title{font-size:22px;font-weight:700;margin-bottom:16px;line-height:1.3;}
+.section-title .tag{font-family:var(--f-body);background:var(--sand);color:var(--muted);border:0;}
+.hero-title{font-size:32px;font-weight:700;line-height:1.15;}
+
+/* Air */
+.section{padding:28px 20px;}
+.section+.section{padding-top:12px;}
+.card,.place-card,.next-card,.money-category,.tcard,.irow{margin-bottom:16px;}
+
+/* Soft shapes: borderless warm cards with a gentle shadow */
+.card,.place-card,.next-card,.tcard,.irow,.money-category,.cat-chip,.postcard,.pcard,.stat-cell,.daily-card{
+  background:var(--card);border:1px solid rgba(230,221,207,.6);border-radius:var(--r-card);box-shadow:var(--shadow-1);}
+.card{padding:20px;}
+.card.dashed{border:1.5px dashed var(--line);box-shadow:none;background:transparent;}
+.postcard{border-radius:var(--r-card);border-right-width:1px;border-inline-start:4px solid var(--accent);}
+.next-card{border-right:1px solid rgba(230,221,207,.6);border-inline-start:4px solid var(--accent);}
+.warning-card{background:#FBF1EA;border:0;border-radius:20px;padding:14px 16px;box-shadow:none;}
+.deck-total{background:var(--sand);border-radius:20px;}
+.deck-hero,.photo,.home-mosaic>*{border-radius:var(--r-card);}
+
+/* One strong colour: the primary button. Everything else is calm. */
+.btn{min-height:48px;padding:12px 22px;border-radius:var(--r-ctl);font-size:15px;font-weight:600;
+  background:var(--accent);color:#fff;box-shadow:0 6px 18px rgba(162,97,74,.24);
+  transition:transform .15s ease,box-shadow .15s ease,background .15s ease;}
+.btn:hover{background:var(--accent-dark);}
+.btn:active{transform:scale(.98);}
+.btn.secondary,.btn.ghost{background:var(--sand);color:var(--ink);border:0;box-shadow:none;}
+.btn.secondary:hover,.btn.ghost:hover{background:var(--line);}
+.btn.danger{background:transparent;color:var(--danger);border:1.5px solid currentColor;box-shadow:none;}
+.btn.small{min-height:44px;padding:10px 18px;font-size:14px;}
+.btn.mini{min-height:36px;padding:6px 14px;font-size:13px;border-radius:var(--r-ctl);}
+/* secondary row buttons inside cards stay quiet */
+.card .btn:not(.full):not(.primary),.modal-actions .btn+.btn{background:var(--sand);color:var(--ink);box-shadow:none;}
+.btn.full{min-height:52px;}
+.icon-btn{width:44px;height:44px;background:var(--sand);}
+
+.reveal-btn,.place-actions button{min-height:36px;padding:6px 14px;border-radius:var(--r-ctl);background:var(--sand);}
+
+/* Pills / sub navigation: calm, the active one is ink, not a second colour */
+.pill,.subnav button{min-height:44px;padding:10px 18px;border-radius:var(--r-ctl);border:0;background:var(--sand);
+  color:var(--ink);font-weight:500;box-shadow:none;}
+.pill.active,.subnav button.active{background:var(--ink);color:var(--cream);}
+.pill.addnew{background:transparent;border:1.5px dashed var(--line);}
+.pillrow,.subnav{gap:8px;margin-bottom:20px;}
+
+/* Chips, stamps and tags */
+.chip,.stamp,.tag-s,.legend-chip{border-radius:var(--r-ctl);}
+.stamp{border-style:solid;border-width:1px;}
+.stamp.booked,.stamp.done,.stamp.been{color:#3F6B4F;}
+.tag-s.booked,.tag-s.paid{background:#EAF1EA;color:#3F6B4F;}
+
+/* Forms */
+.field input,.field select,.field textarea,.filters-grid select{min-height:48px;border-radius:16px;border:1.5px solid var(--line);
+  background:var(--white);font-size:16px;font-family:var(--f-body);color:var(--ink);}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--accent);outline:0;box-shadow:0 0 0 4px var(--accent-soft);}
+#modal{background:var(--cream);border-radius:28px 28px 0 0;padding:20px 20px 32px;box-shadow:var(--shadow-2);}
+#modal-backdrop{background:rgba(31,27,23,.45);}
+
+/* Progress */
+.progress-track{background:var(--sand);}
+.progress-fill,.progress-track>span{background:var(--accent);}
+
+/* Bottom navigation: floating soft bar */
+#bottomnav{background:rgba(255,253,249,.92);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);
+  border-top:0;box-shadow:0 -8px 30px rgba(31,27,23,.07);border-radius:24px 24px 0 0;}
+.nav-btn{color:var(--muted);min-height:56px;border-radius:18px;}
+.nav-btn.active{color:var(--ink);background:var(--sand);}
+
+/* Itinerary timeline in the warm palette */
+.activity-timeline::before,.day-rows::before{background:var(--line);}
+.tcard::before,.irow::before{border-color:var(--line);}
+.tcard.done::before,.irow.done::before{background:var(--accent);border-color:var(--accent);}
+.activity-time,.irow .itime{color:var(--accent-dark);}
+.tcard .chip.mini,.irow .chip.mini,.irow .ibaht,.tag-s{background:var(--sand);color:var(--muted);}
+.tcard.done,.irow.done{background:#FCF9F4;}
+
+/* Focus ring follows the accent */
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--accent);outline-offset:3px;}
+
+/* Gentle motion: cards rise once as they scroll into view */
+.rv{opacity:0;transform:translateY(14px);transition:opacity .5s ease,transform .5s ease;}
+.rv.in{opacity:1;transform:none;}
+@media (prefers-reduced-motion:reduce){
+  .rv{opacity:1;transform:none;transition:none;}
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important;}
+}
+
+/* Wider screens: keep the phone column, give it room to breathe */
+@media (min-width:700px){
+  #shell{max-width:600px;box-shadow:0 0 0 1px var(--line);}
+  #bottomnav{max-width:600px;}
+}

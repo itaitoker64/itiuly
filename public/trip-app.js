@@ -5153,7 +5153,7 @@ function renderTimeline(){
     <div class="section-title">ציר הזמן של הטיול 📅</div>
     ${Object.keys(byMonth).length? Object.keys(byMonth).map(month=>`
       <div style="margin-bottom:16px;">
-        <div style="font-family:'Frank Ruhl Libre',serif;font-size:15px;margin-bottom:8px;color:var(--terracotta-dark);">${month}</div>
+        <div style="font-family:'Rubik',sans-serif;font-size:15px;margin-bottom:8px;color:var(--terracotta-dark);">${month}</div>
         ${byMonth[month].map(d=>`<div class="postcard" style="--accent:${getCssVar(d.countryColor)}"><div class="row"><b>${d.countryFlag} ${d.name}</b><span class="small muted">${fmtDateShort(d.arrival)} – ${fmtDateShort(d.departure)}</span></div><div class="small muted">${d.notes||''}</div></div>`).join('')}
       </div>`).join('') : `<div class="empty"><span class="ei">🗓️</span>עדיין אין תאריכים במסלול</div>`}
   </div>`;
@@ -7385,3 +7385,16 @@ document.addEventListener('click', (e)=>{
 
 
 loadState();
+
+// Gentle scroll reveal: cards rise once as they come into view.
+(function(){
+  if(typeof IntersectionObserver==='undefined') return;
+  if(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const io=new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }),{rootMargin:'0px 0px -6% 0px'});
+  const SEL='.section>.card,.section>.place-card,.next-card,.postcard,.pcard,.money-category,.daily-card';
+  function scan(root){ (root||document).querySelectorAll(SEL).forEach(el=>{ if(el.dataset.rv) return; el.dataset.rv='1';
+    const r=el.getBoundingClientRect(); if(r.top<innerHeight) return; el.classList.add('rv'); io.observe(el); }); }
+  const host=document.getElementById('content')||document.body;
+  new MutationObserver(()=>scan(host)).observe(host,{childList:true,subtree:true});
+  scan(host);
+})();

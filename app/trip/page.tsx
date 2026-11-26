@@ -31,10 +31,11 @@ export default async function TripPage() {
       />
       <link
         rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@500;700;900&family=Heebo:wght@300;400;500;600;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Rubik:wght@500;600;700&family=Heebo:wght@300;400;500;600;700&display=swap"
       />
       <link rel="stylesheet" href={`/trip-app.css?v=${v}`} />
       <link rel="stylesheet" href={`/journal.css?v=${v}`} />
+      <link rel="stylesheet" href={`/redesign.css?v=${v}`} />
       <div dangerouslySetInnerHTML={{ __html: shell }} />
       <TripAppLoader user={user} version={v} />
     </>
