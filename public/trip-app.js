@@ -2666,6 +2666,21 @@ function ensureDefaults(){
     if(x) Object.assign(x, {amount:2600, currency:'THB', status:'paid', note:'אישור 6851274942 · Riverside Double Bungalow · כולל ארוחת בוקר · שולם ב-26/11 · לא מוחזר'});
     STATE.shared.applied2611rainforest = true;
   }
+  // 26/11: הגראב לקלימה הוזמן מחדש מ-Rainforest Resort (฿842), ולוקאס עודכן — פעם אחת
+  if(STATE.shared && window.SHARED_SEED && !STATE.shared.applied2611grab){
+    const SS = window.SHARED_SEED;
+    const sg = SS.bookings.find(x=>x.ref==='A-A4B3K42WXAUFAV'), g = (STATE.shared.bookings||[]).find(x=>x.ref==='A-A4B3K42WXAUFAV');
+    if(sg && g) Object.assign(g, JSON.parse(JSON.stringify(sg)));
+    (STATE.shared.days||[]).filter(d=>d.owner!=='talia').forEach(day=>{
+      const seedDay = SS.days.find(d=>d.date===day.date && d.owner!=='talia'); if(!seedDay) return;
+      (day.rows||[]).forEach(r=>{
+        if(!['s_g6_taxi','s_g6_2'].includes(r.id)) return;
+        const sr = seedDay.rows.find(x=>x.id===r.id); if(!sr) return;
+        ['status','baht','notes'].forEach(k=>{ r[k] = sr[k]; });
+      });
+    });
+    STATE.shared.applied2611grab = true;
+  }
   // המפה של טליה ומל בגוגל מפות — המקומות נטענים ממנה בכל פתיחה
   if(STATE.shared && !(STATE.shared.mapLists||[]).some(m=>m.id==='wHPaAtsYL2pmB4xARWodPA')){
     (STATE.shared.mapLists = STATE.shared.mapLists||[]).push({id:'wHPaAtsYL2pmB4xARWodPA', title:'טליה ומל כובשות את המזרח 👯🌺✈️', note:'הרשימה של טליה ומל בגוגל מפות · כל מקום שנשמר שם מופיע כאן'});

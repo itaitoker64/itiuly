@@ -3161,7 +3161,7 @@ window.SHARED_SEED = {
      "baht": 1200,
      "status": "מוזמן",
      "link": "",
-     "notes": "כלול בחבילה של Siam Tour · לוקאס אישר ב-17/11 הורדה ב-River Lodge במקום חזרה לקראבי · 26/11 המלון הוחלף ל-Khaosok Rainforest Resort, לעדכן את לוקאס בוואטסאפ",
+     "notes": "כלול בחבילה של Siam Tour · לוקאס אישר ב-17/11 הורדה ב-River Lodge במקום חזרה לקראבי · 26/11 המלון הוחלף ל-Khaosok Rainforest Resort, ולוקאס עודכן בוואטסאפ",
      "id": "s_g6_2",
      "done": false,
      "priceEstimate": {
@@ -3358,10 +3358,10 @@ window.SHARED_SEED = {
      "act": "מונית מהכפר לקלימה",
      "loc": "קאו סוק → קאו לאק",
      "cat": "תחבורה",
-     "baht": 849,
+     "baht": 842,
      "status": "מוזמן",
      "link": "",
-     "notes": "Grab מתוזמן ฿849 (A-A4B3K42WXAUFAV) · לעדכן באפליקציה של Grab את נקודת האיסוף ל-Khaosok Rainforest Resort · מונית הגיבוי של Booking בוטלה ב-26/11, ההחזר ₪481.69 יגיע תוך 1–5 ימי עסקים",
+     "notes": "Grab מתוזמן ฿842 · איסוף מ-Khaosok Rainforest Resort & Spa (הוזמן מחדש ב-26/11) · ביטול חינם עד שעה לפני · מונית הגיבוי של Booking בוטלה, ההחזר ₪481.69 תוך 1–5 ימי עסקים",
      "id": "s_g6_taxi",
      "done": false,
      "priceEstimate": {
@@ -4623,10 +4623,10 @@ window.SHARED_SEED = {
   {
    "what": "Grab · Rainforest Resort → קלימה",
    "when": "5/12, 11:00",
-   "details": "Standard Car, 4 מקומות · נסיעה מתוזמנת — לא מובטח שיימצא נהג באזור · לעדכן את נקודת האיסוף ל-Rainforest Resort",
+   "details": "Standard (JustGrab) · איסוף מ-Khaosok Rainforest Resort & Spa · Prioritised rematching אם נהג מבטל",
    "ref": "A-A4B3K42WXAUFAV",
-   "payment": "฿849 בכרטיס",
-   "freeCancel": "לפי תנאי Grab"
+   "payment": "฿842 בכרטיס",
+   "freeCancel": "ביטול חינם עד שעה לפני"
   },
   {
    "what": "מונית Booking · Eleven → BKK",
