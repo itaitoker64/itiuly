@@ -488,6 +488,12 @@ const SPEND_2511 = () => [
   {id:uid('x'), date:"2026-11-25", title:"Rajadamnern · Global Sport Ventures", category:"activities", amount:440, currency:"THB", paidBy:"talia", split:"ratio", status:"paid", note:"באשראי"},
   {id:uid('x'), date:"2026-11-25", title:"Shibuya · פראטונם", category:"food", amount:254, currency:"THB", paidBy:"talia", split:"ratio", status:"paid", note:"באשראי"}
 ];
+const SPEND_2711 = () => [
+  {id:uid('x'), date:"2026-11-26", title:"Subway · סוברנבומי", category:"food", amount:1015, currency:"THB", paidBy:"itai", split:"ratio", status:"paid", note:"באשראי"},
+  {id:uid('x'), date:"2026-11-26", title:"Vendi · סוברנבומי", category:"food", amount:270, currency:"THB", paidBy:"talia", split:"ratio", status:"paid", note:"באשראי · Apple Pay"},
+  {id:uid('x'), date:"2026-11-26", title:"7-11 · קו יאו", category:"food", amount:1158, currency:"THB", paidBy:"talia", split:"ratio", status:"paid", note:"באשראי"},
+  {id:uid('x'), date:"2026-11-27", title:"קו יאו נוי 26–27/11 · מזומן", category:"food", amount:4925, currency:"THB", paidBy:"itai", split:"ratio", status:"paid", note:"סך המזומן עד 27/11 הוא ฿15,900: ฿4,900 בבנגקוק, ฿6,075 יתרת KYN, וכאן השאר — ספידבוט, מוניות, קטנוע ואוכל"}
+];
 const NEW_TASKS_36 = () => [
   {id:uid('m'), owner:"itai", status:"todo", category:"הזמנות", countryId:"thailand", order:13.32, priority:"גבוהה", deadline:"2026-11-26",
    title:"לשלם ל-Siam Tour את היתרה, ฿7,500", notes:"הזמנה 5946 · voucher 8044 · בכרטיס דרך הקישור של לוקאס או ב-Wise · לשלוח צילום מסך בוואטסאפ", link:""},
@@ -722,6 +728,7 @@ function seedData(){
       added2411:true,
       added2511:true,
       cash2511:true,
+      spend2711:true,
       prepay2211:true,
       rate:0.08981,                 // ฿1 בשקלים
       rateChecked:"2026-09-10",      // מתי נבדק — משמש לאזהרה כשהוא מתיישן
@@ -740,7 +747,7 @@ function seedData(){
         KALIMA_EXTRA_EXPENSE(),
         {id:uid('x'), date:"2026-12-09", title:"Eleven Bangkok Sukhumvit 11 · 9–12/12", category:"accommodation",
          amount:8411.85, currency:"THB", paidBy:"itai", split:"ratio", status:"due", note:ELEVEN_NOTE_32},
-        ...EXPENSES_32(), EXPENSE_36(), ...SPEND_2411(), ...SPEND_2511()
+        ...EXPENSES_32(), EXPENSE_36(), ...SPEND_2411(), ...SPEND_2511(), ...SPEND_2711()
       ],
       settlements:[{id:'s-talia-prepay', from:'talia', to:'itai', amount:4766, date:'2026-11-22', note:'לפני הטיול, על מה שהוזמן מראש'}]
     },
@@ -2680,6 +2687,13 @@ function ensureDefaults(){
       });
     });
     STATE.shared.applied2611grab = true;
+  }
+  // 27/11: אשראי מ-26/11, והמזומן הגיע ל-฿15,900 — כולל יתרת KYN ששולמה במזומן בהגעה
+  if(STATE.money && STATE.money.expenses && !STATE.money.spend2711){
+    SPEND_2711().forEach(x=>{ if(!STATE.money.expenses.some(e=>e.title===x.title && e.date===x.date && e.amount===x.amount)) STATE.money.expenses.push(x); });
+    const k = STATE.money.expenses.find(x=>x.bookingKey==='kyn-2026-11');
+    if(k && k.status!=='paid'){ k.status = 'paid'; k.note = 'שולם: מקדמה ฿6,075 ב-Wise, והיתרה ฿6,075 במזומן בהגעה ב-26/11 · '+(k.note||''); }
+    STATE.money.spend2711 = true;
   }
   // המפה של טליה ומל בגוגל מפות — המקומות נטענים ממנה בכל פתיחה
   if(STATE.shared && !(STATE.shared.mapLists||[]).some(m=>m.id==='wHPaAtsYL2pmB4xARWodPA')){
