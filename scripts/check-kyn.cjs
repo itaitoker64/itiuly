@@ -11,7 +11,7 @@ const run = s=>vm.runInContext(s,ctx);
 run('STATE=seedData(); ensureDefaults();');
 assert.equal(run('STATE.schema'), 37);
 // Every booking is Itai's; Talia's card shows only her own day-to-day spending from 23–25/11.
-assert.equal(run('wallet().expenses.filter(x=>x.paidBy==="talia").length.),11);
+assert.equal(run('wallet().expenses.filter(x=>x.paidBy==="talia").length'),11);
 assert.equal(run('wallet().expenses.filter(x=>x.paidBy==="talia" && x.category==="accommodation").length'),0);
 assert.ok(run('balance().taliaPaid')>0);
 assert.equal(run('wallet().expenses.filter(x=>x.bookingKey==="kyn-2026-11").length'),1);
